@@ -1,0 +1,6 @@
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\bin\Debug\BaseConversion.exe.config
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\obj\Debug\BaseConversion.csprojResolveAssemblyReference.cache
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\bin\Debug\BaseConversion.exe
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\bin\Debug\BaseConversion.pdb
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\obj\Debug\BaseConversion.exe
+C:\Users\NGY\Documents\School\Assembly\BaseConversion\BaseConversion\obj\Debug\BaseConversion.pdb

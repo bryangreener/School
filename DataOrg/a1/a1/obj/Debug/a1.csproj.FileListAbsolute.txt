@@ -4,3 +4,6 @@ C:\Users\NGY\Documents\School\Data Org\a1\a1\bin\Debug\a1.pdb
 C:\Users\NGY\Documents\School\Data Org\a1\a1\obj\Debug\a1.csprojResolveAssemblyReference.cache
 C:\Users\NGY\Documents\School\Data Org\a1\a1\obj\Debug\a1.exe
 C:\Users\NGY\Documents\School\Data Org\a1\a1\obj\Debug\a1.pdb
+E:\School\DataOrg\a1\a1\bin\Debug\a1.exe.config
+E:\School\DataOrg\a1\a1\obj\Debug\a1.exe
+E:\School\DataOrg\a1\a1\obj\Debug\a1.pdb

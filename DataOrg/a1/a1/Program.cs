@@ -33,7 +33,14 @@ namespace a1
 				Console.WriteLine($"{name[i++]}: {j}");
 			}
 			*/
-			sort(a, n);
+
+			// MergeSort
+			// Create new 1d array and assign with converted 2d array from Conv method.
+			char[] b = Conv(a, n);
+			int r = b.Length;
+			MergeSort(b, 0, r, n);
+
+			Array.BinarySearch(b, search);
 
 			Console.ReadLine();
 		}
@@ -72,31 +79,102 @@ namespace a1
 			return result;
 		}
 
-		static char[,] sort(char[,] input, int n)
+		/// <summary>
+		/// Recursive calling MergeSort method which uses Merge-
+		/// sort to sort the newly converted 1d array.
+		/// Called by Main.
+		/// Calls Merge method and itself.
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="l"></param>
+		/// <param name="r"></param>
+		/// <param name="n"></param>
+		static void MergeSort(char[] input, int l, int r, int n)
+		{
+			int m;
+			if(l < r)
+			{
+				m = (l + r) / 2;
+				MergeSort(input, l, m, n);
+				MergeSort(input, m++, r, n);
+				Merge(input, l, m++, r, n);
+			}
+		}
+
+		/// <summary>
+		/// Called by MergeSort.
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="l"></param>
+		/// <param name="m"></param>
+		/// <param name="r"></param>
+		/// <param name="n"></param>
+		static void Merge(char[] input, int l, int m, int r, int n)
 		{
 			char[] temp = new char[n*n];
+			int i, le, num_elements, temp_pos;
+
+			le = (m--);
+			temp_pos = l;
+			num_elements = (r - l + 1);
+			while ((l <= le) && (m <= r))
+			{
+				if (input[l] <= input[m])
+					temp[temp_pos++] = input[l++];
+				else
+					temp[temp_pos++] = input[m++];
+			}
+
+			while (l <= le)
+				temp[temp_pos++] = input[l++];
+
+			while (m <= r)
+				temp[temp_pos++] = input[m++];
+
+			for (i = 0; i < num_elements; i++)
+			{
+				input[r] = temp[r];
+				r--;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		static char BinSearch(char[] input, char search, int l, int r)
+		{
+
+			int m = (r - l) / 2;
+			if(search < input[m])
+			{
+				BinSearch(input, search, l, m - 1);
+				return '0';
+			}
+			else if(search > input[m])
+			{
+				BinSearch(input, search, m + 1, r);
+				return '0';
+			}
+			else if(search == input[m])
+			{
+				return input[m];
+			}
+			else
+			{
+				return '0';
+			}
+		}
+
+		static char[] Conv(char[,] input, int n)
+		{
+			char[] temp = new char[n * n];
 			int i = 0;
-			foreach(char c in input)
+			foreach (char c in input)
 			{
 				temp[i++] = c;
 			}
-			Array.Sort(temp);
-			int l = 0;
-			for(int k = 0; k < n; k++)
-			{
-				for (int j = 0; j < n; j++)
-				{
-					input[k, j] = temp[l++];
-					Console.Write($" {input[k, j]}");
-				}
-			}
-
-			return input;
-		}
-
-		static void binSearch(char[,] input)
-		{
-
+			return temp;
 		}
 
 		static char[,] randomize(int n)

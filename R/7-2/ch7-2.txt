@@ -1,0 +1,137 @@
+## copy and paste these commands into the R console window to
+## see how the commands work.
+
+## the R function t.test is performs t-tests
+## for one sample, two samples, or matched pairs
+##
+## it also computes t confidence intervals
+##
+
+?t.test      # display the documentation for the function
+
+######### one-sample example 
+
+## simple one-sample example with hypothetical data.
+# we wish to test Ho: mean differnce = 0
+# and compute a confidence interval;
+
+x = c(3.1, -2.5, 8.6, 11.9, 5.2)
+
+
+t.test(x)
+
+# Suppose instead we wish to test H0: mean =1 versus H0: mean > 1 
+
+t.test(x, mu=1, alternative="greater")
+
+
+# suppose we want a 90% confidence inteval instead of 95%
+
+t.test(x, conf.level=.90)
+
+
+# use a quantile plot to check if the data are normal
+
+qnorm(x)
+
+##################### two-sample example 
+
+## two-sample example with hypothetical data compare x data with new y data
+
+y = c(6.2, 5.0, 8.8, 4.3, -3.6)
+
+# test Ho: mu_y - mu_x = 0  and get confidence interval for the difference:
+
+t.test(x,y)
+
+# if we assume equal variances and want one-sided the results are as follows
+
+t.test(x, y, alternative="greater", var.equal=TRUE)
+
+
+################################################################################
+
+
+
+################################################################################
+
+# Example reading in data from a text file
+
+# save the dataset "bpandcalcium.txt" to your desktop
+# for a description of the data see Table 7.5 in the MMC text.
+
+# read data
+
+Dataset <-read.table("calcium.txt",head=TRUE)
+
+# to work directly with the variables "attach" the data:
+
+attach(Dataset)
+
+# display responses
+
+dec
+
+# display groups
+
+group
+
+
+# stem plot for the control group
+
+stem(dec[group=="Placebo"])
+
+# stem plot for the treatment group
+
+stem(dec[group=="Calcium"])
+
+
+# quantile plots
+
+qqnorm(dec[group=="Placebo"])
+
+qqnorm(dec[group=="Calcium"])
+
+
+# boxplot of the data by groups
+
+boxplot(dec ~ group)
+
+
+
+# extract the two samples of data
+
+x1 = dec[group=="Calcium"]
+x2 = dec[group=="Placebo"]
+
+x1
+x2
+
+# summary statistics
+
+m1 = mean(x1)
+s1 = sd(x1)
+m2 = mean(x2)
+s2 = sd(x2)
+n1 = length(x1)
+n2 = length(x2)
+g1 = "Treat"
+g2 = "Control"
+
+data.frame(g1,n1,m1,s1)
+
+data.frame(g2,n2,m2,s2)
+
+
+# We could compute the t-statistic from these summaries or use the t.test
+
+# Here we do a one-tailed test of treatment better than control (mean 1 - mean 2 > 0)
+
+
+t.test(x1, x2, alternative="greater")
+
+
+
+
+
+

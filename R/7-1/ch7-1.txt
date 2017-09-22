@@ -1,0 +1,54 @@
+# Example 7.4: Stock portfolio returns (MMC p. 410)
+# Story: investor sued broker for underperformance due to lack
+# of diversification. Data are monthly returns (%) on a several
+# hundred thousand dollar portfolio. 
+# Are the returns significantly different from the SP500 mean
+# return of 0.95% per month over this time period?
+
+returns = scan()
+-8.36 1.63 -2.27 -2.93 -2.70 -2.93 -9.14 -2.64
+6.82 -2.35 -3.58 6.13 7.00 -15.25 -8.66 -1.03
+-9.16 -1.25 -1.22 -10.27 -5.11 -0.80 -1.44 1.28
+-0.65 4.34 12.22 -7.21 -0.09 7.34 5.04 -7.24
+-2.14 -1.01 -1.41 12.03 -2.56 4.33 2.35
+
+hist(returns)
+
+qqnorm(returns)
+xbar = mean(returns)
+sx = sd(returns)
+abline(c(xbar, sx))
+
+xbar
+sx
+
+
+# compare direct calculation with the result from t.test
+
+xbar = mean(returns)
+xbar
+se = sd(returns)/sqrt(39)
+se
+
+# t-value
+tobs = (mean(returns)-0.95)/se
+tobs
+
+# p-value
+2*(1 - pt(abs(tobs),38))
+
+# Note that the t.test function also produced a 95 percent confidence interval
+# Here's the direct calculation:
+
+tval = qt(0.975,38) # 95% confidence interval
+tval
+
+lower = xbar - tval*se
+upper = xbar + tval*se
+
+c(lower, upper)
+
+
+# Here's a function that does all that for you...
+
+t.test(returns, mu=0.95)

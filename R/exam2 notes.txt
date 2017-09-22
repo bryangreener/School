@@ -1,0 +1,677 @@
+##########################################################
+# Examples of random sampling from data
+# Copy and paste into the R console window to see how the
+# commands work. 
+
+# ( Note: "#" starts a comment. anything to the right of a "#" is
+# not executed in R).
+
+
+###################### Sample from a population marked with 1's and 0's
+
+x=c(rep(0,5000),rep(1,5000))   #create a population with 5000 0's and 5000 1's.
+sample(x,10)                   #takes a random sample of size 10 from the population.
+mean(sample(x,10))             #gives the mean of a random sample of size 10
+y=c(mean(sample(x,10)))        #stores the mean of a random sample of size 10
+y=c(y,mean(sample(x,10)))      #adds the mean of a random sample of size 10 to the previous stored data
+
+
+#the following short program will add the mean of 1000 random samples of size ten to the previous store data
+
+for(i in 1:1000){              #this line tells the program to run 1000 times
+y=c(y,mean(sample(x,10)))      #adds the mean of a random sample of size 10 to the previous stored data
+}
+
+hist(y)                        #makes a histogram of the stored means of the random samples. 
+
+
+
+######################## sample from a simulated Normal population
+
+z=rnorm(200,50,10)             #create population of 200 values from the Normal distribution
+                               #with mean=50 and standard deviation=10
+mean(z)                        #display the mean of the "population"
+
+zsamp=sample(z,16)             #takes a sample of 16 of the values
+zsamp                          #display the sample
+mean(zsamp)                    #mean of the sample
+
+zmeans=NULL                    #intialize vector to store results from repeated sampling
+for(i in 1:100){               #run the sampling 100 times and save the results
+zmeans=c(zmeans,mean(sample(z,16)))
+}
+mean(zmeans)
+sd(zmeans)
+x11()
+hist(zmeans)
+
+# Notice that the sd for the sample means is about 2.5 = 10/4
+# This illustrates the square root rule, that increasing the sample size
+# by a factor of n decreases the sd of the sample mean by a factor of sqrt(n)
+
+
+
+####################### sample from a list based on id numbers
+
+# create some fake data
+testdata = 
+data.frame(id=seq(12), 
+           vals=c(83,22,87,55,60,97,81,79,100,83,94,43))
+testdata
+
+attach(testdata)
+
+# sample 3 observations based on the id numbers
+
+idsamp=sample(id,3)
+idsamp
+
+#corresponding values
+
+vals[idsamp]
+
+# display sampled data
+
+testdata[idsamp,]
+
+
+
+########################### enter the data into a vector
+
+data = c(250,300,410,330,175)
+
+data
+
+# can use built in functions
+mean(data)
+sd(data)
+median(data)
+IQR(data)
+
+
+
+# sample without replacement from the data vector 
+# and compute the sample mean
+
+
+rdat = sample(data,2)
+rdat
+mean(rdat)
+
+
+
+
+################################### sampling id numbers versus sampling from data
+
+idnum = c(1,2,3,4,5)
+
+value = c(300,250,450,200,150)
+
+sample(idnum,3)
+
+ids = sample(idnum,3)
+ids
+
+
+value[1]
+value[ids]   # the values for the sample of id numbers
+
+
+
+# 0-1 data (binomial sampling model)
+
+bindat = c(0,0,0,1,1)   # like a box with two "winning" tickets
+
+sample(bindat,10,replace=TRUE)     # sampling with replacement
+
+sum(sample(bindat,10,replace=TRUE))    # sum of the random sample
+
+mean(sample(bindat,10,replace=TRUE))   # sample proportion (why?)
+
+
+
+# sum is a Binomial random variable   B(10, 0.4)   
+# theoretical mean (mu) is 10*0.4=4
+# theoretical sd = sqrt(10*0.4*0.6)
+
+
+##########################################################
+# Examples of random sampling from data
+# Copy and paste into the R console window to see how the
+# commands work. 
+
+# ( Note: "#" starts a comment. anything to the right of a "#" is
+# not executed in R).
+
+
+###################### Sample from a population marked with 1's and 0's
+
+x=c(rep(0,5000),rep(1,5000))   #create a population with 5000 0's and 5000 1's.
+sample(x,10)                   #takes a random sample of size 10 from the population.
+mean(sample(x,10))             #gives the mean of a random sample of size 10
+y=c(mean(sample(x,10)))        #stores the mean of a random sample of size 10
+y=c(y,mean(sample(x,10)))      #adds the mean of a random sample of size 10 to the previous stored data
+
+
+#the following short program will add the mean of 1000 random samples of size ten to the previous store data
+
+for(i in 1:1000){              #this line tells the program to run 1000 times
+y=c(y,mean(sample(x,10)))      #adds the mean of a random sample of size 10 to the previous stored data
+}
+
+hist(y)                        #makes a histogram of the stored means of the random samples. 
+
+
+
+######################## sample from a simulated Normal population
+
+z=rnorm(200,50,10)             #create population of 200 values from the Normal distribution
+                               #with mean=50 and standard deviation=10
+mean(z)                        #display the mean of the "population"
+
+zsamp=sample(z,16)             #takes a sample of 16 of the values
+zsamp                          #display the sample
+mean(zsamp)                    #mean of the sample
+
+zmeans=NULL                    #intialize vector to store results from repeated sampling
+for(i in 1:100){               #run the sampling 100 times and save the results
+zmeans=c(zmeans,mean(sample(z,16)))
+}
+mean(zmeans)
+sd(zmeans)
+x11()
+hist(zmeans)
+
+# Notice that the sd for the sample means is about 2.5 = 10/4
+# This illustrates the square root rule, that increasing the sample size
+# by a factor of n decreases the sd of the sample mean by a factor of sqrt(n)
+
+
+
+####################### sample from a list based on id numbers
+
+# create some fake data
+testdata = 
+data.frame(id=seq(12), 
+           vals=c(83,22,87,55,60,97,81,79,100,83,94,43))
+testdata
+
+attach(testdata)
+
+# sample 3 observations based on the id numbers
+
+idsamp=sample(id,3)
+idsamp
+
+#corresponding values
+
+vals[idsamp]
+
+# display sampled data
+
+testdata[idsamp,]
+
+
+
+########################### enter the data into a vector
+
+data = c(250,300,410,330,175)
+
+data
+
+# can use built in functions
+mean(data)
+sd(data)
+median(data)
+IQR(data)
+
+
+
+# sample without replacement from the data vector 
+# and compute the sample mean
+
+
+rdat = sample(data,2)
+rdat
+mean(rdat)
+
+
+
+
+################################### sampling id numbers versus sampling from data
+
+idnum = c(1,2,3,4,5)
+
+value = c(300,250,450,200,150)
+
+sample(idnum,3)
+
+ids = sample(idnum,3)
+ids
+
+
+value[1]
+value[ids]   # the values for the sample of id numbers
+
+
+
+# 0-1 data (binomial sampling model)
+
+bindat = c(0,0,0,1,1)   # like a box with two "winning" tickets
+
+sample(bindat,10,replace=TRUE)     # sampling with replacement
+
+sum(sample(bindat,10,replace=TRUE))    # sum of the random sample
+
+mean(sample(bindat,10,replace=TRUE))   # sample proportion (why?)
+
+
+
+# sum is a Binomial random variable   B(10, 0.4)   
+# theoretical mean (mu) is 10*0.4=4
+# theoretical sd = sqrt(10*0.4*0.6)
+
+
+
+### dbinom computes binomial density values P(X=k)
+### pbinom computes binomial cumulative probabilities P(X <= k)
+### dnorm computes values of the Normal density curve 
+### pnorm computes cumulative probabilities P(X <= x)
+### normal approximation to binomial: 
+###     binomial(n,p) approx. Normal(np, sqrt(np(1-p))
+
+
+### X is binomial(40,.5)
+
+dbinom(19,40,.5)         #P(X=19)
+sum(dbinom(0:19,40,.5))  #P(X<=19) = P(X=0) + P(X=1) + ... + P(X=19)
+pbinom(19,40,.5)         #P(X<=19)
+
+### graph the binomial density using vertical lines for probabilities
+
+plot(0:40, dbinom(0:40,40,.5), type="h")
+
+### X is approx N(20, sqrt(10))
+
+pnorm(19.5,20,sqrt(10))  #P(X<=19)=P(X<=19.5), due to continuity correction.
+
+z = (19.5 - 20)/sqrt(10)  #using standardization method
+z
+pnorm(z)       
+
+### add the normal curve to the graph for comparison
+
+lines(0:40, dnorm(0:40, 20, sqrt(10)), lty=2)
+
+
+
+#######################################################
+#Example1 in the slide: Density of bacteria in solution#
+#######################################################
+
+sigma=1 #population standard deviation
+vec=c(24,29,31) #three observed values
+xbar=mean(vec) #sample mean
+n=length(vec) #sample size
+
+#construct 96% confidence interval for the population density
+
+zstar.96=qnorm(.96+(1-.96)/2) #critical value
+moe.96=zstar.96*sigma/sqrt(n) #margin of error
+CI.96=c(xbar-moe.96,xbar+moe.96)
+
+#construct 70% confidence interval for the population density
+
+zstar.70=qnorm(.70+(1-.70)/2) #critical value
+moe.70=zstar.70*sigma/sqrt(n) #margin of error
+CI.70=c(xbar-moe.70,xbar+moe.70)
+
+
+#################################################################
+#Example2 in the slide: Does the packaging machine need revision?#
+#################################################################
+
+#Test H_0: mu=227 vs H_a: mu=/= 227
+
+xbar=222 #sample mean
+sigma=5 #population standard deviation
+n=4 #sample size
+mu0=227 #hypothesized value
+
+z=(xbar-mu0)/(sigma/sqrt(n)) #test statistic
+pvalue=2*pnorm(z) #p value for two sided
+
+
+
+
+# Example 7.4: Stock portfolio returns (MMC p. 410)
+# Story: investor sued broker for underperformance due to lack
+# of diversification. Data are monthly returns (%) on a several
+# hundred thousand dollar portfolio. 
+# Are the returns significantly different from the SP500 mean
+# return of 0.95% per month over this time period?
+
+returns = scan()
+-8.36 1.63 -2.27 -2.93 -2.70 -2.93 -9.14 -2.64
+6.82 -2.35 -3.58 6.13 7.00 -15.25 -8.66 -1.03
+-9.16 -1.25 -1.22 -10.27 -5.11 -0.80 -1.44 1.28
+-0.65 4.34 12.22 -7.21 -0.09 7.34 5.04 -7.24
+-2.14 -1.01 -1.41 12.03 -2.56 4.33 2.35
+
+hist(returns)
+
+qqnorm(returns)
+xbar = mean(returns)
+sx = sd(returns)
+abline(c(xbar, sx))
+
+xbar
+sx
+
+
+# compare direct calculation with the result from t.test
+
+xbar = mean(returns)
+xbar
+se = sd(returns)/sqrt(39)
+se
+
+# t-value
+tobs = (mean(returns)-0.95)/se
+tobs
+
+# p-value
+2*(1 - pt(abs(tobs),38))
+
+# Note that the t.test function also produced a 95 percent confidence interval
+# Here's the direct calculation:
+
+tval = qt(0.975,38) # 95% confidence interval
+tval
+
+lower = xbar - tval*se
+upper = xbar + tval*se
+
+c(lower, upper)
+
+
+# Here's a function that does all that for you...
+
+t.test(returns, mu=0.95)
+
+
+
+
+
+## copy and paste these commands into the R console window to
+## see how the commands work.
+
+## the R function t.test is performs t-tests
+## for one sample, two samples, or matched pairs
+##
+## it also computes t confidence intervals
+##
+
+?t.test      # display the documentation for the function
+
+######### one-sample example 
+
+## simple one-sample example with hypothetical data.
+# we wish to test Ho: mean differnce = 0
+# and compute a confidence interval;
+
+x = c(3.1, -2.5, 8.6, 11.9, 5.2)
+
+
+t.test(x)
+
+# Suppose instead we wish to test H0: mean =1 versus H0: mean > 1 
+
+t.test(x, mu=1, alternative="greater")
+
+
+# suppose we want a 90% confidence inteval instead of 95%
+
+t.test(x, conf.level=.90)
+
+
+# use a quantile plot to check if the data are normal
+
+qnorm(x)
+
+##################### two-sample example 
+
+## two-sample example with hypothetical data compare x data with new y data
+
+y = c(6.2, 5.0, 8.8, 4.3, -3.6)
+
+# test Ho: mu_y - mu_x = 0  and get confidence interval for the difference:
+
+t.test(x,y)
+
+# if we assume equal variances and want one-sided the results are as follows
+
+t.test(x, y, alternative="greater", var.equal=TRUE)
+
+
+################################################################################
+
+
+
+################################################################################
+
+# Example reading in data from a text file
+
+# save the dataset "bpandcalcium.txt" to your desktop
+# for a description of the data see Table 7.5 in the MMC text.
+
+# read data
+
+Dataset <-read.table("calcium.txt",head=TRUE)
+
+# to work directly with the variables "attach" the data:
+
+attach(Dataset)
+
+# display responses
+
+dec
+
+# display groups
+
+group
+
+
+# stem plot for the control group
+
+stem(dec[group=="Placebo"])
+
+# stem plot for the treatment group
+
+stem(dec[group=="Calcium"])
+
+
+# quantile plots
+
+qqnorm(dec[group=="Placebo"])
+
+qqnorm(dec[group=="Calcium"])
+
+
+# boxplot of the data by groups
+
+boxplot(dec ~ group)
+
+
+
+# extract the two samples of data
+
+x1 = dec[group=="Calcium"]
+x2 = dec[group=="Placebo"]
+
+x1
+x2
+
+# summary statistics
+
+m1 = mean(x1)
+s1 = sd(x1)
+m2 = mean(x2)
+s2 = sd(x2)
+n1 = length(x1)
+n2 = length(x2)
+g1 = "Treat"
+g2 = "Control"
+
+data.frame(g1,n1,m1,s1)
+
+data.frame(g2,n2,m2,s2)
+
+
+# We could compute the t-statistic from these summaries or use the t.test
+
+# Here we do a one-tailed test of treatment better than control (mean 1 - mean 2 > 0)
+
+
+t.test(x1, x2, alternative="greater")
+
+
+NULL AND ALT HYPOTHESIS
+
+BrandToggle navigation
+EDUCATIONMATHSTATISTICSHOW TO SET UP A HYPOTHESIS TEST: NULL VERSUS ALTERNATIVE
+HOW TO SET UP A HYPOTHESIS TEST: NULL VERSUS ALTERNATIVE
+ Statistics For Dummies, 2nd Edition
+RELATED BOOK
+Statistics For Dummies, 2nd Edition
+
+By Deborah J. Rumsey
+
+When you set up a hypothesis test to determine the validity of a statistical claim, you need to define both a null hypothesis and an alternative hypothesis.
+
+Typically in a hypothesis test, the claim being made is about a population parameter (one number that characterizes the entire population). Because parameters tend to be unknown quantities, everyone wants to make claims about what their values may be. For example, the claim that 25% (or 0.25) of all women have varicose veins is a claim about the proportion (that’s the parameter) of all women (that’s the population) who have varicose veins (that’s the variable — having or not having varicose veins).
+
+Researchers often challenge claims about population parameters. You may hypothesize, for example, that the actual proportion of women who have varicose veins is lower than 0.25, based on your observations. Or you may hypothesize that due to the popularity of high heeled shoes, the proportion may be higher than 0.25. Or if you’re simply questioning whether the actual proportion is 0.25, your alternative hypothesis is: “No, it isn’t 0.25.”
+
+HOW TO DEFINE A NULL HYPOTHESIS
+Every hypothesis test contains a set of two opposing statements, or hypotheses, about a population parameter. The first hypothesis is called the null hypothesis, denoted H0. The null hypothesis always states that the population parameter is equal to the claimed value. For example, if the claim is that the average time to make a name-brand ready-mix pie is five minutes, the statistical shorthand notation for the null hypothesis in this case would be as follows:
+
+image0.png
+(That is, the population mean is 5 minutes.)
+
+All null hypotheses include an equal sign in them.
+
+HOW TO DEFINE AN ALTERNATIVE HYPOTHESIS
+Before actually conducting a hypothesis test, you have to put two possible hypotheses on the table — the null hypothesis is one of them. But, if the null hypothesis is rejected (that is, there was sufficient evidence against it), what’s your alternative going to be? Actually, three possibilities exist for the second (or alternative) hypothesis, denoted Ha. Here they are, along with their shorthand notations in the context of the pie example:
+
+The population parameter is not equal to the claimed value
+
+image1.png
+
+The population parameter is greater than the claimed value
+
+image2.png
+
+The population parameter is less than the claimed value
+
+image3.png
+
+Which alternative hypothesis you choose in setting up your hypothesis test depends on what you’re interested in concluding, should you have enough evidence to refute the null hypothesis (the claim). The alternative hypothesis should be decided upon before collecting or looking at any data, so as not to influence the results.
+
+For example, if you want to test whether a company is correct in claiming its pie takes five minutes to make and it doesn’t matter whether the actual average time is more or less than that, you use the not-equal-to alternative. Your hypotheses for that test would be
+
+image4.png
+If you only want to see whether the time turns out to be greater than what the company claims (that is, whether the company is falsely advertising its quick prep time), you use the greater-than alternative, and your two hypotheses are
+
+image5.png
+Finally, say you work for the company marketing the pie, and you think the pie can be made in less than five minutes (and could be marketed by the company as such). The less-than alternative is the one you want, and your two hypotheses would be
+
+image6.png
+How do you know which hypothesis to put in H0 and which one to put in Ha? Typically, the null hypothesis says that nothing new is happening; the previous result is the same now as it was before, or the groups have the same average (their difference is equal to zero). In general, you assume that people’s claims are true until proven otherwise. So the question becomes: Can you prove otherwise? In other words, can you show sufficient evidence to reject H0?
+
+ 
+Sponsored Content
+An Apple Engineer Designed a Sweatshirt That’s Disrupting American Manufacturing
+An Apple Engineer Designed a Sweatshirt That’s Disrupting American Manufacturing
+American Giant on Business Insider
+See Why People Are Going Crazy For Plated
+See Why People Are Going Crazy For Plated
+Food & Wine
+How Older Men Tighten Their Skin
+How Older Men Tighten Their Skin
+The Modern Man Today
+Recommended by
+EDUCATIONMATHSTATISTICSSTATISTICAL ANALYSIS WITH EXCEL FOR DUMMIES
+CHEAT SHEET
+STATISTICAL ANALYSIS WITH EXCEL FOR DUMMIES
+From Statistical Analysis with R For Dummies
+By Joseph Schmuller
+R provides a wide array of functions to help you with your work — from simple statistics to complex analyses. This cheat sheet lists a selection for you.
+
+BASE R STATISTICAL FUNCTIONS
+
+Here’s a selection of statistical functions that come with the standard R installation. You’ll find many others in R packages.
+
+Central Tendency and Variability
+Function	What it Calculates
+mean(x)	Mean of the numbers in vector x.
+median(x)	Median of the numbers in vector x
+var(x)	Estimated variance of the population from which the numbers in vector x are sampled
+sd(x)	Estimated standard deviation of the population from which the numbers in vector x are sampled
+scale(x)	Standard scores (z-scores) for the numbers in vector x
+Relative Standing
+Function	What it Calculates
+sort(x)	The numbers in vector x in increasing order
+sort(x)[n]	The nth smallest number in vector x
+rank(x)	Ranks of the numbers (in increasing order) in vector x
+rank(-x)	Ranks of the numbers (in decreasing order) in vector x
+rank(x, ties.method= “average”)	Ranks of the numbers (in increasing order) in vector x, with tied numbers given the average of the ranks that the ties would have attained
+rank(x, ties.method= “min”)	
+Ranks of the numbers (in increasing order) in vector x, with tied numbers given the minimum of the ranks that the ties would have attained
+rank(x, ties.method = “max”)	Ranks of the numbers (in increasing order) in vector x, with tied numbers given the maximum of the ranks that the ties would have attained
+quantile(x)	
+The 0th, 25th, 50th, 75th, and 100th percentiles (i.e, the quartiles) of the numbers in vector x. (That’s not a misprint: quantile(x) returns the quartiles of x.)
+t-tests
+Function	What it Calculates
+t.test(x,mu=n, alternative = “two.sided”)	Two-tailed t-test that the mean of the numbers in vector x is different from n.
+t.test(x,mu=n, alternative = “greater”)	One-tailed t-test that the mean of the numbers in vector x is greater than n.
+t.test(x,mu=n, alternative = “less”)	One-tailed t-test that the mean of the numbers in vector x is less than n.
+t.test(x,y,mu=0, var.equal = TRUE, alternative = “two.sided”)	Two-tailed t-test that the mean of the numbers in vector x is different from the mean of the numbers in vector y. The variances in the two vectors are assumed to be equal.
+t.test(x,y,mu=0, alternative = “two.sided”, paired = TRUE)	Two-tailed t-test that the mean of the numbers in vector x is different from the mean of the numbers in vector y. The vectors represent matched samples.
+Analysis of Variance (ANOVA)
+Function	What it Calculates
+aov(y~x, data = d)	Single-factor ANOVA, with the numbers in vector y as the dependent variable and the elements of vector x as the levels of the independent variable. The data are in data frame d.
+aov(y~x + Error(w/x), data = d)	Repeated Measures ANOVA, with the numbers in vector y as the dependent variable and the elements in vector x as the levels of an independent variable. Error(w/x) indicates that each element in vector w experiences all the levels of x (i.e., x is a repeated measure). The data are in data frame d.
+aov(y~x*z, data = d)	Two-factor ANOVA, with the numbers in vector y as the dependent variable and the elements of vectors x and z as the levels of the two independent variables. The data are in data frame d.
+aov(y~x*z + Error(w/z), data = d)	Mixed ANOVA, with the numbers in vector z as the dependent variable and the elements of vectors x and y as the levels of the two independent variables. Error(w/z) indicates that each element in vector w experiences all the levels of z (i.e., z is a repeated measure). The data are in data frame d.
+Correlation and Regression
+Function	What it Calculates
+cor(x,y)	Correlation coefficient between the numbers in vector x and the numbers in vector y
+cor.test(x,y)	Correlation coefficient between the numbers in vector x and the numbers in vector y, along with a t-test of the significance of the correlation coefficient.
+lm(y~x, data = d)	Linear regression analysis with the numbers in vector y as the dependent variable and the numbers in vector x as the independent variable. Data are in data frame d.
+coefficients(a)	Slope and intercept of linear regression model a.
+confint(a)	Confidence intervals of the slope and intercept of linear regression model a
+lm(y~x+z, data = d)	Multiple regression analysis with the numbers in vector y as the dependent variable and the numbers in vectors x and z as the independent variables. Data are in data frame d.
+When you carry out an ANOVA or a regression analysis, store the analysis in a list. For example,
+a <- lm(y~x, data = d)
+
+Then, to see the tabled results, use the summary() function:
+
+summary(a)
+ 
+Sponsored Content
+What's the Most Common Last Name in the United States?
+What's the Most Common Last Name in the United States?
+Ancestry
+Take A Look At The Lost Cities Of Time
+Take A Look At The Lost Cities Of Time
+Mozo Travel
+Recommended by
+Share to Facebook
+Share to Twitter
+Share to Google+
+Share to Email
+Share to Pinterest
+Share to Print
+
+

@@ -1,0 +1,35 @@
+#######################################################
+#Example1 in the slide: Density of bacteria in solution#
+#######################################################
+
+sigma=1 #population standard deviation
+vec=c(24,29,31) #three observed values
+xbar=mean(vec) #sample mean
+n=length(vec) #sample size
+
+#construct 96% confidence interval for the population density
+
+zstar.96=qnorm(.96+(1-.96)/2) #critical value
+moe.96=zstar.96*sigma/sqrt(n) #margin of error
+CI.96=c(xbar-moe.96,xbar+moe.96)
+
+#construct 70% confidence interval for the population density
+
+zstar.70=qnorm(.70+(1-.70)/2) #critical value
+moe.70=zstar.70*sigma/sqrt(n) #margin of error
+CI.70=c(xbar-moe.70,xbar+moe.70)
+
+
+#################################################################
+#Example2 in the slide: Does the packaging machine need revision?#
+#################################################################
+
+#Test H_0: mu=227 vs H_a: mu=/= 227
+
+xbar=222 #sample mean
+sigma=5 #population standard deviation
+n=4 #sample size
+mu0=227 #hypothesized value
+
+z=(xbar-mu0)/(sigma/sqrt(n)) #test statistic
+pvalue=2*pnorm(z) #p value for two sided

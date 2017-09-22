@@ -1,0 +1,30 @@
+### dbinom computes binomial density values P(X=k)
+### pbinom computes binomial cumulative probabilities P(X <= k)
+### dnorm computes values of the Normal density curve 
+### pnorm computes cumulative probabilities P(X <= x)
+### normal approximation to binomial: 
+###     binomial(n,p) approx. Normal(np, sqrt(np(1-p))
+
+
+### X is binomial(40,.5)
+
+dbinom(19,40,.5)         #P(X=19)
+sum(dbinom(0:19,40,.5))  #P(X<=19) = P(X=0) + P(X=1) + ... + P(X=19)
+pbinom(19,40,.5)         #P(X<=19)
+
+### graph the binomial density using vertical lines for probabilities
+
+plot(0:40, dbinom(0:40,40,.5), type="h")
+
+### X is approx N(20, sqrt(10))
+
+pnorm(19.5,20,sqrt(10))  #P(X<=19)=P(X<=19.5), due to continuity correction.
+
+z = (19.5 - 20)/sqrt(10)  #using standardization method
+z
+pnorm(z)       
+
+### add the normal curve to the graph for comparison
+
+lines(0:40, dnorm(0:40, 20, sqrt(10)), lty=2)
+

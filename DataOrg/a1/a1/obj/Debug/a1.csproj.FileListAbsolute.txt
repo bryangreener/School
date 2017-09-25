@@ -13,3 +13,6 @@ D:\School\DataOrg\a1\a1\obj\Debug\a1.pdb
 D:\School\DataOrg\a1\a1\bin\Debug\a1.exe
 D:\School\DataOrg\a1\a1\bin\Debug\a1.pdb
 D:\School\DataOrg\a1\a1\obj\Debug\a1.csprojResolveAssemblyReference.cache
+E:\School\DataOrg\a1\a1\bin\Debug\a1.exe
+E:\School\DataOrg\a1\a1\bin\Debug\a1.pdb
+E:\School\DataOrg\a1\a1\obj\Debug\a1.csprojResolveAssemblyReference.cache

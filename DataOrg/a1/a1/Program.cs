@@ -31,7 +31,7 @@ namespace a1
             TextWriter oldOut = Console.Out;
             try
             {
-                ostrm = new FileStream("C:/Users/Bryan/Desktop/CS3310-A1.txt", FileMode.Create, FileAccess.Write);
+                ostrm = new FileStream("./CS3310-A1.txt", FileMode.Create, FileAccess.Write);
                 writer = new StreamWriter(ostrm);
             }
             catch(Exception e)
@@ -67,7 +67,7 @@ namespace a1
                 ostrm.Close();
                 try
                 {
-                    ostrm = new FileStream("C:/Users/Bryan/Desktop/CS3310-A1.txt", FileMode.Append, FileAccess.Write);
+                    ostrm = new FileStream("./CS3310-A1.txt", FileMode.Append, FileAccess.Write);
                     writer = new StreamWriter(ostrm);
                 }
                 catch (Exception e)

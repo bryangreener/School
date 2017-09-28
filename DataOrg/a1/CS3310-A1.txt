@@ -1,0 +1,183 @@
+========================
+START VARIABLE DIMENSION
+========================
+
+NEW ARRAY SIZE: 5x5
+
+Unsorted Search (ms): 83
+
+f u e m w 
+e k a d w 
+u o j c l 
+f r i x c 
+x f e u n 
+
+b: [ -1, -1 ]
+r: [ 1, 3 ]
+y: [ -1, -1 ]
+a: [ 2, 1 ]
+n: [ 4, 4 ]
+g: [ -1, -1 ]
+r: [ -1, -1 ]
+e: [ 2, 0 ]
+e: [ 0, 1 ]
+n: [ -1, -1 ]
+e: [ 2, 4 ]
+r: [ -1, -1 ]
+Merge Sort (ms): 0
+Binary Search (ms): 57
+
+
+a a b c c 
+d d e f f 
+h i j j j 
+k k m o o 
+p q t x x 
+
+b: [ 2, 0 ]
+r: [ -1, -1 ]
+y: [ -1, -1 ]
+a: [ 0, 0 ]
+n: [ -1, -1 ]
+g: [ -1, -1 ]
+r: [ -1, -1 ]
+e: [ 2, 1 ]
+e: [ -1, -1 ]
+n: [ -1, -1 ]
+e: [ -1, -1 ]
+r: [ -1, -1 ]
+
+NEW ARRAY SIZE: 10x10
+
+Unsorted Search (ms): 136
+
+t o a n c g m p y f 
+k g r n i o k l e h 
+d t d f d u m k u p 
+m i y m o k f s p c 
+n g b f q n q z f g 
+o o g i d a l v k i 
+u b u j s c h e z y 
+i s w b t x s x o q 
+e m f n a x b p j n 
+y k i h h l l r m o 
+
+b: [ 2, 4 ]
+r: [ 2, 1 ]
+y: [ 8, 0 ]
+a: [ 2, 0 ]
+n: [ 3, 0 ]
+g: [ 5, 0 ]
+r: [ 7, 9 ]
+e: [ 8, 1 ]
+e: [ 7, 6 ]
+n: [ 3, 1 ]
+e: [ 0, 8 ]
+r: [ -1, -1 ]
+Merge Sort (ms): 0
+Binary Search (ms): 135
+
+
+a a a a a b b c c d 
+d d e e e f f f g g 
+g g h h h h h i i j 
+j j j j j j j j k k 
+k k k k l l l m m m 
+n n o o o o o p p q 
+q q q r r r r r s s 
+s s s s s t t t t t 
+t u u u u v w w w x 
+x x y y y z z z z z 
+
+b: [ 5, 0 ]
+r: [ 3, 6 ]
+y: [ 2, 9 ]
+a: [ 0, 0 ]
+n: [ 0, 5 ]
+g: [ 8, 1 ]
+r: [ 4, 6 ]
+e: [ 2, 1 ]
+e: [ 3, 1 ]
+n: [ 1, 5 ]
+e: [ 4, 1 ]
+r: [ 5, 6 ]
+
+NEW ARRAY SIZE: 100x100
+
+Unsorted Search (ms): 150
+Merge Sort (ms): 150
+Binary Search (ms): 323
+
+
+NEW ARRAY SIZE: 1000x1000
+
+Unsorted Search (ms): 197
+Merge Sort (ms): 496
+Binary Search (ms): 540
+
+========================
+  START VARIABLE NAME   
+========================
+REPLACING 1 LETTERS
+NEW SEARCH: beyangreener
+
+Unsorted Search (ms): 159
+Merge Sort (ms): 150
+Binary Search (ms): 338
+
+REPLACING 2 LETTERS
+NEW SEARCH: bryangreenei
+
+Unsorted Search (ms): 135
+Merge Sort (ms): 150
+Binary Search (ms): 329
+
+REPLACING 4 LETTERS
+NEW SEARCH: bryancreenem
+
+Unsorted Search (ms): 135
+Merge Sort (ms): 149
+Binary Search (ms): 325
+
+REPLACING 8 LETTERS
+NEW SEARCH: gryazgriihen
+
+Unsorted Search (ms): 122
+Merge Sort (ms): 150
+Binary Search (ms): 316
+
+REPLACING 16 LETTERS
+NEW SEARCH: mnyonuzxgobr
+
+Unsorted Search (ms): 111
+Merge Sort (ms): 151
+Binary Search (ms): 315
+
+REPLACING 32 LETTERS
+NEW SEARCH: xryidlwwbnau
+
+Unsorted Search (ms): 110
+Merge Sort (ms): 150
+Binary Search (ms): 326
+
+REPLACING 64 LETTERS
+NEW SEARCH: cbbwfwyzuzjd
+
+Unsorted Search (ms): 123
+Merge Sort (ms): 149
+Binary Search (ms): 315
+
+REPLACING 128 LETTERS
+NEW SEARCH: yyjktiutbcre
+
+Unsorted Search (ms): 119
+Merge Sort (ms): 149
+Binary Search (ms): 323
+
+REPLACING 256 LETTERS
+NEW SEARCH: rmqxjzgbletf
+
+Unsorted Search (ms): 104
+Merge Sort (ms): 151
+Binary Search (ms): 320
+

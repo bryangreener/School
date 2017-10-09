@@ -8,10 +8,10 @@
 </head>
 <body>
 <TABLE BORDER=3 CELLSPACING=3 CELLPADDING=3> 
-<TR>
+<TR class="month">
 	<TD COLSPAN="7" ALIGN=center><B>October 2014</B></TD> 
 </TR>
-<TR> 
+<TR class="weekdays"> 
 	<TD ALIGN=center>S</TD>
 	<TD ALIGN=center>M</TD>
 	<TD ALIGN=center>T</TD>
@@ -20,7 +20,7 @@
 	<TD ALIGN=center>F</TD>
 	<TD ALIGN=center>S</TD>
 </TR>
-<TR> 
+<TR class="days"> 
 	<TD ALIGN=center></TD>
 	<TD ALIGN=center></TD>
 	<TD ALIGN=center></TD>
@@ -29,7 +29,7 @@
 	<TD ALIGN=center>3</TD>
 	<TD ALIGN=center>4</TD>
 </TR>
-<TR> 
+<TR class="days"> 
 	<TD ALIGN=center>5</TD>
 	<TD ALIGN=center>6</TD>
 	<TD ALIGN=center>7</TD>
@@ -38,7 +38,7 @@
 	<TD ALIGN=center>10</TD>
 	<TD ALIGN=center>11</TD>
 </TR>
-<TR> 
+<TR class="days"> 
 	<TD ALIGN=center>12</TD>
 	<TD ALIGN=center>13</TD>
 	<TD ALIGN=center>14</TD>
@@ -47,7 +47,7 @@
 	<TD ALIGN=center>17</TD>
 	<TD ALIGN=center>18</TD>
 </TR>
-<TR> 
+<TR class="days"> 
 	<TD ALIGN=center>19</TD>
 	<TD ALIGN=center>20</TD>
 	<TD ALIGN=center>21</TD>
@@ -56,7 +56,7 @@
 	<TD ALIGN=center>24</TD>
 	<TD ALIGN=center>25</TD>
 </TR>
-<TR> 
+<TR class="days"> 
 	<TD ALIGN=center>26</TD>
 	<TD ALIGN=center>27</TD>
 	<TD ALIGN=center>28</TD>
@@ -65,15 +65,20 @@
 	<TD ALIGN=center>31</TD>
 	<TD ALIGN=center></TD>
 </TR>
-<TR> 
+<TR>
+	<TD class="prev">&#10094;&#10094; Sep</TD>
 	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
+	<TD class="next">Nov &#10095;&#10095;j</TD>
 </TR>
 </TABLE>
+<form>
+  <fieldset>
+    <legend>Meeting Details:</legend>
+    Client Name: <input type="text"><br>
+    First Meeting?: <input type="text"><br>
+    Client Type: <input type="text">
+    Meeting Date: <input type="text" id="date">
+  </fieldset>
+</form>
 </body>
 </html>

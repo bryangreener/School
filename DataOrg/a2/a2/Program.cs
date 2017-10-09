@@ -161,8 +161,11 @@ namespace a2
 
 	public class CharNode
 	{
-		public CharNode Next;
-		public char myData;
+		private CharNode Next;
+		private char myData;
+		// setdata getdata setnext getnext
+
+
 	}
 
 	public class CharList

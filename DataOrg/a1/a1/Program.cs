@@ -31,7 +31,7 @@ namespace a1
             TextWriter oldOut = Console.Out;
             try
             {
-                ostrm = new FileStream("C:/Users/Bryan/Desktop/CS3310-A1.txt", FileMode.Create, FileAccess.Write);
+                ostrm = new FileStream("./CS3310-A1.txt", FileMode.Create, FileAccess.Write);
                 writer = new StreamWriter(ostrm);
             }
             catch(Exception e)
@@ -67,7 +67,7 @@ namespace a1
                 ostrm.Close();
                 try
                 {
-                    ostrm = new FileStream("C:/Users/Bryan/Desktop/CS3310-A1.txt", FileMode.Append, FileAccess.Write);
+                    ostrm = new FileStream("./CS3310-A1.txt", FileMode.Append, FileAccess.Write);
                     writer = new StreamWriter(ostrm);
                 }
                 catch (Exception e)
@@ -121,9 +121,8 @@ namespace a1
         {
             // Create stopwatch item for timing use later on
             Stopwatch sw = new Stopwatch();
-            TimeSpan ts = new TimeSpan();
             // int used to add milliseconds
-            int mill = 0;
+            double mill = 0;
 
             // Index arrays used to store array search results
             int[] index = new int[name.Length];
@@ -153,12 +152,10 @@ namespace a1
                     index = BoringSearch(b, name);
                     // Stop Timer
                     sw.Stop();
-                    // Get time difference
-                    ts = sw.Elapsed;
-                    // Add to total time
-                    mill += ts.Milliseconds;
-                    // Increment index counter
-                    j++;
+					// Get time difference
+					mill += sw.Elapsed.TotalMilliseconds;
+					// Increment index counter
+					j++;
                 }
             }
             // Print out resulting average milliseconds per search.
@@ -188,9 +185,8 @@ namespace a1
                 sw.Start();
                 Array.Sort(b);
                 sw.Stop();
-                ts = sw.Elapsed;
-                mill += ts.Milliseconds;
-            }
+				mill += sw.Elapsed.TotalMilliseconds;
+			}
             Console.WriteLine($"Merge Sort (ms): {mill / 1000}");
             sw.Reset();
             mill = 0;
@@ -211,8 +207,7 @@ namespace a1
                     sw.Start();
                     index = SortedSearch(b, name);
                     sw.Stop();
-                    ts = sw.Elapsed;
-                    mill += ts.Milliseconds;
+                    mill += sw.Elapsed.TotalMilliseconds;
                 }
             }
             Console.WriteLine($"Binary Search (ms): {mill / 1000}");

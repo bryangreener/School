@@ -7,77 +7,82 @@
    <link rel="stylesheet" href="chapter04-project01.css" />
 </head>
 <body>
-<TABLE BORDER=3 CELLSPACING=3 CELLPADDING=3> 
-<TR class="month">
-	<TD COLSPAN="7" ALIGN=center><B>October 2014</B></TD> 
-</TR>
+<TABLE> 
+<caption class="month">October 2014</caption>
 <TR class="weekdays"> 
-	<TD ALIGN=center>S</TD>
-	<TD ALIGN=center>M</TD>
-	<TD ALIGN=center>T</TD>
-	<TD ALIGN=center>W</TD>
-	<TD ALIGN=center>T</TD>
-	<TD ALIGN=center>F</TD>
-	<TD ALIGN=center>S</TD>
+	<TD >S</TD>
+	<TD >M</TD>
+	<TD >T</TD>
+	<TD >W</TD>
+	<TD >T</TD>
+	<TD >F</TD>
+	<TD >S</TD>
 </TR>
 <TR class="days"> 
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center></TD>
-	<TD ALIGN=center>1</TD>
-	<TD ALIGN=center>2</TD>
-	<TD ALIGN=center>3</TD>
-	<TD ALIGN=center>4</TD>
+	<TD >&nbsp</TD>
+	<TD >&nbsp</TD>
+	<TD >&nbsp</TD>
+	<TD >1</TD>
+	<TD >2</TD>
+	<TD >3</TD>
+	<TD >4</TD>
 </TR>
 <TR class="days"> 
-	<TD ALIGN=center>5</TD>
-	<TD ALIGN=center>6</TD>
-	<TD ALIGN=center>7</TD>
-	<TD ALIGN=center>8</TD>
-	<TD ALIGN=center>9</TD>
-	<TD ALIGN=center>10</TD>
-	<TD ALIGN=center>11</TD>
+	<TD >5</TD>
+	<TD >6</TD>
+	<TD >7</TD>
+	<TD >8</TD>
+	<TD >9</TD>
+	<TD >10</TD>
+	<TD >11</TD>
 </TR>
 <TR class="days"> 
-	<TD ALIGN=center>12</TD>
-	<TD ALIGN=center>13</TD>
-	<TD ALIGN=center>14</TD>
-	<TD ALIGN=center>15</TD>
-	<TD ALIGN=center>16</TD>
-	<TD ALIGN=center>17</TD>
-	<TD ALIGN=center>18</TD>
+	<TD >12</TD>
+	<TD >13</TD>
+	<TD class="active">14</TD>
+	<TD >15</TD>
+	<TD >16</TD>
+	<TD >17</TD>
+	<TD >18</TD>
 </TR>
 <TR class="days"> 
-	<TD ALIGN=center>19</TD>
-	<TD ALIGN=center>20</TD>
-	<TD ALIGN=center>21</TD>
-	<TD ALIGN=center>22</TD>
-	<TD ALIGN=center>23</TD>
-	<TD ALIGN=center>24</TD>
-	<TD ALIGN=center>25</TD>
+	<TD >19</TD>
+	<TD >20</TD>
+	<TD >21</TD>
+	<TD >22</TD>
+	<TD >23</TD>
+	<TD >24</TD>
+	<TD >25</TD>
 </TR>
 <TR class="days"> 
-	<TD ALIGN=center>26</TD>
-	<TD ALIGN=center>27</TD>
-	<TD ALIGN=center>28</TD>
-	<TD ALIGN=center>29</TD>
-	<TD ALIGN=center>30</TD>
-	<TD ALIGN=center>31</TD>
-	<TD ALIGN=center></TD>
+	<TD >26</TD>
+	<TD >27</TD>
+	<TD >28</TD>
+	<TD >29</TD>
+	<TD >30</TD>
+	<TD >31</TD>
+	<TD >&nbsp</TD>
 </TR>
-<TR>
-	<TD class="prev">&#10094;&#10094; Sep</TD>
-	<TD ALIGN=center></TD>
-	<TD class="next">Nov &#10095;&#10095;j</TD>
+<TR class="days">
+	<TD class="prev"><a href="#september">&#10094;&#10094; Sep</a></TD>
+	<TD class="empty">&nbsp</TD>
+	<TD class="next"><a href="#november">Nov &#10095;&#10095;</a></TD>
 </TR>
 </TABLE>
-<form>
+
+
+
+
+<form action="http://www.randyconnolly.com/tests/process.php" method="get">
   <fieldset>
     <legend>Meeting Details:</legend>
-    Client Name: <input type="text"><br>
-    First Meeting?: <input type="text"><br>
-    Client Type: <input type="text">
-    Meeting Date: <input type="text" id="date">
+    Client Name: <input type="text" name="client"><br>
+    First Meeting?: <input type="checkbox" name="first"><br>
+    Client Type: <input type="radio" name="type" value="School">School 
+    <input type="radio" name="type" value="College">College 
+    <input type="radio" name="type" value="University">University<br>
+	<label for="meeting">Meeting Date : </label><input id="meeting" type="date" name="date" value="2011-01-13"/><br>
+    <input type="submit" value="Submit">
   </fieldset>
 </form>
 </body>

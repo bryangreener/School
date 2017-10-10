@@ -7,6 +7,160 @@
    <link rel="stylesheet" href="chapter04-project03.css" />
 </head>
 <body>
+<form action="http://www.randyconnolly.com/tests/process.php" method="post">
+<fieldset>
+<div class="internal">
+<legend>Photo Details</legend>
+<table>
+<tr>
+	<td>Title</td>
+</tr>
+<tr>
+	<td><input type="text" name="title" placeholder="Enter title"></td>
+</tr>
+<tr>
+	<td>Description</td>
+</tr>
+<tr>
+	<td><textarea rows="6"></textarea></td>
+</tr>
+<tr>
+	<td>
+		<table>
+			<tr>
+				<td>Continent</td>
+			</tr>
+			<tr>
+				<td>
+				<select name="continent">
+					<option value="0">North America</option>
+					<option value="1">Europe</option>
+					<option value="2">South America</option>
+					<option value="3">Antarctica</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Country</td>
+			</tr>
+			<tr>
+				<td>
+				<select name="country">
+					<option value="0">United States</option>
+					<option value="1">Finland</option>
+					<option value="2">Argentina</option>
+					<option value="3">Icy Hellscape</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>City</td>
+			</tr>
+			<tr>
+				<td>
+				<input type="text" name="city" placeholder="Enter city">
+				</td>
+			</tr>
+		</table>
+	</td>
+	<td>
+		<table>
+			<tr>
+				<td>
+					<fieldset class="copyright">
+						Copyright?<br>
+						<input type="radio" name="copyright" value="off">All rights reserved<br>
+						<input type="radio" name="copyright" value="on">Creative Commons
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<fieldset class="cc">
+						Creative Common Types<br>
+						<input type="checkbox" name="cc" value="1">Attribution<br>
+						<input type="checkbox" name="cc" value="2">Noncommercial<br>
+						<input type="checkbox" name="cc" value="3">No Derivative Works<br>
+						<input type="checkbox" name="cc" value="4">Share Alike
+					</fieldset>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td>
+		<fieldset class="license">
+			I accept the software license
+			<input type="checkbox">
+		</fieldset>
+	</td>
+</tr>
+<tr>
+	<td>
+	<table>
+		<tr>
+			<td>
+				Rate this photo:
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="rate">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Color Collection:
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" name="color">
+			</td>
+		</tr>
+	</table>
+	</td>
+	<td>
+		<fieldset class="datetime">
+		<table>
+			<tr>
+				<td>
+					Date Taken:
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="meeting" type="date" name="date" value="2011-01-13"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Time Taken:
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="meeting" type="time" name="time" value="01:00 PM"/>
+				</td>
+			</tr>
+		</table>
+		</fieldset>
+	</td>
+</tr>
+<tr>
+	<td>
+		<fieldset class="sub">
+			<button class="button" type="submit" value="Submit">Submit</button>&nbsp
+			<button class="button" type="reset" value="Clear Form">Clear Form</button>
+		</fieldset>
+	</td>
+</tr>
 
+
+</table>
+</div>
+</fieldset>
+</form>
 </body>
 </html>

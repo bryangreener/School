@@ -8,5 +8,114 @@
 </head>
 <body>
 
+<nav class="search">
+<form action="http://www.randyconnolly.com/tests/process.php" method="post">
+	<fieldset>
+	<input type="text" name="search" placeholder="Search titles">
+	<input type="submit" value="Search">
+	</fieldset>
+</nav>
+
+<nav class="filter">
+	<fieldset>
+	<select name="actions">
+		<option disabled selected="selected">Actions</option>
+		<option value="0">Archive</option>
+		<option value="1">Delete</option>
+	</select>&nbsp
+	<input type="submit" value="Apply">&nbsp
+	<select name="filter">
+		<option disabled selected="selected">Genre</option>
+		<option value="0">Baroque</option>
+		<option value="1">Renaissance</option>
+		<option value="2">Realism</option>
+	</select>&nbsp
+	<input type="submit" value="Filter">
+	</fieldset>
+</nav>
+
+<nav class="results">
+	<fieldset>
+		<table>
+		 <caption>Paintings</caption>
+		 <tr>
+		 	<th>&nbsp</th>
+		 	<th>&nbsp</th>
+		 	<th>Title</th>
+		 	<th>Artist</th>
+		 	<th>Year</th>
+		 	<th>Genre</th>
+		 	<th>&nbsp</th>
+		 </tr>
+		 <tr>
+		 	<td><input type="checkbox" name="index[]" value="0"></td>
+		 	<td><img src="images\05030.jpg" alt="death of marat"></td>
+		 	<td><i>Death of Marat</i></td>
+		 	<td>David, Jacques-Louis</td>
+		 	<td>1793</td>
+		 	<td>Romanticism</td>
+		 	<td><button type="button" name="edit" value="edit">
+		 		<img src="images\edit16.png"><br>
+		 		<a href="#edit">Edit</a>
+		 		</button>
+		 	</td>
+		 </tr>
+		 <tr>
+		 	<td><input type="checkbox" name="index[]" value="1"></td>
+		 	<td><img src="images\120010.jpg" alt="portrait of elanor of toledo"></td>
+		 	<td><i>Portrait of Elanor of Toledo</i></td>
+		 	<td>Bronzino, Angolo</td>
+		 	<td>1545</td>
+		 	<td>Mannerism</td>
+		 	<td><button type="button" name="edit" value="edit">
+		 		<img src="images\edit16.png"><br>
+		 		<a href="#edit">Edit</a>
+		 		</button>
+		 	</td>
+		 </tr>
+		 <tr>
+		 	<td><input type="checkbox" name="index[]" value="2"></td>
+		 	<td><img src="images\07020.jpg" alt="liberty leading the people"></td>
+		 	<td><i>Liberty Leading the People</i></td>
+		 	<td>Delacroix, Eugene</td>
+		 	<td>1830</td>
+		 	<td>Romanticism</td>
+		 	<td><button type="button" name="edit" value="edit">
+		 		<img src="images\edit16.png"><br>
+		 		<a href="#edit">Edit</a>
+		 		</button>
+		 	</td>
+		 </tr>
+		 <tr>
+		 	<td><input type="checkbox" name="index[]" value="3"></td>
+		 	<td><img src="images\13030.jpg" alt="arrangement in grey and black"></td>
+		 	<td><i>Arrangement in Grey and Black</i></td>
+		 	<td>Whistler, James Abbott</td>
+		 	<td>1871</td>
+		 	<td>Realism</td>
+		 	<td><button type="button" name="edit" value="edit">
+		 		<img src="images\edit16.png"><br>
+		 		<a href="#edit">Edit</a>
+		 		</button>
+		 	</td>
+		 </tr>
+		 <tr>
+		 	<td><input type="checkbox" name="index[]" value="4"></td>
+		 	<td><img src="images\06010.jpg" alt="mademoiselle caroline riviere"></td>
+		 	<td><i>Mademoiselle Caroline Riviere</i></td>
+		 	<td>Ingres, Jean-Auguste</td>
+		 	<td>1806</td>
+		 	<td>Neo-Classicism</td>
+		 	<td><button type="button" name="edit" value="edit">
+		 		<img src="images\edit16.png"><br>
+		 		<a href="#edit">Edit</a>
+		 		</button>
+		 	</td>
+		 </tr>
+		</table>
+	</fieldset>
+</nav>
+
+</form>
 </body>
 </html>

@@ -1,0 +1,33 @@
+PHP Arrays and Superglobals
+Array is ordered map associating a value in array with a key.
+	This is because arrays in PHP use hash tables.
+	Key default is 0 based index but can be either string or integer.
+	Create new array:
+		$arrayName = array();
+		can also initialize with:
+			$arrayName = array["one", "two"]; or
+			$arrayName = ["one", "two"];
+	Append to array:
+		$arrayname[] = "item"; appends to end
+		$arrayname[i] = "item"; pretty obvious...
+	Create array with key and value
+		$arrayName = array(0 => "zero", 1 => "one");
+		$arrayName = array("zero" => 0, "one" => 1);
+
+	Print item:
+		echo $arrayName[key];
+
+Creating new object of class is same as C.
+$object = new Class();
+$object->property = "";
+ex.	$person->firstName = "name";
+Constructors
+	define __construct() as function (two underscores)
+this-> refers to object
+
+Class Person
+	function __construct($firstname, $lastname){
+		$this->firstname = $firstname;
+		$this->lastname = $lastname;
+	}
+}

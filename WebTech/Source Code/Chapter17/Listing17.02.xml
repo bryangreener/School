@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE art [
+          <!ELEMENT art (painting*)>
+          <!ELEMENT painting (title,artist,year,medium)>
+          <!ATTLIST painting id CDATA #REQUIRED>
+          <!ELEMENT title (#PCDATA)>
+          <!ELEMENT artist (name,nationality)>
+          <!ELEMENT name (#PCDATA)>
+          <!ELEMENT nationality (#PCDATA)>
+          <!ELEMENT year (#PCDATA)>
+          <!ELEMENT medium (#PCDATA)>
+          ]>
+<art>
+  <painting id="290">
+    <title>Balcony</title>
+    <artist>
+      <name>Manet</name>
+      <nationality>France</nationality>
+    </artist>
+    <year>1868</year>
+    <medium>Oil on canvas</medium>
+  </painting>
+  <painting id="192">
+    <title>The Kiss</title>
+    <artist>
+      <name>Klimt</name>
+      <nationality>Austria</nationality>
+    </artist>
+    <year>1907</year>
+    <medium>Oil and gold on canvas</medium>
+  </painting>
+  <painting id="139">
+    <title>The Oath of the Horatii</title>
+    <artist>
+      <name>David</name>
+      <nationality>France</nationality>
+    </artist>
+    <year>1784</year>
+    <medium>Oil on canvas</medium>
+  </painting>
+</art>

@@ -1,0 +1,41 @@
+HTTP/1.1 200 OK
+Content-Type: application/xml; charset=UTF-8
+Date: Fri, 19 Jul 2013 19:15:54 GMT
+Expires: Sat, 20 Jul 2013 19:15:54 GMT
+Cache-Control: public, max-age=86400
+Vary: Accept-Language
+Content-Encoding: gzip
+Server: mafe
+Content-Length: 512
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+<?xml version="1.0" encoding="UTF-8"?>
+<GeocodeResponse>
+  <status>OK</status>
+  <result>
+    <type>route</type>
+    <formatted_address>
+      Great Russell Street, London Borough of Camden, London, UK
+    </formatted_address>
+    <address_component>
+      <long_name>Great Russell Street</long_name>
+      <short_name>Great Russell St</short_name>
+      <type>route</type>
+    </address_component>
+    <address_component>
+      <long_name>London</long_name>
+      <short_name>London</short_name>
+      <type>locality</type>
+      <type>political</type>
+    </address_component>
+    ...
+    <geometry>
+      <location>
+        <lat>51.5179231</lat>
+        <lng>-0.1271022</lng>
+      </location>
+      <location_type>GEOMETRIC_CENTER</location_type>
+      ...
+    </geometry>
+  </result>
+</GeocodeResponse>

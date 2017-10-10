@@ -1,0 +1,10 @@
+/*
+Theme Name: Twenty Twelve Example Child
+Theme URI: http://funwebdev.com/
+Description: Theme to demonstrate child themes
+Author: Randy Connolly and Ricardo Hoar
+Author URI: http://funwebdev.com
+Template: twentytwelve
+Version: 1.0.0
+*/
+@import url("../twentytwelve/style.css");

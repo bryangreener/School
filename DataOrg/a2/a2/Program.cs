@@ -125,7 +125,7 @@ namespace a2
 
 		public void Enqueue(char data)
 		{
-			list.Insert(list.Count() - 1, data);
+			list.Insert(list.Count(), data);
 		}
 		public char Dequeue()
 		{
@@ -165,7 +165,7 @@ namespace a2
 			head.Next = tail;
 			count = 0;
 		}
-
+		/*
 		public void Insert(int index, char data)
 		{
 			CharNode newNode = new a2.CharNode();
@@ -186,7 +186,74 @@ namespace a2
 			current.Next = newNode;
 			count++;
 		}
-
+		*/
+		public void Insert(int index, char data)
+		{
+			CharNode newNode = new a2.CharNode();
+			newNode.MyData = data;
+			CharNode oldHead = head;
+			if(index == 0)
+			{
+				if(count == 0)
+				{
+					head = newNode;
+					count++;
+					return;
+				}
+				head = newNode;
+				newNode.Next = oldHead;
+				count++;
+				return;
+			}
+			if(index >= count -1)
+			{
+				tail.Next = newNode;
+				tail = newNode;
+				count++;
+				return;
+			}
+			CharNode previous = head;
+			for (int i = 1; i < index; i++)
+			{
+				previous = previous.Next;
+			}
+			newNode.Next = previous.Next;
+			previous.Next = newNode;
+			count++;
+		}
+		public char Delete(int index)
+		{
+			CharNode previous = head;
+			char c;
+			if(index == 0)
+			{
+				if(head == null)
+				{
+					return '\0';
+				}
+				c = head.MyData;
+				head = head.Next;
+				count--;
+				return c;
+			}
+			for(int i = 1; i < index; i++)
+			{
+				previous = previous.Next;
+			}
+			if(previous.Next == tail)
+			{
+				c = tail.MyData;
+				tail = previous;
+				tail.Next = null;
+				count--;
+				return c;
+			}
+			c = previous.Next.MyData;
+			previous.Next = previous.Next.Next;
+			count--;
+			return c;
+		}
+		/*
 		public char Delete(int index)
 		{
 			char result;
@@ -200,6 +267,7 @@ namespace a2
 			count--;
 			return result;
 		}
+		*/
 		private CharNode Find(int index)
 		{
 			current = head;

@@ -15,19 +15,19 @@ namespace a2
 			string text = File.ReadAllText("balancedParenCheckInputs.txt");
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			List<string> input = new List<string>();
-			foreach(string line in lines)
+			foreach (string line in lines)
 			{
 				input.Add(Regex.Unescape(line));
 			}
 
-			
+
 			foreach (string s in input)
 			{
 				StackCheckBalancedParentheses stackCheck = new StackCheckBalancedParentheses();
 				Console.WriteLine($"STACK: {s} --- Degree: {stackCheck.CheckBalancedParentheses(s)}");
 			}
-			
-			foreach(string s in input)
+
+			foreach (string s in input)
 			{
 				QueueCheckBalancedParentheses queueCheck = new QueueCheckBalancedParentheses();
 				Console.WriteLine($"QUEUE: {s} --- Degree: {queueCheck.CheckBalancedParentheses(s)}");
@@ -39,88 +39,79 @@ namespace a2
 	class StackCheckBalancedParentheses
 	{
 		CharStack stack = new CharStack();
-		
+
 		public int CheckBalancedParentheses(string input)
 		{
 			int degree = 0;
 			foreach (char c in input)
 			{
-					if (c == '(')
+				if (c == '(')
+				{
+					stack.Push(c);
+				}
+				if (c == ')')
+				{
+					if (stack.Pop() != '(')
 					{
-						stack.Push(c);
+						degree++;
 					}
-					if (c == ')')
-					{
-						if (stack.Pop() != '(')
-						{
-							degree++;
-						}
-					}
+				}
 			}
-			return degree += stack.GetLength();
+			return degree += stack.Count();
 		}
 	}
 	class CharStack
 	{
 		CharList list = new CharList();
-		public CharStack()
-		{
-			list.Clear();
-		}
+
 		public void Push(char data)
 		{
-			list.Insert(data);
-			list.MoveToHead();
+			list.Insert(0, data);
 		}
 		public char Pop()
 		{
-			while (list.CurrentPos() != 0)
-			{
-				list.MoveLeft();
-			}
-			return list.Delete();
+			return list.Delete(0);
 		}
-		public int GetLength()
+		public int Count()
 		{
-			return list.GetLength();
+			return list.Count();
 		}
 	}
 
 	class QueueCheckBalancedParentheses
 	{
 		CharQueue queue = new CharQueue();
-		
+
 		public int CheckBalancedParentheses(string input)
 		{
 			int degree = 0;
 			foreach (char c in input)
 			{
-					if (c == '(')
+				if (c == '(')
+				{
+					Push(c); // this calls the Push method in this class, not in the Stack class
+				}
+				if (c == ')')
+				{
+					if (Pop() != '(') // this calls the Pop method in this class, not in the Stack class
 					{
-						Push(c); // this calls the Push method in this class, not in the Stack class
+						degree++;
 					}
-					if (c == ')')
-					{
-						if (Pop() != '(') // this calls the Pop method in this class, not in the Stack class
-						{
-							degree++;
-						}
 				}
 			}
-			return degree += queue.GetLength();
+			return degree += queue.Count();
 		}
 		private void Push(char c)
 		{
 			CharQueue queue2 = new CharQueue();
 			queue.Enqueue(c);
-			for(int i = 0; i < queue.GetLength() - 1; i++)
+			for (int i = 0; i < queue.Count() - 1; i++)
 			{
-				queue.Enqueue(queue.Dequeue());
-			}
-			queue2.Enqueue(queue.Dequeue());
-			for(int i = 0; i < queue2.GetLength(); i++)
-			{
-				queue.Enqueue(queue2.Dequeue());
+				for (int j = 0; j < queue.Count() - 2; j++)
+				{
+					queue.Enqueue(queue.Dequeue());
+				}
+				queue2.Enqueue(queue.Dequeue());
 			}
 		}
 		private char Pop()
@@ -131,26 +122,18 @@ namespace a2
 	class CharQueue
 	{
 		CharList list = new CharList();
-		public CharQueue()
-		{
-			list.Clear();
-		}
+
 		public void Enqueue(char data)
 		{
-			list.Append(data);
+			list.Insert(list.Count() - 1, data);
 		}
 		public char Dequeue()
 		{
-			list.MoveToHead();
-			return list.Delete();
+			return list.Delete(0);
 		}
-		public int GetLength()
+		public int Count()
 		{
-			return list.GetLength();
-		}
-		public void Clear()
-		{
-			list.Clear();
+			return list.Count();
 		}
 	}
 
@@ -161,11 +144,11 @@ namespace a2
 
 	public class CharNode
 	{
-		private CharNode Next;
+		private CharNode next;
 		private char myData;
-		// setdata getdata setnext getnext
 
-
+		public char MyData { get; set; }
+		public CharNode Next { get; set; }
 	}
 
 	public class CharList
@@ -173,125 +156,62 @@ namespace a2
 		private CharNode head;
 		private CharNode tail;
 		private CharNode current;
-		public int Count;
-
+		private int count;
+		
 		public CharList()
 		{
-			Clear();
-		}
-
-		public void Clear()
-		{
-			current = tail = new CharNode();
 			head = new CharNode();
+			current = tail = new CharNode();
 			head.Next = tail;
-			Count = 0;
+			count = 0;
 		}
 
-		public void Insert(char data) // ins current
+		public void Insert(int index, char data)
 		{
-			CharNode newNode = new CharNode();
-			newNode.myData = current.myData;
-			newNode.Next = current.Next;
-			current.Next = newNode;
-			current.myData = data;
-			if(tail == current)
+			CharNode newNode = new a2.CharNode();
+			newNode.MyData = data;
+			if (index == 1)
 			{
-				tail = current.Next;
-			}
-			Count++;
-		}
-
-		public char Delete() // del current
-		{
-			if (current == tail)
-			{
-				return current.myData;
-			}
-			char value = current.myData;
-			current.myData = current.Next.myData;
-			if (current.Next == tail)
-			{
-				tail = current;
-			}
-			current.Next = current.Next.Next;
-			Count--;
-			return value;
-		}
-
-		public int CurrentPos()
-		{
-			CharNode temp = head.Next;
-			int i;
-			for(i = 0; current != temp; i++)
-			{
-				temp = temp.Next;
-			}
-			return i;
-		}
-
-		public void Append(char data)
-		{
-			CharNode tempNode = new CharNode();
-			tempNode.myData = tail.myData;
-			tail.myData = data;
-			tail.Next = tempNode;
-			tempNode.Next = null;
-			Count++;
-		}
-
-		public void MoveToHead()
-		{
-			current = head;
-		}
-
-		public void MoveToTail()
-		{
-			current = tail;
-		}
-
-		public void MoveLeft()
-		{
-			if(head.Next == current)
-			{
+				newNode.Next = head;
+				head = newNode;
+				count++;
 				return;
 			}
-			CharNode temp = head;
-			while(temp.Next != current)
-			{
-				temp = temp.Next;
-			}
-			current = temp;
-		}
-
-		public void MoveRight()
-		{
-			if(current != tail)
+			current = head;
+			for(int i = 1; i < index - 1; i++)
 			{
 				current = current.Next;
 			}
+			newNode.Next = current.Next;
+			current.Next = newNode;
+			count++;
 		}
 
-		public int GetLength()
+		public char Delete(int index)
 		{
-			return Count;
-		}
-
-		public char GetValue()
-		{
-			return current.myData;
-		}
-
-		public void PrintNodes()
-		{
-			Console.Write("HEAD");
-			CharNode current = head;
-			while (current.Next != null)
+			char result;
+			current = head;
+			for (int i = 1; i < index - 1; i++)
 			{
-				Console.Write($" -> {current.myData}");
 				current = current.Next;
 			}
-			Console.Write(" -> NULL");
+			result = current.MyData;
+			current.Next = current.Next.Next;
+			count--;
+			return result;
+		}
+		private CharNode Find(int index)
+		{
+			current = head;
+			for(int i = 1; i < index; i++)
+			{
+				current = current.Next;
+			}
+			return current;
+		}
+		public int Count()
+		{
+			return count;
 		}
 	}
 }

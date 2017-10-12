@@ -105,13 +105,18 @@ namespace a2
 		{
 			CharQueue queue2 = new CharQueue();
 			queue.Enqueue(c);
-			for (int i = 0; i < queue.Count() - 1; i++)
+
+			for (int i = 0; i <= queue.Count(); i++)
 			{
-				for (int j = 0; j < queue.Count() - 2; j++)
+				for (int j = 0; j <= queue.Count() - 1; j++)
 				{
 					queue.Enqueue(queue.Dequeue());
 				}
 				queue2.Enqueue(queue.Dequeue());
+			}
+			for(int i = 0; i <= queue2.Count(); i++)
+			{
+				queue.Enqueue(queue2.Dequeue());
 			}
 		}
 		private char Pop()
@@ -175,19 +180,15 @@ namespace a2
 	public class CharList
 	{
 		protected CharNode head;
+		protected CharNode tail;
+		protected CharNode newNode;
 		protected int count;
 		
 		public CharList()
 		{
-<<<<<<< HEAD
-			head = current = tail = new CharNode();
-			head.Next = null;
+			head = null;
+			tail = head;
 			count = 0;
-		}
-		public void Insert(int index, char data)
-=======
-			head = new a2.CharNode('\0', null);
-			count = 0;	
 		}
 
 		public void AddHead(char c)
@@ -196,64 +197,34 @@ namespace a2
 			count++;
 		}
 		public void AddTail(char c)
->>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
 		{
-			CharNode temp = new CharNode(c, null);
-			CharNode tail = new CharNode('\0', null);
-			temp.SetNext(null);
+			newNode = new CharNode(c, null);
 			if(head == null)
 			{
-<<<<<<< HEAD
-				if(count == 0)
-				{
-					head = tail = newNode;
-					count++;
-					return;
-				}
 				head = newNode;
-				newNode.Next = oldHead;
-				count++;
-				return;
-			}
-			if(index >= count)
-=======
-				head = temp;
 			}
 			else
->>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
 			{
-				tail.SetNext(temp);
+				tail.SetNext(newNode);
 			}
-			tail = temp;
+			tail = newNode;
 			count++;
 		}
 
 		public char DeleteHead()
 		{
-			CharNode temp = new CharNode('\0', null);
-			if(head == null)
+			if (head == null)
 			{
 				return '0';
 			}
 			char c = head.GetData();
-			temp = head;
+			newNode = head;
 			head = head.GetNext();
-			temp.SetNext(null);
+			newNode.SetNext(null);
 			count--;
 			return c;
 		}
-<<<<<<< HEAD
-		private CharNode Find(int index)
-		{
-			current = head;
-			for(int i = 1; i < index; i++)
-			{
-				current = current.Next;
-			}
-			return current;
-		}
-=======
->>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
+
 		public int Count()
 		{
 			return count;

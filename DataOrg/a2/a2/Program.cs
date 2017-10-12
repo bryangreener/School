@@ -160,33 +160,10 @@ namespace a2
 		
 		public CharList()
 		{
-			head = new CharNode();
-			current = tail = new CharNode();
-			head.Next = tail;
+			head = current = tail = new CharNode();
+			head.Next = null;
 			count = 0;
 		}
-		/*
-		public void Insert(int index, char data)
-		{
-			CharNode newNode = new a2.CharNode();
-			newNode.MyData = data;
-			if (index == 1)
-			{
-				newNode.Next = head;
-				head = newNode;
-				count++;
-				return;
-			}
-			current = head;
-			for(int i = 1; i < index - 1; i++)
-			{
-				current = current.Next;
-			}
-			newNode.Next = current.Next;
-			current.Next = newNode;
-			count++;
-		}
-		*/
 		public void Insert(int index, char data)
 		{
 			CharNode newNode = new a2.CharNode();
@@ -196,7 +173,7 @@ namespace a2
 			{
 				if(count == 0)
 				{
-					head = newNode;
+					head = tail = newNode;
 					count++;
 					return;
 				}
@@ -205,7 +182,7 @@ namespace a2
 				count++;
 				return;
 			}
-			if(index >= count -1)
+			if(index >= count)
 			{
 				tail.Next = newNode;
 				tail = newNode;
@@ -253,21 +230,6 @@ namespace a2
 			count--;
 			return c;
 		}
-		/*
-		public char Delete(int index)
-		{
-			char result;
-			current = head;
-			for (int i = 1; i < index - 1; i++)
-			{
-				current = current.Next;
-			}
-			result = current.MyData;
-			current.Next = current.Next.Next;
-			count--;
-			return result;
-		}
-		*/
 		private CharNode Find(int index)
 		{
 			current = head;

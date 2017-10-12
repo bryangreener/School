@@ -66,11 +66,11 @@ namespace a2
 
 		public void Push(char data)
 		{
-			list.Insert(0, data);
+			list.AddHead(data);
 		}
 		public char Pop()
 		{
-			return list.Delete(0);
+			return list.DeleteHead();
 		}
 		public int Count()
 		{
@@ -125,11 +125,11 @@ namespace a2
 
 		public void Enqueue(char data)
 		{
-			list.Insert(list.Count(), data);
+			list.AddTail(data);
 		}
 		public char Dequeue()
 		{
-			return list.Delete(0);
+			return list.DeleteHead();
 		}
 		public int Count()
 		{
@@ -147,30 +147,63 @@ namespace a2
 		private CharNode next;
 		private char myData;
 
-		public char MyData { get; set; }
-		public CharNode Next { get; set; }
+		public CharNode(char c, CharNode n)
+		{
+			myData = c;
+			next = n;
+		}
+		// accessors
+		public char GetData()
+		{
+			return myData;
+		}
+		public CharNode GetNext()
+		{
+			return next;
+		}
+		// mutators
+		public void SetData(char newData)
+		{
+			myData = newData;
+		}
+		public void SetNext(CharNode newNext)
+		{
+			next = newNext;
+		}
 	}
 
 	public class CharList
 	{
-		private CharNode head;
-		private CharNode tail;
-		private CharNode current;
-		private int count;
+		protected CharNode head;
+		protected int count;
 		
 		public CharList()
 		{
+<<<<<<< HEAD
 			head = current = tail = new CharNode();
 			head.Next = null;
 			count = 0;
 		}
 		public void Insert(int index, char data)
+=======
+			head = new a2.CharNode('\0', null);
+			count = 0;	
+		}
+
+		public void AddHead(char c)
 		{
-			CharNode newNode = new a2.CharNode();
-			newNode.MyData = data;
-			CharNode oldHead = head;
-			if(index == 0)
+			head = new CharNode(c, head);
+			count++;
+		}
+		public void AddTail(char c)
+>>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
+		{
+			CharNode temp = new CharNode(c, null);
+			CharNode tail = new CharNode('\0', null);
+			temp.SetNext(null);
+			if(head == null)
 			{
+<<<<<<< HEAD
 				if(count == 0)
 				{
 					head = tail = newNode;
@@ -183,53 +216,33 @@ namespace a2
 				return;
 			}
 			if(index >= count)
-			{
-				tail.Next = newNode;
-				tail = newNode;
-				count++;
-				return;
+=======
+				head = temp;
 			}
-			CharNode previous = head;
-			for (int i = 1; i < index; i++)
+			else
+>>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
 			{
-				previous = previous.Next;
+				tail.SetNext(temp);
 			}
-			newNode.Next = previous.Next;
-			previous.Next = newNode;
+			tail = temp;
 			count++;
 		}
-		public char Delete(int index)
+
+		public char DeleteHead()
 		{
-			CharNode previous = head;
-			char c;
-			if(index == 0)
+			CharNode temp = new CharNode('\0', null);
+			if(head == null)
 			{
-				if(head == null)
-				{
-					return '\0';
-				}
-				c = head.MyData;
-				head = head.Next;
-				count--;
-				return c;
+				return '0';
 			}
-			for(int i = 1; i < index; i++)
-			{
-				previous = previous.Next;
-			}
-			if(previous.Next == tail)
-			{
-				c = tail.MyData;
-				tail = previous;
-				tail.Next = null;
-				count--;
-				return c;
-			}
-			c = previous.Next.MyData;
-			previous.Next = previous.Next.Next;
+			char c = head.GetData();
+			temp = head;
+			head = head.GetNext();
+			temp.SetNext(null);
 			count--;
 			return c;
 		}
+<<<<<<< HEAD
 		private CharNode Find(int index)
 		{
 			current = head;
@@ -239,6 +252,8 @@ namespace a2
 			}
 			return current;
 		}
+=======
+>>>>>>> 89ed3128a0153053d84906718ba0dd57fb8ba5c7
 		public int Count()
 		{
 			return count;

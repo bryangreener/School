@@ -1,0 +1,27 @@
+STACK: "sdb(erlj)((djre)lejr)"     Degree: 0
+STACK: "4+(5*4))"                  Degree: 1
+STACK: "ere)(jre"                  Degree: 2
+STACK: "((())(("                   Degree: 3
+STACK: ")((())(("                  Degree: 4
+STACK: testing)))))))))thisis 9    Degree: 9
+STACK: idk test(()                 Degree: 1
+STACK: ()()                        Degree: 0
+STACK: )()(                        Degree: 2
+STACK: ))                          Degree: 2
+STACK: ((                          Degree: 2
+STACK:                             Degree: 0
+STACK: (endfile)                   Degree: 0
+---------------------------------------------
+QUEUE: "sdb(erlj)((djre)lejr)"     Degree: 0
+QUEUE: "4+(5*4))"                  Degree: 1
+QUEUE: "ere)(jre"                  Degree: 2
+QUEUE: "((())(("                   Degree: 3
+QUEUE: ")((())(("                  Degree: 4
+QUEUE: testing)))))))))thisis 9    Degree: 9
+QUEUE: idk test(()                 Degree: 1
+QUEUE: ()()                        Degree: 0
+QUEUE: )()(                        Degree: 2
+QUEUE: ))                          Degree: 2
+QUEUE: ((                          Degree: 2
+QUEUE:                             Degree: 0
+QUEUE: (endfile)                   Degree: 0

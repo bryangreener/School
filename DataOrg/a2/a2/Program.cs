@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
 
+
+/// <summary>
+/// By:			Bryan Greener
+/// Class:		CS3310
+///	Submitted:	2017-10-15
+///	This program's goal is to take in a txt file, read each line as a separate entry,
+///	then check to see if parentheses are balanced. It does this by using both a stack
+///	and a queue implementation of a singly linked list.
+/// 
+/// I give permission to the instructor to share my solution(s) with the class.
+/// </summary>
+
 namespace a2
 {
 	class Program

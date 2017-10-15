@@ -6,6 +6,9 @@ Documentation.XML
 Assignment 2 Algorithms Used.docx
 	Open this in MS Word to view time complexity analysis and graph showing algorithm run time.
 
+SAMPLE OUTPUT.txt
+	Output from running program on my computer.
+
 a2/bin/debug/balancedParenCheckInputs.txt
 	Edit this file with input strings. This is the 	main file that the program reads and checks for degree of balanced parentheses. Leave in the bin/debug folder in order for the program to read it.
 

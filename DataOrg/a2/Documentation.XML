@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>a2</name>
+    </assembly>
+    <members>
+        <member name="M:a2.Program.Main(System.String[])">
+            <summary>
+            Main method only calls StackQueueDemo's SanitizeInput method.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:a2.StackCheckBalancedParentheses">
+            <summary>
+            Called by StackQueueDemo class.
+            This class performs stack functions on linked list.
+            </summary>
+        </member>
+        <member name="M:a2.StackCheckBalancedParentheses.CheckBalancedParentheses(System.String)">
+            <summary>
+            Method that contains loop that calls push and pop methods from CharStack class
+            in order to determine the degree of mismatching pairs of parentheses.
+            </summary>
+            <param name="input">Input is a single line of the input file passed in as a string.</param>
+            <returns>Degree is the total degree of mismatched parentheses.</returns>
+        </member>
+        <member name="T:a2.CharStack">
+            <summary>
+            Called by StackCheckBalancedParenthesis class.
+            </summary>
+            <remarks>This class contains Push and Pop methods which access
+            the CharList class which contains a Linked List.</remarks>
+        </member>
+        <member name="M:a2.CharStack.Push(System.Char)">
+            <summary>
+            Stack operation that adds item before head in linked list.
+            </summary>
+            <param name="data">Single character from input string to be pushed on stack.</param>
+        </member>
+        <member name="M:a2.CharStack.Pop">
+            <summary>
+            Stack operation that removes head from linked list.
+            </summary>
+            <returns>Returns single character from top of stack.</returns>
+        </member>
+        <member name="M:a2.CharStack.Count">
+            <summary>
+            Used to get number of items in list while in StackCheckBalancedParentheses class.
+            </summary>
+            <returns>Integer length of linked list.</returns>
+        </member>
+        <member name="T:a2.QueueCheckBalancedParentheses">
+            <summary>
+            Called by StackQueueDemo class.
+            </summary>
+            <remarks>This class performs stack functions on linked list
+            by using two queues to imitate a stack
+            and returns a degree of mismatched parenthesis.</remarks>
+        </member>
+        <member name="M:a2.QueueCheckBalancedParentheses.CheckBalancedParentheses(System.String)">
+            <summary>
+            Method identical to method of same name in StackCheckBalancedParentheses class.
+            </summary>
+            <param name="input">Input is a single line of the input file passed in as a string.</param>
+            <returns>Degree is the total degree of mismatched parentheses.</returns>
+        </member>
+        <member name="M:a2.QueueCheckBalancedParentheses.Push(System.Char)">
+            <summary>
+            Push method used to simulate push operation on a stack.
+            </summary>
+            <remarks>By using two queues and rotating the first to pop the final element off to a different queue,
+            this method simulates a stack.</remarks>
+            <param name="c">Single character input to be sent to "stack".</param>
+        </member>
+        <member name="M:a2.QueueCheckBalancedParentheses.Pop">
+            <summary>
+            Pop method using the previously converted queue to simulate pop operation on a stack.
+            </summary>
+            <returns>Return single character from front of queue.</returns>
+        </member>
+        <member name="T:a2.CharQueue">
+            <summary>
+            Called by QueueCheckBalancedParenthesis class.
+            This class contains Enqueue and Dequeue methods which access
+            the CharList class which contains a Linked List.
+            </summary>
+        </member>
+        <member name="M:a2.CharQueue.Enqueue(System.Char)">
+            <summary>
+            Adds input to tail of linked list.
+            </summary>
+            <param name="data">Single character input.</param>
+        </member>
+        <member name="M:a2.CharQueue.Dequeue">
+            <summary>
+            Removes head of linked list queue.
+            </summary>
+            <returns>Returns single character value from head of queue.</returns>
+        </member>
+        <member name="M:a2.CharQueue.Count">
+            <summary>
+            Used to get length of linked list queue.
+            </summary>
+            <returns>Returns integer value.</returns>
+        </member>
+        <member name="T:a2.StackQueueDemo">
+            <summary>
+            Contains SanitizeInput method which is called by Main method in Program class.
+            </summary>
+        </member>
+        <member name="M:a2.StackQueueDemo.SanitizeInput">
+            <summary>
+            Called by Main method in Program class.
+            This class reads the balancedParenCheckInputs.txt text file
+            inside the /bin/debug program folder. It then splits this input,
+            sanitizes it, calls StackCheckBalancedParentheses and
+            QueueCheckBalancedParentheses class methods. The return
+            from these calls gets saved to a single list then outputs in
+            a nice format.
+            </summary>
+        </member>
+        <member name="T:a2.CharNode">
+            <summary>
+            This class contains the accessors and mutators which
+            control individual nodes in the Linked List.
+            </summary>
+        </member>
+        <member name="M:a2.CharNode.#ctor(System.Char,a2.CharNode)">
+            <summary>
+            Individual node object.
+            </summary>
+            <param name="c">Input character to be saved as node's value. Saved as local myData variable.</param>
+            <param name="n">Input CharNode to be used to link current and next node. Saved as local next variable.</param>
+        </member>
+        <member name="M:a2.CharNode.GetData">
+            <summary>
+            Accessor used to get value for specified node.
+            </summary>
+            <returns>Returns char value saved at specific node.</returns>
+        </member>
+        <member name="M:a2.CharNode.GetNext">
+            <summary>
+            Accessor used to get link to next node for current node.
+            </summary>
+            <returns>Returns CharNode next link at specific node.</returns>
+        </member>
+        <member name="M:a2.CharNode.SetData(System.Char)">
+            <summary>
+            Mutator used to save value at specified node.
+            </summary>
+            <param name="newData">Single character input saved as local myData variable.</param>
+        </member>
+        <member name="M:a2.CharNode.SetNext(a2.CharNode)">
+            <summary>
+            Mutator used to save link to next element for specific node.
+            </summary>
+            <param name="newNext">CharNode input saved as local next variable.</param>
+        </member>
+        <member name="T:a2.CharList">
+            <summary>
+            This class contains the insert/delete/count functions of
+            the program's singly linked list.
+            This class gets called by CharStack and CharQueue class methods.
+            </summary>
+        </member>
+        <member name="M:a2.CharList.#ctor">
+            <summary>
+            Initializes a new linked list with head and tail and with a count of 0 elements.
+            </summary>
+        </member>
+        <member name="M:a2.CharList.AddHead(System.Char)">
+            <summary>
+            Inserts new node as head.
+            </summary>
+            <param name="c">Single character input.</param>
+        </member>
+        <member name="M:a2.CharList.AddTail(System.Char)">
+            <summary>
+            Inserts new node as tail.
+            </summary>
+            <param name="c">Single charatcer input.</param>
+        </member>
+        <member name="M:a2.CharList.DeleteHead">
+            <summary>
+            Deletes head node from linked list.
+            </summary>
+            <returns>Returns single character value from deleted node.</returns>
+        </member>
+        <member name="M:a2.CharList.Count">
+            <summary>
+            Method used to get current count of items in linked list.
+            </summary>
+            <returns>Returns integer count of number of items in linked list.</returns>
+        </member>
+    </members>
+</doc>

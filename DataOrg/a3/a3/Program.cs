@@ -15,23 +15,69 @@ namespace a3
 		}
 	}
 
+	class UI
+	{
+		public void Unsorted(LL list, string s)
+		{
+			Console.WriteLine();
+			Console.WriteLine($"{s} Sort");
+			Console.Write("Unsorted: ");
+			list.Print();
+		}
+		public void Sorted(LL list)
+		{
+			Console.WriteLine();
+			Console.Write("Sorted:   ");
+			list.Print();
+			Console.WriteLine();
+		}
+	}
+
 	class Sort
 	{
-		// IMPORTANT: Last index of bubble and selection sort are not being sorted.
+		UI ui = new UI();
 		LL list = new LL();
+		private int n;
+
 		public Sort(int n)
 		{
-			Initialize(n);
-			Console.WriteLine(list.Count());
-			//Console.WriteLine("Insertion Sort");
-			//LLInsertion();
-			//Console.WriteLine("Bubble Sort");
-			//LLBubble();
-			//Console.WriteLine("Selection Sort");
-			LLSelection();
+			this.n = n;
+			ListSorts();
+			ArraySorts();
 		}
 
-		public void Initialize(int n)
+		public void ListSorts()
+		{
+			Initialize();
+			ui.Unsorted(list, "Insertion");
+			LLInsertion(list);
+			ui.Sorted(list);
+
+			list = new LL();
+			Initialize();
+			ui.Unsorted(list, "Bubble");
+			LLBubble(list);
+			ui.Sorted(list);
+
+			list = new LL();
+			Initialize();
+			ui.Unsorted(list, "Selection");
+			LLSelection(list);
+			ui.Sorted(list);
+
+			list = new LL();
+			Initialize();
+			ui.Unsorted(list, "Merge");
+			LLMerge(list, new LL(), 1, list.Count());
+			ui.Sorted(list);
+		}
+
+		public void ArraySorts()
+		{
+
+		}
+
+		private void Initialize()
 		{
 			Random rnd = new Random();
 			string ascii = "abcdefghijklmnopqrstuvwxyz";
@@ -39,15 +85,11 @@ namespace a3
 			{
 				list.Insert(ascii[rnd.Next(0, 26)]);
 			}
-			Console.WriteLine("initialized");
 		}
 
 		#region LinkedListSorts
-		public void LLInsertion()
+		private void LLInsertion(LL list)
 		{
-			Console.WriteLine();
-			Console.WriteLine("Unsorted:");
-			list.Print();
 			for(int i = 1; i < list.Count(); i++)
 			{
 				for(int j = i + 1; j > 1 && list.GetData(j) < list.GetData(j - 1); j--)
@@ -55,57 +97,59 @@ namespace a3
 					list.Swap(j, j - 1);
 				}
 			}
-			Console.WriteLine();
-			Console.WriteLine("Sorted:");
-			list.Print();
 		}
 
-		public void LLBubble()
+		private void LLBubble(LL list)
 		{
-			Console.WriteLine();
-			Console.WriteLine("Unsorted:");
-			list.Print();
 			for(int i = 0; i < list.Count(); i++)
 			{
-				for(int j = 1; j < list.Count() - i; j++)
+				for(int j = 1; j < list.Count() - i + 1; j++)
 				{
 					if(list.GetData(j - 1) > list.GetData(j))
 					{
-						list.Swap(j - 1, j);
+						list.Swap(j, j - 1);
 					}
 				}
 			}
-			Console.WriteLine();
-			Console.WriteLine("Sorted:");
-			list.Print();
 		}
 
-		public void LLSelection()
+		private void LLSelection(LL list)
 		{
-			Console.WriteLine();
-			Console.WriteLine("Unsorted:");
-			list.Print();
 			for(int i = 0; i < list.Count(); i++)
 			{
 				int bigindex = 0;
-				for(int j = 1; j < list.Count() - i; j++)
+				for(int j = 1; j < list.Count() - i + 1; j++)
 				{
 					if(list.GetData(j) > list.GetData(bigindex))
 					{
 						bigindex = j;
 					}
-					list.Swap(bigindex, list.Count() - i - 1);
 				}
+				list.Swap(bigindex, list.Count() - i);
 			}
-			Console.WriteLine();
-			Console.WriteLine("Sorted:");
-			list.Print();
 		}
 
-		public void LLMerge()
+		private void LLMerge(LL list, LL temp, int left, int right)
 		{
+			if(left == right) { return; }
+			int mid = (left + right) / 2;
+			LLMerge(list, temp, left, mid);
+			LLMerge(list, temp, mid + 1, right);
+			for(int i = left; i <= right; i++)
+			{
+				temp.Insert(list.GetData(i), i);
+			}
 
+			int i1 = left, i2 = mid + 1;
+			for (int current = left; current <= right; current++)
+			{
+				if (i1 == mid + 1) { list.Replace(temp.GetData(i2++), current); }
+				else if (i2 > right) { list.Replace(temp.GetData(i1++), current); }
+				else if (temp.GetData(i1) <= temp.GetData(i2)) { list.Replace(temp.GetData(i1++), current); }
+				else { list.Replace(temp.GetData(i2++), current); }
+			}
 		}
+
 		#endregion
 		#region ArraySorts
 		public void ArrInsertion()
@@ -126,6 +170,7 @@ namespace a3
 		}
 		#endregion
 	}
+
 	class Node
 	{
 		public Node() { }
@@ -170,6 +215,11 @@ namespace a3
 			count++;
 		}
 
+		public void Replace(char d, int index)
+		{
+			current = GoToIndex(current, index);
+			current.Data = d;
+		}
 		public void Swap(int index1, int index2)
 		{
 			Node current2 = new Node(null);

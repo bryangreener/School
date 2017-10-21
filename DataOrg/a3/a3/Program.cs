@@ -17,19 +17,43 @@ namespace a3
 
 	class UI
 	{
-		public void Unsorted(LL list, string s)
+		public void LLUnsorted(LL list, string s)
 		{
 			Console.WriteLine();
 			Console.WriteLine($"{s} Sort");
 			Console.Write("Unsorted: ");
 			list.Print();
+			
 		}
-		public void Sorted(LL list)
+		public void LLSorted(LL list)
 		{
 			Console.WriteLine();
 			Console.Write("Sorted:   ");
 			list.Print();
 			Console.WriteLine();
+		}
+		public void ArrUnsorted(char[] arr, string s)
+		{
+			Console.WriteLine();
+			Console.WriteLine($"{s} Sort");
+			Console.Write("Unsorted: ");
+			ArrPrint(arr);
+
+		}
+		public void ArrSorted(char[] arr)
+		{
+			Console.WriteLine();
+			Console.Write("Sorted:   ");
+			ArrPrint(arr);
+			Console.WriteLine();
+		}
+
+		private void ArrPrint(char[] arr)
+		{
+			foreach(char c in arr)
+			{
+				Console.Write($"{c} ");
+			}
 		}
 	}
 
@@ -48,36 +72,56 @@ namespace a3
 
 		public void ListSorts()
 		{
-			Initialize();
-			ui.Unsorted(list, "Insertion");
+			LLInitialize();
+			ui.LLUnsorted(list, "Insertion");
 			LLInsertion(list);
-			ui.Sorted(list);
+			ui.LLSorted(list);
 
 			list = new LL();
-			Initialize();
-			ui.Unsorted(list, "Bubble");
+			LLInitialize();
+			ui.LLUnsorted(list, "Bubble");
 			LLBubble(list);
-			ui.Sorted(list);
+			ui.LLSorted(list);
 
 			list = new LL();
-			Initialize();
-			ui.Unsorted(list, "Selection");
+			LLInitialize();
+			ui.LLUnsorted(list, "Selection");
 			LLSelection(list);
-			ui.Sorted(list);
+			ui.LLSorted(list);
 
 			list = new LL();
-			Initialize();
-			ui.Unsorted(list, "Merge");
+			LLInitialize();
+			ui.LLUnsorted(list, "Merge");
 			LLMerge(list, new LL(), 1, list.Count());
-			ui.Sorted(list);
+			ui.LLSorted(list);
 		}
-
 		public void ArraySorts()
 		{
+			char[] arr = new char[n];
+
+			arr = ArrInitialize(arr);
+			ui.ArrUnsorted(arr, "Insersion");
+			ArrInsertion(arr);
+			ui.ArrSorted(arr);
+
+			arr = ArrInitialize(arr);
+			ui.ArrUnsorted(arr, "Bubble");
+			ArrBubble(arr);
+			ui.ArrSorted(arr);
+
+			arr = ArrInitialize(arr);
+			ui.ArrUnsorted(arr, "Selection");
+			ArrSelection(arr);
+			ui.ArrSorted(arr);
+
+			arr = ArrInitialize(arr);
+			ui.ArrUnsorted(arr, "Merge");
+			ArrMerge(arr, new char[n], 0, arr.Count() - 1);
+			ui.ArrSorted(arr);
 
 		}
 
-		private void Initialize()
+		private void LLInitialize()
 		{
 			Random rnd = new Random();
 			string ascii = "abcdefghijklmnopqrstuvwxyz";
@@ -85,6 +129,16 @@ namespace a3
 			{
 				list.Insert(ascii[rnd.Next(0, 26)]);
 			}
+		}
+		private char[] ArrInitialize(char[] arr)
+		{
+			Random rnd = new Random();
+			string ascii = "abcdefghijklmnopqrstuvwxyz";
+			for(int i = 0; i < n; i++)
+			{
+				arr[i] = ascii[rnd.Next(0, 26)];
+			}
+			return arr;
 		}
 
 		#region LinkedListSorts
@@ -98,7 +152,6 @@ namespace a3
 				}
 			}
 		}
-
 		private void LLBubble(LL list)
 		{
 			for(int i = 0; i < list.Count(); i++)
@@ -112,7 +165,6 @@ namespace a3
 				}
 			}
 		}
-
 		private void LLSelection(LL list)
 		{
 			for(int i = 0; i < list.Count(); i++)
@@ -128,7 +180,6 @@ namespace a3
 				list.Swap(bigindex, list.Count() - i);
 			}
 		}
-
 		private void LLMerge(LL list, LL temp, int left, int right)
 		{
 			if(left == right) { return; }
@@ -152,21 +203,71 @@ namespace a3
 
 		#endregion
 		#region ArraySorts
-		public void ArrInsertion()
+		private void ArrInsertion(char[] arr)
 		{
-
+			for (int i = 0; i < arr.Count() - 1; i++)
+			{
+				for (int j = i + 1; j > 0 && arr[j] < arr[j - 1]; j--)
+				{
+					Swap(ref arr[j], ref arr[j - 1]);
+				}
+			}
 		}
-		public void ArrBubble()
+		private void ArrBubble(char[] arr)
 		{
-
+			for (int i = 0; i < arr.Count() - 1; i++)
+			{
+				for (int j = 1; j < arr.Count() - i; j++)
+				{
+					if (arr[j - 1] > arr[j])
+					{
+						Swap(ref arr[j], ref arr[j - 1]);
+					}
+				}
+			}
 		}
-		public void ArrSelection()
+		private void ArrSelection(char[] arr)
 		{
-
+			for (int i = 0; i < arr.Count() - 1; i++)
+			{
+				int bigindex = 0;
+				for (int j = 1; j < arr.Count() - i; j++)
+				{
+					if (arr[j] > arr[bigindex])
+					{
+						bigindex = j;
+					}
+				}
+				Swap(ref arr[bigindex], ref arr[arr.Count() - i - 1]);
+			}
 		}
-		public void ArrMerge()
+		private void ArrMerge(char[] arr, char[] temp, int left, int right)
 		{
+			if(left == right) { return; }
+			int mid = (left + right) / 2;
+			ArrMerge(arr, temp, left, mid);
+			ArrMerge(arr, temp, mid + 1, right);
+			for(int i = left; i <= right; i++)
+			{
+				temp[i] = arr[i];
+			}
 
+			int i1 = left;
+			int i2 = mid + 1;
+			for(int current = left; current <= right; current++)
+			{
+				if (i1 == mid + 1) { arr[current] = temp[i2++]; }
+				else if(i2 > right) { arr[current] = temp[i1++]; }
+				else if(temp[i1] <= temp[i2]) { arr[current] = temp[i1++]; }
+				else { arr[current] = temp[i2++]; }
+			}
+		}
+
+		private void Swap(ref char a, ref char b)
+		{
+			char temp = a;
+			a = b;
+			b = temp;
 		}
 		#endregion
 	}

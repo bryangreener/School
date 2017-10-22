@@ -3,49 +3,115 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Diagnostics;
 namespace a3
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			Sort s = new Sort(10);
+			UI ui = new UI();
+			Sort s = new Sort(ui.N(), ui.Name());
 			Console.ReadLine();
 		}
 	}
 
 	class UI
 	{
+		public int N()
+		{
+			Console.WriteLine("Please enter an integer N");
+			string input = Console.ReadLine();
+			while(input == "")
+			{
+				Console.WriteLine("INVALID INPUT - Please enter an integer for N");
+				input = Console.ReadLine();
+			}
+			bool valid = false;
+			while(valid == false)
+			{
+				int temp = 0;
+				if (!int.TryParse(input, out temp))
+				{
+					Console.WriteLine("INVALID INPUT - Please enter an integer for N");
+					input = Console.ReadLine();
+				}
+				else { valid = true; }
+			}
+			return Convert.ToInt32(input);
+		}
+		public string Name()
+		{
+			Console.WriteLine("Please Enter Last Name");
+			string name = Console.ReadLine();
+			while (name.ToLower().Replace(" ", string.Empty) == "" || name.Any(char.IsDigit))
+			{
+				Console.WriteLine("INVALID NAME - Please enter a valid name");
+				name = Console.ReadLine();
+			}
+			return name.ToLower().Replace(" ", "");
+		}
+		
+		public void LLHeader(int n, string name)
+		{
+			Console.WriteLine();
+			Console.WriteLine("-----------------------");
+			Console.WriteLine("== LINKED LIST SORTS ==");
+			Console.WriteLine("-----------------------");
+			Console.WriteLine($"Number of chars: {n}");
+			Console.WriteLine($"Sorting by name: {name}");
+		}
+		public void ArrHeader(int n, string name)
+		{
+			Console.WriteLine();
+			Console.WriteLine("-----------------------");
+			Console.WriteLine("== ARRAY BASED SORTS ==");
+			Console.WriteLine("-----------------------");
+			Console.WriteLine($"Number of chars: {n}");
+			Console.WriteLine($"Sorting by name: {name}");
+		}
+
 		public void LLUnsorted(LL list, string s)
 		{
 			Console.WriteLine();
-			Console.WriteLine($"{s} Sort");
-			Console.Write("Unsorted: ");
-			list.Print();
-			
+			Console.WriteLine($"{s.ToUpper()} SORT");
+			Console.WriteLine("--------------");
+			if (list.Count() <= 25)
+			{
+				Console.Write("Unsorted: ");
+				list.Print();
+			}
 		}
 		public void LLSorted(LL list)
 		{
 			Console.WriteLine();
-			Console.Write("Sorted:   ");
-			list.Print();
-			Console.WriteLine();
+			if (list.Count() <= 25)
+			{
+				Console.Write("Sorted:   ");
+				list.Print();
+				Console.WriteLine();
+			}
 		}
 		public void ArrUnsorted(char[] arr, string s)
 		{
 			Console.WriteLine();
-			Console.WriteLine($"{s} Sort");
-			Console.Write("Unsorted: ");
-			ArrPrint(arr);
-
+			Console.WriteLine($"{s.ToUpper()} SORT");
+			Console.WriteLine("--------------");
+			if(arr.Count() <= 25)
+			{
+				Console.Write("Unsorted: ");
+				ArrPrint(arr);
+			}
 		}
 		public void ArrSorted(char[] arr)
 		{
 			Console.WriteLine();
-			Console.Write("Sorted:   ");
-			ArrPrint(arr);
-			Console.WriteLine();
+			if (arr.Count() <= 25)
+			{
+				Console.Write("Sorted:   ");
+				ArrPrint(arr);
+				Console.WriteLine();
+			}
 		}
 
 		private void ArrPrint(char[] arr)
@@ -55,73 +121,105 @@ namespace a3
 				Console.Write($"{c} ");
 			}
 		}
+
+		public void TotalTime(double time)
+		{
+			Console.WriteLine($"Elapsed Time: {time/1000}ms");
+		}
 	}
 
 	class Sort
 	{
 		UI ui = new UI();
-		LL list = new LL();
-		private int n;
+		
+		Stopwatch sw = new Stopwatch();
 
-		public Sort(int n)
+		private int n;
+		private string name, sortString;
+
+		public Sort(int n, string name)
 		{
 			this.n = n;
+			this.name = name;
+
+			sortString = CharValues();
+
+			ui.LLHeader(n, name);
 			ListSorts();
+
+			ui.ArrHeader(n, name);
 			ArraySorts();
 		}
 
-		public void ListSorts()
+		private void ListSorts()
 		{
-			LLInitialize();
+			LL list = new LL();
+			LLInitialize(list);
 			ui.LLUnsorted(list, "Insertion");
-			LLInsertion(list);
+			sw.Start(); LLInsertion(list); sw.Stop();
 			ui.LLSorted(list);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			list = new LL();
-			LLInitialize();
+			LLInitialize(list);
 			ui.LLUnsorted(list, "Bubble");
-			LLBubble(list);
+			sw.Start(); LLBubble(list); sw.Stop();
 			ui.LLSorted(list);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			list = new LL();
-			LLInitialize();
+			LLInitialize(list);
 			ui.LLUnsorted(list, "Selection");
-			LLSelection(list);
+			sw.Start(); LLSelection(list); sw.Stop();
 			ui.LLSorted(list);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			list = new LL();
-			LLInitialize();
+			LLInitialize(list);
 			ui.LLUnsorted(list, "Merge");
-			LLMerge(list, new LL(), 1, list.Count());
+			sw.Start(); LLMerge(list, new LL(), 1, list.Count()); sw.Stop();
 			ui.LLSorted(list);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 		}
-		public void ArraySorts()
+		private void ArraySorts()
 		{
 			char[] arr = new char[n];
 
 			arr = ArrInitialize(arr);
-			ui.ArrUnsorted(arr, "Insersion");
-			ArrInsertion(arr);
+			ui.ArrUnsorted(arr, "Insertion");
+			sw.Start(); ArrInsertion(arr); sw.Stop();
 			ui.ArrSorted(arr);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			arr = ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Bubble");
-			ArrBubble(arr);
+			sw.Start(); ArrBubble(arr); sw.Stop();
 			ui.ArrSorted(arr);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			arr = ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Selection");
-			ArrSelection(arr);
+			sw.Start(); ArrSelection(arr); sw.Stop();
 			ui.ArrSorted(arr);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 			arr = ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Merge");
-			ArrMerge(arr, new char[n], 0, arr.Count() - 1);
+			sw.Start(); ArrMerge(arr, new char[n], 0, arr.Count() - 1); sw.Stop();
 			ui.ArrSorted(arr);
+			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
+			sw.Reset();
 
 		}
 
-		private void LLInitialize()
+		private void LLInitialize(LL list)
 		{
 			Random rnd = new Random();
 			string ascii = "abcdefghijklmnopqrstuvwxyz";
@@ -141,12 +239,35 @@ namespace a3
 			return arr;
 		}
 
+		private string CharValues()
+		{
+			string ascii = "abcdefghijklmnopqrstuvwxyz";
+			char[] chars = new char[26];
+			name.ToCharArray().Distinct().ToArray();
+			for(int i = 0; i < name.Count(); i++)
+			{
+				chars[i] = name[i];
+				ascii = ascii.Remove(ascii.IndexOf(name[i]), 1);
+			}
+			for(int i = name.Length; i < 26; i++)
+			{
+				chars[i] = ascii[i - name.Length];
+			}
+			return new string(chars);
+		}
+		private int CharCompare(char x, char y)
+		{
+			if (sortString.IndexOf(x) < sortString.IndexOf(y)) { return -1; }
+			else if (sortString.IndexOf(x) > sortString.IndexOf(y)) { return 1; }
+			else { return 0; }
+		}
+
 		#region LinkedListSorts
 		private void LLInsertion(LL list)
 		{
 			for(int i = 1; i < list.Count(); i++)
 			{
-				for(int j = i + 1; j > 1 && list.GetData(j) < list.GetData(j - 1); j--)
+				for(int j = i + 1; j > 1 && CharCompare(list.GetData(j), list.GetData(j - 1)) == -1; j--)
 				{
 					list.Swap(j, j - 1);
 				}
@@ -158,7 +279,7 @@ namespace a3
 			{
 				for(int j = 1; j < list.Count() - i + 1; j++)
 				{
-					if(list.GetData(j - 1) > list.GetData(j))
+					if(CharCompare(list.GetData(j - 1), list.GetData(j)) == 1)
 					{
 						list.Swap(j, j - 1);
 					}
@@ -172,7 +293,7 @@ namespace a3
 				int bigindex = 0;
 				for(int j = 1; j < list.Count() - i + 1; j++)
 				{
-					if(list.GetData(j) > list.GetData(bigindex))
+					if(CharCompare(list.GetData(j), list.GetData(bigindex)) == 1)
 					{
 						bigindex = j;
 					}
@@ -196,7 +317,10 @@ namespace a3
 			{
 				if (i1 == mid + 1) { list.Replace(temp.GetData(i2++), current); }
 				else if (i2 > right) { list.Replace(temp.GetData(i1++), current); }
-				else if (temp.GetData(i1) <= temp.GetData(i2)) { list.Replace(temp.GetData(i1++), current); }
+				else if (CharCompare(temp.GetData(i1), temp.GetData(i2)) == -1 || CharCompare(temp.GetData(i1), temp.GetData(i2)) == 0)
+				{
+					list.Replace(temp.GetData(i1++), current);
+				}
 				else { list.Replace(temp.GetData(i2++), current); }
 			}
 		}
@@ -207,7 +331,7 @@ namespace a3
 		{
 			for (int i = 0; i < arr.Count() - 1; i++)
 			{
-				for (int j = i + 1; j > 0 && arr[j] < arr[j - 1]; j--)
+				for (int j = i + 1; j > 0 && CharCompare(arr[j], arr[j - 1]) == -1; j--)
 				{
 					Swap(ref arr[j], ref arr[j - 1]);
 				}
@@ -219,7 +343,7 @@ namespace a3
 			{
 				for (int j = 1; j < arr.Count() - i; j++)
 				{
-					if (arr[j - 1] > arr[j])
+					if (CharCompare(arr[j - 1], arr[j]) == 1)
 					{
 						Swap(ref arr[j], ref arr[j - 1]);
 					}
@@ -233,7 +357,7 @@ namespace a3
 				int bigindex = 0;
 				for (int j = 1; j < arr.Count() - i; j++)
 				{
-					if (arr[j] > arr[bigindex])
+					if (CharCompare(arr[j], arr[bigindex]) == 1)
 					{
 						bigindex = j;
 					}
@@ -258,7 +382,10 @@ namespace a3
 			{
 				if (i1 == mid + 1) { arr[current] = temp[i2++]; }
 				else if(i2 > right) { arr[current] = temp[i1++]; }
-				else if(temp[i1] <= temp[i2]) { arr[current] = temp[i1++]; }
+				else if(CharCompare(temp[i1], temp[i2]) == -1 || CharCompare(temp[i1], temp[i2]) == 0)
+				{
+					arr[current] = temp[i1++];
+				}
 				else { arr[current] = temp[i2++]; }
 			}
 		}
@@ -288,6 +415,7 @@ namespace a3
 		public char Data { get; set; }
 		public Node Next { get; set; }
 	}
+
 	class LL
 	{
 		private Node head, tail, current;

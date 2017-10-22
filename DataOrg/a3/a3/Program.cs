@@ -38,6 +38,12 @@ namespace a3
 				}
 				else { valid = true; }
 			}
+			while(Convert.ToInt32(input) > 500)
+			{
+				Console.WriteLine("Sorry but bublesort can't handle that big of a number without comparing into infinity.");
+				Console.WriteLine("Please enter a lower integer N");
+				input = Console.ReadLine();
+			}
 			return Convert.ToInt32(input);
 		}
 		public string Name()
@@ -52,7 +58,7 @@ namespace a3
 			return name.ToLower().Replace(" ", "");
 		}
 		
-		public void LLHeader(int n, string name)
+		public void LLHeader(int n, string name, string search)
 		{
 			Console.WriteLine();
 			Console.WriteLine("-----------------------");
@@ -60,8 +66,9 @@ namespace a3
 			Console.WriteLine("-----------------------");
 			Console.WriteLine($"Number of chars: {n}");
 			Console.WriteLine($"Sorting by name: {name}");
+			Console.WriteLine($"Search order:    {search}");
 		}
-		public void ArrHeader(int n, string name)
+		public void ArrHeader(int n, string name, string search)
 		{
 			Console.WriteLine();
 			Console.WriteLine("-----------------------");
@@ -69,6 +76,7 @@ namespace a3
 			Console.WriteLine("-----------------------");
 			Console.WriteLine($"Number of chars: {n}");
 			Console.WriteLine($"Sorting by name: {name}");
+			Console.WriteLine($"Search order:    {search}");
 		}
 
 		public void LLUnsorted(LL list, string s)
@@ -122,107 +130,137 @@ namespace a3
 			}
 		}
 
-		public void TotalTime(double time)
+		public void TotalTime(double time, int loops)
 		{
-			Console.WriteLine($"Elapsed Time: {time/1000}ms");
+			Console.WriteLine($"Elapsed Time: {time/loops}ms");
 		}
 	}
 
 	class Sort
 	{
 		UI ui = new UI();
-		
+		Random rnd = new Random();
 		Stopwatch sw = new Stopwatch();
 
-		private int n;
+		private int n, testLoops = 1000;
 		private string name, sortString;
+		private string ascii = "abcdefghijklmnopqrstuvwxyz";
+		private double ms = 0;
 
 		public Sort(int n, string name)
 		{
 			this.n = n;
 			this.name = name;
 
+			if (n > 100)
+			{
+				testLoops = 100;
+			}
+
 			sortString = CharValues();
 
-			ui.LLHeader(n, name);
+			ui.LLHeader(n, name, sortString);
 			ListSorts();
 
-			ui.ArrHeader(n, name);
+			ui.ArrHeader(n, name, sortString);
 			ArraySorts();
 		}
 
 		private void ListSorts()
 		{
 			LL list = new LL();
+
 			LLInitialize(list);
 			ui.LLUnsorted(list, "Insertion");
-			sw.Start(); LLInsertion(list); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); LLInsertion(list); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.LLSorted(list);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
 			list = new LL();
 			LLInitialize(list);
 			ui.LLUnsorted(list, "Bubble");
-			sw.Start(); LLBubble(list); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); LLBubble(list); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.LLSorted(list);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
 			list = new LL();
 			LLInitialize(list);
 			ui.LLUnsorted(list, "Selection");
-			sw.Start(); LLSelection(list); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); LLSelection(list); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.LLSorted(list);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
 			list = new LL();
 			LLInitialize(list);
 			ui.LLUnsorted(list, "Merge");
-			sw.Start(); LLMerge(list, new LL(), 1, list.Count()); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); LLMerge(list, new LL(), 1, list.Count()); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.LLSorted(list);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 		}
 		private void ArraySorts()
 		{
 			char[] arr = new char[n];
 
-			arr = ArrInitialize(arr);
+			ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Insertion");
-			sw.Start(); ArrInsertion(arr); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); ArrInsertion(arr); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.ArrSorted(arr);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
-			arr = ArrInitialize(arr);
+			ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Bubble");
-			sw.Start(); ArrBubble(arr); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); ArrBubble(arr); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.ArrSorted(arr);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
-			arr = ArrInitialize(arr);
+			ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Selection");
-			sw.Start(); ArrSelection(arr); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); ArrSelection(arr); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.ArrSorted(arr);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
-			arr = ArrInitialize(arr);
+			ArrInitialize(arr);
 			ui.ArrUnsorted(arr, "Merge");
-			sw.Start(); ArrMerge(arr, new char[n], 0, arr.Count() - 1); sw.Stop();
+			for (int i = 0; i < testLoops; i++)
+			{
+				sw.Start(); ArrMerge(arr, new char[n], 0, arr.Count() - 1); sw.Stop(); ms += sw.Elapsed.TotalMilliseconds; sw.Reset();
+			}
 			ui.ArrSorted(arr);
-			ui.TotalTime(sw.Elapsed.TotalMilliseconds);
-			sw.Reset();
+			ui.TotalTime(ms, testLoops);
+			ms = 0;
 
 		}
 
 		private void LLInitialize(LL list)
 		{
-			Random rnd = new Random();
-			string ascii = "abcdefghijklmnopqrstuvwxyz";
 			for(int i = 0; i < n; i++)
 			{
 				list.Insert(ascii[rnd.Next(0, 26)]);
@@ -230,8 +268,6 @@ namespace a3
 		}
 		private char[] ArrInitialize(char[] arr)
 		{
-			Random rnd = new Random();
-			string ascii = "abcdefghijklmnopqrstuvwxyz";
 			for(int i = 0; i < n; i++)
 			{
 				arr[i] = ascii[rnd.Next(0, 26)];
@@ -241,17 +277,18 @@ namespace a3
 
 		private string CharValues()
 		{
-			string ascii = "abcdefghijklmnopqrstuvwxyz";
+			string tempAscii = "abcdefghijklmnopqrstuvwxyz";
 			char[] chars = new char[26];
-			name.ToCharArray().Distinct().ToArray();
-			for(int i = 0; i < name.Count(); i++)
+			char[] nameArr = name.ToCharArray().Distinct().ToArray();
+
+			for(int i = 0; i < nameArr.Count(); i++)
 			{
-				chars[i] = name[i];
-				ascii = ascii.Remove(ascii.IndexOf(name[i]), 1);
+				chars[i] = nameArr[i];
+				tempAscii = tempAscii.Remove(tempAscii.IndexOf(nameArr[i]), 1);
 			}
-			for(int i = name.Length; i < 26; i++)
+			for(int i = nameArr.Count(); i < 26; i++)
 			{
-				chars[i] = ascii[i - name.Length];
+				chars[i] = tempAscii[i - nameArr.Count()];
 			}
 			return new string(chars);
 		}
@@ -422,10 +459,15 @@ namespace a3
 		private int count;
 
 		public LL()
-		{ // clear list and initialize
+		{
 			current = tail = new Node(null);
 			head = new a3.Node(tail);
 			count = 0;
+		}
+
+		public void Clear()
+		{
+			head = null;
 		}
 
 		public void Insert(char d)	// APPEND

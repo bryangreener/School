@@ -1,0 +1,67 @@
+Please enter an integer N
+10
+Please Enter Last Name
+Greener
+
+-----------------------
+== LINKED LIST SORTS ==
+-----------------------
+Number of chars: 10
+Sorting by name: greener
+Search order:    grenabcdfhijklmopqstuvwxyz
+
+INSERTION SORT
+--------------
+Unsorted: i t h u f n s m o k
+Sorted:   n f h i k m o s t u
+Elapsed Time: 0.4246ms
+
+BUBBLE SORT
+--------------
+Unsorted: q i p i a i b k p e
+Sorted:   e a b i i i k p p q
+Elapsed Time: 0.1224ms
+
+SELECTION SORT
+--------------
+Unsorted: h x v t c n o f h k
+Sorted:   n c f h h k o t v x
+Elapsed Time: 0.146ms
+
+MERGE SORT
+--------------
+Unsorted: o a k k b a t u w f
+Sorted:   a a b f k k o t u w
+Elapsed Time: 0.4793ms
+
+-----------------------
+== ARRAY BASED SORTS ==
+-----------------------
+Number of chars: 10
+Sorting by name: greener
+Search order:    grenabcdfhijklmopqstuvwxyz
+
+INSERTION SORT
+--------------
+Unsorted: q l t w b c y h d r
+Sorted:   r b c d h l q t w y
+Elapsed Time: 0.1744ms
+
+BUBBLE SORT
+--------------
+Unsorted: v a e u p k x n r s
+Sorted:   r e n a k p s u v x
+Elapsed Time: 0.1355ms
+
+SELECTION SORT
+--------------
+Unsorted: y m f e v p x e h a
+Sorted:   e e a f h m p v x y
+Elapsed Time: 0.1525ms
+
+MERGE SORT
+--------------
+Unsorted: o g o j o w e y s a
+Sorted:   g e a j o o o s w y
+Elapsed Time: 0.1987ms
+COMPLETE. Press ENTER to close...

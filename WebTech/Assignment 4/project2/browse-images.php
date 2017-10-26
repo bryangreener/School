@@ -12,53 +12,61 @@
   $cities = [];
   $imgLocations = [];
 
-  if(isset($_GET['city']) && isset($_GET['country']))
+  if(isset($_GET['city']) || isset($_GET['country']))
   {
-    if($_GET['city'] == 0 || $_GET['country'] == "ZZZ")
+    $city = $_GET['city'];
+    $country = $_GET['country'];
+  }
+  else
+  {
+    $city = 0;
+    $country = "ZZZ";
+  }
+
+  if($city == 0 || $country == "ZZZ")
+  {
+    if($city == 0 && $country != "ZZZ")
     {
-      if($_GET['city'] == 0 && $_GET['country'] != "ZZZ")
-      {
-        $query = "SELECT 'Path'
+      $query = "SELECT Path
             FROM travelimage
             JOIN travelimagedetails ON travelimagedetails.ImageID = travelimage.ImageID
-            WHERE CountryCodeISO = :country
-            ORDER BY ImageID";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindValue(':country', $_GET['country']);
-        $result = $stmt->execute();
-      }
-      else if($_GET['country'] == "ZZZ" && $_GET['city'] != 0)
-      {
-        $query = "SELECT 'Path'
+            WHERE CountryCodeISO = :country";
+      $stmt = $pdo->prepare($query);
+      $stmt->bindParam(':country',$country, PDO::PARAM_STR);
+    }
+    else if($city != 0 && $country == "ZZZ")
+    {
+      $query = "SELECT Path
             FROM travelimage
             JOIN travelimagedetails ON travelimagedetails.ImageID = travelimage.ImageID
-            WHERE CityCode = :city
-            ORDER BY ImageID";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindValue(':city', $_GET['city']);
-        $result = $stmt->execute();
-      }
+            WHERE CityCode= :city";
+      $stmt = $pdo->prepare($query);
+      $stmt->bindParam(':city',$city, PDO::PARAM_INT);
     }
     else
     {
-      $query = "SELECT 'Path'
+      $query = "SELECT Path
             FROM travelimage
-            JOIN travelimagedetails ON travelimagedetails.ImageID = travelimage.ImageID
-            WHERE CityCode = :city AND CountryCodeISO = :country
-            ORDER BY ImageID";
+            JOIN travelimagedetails ON travelimagedetails.ImageID = travelimage.ImageID";
       $stmt = $pdo->prepare($query);
-      $stmt->bindValue(':city', $_GET['city']);
-      $stmt->bindValue(':country', $_GET['country']);
-      $result = $stmt->execute();
     }
   }
-
-  if(!empty($result))
+  else
   {
-    while($row = $result->fetch())
-    {
-      $imgLocations[] = $row;
-    }
+    // both set
+    $query = "SELECT Path
+            FROM travelimage
+            JOIN travelimagedetails ON travelimagedetails.ImageID = travelimage.ImageID
+            WHERE CityCode = :city AND CountryCodeISO = :country";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':city',$city, PDO::PARAM_INT);
+    $stmt->bindParam(':country',$country, PDO::PARAM_STR);
+
+  }
+  $stmt->execute();
+  while($row = $stmt->fetch())
+  {
+    array_push($imgLocations,$row['Path']);
   }
 
   $query = "SELECT ContinentName FROM geocontinents ORDER BY ContinentName ASC";
@@ -152,7 +160,7 @@
                 <?php
                   foreach($imgLocations as $img)
                   {
-                    echo "$img[0]";
+                    echo '<img src=images/travel/square/' . $img . '>&nbsp';
                   }
                 ?>
             </div>

@@ -11,7 +11,7 @@ namespace a4
     {
         static void Main(string[] args)
         {
-			string text = File.ReadAllText("namelist.txt");
+			string text = File.ReadAllText("namelistSMALL.txt");
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			string[][] input = new string[lines.Length][];
 
@@ -36,12 +36,14 @@ namespace a4
 		{
 			Input = input;
 
-			MinHeapControl();
+			//MinHeapControl();
 
-			Console.WriteLine();
-			Console.WriteLine("========================================");
+			//Console.WriteLine();
+			//Console.WriteLine("========================================");
 
-			MaxHeapControl();
+			//MaxHeapControl();
+
+			BSTControl();
 		}
 
 		private void MinHeapControl()
@@ -91,7 +93,20 @@ namespace a4
 		}
 		private void BSTControl()
 		{
-
+			BST bst = new BST();
+			foreach(var v in Input)
+			{
+				bst.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
+			}
+			// Print results
+			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "DFS       BFS");
+			foreach (var s in Input)
+			{
+				Console.WriteLine($"{s[0].PadRight(20, ' ')}" + $"{bst.Get(s[0].ToLower())}".PadRight(10, ' '));
+				//Console.WriteLine($"{s[1].PadRight(20, ' ')}" + $"{bst.DFS(s[1].ToLower())}".PadRight(10, ' ') + $"{bst.BFS(s[1].ToLower())}");
+			}
+			Console.WriteLine("========================================");
+			bst.Traverse();
 		}
 	}
 
@@ -375,7 +390,6 @@ namespace a4
 		}
 	}
 
-
 	class Person
 	{
 		public Person() { }
@@ -564,6 +578,145 @@ namespace a4
 		{
 			if (pos % 2 != 0) { return pos + 1; }
 			else { return -1; }
+		}
+	}
+
+	class BSTNode
+	{
+		public BSTNode(Tuple<string,string> value, int n, bool color)
+		{
+			Value = value;
+			N = n;
+			Color = color;
+		}
+		public Tuple<string,string> Value { get; set; }
+		public int N { get; set; }
+		public bool Color { get; set; }
+		public BSTNode Left { get; set; }
+		public BSTNode Right { get; set; }
+	}
+	class BST
+	{
+		private const bool RED = true;
+		private const bool BLACK = false;
+
+		private BSTNode root;
+
+		public void Insert(Tuple<string,string> val)
+		{
+			root = Insert(root, val);
+			root.Color = BLACK;
+		}
+		private BSTNode Insert(BSTNode h, Tuple<string,string> val)
+		{
+			if(h == null) { return new BSTNode(val, 1, RED); }
+
+			int cmp = val.Item2.CompareTo(h.Value.Item2);
+
+			if (cmp < 0) { h.Left = Insert(h.Left, val); }
+			else if (cmp > 0) { h.Right = Insert(h.Right, val); }
+			else { h.Value = val; }
+
+			if(IsRed(h.Right) && !IsRed(h.Left)) { h = RotateLeft(h); }
+			if(IsRed(h.Left) && IsRed(h.Left.Left)) { h = RotateRight(h); }
+			if(IsRed(h.Left) && IsRed(h.Right)) { FlipColors(h); }
+
+			h.N = Size(h.Left) + Size(h.Right) + 1;
+			return h;
+		}
+
+		public Tuple<int,int> Get(string last)
+		{
+			return Get(root, last, 0, 0);
+		}
+		private Tuple<int,int> Get(BSTNode h, string last, int x, int y)
+		{
+			if (h == null) { return Tuple.Create(-1,-1); }
+			if(h.Value.Item2 == last) { return Tuple.Create(x, y); }
+			int cmp = h.Value.Item2.CompareTo(last);
+			if (cmp < 0) { return Get(h.Left, last, (x << 1), y + 1); }
+			if (cmp > 0) { return Get(h.Right, last, (x << 1) + 1, y + 1); }
+			else { return Tuple.Create(x, y); }
+		}
+
+		// Helper methods
+		private bool IsRed(BSTNode x)
+		{
+			if (x == null) { return false; }
+			return (x.Color == RED);
+
+		}
+		public BSTNode RotateLeft(BSTNode h)
+		{
+			BSTNode x = h.Right;
+			h.Right = x.Left;
+			x.Left = h;
+			x.Color = h.Color;
+			h.Color = RED;
+			x.N = h.N;
+			h.N = 1 + Size(h.Left) + Size(h.Right);
+			return x;
+		}
+		public BSTNode RotateRight(BSTNode h)
+		{
+			BSTNode x = h.Left;
+			h.Left = x.Right;
+			x.Right = h;
+			x.Color = h.Color;
+			h.Color = RED;
+			x.N = h.N;
+			h.N = 1 + Size(h.Left) + Size(h.Right);
+			return x;
+		}
+		public void FlipColors(BSTNode h)
+		{
+			h.Color = RED;
+			h.Left.Color = BLACK;
+			h.Right.Color = BLACK;
+		}
+		
+		// Traversals
+		public void Traverse()
+		{
+			Console.WriteLine("=== PREORDER  ===");
+			PreOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== INORDER   ===");
+			InOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== POSTORDER ===");
+			PostOrder(root);
+		}
+		private void PreOrder(BSTNode x)
+		{
+			if(x == null) { return; }
+			Console.WriteLine(x.Value.Item2 + " " + x.Color);
+			PreOrder(x.Left);
+			PreOrder(x.Right);
+		}
+		private void InOrder(BSTNode x)
+		{
+			if (x == null) { return; }
+			InOrder(x.Left);
+			Console.WriteLine(x.Value.Item2 + " " + x.Color);
+			InOrder(x.Right);
+		}   // Sorted traversal
+		private void PostOrder(BSTNode x)
+		{
+			if (x == null) { return; }
+			PostOrder(x.Left);
+			PostOrder(x.Right);
+			Console.WriteLine(x.Value.Item2 + " " + x.Color);
+		}
+
+		private int Size()
+		{
+			return Size(root);
+		}
+		private int Size(BSTNode x)
+		{
+			if (x == null) { return 0; }
+			else { return x.N; }
 		}
 	}
 }

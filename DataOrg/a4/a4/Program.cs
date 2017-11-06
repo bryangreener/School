@@ -36,14 +36,14 @@ namespace a4
 		{
 			Input = input;
 
-			//MinHeapControl();
+			MinHeapControl();
 
 			//Console.WriteLine();
 			//Console.WriteLine("========================================");
 
 			//MaxHeapControl();
 
-			BSTControl();
+			//BSTControl();
 		}
 
 		private void MinHeapControl()
@@ -51,8 +51,11 @@ namespace a4
 			MinHeap heap = new MinHeap();
 			foreach (var r in Input)
 			{
-				heap.Insert(r[1].ToLower(), r[0].ToLower());
+				heap.Insert(Tuple.Create(r[0], r[1]));
 			}
+
+			heap.AssignXY(heap.ReturnRoot(), -1, heap.Height(heap.ReturnRoot()));
+
 			Console.WriteLine("========================================");
 			Console.WriteLine("SEARCHES".PadRight(20,' ') + "DFS       BFS");
 			foreach(var s in Input)
@@ -61,12 +64,7 @@ namespace a4
 			}
 
 			Console.WriteLine("========================================");
-			Console.WriteLine("==== PREORDER  ====");
-			heap.PreOrder(heap.ReturnRoot());
-			Console.WriteLine("====  INORDER  ====");
-			heap.InOrder(heap.ReturnRoot());
-			Console.WriteLine("==== POSTORDER ====");
-			heap.PostOrder(heap.ReturnRoot());
+			heap.Traverse();
 		}
 		private void MaxHeapControl()
 		{
@@ -109,284 +107,245 @@ namespace a4
 			bst.Traverse();
 		}
 	}
-
+	//UPDATED
 	class MinHeapNode
 	{
 		public MinHeapNode() { }
-
-		public MinHeapNode(MinHeapNode p, MinHeapNode l, MinHeapNode r)
+		public MinHeapNode(Tuple<string, string> value, int n)
 		{
-			Parent = p;
-			Left = l;
-			Right = r;
+			Value = value;
+			N = n;
 		}
-
-		public MinHeapNode(string f, string l, int s, MinHeapNode parent, MinHeapNode left, MinHeapNode right)
-		{
-			First = f;
-			Last = l;
-			Subtree = s;
-			Parent = parent;
-			Left = left;
-			Right = right;
-		}
-
-		public string First { get; set; }
-		public string Last { get; set; }
-		public int Subtree { get; set; }
-
+		public Tuple<string, string> Value { get; set; }
+		public int N { get; set; }
+		public int X { get; set; }
+		public int Y { get; set; }
 		public MinHeapNode Parent { get; set; }
 		public MinHeapNode Left { get; set; }
 		public MinHeapNode Right { get; set; }
 	}
 	class MinHeap
 	{
-		private MinHeapNode root, current;
-		private int count;
+		private MinHeapNode root;
 
-		public MinHeap()
+		// WORKING
+		public void Insert(Tuple<string,string> val)
 		{
-			root = current = new MinHeapNode(null, null, null);
-			root.Subtree = 0;
-			count = 0;
+			root = Insert(root, val);
+		}
+		// WORKING
+		private MinHeapNode Insert(MinHeapNode h, Tuple<string,string> val)
+		{
+			MinHeapNode newNode = new MinHeapNode();
+			if(h == null) { return new MinHeapNode(val, 1); }
+			if(h.Left == null || h.Right == null)
+			{
+				if(h.Left == null) { newNode = h.Left = Insert(h.Left, val); newNode.Parent = h; }
+				else { newNode = h.Right = Insert(h.Right, val); newNode.Parent = h; }
+			}
+			else if(h.Left.N < h.Right.N) { h.Left = Insert(h.Left, val); }
+			else{ h.Right = Insert(h.Right, val); }
+
+			while(newNode.Parent != null && newNode.Value.Item2.CompareTo(h.Value.Item2) < 0)
+			{
+				Swap(newNode, h);
+				newNode = h;
+			}
+
+			h.N = Size(h.Left) + Size(h.Right) + 1;
+			return h;
 		}
 
-		public void Insert(string first, string last)
+		// NEW
+		private MinHeapNode DeleteMin()
 		{
-			current = root;
-			if (current.Last == null)
-			{
-				current.First = first;
-				current.Last = last;
-				current.Subtree++;
-				count++;
-				return;
-			}
-			while(current != null)
-			{
-				if(current.Left == null)
-				{
-					current.Subtree++;
-					current.Left = new MinHeapNode(first, last, 1, current, null, null);
-					current = current.Left;
-					count++;
-					Heapify();
-					return;
-				}
-				if(current.Right == null)
-				{
-					current.Subtree++;
-					current.Right = new MinHeapNode(first, last, 1, current, null, null);
-					current = current.Right;
-					count++;
-					Heapify();
-					return;
-				}
-				if (current.Left.Subtree > current.Right.Subtree)
-				{
-					if(current.Right == null)
-					{
-						current.Right = new MinHeapNode(first, last, 1, current, null, null);
-						current = current.Right;
-						count++;
-						Heapify();
-						return;
-					}
-					else
-					{
-						current.Subtree++;
-						current = current.Right;
-					}
-				}
-				else if(current.Left.Subtree <= current.Right.Subtree)
-				{
-					if (current.Left == null)
-					{
-						current.Left = new MinHeapNode(first, last, 1, current, null, null);
-						current = current.Left;
-						count++;
-						Heapify();
-						return;
-					}
-					else
-					{
-						current.Subtree++;
-						current = current.Left;
-					}
-				}
-			}
-		}
-		
-		public Tuple<string,string> Delete(string last)
-		{
-			current = root;
-			if(current == null) { return null; }
-			while (current != null)
-			{
-				if (current.Left == null && current.Right == null)
-				{
-					var ret = Tuple.Create(root.First, root.Last);
-					root.First = current.First;
-					root.Last = current.Last;
-					current = current.Parent;
-					if (current.Right != null) { current.Right = null; }
-					else if (current.Left != null) { current.Left = null; }
-					Heapify();
-					return ret;
-				}
-				else if (current.Right != null && current.Left != null)
-				{
-					current = current.Right;
-				}
-				else if (current.Left != null && current.Right == null)
-				{
-					current = current.Left;
-				}
-				else if (current.Left.Subtree < current.Right.Subtree)
-				{
-					current = current.Right;
-				}
-				else
-				{
-					current = current.Left;
-				}
-			}
-			return Tuple.Create("Not", "Found");
+			MinHeapNode temp = GoToLast(root);
+			Swap(root, temp);
+			if(temp.Parent.Right != null) { temp.Parent.Right = null; }
+			else { temp.Parent.Left = null; }
+			temp.Parent = null;
+			DownHeapify(root);
+			root.N = Size(root.Left) + Size(root.Right) + 1;
+			return temp;
 		}
 
+		// NEW
+		public int Height(MinHeapNode h)
+		{
+			if(h == null) { return 0; }
+			else
+			{
+				int l = Height(h.Left);
+				int r = Height(h.Right);
+				if(l > r) { return l + 1; }
+				else { return r + 1; }
+			}
+		}
+		// NEW
+		public int AssignXY(MinHeapNode h, int lastX, int y)
+		{
+			h.Y = y;
+			h.X = 1 + (h.Left == null ? lastX : AssignXY(h.Left, lastX, y - 1));
+			return (h.Right == null ? h.X : AssignXY(h.Right, h.X, y - 1));
+		}
+
+		// UPDATED
 		public Tuple<int,int> DFS(string last)
 		{
-			var pos = DFSUtil(root, last, 0, 1);
-			return Tuple.Create(pos.Item1 + 1, pos.Item2);
+			return DFSUtil(root, last);
 		}
-		public Tuple<int,int> DFSUtil(MinHeapNode r, string last, int x, int y)
+		// UPDATED
+		private Tuple<int,int> DFSUtil(MinHeapNode h, string last)
 		{
-			if (r == null) { return Tuple.Create(0,0); }
+			if (h == null) { return Tuple.Create(-1, -1); }
 			// Preorder DFS
-			if(r.Last == last) { return Tuple.Create(x, y); }
-			var pos = DFSUtil(r.Left, last, (x << 1), y+1);
-			if(pos.Item2 != 0) { return pos; }
-			pos = DFSUtil(r.Right, last, (x << 1) + 1, y+1);
-			return pos;
+			if(h.Value.Item2 == last) { return Tuple.Create(h.X, h.Y); }
+			else
+			{
+				DFSUtil(h.Left, last);
+				DFSUtil(h.Right, last);
+				return Tuple.Create(h.X, h.Y);
+			}
+			
 		}
 
+		// UPDATED
 		public Tuple<int, int> BFS(string last)
 		{
-			var pos = BFSUtil(root, last);
-			return Tuple.Create(pos.Item1, pos.Item2);
+			return BFSUtil(root, last);
 		}
-		private Tuple<int, int> BFSUtil(MinHeapNode r, string last)
+		// UPDATED
+		private Tuple<int, int> BFSUtil(MinHeapNode h, string last)
 		{
 			Queue<MinHeapNode> q = new Queue<MinHeapNode>();
 			int x = 0, y = 0, counter = 0;
-			if (r == null) { return Tuple.Create(-1, -1); }
-			q.Enqueue(r);
+			if (h == null) { return Tuple.Create(0, 0); }
+			q.Enqueue(h);
 			while (q.Count() != 0)
 			{
-				r = q.Dequeue();
+				h = q.Dequeue();
 				counter++;
-				if (r.Last == last)
+				if (h.Value.Item2 == last)
 				{
-					// X calc
-					if (counter == 1 || PowerOfTwo(counter)) { x = 1; }
-					else if (counter == 3) { x = 2; } // Weird case where this doesnt work...
-					else { x = counter - (int)Math.Ceiling(Math.Log(counter) / Math.Log(2)); }
-
-					//Y calc
-					if (counter == 1) { y = 1; }
-					else if (PowerOfTwo(counter)) { y = (int)(Math.Log(counter) / Math.Log(2)) + 1; }
-					else { y = (int)(Math.Ceiling(Math.Log(counter) / Math.Log(2))); }
-
-					return Tuple.Create(x, y);
+					x = h.X;
+					y = h.Y;
 				}
 				else
 				{
-					if (r.Left != null)
+					if (h.Left != null)
 					{
-						q.Enqueue(r.Left);
+						q.Enqueue(h.Left);
 					}
-					if (r.Right != null)
+					if (h.Right != null)
 					{
-						q.Enqueue(r.Right);
+						q.Enqueue(h.Right);
 					}
 				}
 			}
-			return Tuple.Create(-1, -1);
-		}
-		private bool PowerOfTwo(int x)
-		{
-			while (((x % 2) == 0) && x > 1) { x /= 2; }
-			return (x == 1);
+			return Tuple.Create(x, y);
 		}
 
-		private void Heapify()
+		// UPDATED
+		private MinHeapNode UpHeapify(MinHeapNode h)
 		{
-			while(current.Parent != null)
+			if(h.Parent == null) { return h; }
+			int cmp = h.Value.Item2.CompareTo(h.Parent.Value.Item2);
+			if (cmp < 0) { return UpHeapify(Swap(h, h.Parent)); }
+			else { return h; }
+		}
+
+		// NEW
+		private MinHeapNode DownHeapify(MinHeapNode h)
+		{
+			int cmpN = h.Left.N.CompareTo(h.Right.N);
+			
+			if (cmpN < 0)
 			{
-				if(string.Compare(current.Parent.Last, current.Last) == 1)
-				{
-					Swap(current, current.Parent);
-				}
-				else
-				{
-					return;
-				}
+				int cmpV = h.Value.Item2.CompareTo(h.Left.Value.Item2);
+				if(cmpV > 0) { return DownHeapify(Swap(h, h.Left)); }
+				else { return h; }
 			}
-			Console.WriteLine("Error in Heapify(). Exited WHILE loop. Parent == null");
-			return;
+			else if(cmpN > 0)
+			{
+				int cmpV = h.Value.Item2.CompareTo(h.Right.Value.Item2);
+				if (cmpV > 0) { return DownHeapify(Swap(h, h.Right)); }
+				else { return h; }
+			}
+			else { return h; }
 		}
 
-		public void Swap(MinHeapNode c, MinHeapNode p)
+		// UPDATED
+		public MinHeapNode Swap(MinHeapNode h1, MinHeapNode h2)
 		{
-			string tempFirst = p.First;
-			string tempLast = p.Last;
-			p.First = c.First;
-			p.Last = c.Last;
-			c.First = tempFirst;
-			c.Last = tempLast;
+			var temp = h1.Value;
+			h1.Value = h2.Value;
+			h2.Value = temp;
+			return h2;
 		}
 
-		public void PreOrder(MinHeapNode r)
+		// NEW
+		private MinHeapNode GoToLast(MinHeapNode h)
 		{
-			if (r == null) { return; }
-			Console.WriteLine(r.Last);
-			PreOrder(r.Left);
-			PreOrder(r.Right);
-		}
-		public void InOrder(MinHeapNode r)
-		{
-			if(r == null) { return; }
-			InOrder(r.Left);
-			Console.WriteLine(r.Last);
-			InOrder(r.Right);
-		}
-		public void PostOrder(MinHeapNode r)
-		{
-			if(r == null) { return; }
-			PostOrder(r.Left);
-			PostOrder(r.Right);
-			Console.WriteLine(r.Last);
+			if(h == null) { return null; }
+			if(h.N == 1) { return h; }
+			int cmp = h.Left.N.CompareTo(h.Right.N);
+			if(cmp > 0) { return GoToLast(h.Left); }
+			else { return GoToLast(h.Right); }
 		}
 
+		// NEW
 		public MinHeapNode ReturnRoot()
 		{
 			return root;
 		}
 
-		public int Height(MinHeapNode r)
+		// NEW
+		public void Traverse()
 		{
-			if(r == null){ return 0; }
-			else
-			{
-				int lHeight = Height(r.Left);
-				int rHeight = Height(r.Right);
-				if(lHeight > rHeight) { return lHeight + 1; }
-				else { return rHeight + 1; }
-			}
+			Console.WriteLine("=== PREORDER  ===");
+			PreOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== INORDER   ===");
+			InOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== POSTORDER ===");
+			PostOrder(root);
 		}
-		public int Count()
+		// UPDATED
+		public void PreOrder(MinHeapNode h)
 		{
-			return count;
+			if (h == null) { return; }
+			Console.WriteLine(h.Value.Item2);
+			PreOrder(h.Left);
+			PreOrder(h.Right);
+		}
+		// UPDATED
+		public void InOrder(MinHeapNode h)
+		{
+			if(h == null) { return; }
+			InOrder(h.Left);
+			Console.WriteLine(h.Value.Item2);
+			InOrder(h.Right);
+		}
+		// UPDATED
+		public void PostOrder(MinHeapNode h)
+		{
+			if(h == null) { return; }
+			PostOrder(h.Left);
+			PostOrder(h.Right);
+			Console.WriteLine(h.Value.Item2);
+		}
+
+		// NEW
+		private int Size()
+		{
+			return Size(root);
+		}
+		// NEW
+		private int Size(MinHeapNode x)
+		{
+			if (x == null) { return 0; }
+			else { return x.N; }
 		}
 	}
 

@@ -627,16 +627,26 @@ namespace a4
 
 		public Tuple<int,int> Get(string last)
 		{
-			return Get(root, last, 0, 0);
+			var pos = Get(root, last, 0, 1);
+			return Tuple.Create(pos.Item1 + 1, pos.Item2);
 		}
 		private Tuple<int,int> Get(BSTNode h, string last, int x, int y)
 		{
-			if (h == null) { return Tuple.Create(-1,-1); }
-			if(h.Value.Item2 == last) { return Tuple.Create(x, y); }
-			int cmp = h.Value.Item2.CompareTo(last);
-			if (cmp < 0) { return Get(h.Left, last, (x << 1), y + 1); }
-			if (cmp > 0) { return Get(h.Right, last, (x << 1) + 1, y + 1); }
-			else { return Tuple.Create(x, y); }
+			if(h == null) { return Tuple.Create(-1,-1); }
+			int cmp = last.CompareTo(h.Value.Item2);
+			if (cmp < 0)
+			{
+				if(h.Left.Color == RED) { return Get(h.Left, last, (x << 1), y); }
+				else { return Get(h.Left, last, (x << 1), y + 1); }
+				
+			}
+			else if (cmp > 0)
+			{
+				if(h.Right.Color == RED) { return Get(h.Right, last, (x << 1) + 1, y); }
+				else { return Get(h.Right, last, (x << 1) + 1, y + 1); }
+				
+			}
+			else { return Tuple.Create(x,y); }
 		}
 
 		// Helper methods

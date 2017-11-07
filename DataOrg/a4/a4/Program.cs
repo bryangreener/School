@@ -11,7 +11,7 @@ namespace a4
     {
         static void Main(string[] args)
         {
-			string text = File.ReadAllText("namelist.txt");
+			string text = File.ReadAllText("namelistSMALL.txt");
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			string[][] input = new string[lines.Length][];
 
@@ -37,12 +37,12 @@ namespace a4
 			// NOTE: LAST,FIRST order so input item1 is LAST NAME
 			Input = input;
 
-			MinHeapControl();
+			//MinHeapControl();
 
 			//Console.WriteLine();
 			//Console.WriteLine("========================================");
 
-			//MaxHeapControl();
+			MaxHeapControl();
 
 			//BSTControl();
 		}
@@ -67,29 +67,21 @@ namespace a4
 			Console.WriteLine("========================================");
 			heap.Traverse();
 		}
+
 		private void MaxHeapControl()
 		{
-			MaxHeap heap = new MaxHeap(Input.Length);
-			foreach (var r in Input)
-			{
-				heap.Insert(r[1].ToLower(), r[0].ToLower());
-			}
+			MaxHeap heap = new MaxHeap(Input, Input.Length*2 + 2);
+
+			heap.AssignXY(0, 0, 0);
 
 			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "DFS       BFS");
 			foreach (var s in Input)
 			{
 				Console.WriteLine($"{s[1].PadRight(20, ' ')}" + $"{heap.DFS(s[1].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(s[1].ToLower())}");
 			}
-
-
-			Console.WriteLine("========================================");
-			Console.WriteLine("==== PREORDER  ====");
-			heap.PreOrder(0);
-			Console.WriteLine("====  INORDER  ====");
-			heap.InOrder(0);
-			Console.WriteLine("==== POSTORDER ====");
-			heap.PostOrder(0);
+			heap.Traverse();
 		}
+
 		private void BSTControl()
 		{
 			BST bst = new BST();
@@ -98,11 +90,11 @@ namespace a4
 				bst.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
 			}
 			// Print results
-			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "DFS       BFS");
+			bst.AssignXY(bst.ReturnRoot(), 0, 0);
+			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "BTS");
 			foreach (var s in Input)
 			{
-				Console.WriteLine($"{s[0].PadRight(20, ' ')}" + $"{bst.Get(s[0].ToLower())}".PadRight(10, ' '));
-				//Console.WriteLine($"{s[1].PadRight(20, ' ')}" + $"{bst.DFS(s[1].ToLower())}".PadRight(10, ' ') + $"{bst.BFS(s[1].ToLower())}");
+				Console.WriteLine($"{s[0].PadRight(20, ' ')}" + $"{bst.Get(s[0].ToLower())}");
 			}
 			Console.WriteLine("========================================");
 			bst.Traverse();
@@ -163,13 +155,12 @@ namespace a4
 		}
 
 		// WORKING oh my god it finally works
-		public int AssignXY(MinHeapNode h, int x, int y)
+		public bool AssignXY(MinHeapNode h, int x, int y)
 		{
-			if (h == null) { return 0; }
+			if (h == null) { return false; }
 			h.X = x;
 			h.Y = y;
-			AssignXY(h.Left, x, y + 1);
-			return AssignXY(h.Right, x + 1, y + 1);
+			return AssignXY(h.Left, x, y + 1) && AssignXY(h.Right, x + 1, y + 1);
 		}
 
 		// WORKING
@@ -365,53 +356,45 @@ namespace a4
 	class Person
 	{
 		public Person() { }
-		public Person(string first, string last)
+		public Person(Tuple<string,string> value)
 		{
-			First = first;
-			Last = last;
+			Value = value;
 		}
+		public int X { get; set; }
+		public int Y { get; set; }
 		public bool Visited { get; set; }
-		public string First { get; set; }
-		public string Last { get; set; }
+		public Tuple<string,string> Value { get; set; }
 	}
 	class MaxHeap
 	{
 		private Person[] Heap { get; set; }
-		private int current, n = 0;
+		private int size, n = 0;
 
-		public MaxHeap(int length)
+		#region Public Methods
+		public MaxHeap(string[][] items, int max)
 		{
-			Heap = new Person[length*2 + 1];
-			current = -1;
-		}
-
-		public void Insert(string first, string last)
-		{
-			if(n >= Heap.Length) { return; } // Shouldnt ever reach this line since size is known in advance.
-			current = n++;
-			Heap[current] = new Person(first, last);
-			while ((current != 0) && (Heap[current].First.CompareTo(Heap[Parent(current)].First) > 0))
+			Heap = new Person[size = max];
+			for(int i = 0; i < items.Length; i++)
 			{
-				Swap(current, Parent(current));
-				current = Parent(current);
+				Heap[i] = new Person(Tuple.Create(items[i][1], items[i][0]));
 			}
+			BuildHeap();
 		}
 
-		private void Heapify()
+		public void Insert(Tuple<string,string> val)
 		{
-			for(int i = (n / 2) - 1; i >= 0; i--) { SiftDown(i); }
-		}
-
-		private void SiftDown(int pos)
-		{
-			if((pos < 0) || (pos >= n)) { return; } // Shouldnt ever do this... bad position
-			while(!IsLeaf(pos))
+			if (n >= size)
 			{
-				int j = LeftChild(pos);
-				if ((j < (n - 1)) && (Heap[j].First.CompareTo(Heap[j + 1].First) < 0)) { j++; }
-				if(Heap[pos].First.CompareTo(Heap[j].First) >= 0) { return; }
-				Swap(pos, j);
-				pos = j;
+				Console.WriteLine("Heap is full");
+				return;
+			}
+			int curr = n++;
+			Heap[curr].Value = val;  // Start at end of heap
+							   // Now sift up until curr's parent's key > curr's key
+			while ((curr != 0) && (Heap[curr].Value.Item1.CompareTo(Heap[Parent(curr)].Value.Item1) > 0))
+			{
+				Swap(curr, Parent(curr));
+				curr = Parent(curr);
 			}
 		}
 		
@@ -430,7 +413,7 @@ namespace a4
 			else
 			{
 				Swap(pos, --n);
-				while((pos > 0) && (Heap[pos].First.CompareTo(Heap[Parent(pos)].First) > 0))
+				while((pos > 0) && (Heap[pos].Value.Item1.CompareTo(Heap[Parent(pos)].Value.Item1) > 0))
 				{
 					Swap(pos, Parent(pos));
 					pos = Parent(pos);
@@ -440,37 +423,75 @@ namespace a4
 			return Heap[n];
 		}
 
+		public int AssignXY(int h, int x, int y)
+		{
+			if (Heap[h] == null) { return 0; }
+			Heap[h].X = x;
+			Heap[h].Y = y;
+			AssignXY(LeftChild(h), x, y + 1);
+			return AssignXY(RightChild(h), x + 1, y + 1);
+		}
+
 		public Tuple<int,int> BFS(string first)
 		{
-			var pos = BFSUtil(0, first);
-			return Tuple.Create(pos.Item1, pos.Item2);
+			return BFSUtil(0, first);
 		}
-		private Tuple<int,int> BFSUtil(int r, string first)
+		public Tuple<int,int> DFS(string first)
+		{
+			Person h = DFSUtil(0, first);
+			if (h == null) { return Tuple.Create(-1, -1); }
+			else { return Tuple.Create(h.X, h.Y); }
+		}
+
+		public void Traverse()
+		{
+			Console.WriteLine("=== PREORDER  ===");
+			PreOrder(0);
+			Console.WriteLine();
+			Console.WriteLine("=== INORDER   ===");
+			InOrder(0);
+			Console.WriteLine();
+			Console.WriteLine("=== POSTORDER ===");
+			PostOrder(0);
+		}
+		#endregion
+
+		#region Private Methods
+		private void BuildHeap()
+		{
+			for (int i = (n / 2) - 1; i >= 0; i--) { SiftDown(i); }
+		}
+
+		private void SiftDown(int pos)
+		{
+			if ((pos < 0) || (pos >= n)) { return; } // Shouldnt ever do this... bad position
+			while (!IsLeaf(pos))
+			{
+				int j = LeftChild(pos);
+				if ((j < (n - 1)) && (Heap[j].Value.Item1.CompareTo(Heap[j + 1].Value.Item1) < 0)) { j++; }
+				if (Heap[pos].Value.Item1.CompareTo(Heap[j].Value.Item1) >= 0) { return; }
+				Swap(pos, j);
+				pos = j;
+			}
+		}
+
+		private Tuple<int, int> BFSUtil(int r, string first)
 		{
 			Queue<int> q = new Queue<int>();
-			int x = 0, y = 0, counter = 0;
-			if(Heap[r] == null) { return Tuple.Create(-1, -1); }
+			int x = 0, y = 0;
+			if (Heap[r] == null) { return Tuple.Create(-1, -1); }
 			q.Enqueue(r);
-			while(q.Count() != 0)
+			while (q.Count() != 0)
 			{
 				int n = q.Dequeue();
-				counter++;
-				if(Heap[n].First == first)
+				if (Heap[n].Value.Item1 == first)
 				{
-					// X calc
-					if(counter == 1 || PowerOfTwo(counter)) { x = 1; }
-					else if(counter == 3) { x = 2; } // Weird case where this doesnt work...
-					else { x = counter - (int)Math.Ceiling(Math.Log(counter) / Math.Log(2)); }
-
-					//Y calc
-					if(counter == 1) { y = 1; }
-					else if (PowerOfTwo(counter)) { y = (int)(Math.Log(counter) / Math.Log(2)) + 1; }
-					else { y = (int)(Math.Ceiling(Math.Log(counter) / Math.Log(2))); }
-
-					return Tuple.Create(y, x); }
+					x = Heap[n].X;
+					y = Heap[n].Y;
+				}
 				else
 				{
-					if(Heap[LeftChild(n)] != null)
+					if (Heap[LeftChild(n)] != null)
 					{
 						q.Enqueue(LeftChild(n));
 					}
@@ -480,50 +501,43 @@ namespace a4
 					}
 				}
 			}
-			return Tuple.Create(-1, -1);
+			return Tuple.Create(x, y);
 		}
-		private bool PowerOfTwo(int x)
+		private Person DFSUtil(int h, string first)
 		{
-			while(((x % 2) == 0) && x > 1) { x /= 2; }
-			return (x == 1);
+			if (Heap[h] != null)
+			{
+				if (Heap[h].Value.Item2 == first) { return Heap[h]; }
+				else
+				{
+					Person ret = DFSUtil(LeftChild(h), first);
+					if (ret == null) { ret = DFSUtil(RightChild(h), first); }
+					return ret;
+				}
+			}
+			else { return null; }
 		}
 
-		public Tuple<int,int> DFS(string first)
-		{
-			var pos = DFSUtil(0, first, 0, 1);
-			return Tuple.Create(pos.Item2, pos.Item1 + 1);
-		}
-		private Tuple<int,int> DFSUtil(int r, string first, int x, int y)
-		{
-			if (Heap[r] == null) { return Tuple.Create(0, 0); }
-
-			if (Heap[r].First == first) { return Tuple.Create(x, y); }
-			var pos = DFSUtil(LeftChild(r), first, (x << 1), y + 1);
-			if (pos.Item2 != 0) { return pos; }
-			pos = DFSUtil(RightChild(r), first, (x << 1) + 1, y + 1);
-			return pos;
-		}
-
-		public void PreOrder(int pos)
+		private void PreOrder(int pos)
 		{
 			if(Heap[pos] == null) { return; }
-			Console.WriteLine($"{Heap[pos].First}");
+			Console.WriteLine($"{Heap[pos].Value.Item1}");
 			PreOrder(LeftChild(pos));
 			PreOrder(RightChild(pos));
 		}
-		public void InOrder(int pos)
+		private void InOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
 			PreOrder(LeftChild(pos));
-			Console.WriteLine($"{Heap[pos].First}");
+			Console.WriteLine($"{Heap[pos].Value.Item1}");
 			PreOrder(RightChild(pos));
 		}
-		public void PostOrder(int pos)
+		private void PostOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
 			PreOrder(LeftChild(pos));
 			PreOrder(RightChild(pos));
-			Console.WriteLine($"{Heap[pos].First}");
+			Console.WriteLine($"{Heap[pos].Value.Item1}");
 		}
 
 		private void Swap(int p1, int p2) // Swap current and parent of current
@@ -551,23 +565,123 @@ namespace a4
 			if (pos % 2 != 0) { return pos + 1; }
 			else { return -1; }
 		}
+		#endregion
 	}
 
 	class BSTNode
 	{
-		public BSTNode(Tuple<string,string> value, int n, bool color)
+		public BSTNode(Tuple<string,string> value)
+		{
+			Value = value;
+		}
+		
+		public Tuple<string,string> Value { get; set; }
+		public int X { get; set; }
+		public int Y { get; set; }
+		public BSTNode Left { get; set; }
+		public BSTNode Right { get; set; }
+
+		#region RedBlack BST Code (UNUSED)
+		// Following code is only used in RedBlack BST
+		public BSTNode(Tuple<string, string> value, int n, bool color)
 		{
 			Value = value;
 			N = n;
 			Color = color;
 		}
-		public Tuple<string,string> Value { get; set; }
 		public int N { get; set; }
 		public bool Color { get; set; }
-		public BSTNode Left { get; set; }
-		public BSTNode Right { get; set; }
+		#endregion
 	}
 	class BST
+	{
+		private BSTNode root;
+
+		#region Public Methods
+		public void Insert(Tuple<string,string> val)
+		{
+			root = InsertUtil(root, val);
+		}
+
+		public Tuple<int,int> Get(string last)
+		{
+			BSTNode pos = GetUtil(root, last);
+			return Tuple.Create(pos.X, pos.Y);
+		}
+
+		public void Traverse()
+		{
+			Console.WriteLine("=== PREORDER  ===");
+			PreOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== INORDER   ===");
+			InOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== POSTORDER ===");
+			PostOrder(root);
+		}
+
+		public int AssignXY(BSTNode h, int x, int y)
+		{
+			if (h == null) { return 0; }
+			h.X = x;
+			h.Y = y;
+			AssignXY(h.Left, x, y + 1);
+			return AssignXY(h.Right, x + 1, y + 1);
+		}
+
+		public BSTNode ReturnRoot()
+		{
+			return root;
+		}
+		#endregion
+
+		#region Private Methods
+		private BSTNode InsertUtil(BSTNode h, Tuple<string, string> val)
+		{
+			if (h == null) { return new BSTNode(val); }
+			int cmp = val.Item2.CompareTo(h.Value.Item2);
+			if (cmp < 0) { h.Left = InsertUtil(h.Left, val); }
+			else if (cmp > 0) { h.Right = InsertUtil(h.Right, val); }
+			else { h.Value = val; }
+			return h;
+		}
+
+		private BSTNode GetUtil(BSTNode h, string last)
+		{
+			if (h == null) { return null; }
+			int cmp = last.CompareTo(h.Value.Item2);
+			if (cmp < 0) { return GetUtil(h.Left, last); }
+			else if (cmp > 0) { return GetUtil(h.Right, last); }
+			else { return h; }
+		}
+
+		private void PreOrder(BSTNode h)
+		{
+			if (h == null) { return; }
+			Console.WriteLine(h.Value.Item2);
+			PreOrder(h.Left);
+			PreOrder(h.Right);
+		}
+		private void InOrder(BSTNode h)
+		{
+			if (h == null) { return; }
+			InOrder(h.Left);
+			Console.WriteLine(h.Value.Item2);
+			InOrder(h.Right);
+		}
+		private void PostOrder(BSTNode h)
+		{
+			if (h == null) { return; }
+			PostOrder(h.Left);
+			PostOrder(h.Right);
+			Console.WriteLine(h.Value.Item2);
+		}
+		#endregion
+	}
+
+	#region RedBlack BST (NOT USED)
+	class RedBlackBST
 	{
 		private const bool RED = true;
 		private const bool BLACK = false;
@@ -701,4 +815,5 @@ namespace a4
 			else { return x.N; }
 		}
 	}
+	#endregion
 }

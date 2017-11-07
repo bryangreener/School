@@ -11,7 +11,7 @@ namespace a4
     {
         static void Main(string[] args)
         {
-			string text = File.ReadAllText("namelistSMALL.txt");
+			string text = File.ReadAllText("namelist.txt");
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			string[][] input = new string[lines.Length][];
 
@@ -34,6 +34,7 @@ namespace a4
 		
 		public Controller(string[][] input)
 		{
+			// NOTE: LAST,FIRST order so input item1 is LAST NAME
 			Input = input;
 
 			MinHeapControl();
@@ -51,7 +52,7 @@ namespace a4
 			MinHeap heap = new MinHeap();
 			foreach (var r in Input)
 			{
-				heap.Insert(Tuple.Create(r[0], r[1]));
+				heap.Insert(Tuple.Create(r[1].ToLower(), r[0].ToLower()));
 			}
 
 			heap.AssignXY(heap.ReturnRoot(), 0, 0);

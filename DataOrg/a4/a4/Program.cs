@@ -37,12 +37,12 @@ namespace a4
 			// NOTE: LAST,FIRST order so input item1 is LAST NAME
 			Input = input;
 
-			//MinHeapControl();
+			MinHeapControl();
 
 			//Console.WriteLine();
 			//Console.WriteLine("========================================");
 
-			MaxHeapControl();
+			//MaxHeapControl();
 
 			//BSTControl();
 		}
@@ -113,6 +113,7 @@ namespace a4
 		public int N { get; set; }
 		public int X { get; set; }
 		public int Y { get; set; }
+		public bool Visited { get; set; }
 		public MinHeapNode Parent { get; set; }
 		public MinHeapNode Left { get; set; }
 		public MinHeapNode Right { get; set; }
@@ -155,12 +156,13 @@ namespace a4
 		}
 
 		// WORKING oh my god it finally works
-		public bool AssignXY(MinHeapNode h, int x, int y)
+		public void AssignXY(MinHeapNode h, int x, int y)
 		{
-			if (h == null) { return false; }
+			if(h == null) { return; }
 			h.X = x;
 			h.Y = y;
-			return AssignXY(h.Left, x, y + 1) && AssignXY(h.Right, x + 1, y + 1);
+			AssignXY(h.Left, x, y+1);
+			AssignXY(h.Right, x+1, y+1);
 		}
 
 		// WORKING

@@ -54,7 +54,7 @@ namespace a4
 				heap.Insert(Tuple.Create(r[0], r[1]));
 			}
 
-			heap.AssignXY(heap.ReturnRoot(), -1, heap.Height(heap.ReturnRoot()));
+			heap.AssignXY(heap.ReturnRoot(), 0, 0);
 
 			Console.WriteLine("========================================");
 			Console.WriteLine("SEARCHES".PadRight(20,' ') + "DFS       BFS");
@@ -107,7 +107,7 @@ namespace a4
 			bst.Traverse();
 		}
 	}
-	//UPDATED
+
 	class MinHeapNode
 	{
 		public MinHeapNode() { }
@@ -128,11 +128,70 @@ namespace a4
 	{
 		private MinHeapNode root;
 
+		#region Public Methods
 		// WORKING
 		public void Insert(Tuple<string,string> val)
 		{
 			root = Insert(root, val);
 		}
+
+		// WORKING
+		public Tuple<int, int> DFS(string last)
+		{
+			MinHeapNode h = DFSUtil(root, last);
+			if (h == null) { return Tuple.Create(-1, -1); }
+			else { return Tuple.Create(h.X, h.Y); }
+		}
+		// WORKING
+		public Tuple<int, int> BFS(string last)
+		{
+			return BFSUtil(root, last);
+		}
+
+		// NEW
+		public int Height(MinHeapNode h)
+		{
+			if (h == null) { return 0; }
+			else
+			{
+				int l = Height(h.Left);
+				int r = Height(h.Right);
+				if (l > r) { return l + 1; }
+				else { return r + 1; }
+			}
+		}
+
+		// WORKING oh my god it finally works
+		public int AssignXY(MinHeapNode h, int x, int y)
+		{
+			if (h == null) { return 0; }
+			h.X = x;
+			h.Y = y;
+			AssignXY(h.Left, x, y + 1);
+			return AssignXY(h.Right, x + 1, y + 1);
+		}
+
+		// WORKING
+		public void Traverse()
+		{
+			Console.WriteLine("=== PREORDER  ===");
+			PreOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== INORDER   ===");
+			InOrder(root);
+			Console.WriteLine();
+			Console.WriteLine("=== POSTORDER ===");
+			PostOrder(root);
+		}
+
+		// NEW
+		public MinHeapNode ReturnRoot()
+		{
+			return root;
+		}
+		#endregion
+
+		#region Private Methods
 		// WORKING
 		private MinHeapNode Insert(MinHeapNode h, Tuple<string,string> val)
 		{
@@ -169,52 +228,22 @@ namespace a4
 			return temp;
 		}
 
-		// NEW
-		public int Height(MinHeapNode h)
+		// WORKING
+		private MinHeapNode DFSUtil(MinHeapNode h, string last)
 		{
-			if(h == null) { return 0; }
-			else
+			if (h != null)
 			{
-				int l = Height(h.Left);
-				int r = Height(h.Right);
-				if(l > r) { return l + 1; }
-				else { return r + 1; }
+				if(h.Value.Item2 == last) { return h; }
+				else
+				{
+					MinHeapNode ret = DFSUtil(h.Left, last);
+					if(ret == null) { ret = DFSUtil(h.Right, last); }
+					return ret;
+				}
 			}
+			else { return null; }
 		}
-		// NEW
-		public int AssignXY(MinHeapNode h, int lastX, int y)
-		{
-			h.Y = y;
-			h.X = 1 + (h.Left == null ? lastX : AssignXY(h.Left, lastX, y - 1));
-			return (h.Right == null ? h.X : AssignXY(h.Right, h.X, y - 1));
-		}
-
-		// UPDATED
-		public Tuple<int,int> DFS(string last)
-		{
-			return DFSUtil(root, last);
-		}
-		// UPDATED
-		private Tuple<int,int> DFSUtil(MinHeapNode h, string last)
-		{
-			if (h == null) { return Tuple.Create(-1, -1); }
-			// Preorder DFS
-			if(h.Value.Item2 == last) { return Tuple.Create(h.X, h.Y); }
-			else
-			{
-				DFSUtil(h.Left, last);
-				DFSUtil(h.Right, last);
-				return Tuple.Create(h.X, h.Y);
-			}
-			
-		}
-
-		// UPDATED
-		public Tuple<int, int> BFS(string last)
-		{
-			return BFSUtil(root, last);
-		}
-		// UPDATED
+		// WORKING
 		private Tuple<int, int> BFSUtil(MinHeapNode h, string last)
 		{
 			Queue<MinHeapNode> q = new Queue<MinHeapNode>();
@@ -245,7 +274,7 @@ namespace a4
 			return Tuple.Create(x, y);
 		}
 
-		// UPDATED
+		// PROBABLY WORKING
 		private MinHeapNode UpHeapify(MinHeapNode h)
 		{
 			if(h.Parent == null) { return h; }
@@ -253,7 +282,6 @@ namespace a4
 			if (cmp < 0) { return UpHeapify(Swap(h, h.Parent)); }
 			else { return h; }
 		}
-
 		// NEW
 		private MinHeapNode DownHeapify(MinHeapNode h)
 		{
@@ -274,8 +302,8 @@ namespace a4
 			else { return h; }
 		}
 
-		// UPDATED
-		public MinHeapNode Swap(MinHeapNode h1, MinHeapNode h2)
+		// WORKING
+		private MinHeapNode Swap(MinHeapNode h1, MinHeapNode h2)
 		{
 			var temp = h1.Value;
 			h1.Value = h2.Value;
@@ -293,42 +321,25 @@ namespace a4
 			else { return GoToLast(h.Right); }
 		}
 
-		// NEW
-		public MinHeapNode ReturnRoot()
-		{
-			return root;
-		}
 
-		// NEW
-		public void Traverse()
-		{
-			Console.WriteLine("=== PREORDER  ===");
-			PreOrder(root);
-			Console.WriteLine();
-			Console.WriteLine("=== INORDER   ===");
-			InOrder(root);
-			Console.WriteLine();
-			Console.WriteLine("=== POSTORDER ===");
-			PostOrder(root);
-		}
-		// UPDATED
-		public void PreOrder(MinHeapNode h)
+		// WORKING
+		private void PreOrder(MinHeapNode h)
 		{
 			if (h == null) { return; }
 			Console.WriteLine(h.Value.Item2);
 			PreOrder(h.Left);
 			PreOrder(h.Right);
 		}
-		// UPDATED
-		public void InOrder(MinHeapNode h)
+		// WORKING
+		private void InOrder(MinHeapNode h)
 		{
 			if(h == null) { return; }
 			InOrder(h.Left);
 			Console.WriteLine(h.Value.Item2);
 			InOrder(h.Right);
 		}
-		// UPDATED
-		public void PostOrder(MinHeapNode h)
+		// WORKING
+		private void PostOrder(MinHeapNode h)
 		{
 			if(h == null) { return; }
 			PostOrder(h.Left);
@@ -336,17 +347,18 @@ namespace a4
 			Console.WriteLine(h.Value.Item2);
 		}
 
-		// NEW
+		// WORKING
 		private int Size()
 		{
 			return Size(root);
 		}
-		// NEW
+		// WORKING
 		private int Size(MinHeapNode x)
 		{
 			if (x == null) { return 0; }
 			else { return x.N; }
 		}
+		#endregion
 	}
 
 	class Person

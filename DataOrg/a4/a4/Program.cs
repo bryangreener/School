@@ -21,6 +21,10 @@ namespace a4
 		/// <param name="args">default param</param>
         static void Main(string[] args)
         {
+			UI ui = new UI();
+			Tests tests = new Tests();
+			File.Delete("./BENCHMARK.txt");
+
 			// Temp save namelist.txt into string.
 			string text = File.ReadAllText("namelist.txt");
 			// Split text string by line
@@ -34,16 +38,83 @@ namespace a4
 				input[i] = lines[i].Split('\t');
 			}
 
-			// Infinite loop that prevents application from closing when program is done executing.
+			// Infinite loop that prevents program from closing unless user requests exit.
 			while (true)
 			{
-				Console.Clear();									// Clear the console window
-				Controller c = new Controller(input);               // New instance of Controller class, passing in input array
-				Console.WriteLine("Press any key to continue...");
-				while(Console.ReadKey() == null) { Console.ReadKey(); } // Prevents console from closing until key is pressed.
+				Console.Clear();
+				// NOTE: LAST,FIRST order so input item1 is LAST NAME
+				// Get search tuple from UI.
+				Tuple<string, string> search = ui.Main();
+
+				if (search != null && search.Item1 == "run" && search.Item2 == "tests")
+				{
+					Console.WriteLine("Running benchmark tests. This may take a while...");
+					tests.Main();
+					Console.WriteLine("Saved results to bin/debug/BENCHMARK.txt");
+					Console.WriteLine();
+					Console.WriteLine("Press any key to continue...");
+					while (Console.ReadKey() == null) { Console.ReadKey(); }
+				}
+				else
+				{
+					Controller c = new Controller(input, search);               // New instance of Controller class, passing in input array
+					Console.WriteLine("Press any key to continue...");
+					while (Console.ReadKey() == null) { Console.ReadKey(); }    // Prevents console from closing until key is pressed.
+				}
 			}
         }
+		
     }
+
+	class Tests
+	{
+		public void Main()
+		{
+			UI ui = new UI();
+			
+			int[] testCounts = new int[] { 1, 10, 100, 1000, 10000, 100000, 250000, 500000, 1000000 };
+			foreach(int i in testCounts)
+			{
+				string[][] testStrings = Main(i, i.ToString());
+				Controller c = new Controller(testStrings, Tuple.Create("run", "tests"));
+			}
+		}
+
+		public string[][] Main(int size, string filename)
+		{
+			FileStream ostrm;
+			StreamWriter writer;
+
+			string ascii = "abcdefghijklmnopqrstuvwxyz";
+			string[][] randomWords = new string[size][];
+			Random rnd = new Random();
+			for (int i = 0; i < size; i++)
+			{
+				string tempWord = "";
+				for (int j = 0; j < 100; j++)
+				{
+					tempWord += ascii[rnd.Next(0, 26)];
+				}
+				randomWords[i] = new string[] { tempWord, tempWord };
+			}
+
+			TextWriter oldOut = Console.Out;
+			ostrm = new FileStream($"./{filename}.txt", FileMode.Create, FileAccess.Write);
+			writer = new StreamWriter(ostrm);
+			Console.SetOut(writer);
+
+			foreach (var v in randomWords)
+			{
+				Console.WriteLine($"{v[0]}\t{v[0]}");
+			}
+
+			Console.SetOut(oldOut);
+			writer.Close();
+			ostrm.Close();
+
+			return randomWords;
+		}
+	}
 
 	/// <summary>
 	/// This class controls nearly all console and txt file outputs and user inputs.
@@ -63,7 +134,8 @@ namespace a4
 			Console.WriteLine("ENTER OPTION NUMBER");
 			Console.WriteLine("1) Print all items");
 			Console.WriteLine("2) Search for Name");
-			Console.WriteLine("3) Exit");
+			Console.WriteLine("3) Run Search Tests !LONG!");
+			Console.WriteLine("4) Exit");
 
 			// Switch that handles possible inputs after stripping input of escape chars and sending the user input to a validate method
 			switch (ValidateMain(Regex.Escape(Console.ReadLine())))
@@ -72,8 +144,10 @@ namespace a4
 					Console.WriteLine("Saving output to /bin/debug/output.txt");
 					break;
 				case 2:	// Search
-					return SearchMenu();	// Call secondary menu method and return its result to method call
-				case 3:	// Exit
+					return SearchMenu();    // Call secondary menu method and return its result to method call
+				case 3: // Tests
+					return Tuple.Create("run", "tests");
+				case 4:	// Exit
 					Console.WriteLine("Exiting application. Enter c to cancel.");
 					Console.WriteLine("Press enter to exit.");
 					string response = Console.ReadLine();
@@ -81,7 +155,7 @@ namespace a4
 					else { Environment.Exit(0); }               // Otherwise, exit the program
 					break;
 			}
-			return null;	// Shouldnt ever reach this line but it is a failsafe incase the program skipped user input.
+			return null;
 		}
 
 		/// <summary>
@@ -100,30 +174,6 @@ namespace a4
 		}
 
 		/// <summary>
-		/// This method validates the first and last names to verify they don't contain numbers or null characters.
-		/// </summary>
-		/// <param name="first">First name passed in from SearchMenu</param>
-		/// <param name="last">Last name passed in from SearchMenu</param>
-		/// <returns>Tuple of strings containing first and last name.</returns>
-		private Tuple<string,string> ValidateSearch(string first, string last)
-		{
-			// If any character in first or last name is a number, or if either are blank...
-			if(first.Any(c => char.IsDigit(c)) || last.Any(c => char.IsDigit(c)) || first == "" || last == "")
-			{
-				// Write an error and call the SearchMenu method again to ask for correct first and last names.
-				Console.WriteLine("=========================================");
-				Console.WriteLine("            ! INVALID INPUT !            ");
-				Console.WriteLine("Input must be nonempty string of letters.");
-				Console.WriteLine("=========================================");
-				SearchMenu();
-			}
-			// Remove all leading and trailing whitespace from first and last names then convert them to lowercase characters.
-			first = first.Trim().ToLower();
-			last = last.Trim().ToLower();
-			return Tuple.Create(first, last);	// Return the new valid first and last name.
-		}
-
-		/// <summary>
 		/// Method that validates main menu input number to verify that it is an integer between 1 and 3.
 		/// </summary>
 		/// <param name="input">Input string from Main() method.</param>
@@ -132,7 +182,7 @@ namespace a4
 		{
 			int n;
 			// Try parsing input as an integer. If successful, save to int n. Also verify input isnt empty and it is between 1 and 3.
-			if(!int.TryParse(input, out n) || n < 1 || n > 3 || input == "")
+			if (!int.TryParse(input, out n) || n < 1 || n > 4 || input == "")
 			{
 				// If any of these conditions fails, print error and call Main menu method again to ask for correct input.
 				Console.WriteLine("=========================================");
@@ -145,7 +195,68 @@ namespace a4
 			return n;
 		}
 
+		/// <summary>
+		/// This method validates the first and last names to verify they don't contain numbers or null characters.
+		/// </summary>
+		/// <param name="first">First name passed in from SearchMenu</param>
+		/// <param name="last">Last name passed in from SearchMenu</param>
+		/// <returns>Tuple of strings containing first and last name.</returns>
+		private Tuple<string, string> ValidateSearch(string first, string last)
+		{
+			// If any character in first or last name is a number, or if either are blank...
+			if (first.Any(c => char.IsDigit(c)) || last.Any(c => char.IsDigit(c)) || first == "" || last == "")
+			{
+				// Write an error and call the SearchMenu method again to ask for correct first and last names.
+				Console.WriteLine("=========================================");
+				Console.WriteLine("            ! INVALID INPUT !            ");
+				Console.WriteLine("Input must be nonempty string of letters.");
+				Console.WriteLine("=========================================");
+				SearchMenu();
+			}
+			// Remove all leading and trailing whitespace from first and last names then convert them to lowercase characters.
+			first = first.Trim().ToLower();
+			last = last.Trim().ToLower();
+			return Tuple.Create(first, last);   // Return the new valid first and last name.
+		}
 		#endregion
+
+		public void PrintBuildTimes(int items, double minHeapBuildtime, double maxHeapBuildTime, double bstBuildTime)
+		{
+			HR();
+			Console.WriteLine($"TREE BUILD TIMES FOR {items} ITEMS");
+			Console.WriteLine();
+			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
+			Console.WriteLine("TIME (ms)".PadRight(10, ' ') +
+				Math.Round(minHeapBuildtime, 4).ToString().PadRight(15, ' ') +
+				Math.Round(maxHeapBuildTime, 4).ToString().PadRight(15, ' ') +
+				Math.Round(bstBuildTime, 4).ToString());
+			HR();
+		}
+		/// <summary>
+		/// This method takes in a lot of parameters from the Controller class and prints to console in a pretty table.
+		/// </summary>
+		/// <param name="name">Tuple of strings containing first and last name.</param>
+		/// <param name="minPos">Tuple of integers containing X and Y coordinates in MinHeap.</param>
+		/// <param name="maxPos">Tuple of integers contianing X and Y coordinates in MaxHeap.</param>
+		/// <param name="bstPos">Tuple of integers containing X and Y coordinates in Binary Search Tree.</param>
+		/// <param name="minDFS">Double containing total MinHeap Depth First Search time in milliseconds.</param>
+		/// <param name="minBFS">Double containing total MinHeap Breadth First Search time in milliseconds.</param>
+		/// <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
+		/// <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
+		/// <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
+		public void PrintRndSearch(Tuple<string, string> name, Tuple<int, int> minPos, Tuple<int, int> maxPos, Tuple<int, int> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
+		{
+			HR();
+			Console.WriteLine("AVERAGE SEARCH TIMES FOR UPWARD OF 1,000 RANDOM NAMES"); // Display first and last name being searched
+			Console.WriteLine();
+			// Header
+			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
+			// Print out search times and X Y coordinates for search item using string formatting to create a table.
+			Console.WriteLine("BFS (ms)".PadRight(10, ' ') + Math.Round(minBFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxBFS, 4).ToString().PadRight(15, ' ') + "n/a");
+			Console.WriteLine("DFS (ms)".PadRight(10, ' ') + Math.Round(minDFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxDFS, 4).ToString().PadRight(15, ' ') + "n/a");
+			Console.WriteLine("BTS (ms)".PadRight(10, ' ') + "n/a".PadRight(15, ' ') + "n/a".PadRight(15, ' ') + Math.Round(bts, 4).ToString());
+			HR();
+		}
 
 		/// <summary>
 		/// This method takes in a lot of parameters from the Controller class and prints to console in a pretty table.
@@ -246,6 +357,8 @@ namespace a4
 	/// </summary>
 	class Controller
 	{
+		public Controller() { }
+		
 		// Controller class variables. Input is a jagged array and ui is a new instance of the UI class which automatically calls Main() method.
 		private string[][] Input { get; set; }
 		UI ui = new UI();
@@ -254,25 +367,39 @@ namespace a4
 		/// This method calls each tree method and handles filestream output and passes input array to each tree method.
 		/// </summary>
 		/// <param name="input"></param>
-		public Controller(string[][] input)
+		public Controller(string[][] input, Tuple<string,string> search)
 		{
 			// File items used to output to a text file and control console output.
 			FileStream ostrm;
 			StreamWriter writer;
+			Stopwatch sw = new Stopwatch();
+			Random rnd = new Random();
+			double minHeapBuildTime = 0, maxHeapBuildTime = 0, bstBuildTime = 0;
 
 			// Set input to the global Input object.
 			Input = input;
 
 			// Initialize each of the tree structures.
+			sw.Start();
 			MinHeap minHeap = MinHeapInit();
+			sw.Stop();
+			minHeapBuildTime = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
 			MaxHeap maxHeap = MaxHeapInit();
+			sw.Stop();
+			maxHeapBuildTime = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
 			BST bst = BSTInit();
+			sw.Stop();
+			bstBuildTime = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
 
-			// NOTE: LAST,FIRST order so input item1 is LAST NAME
-			// Get search tuple from UI.
-			Tuple<string,string> search = ui.Main();
-
-			if(search == null) // If user chose option 1 instead of 2 in menu (print all instead of search)...
+			
+			if(search == null) // If user chose option 1 instead of 2 or 3 in menu (print all instead of search)...
 			{
 				// Save current console output for later use.
 				TextWriter oldOut = Console.Out;
@@ -306,10 +433,27 @@ namespace a4
 				writer.Close();
 				ostrm.Close();
 			}
+			else if (search != null && search.Item1 == "run" && search.Item2 == "tests")
+			{
+				TextWriter oldOut = Console.Out;
+				ostrm = new FileStream($"./BENCHMARK.txt", FileMode.Append, FileAccess.Write);
+				writer = new StreamWriter(ostrm);
+				Console.SetOut(writer);
+
+				ui.PrintBuildTimes(input.Length, minHeapBuildTime, maxHeapBuildTime, bstBuildTime);
+				SearchName(minHeap, maxHeap, bst, search);
+
+				Console.SetOut(oldOut);
+				writer.Close();
+				ostrm.Close();
+			}
 			else // OTherwise just search for name.
 			{
 				SearchName(minHeap, maxHeap, bst, search);
 			}
+			minHeap = null;
+			maxHeap = null;
+			bst = null;
 		}
 
 		/// <summary>
@@ -437,96 +581,225 @@ namespace a4
 		private void SearchName(MinHeap min, MaxHeap max, BST bst, Tuple<string,string> name)
 		{
 			// Declare stopwatch, timers, total runtime variables, and tuples to be used throughout this method.
+			Random rnd = new Random();
 			Stopwatch sw = new Stopwatch();
 			double minDFS = 0, minBFS = 0, maxDFS = 0, maxBFS = 0, bts = 0;
 			Tuple<int, int> minPos = null, maxPos = null, bstPos = null;
 
-			// Each of these blocks are nearly identical. They simply call different methods.
+			if (name.Item1 == "run" && name.Item2 == "tests")
+			{
+				for (int i = 0; i < 1000; i++)
+				{
+					int randomIndex = rnd.Next(0, Input.Length);
+					// Each of these blocks are nearly identical. They simply call different methods.
 
-			sw.Start();								// Start stopwatch
-			minPos = min.DFS(name.Item2);			// Find last name in MinHeap using DFS.
-			sw.Stop();								// Stop stopwatch
-			minDFS = sw.Elapsed.TotalMilliseconds;	// Save total milliseconds during search.
-			sw.Reset();								// Reset stopwatch
+					sw.Start();                             // Start stopwatch
+					minPos = min.DFS(name.Item2);           // Find last name in MinHeap using DFS.
+					sw.Stop();                              // Stop stopwatch
+					minDFS += sw.Elapsed.TotalMilliseconds;  // Save total milliseconds during search.
+					sw.Reset();                             // Reset stopwatch
 
-			// MinHeap BFS (last name)
-			sw.Start();
-			min.BFS(name.Item2);
-			sw.Stop();
-			minBFS = sw.Elapsed.TotalMilliseconds;
-			sw.Reset();
+					// MinHeap BFS (last name)
+					sw.Start();
+					min.BFS(name.Item2);
+					sw.Stop();
+					minBFS += sw.Elapsed.TotalMilliseconds;
+					sw.Reset();
 
-			// MaxHeap DFS (first name)
-			sw.Start();
-			maxPos = max.DFS(name.Item1);
-			sw.Stop();
-			maxDFS = sw.Elapsed.TotalMilliseconds;
-			sw.Reset();
+					// MaxHeap DFS (first name)
+					sw.Start();
+					maxPos = max.DFS(name.Item1);
+					sw.Stop();
+					maxDFS += sw.Elapsed.TotalMilliseconds;
+					sw.Reset();
 
-			// MaxHeap BFS (first name)
-			sw.Start();
-			max.BFS(name.Item1);
-			sw.Stop();
-			maxBFS = sw.Elapsed.TotalMilliseconds;
-			sw.Reset();
+					// MaxHeap BFS (first name)
+					sw.Start();
+					max.BFS(name.Item1);
+					sw.Stop();
+					maxBFS += sw.Elapsed.TotalMilliseconds;
+					sw.Reset();
 
-			// BST BTS (last name)
-			sw.Start();
-			bstPos = bst.Get(name.Item2);
-			sw.Stop();
-			bts = sw.Elapsed.TotalMilliseconds;
-			sw.Reset();
+					// BST BTS (last name)
+					sw.Start();
+					bstPos = bst.Get(name.Item2);
+					sw.Stop();
+					bts += sw.Elapsed.TotalMilliseconds;
+					sw.Reset();
+				}
+				// Used for extremely precise measurement by ticks.
+				//decimal frequency = Stopwatch.Frequency;
+				//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
 
-			// Used for extremely precise measurement by ticks.
-			//decimal frequency = Stopwatch.Frequency;
-			//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
-			
-			// Call ui method that prints table with passed in search results.
-			ui.PrintNameSearch(name, minPos, maxPos, bstPos, minDFS, minBFS, maxDFS, maxBFS, bts);
+				// Call ui method that prints table with passed in search results.
+				ui.PrintRndSearch(name, minPos, maxPos, bstPos, minDFS/1000, minBFS/1000, maxDFS/1000, maxBFS/1000, bts/1000);
+			}
+			else
+			{
+				// Each of these blocks are nearly identical. They simply call different methods.
+
+				sw.Start();                             // Start stopwatch
+				minPos = min.DFS(name.Item2);           // Find last name in MinHeap using DFS.
+				sw.Stop();                              // Stop stopwatch
+				minDFS = sw.Elapsed.TotalMilliseconds;  // Save total milliseconds during search.
+				sw.Reset();                             // Reset stopwatch
+
+				// MinHeap BFS (last name)
+				sw.Start();
+				min.BFS(name.Item2);
+				sw.Stop();
+				minBFS = sw.Elapsed.TotalMilliseconds;
+				sw.Reset();
+
+				// MaxHeap DFS (first name)
+				sw.Start();
+				maxPos = max.DFS(name.Item1);
+				sw.Stop();
+				maxDFS = sw.Elapsed.TotalMilliseconds;
+				sw.Reset();
+
+				// MaxHeap BFS (first name)
+				sw.Start();
+				max.BFS(name.Item1);
+				sw.Stop();
+				maxBFS = sw.Elapsed.TotalMilliseconds;
+				sw.Reset();
+
+				// BST BTS (last name)
+				sw.Start();
+				bstPos = bst.Get(name.Item2);
+				sw.Stop();
+				bts = sw.Elapsed.TotalMilliseconds;
+				sw.Reset();
+
+				// Used for extremely precise measurement by ticks.
+				//decimal frequency = Stopwatch.Frequency;
+				//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
+
+				// Call ui method that prints table with passed in search results.
+				ui.PrintNameSearch(name, minPos, maxPos, bstPos, minDFS, minBFS, maxDFS, maxBFS, bts);
+			}
 		}
 	}
 
-	class MinHeapNode
+	/// <summary>
+	/// Class Object used to create nodes for trees.
+	/// Used by both BST and MinHeap classes.
+	/// </summary>
+	class Node
 	{
-		public MinHeapNode() { }
-		public MinHeapNode(Tuple<string, string> value, int n)
+		/// <summary>
+		/// Default constructor used to create a null node.
+		/// </summary>
+		public Node() { }
+
+		/// <summary>
+		/// Constructor that only takes in a name.
+		/// </summary>
+		/// <param name="value">Tuple of strings containing first and last name.</param>
+		public Node(Tuple<string, string> value)
+		{
+			Value = value;
+		}
+
+		/// <summary>
+		/// Constructor that takes in a name and a value n.
+		/// </summary>
+		/// <param name="value">Tuple of strings containing first and last name.</param>
+		/// <param name="n">Integer referencing subtree size.</param>
+		public Node(Tuple<string, string> value, int n)
 		{
 			Value = value;
 			N = n;
 		}
+
+		/// <summary>
+		/// Accessor/Mutator for Tuple of strings containing first and last name.
+		/// </summary>
 		public Tuple<string, string> Value { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for integer refering to subtree size.
+		/// </summary>
 		public int N { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for integer refering to X position of node in a row.
+		/// </summary>
 		public int X { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for integer refering to Y height of node in a tree.
+		/// </summary>
 		public int Y { get; set; }
-		public MinHeapNode Parent { get; set; }
-		public MinHeapNode Left { get; set; }
-		public MinHeapNode Right { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for Node object refering to parent of current node.
+		/// </summary>
+		public Node Parent { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for Node object refering to left child of current node.
+		/// </summary>
+		public Node Left { get; set; }
+		/// <summary>
+		/// Accessor/Mutator for Node object refering to right child of current node.
+		/// </summary>
+		public Node Right { get; set; }
+
+		#region RedBlack BST Code (UNUSED)
+		// Following code is only used in RedBlack BST
+		
+		public Node(Tuple<string, string> value, int n, bool color)
+		{
+			Value = value;
+			N = n;
+			Color = color;
+		}
+		public bool Color { get; set; }
+		
+		#endregion
 	}
+
+	/// <summary>
+	/// Class containing methods containing all operations of a min heap using a binary tree implementation.
+	/// </summary>
 	class MinHeap
 	{
-		private MinHeapNode root;
+		private Node root;	// Create new Node object for root of tree.
 
 		#region Public Methods
-
+		/// <summary>
+		/// Public method that gets called from outside classes.
+		/// Calls InsertUtil private method which then inserts a value.
+		/// </summary>
+		/// <param name="val">Tuple of strings containing first and last name.</param>
 		public void Insert(Tuple<string,string> val)
 		{
-			root = InsertUtil(root, val);
+			root = InsertUtil(root, val);	// Pass root node and val tuple into InsertUtil.
 		}
 
-
+		/// <summary>
+		/// Public method that gets called from outside classes.
+		/// Calls DFSUtil private method which uses Depth First Search to find a node with specified last name.
+		/// </summary>
+		/// <param name="last">Last name to search.</param>
+		/// <returns>Tuple of ints returned to Controller class. Contains X,Y coordinate of search result. (-1,-1) if search miss.</returns>
 		public Tuple<int, int> DFS(string last)
 		{
-			MinHeapNode h = DFSUtil(root, last);
-			if (h == null) { return Tuple.Create(-1, -1); }
-			else { return Tuple.Create(h.X, h.Y); }
+			Node h = DFSUtil(root, last);	// Pass root and last name into DFSUtil. Save as a new temp node.
+			if (h == null) { return Tuple.Create(-1, -1); }	// If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else { return Tuple.Create(h.X, h.Y); }			// Else, return the returned search hit X and Y positions as a new tuple.
 		}
 
+		/// <summary>
+		/// Public method that gets called from outside classes.
+		/// Calls BFSUtil private method which uses Breadth First Search to find a node with the specified last name.
+		/// </summary>
+		/// <param name="last">Last name to search.</param>
+		/// <returns>Tuple of ints returned to Controller class. Contains X,Y coordinates of search result. (-1,-1) if search miss.</returns>
 		public Tuple<int, int> BFS(string last)
 		{
-			return BFSUtil(root, last);
+			return BFSUtil(root, last);	// Pass root and last name into BFSUtil and return the tuple<int,int> (coordinate) result.
 		}
 
-		public void AssignXY(MinHeapNode h, int x, int y)
+		// TRY TO IMPLEMENT THIS FUNCTIONALITY IN INSERT METHOD
+		public void AssignXY(Node h, int x, int y)
 		{
 			if (h == null) { return; }
 			h.X = x;
@@ -535,6 +808,10 @@ namespace a4
 			AssignXY(h.Right, 2 * x, y + 1);
 		}
 
+		/// <summary>
+		/// Public method called by outside classes.
+		/// Calls each of the private traversal methods and separate with headers.
+		/// </summary>
 		public void Traverse()
 		{
 			Console.WriteLine("=== PREORDER  ===");
@@ -547,152 +824,224 @@ namespace a4
 			PostOrder(root);
 		}
 
-		public MinHeapNode ReturnRoot()
+		/// <summary>
+		/// Helper method used to return root to call. This allows us to pass the root node into a method like BFS or DFS.
+		/// </summary>
+		/// <returns></returns>
+		public Node ReturnRoot()
 		{
 			return root;
+		}
+
+		/// <summary>
+		/// Helper method that calls private Size method.
+		/// </summary>
+		/// <returns>Returns root's N property.</returns>
+		public int Size()
+		{
+			return Size(root);
 		}
 		#endregion
 
 		#region Private Methods
-
-		private MinHeapNode InsertUtil(MinHeapNode h, Tuple<string,string> val)
+		/// <summary>
+		/// Called by Insert public method.
+		/// Inserts a given value into the next node in a size balanced tree.
+		/// On insert, the node sifts up the tree until its parent is a smaller value.
+		/// </summary>
+		/// <param name="h">Node initially passed in as root then is changed during recursive call.</param>
+		/// <param name="val">Tuple of strings containing first and last name.</param>
+		/// <returns></returns>
+		private Node InsertUtil(Node h, Tuple<string,string> val)
 		{
-			MinHeapNode newNode = new MinHeapNode();
-			if(h == null) { return new MinHeapNode(val, 1); }
-			if(h.Left == null || h.Right == null)
+			Node newNode = new Node();					// Create new node to help swap nodes around without overwriting one.
+			if(h == null) { return new Node(val, 1); }	// If current node position doesnt exist, create new node with value and subtree size of 1.
+			if(h.Left == null || h.Right == null)		// If either left or right child is null...
 			{
-				if(h.Left == null) { newNode = h.Left = InsertUtil(h.Left, val); newNode.Parent = h; }
-				else { newNode = h.Right = InsertUtil(h.Right, val); newNode.Parent = h; }
+				if(h.Left == null) { newNode = h.Left = InsertUtil(h.Left, val); newNode.Parent = h; }	// If left child is null, create new node and save as left child and newNode, maintaining links.
+				else { newNode = h.Right = InsertUtil(h.Right, val); newNode.Parent = h; }				// If right child is null, create new node and save as right child and newNode, maintaining links.
 			}
-			else if(h.Left.N < h.Right.N) { h.Left = InsertUtil(h.Left, val); }
-			else{ h.Right = InsertUtil(h.Right, val); }
+			else if(h.Left.N < h.Right.N) { h.Left = InsertUtil(h.Left, val); }	// If Left subtree is smaller than right subtree, move to left child and recursive call InsertUtil.
+			else{ h.Right = InsertUtil(h.Right, val); }							// If left subtree is larger or equal to right subtree, move to right child and recursive call InsertUtil.
 
+			// While not at root of tree and newNode (current) value is less than parent node...
 			while(newNode.Parent != null && newNode.Value.Item2.CompareTo(h.Value.Item2) < 0)
 			{
-				Swap(newNode, h);
-				newNode = h;
+				Swap(newNode, h);	// Swap newNode and parent node (h).
+				newNode = h;		// Set newNode to parent position.
 			}
 
+			// Increase h subtree size by adding left and right subtrees (+1 for root node).
 			h.N = Size(h.Left) + Size(h.Right) + 1;
-			return h;
+			return h;	// Return h to Insert public method.
 		}
 
-		private MinHeapNode DeleteMin()
+		/// <summary>
+		/// Not used in this program.
+		/// Deletes root from minheap.
+		/// </summary>
+		/// <returns>Returns Node to call.</returns>
+		private Node DeleteMin()
 		{
-			MinHeapNode temp = GoToLast(root);
-			Swap(root, temp);
-			if(temp.Parent.Right != null) { temp.Parent.Right = null; }
-			else { temp.Parent.Left = null; }
-			temp.Parent = null;
-			DownHeapify(root);
-			root.N = Size(root.Left) + Size(root.Right) + 1;
+			Node temp = GoToLast(root);									// Pointer for last item in tree
+			Swap(root, temp);											// Swap root and last node
+			if(temp.Parent.Right != null) { temp.Parent.Right = null; }	// IF ELSE used to set last node to null (deleting min value).
+			else { temp.Parent.Left = null; }							
+			temp.Parent = null;											// Remove link to main tree.
+			DownHeapify(root);											// Heapify
+			root.N = Size(root.Left) + Size(root.Right) + 1;			// Update size of subtrees.
 			return temp;
 		}
 
-		private MinHeapNode DFSUtil(MinHeapNode h, string last)
+		/// <summary>
+		/// Depth First Search private method called by DFS public method.
+		/// </summary>
+		/// <param name="h">Node initially passed in as root then updated recursively.</param>
+		/// <param name="last">Last name to search.</param>
+		/// <returns>Node containing search result or null node if search miss.</returns>
+		private Node DFSUtil(Node h, string last)
 		{
+			// If tree isn't empty...
 			if (h != null)
 			{
-				if(h.Value.Item2 == last) { return h; }
-				else
+				if(h.Value.Item2 == last) { return h; }	// If search hit, return result node.
+				else									// Otherwise, continue search
 				{
-					MinHeapNode ret = DFSUtil(h.Left, last);
-					if(ret == null) { ret = DFSUtil(h.Right, last); }
-					return ret;
+					Node ret = DFSUtil(h.Left, last);					// Create temp node containing result of left subtree recursive call.
+					if(ret == null) { ret = DFSUtil(h.Right, last); }	// If null is returned, search right and save result as ret.
+					return ret;											// Return the result. This is allowed to be null indicating search miss.
 				}
 			}
-			else { return null; }
+			else { return null; }	// If tree is empty, return null indicating search miss.
 		}
 
-		private Tuple<int, int> BFSUtil(MinHeapNode h, string last)
+		/// <summary>
+		/// Bredth First Search private method called by BFS public method.
+		/// </summary>
+		/// <param name="h">Node initially passed in as root then updated recursively.</param>
+		/// <param name="last">Last name to search.</param>
+		/// <returns>Tuple of ints referencing node.X and node.Y values (position).</returns>
+		private Tuple<int, int> BFSUtil(Node h, string last)
 		{
-			Queue<MinHeapNode> q = new Queue<MinHeapNode>();
-			int x = 0, y = 0, counter = 0;
-			if (h == null) { return Tuple.Create(-1, -1); }
-			q.Enqueue(h);
-			while (q.Count() != 0)
+			Queue<Node> q = new Queue<Node>();				// Create new built-int C# queue.
+			int x = 0, y = 0;								// X,Y values initialized.
+			if (h == null) { return Tuple.Create(-1, -1); }	// If tree is empty, return new tuple containing -1,-1 indicating search miss.
+			q.Enqueue(h);									// Enqueue current node.
+			while (q.Count() != 0)							// While the queue isn't empty...
 			{
-				h = q.Dequeue();
-				counter++;
-				if (h.Value.Item2 == last)
+				h = q.Dequeue();							// Save Node h as dequeued node.
+				if (h.Value.Item2 == last)					// If search hit...
 				{
-					x = h.X;
-					y = h.Y;
+					x = h.X;								// Set x to node's X value
+					y = h.Y;								// Set y to node's Y value
 				}
-				else
+				else										// If search miss...
 				{
-					if (h.Left != null)
+					if (h.Left != null)						// If left child exists...
 					{
-						q.Enqueue(h.Left);
+						q.Enqueue(h.Left);					// Enqueue left child.
 					}
-					if (h.Right != null)
+					if (h.Right != null)					// If right child exists...
 					{
-						q.Enqueue(h.Right);
+						q.Enqueue(h.Right);					// Enqueue right child.
 					}
 				}
 			}
-			return Tuple.Create(x, y);
+			return Tuple.Create(x, y);						// Reached after search hit. Returns tuple of ints containing x,y coordinates.
 		}
 
-		private MinHeapNode UpHeapify(MinHeapNode h)
+		/// <summary>
+		/// Heapify from bottom to top.
+		/// </summary>
+		/// <param name="h">Node passed in originally as inserted node.</param>
+		/// <returns>Node referencing inserted node.</returns>
+		private Node UpHeapify(Node h)
 		{
-			if(h.Parent == null) { return h; }
-			int cmp = h.Value.Item2.CompareTo(h.Parent.Value.Item2);
-			if (cmp < 0) { return UpHeapify(Swap(h, h.Parent)); }
-			else { return h; }
+			if(h.Parent == null) { return h; }							// If at root, return root.
+			int cmp = h.Value.Item2.CompareTo(h.Parent.Value.Item2);	// Set int cmp to result of comparing current node's last name to the paren't last name.
+			if (cmp < 0) { return UpHeapify(Swap(h, h.Parent)); }		// If cmp < 0 (current last name < parent last name), return the result of recursive call of upheapify while moving up to parent.
+			else { return h; }											// Otherwise, if can't move up heap then return current node.
 		}
 
-		private MinHeapNode DownHeapify(MinHeapNode h)
+		/// <summary>
+		/// Heapify from top to bottom.
+		/// </summary>
+		/// <param name="h">Node passed in originally as inserted node.</param>
+		/// <returns>Node referencing inserted node.</returns>
+		private Node DownHeapify(Node h)
 		{
-			int cmpN = h.Left.N.CompareTo(h.Right.N);
+			int cmpN = h.Left.N.CompareTo(h.Right.N);					// Set int cmpN to result of comparing left child's subtree value to right child's subtree value.
 			
-			if (cmpN < 0)
+			if (cmpN < 0)												// If left subtree is less than right subtree...
 			{
-				int cmpV = h.Value.Item2.CompareTo(h.Left.Value.Item2);
-				if(cmpV > 0) { return DownHeapify(Swap(h, h.Left)); }
-				else { return h; }
+				int cmpV = h.Value.Item2.CompareTo(h.Left.Value.Item2);	// Set int cmpV to result of comparing current node's last name to left child's last name.
+				if(cmpV > 0) { return DownHeapify(Swap(h, h.Left)); }	// If left child's last name is less than current node's last name, downheapify recursively while moving to left child.
+				else { return h; }										// Otherwise, return current node.
 			}
-			else if(cmpN > 0)
+			else if(cmpN > 0)											// If right subtree is larger...
 			{
 				int cmpV = h.Value.Item2.CompareTo(h.Right.Value.Item2);
-				if (cmpV > 0) { return DownHeapify(Swap(h, h.Right)); }
-				else { return h; }
+				if (cmpV > 0) { return DownHeapify(Swap(h, h.Right)); }	// If right child val is less than current, move right.
+				else { return h; }										// Otherwise, return current node.
 			}
-			else { return h; }
+			else { return h; }											// Return current node when if subtrees are equal.
 		}
 
-		private MinHeapNode Swap(MinHeapNode h1, MinHeapNode h2)
+		/// <summary>
+		/// Helper method used to swap two node's values while keeping other object properties the same.
+		/// </summary>
+		/// <param name="h1">Current node.</param>
+		/// <param name="h2">Node to swap with.</param>
+		/// <returns>Returns new position of current node.</returns>
+		private Node Swap(Node h1, Node h2)
 		{
-			var temp = h1.Value;
-			h1.Value = h2.Value;
-			h2.Value = temp;
-			return h2;
+			var temp = h1.Value;	// Create temp var containing node 1's value.
+			h1.Value = h2.Value;	// Set node 1's value to node 2's value.
+			h2.Value = temp;		// Set node 2's value to temp var value.
+			return h2;				// Return new position of passed in node 1.
 		}
 
-		private MinHeapNode GoToLast(MinHeapNode h)
+		/// <summary>
+		/// Moves current node to last position in tree.
+		/// </summary>
+		/// <param name="h">Node initially passed in as root then recursively changed.</param>
+		/// <returns>Returns node at last position in tree.</returns>
+		private Node GoToLast(Node h)
 		{
-			if(h == null) { return null; }
-			if(h.N == 1) { return h; }
-			int cmp = h.Left.N.CompareTo(h.Right.N);
-			if(cmp > 0) { return GoToLast(h.Left); }
-			else { return GoToLast(h.Right); }
+			if(h == null) { return null; }				// If tree is empty, return null;
+			if(h.N == 1) { return h; }					// If tree contains a single node, return that node.
+			int cmp = h.Left.N.CompareTo(h.Right.N);	// Set int cmp to result of comparing left and right subtrees.
+			if(cmp > 0) { return GoToLast(h.Left); }	// If left is larger, move left recursively.
+			else { return GoToLast(h.Right); }			// If right is larger or equal, move right recursively.
 		}
 
-		private void PreOrder(MinHeapNode h)
+		/// <summary>
+		/// Preorder traversal method called by Traversal public method.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void PreOrder(Node h)
 		{
-			if (h == null) { return; }
-			Console.WriteLine(h.Value.Item2);
-			PreOrder(h.Left);
-			PreOrder(h.Right);
+			if (h == null) { return; }			// If tree is empty, exit method.
+			Console.WriteLine(h.Value.Item2);	// Print out current node's last name.
+			PreOrder(h.Left);					// Move left recursively.
+			PreOrder(h.Right);					// Move right recursively.
 		}
-		private void InOrder(MinHeapNode h)
+		/// <summary>
+		/// Same as Preorder traversal method but uses InOrder traversal.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void InOrder(Node h)
 		{
 			if(h == null) { return; }
 			InOrder(h.Left);
 			Console.WriteLine(h.Value.Item2);
 			InOrder(h.Right);
 		}
-		private void PostOrder(MinHeapNode h)
+		/// <summary>
+		/// Same as Preorder and Inorder traversals but uses PostOrder traversal.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void PostOrder(Node h)
 		{
 			if(h == null) { return; }
 			PostOrder(h.Left);
@@ -700,11 +1049,12 @@ namespace a4
 			Console.WriteLine(h.Value.Item2);
 		}
 
-		public int Size()
-		{
-			return Size(root);
-		}
-		private int Size(MinHeapNode x)
+		/// <summary>
+		/// Private size method called from InsertUtil and from Size public method.
+		/// </summary>
+		/// <param name="x">Node passed in that will have its size changed.</param>
+		/// <returns>Returns node's N property.</returns>
+		private int Size(Node x)
 		{
 			if (x == null) { return 0; }
 			else { return x.N; }
@@ -712,51 +1062,81 @@ namespace a4
 		#endregion
 	}
 
+	/// <summary>
+	/// Class object used to create array of people. Used only by MaxHeap class.
+	/// </summary>
 	class Person
 	{
+		/// <summary>
+		/// Default constructor taking 0 parameters. Used to create null person.
+		/// </summary>
 		public Person() { }
+		/// <summary>
+		/// Constructor used to create new person with a first and last name.
+		/// </summary>
+		/// <param name="value">Tuple of strings containing first and last name.</param>
 		public Person(Tuple<string,string> value)
 		{
-			Value = value;
+			Value = value;	// Set passed in value to Value property.
 		}
-		public int X { get; set; }
-		public int Y { get; set; }
-		public Tuple<string,string> Value { get; set; }
+		public int X { get; set; }						// X property used to store X position of node in a row.
+		public int Y { get; set; }						// Y property used to store Y height of node in tree.
+		public Tuple<string,string> Value { get; set; }	// Value property used to store first and last names of Person object in form of a tuple of strings.
 	}
+
+	/// <summary>
+	/// Class containing methods containing all operations of a max heap using an array implementation.
+	/// </summary>
 	class MaxHeap
 	{
-		private Person[] Heap { get; set; }
-		private int size, n = 0;
+		private Person[] Heap { get; set; } // Global property of array of People objects. Used throughout this class.
+		private int size, n = 0;			// Integers used to keep track of size of array and current node pointer.
 
 		#region Public Methods
+		/// <summary>
+		/// Main method of MaxHeap class.
+		/// Takes in array of items and a max size of array and builds the array of People.
+		/// </summary>
+		/// <param name="items">Jagged array passed in by Controller class. Contains first and last names.</param>
+		/// <param name="max">Max size of array allowed given number of items in the items array.</param>
 		public MaxHeap(string[][] items, int max)
 		{
-			size = max;
-			Heap = new Person[size];
-			for(int i = 0; i < items.Length; i++)
+			size = max;					// Sets global size integer to passed in max integer.
+			Heap = new Person[size];    // Create new array of Person of size size and save as Heap.
+			for (int i = 0; i < items.Length; i++)  // For each item in the items array...
 			{
+				// At position i in Heap, create new person with first and last names from items array.
 				Heap[i] = new Person(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
 			}
-			BuildHeap();
+			BuildHeap();	// Call buildheap private method to build the maxheap.
 		}
 
+		/// <summary>
+		/// Insert method that inserts an item into the array then maintains the max heap.
+		/// </summary>
+		/// <param name="val">Tuple of strings containing first and last names.</param>
 		public void Insert(Tuple<string,string> val)
 		{
-			if (n >= size)
+			if (n >= size)	// If at or past end of array...
 			{
-				Console.WriteLine("Heap is full");
-				return;
+				Console.WriteLine("Heap is full");	// Print error.
+				return;								// Exit method.
 			}
-			int curr = n++;
-			Heap[curr].Value = val;  // Start at end of heap
-							   // Now sift up until curr's parent's key > curr's key
+			int curr = n++;			//Set current to next position in array.
+			Heap[curr].Value = val; // Start at end of heap
+
+			// While maxheap isn't maintained...
 			while ((curr != 0) && (Heap[curr].Value.Item1.CompareTo(Heap[Parent(curr)].Value.Item1) > 0))
 			{
-				Swap(curr, Parent(curr));
-				curr = Parent(curr);
+				Swap(curr, Parent(curr));	// Swap current with parent of current.
+				curr = Parent(curr);		// Set current to parent.
 			}
 		}
 		
+		/// <summary>
+		/// Deletes root of array then sifts down to maintain max heap.
+		/// </summary>
+		/// <returns>Return value removed.</returns>
 		public Person DeleteMax()
 		{
 			if (n == 0) { return null; }
@@ -765,21 +1145,27 @@ namespace a4
 			return Heap[n];
 		}
 
+		/// <summary>
+		/// Deletes at specified position then sifts down to maintain heap.
+		/// </summary>
+		/// <param name="pos">Position of item in array to delete.</param>
+		/// <returns>Return value removed.</returns>
 		public Person Delete(int pos)
 		{
-			if((pos < 0) || (pos >= n)) { return null; } // Bad pos
-			if(pos == (n - 1)) { n--; } // Last element in array
+			if((pos < 0) || (pos >= n)) { return null; }	// If outside the bounds of the array, return null.
+			if(pos == (n - 1)) { n--; }						// If at last position in array, delete.
 			else
 			{
-				Swap(pos, --n);
+				Swap(pos, --n);	// Swap current and one position up.
+				// While maxheap not maintained...
 				while((pos > 0) && (Heap[pos].Value.Item1.CompareTo(Heap[Parent(pos)].Value.Item1) > 0))
 				{
-					Swap(pos, Parent(pos));
-					pos = Parent(pos);
+					Swap(pos, Parent(pos));	// Swap current and parent.
+					pos = Parent(pos);		// Set current to parent of current.
 				}
-				if(n != 0) { SiftDown(pos); }
+				if(n != 0) { SiftDown(pos); }	// If not at root, siftdown.
 			}
-			return Heap[n];
+			return Heap[n];	// Return deleted value.
 		}
 
 		public void AssignXY(int h, int x, int y)
@@ -791,17 +1177,31 @@ namespace a4
 			AssignXY(RightChild(h), 2 * x, y + 1);
 		}
 
+		/// <summary>
+		/// Public method that calls private Breadth First Search method.
+		/// </summary>
+		/// <param name="first">First name to search.</param>
+		/// <returns>Returns X,Y position of item in "tree".</returns>
 		public Tuple<int,int> BFS(string first)
 		{
-			return BFSUtil(0, first);
-		}
-		public Tuple<int,int> DFS(string first)
-		{
-			Person h = DFSUtil(0, first);
-			if (h == null) { return Tuple.Create(-1, -1); }
-			else { return Tuple.Create(h.X, h.Y); }
+			return BFSUtil(0, first);	// Return result of BFSUtil when passing in root and search string.
 		}
 
+		/// <summary>
+		/// Public method that calls private Depth First Search method.
+		/// </summary>
+		/// <param name="first">First name to search.</param>
+		/// <returns>Returns X,Y position of item in "tree".</returns>
+		public Tuple<int,int> DFS(string first)
+		{
+			Person h = DFSUtil(0, first);					// Create new Person containing result of DFSUtil when passing in root and search string.
+			if (h == null) { return Tuple.Create(-1, -1); }	// If null node returned, return tuple with position -1,-1 indicating search miss.
+			else { return Tuple.Create(h.X, h.Y); }			// Otherwise, return the returned search results by creating tuple of X,Y values.
+		}
+
+		/// <summary>
+		/// Public method that calls private tree traversal methods when passing in root node and splits them up with headers.
+		/// </summary>
 		public void Traverse()
 		{
 			Console.WriteLine("=== PREORDER  ===");
@@ -816,74 +1216,103 @@ namespace a4
 		#endregion
 
 		#region Private Methods
+		/// <summary>
+		/// Private method that sifts down maxheap.
+		/// </summary>
 		private void BuildHeap()
 		{
+			// For each item in heap starting at end and moving up, siftdown.
 			for (int i = (n / 2) - 1; i >= 0; i--) { SiftDown(i); }
 		}
 
+		/// <summary>
+		/// Method used to sift individual nodes down tree.
+		/// </summary>
+		/// <param name="pos">Current position index to sift down.</param>
 		private void SiftDown(int pos)
 		{
 			if ((pos < 0) || (pos >= n)) { return; } // Shouldnt ever do this... bad position
-			while (!IsLeaf(pos))
+			while (!IsLeaf(pos))	// While not at a leaf node...
 			{
-				int j = LeftChild(pos);
-				if ((j < (n - 1)) && (Heap[j].Value.Item1.CompareTo(Heap[j + 1].Value.Item1) < 0)) { j++; }
-				if (Heap[pos].Value.Item1.CompareTo(Heap[j].Value.Item1) >= 0) { return; }
-				Swap(pos, j);
-				pos = j;
+				int j = LeftChild(pos);																		// Temp int used to keep track of left child index.
+				if ((j < (n - 1)) && (Heap[j].Value.Item1.CompareTo(Heap[j + 1].Value.Item1) < 0)) { j++; }	// If maxheap maintained, increment j.
+				if (Heap[pos].Value.Item1.CompareTo(Heap[j].Value.Item1) >= 0) { return; }					// If maxheap maintained and complete. Exit method.
+				Swap(pos, j);	// Swap current and j.
+				pos = j;		// Set current to j.
 			}
 		}
 
+		/// <summary>
+		/// Breadth First Search method for array implementation of MaxHeap. Called from public BFS method.
+		/// </summary>
+		/// <param name="h">Int passed in as root then updated recursively.</param>
+		/// <param name="first">First name to search.</param>
+		/// <returns>Tuple of ints containing X,Y coordinates of search result.</returns>
 		private Tuple<int, int> BFSUtil(int h, string first)
 		{
-			Queue<int> q = new Queue<int>();
-			int x = 0, y = 0;
-			if (Heap[h] == null) { return Tuple.Create(-1, -1); }
-			q.Enqueue(h);
-			while (q.Count() != 0)
-			{
-				h = q.Dequeue();
-				if (Heap[h].Value.Item1 == first)
-				{
-					x = Heap[h].X;
-					y = Heap[h].Y;
+			Queue<int> q = new Queue<int>();						// Create new queue to be used in this method. 
+			int x = 0, y = 0;										// Counters for X,Y positions.
+			if (Heap[h] == null) { return Tuple.Create(-1, -1); }	// If empty tree, return tuple with -1,-1 indicating search miss.
+			q.Enqueue(h);											// Enqueue current position.
+			while (q.Count() != 0)									// While queue isn't empty...
+			{	
+				h = q.Dequeue();									// Set h to dequeued value.
+				if (Heap[h].Value.Item1 == first)					// If search hit...
+				{	
+					x = Heap[h].X;									// Set x to current position's X property.
+					y = Heap[h].Y;									// Set y to current position's Y property.
 				}
-				else
+				else												// Otherwise if search miss...
 				{
-					if (Heap[LeftChild(h)] != null)
+					if (Heap[LeftChild(h)] != null)					// If left child exists...
 					{
-						q.Enqueue(LeftChild(h));
+						q.Enqueue(LeftChild(h));					// Enqueue left child.
 					}
-					if (Heap[RightChild(h)] != null)
+					if (Heap[RightChild(h)] != null)				// If right child exists...
 					{
-						q.Enqueue(RightChild(h));
+						q.Enqueue(RightChild(h));					// Enqueue right child.
 					}
 				}
 			}
-			return Tuple.Create(x, y);
-		}
-		private Person DFSUtil(int h, string first)
-		{
-			if (Heap[h] != null)
-			{
-				if (Heap[h].Value.Item1 == first) { return Heap[h]; }
-				else
-				{
-					Person ret = DFSUtil(LeftChild(h), first);
-					if (ret == null) { ret = DFSUtil(RightChild(h), first); }
-					return ret;
-				}
-			}
-			else { return null; }
+			return Tuple.Create(x, y);								// Return a tuple containing x y values from search result.
 		}
 
+		/// <summary>
+		/// Depth First Search method for array implementation of MaxHeap. Called from public DFS method.
+		/// </summary>
+		/// <param name="h">Int passed in as root then updated recursively.</param>
+		/// <param name="first">First name to search.</param>
+		/// <returns>Person object returned to call.</returns>
+		private Person DFSUtil(int h, string first)
+		{
+			if (Heap[h] != null)												// If heap isn't empty...
+			{
+				if (Heap[h].Value.Item1 == first) { return Heap[h]; }			// If search hit, return current Person.
+				else															// Otherwise...
+				{
+					Person ret = DFSUtil(LeftChild(h), first);					// Create temp Person and set to result from recursive search of left child.
+					if (ret == null) { ret = DFSUtil(RightChild(h), first); }	// If temp Person is null, set temp Person to result from recursive search of right child.
+					return ret;													// Return the temp Person.
+				}
+			}
+			else { return null; }												// Otherwise, if heap is empty, return null.
+		}
+
+		/// <summary>
+		/// Preorder traversal method called by Traversal public method.
+		/// </summary>
+		/// <param name="h">Index passed in as root then updated recursively.</param>
 		private void PreOrder(int pos)
 		{
-			if(Heap[pos] == null) { return; }
-			Console.WriteLine($"{Heap[pos].Value.Item1}");
-			PreOrder(LeftChild(pos));
-			PreOrder(RightChild(pos));
+			if(Heap[pos] == null) { return; }				// If current position is null, exit method.
+			Console.WriteLine($"{Heap[pos].Value.Item1}");	// Output current position's first name.
+			PreOrder(LeftChild(pos));						// Recursively call while moving to left child.
+			PreOrder(RightChild(pos));						// Recursively call while moving to right child.
 		}
+		/// <summary>
+		/// Same as Preorder traversal method but uses Inorder traversal instead.
+		/// </summary>
+		/// <param name="h">Index passed in as root then updated recursively.</param>
 		private void InOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
@@ -891,6 +1320,10 @@ namespace a4
 			Console.WriteLine($"{Heap[pos].Value.Item1}");
 			PreOrder(RightChild(pos));
 		}
+		/// <summary>
+		/// Same as Preorder and Inorder traversal methods but uses PostOrder traversal instead.
+		/// </summary>
+		/// <param name="h">Index passed in as root then updated recursively.</param>
 		private void PostOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
@@ -899,26 +1332,61 @@ namespace a4
 			Console.WriteLine($"{Heap[pos].Value.Item1}");
 		}
 
+		/// <summary>
+		/// Helper method used to swap two node values while leaving other properties unchanged.
+		/// </summary>
+		/// <param name="p1">Current position.</param>
+		/// <param name="p2">Position to swap with.</param>
 		private void Swap(int p1, int p2) // Swap current and parent of current
 		{
-			Person temp = Heap[p1];
-			Heap[p1] = Heap[p2];
-			Heap[p2] = temp;
+			Person temp = Heap[p1];	// Create temp Person containing current position's values.
+			Heap[p1] = Heap[p2];	// Set current position value to position 2's value.
+			Heap[p2] = temp;		// Set position 2's value to temp Person value.
 		}
 
+		/// <summary>
+		/// Helper method that returns true if passed in index is a leaf.
+		/// </summary>
+		/// <param name="pos">Index of item in array.</param>
+		/// <returns>True if pos is leaf. Otherwise false.</returns>
 		private bool IsLeaf(int pos)
 		{
 			return (pos >= n / 2) && (pos < n);
 		}
 
+		/// <summary>
+		/// Helper method that returns index of left child.
+		/// </summary>
+		/// <param name="pos">Position to check.</param>
+		/// <returns>Int index of left child.</returns>
 		private int LeftChild(int pos) { return (2 * pos) + 1; }
+		/// <summary>
+		/// Helper method that returns index of right child.
+		/// </summary>
+		/// <param name="pos">Position to check.</param>
+		/// <returns>Int index of right child.</returns>
 		private int RightChild(int pos) { return (2 * pos) + 2; }
+		/// <summary>
+		/// Helper method that returns index of parent.
+		/// </summary>
+		/// <param name="pos">Position to check.</param>
+		/// <returns>Int index of parent.</returns>
 		private int Parent(int pos) { return (int)Math.Floor((double)((pos - 1) / 2)); }
+		/// <summary>
+		/// Helper method that returns index of left sibling.
+		/// </summary>
+		/// <param name="pos">Position to check.</param>
+		/// <returns>Int index of left sibling.</returns>
 		private int LeftSibling(int pos)
 		{
 			if (pos % 2 == 0) { return pos - 1; }
 			else { return -1; }
 		}
+		/// <summary>
+		/// Helper method that returns index of right sibling.
+		/// </summary>
+		/// <param name="pos">Position to check.</param>
+		/// <returns>Int index of right subling.</returns>
 		private int RightSibling(int pos)
 		{
 			if (pos % 2 != 0) { return pos + 1; }
@@ -926,49 +1394,39 @@ namespace a4
 		}
 		#endregion
 	}
-
-	class BSTNode
-	{
-		public BSTNode(Tuple<string,string> value)
-		{
-			Value = value;
-		}
-		
-		public Tuple<string,string> Value { get; set; }
-		public int X { get; set; }
-		public int Y { get; set; }
-		public BSTNode Left { get; set; }
-		public BSTNode Right { get; set; }
-
-		#region RedBlack BST Code (UNUSED)
-		// Following code is only used in RedBlack BST
-		public BSTNode(Tuple<string, string> value, int n, bool color)
-		{
-			Value = value;
-			N = n;
-			Color = color;
-		}
-		public int N { get; set; }
-		public bool Color { get; set; }
-		#endregion
-	}
+	
+	/// <summary>
+	/// Class containing methods containing all operations of binary search tree using binary tree implementation.
+	/// </summary>
 	class BST
 	{
-		private BSTNode root;
+		private Node root;	// Create new node and set to root. Used between methods in this class.
 
 		#region Public Methods
+		/// <summary>
+		/// Insert method that calls a private InsertUtil method by passing in value and root.
+		/// </summary>
+		/// <param name="val">Tuple of strings containing first and last name.</param>
 		public void Insert(Tuple<string,string> val)
 		{
-			root = InsertUtil(root, val);
+			root = InsertUtil(root, val);	// Save root as the return from InsertUtil when passing in current root and value.
 		}
 
+		/// <summary>
+		/// Search method that calls GetUtil private method by passing in root and search string.
+		/// </summary>
+		/// <param name="last"></param>
+		/// <returns></returns>
 		public Tuple<int,int> Get(string last)
 		{
-			BSTNode pos = GetUtil(root, last);
-			if (pos == null) { return Tuple.Create(-1, -1); }
-			else { return Tuple.Create(pos.X, pos.Y); }
+			Node pos = GetUtil(root, last);						// Save new node as return from getUtil when passing in current root and search string.
+			if (pos == null) { return Tuple.Create(-1, -1); }	// If pos is null, return a new tuple with -1,-1 indicating search miss.
+			else { return Tuple.Create(pos.X, pos.Y); }			// Otherwise, return a new tuple containing X,Y coordinates of search item.
 		}
 
+		/// <summary>
+		/// Method that calls private traversal methods with header outputs inbetween.
+		/// </summary>
 		public void Traverse()
 		{
 			Console.WriteLine("=== PREORDER  ===");
@@ -981,7 +1439,7 @@ namespace a4
 			PostOrder(root);
 		}
 
-		public void AssignXY(BSTNode h, int x, int y)
+		public void AssignXY(Node h, int x, int y)
 		{
 			if (h == null) { return; }
 			h.X = x;
@@ -990,47 +1448,75 @@ namespace a4
 			AssignXY(h.Right, 2 * x, y + 1);
 		}
 
-		public BSTNode ReturnRoot()
+		/// <summary>
+		/// Helper method used to return root of tree. This is used in the Controller class when calling methods that require the root to be passed in.
+		/// </summary>
+		/// <returns></returns>
+		public Node ReturnRoot()
 		{
 			return root;
 		}
 		#endregion
 
 		#region Private Methods
-		private BSTNode InsertUtil(BSTNode h, Tuple<string, string> val)
+		/// <summary>
+		/// Insert utility private method that carries out a binary search through the BST.
+		/// </summary>
+		/// <param name="h">Node passed in as root then recursively updated.</param>
+		/// <param name="val">Tuple of strings containing first and last name.</param>
+		/// <returns>Node return to Insert public method.</returns>
+		private Node InsertUtil(Node h, Tuple<string, string> val)
 		{
-			if (h == null) { return new BSTNode(val); }
-			int cmp = val.Item2.CompareTo(h.Value.Item2);
-			if (cmp < 0) { h.Left = InsertUtil(h.Left, val); }
-			else if (cmp > 0) { h.Right = InsertUtil(h.Right, val); }
-			else { h.Value = val; }
-			return h;
+			if (h == null) { return new Node(val); }					// If current node is empty, return a new node containing passed in value.
+			int cmp = val.Item2.CompareTo(h.Value.Item2);				// Set int cmp to the result of comparing passed in val's last name to current node's last name.
+			if (cmp < 0) { h.Left = InsertUtil(h.Left, val); }			// If passed in value is less than current node's value, recursive move left and insert.
+			else if (cmp > 0) { h.Right = InsertUtil(h.Right, val); }	// Else If passed in value is greater, recursive move right and insert.
+			else { h.Value = val; }										// Otherwise if it is equal. Set current value to passed in value.
+			return h;													// Return new node.
 		}
 
-		private BSTNode GetUtil(BSTNode h, string last)
+		/// <summary>
+		/// Private search method called by public Get method.
+		/// </summary>
+		/// <param name="h">Node passed in as root then recursively updated.</param>
+		/// <param name="last">Last name to search.</param>
+		/// <returns>Returns search result node.</returns>
+		private Node GetUtil(Node h, string last)
 		{
-			if (h == null) { return null; }
-			int cmp = last.CompareTo(h.Value.Item2);
-			if (cmp < 0) { return GetUtil(h.Left, last); }
-			else if (cmp > 0) { return GetUtil(h.Right, last); }
-			else { return h; }
+			if (h == null) { return null; }							// If tree is null, return null node.
+			int cmp = last.CompareTo(h.Value.Item2);				// Set int cmp to result of comparing search value with current node's value.
+			if (cmp < 0) { return GetUtil(h.Left, last); }			// If search value is less than current node, return a recursive search while moving left.
+			else if (cmp > 0) { return GetUtil(h.Right, last); }	// Else If search value is greater, return a recursive search while moving right.
+			else { return h; }										// Otherwise, return current node.
 		}
 
-		private void PreOrder(BSTNode h)
+		/// <summary>
+		/// Preorder traversal method called by Traversal public method.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void PreOrder(Node h)
 		{
-			if (h == null) { return; }
-			Console.WriteLine(h.Value.Item2);
-			PreOrder(h.Left);
-			PreOrder(h.Right);
+			if (h == null) { return; }			// If tree is empty, exit method.
+			Console.WriteLine(h.Value.Item2);	// Print current node's last name.
+			PreOrder(h.Left);					// Recursively move left.
+			PreOrder(h.Right);					// Recursively move right.
 		}
-		private void InOrder(BSTNode h)
+		/// <summary>
+		/// Same as Preorder traversal method but using an InOrder traversal.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void InOrder(Node h)
 		{
 			if (h == null) { return; }
 			InOrder(h.Left);
 			Console.WriteLine(h.Value.Item2);
 			InOrder(h.Right);
 		}
-		private void PostOrder(BSTNode h)
+		/// <summary>
+		/// Same as Preorder and Inorder traversal but using a PostOrder traversal.
+		/// </summary>
+		/// <param name="h">Node passed in as root then updated recursively.</param>
+		private void PostOrder(Node h)
 		{
 			if (h == null) { return; }
 			PostOrder(h.Left);
@@ -1041,21 +1527,26 @@ namespace a4
 	}
 
 	#region RedBlack BST (NOT USED)
+	/// <summary>
+	/// Ignore this class. I used this as a test of a red black 2-3 tree.
+	/// Leaving this in the program as it works with this program so I'd rather not create an
+	/// entire new solution to save this.
+	/// </summary>
 	class RedBlackBST
 	{
 		private const bool RED = true;
 		private const bool BLACK = false;
 
-		private BSTNode root;
+		private Node root;
 
 		public void Insert(Tuple<string,string> val)
 		{
 			root = Insert(root, val);
 			root.Color = BLACK;
 		}
-		private BSTNode Insert(BSTNode h, Tuple<string,string> val)
+		private Node Insert(Node h, Tuple<string,string> val)
 		{
-			if(h == null) { return new BSTNode(val, 1, RED); }
+			if(h == null) { return new Node(val, 1, RED); }
 
 			int cmp = val.Item2.CompareTo(h.Value.Item2);
 
@@ -1076,7 +1567,7 @@ namespace a4
 			var pos = Get(root, last, 0, 1);
 			return Tuple.Create(pos.Item1 + 1, pos.Item2);
 		}
-		private Tuple<int,int> Get(BSTNode h, string last, int x, int y)
+		private Tuple<int,int> Get(Node h, string last, int x, int y)
 		{
 			if(h == null) { return Tuple.Create(-1,-1); }
 			int cmp = last.CompareTo(h.Value.Item2);
@@ -1096,15 +1587,15 @@ namespace a4
 		}
 
 		// Helper methods
-		private bool IsRed(BSTNode x)
+		private bool IsRed(Node x)
 		{
 			if (x == null) { return false; }
 			return (x.Color == RED);
 
 		}
-		public BSTNode RotateLeft(BSTNode h)
+		public Node RotateLeft(Node h)
 		{
-			BSTNode x = h.Right;
+			Node x = h.Right;
 			h.Right = x.Left;
 			x.Left = h;
 			x.Color = h.Color;
@@ -1113,9 +1604,9 @@ namespace a4
 			h.N = 1 + Size(h.Left) + Size(h.Right);
 			return x;
 		}
-		public BSTNode RotateRight(BSTNode h)
+		public Node RotateRight(Node h)
 		{
-			BSTNode x = h.Left;
+			Node x = h.Left;
 			h.Left = x.Right;
 			x.Right = h;
 			x.Color = h.Color;
@@ -1124,7 +1615,7 @@ namespace a4
 			h.N = 1 + Size(h.Left) + Size(h.Right);
 			return x;
 		}
-		public void FlipColors(BSTNode h)
+		public void FlipColors(Node h)
 		{
 			h.Color = RED;
 			h.Left.Color = BLACK;
@@ -1143,21 +1634,21 @@ namespace a4
 			Console.WriteLine("=== POSTORDER ===");
 			PostOrder(root);
 		}
-		private void PreOrder(BSTNode x)
+		private void PreOrder(Node x)
 		{
 			if(x == null) { return; }
 			Console.WriteLine(x.Value.Item2 + " " + x.Color);
 			PreOrder(x.Left);
 			PreOrder(x.Right);
 		}
-		private void InOrder(BSTNode x)
+		private void InOrder(Node x)
 		{
 			if (x == null) { return; }
 			InOrder(x.Left);
 			Console.WriteLine(x.Value.Item2 + " " + x.Color);
 			InOrder(x.Right);
 		}   // Sorted traversal
-		private void PostOrder(BSTNode x)
+		private void PostOrder(Node x)
 		{
 			if (x == null) { return; }
 			PostOrder(x.Left);
@@ -1169,7 +1660,7 @@ namespace a4
 		{
 			return Size(root);
 		}
-		private int Size(BSTNode x)
+		private int Size(Node x)
 		{
 			if (x == null) { return 0; }
 			else { return x.N; }

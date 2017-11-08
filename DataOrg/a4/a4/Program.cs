@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace a4
 {
@@ -11,7 +13,7 @@ namespace a4
     {
         static void Main(string[] args)
         {
-			string text = File.ReadAllText("namelistSMALL.txt");
+			string text = File.ReadAllText("namelist.txt");
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 			string[][] input = new string[lines.Length][];
 
@@ -20,69 +22,241 @@ namespace a4
 				input[i] = lines[i].Split('\t');
 			}
 
-			Controller c = new Controller(input);
-
-			Console.ReadLine();
+			while (true)
+			{
+				Console.Clear();
+				Controller c = new Controller(input);
+				Console.WriteLine("Press enter to continue...");
+				Console.ReadLine();
+			}
         }
-
-		
     }
+
+	class UI
+	{
+		#region Input Methods
+		public Tuple<string,string> Main()
+		{
+			HR();
+			Console.WriteLine("ENTER OPTION NUMBER");
+			Console.WriteLine("1) Print all items");
+			Console.WriteLine("2) Search for Name");
+			Console.WriteLine("3) Exit");
+
+			switch (ValidateMain(Regex.Escape(Console.ReadLine())))
+			{
+				case 1:
+					Console.WriteLine("Saving output to /bin/debug/output.txt");
+					break;
+				case 2:
+					return SearchMenu();
+				case 3:
+					Console.WriteLine("Exiting application. Enter c to cancel.");
+					Console.WriteLine("Press enter to exit.");
+					string response = Console.ReadLine();
+					if (response == "c" || response == "C") { Main(); }
+					else { Environment.Exit(0); }
+					break;
+			}
+			return null;
+		}
+		private Tuple<string,string> SearchMenu()
+		{
+			HR();
+			Console.WriteLine("ENTER FIRST NAME");
+			string first = Regex.Escape(Console.ReadLine());
+			Console.WriteLine("ENTER LAST NAME");
+			string last = Regex.Escape(Console.ReadLine());
+			return ValidateSearch(first, last);
+		}
+		private Tuple<string,string> ValidateSearch(string first, string last)
+		{
+			if(first.Any(c => char.IsDigit(c)) || last.Any(c => char.IsDigit(c)) || first == "" || last == "")
+			{
+				Console.WriteLine("=========================================");
+				Console.WriteLine("            ! INVALID INPUT !            ");
+				Console.WriteLine("Input must be nonempty string of letters.");
+				Console.WriteLine("=========================================");
+				SearchMenu();
+			}
+			first = first.Trim().ToLower();
+			last = last.Trim().ToLower();
+			return Tuple.Create(first, last);
+		}
+
+		private int ValidateMain(string input)
+		{
+			int n;
+			if(!int.TryParse(input, out n) || n < 1 || n > 3 || input == "")
+			{
+				Console.WriteLine("=========================================");
+				Console.WriteLine("            ! INVALID INPUT !            ");
+				Console.WriteLine("Input must be an integer between 1 and 3.");
+				Console.WriteLine("=========================================");
+				Main();
+			}
+			return n;
+		}
+
+		#endregion
+
+		public void PrintNameSearch(Tuple<string,string> name, Tuple<int,int> minPos, Tuple<int,int> maxPos, Tuple<int,int> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
+		{
+			HR();
+			Console.WriteLine($"SEARCH FOR {name.Item1} {name.Item2}");
+			Console.WriteLine();
+			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
+			Console.WriteLine("  (X, Y)".PadRight(10, ' ') + minPos.ToString().PadRight(15, ' ') + maxPos.ToString().PadRight(15, ' ') + bstPos.ToString().PadRight(15, ' '));
+			Console.WriteLine("BFS (ms)".PadRight(10, ' ') + Math.Round(minBFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxBFS, 4).ToString().PadRight(15, ' ') + "n/a");
+			Console.WriteLine("DFS (ms)".PadRight(10, ' ') + Math.Round(minDFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxDFS, 4).ToString().PadRight(15, ' ') + "n/a");
+			Console.WriteLine("BTS (ms)".PadRight(10, ' ') + "n/a".PadRight(15, ' ') + "n/a".PadRight(15, ' ') + Math.Round(bts, 4).ToString());
+			HR();
+		}
+
+		#region Text Outputs
+		public void HR()
+		{
+			Console.WriteLine("".PadRight(45, '_'));
+		}
+		public void MinHeapHeader()
+		{
+			Console.WriteLine("======================");
+			Console.WriteLine("MIN HEAP RESULTS BELOW");
+			Console.WriteLine("======================");
+			Console.WriteLine();
+			HR();
+		}
+		public void MaxHeapHeader()
+		{
+			Console.WriteLine("======================");
+			Console.WriteLine("MAX HEAP RESULTS BELOW");
+			Console.WriteLine("======================");
+			Console.WriteLine();
+			HR();
+		}
+		public void BSTHeader()
+		{
+			Console.WriteLine("=================");
+			Console.WriteLine("BST RESULTS BELOW");
+			Console.WriteLine("=================");
+			Console.WriteLine();
+			HR();
+		}
+		public void SR()
+		{
+			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "DFS       BFS");
+			Console.WriteLine("".PadRight(25, ' ') + "(X, Y)    (X, Y)");
+			HR();
+		}
+		public void SRBST()
+		{
+			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "BTS");
+			Console.WriteLine("".PadRight(25, ' ') + "(X, Y)");
+			HR();
+		}
+		#endregion
+	}
 
 	class Controller
 	{
 		private string[][] Input { get; set; }
+		UI ui = new UI();
 		
 		public Controller(string[][] input)
 		{
-			// NOTE: LAST,FIRST order so input item1 is LAST NAME
+			FileStream ostrm;
+			StreamWriter writer;
+
 			Input = input;
 
-			MinHeapControl();
+			MinHeap minHeap = MinHeapInit();
+			MaxHeap maxHeap = MaxHeapInit();
+			BST bst = BSTInit();
 
-			//Console.WriteLine();
-			//Console.WriteLine("========================================");
+			// NOTE: LAST,FIRST order so input item1 is LAST NAME
+			Tuple<string,string> search = ui.Main();
+			if(search == null)
+			{
+				TextWriter oldOut = Console.Out;
+				try
+				{
+					ostrm = new FileStream("./output.txt", FileMode.Create, FileAccess.Write);
+					writer = new StreamWriter(ostrm);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Cannot open output.txt for editing.");
+					Console.WriteLine(e.Message);
+					return;
+				}
+				Console.SetOut(writer);
 
-			//MaxHeapControl();
+				ui.MinHeapHeader();
+				MinHeapPrint(minHeap);
+				ui.MaxHeapHeader();
+				MaxHeapPrint(maxHeap);
+				ui.BSTHeader();
+				BSTPrint(bst);
+				ui.HR();
 
-			//BSTControl();
+				Console.SetOut(oldOut);
+				writer.Close();
+				ostrm.Close();
+			}
+			else
+			{
+				SearchName(minHeap, maxHeap, bst, search);
+			}
 		}
 
-		private void MinHeapControl()
+		private MinHeap MinHeapInit()
 		{
 			MinHeap heap = new MinHeap();
-			foreach (var r in Input)
+			foreach (var v in Input)
 			{
-				heap.Insert(Tuple.Create(r[1].ToLower(), r[0].ToLower()));
+				heap.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
+			}
+		
+			heap.AssignXY(heap.ReturnRoot(), 1, 1);
+
+			return heap;
+		}
+		private MinHeap MinHeapPrint(MinHeap heap)
+		{
+			ui.SR();
+			foreach (var v in Input)
+			{
+				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{heap.DFS(v[0].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(v[0].ToLower())}");
 			}
 
-			heap.AssignXY(heap.ReturnRoot(), 0, 0);
-
-			Console.WriteLine("========================================");
-			Console.WriteLine("SEARCHES".PadRight(20,' ') + "DFS       BFS");
-			foreach(var s in Input)
-			{
-				Console.WriteLine($"{s[0].PadRight(20, ' ')}" + $"{heap.DFS(s[0].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(s[0].ToLower())}");
-			}
-
-			Console.WriteLine("========================================");
+			ui.HR();
 			heap.Traverse();
+			return heap;
 		}
 
-		private void MaxHeapControl()
+		private MaxHeap MaxHeapInit()
 		{
 			MaxHeap heap = new MaxHeap(Input, Input.Length*2 + 2);
 
-			heap.AssignXY(0, 0, 0);
+			heap.AssignXY(0, 1, 1);
 
-			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "DFS       BFS");
-			foreach (var s in Input)
+			return heap;
+		}
+		private MaxHeap MaxHeapPrint(MaxHeap heap)
+		{
+			ui.SR();
+			foreach (var v in Input)
 			{
-				Console.WriteLine($"{s[1].PadRight(20, ' ')}" + $"{heap.DFS(s[1].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(s[1].ToLower())}");
+				Console.WriteLine($"{v[1].PadRight(25, ' ')}" + $"{heap.DFS(v[1].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(v[1].ToLower())}");
 			}
+
+			ui.HR();
 			heap.Traverse();
+
+			return heap;
 		}
 
-		private void BSTControl()
+		private BST BSTInit()
 		{
 			BST bst = new BST();
 			foreach(var v in Input)
@@ -90,14 +264,64 @@ namespace a4
 				bst.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
 			}
 			// Print results
-			bst.AssignXY(bst.ReturnRoot(), 0, 0);
-			Console.WriteLine("SEARCHES".PadRight(20, ' ') + "BTS");
-			foreach (var s in Input)
+			bst.AssignXY(bst.ReturnRoot(), 1, 1);
+
+			return bst;
+		}
+		private BST BSTPrint(BST bst)
+		{
+			ui.SRBST();
+			foreach (var v in Input)
 			{
-				Console.WriteLine($"{s[0].PadRight(20, ' ')}" + $"{bst.Get(s[0].ToLower())}");
+				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{bst.Get(v[0].ToLower())}");
 			}
-			Console.WriteLine("========================================");
+
+			ui.HR();
 			bst.Traverse();
+			return bst;
+		}
+
+		private void SearchName(MinHeap min, MaxHeap max, BST bst, Tuple<string,string> name)
+		{
+			Stopwatch sw = new Stopwatch();
+			double minDFS = 0, minBFS = 0, maxDFS = 0, maxBFS = 0, bts = 0;
+			Tuple<int, int> minPos = null, maxPos = null, bstPos = null;
+
+			sw.Start();
+			minPos = min.DFS(name.Item2);
+			sw.Stop();
+			minDFS = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
+			min.BFS(name.Item2);
+			sw.Stop();
+			minBFS = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
+			maxPos = max.DFS(name.Item1);
+			sw.Stop();
+			maxDFS = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
+			max.BFS(name.Item1);
+			sw.Stop();
+			maxBFS = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			sw.Start();
+			bstPos = bst.Get(name.Item2);
+			sw.Stop();
+			bts = sw.Elapsed.TotalMilliseconds;
+			sw.Reset();
+
+			// Used for extremely precise measurement by ticks.
+			//decimal frequency = Stopwatch.Frequency;
+			//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
+			
+			ui.PrintNameSearch(name, minPos, maxPos, bstPos, minDFS, minBFS, maxDFS, maxBFS, bts);
 		}
 	}
 
@@ -113,7 +337,6 @@ namespace a4
 		public int N { get; set; }
 		public int X { get; set; }
 		public int Y { get; set; }
-		public bool Visited { get; set; }
 		public MinHeapNode Parent { get; set; }
 		public MinHeapNode Left { get; set; }
 		public MinHeapNode Right { get; set; }
@@ -123,49 +346,34 @@ namespace a4
 		private MinHeapNode root;
 
 		#region Public Methods
-		// WORKING
+
 		public void Insert(Tuple<string,string> val)
 		{
-			root = Insert(root, val);
+			root = InsertUtil(root, val);
 		}
 
-		// WORKING
+
 		public Tuple<int, int> DFS(string last)
 		{
 			MinHeapNode h = DFSUtil(root, last);
 			if (h == null) { return Tuple.Create(-1, -1); }
 			else { return Tuple.Create(h.X, h.Y); }
 		}
-		// WORKING
+
 		public Tuple<int, int> BFS(string last)
 		{
 			return BFSUtil(root, last);
 		}
 
-		// NEW
-		public int Height(MinHeapNode h)
-		{
-			if (h == null) { return 0; }
-			else
-			{
-				int l = Height(h.Left);
-				int r = Height(h.Right);
-				if (l > r) { return l + 1; }
-				else { return r + 1; }
-			}
-		}
-
-		// WORKING oh my god it finally works
 		public void AssignXY(MinHeapNode h, int x, int y)
 		{
-			if(h == null) { return; }
+			if (h == null) { return; }
 			h.X = x;
 			h.Y = y;
-			AssignXY(h.Left, x, y+1);
-			AssignXY(h.Right, x+1, y+1);
+			AssignXY(h.Left, 2 * x - 1, y + 1);
+			AssignXY(h.Right, 2 * x, y + 1);
 		}
 
-		// WORKING
 		public void Traverse()
 		{
 			Console.WriteLine("=== PREORDER  ===");
@@ -178,7 +386,6 @@ namespace a4
 			PostOrder(root);
 		}
 
-		// NEW
 		public MinHeapNode ReturnRoot()
 		{
 			return root;
@@ -186,18 +393,18 @@ namespace a4
 		#endregion
 
 		#region Private Methods
-		// WORKING
-		private MinHeapNode Insert(MinHeapNode h, Tuple<string,string> val)
+
+		private MinHeapNode InsertUtil(MinHeapNode h, Tuple<string,string> val)
 		{
 			MinHeapNode newNode = new MinHeapNode();
 			if(h == null) { return new MinHeapNode(val, 1); }
 			if(h.Left == null || h.Right == null)
 			{
-				if(h.Left == null) { newNode = h.Left = Insert(h.Left, val); newNode.Parent = h; }
-				else { newNode = h.Right = Insert(h.Right, val); newNode.Parent = h; }
+				if(h.Left == null) { newNode = h.Left = InsertUtil(h.Left, val); newNode.Parent = h; }
+				else { newNode = h.Right = InsertUtil(h.Right, val); newNode.Parent = h; }
 			}
-			else if(h.Left.N < h.Right.N) { h.Left = Insert(h.Left, val); }
-			else{ h.Right = Insert(h.Right, val); }
+			else if(h.Left.N < h.Right.N) { h.Left = InsertUtil(h.Left, val); }
+			else{ h.Right = InsertUtil(h.Right, val); }
 
 			while(newNode.Parent != null && newNode.Value.Item2.CompareTo(h.Value.Item2) < 0)
 			{
@@ -209,7 +416,6 @@ namespace a4
 			return h;
 		}
 
-		// NEW
 		private MinHeapNode DeleteMin()
 		{
 			MinHeapNode temp = GoToLast(root);
@@ -222,7 +428,6 @@ namespace a4
 			return temp;
 		}
 
-		// WORKING
 		private MinHeapNode DFSUtil(MinHeapNode h, string last)
 		{
 			if (h != null)
@@ -237,12 +442,12 @@ namespace a4
 			}
 			else { return null; }
 		}
-		// WORKING
+
 		private Tuple<int, int> BFSUtil(MinHeapNode h, string last)
 		{
 			Queue<MinHeapNode> q = new Queue<MinHeapNode>();
 			int x = 0, y = 0, counter = 0;
-			if (h == null) { return Tuple.Create(0, 0); }
+			if (h == null) { return Tuple.Create(-1, -1); }
 			q.Enqueue(h);
 			while (q.Count() != 0)
 			{
@@ -268,7 +473,6 @@ namespace a4
 			return Tuple.Create(x, y);
 		}
 
-		// PROBABLY WORKING
 		private MinHeapNode UpHeapify(MinHeapNode h)
 		{
 			if(h.Parent == null) { return h; }
@@ -276,7 +480,7 @@ namespace a4
 			if (cmp < 0) { return UpHeapify(Swap(h, h.Parent)); }
 			else { return h; }
 		}
-		// NEW
+
 		private MinHeapNode DownHeapify(MinHeapNode h)
 		{
 			int cmpN = h.Left.N.CompareTo(h.Right.N);
@@ -296,7 +500,6 @@ namespace a4
 			else { return h; }
 		}
 
-		// WORKING
 		private MinHeapNode Swap(MinHeapNode h1, MinHeapNode h2)
 		{
 			var temp = h1.Value;
@@ -305,7 +508,6 @@ namespace a4
 			return h2;
 		}
 
-		// NEW
 		private MinHeapNode GoToLast(MinHeapNode h)
 		{
 			if(h == null) { return null; }
@@ -315,8 +517,6 @@ namespace a4
 			else { return GoToLast(h.Right); }
 		}
 
-
-		// WORKING
 		private void PreOrder(MinHeapNode h)
 		{
 			if (h == null) { return; }
@@ -324,7 +524,6 @@ namespace a4
 			PreOrder(h.Left);
 			PreOrder(h.Right);
 		}
-		// WORKING
 		private void InOrder(MinHeapNode h)
 		{
 			if(h == null) { return; }
@@ -332,7 +531,6 @@ namespace a4
 			Console.WriteLine(h.Value.Item2);
 			InOrder(h.Right);
 		}
-		// WORKING
 		private void PostOrder(MinHeapNode h)
 		{
 			if(h == null) { return; }
@@ -341,12 +539,10 @@ namespace a4
 			Console.WriteLine(h.Value.Item2);
 		}
 
-		// WORKING
-		private int Size()
+		public int Size()
 		{
 			return Size(root);
 		}
-		// WORKING
 		private int Size(MinHeapNode x)
 		{
 			if (x == null) { return 0; }
@@ -364,7 +560,6 @@ namespace a4
 		}
 		public int X { get; set; }
 		public int Y { get; set; }
-		public bool Visited { get; set; }
 		public Tuple<string,string> Value { get; set; }
 	}
 	class MaxHeap
@@ -375,10 +570,11 @@ namespace a4
 		#region Public Methods
 		public MaxHeap(string[][] items, int max)
 		{
-			Heap = new Person[size = max];
+			size = max;
+			Heap = new Person[size];
 			for(int i = 0; i < items.Length; i++)
 			{
-				Heap[i] = new Person(Tuple.Create(items[i][1], items[i][0]));
+				Heap[i] = new Person(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
 			}
 			BuildHeap();
 		}
@@ -425,13 +621,13 @@ namespace a4
 			return Heap[n];
 		}
 
-		public int AssignXY(int h, int x, int y)
+		public void AssignXY(int h, int x, int y)
 		{
-			if (Heap[h] == null) { return 0; }
+			if (Heap[h] == null) { return; }
 			Heap[h].X = x;
 			Heap[h].Y = y;
-			AssignXY(LeftChild(h), x, y + 1);
-			return AssignXY(RightChild(h), x + 1, y + 1);
+			AssignXY(LeftChild(h), 2 * x - 1, y + 1);
+			AssignXY(RightChild(h), 2 * x, y + 1);
 		}
 
 		public Tuple<int,int> BFS(string first)
@@ -477,29 +673,29 @@ namespace a4
 			}
 		}
 
-		private Tuple<int, int> BFSUtil(int r, string first)
+		private Tuple<int, int> BFSUtil(int h, string first)
 		{
 			Queue<int> q = new Queue<int>();
 			int x = 0, y = 0;
-			if (Heap[r] == null) { return Tuple.Create(-1, -1); }
-			q.Enqueue(r);
+			if (Heap[h] == null) { return Tuple.Create(-1, -1); }
+			q.Enqueue(h);
 			while (q.Count() != 0)
 			{
-				int n = q.Dequeue();
-				if (Heap[n].Value.Item1 == first)
+				h = q.Dequeue();
+				if (Heap[h].Value.Item1 == first)
 				{
-					x = Heap[n].X;
-					y = Heap[n].Y;
+					x = Heap[h].X;
+					y = Heap[h].Y;
 				}
 				else
 				{
-					if (Heap[LeftChild(n)] != null)
+					if (Heap[LeftChild(h)] != null)
 					{
-						q.Enqueue(LeftChild(n));
+						q.Enqueue(LeftChild(h));
 					}
-					if (Heap[RightChild(n)] != null)
+					if (Heap[RightChild(h)] != null)
 					{
-						q.Enqueue(RightChild(n));
+						q.Enqueue(RightChild(h));
 					}
 				}
 			}
@@ -509,7 +705,7 @@ namespace a4
 		{
 			if (Heap[h] != null)
 			{
-				if (Heap[h].Value.Item2 == first) { return Heap[h]; }
+				if (Heap[h].Value.Item1 == first) { return Heap[h]; }
 				else
 				{
 					Person ret = DFSUtil(LeftChild(h), first);
@@ -608,7 +804,8 @@ namespace a4
 		public Tuple<int,int> Get(string last)
 		{
 			BSTNode pos = GetUtil(root, last);
-			return Tuple.Create(pos.X, pos.Y);
+			if (pos == null) { return Tuple.Create(-1, -1); }
+			else { return Tuple.Create(pos.X, pos.Y); }
 		}
 
 		public void Traverse()
@@ -623,13 +820,13 @@ namespace a4
 			PostOrder(root);
 		}
 
-		public int AssignXY(BSTNode h, int x, int y)
+		public void AssignXY(BSTNode h, int x, int y)
 		{
-			if (h == null) { return 0; }
+			if (h == null) { return; }
 			h.X = x;
 			h.Y = y;
-			AssignXY(h.Left, x, y + 1);
-			return AssignXY(h.Right, x + 1, y + 1);
+			AssignXY(h.Left, 2 * x - 1, y + 1);
+			AssignXY(h.Right, 2 * x, y + 1);
 		}
 
 		public BSTNode ReturnRoot()

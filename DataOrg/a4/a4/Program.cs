@@ -9,57 +9,85 @@ using System.Text.RegularExpressions;
 
 namespace a4
 {
+	/// <summary>
+	/// Contains only the Main method which calls a new instance of the Controller class.
+	/// </summary>
     class Program
     {
+		/// <summary>
+		/// Handles txt file input and splits input into var.
+		/// Also handles looping Controller call to allow program to repeat.
+		/// </summary>
+		/// <param name="args">default param</param>
         static void Main(string[] args)
         {
+			// Temp save namelist.txt into string.
 			string text = File.ReadAllText("namelist.txt");
+			// Split text string by line
 			var lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+			// Create new jagged array. Number of elements is equal to number of elements in lines variable
 			string[][] input = new string[lines.Length][];
 
+			// For each lines in lines, split line at TAB and save into array
 			for (int i = 0; i < lines.Length; i++)
 			{
 				input[i] = lines[i].Split('\t');
 			}
 
+			// Infinite loop that prevents application from closing when program is done executing.
 			while (true)
 			{
-				Console.Clear();
-				Controller c = new Controller(input);
-				Console.WriteLine("Press enter to continue...");
-				Console.ReadLine();
+				Console.Clear();									// Clear the console window
+				Controller c = new Controller(input);               // New instance of Controller class, passing in input array
+				Console.WriteLine("Press any key to continue...");
+				while(Console.ReadKey() == null) { Console.ReadKey(); } // Prevents console from closing until key is pressed.
 			}
         }
     }
 
+	/// <summary>
+	/// This class controls nearly all console and txt file outputs and user inputs.
+	/// Called from Controller class methods and returns values to Controller methods.
+	/// </summary>
 	class UI
 	{
 		#region Input Methods
+		/// <summary>
+		/// Main menu method that prints the main menu and asks for user to select an option.
+		/// This method can call a secondary menu method and an input validation method.
+		/// </summary>
+		/// <returns>Tuple of strings containing first and last name.</returns>
 		public Tuple<string,string> Main()
 		{
-			HR();
+			HR();	// Call method to display horizontal rule. This is used often so I won't comment it every time.
 			Console.WriteLine("ENTER OPTION NUMBER");
 			Console.WriteLine("1) Print all items");
 			Console.WriteLine("2) Search for Name");
 			Console.WriteLine("3) Exit");
 
+			// Switch that handles possible inputs after stripping input of escape chars and sending the user input to a validate method
 			switch (ValidateMain(Regex.Escape(Console.ReadLine())))
 			{
-				case 1:
+				case 1:	// Print all
 					Console.WriteLine("Saving output to /bin/debug/output.txt");
 					break;
-				case 2:
-					return SearchMenu();
-				case 3:
+				case 2:	// Search
+					return SearchMenu();	// Call secondary menu method and return its result to method call
+				case 3:	// Exit
 					Console.WriteLine("Exiting application. Enter c to cancel.");
 					Console.WriteLine("Press enter to exit.");
 					string response = Console.ReadLine();
-					if (response == "c" || response == "C") { Main(); }
-					else { Environment.Exit(0); }
+					if (response.ToLower() == "c") { Main(); }  // If response is c, then we return to the main menu
+					else { Environment.Exit(0); }               // Otherwise, exit the program
 					break;
 			}
-			return null;
+			return null;	// Shouldnt ever reach this line but it is a failsafe incase the program skipped user input.
 		}
+
+		/// <summary>
+		/// Secondary menu that asks for user to input first and last name to search for.
+		/// </summary>
+		/// <returns>Tuple of strings containing first and last name.</returns>
 		private Tuple<string,string> SearchMenu()
 		{
 			HR();
@@ -67,45 +95,78 @@ namespace a4
 			string first = Regex.Escape(Console.ReadLine());
 			Console.WriteLine("ENTER LAST NAME");
 			string last = Regex.Escape(Console.ReadLine());
+			// Return the result of validating the first and last names.
 			return ValidateSearch(first, last);
 		}
+
+		/// <summary>
+		/// This method validates the first and last names to verify they don't contain numbers or null characters.
+		/// </summary>
+		/// <param name="first">First name passed in from SearchMenu</param>
+		/// <param name="last">Last name passed in from SearchMenu</param>
+		/// <returns>Tuple of strings containing first and last name.</returns>
 		private Tuple<string,string> ValidateSearch(string first, string last)
 		{
+			// If any character in first or last name is a number, or if either are blank...
 			if(first.Any(c => char.IsDigit(c)) || last.Any(c => char.IsDigit(c)) || first == "" || last == "")
 			{
+				// Write an error and call the SearchMenu method again to ask for correct first and last names.
 				Console.WriteLine("=========================================");
 				Console.WriteLine("            ! INVALID INPUT !            ");
 				Console.WriteLine("Input must be nonempty string of letters.");
 				Console.WriteLine("=========================================");
 				SearchMenu();
 			}
+			// Remove all leading and trailing whitespace from first and last names then convert them to lowercase characters.
 			first = first.Trim().ToLower();
 			last = last.Trim().ToLower();
-			return Tuple.Create(first, last);
+			return Tuple.Create(first, last);	// Return the new valid first and last name.
 		}
 
+		/// <summary>
+		/// Method that validates main menu input number to verify that it is an integer between 1 and 3.
+		/// </summary>
+		/// <param name="input">Input string from Main() method.</param>
+		/// <returns>Integer with valid menu selection.</returns>
 		private int ValidateMain(string input)
 		{
 			int n;
+			// Try parsing input as an integer. If successful, save to int n. Also verify input isnt empty and it is between 1 and 3.
 			if(!int.TryParse(input, out n) || n < 1 || n > 3 || input == "")
 			{
+				// If any of these conditions fails, print error and call Main menu method again to ask for correct input.
 				Console.WriteLine("=========================================");
 				Console.WriteLine("            ! INVALID INPUT !            ");
 				Console.WriteLine("Input must be an integer between 1 and 3.");
 				Console.WriteLine("=========================================");
 				Main();
 			}
+			// If input is valid, return the menu option selected to the Main method.
 			return n;
 		}
 
 		#endregion
 
+		/// <summary>
+		/// This method takes in a lot of parameters from the Controller class and prints to console in a pretty table.
+		/// </summary>
+		/// <param name="name">Tuple of strings containing first and last name.</param>
+		/// <param name="minPos">Tuple of integers containing X and Y coordinates in MinHeap.</param>
+		/// <param name="maxPos">Tuple of integers contianing X and Y coordinates in MaxHeap.</param>
+		/// <param name="bstPos">Tuple of integers containing X and Y coordinates in Binary Search Tree.</param>
+		/// <param name="minDFS">Double containing total MinHeap Depth First Search time in milliseconds.</param>
+		/// <param name="minBFS">Double containing total MinHeap Breadth First Search time in milliseconds.</param>
+		/// <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
+		/// <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
+		/// <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
 		public void PrintNameSearch(Tuple<string,string> name, Tuple<int,int> minPos, Tuple<int,int> maxPos, Tuple<int,int> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
 		{
 			HR();
-			Console.WriteLine($"SEARCH FOR {name.Item1} {name.Item2}");
+			Console.WriteLine($"SEARCH FOR {name.Item1} {name.Item2}");	// Display first and last name being searched
 			Console.WriteLine();
+			// Header
 			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
+			// Print out search times and X Y coordinates for search item using string formatting to create a table.
 			Console.WriteLine("  (X, Y)".PadRight(10, ' ') + minPos.ToString().PadRight(15, ' ') + maxPos.ToString().PadRight(15, ' ') + bstPos.ToString().PadRight(15, ' '));
 			Console.WriteLine("BFS (ms)".PadRight(10, ' ') + Math.Round(minBFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxBFS, 4).ToString().PadRight(15, ' ') + "n/a");
 			Console.WriteLine("DFS (ms)".PadRight(10, ' ') + Math.Round(minDFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxDFS, 4).ToString().PadRight(15, ' ') + "n/a");
@@ -114,10 +175,17 @@ namespace a4
 		}
 
 		#region Text Outputs
+		/// <summary>
+		/// Void method that simply prints a horizontal rule made up of 45 '_' characters.
+		/// </summary>
 		public void HR()
 		{
 			Console.WriteLine("".PadRight(45, '_'));
 		}
+
+		/// <summary>
+		/// Console output header for min heap results
+		/// </summary>
 		public void MinHeapHeader()
 		{
 			Console.WriteLine("======================");
@@ -126,6 +194,10 @@ namespace a4
 			Console.WriteLine();
 			HR();
 		}
+
+		/// <summary>
+		///  Console output header for max heap results
+		/// </summary>
 		public void MaxHeapHeader()
 		{
 			Console.WriteLine("======================");
@@ -134,6 +206,10 @@ namespace a4
 			Console.WriteLine();
 			HR();
 		}
+
+		/// <summary>
+		/// Console output header for BST results
+		/// </summary>
 		public void BSTHeader()
 		{
 			Console.WriteLine("=================");
@@ -142,12 +218,20 @@ namespace a4
 			Console.WriteLine();
 			HR();
 		}
+
+		/// <summary>
+		/// Min/Max Heap search results header for when Main Menu option 1 is selected.
+		/// </summary>
 		public void SR()
 		{
 			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "DFS       BFS");
 			Console.WriteLine("".PadRight(25, ' ') + "(X, Y)    (X, Y)");
 			HR();
 		}
+
+		/// <summary>
+		/// BST search results header for when Main Menu option 1 is selected.
+		/// </summary>
 		public void SRBST()
 		{
 			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "BTS");
@@ -157,40 +241,58 @@ namespace a4
 		#endregion
 	}
 
+	/// <summary>
+	/// This is the main class that contains methods that controls tree functions and searches.
+	/// </summary>
 	class Controller
 	{
+		// Controller class variables. Input is a jagged array and ui is a new instance of the UI class which automatically calls Main() method.
 		private string[][] Input { get; set; }
 		UI ui = new UI();
 		
+		/// <summary>
+		/// This method calls each tree method and handles filestream output and passes input array to each tree method.
+		/// </summary>
+		/// <param name="input"></param>
 		public Controller(string[][] input)
 		{
+			// File items used to output to a text file and control console output.
 			FileStream ostrm;
 			StreamWriter writer;
 
+			// Set input to the global Input object.
 			Input = input;
 
+			// Initialize each of the tree structures.
 			MinHeap minHeap = MinHeapInit();
 			MaxHeap maxHeap = MaxHeapInit();
 			BST bst = BSTInit();
 
 			// NOTE: LAST,FIRST order so input item1 is LAST NAME
+			// Get search tuple from UI.
 			Tuple<string,string> search = ui.Main();
-			if(search == null)
+
+			if(search == null) // If user chose option 1 instead of 2 in menu (print all instead of search)...
 			{
+				// Save current console output for later use.
 				TextWriter oldOut = Console.Out;
+				// Try creating/writing to a text file in bin/debug/ folder for console output.
 				try
 				{
+					// If file exists, edit. If not, create.
 					ostrm = new FileStream("./output.txt", FileMode.Create, FileAccess.Write);
 					writer = new StreamWriter(ostrm);
 				}
-				catch (Exception e)
+				catch (Exception e)	// Throws error if file is locked or anything else that prevents FileStream from accessing it.
 				{
 					Console.WriteLine("Cannot open output.txt for editing.");
 					Console.WriteLine(e.Message);
 					return;
 				}
+				// Set console output to write to text file.
 				Console.SetOut(writer);
 
+				// Call each print method for each type of tree and add ui headers for extra prettiness points.
 				ui.MinHeapHeader();
 				MinHeapPrint(minHeap);
 				ui.MaxHeapHeader();
@@ -199,49 +301,81 @@ namespace a4
 				BSTPrint(bst);
 				ui.HR();
 
+				// Give output control back to console and close stream/writer.
 				Console.SetOut(oldOut);
 				writer.Close();
 				ostrm.Close();
 			}
-			else
+			else // OTherwise just search for name.
 			{
 				SearchName(minHeap, maxHeap, bst, search);
 			}
 		}
 
+		/// <summary>
+		/// Initializes MinHeap by inserting first and last names.
+		/// </summary>
+		/// <returns>MinHeap sent back to Controller that is used in output.</returns>
 		private MinHeap MinHeapInit()
 		{
+			// Create new MinHeap
 			MinHeap heap = new MinHeap();
+			// For each name in input...
 			foreach (var v in Input)
 			{
+				// Insert a new Tuple<string,string> into heap. (v[1] is last name, v[0] is first name)
 				heap.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
 			}
-		
+			
+			// Call method in heap that traverses tree and assigns x,y coords to each.
 			heap.AssignXY(heap.ReturnRoot(), 1, 1);
 
+			// Return entire heap to controller.
 			return heap;
 		}
+
+		/// <summary>
+		/// Prints MinHeap in formatted style.
+		/// Searches for last name.
+		/// </summary>
+		/// <param name="heap">This is the heap that was returned from initializing the MinHeap.</param>
+		/// <returns>MinHeap sent back to Controller method.</returns>
 		private MinHeap MinHeapPrint(MinHeap heap)
 		{
-			ui.SR();
+			ui.SR();    // Print search result header.
+			// For each name in Input array.
 			foreach (var v in Input)
 			{
+				// Outputs a formatted string that uses $ to allow us to call searches from within the string.
+				// This isn't offloaded to UI class since it is accessing the heap methods.
 				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{heap.DFS(v[0].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(v[0].ToLower())}");
 			}
 
 			ui.HR();
-			heap.Traverse();
-			return heap;
+			heap.Traverse();	// Run through preorder, inorder, and postorder traversals in MinHeap class.
+			return heap;		// Return heap to controller method.
 		}
 
+		/// <summary>
+		/// Initializes MaxHeap by inserting first and last names.
+		/// </summary>
+		/// <returns>MaxHeap sent back to Controller that is used in output.</returns>
 		private MaxHeap MaxHeapInit()
 		{
+			// Create new MaxHeap and send in Input array and max length possible with number of inputs in array.
 			MaxHeap heap = new MaxHeap(Input, Input.Length*2 + 2);
 
-			heap.AssignXY(0, 1, 1);
+			heap.AssignXY(0, 1, 1);	// Assign XY values to each node.
 
-			return heap;
+			return heap;			// Returns heap to controller method.
 		}
+
+		/// <summary>
+		/// Prints MaxHeap in formatted style.
+		/// This method is identical to the MinHeapPrint method except it is searching for first name instead of last.
+		/// </summary>
+		/// <param name="heap">This is the heap that was returned from initializing the MaxHeap.</param>
+		/// <returns>MaxHeap sent back to Controller method.</returns>
 		private MaxHeap MaxHeapPrint(MaxHeap heap)
 		{
 			ui.SR();
@@ -256,6 +390,11 @@ namespace a4
 			return heap;
 		}
 
+		/// <summary>
+		/// Initializes BST by inserting first and last names.
+		/// This is identical to the MinHeapInit method.
+		/// </summary>
+		/// <returns>BST sent back to Controller that is used in output.</returns>
 		private BST BSTInit()
 		{
 			BST bst = new BST();
@@ -268,9 +407,16 @@ namespace a4
 
 			return bst;
 		}
+
+		/// <summary>
+		/// Prints BST in formatted style.
+		/// This method is identical to the MinHeapPrint method except it only calls a single search type.
+		/// </summary>
+		/// <param name="heap">This is the heap that was returned from initializing the BST.</param>
+		/// <returns>BST sent back to Controller method.</returns>
 		private BST BSTPrint(BST bst)
 		{
-			ui.SRBST();
+			ui.SRBST();	// Search Result header for BST
 			foreach (var v in Input)
 			{
 				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{bst.Get(v[0].ToLower())}");
@@ -281,36 +427,50 @@ namespace a4
 			return bst;
 		}
 
+		/// <summary>
+		/// Searches for a user specified name.
+		/// </summary>
+		/// <param name="min">MinHeap passed in by controller.</param>
+		/// <param name="max">MaxHeap passed in by controller.</param>
+		/// <param name="bst">BST passed in by controller.</param>
+		/// <param name="name">Tuple of strings containing first and last name.</param>
 		private void SearchName(MinHeap min, MaxHeap max, BST bst, Tuple<string,string> name)
 		{
+			// Declare stopwatch, timers, total runtime variables, and tuples to be used throughout this method.
 			Stopwatch sw = new Stopwatch();
 			double minDFS = 0, minBFS = 0, maxDFS = 0, maxBFS = 0, bts = 0;
 			Tuple<int, int> minPos = null, maxPos = null, bstPos = null;
 
-			sw.Start();
-			minPos = min.DFS(name.Item2);
-			sw.Stop();
-			minDFS = sw.Elapsed.TotalMilliseconds;
-			sw.Reset();
+			// Each of these blocks are nearly identical. They simply call different methods.
 
+			sw.Start();								// Start stopwatch
+			minPos = min.DFS(name.Item2);			// Find last name in MinHeap using DFS.
+			sw.Stop();								// Stop stopwatch
+			minDFS = sw.Elapsed.TotalMilliseconds;	// Save total milliseconds during search.
+			sw.Reset();								// Reset stopwatch
+
+			// MinHeap BFS (last name)
 			sw.Start();
 			min.BFS(name.Item2);
 			sw.Stop();
 			minBFS = sw.Elapsed.TotalMilliseconds;
 			sw.Reset();
 
+			// MaxHeap DFS (first name)
 			sw.Start();
 			maxPos = max.DFS(name.Item1);
 			sw.Stop();
 			maxDFS = sw.Elapsed.TotalMilliseconds;
 			sw.Reset();
 
+			// MaxHeap BFS (first name)
 			sw.Start();
 			max.BFS(name.Item1);
 			sw.Stop();
 			maxBFS = sw.Elapsed.TotalMilliseconds;
 			sw.Reset();
 
+			// BST BTS (last name)
 			sw.Start();
 			bstPos = bst.Get(name.Item2);
 			sw.Stop();
@@ -321,6 +481,7 @@ namespace a4
 			//decimal frequency = Stopwatch.Frequency;
 			//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
 			
+			// Call ui method that prints table with passed in search results.
 			ui.PrintNameSearch(name, minPos, maxPos, bstPos, minDFS, minBFS, maxDFS, maxBFS, bts);
 		}
 	}

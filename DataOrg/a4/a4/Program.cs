@@ -707,7 +707,7 @@ namespace a4
 
 	/// <summary>
 	/// Class Object used to create nodes for trees.
-	/// Used by both BST and MinHeap classes.
+	/// Used by all tree classes.
 	/// </summary>
 	class Node
 	{

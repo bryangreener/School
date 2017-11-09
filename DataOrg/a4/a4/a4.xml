@@ -1,0 +1,610 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>a4</name>
+    </assembly>
+    <members>
+        <member name="T:a4.Program">
+            <summary>
+            Contains only the Main method which calls a new instance of the Controller class.
+            </summary>
+        </member>
+        <member name="M:a4.Program.Main(System.String[])">
+            <summary>
+            Handles txt file input and splits input into var.
+            Also handles looping Controller call to allow program to repeat.
+            </summary>
+            <param name="args">default param</param>
+        </member>
+        <member name="T:a4.Tests">
+            <summary>
+            Class used to control multiple loops of program using different size trees.
+            Entirely used as a benchmark or test of the algorithms for analysis report.
+            </summary>
+        </member>
+        <member name="M:a4.Tests.Main">
+            <summary>
+            Main method in tests class.
+            Creates new instance of controller for each size of test string.
+            </summary>
+        </member>
+        <member name="T:a4.UI">
+            <summary>
+            This class controls nearly all console and txt file outputs and user inputs.
+            Called from Controller class methods and returns values to Controller methods.
+            </summary>
+        </member>
+        <member name="M:a4.UI.Main">
+            <summary>
+            Main menu method that prints the main menu and asks for user to select an option.
+            This method can call a secondary menu method and an input validation method.
+            </summary>
+            <returns>Tuple of strings containing first and last name.</returns>
+        </member>
+        <member name="M:a4.UI.SearchMenu">
+            <summary>
+            Secondary menu that asks for user to input first and last name to search for.
+            </summary>
+            <returns>Tuple of strings containing first and last name.</returns>
+        </member>
+        <member name="M:a4.UI.ValidateMain(System.String)">
+            <summary>
+            Method that validates main menu input number to verify that it is an integer between 1 and 3.
+            </summary>
+            <param name="input">Input string from Main() method.</param>
+            <returns>Integer with valid menu selection.</returns>
+        </member>
+        <member name="M:a4.UI.ValidateSearch(System.String,System.String)">
+            <summary>
+            This method validates the first and last names to verify they don't contain numbers or null characters.
+            </summary>
+            <param name="first">First name passed in from SearchMenu</param>
+            <param name="last">Last name passed in from SearchMenu</param>
+            <returns>Tuple of strings containing first and last name.</returns>
+        </member>
+        <member name="M:a4.UI.PrintRndSearch(System.Tuple{System.String,System.String},System.Tuple{System.Int32,System.Int32},System.Tuple{System.Int32,System.Int32},System.Tuple{System.Int32,System.Int32},System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            This method takes in a lot of parameters from the Controller class and prints to console in a pretty table.
+            </summary>
+            <param name="name">Tuple of strings containing first and last name.</param>
+            <param name="minPos">Tuple of integers containing X and Y coordinates in MinHeap.</param>
+            <param name="maxPos">Tuple of integers contianing X and Y coordinates in MaxHeap.</param>
+            <param name="bstPos">Tuple of integers containing X and Y coordinates in Binary Search Tree.</param>
+            <param name="minDFS">Double containing total MinHeap Depth First Search time in milliseconds.</param>
+            <param name="minBFS">Double containing total MinHeap Breadth First Search time in milliseconds.</param>
+            <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
+            <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
+            <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
+        </member>
+        <member name="M:a4.UI.PrintNameSearch(System.Tuple{System.String,System.String},System.Tuple{System.Int32,System.Int32},System.Tuple{System.Int32,System.Int32},System.Tuple{System.Int32,System.Int32},System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            This method takes in a lot of parameters from the Controller class and prints to console in a pretty table.
+            </summary>
+            <param name="name">Tuple of strings containing first and last name.</param>
+            <param name="minPos">Tuple of integers containing X and Y coordinates in MinHeap.</param>
+            <param name="maxPos">Tuple of integers contianing X and Y coordinates in MaxHeap.</param>
+            <param name="bstPos">Tuple of integers containing X and Y coordinates in Binary Search Tree.</param>
+            <param name="minDFS">Double containing total MinHeap Depth First Search time in milliseconds.</param>
+            <param name="minBFS">Double containing total MinHeap Breadth First Search time in milliseconds.</param>
+            <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
+            <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
+            <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
+        </member>
+        <member name="M:a4.UI.HR">
+            <summary>
+            Void method that simply prints a horizontal rule made up of 45 '_' characters.
+            </summary>
+        </member>
+        <member name="M:a4.UI.MinHeapHeader">
+            <summary>
+            Console output header for min heap results
+            </summary>
+        </member>
+        <member name="M:a4.UI.MaxHeapHeader">
+            <summary>
+             Console output header for max heap results
+            </summary>
+        </member>
+        <member name="M:a4.UI.BSTHeader">
+            <summary>
+            Console output header for BST results
+            </summary>
+        </member>
+        <member name="M:a4.UI.SR">
+            <summary>
+            Min/Max Heap search results header for when Main Menu option 1 is selected.
+            </summary>
+        </member>
+        <member name="M:a4.UI.SRBST">
+            <summary>
+            BST search results header for when Main Menu option 1 is selected.
+            </summary>
+        </member>
+        <member name="T:a4.Controller">
+            <summary>
+            This is the main class that contains methods that controls tree functions and searches.
+            </summary>
+        </member>
+        <member name="M:a4.Controller.#ctor(System.String[][],System.Tuple{System.String,System.String})">
+            <summary>
+            This method calls each tree method and handles filestream output and passes input array to each tree method.
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:a4.Controller.MinHeapInit">
+            <summary>
+            Initializes MinHeap by inserting first and last names.
+            </summary>
+            <returns>MinHeap sent back to Controller that is used in output.</returns>
+        </member>
+        <member name="M:a4.Controller.MinHeapPrint(a4.MinHeap)">
+            <summary>
+            Prints MinHeap in formatted style.
+            Searches for last name.
+            </summary>
+            <param name="heap">This is the heap that was returned from initializing the MinHeap.</param>
+            <returns>MinHeap sent back to Controller method.</returns>
+        </member>
+        <member name="M:a4.Controller.MaxHeapInit">
+            <summary>
+            Initializes MaxHeap by inserting first and last names.
+            </summary>
+            <returns>MaxHeap sent back to Controller that is used in output.</returns>
+        </member>
+        <member name="M:a4.Controller.MaxHeapPrint(a4.MaxHeap)">
+            <summary>
+            Prints MaxHeap in formatted style.
+            This method is identical to the MinHeapPrint method except it is searching for first name instead of last.
+            </summary>
+            <param name="heap">This is the heap that was returned from initializing the MaxHeap.</param>
+            <returns>MaxHeap sent back to Controller method.</returns>
+        </member>
+        <member name="M:a4.Controller.BSTInit">
+            <summary>
+            Initializes BST by inserting first and last names.
+            This is identical to the MinHeapInit method.
+            </summary>
+            <returns>BST sent back to Controller that is used in output.</returns>
+        </member>
+        <member name="M:a4.Controller.BSTPrint(a4.BST)">
+            <summary>
+            Prints BST in formatted style.
+            This method is identical to the MinHeapPrint method except it only calls a single search type.
+            </summary>
+            <param name="heap">This is the heap that was returned from initializing the BST.</param>
+            <returns>BST sent back to Controller method.</returns>
+        </member>
+        <member name="M:a4.Controller.SearchName(a4.MinHeap,a4.MaxHeap,a4.BST,System.Tuple{System.String,System.String})">
+            <summary>
+            Searches for a user specified name.
+            </summary>
+            <param name="min">MinHeap passed in by controller.</param>
+            <param name="max">MaxHeap passed in by controller.</param>
+            <param name="bst">BST passed in by controller.</param>
+            <param name="name">Tuple of strings containing first and last name.</param>
+        </member>
+        <member name="T:a4.Node">
+            <summary>
+            Class Object used to create nodes for trees.
+            Used by both BST and MinHeap classes.
+            </summary>
+        </member>
+        <member name="M:a4.Node.#ctor">
+            <summary>
+            Default constructor used to create a null node.
+            </summary>
+        </member>
+        <member name="M:a4.Node.#ctor(System.Tuple{System.String,System.String})">
+            <summary>
+            Constructor that only takes in a name.
+            </summary>
+            <param name="value">Tuple of strings containing first and last name.</param>
+        </member>
+        <member name="M:a4.Node.#ctor(System.Tuple{System.String,System.String},System.Int32)">
+            <summary>
+            Constructor that takes in a name and a value n.
+            </summary>
+            <param name="value">Tuple of strings containing first and last name.</param>
+            <param name="n">Integer referencing subtree size.</param>
+        </member>
+        <member name="P:a4.Node.Value">
+            <summary>
+            Accessor/Mutator for Tuple of strings containing first and last name.
+            </summary>
+        </member>
+        <member name="P:a4.Node.N">
+            <summary>
+            Accessor/Mutator for integer refering to subtree size.
+            </summary>
+        </member>
+        <member name="P:a4.Node.X">
+            <summary>
+            Accessor/Mutator for integer refering to X position of node in a row.
+            </summary>
+        </member>
+        <member name="P:a4.Node.Y">
+            <summary>
+            Accessor/Mutator for integer refering to Y height of node in a tree.
+            </summary>
+        </member>
+        <member name="P:a4.Node.Parent">
+            <summary>
+            Accessor/Mutator for Node object refering to parent of current node.
+            </summary>
+        </member>
+        <member name="P:a4.Node.Left">
+            <summary>
+            Accessor/Mutator for Node object refering to left child of current node.
+            </summary>
+        </member>
+        <member name="P:a4.Node.Right">
+            <summary>
+            Accessor/Mutator for Node object refering to right child of current node.
+            </summary>
+        </member>
+        <member name="T:a4.MinHeap">
+            <summary>
+            Class containing methods containing all operations of a min heap using a binary tree implementation.
+            </summary>
+        </member>
+        <member name="M:a4.MinHeap.Insert(System.Tuple{System.String,System.String})">
+            <summary>
+            Public method that gets called from outside classes.
+            Calls InsertUtil private method which then inserts a value.
+            </summary>
+            <param name="val">Tuple of strings containing first and last name.</param>
+        </member>
+        <member name="M:a4.MinHeap.DFS(System.String)">
+            <summary>
+            Public method that gets called from outside classes.
+            Calls DFSUtil private method which uses Depth First Search to find a node with specified last name.
+            </summary>
+            <param name="last">Last name to search.</param>
+            <returns>Tuple of ints returned to Controller class. Contains X,Y coordinate of search result. (-1,-1) if search miss.</returns>
+        </member>
+        <member name="M:a4.MinHeap.BFS(System.String)">
+            <summary>
+            Public method that gets called from outside classes.
+            Calls BFSUtil private method which uses Breadth First Search to find a node with the specified last name.
+            </summary>
+            <param name="last">Last name to search.</param>
+            <returns>Tuple of ints returned to Controller class. Contains X,Y coordinates of search result. (-1,-1) if search miss.</returns>
+        </member>
+        <member name="M:a4.MinHeap.Traverse">
+            <summary>
+            Public method called by outside classes.
+            Calls each of the private traversal methods and separate with headers.
+            </summary>
+        </member>
+        <member name="M:a4.MinHeap.ReturnRoot">
+            <summary>
+            Helper method used to return root to call. This allows us to pass the root node into a method like BFS or DFS.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:a4.MinHeap.Size">
+            <summary>
+            Helper method that calls private Size method.
+            </summary>
+            <returns>Returns root's N property.</returns>
+        </member>
+        <member name="M:a4.MinHeap.InsertUtil(a4.Node,System.Tuple{System.String,System.String})">
+            <summary>
+            Called by Insert public method.
+            Inserts a given value into the next node in a size balanced tree.
+            On insert, the node sifts up the tree until its parent is a smaller value.
+            </summary>
+            <param name="h">Node initially passed in as root then is changed during recursive call.</param>
+            <param name="val">Tuple of strings containing first and last name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:a4.MinHeap.DeleteMin">
+            <summary>
+            Not used in this program.
+            Deletes root from minheap.
+            </summary>
+            <returns>Returns Node to call.</returns>
+        </member>
+        <member name="M:a4.MinHeap.DFSUtil(a4.Node,System.String)">
+            <summary>
+            Depth First Search private method called by DFS public method.
+            </summary>
+            <param name="h">Node initially passed in as root then updated recursively.</param>
+            <param name="last">Last name to search.</param>
+            <returns>Node containing search result or null node if search miss.</returns>
+        </member>
+        <member name="M:a4.MinHeap.BFSUtil(a4.Node,System.String)">
+            <summary>
+            Bredth First Search private method called by BFS public method.
+            </summary>
+            <param name="h">Node initially passed in as root then updated recursively.</param>
+            <param name="last">Last name to search.</param>
+            <returns>Tuple of ints referencing node.X and node.Y values (position).</returns>
+        </member>
+        <member name="M:a4.MinHeap.UpHeapify(a4.Node)">
+            <summary>
+            Heapify from bottom to top.
+            </summary>
+            <param name="h">Node passed in originally as inserted node.</param>
+            <returns>Node referencing inserted node.</returns>
+        </member>
+        <member name="M:a4.MinHeap.DownHeapify(a4.Node)">
+            <summary>
+            Heapify from top to bottom.
+            </summary>
+            <param name="h">Node passed in originally as inserted node.</param>
+            <returns>Node referencing inserted node.</returns>
+        </member>
+        <member name="M:a4.MinHeap.Swap(a4.Node,a4.Node)">
+            <summary>
+            Helper method used to swap two node's values while keeping other object properties the same.
+            </summary>
+            <param name="h1">Current node.</param>
+            <param name="h2">Node to swap with.</param>
+            <returns>Returns new position of current node.</returns>
+        </member>
+        <member name="M:a4.MinHeap.GoToLast(a4.Node)">
+            <summary>
+            Moves current node to last position in tree.
+            </summary>
+            <param name="h">Node initially passed in as root then recursively changed.</param>
+            <returns>Returns node at last position in tree.</returns>
+        </member>
+        <member name="M:a4.MinHeap.PreOrder(a4.Node)">
+            <summary>
+            Preorder traversal method called by Traversal public method.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MinHeap.InOrder(a4.Node)">
+            <summary>
+            Same as Preorder traversal method but uses InOrder traversal.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MinHeap.PostOrder(a4.Node)">
+            <summary>
+            Same as Preorder and Inorder traversals but uses PostOrder traversal.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MinHeap.Size(a4.Node)">
+            <summary>
+            Private size method called from InsertUtil and from Size public method.
+            </summary>
+            <param name="x">Node passed in that will have its size changed.</param>
+            <returns>Returns node's N property.</returns>
+        </member>
+        <member name="T:a4.Person">
+            <summary>
+            Class object used to create array of people. Used only by MaxHeap class.
+            </summary>
+        </member>
+        <member name="M:a4.Person.#ctor">
+            <summary>
+            Default constructor taking 0 parameters. Used to create null person.
+            </summary>
+        </member>
+        <member name="M:a4.Person.#ctor(System.Tuple{System.String,System.String})">
+            <summary>
+            Constructor used to create new person with a first and last name.
+            </summary>
+            <param name="value">Tuple of strings containing first and last name.</param>
+        </member>
+        <member name="T:a4.MaxHeap">
+            <summary>
+            Class containing methods containing all operations of a max heap using an array implementation.
+            </summary>
+        </member>
+        <member name="M:a4.MaxHeap.#ctor(System.String[][],System.Int32)">
+            <summary>
+            Main method of MaxHeap class.
+            Takes in array of items and a max size of array and builds the array of People.
+            </summary>
+            <param name="items">Jagged array passed in by Controller class. Contains first and last names.</param>
+            <param name="max">Max size of array allowed given number of items in the items array.</param>
+        </member>
+        <member name="M:a4.MaxHeap.Insert(System.Tuple{System.String,System.String})">
+            <summary>
+            Insert method that inserts an item into the array then maintains the max heap.
+            </summary>
+            <param name="val">Tuple of strings containing first and last names.</param>
+        </member>
+        <member name="M:a4.MaxHeap.DeleteMax">
+            <summary>
+            Deletes root of array then sifts down to maintain max heap.
+            </summary>
+            <returns>Return value removed.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.Delete(System.Int32)">
+            <summary>
+            Deletes at specified position then sifts down to maintain heap.
+            </summary>
+            <param name="pos">Position of item in array to delete.</param>
+            <returns>Return value removed.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.BFS(System.String)">
+            <summary>
+            Public method that calls private Breadth First Search method.
+            </summary>
+            <param name="first">First name to search.</param>
+            <returns>Returns X,Y position of item in "tree".</returns>
+        </member>
+        <member name="M:a4.MaxHeap.DFS(System.String)">
+            <summary>
+            Public method that calls private Depth First Search method.
+            </summary>
+            <param name="first">First name to search.</param>
+            <returns>Returns X,Y position of item in "tree".</returns>
+        </member>
+        <member name="M:a4.MaxHeap.Traverse">
+            <summary>
+            Public method that calls private tree traversal methods when passing in root node and splits them up with headers.
+            </summary>
+        </member>
+        <member name="M:a4.MaxHeap.BuildHeap">
+            <summary>
+            Private method that sifts down maxheap.
+            </summary>
+        </member>
+        <member name="M:a4.MaxHeap.SiftDown(System.Int32)">
+            <summary>
+            Method used to sift individual nodes down tree.
+            </summary>
+            <param name="pos">Current position index to sift down.</param>
+        </member>
+        <member name="M:a4.MaxHeap.BFSUtil(System.Int32,System.String)">
+            <summary>
+            Breadth First Search method for array implementation of MaxHeap. Called from public BFS method.
+            </summary>
+            <param name="h">Int passed in as root then updated recursively.</param>
+            <param name="first">First name to search.</param>
+            <returns>Tuple of ints containing X,Y coordinates of search result.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.DFSUtil(System.Int32,System.String)">
+            <summary>
+            Depth First Search method for array implementation of MaxHeap. Called from public DFS method.
+            </summary>
+            <param name="h">Int passed in as root then updated recursively.</param>
+            <param name="first">First name to search.</param>
+            <returns>Person object returned to call.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.PreOrder(System.Int32)">
+            <summary>
+            Preorder traversal method called by Traversal public method.
+            </summary>
+            <param name="h">Index passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MaxHeap.InOrder(System.Int32)">
+            <summary>
+            Same as Preorder traversal method but uses Inorder traversal instead.
+            </summary>
+            <param name="h">Index passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MaxHeap.PostOrder(System.Int32)">
+            <summary>
+            Same as Preorder and Inorder traversal methods but uses PostOrder traversal instead.
+            </summary>
+            <param name="h">Index passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.MaxHeap.Swap(System.Int32,System.Int32)">
+            <summary>
+            Helper method used to swap two node values while leaving other properties unchanged.
+            </summary>
+            <param name="p1">Current position.</param>
+            <param name="p2">Position to swap with.</param>
+        </member>
+        <member name="M:a4.MaxHeap.IsLeaf(System.Int32)">
+            <summary>
+            Helper method that returns true if passed in index is a leaf.
+            </summary>
+            <param name="pos">Index of item in array.</param>
+            <returns>True if pos is leaf. Otherwise false.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.LeftChild(System.Int32)">
+            <summary>
+            Helper method that returns index of left child.
+            </summary>
+            <param name="pos">Position to check.</param>
+            <returns>Int index of left child.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.RightChild(System.Int32)">
+            <summary>
+            Helper method that returns index of right child.
+            </summary>
+            <param name="pos">Position to check.</param>
+            <returns>Int index of right child.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.Parent(System.Int32)">
+            <summary>
+            Helper method that returns index of parent.
+            </summary>
+            <param name="pos">Position to check.</param>
+            <returns>Int index of parent.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.LeftSibling(System.Int32)">
+            <summary>
+            Helper method that returns index of left sibling.
+            </summary>
+            <param name="pos">Position to check.</param>
+            <returns>Int index of left sibling.</returns>
+        </member>
+        <member name="M:a4.MaxHeap.RightSibling(System.Int32)">
+            <summary>
+            Helper method that returns index of right sibling.
+            </summary>
+            <param name="pos">Position to check.</param>
+            <returns>Int index of right subling.</returns>
+        </member>
+        <member name="T:a4.BST">
+            <summary>
+            Class containing methods containing all operations of binary search tree using binary tree implementation.
+            </summary>
+        </member>
+        <member name="M:a4.BST.Insert(System.Tuple{System.String,System.String})">
+            <summary>
+            Insert method that calls a private InsertUtil method by passing in value and root.
+            </summary>
+            <param name="val">Tuple of strings containing first and last name.</param>
+        </member>
+        <member name="M:a4.BST.Get(System.String)">
+            <summary>
+            Search method that calls GetUtil private method by passing in root and search string.
+            </summary>
+            <param name="last"></param>
+            <returns></returns>
+        </member>
+        <member name="M:a4.BST.Traverse">
+            <summary>
+            Method that calls private traversal methods with header outputs inbetween.
+            </summary>
+        </member>
+        <member name="M:a4.BST.ReturnRoot">
+            <summary>
+            Helper method used to return root of tree. This is used in the Controller class when calling methods that require the root to be passed in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:a4.BST.InsertUtil(a4.Node,System.Tuple{System.String,System.String})">
+            <summary>
+            Insert utility private method that carries out a binary search through the BST.
+            </summary>
+            <param name="h">Node passed in as root then recursively updated.</param>
+            <param name="val">Tuple of strings containing first and last name.</param>
+            <returns>Node return to Insert public method.</returns>
+        </member>
+        <member name="M:a4.BST.GetUtil(a4.Node,System.String)">
+            <summary>
+            Private search method called by public Get method.
+            </summary>
+            <param name="h">Node passed in as root then recursively updated.</param>
+            <param name="last">Last name to search.</param>
+            <returns>Returns search result node.</returns>
+        </member>
+        <member name="M:a4.BST.PreOrder(a4.Node)">
+            <summary>
+            Preorder traversal method called by Traversal public method.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.BST.InOrder(a4.Node)">
+            <summary>
+            Same as Preorder traversal method but using an InOrder traversal.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="M:a4.BST.PostOrder(a4.Node)">
+            <summary>
+            Same as Preorder and Inorder traversal but using a PostOrder traversal.
+            </summary>
+            <param name="h">Node passed in as root then updated recursively.</param>
+        </member>
+        <member name="T:a4.RedBlackBST">
+            <summary>
+            Ignore this class. I used this as a test of a red black 2-3 tree.
+            Leaving this in the program as it works with this program so I'd rather not create an
+            entire new solution to save this.
+            </summary>
+        </member>
+    </members>
+</doc>

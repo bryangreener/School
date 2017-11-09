@@ -23,7 +23,7 @@ namespace a4
         {
 			UI ui = new UI();
 			Tests tests = new Tests();
-			File.Delete("./BENCHMARK.txt");
+			File.Delete("./BENCHMARK.txt");	// Delete benchmark file if it exists.
 
 			// Temp save namelist.txt into string.
 			string text = File.ReadAllText("namelist.txt");
@@ -45,14 +45,17 @@ namespace a4
 				// NOTE: LAST,FIRST order so input item1 is LAST NAME
 				// Get search tuple from UI.
 				Tuple<string, string> search = ui.Main();
-
+				
+				// If option 3 is selected...
 				if (search != null && search.Item1 == "run" && search.Item2 == "tests")
 				{
-					Console.WriteLine("Running benchmark tests. This may take a while...");
+					// Run through tests class which calls all other classes in program to perform operations on trees.
+					Console.WriteLine("Running benchmark tests. This will take a while...");
 					tests.Main();
-					Console.WriteLine("Saved results to bin/debug/BENCHMARK.txt");
+					Console.WriteLine("Saved benchmamrk results to bin/debug/BENCHMARK.txt");
 					Console.WriteLine();
 					Console.WriteLine("Press any key to continue...");
+					// Wait for user input then loop back through program.
 					while (Console.ReadKey() == null) { Console.ReadKey(); }
 				}
 				else
@@ -66,43 +69,53 @@ namespace a4
 		
     }
 
+	/// <summary>
+	/// Class used to control multiple loops of program using different size trees.
+	/// Entirely used as a benchmark or test of the algorithms for analysis report.
+	/// </summary>
 	class Tests
 	{
+		/// <summary>
+		/// Main method in tests class.
+		/// Creates new instance of controller for each size of test string.
+		/// </summary>
 		public void Main()
 		{
-			UI ui = new UI();
-			
+			// Different tree sizes saved in array
 			int[] testCounts = new int[] { 1, 10, 100, 1000, 10000, 100000, 250000, 500000, 1000000 };
-			foreach(int i in testCounts)
+			foreach(int i in testCounts)	// For each tree size
 			{
-				string[][] testStrings = Main(i, i.ToString());
-				Controller c = new Controller(testStrings, Tuple.Create("run", "tests"));
+				string[][] testStrings = Main(i, i.ToString());	// Create new string with random values
+				Controller c = new Controller(testStrings, Tuple.Create("run", "tests"));	// Pass into controller class
 			}
 		}
 
 		public string[][] Main(int size, string filename)
 		{
+			// Create new file stream for saving random name lists.
 			FileStream ostrm;
 			StreamWriter writer;
 
-			string ascii = "abcdefghijklmnopqrstuvwxyz";
-			string[][] randomWords = new string[size][];
-			Random rnd = new Random();
+			string ascii = "abcdefghijklmnopqrstuvwxyz";    // Ascii string used to generate random strings.
+			string[][] randomWords = new string[size][];	// Create new jagged array of specified size.
+			Random rnd = new Random();						// New random to be used to generate random string.	
 			for (int i = 0; i < size; i++)
 			{
-				string tempWord = "";
-				for (int j = 0; j < 100; j++)
+				string tempWord = "";	// Create string to be randomly generated.
+				for (int j = 0; j < 100; j++)	// String length will be 100 chars long.
 				{
-					tempWord += ascii[rnd.Next(0, 26)];
+					tempWord += ascii[rnd.Next(0, 26)];	// Randomly generate character and append to tempWord string.
 				}
-				randomWords[i] = new string[] { tempWord, tempWord };
+				randomWords[i] = new string[] { tempWord, tempWord };	// Save tempword in jagged array. Duplicate for first and last name.
 			}
 
+			// Set up file stream to output string array to text file.
 			TextWriter oldOut = Console.Out;
 			ostrm = new FileStream($"./{filename}.txt", FileMode.Create, FileAccess.Write);
 			writer = new StreamWriter(ostrm);
 			Console.SetOut(writer);
 
+			// Output names to text file.
 			foreach (var v in randomWords)
 			{
 				Console.WriteLine($"{v[0]}\t{v[0]}");
@@ -112,6 +125,7 @@ namespace a4
 			writer.Close();
 			ostrm.Close();
 
+			// Return string array.
 			return randomWords;
 		}
 	}
@@ -366,7 +380,8 @@ namespace a4
 		/// <summary>
 		/// This method calls each tree method and handles filestream output and passes input array to each tree method.
 		/// </summary>
-		/// <param name="input"></param>
+		/// <param name="input">Jagged array containing all names.</param>
+		/// <param name="search">Tuple of strings containing first and last name to search.</param>
 		public Controller(string[][] input, Tuple<string,string> search)
 		{
 			// File items used to output to a text file and control console output.
@@ -434,15 +449,19 @@ namespace a4
 				ostrm.Close();
 			}
 			else if (search != null && search.Item1 == "run" && search.Item2 == "tests")
-			{
+			{	// If running tests (option 3)
+				// Change console output and create file names Benchmark.txt.
 				TextWriter oldOut = Console.Out;
 				ostrm = new FileStream($"./BENCHMARK.txt", FileMode.Append, FileAccess.Write);
 				writer = new StreamWriter(ostrm);
 				Console.SetOut(writer);
 
+				// Print saved build times using method in ui class
 				ui.PrintBuildTimes(input.Length, minHeapBuildTime, maxHeapBuildTime, bstBuildTime);
+				// Search for random names to get an average.
 				SearchName(minHeap, maxHeap, bst, search);
 
+				// Set output back to console.
 				Console.SetOut(oldOut);
 				writer.Close();
 				ostrm.Close();
@@ -451,6 +470,8 @@ namespace a4
 			{
 				SearchName(minHeap, maxHeap, bst, search);
 			}
+
+			// Search each tree back to null just to prevent issues with it not being overwritten.
 			minHeap = null;
 			maxHeap = null;
 			bst = null;
@@ -556,7 +577,7 @@ namespace a4
 		/// Prints BST in formatted style.
 		/// This method is identical to the MinHeapPrint method except it only calls a single search type.
 		/// </summary>
-		/// <param name="heap">This is the heap that was returned from initializing the BST.</param>
+		/// <param name="bst">This is the bst that was returned from initializing the BST.</param>
 		/// <returns>BST sent back to Controller method.</returns>
 		private BST BSTPrint(BST bst)
 		{
@@ -586,9 +607,11 @@ namespace a4
 			double minDFS = 0, minBFS = 0, maxDFS = 0, maxBFS = 0, bts = 0;
 			Tuple<int, int> minPos = null, maxPos = null, bstPos = null;
 
+			// If running tests...
 			if (name.Item1 == "run" && name.Item2 == "tests")
 			{
-				for (int i = 0; i < 1000; i++)
+				int loops = 100;    // Can set to 1000 but runs extremely slow.
+				for (int i = 0; i < loops; i++)	
 				{
 					int randomIndex = rnd.Next(0, Input.Length);
 					// Each of these blocks are nearly identical. They simply call different methods.
@@ -596,7 +619,7 @@ namespace a4
 					sw.Start();                             // Start stopwatch
 					minPos = min.DFS(name.Item2);           // Find last name in MinHeap using DFS.
 					sw.Stop();                              // Stop stopwatch
-					minDFS += sw.Elapsed.TotalMilliseconds;  // Save total milliseconds during search.
+					minDFS += sw.Elapsed.TotalMilliseconds; // Accumulate minDFS total.
 					sw.Reset();                             // Reset stopwatch
 
 					// MinHeap BFS (last name)
@@ -631,10 +654,10 @@ namespace a4
 				//decimal frequency = Stopwatch.Frequency;
 				//decimal nsPerTick = (1000 * 1000 * 1000) / frequency;
 
-				// Call ui method that prints table with passed in search results.
-				ui.PrintRndSearch(name, minPos, maxPos, bstPos, minDFS/1000, minBFS/1000, maxDFS/1000, maxBFS/1000, bts/1000);
+				// Call ui method that prints table with passed in search results, calculating average as well.
+				ui.PrintRndSearch(name, minPos, maxPos, bstPos, minDFS/loops, minBFS/loops, maxDFS/loops, maxBFS/loops, bts/loops);
 			}
-			else
+			else	// Otherwise, search as normal for single key.
 			{
 				// Each of these blocks are nearly identical. They simply call different methods.
 
@@ -1301,7 +1324,7 @@ namespace a4
 		/// <summary>
 		/// Preorder traversal method called by Traversal public method.
 		/// </summary>
-		/// <param name="h">Index passed in as root then updated recursively.</param>
+		/// <param name="pos">Index passed in as root then updated recursively.</param>
 		private void PreOrder(int pos)
 		{
 			if(Heap[pos] == null) { return; }				// If current position is null, exit method.
@@ -1312,7 +1335,7 @@ namespace a4
 		/// <summary>
 		/// Same as Preorder traversal method but uses Inorder traversal instead.
 		/// </summary>
-		/// <param name="h">Index passed in as root then updated recursively.</param>
+		/// <param name="pos">Index passed in as root then updated recursively.</param>
 		private void InOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
@@ -1323,7 +1346,7 @@ namespace a4
 		/// <summary>
 		/// Same as Preorder and Inorder traversal methods but uses PostOrder traversal instead.
 		/// </summary>
-		/// <param name="h">Index passed in as root then updated recursively.</param>
+		/// <param name="pos">Index passed in as root then updated recursively.</param>
 		private void PostOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }

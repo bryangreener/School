@@ -1086,33 +1086,11 @@ namespace a4
 	}
 
 	/// <summary>
-	/// Class object used to create array of people. Used only by MaxHeap class.
-	/// </summary>
-	class Person
-	{
-		/// <summary>
-		/// Default constructor taking 0 parameters. Used to create null person.
-		/// </summary>
-		public Person() { }
-		/// <summary>
-		/// Constructor used to create new person with a first and last name.
-		/// </summary>
-		/// <param name="value">Tuple of strings containing first and last name.</param>
-		public Person(Tuple<string,string> value)
-		{
-			Value = value;	// Set passed in value to Value property.
-		}
-		public int X { get; set; }						// X property used to store X position of node in a row.
-		public int Y { get; set; }						// Y property used to store Y height of node in tree.
-		public Tuple<string,string> Value { get; set; }	// Value property used to store first and last names of Person object in form of a tuple of strings.
-	}
-
-	/// <summary>
 	/// Class containing methods containing all operations of a max heap using an array implementation.
 	/// </summary>
 	class MaxHeap
 	{
-		private Person[] Heap { get; set; } // Global property of array of People objects. Used throughout this class.
+		private Node[] Heap { get; set; } // Global property of array of People objects. Used throughout this class.
 		private int size, n = 0;			// Integers used to keep track of size of array and current node pointer.
 
 		#region Public Methods
@@ -1125,11 +1103,11 @@ namespace a4
 		public MaxHeap(string[][] items, int max)
 		{
 			size = max;					// Sets global size integer to passed in max integer.
-			Heap = new Person[size];    // Create new array of Person of size size and save as Heap.
+			Heap = new Node[size];    // Create new array of Node of size size and save as Heap.
 			for (int i = 0; i < items.Length; i++)  // For each item in the items array...
 			{
-				// At position i in Heap, create new person with first and last names from items array.
-				Heap[i] = new Person(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
+				// At position i in Heap, create new node with first and last names from items array.
+				Heap[i] = new Node(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
 			}
 			BuildHeap();	// Call buildheap private method to build the maxheap.
 		}
@@ -1160,7 +1138,7 @@ namespace a4
 		/// Deletes root of array then sifts down to maintain max heap.
 		/// </summary>
 		/// <returns>Return value removed.</returns>
-		public Person DeleteMax()
+		public Node DeleteMax()
 		{
 			if (n == 0) { return null; }
 			Swap(0, --n);
@@ -1173,7 +1151,7 @@ namespace a4
 		/// </summary>
 		/// <param name="pos">Position of item in array to delete.</param>
 		/// <returns>Return value removed.</returns>
-		public Person Delete(int pos)
+		public Node Delete(int pos)
 		{
 			if((pos < 0) || (pos >= n)) { return null; }	// If outside the bounds of the array, return null.
 			if(pos == (n - 1)) { n--; }						// If at last position in array, delete.
@@ -1217,7 +1195,7 @@ namespace a4
 		/// <returns>Returns X,Y position of item in "tree".</returns>
 		public Tuple<int,int> DFS(string first)
 		{
-			Person h = DFSUtil(0, first);					// Create new Person containing result of DFSUtil when passing in root and search string.
+			Node h = DFSUtil(0, first);					// Create new Node containing result of DFSUtil when passing in root and search string.
 			if (h == null) { return Tuple.Create(-1, -1); }	// If null node returned, return tuple with position -1,-1 indicating search miss.
 			else { return Tuple.Create(h.X, h.Y); }			// Otherwise, return the returned search results by creating tuple of X,Y values.
 		}
@@ -1305,17 +1283,17 @@ namespace a4
 		/// </summary>
 		/// <param name="h">Int passed in as root then updated recursively.</param>
 		/// <param name="first">First name to search.</param>
-		/// <returns>Person object returned to call.</returns>
-		private Person DFSUtil(int h, string first)
+		/// <returns>Node object returned to call.</returns>
+		private Node DFSUtil(int h, string first)
 		{
 			if (Heap[h] != null)												// If heap isn't empty...
 			{
-				if (Heap[h].Value.Item1 == first) { return Heap[h]; }			// If search hit, return current Person.
+				if (Heap[h].Value.Item1 == first) { return Heap[h]; }			// If search hit, return current Node.
 				else															// Otherwise...
 				{
-					Person ret = DFSUtil(LeftChild(h), first);					// Create temp Person and set to result from recursive search of left child.
-					if (ret == null) { ret = DFSUtil(RightChild(h), first); }	// If temp Person is null, set temp Person to result from recursive search of right child.
-					return ret;													// Return the temp Person.
+					Node ret = DFSUtil(LeftChild(h), first);					// Create temp Node and set to result from recursive search of left child.
+					if (ret == null) { ret = DFSUtil(RightChild(h), first); }	// If temp Node is null, set temp Node to result from recursive search of right child.
+					return ret;													// Return the temp Node.
 				}
 			}
 			else { return null; }												// Otherwise, if heap is empty, return null.
@@ -1362,9 +1340,9 @@ namespace a4
 		/// <param name="p2">Position to swap with.</param>
 		private void Swap(int p1, int p2) // Swap current and parent of current
 		{
-			Person temp = Heap[p1];	// Create temp Person containing current position's values.
+			Node temp = Heap[p1];	// Create temp Node containing current position's values.
 			Heap[p1] = Heap[p2];	// Set current position value to position 2's value.
-			Heap[p2] = temp;		// Set position 2's value to temp Person value.
+			Heap[p2] = temp;		// Set position 2's value to temp Node value.
 		}
 
 		/// <summary>

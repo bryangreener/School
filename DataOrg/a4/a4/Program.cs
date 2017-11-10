@@ -1090,8 +1090,8 @@ namespace a4
 	/// </summary>
 	class MaxHeap
 	{
-		private Node[] Heap { get; set; } // Global property of array of People objects. Used throughout this class.
-		private int size, n = 0;			// Integers used to keep track of size of array and current node pointer.
+		private Node[] Heap { get; set; }   // Global property of array of People objects. Used throughout this class.
+		private int size, last = 0, n = 0;	// Integers used to keep track of size of array and current node pointer.
 
 		#region Public Methods
 		/// <summary>
@@ -1102,71 +1102,31 @@ namespace a4
 		/// <param name="max">Max size of array allowed given number of items in the items array.</param>
 		public MaxHeap(string[][] items, int max)
 		{
-			size = max;					// Sets global size integer to passed in max integer.
-			Heap = new Node[size];    // Create new array of Node of size size and save as Heap.
+			size = max;							// Sets global size integer to passed in max integer.
+			Heap = new Node[size];					// Create new array of Node of size size and save as Heap.
 			for (int i = 0; i < items.Length; i++)  // For each item in the items array...
 			{
 				// At position i in Heap, create new node with first and last names from items array.
-				Heap[i] = new Node(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
+				Insert(Tuple.Create(items[i][1].ToLower(), items[i][0].ToLower()));
 			}
-			BuildHeap();	// Call buildheap private method to build the maxheap.
 		}
 
 		/// <summary>
 		/// Insert method that inserts an item into the array then maintains the max heap.
 		/// </summary>
 		/// <param name="val">Tuple of strings containing first and last names.</param>
-		public void Insert(Tuple<string,string> val)
+		private void Insert(Tuple<string,string> val)
 		{
-			if (n >= size)	// If at or past end of array...
-			{
-				Console.WriteLine("Heap is full");	// Print error.
-				return;								// Exit method.
-			}
-			int curr = n++;			//Set current to next position in array.
-			Heap[curr].Value = val; // Start at end of heap
+			Heap[last] = new Node(val);             // New node at current position
+			int temp = last;
+			last++;                                 // Set current to next position in array.
 
 			// While maxheap isn't maintained...
-			while ((curr != 0) && (Heap[curr].Value.Item1.CompareTo(Heap[Parent(curr)].Value.Item1) > 0))
+			while ((Parent(temp) >= 0) && (Heap[temp].Value.Item1.CompareTo(Heap[Parent(temp)].Value.Item1) > 0))
 			{
-				Swap(curr, Parent(curr));	// Swap current with parent of current.
-				curr = Parent(curr);		// Set current to parent.
+				Swap(temp, Parent(temp));   // Swap current with parent of current.
+				temp = Parent(temp);		// Set current to parent.
 			}
-		}
-		
-		/// <summary>
-		/// Deletes root of array then sifts down to maintain max heap.
-		/// </summary>
-		/// <returns>Return value removed.</returns>
-		public Node DeleteMax()
-		{
-			if (n == 0) { return null; }
-			Swap(0, --n);
-			if(n != 0) { SiftDown(0); }
-			return Heap[n];
-		}
-
-		/// <summary>
-		/// Deletes at specified position then sifts down to maintain heap.
-		/// </summary>
-		/// <param name="pos">Position of item in array to delete.</param>
-		/// <returns>Return value removed.</returns>
-		public Node Delete(int pos)
-		{
-			if((pos < 0) || (pos >= n)) { return null; }	// If outside the bounds of the array, return null.
-			if(pos == (n - 1)) { n--; }						// If at last position in array, delete.
-			else
-			{
-				Swap(pos, --n);	// Swap current and one position up.
-				// While maxheap not maintained...
-				while((pos > 0) && (Heap[pos].Value.Item1.CompareTo(Heap[Parent(pos)].Value.Item1) > 0))
-				{
-					Swap(pos, Parent(pos));	// Swap current and parent.
-					pos = Parent(pos);		// Set current to parent of current.
-				}
-				if(n != 0) { SiftDown(pos); }	// If not at root, siftdown.
-			}
-			return Heap[n];	// Return deleted value.
 		}
 
 		public void AssignXY(int h, int x, int y)
@@ -1217,15 +1177,6 @@ namespace a4
 		#endregion
 
 		#region Private Methods
-		/// <summary>
-		/// Private method that sifts down maxheap.
-		/// </summary>
-		private void BuildHeap()
-		{
-			// For each item in heap starting at end and moving up, siftdown.
-			for (int i = (n / 2) - 1; i >= 0; i--) { SiftDown(i); }
-		}
-
 		/// <summary>
 		/// Method used to sift individual nodes down tree.
 		/// </summary>
@@ -1352,7 +1303,7 @@ namespace a4
 		/// <returns>True if pos is leaf. Otherwise false.</returns>
 		private bool IsLeaf(int pos)
 		{
-			return (pos >= n / 2) && (pos < n);
+			return (Heap[LeftChild(pos)] == null) && (Heap[RightChild(pos)] == null);
 		}
 
 		/// <summary>

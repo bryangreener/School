@@ -1,33 +1,30 @@
-var images = document.querySelectorAll(".artThumb");
-var imgLoc = new Array();
-for(var i = 0; i < images.length; i + 1)
+document.addEventListener("DOMContentLoaded", function(event)
 {
-    imgLoc[i] = images.src.substr(18);
-}
-
-    $(document).ready(function ()
-    {
-        $('span').on('mouseenter', function () {
-            $('#test').show();
-            $(this).css({
-                "text-decoration": "underline"
-            });
-        }).on('mouseleave', function() {
-            $('#test').hide();
-            $(this).css({
-                "text-decoration": ''
-            });
+    var span = document.createElement("span");
+    var img = document.createElement("img");
+    var container;
+    var elements = document.querySelectorAll(".artThumb");
+    NodeList.prototype.addEventListener = function(event, func){
+        this.forEach(function(content, item){
+            content.addEventListener(event, func);
         });
-    });
-    /*for(var j = 0; j < imgLoc.length; j + 1)
-    {
-        if(x.substr(18) == imgLoc[j])
-        {
-            img.src = "images/art/" + imgLoc[j];
-            break;
-        }
     }
-    img.className = "bigImg";
     
-    s.appendChild(img);
-    document.body.appendChild(s);*/
+
+    elements.addEventListener("mouseover", function(event){
+        var src = event.currentTarget.getAttribute('src');
+        img.setAttribute("src", src);
+        img.setAttribute("class", "bigImg");
+        img.setAttribute("width", "10%");
+        img.setAttribute("height", "15%");
+        span.appendChild(img);
+        span.setAttribute("id", "imgspan");
+        container = event.currentTarget.parentNode.appendChild(span);
+    });
+    elements.addEventListener("mouseout", function(event){
+        var node = document.getElementById("imgspan");
+        if (node.parentNode) {
+          node.parentNode.removeChild(node);
+        }
+    })
+});

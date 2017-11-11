@@ -1,0 +1,126 @@
+_____________________________________________
+TREE BUILD TIMES FOR 1 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 0.0053         0.0048         0.0051
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  0.0002         0.0003         n/a
+DFS (ms)  0.0002         0.0002         n/a
+BTS (ms)  n/a            n/a            0.0004
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 10 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 0.0366         0.0125         0.014
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  0.0007         0.0011         n/a
+DFS (ms)  0.0006         0.0008         n/a
+BTS (ms)  n/a            n/a            0.0005
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 100 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 0.269          0.1425         0.1784
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  0.0059         0.009          n/a
+DFS (ms)  0.0057         0.0076         n/a
+BTS (ms)  n/a            n/a            0.0019
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 1000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 2.2768         1.0751         1.8383
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  0.0522         0.076          n/a
+DFS (ms)  0.063          0.0762         n/a
+BTS (ms)  n/a            n/a            0.0016
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 10000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 26.2456        20.0424        27.8207
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  1.023          1.004          n/a
+DFS (ms)  0.9147         0.9427         n/a
+BTS (ms)  n/a            n/a            0.006
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 100000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 457.212        241.6456       662.4412
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  24.4079        18.7722        n/a
+DFS (ms)  19.1038        14.7027        n/a
+BTS (ms)  n/a            n/a            0.0128
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 250000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 1456.4328      571.6772       2098.8517
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  67.8591        50.1426        n/a
+DFS (ms)  51.0688        38.3918        n/a
+BTS (ms)  n/a            n/a            0.0151
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 500000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 2605.3069      1273.0286      4315.276
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  123.3613       99.3561        n/a
+DFS (ms)  99.3469        70.6055        n/a
+BTS (ms)  n/a            n/a            0.0146
+_____________________________________________
+_____________________________________________
+TREE BUILD TIMES FOR 1000000 ITEMS
+
+          MINHEAP        MAXHEAP        BST
+TIME (ms) 5221.4551      2628.2486      9357.229
+_____________________________________________
+_____________________________________________
+AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES
+
+          MINHEAP        MAXHEAP        BST
+BFS (ms)  267.0277       202.0553       n/a
+DFS (ms)  214.9535       143.1357       n/a
+BTS (ms)  n/a            n/a            0.0148
+_____________________________________________

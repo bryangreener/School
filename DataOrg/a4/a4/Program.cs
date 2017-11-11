@@ -83,7 +83,7 @@ namespace a4
 		{
 			// Different tree sizes saved in array
 			int[] testCounts = new int[] { 1, 10, 100, 1000, 10000, 100000, 250000, 500000, 1000000 };
-			foreach(int i in testCounts)	// For each tree size
+			foreach (int i in testCounts)	// For each tree size
 			{
 				string[][] testStrings = Main(i, i.ToString());	// Create new string with random values
 				Controller c = new Controller(testStrings, Tuple.Create("run", "tests"));	// Pass into controller class
@@ -180,9 +180,9 @@ namespace a4
 		{
 			HR();
 			Console.WriteLine("ENTER FIRST NAME");
-			string first = Regex.Escape(Console.ReadLine());
+			string first = Console.ReadLine();
 			Console.WriteLine("ENTER LAST NAME");
-			string last = Regex.Escape(Console.ReadLine());
+			string last = Console.ReadLine();
 			// Return the result of validating the first and last names.
 			return ValidateSearch(first, last);
 		}
@@ -228,8 +228,8 @@ namespace a4
 				SearchMenu();
 			}
 			// Remove all leading and trailing whitespace from first and last names then convert them to lowercase characters.
-			first = first.Trim().ToLower();
-			last = last.Trim().ToLower();
+			first = first.TrimStart().TrimEnd().ToLower();
+			last = last.TrimStart().TrimEnd().ToLower();
 			return Tuple.Create(first, last);   // Return the new valid first and last name.
 		}
 		#endregion
@@ -258,10 +258,10 @@ namespace a4
 		/// <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
 		/// <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
 		/// <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
-		public void PrintRndSearch(Tuple<string, string> name, Tuple<int, int> minPos, Tuple<int, int> maxPos, Tuple<int, int> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
+		public void PrintRndSearch(Tuple<string, string> name, Tuple<int, int, string, string, string> minPos, Tuple<int, int, string, string, string> maxPos, Tuple<int, int, string, string, string> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
 		{
 			HR();
-			Console.WriteLine("AVERAGE SEARCH TIMES FOR UPWARD OF 1,000 RANDOM NAMES"); // Display first and last name being searched
+			Console.WriteLine("AVERAGE SEARCH TIMES FOR UPWARD OF 100 RANDOM NAMES"); // Display first and last name being searched
 			Console.WriteLine();
 			// Header
 			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
@@ -284,18 +284,18 @@ namespace a4
 		/// <param name="maxDFS">Double containing total MaxHeap Depth First Search time in milliseconds.</param>
 		/// <param name="maxBFS">Double containing total MaxHeap Breadth First Search time in milliseconds.</param>
 		/// <param name="bts">Double containing total Binary Search Tree Search time in milliseconds.</param>
-		public void PrintNameSearch(Tuple<string,string> name, Tuple<int,int> minPos, Tuple<int,int> maxPos, Tuple<int,int> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
+		public void PrintNameSearch(Tuple<string,string> name, Tuple<int, int, string, string, string> minPos, Tuple<int, int, string, string, string> maxPos, Tuple<int, int, string, string, string> bstPos, double minDFS, double minBFS, double maxDFS, double maxBFS, double bts)
 		{
 			HR();
 			Console.WriteLine($"SEARCH FOR {name.Item1} {name.Item2}");	// Display first and last name being searched
 			Console.WriteLine();
 			// Header
-			Console.WriteLine("".PadRight(10, ' ') + "MINHEAP".PadRight(15, ' ') + "MAXHEAP".PadRight(15, ' ') + "BST");
+			Console.WriteLine("".PadRight(20, ' ') + "MINHEAP".PadRight(50, ' ') + "MAXHEAP".PadRight(50, ' ') + "BST");
 			// Print out search times and X Y coordinates for search item using string formatting to create a table.
-			Console.WriteLine("  (X, Y)".PadRight(10, ' ') + minPos.ToString().PadRight(15, ' ') + maxPos.ToString().PadRight(15, ' ') + bstPos.ToString().PadRight(15, ' '));
-			Console.WriteLine("BFS (ms)".PadRight(10, ' ') + Math.Round(minBFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxBFS, 4).ToString().PadRight(15, ' ') + "n/a");
-			Console.WriteLine("DFS (ms)".PadRight(10, ' ') + Math.Round(minDFS, 4).ToString().PadRight(15, ' ') + Math.Round(maxDFS, 4).ToString().PadRight(15, ' ') + "n/a");
-			Console.WriteLine("BTS (ms)".PadRight(10, ' ') + "n/a".PadRight(15, ' ') + "n/a".PadRight(15, ' ') + Math.Round(bts, 4).ToString());
+			Console.WriteLine("(Y,X,NAME,P,LC,RC)".PadRight(20, ' ') + minPos.ToString().PadRight(50, ' ') + maxPos.ToString().PadRight(50, ' ') + bstPos.ToString());
+			Console.WriteLine("          BFS (ms)".PadRight(20, ' ') + Math.Round(minBFS, 4).ToString().PadRight(50, ' ') + Math.Round(maxBFS, 4).ToString().PadRight(50, ' ') + "n/a");
+			Console.WriteLine("          DFS (ms)".PadRight(20, ' ') + Math.Round(minDFS, 4).ToString().PadRight(50, ' ') + Math.Round(maxDFS, 4).ToString().PadRight(50, ' ') + "n/a");
+			Console.WriteLine("          BTS (ms)".PadRight(20, ' ') + "n/a".PadRight(50, ' ') + "n/a".PadRight(50, ' ') + Math.Round(bts, 4).ToString());
 			HR();
 		}
 
@@ -305,7 +305,7 @@ namespace a4
 		/// </summary>
 		public void HR()
 		{
-			Console.WriteLine("".PadRight(45, '_'));
+			Console.WriteLine("".PadRight(150, '_'));
 		}
 
 		/// <summary>
@@ -349,8 +349,8 @@ namespace a4
 		/// </summary>
 		public void SR()
 		{
-			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "DFS       BFS");
-			Console.WriteLine("".PadRight(25, ' ') + "(X, Y)    (X, Y)");
+			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "DFS".PadRight(60, ' ') + "BFS");
+			Console.WriteLine("".PadRight(25, ' ') + "(Y, X, NAME, PARENT, LC, RC)".PadRight(60, ' ') + "(Y, X, NAME, PARENT, LC, RC)");
 			HR();
 		}
 
@@ -360,7 +360,7 @@ namespace a4
 		public void SRBST()
 		{
 			Console.WriteLine("SEARCH RESULTS".PadRight(26, ' ') + "BTS");
-			Console.WriteLine("".PadRight(25, ' ') + "(X, Y)");
+			Console.WriteLine("".PadRight(25, ' ') + "(Y, X, NAME, PARENT, LC, RC)");
 			HR();
 		}
 		#endregion
@@ -493,7 +493,7 @@ namespace a4
 			}
 			
 			// Call method in heap that traverses tree and assigns x,y coords to each.
-			heap.AssignXY(heap.ReturnRoot(), 1, 1);
+			heap.AssignXY(heap.ReturnRoot());
 
 			// Return entire heap to controller.
 			return heap;
@@ -513,7 +513,7 @@ namespace a4
 			{
 				// Outputs a formatted string that uses $ to allow us to call searches from within the string.
 				// This isn't offloaded to UI class since it is accessing the heap methods.
-				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{heap.DFS(v[0].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(v[0].ToLower())}");
+				Console.WriteLine($"{v[0].PadRight(25, ' ')}" + $"{heap.DFS(v[0].ToLower())}".PadRight(60, ' ') + $"{heap.BFS(v[0].ToLower())}");
 			}
 
 			ui.HR();
@@ -530,7 +530,7 @@ namespace a4
 			// Create new MaxHeap and send in Input array and max length possible with number of inputs in array.
 			MaxHeap heap = new MaxHeap(Input, Input.Length*2 + 2);
 
-			heap.AssignXY(0, 1, 1);	// Assign XY values to each node.
+			heap.AssignXY(0);	// Assign XY values to each node.
 
 			return heap;			// Returns heap to controller method.
 		}
@@ -546,7 +546,7 @@ namespace a4
 			ui.SR();
 			foreach (var v in Input)
 			{
-				Console.WriteLine($"{v[1].PadRight(25, ' ')}" + $"{heap.DFS(v[1].ToLower())}".PadRight(10, ' ') + $"{heap.BFS(v[1].ToLower())}");
+				Console.WriteLine($"{v[1].PadRight(25, ' ')}" + $"{heap.DFS(v[1].ToLower())}".PadRight(60, ' ') + $"{heap.BFS(v[1].ToLower())}");
 			}
 
 			ui.HR();
@@ -568,7 +568,7 @@ namespace a4
 				bst.Insert(Tuple.Create(v[1].ToLower(), v[0].ToLower()));
 			}
 			// Print results
-			bst.AssignXY(bst.ReturnRoot(), 1, 1);
+			bst.AssignXY(bst.ReturnRoot());
 
 			return bst;
 		}
@@ -605,7 +605,7 @@ namespace a4
 			Random rnd = new Random();
 			Stopwatch sw = new Stopwatch();
 			double minDFS = 0, minBFS = 0, maxDFS = 0, maxBFS = 0, bts = 0;
-			Tuple<int, int> minPos = null, maxPos = null, bstPos = null;
+			Tuple<int, int, string, string, string> minPos = null, maxPos = null, bstPos = null;
 
 			// If running tests...
 			if (name.Item1 == "run" && name.Item2 == "tests")
@@ -803,11 +803,19 @@ namespace a4
 		/// </summary>
 		/// <param name="last">Last name to search.</param>
 		/// <returns>Tuple of ints returned to Controller class. Contains X,Y coordinate of search result. (-1,-1) if search miss.</returns>
-		public Tuple<int, int> DFS(string last)
+		public Tuple<int, int, string, string, string> DFS(string last)
 		{
-			Node h = DFSUtil(root, last);	// Pass root and last name into DFSUtil. Save as a new temp node.
-			if (h == null) { return Tuple.Create(-1, -1); }	// If search returns a null node, return new tuple with -1,-1 to indicate search miss.
-			else { return Tuple.Create(h.X, h.Y); }			// Else, return the returned search hit X and Y positions as a new tuple.
+			Node h = DFSUtil(root, last);   // Pass root and last name into DFSUtil. Save as a new temp node.
+			string left, right;
+			if (h == null) { return Tuple.Create(-1, -1, "null", "null", "null"); }    // If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else
+			{
+				if (h.Left == null) { left = "null"; }
+				else { left = h.Left.Value.Item2; }
+				if (h.Right == null) { right = "null"; }
+				else { right = h.Right.Value.Item2; }
+				return Tuple.Create(h.Y, h.X, h.Value.Item2, left, right);
+			}
 		}
 
 		/// <summary>
@@ -816,19 +824,52 @@ namespace a4
 		/// </summary>
 		/// <param name="last">Last name to search.</param>
 		/// <returns>Tuple of ints returned to Controller class. Contains X,Y coordinates of search result. (-1,-1) if search miss.</returns>
-		public Tuple<int, int> BFS(string last)
+		public Tuple<int, int, string, string, string> BFS(string last)
 		{
-			return BFSUtil(root, last);	// Pass root and last name into BFSUtil and return the tuple<int,int> (coordinate) result.
+			Node h = BFSUtil(root, last);   // Pass root and last name into BFSUtil and return the tuple<int,int> (coordinate) result.
+			string left, right;
+			if (h == null) { return Tuple.Create(-1, -1, "null", "null", "null"); }    // If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else
+			{
+				if (h.Left == null) { left = "null"; }
+				else { left = h.Left.Value.Item2; }
+				if (h.Right == null) { right = "null"; }
+				else { right = h.Right.Value.Item2; }
+				return Tuple.Create(h.Y, h.X, h.Value.Item2, left, right);
+			}
 		}
 
-		// TRY TO IMPLEMENT THIS FUNCTIONALITY IN INSERT METHOD
-		public void AssignXY(Node h, int x, int y)
+		public void AssignXY(Node h)
 		{
+			Queue<Node> q = new Queue<Node>();
+			int x = 0, y = 0;
 			if (h == null) { return; }
-			h.X = x;
-			h.Y = y;
-			AssignXY(h.Left, 2 * x - 1, y + 1);
-			AssignXY(h.Right, 2 * x, y + 1);
+			h.Y = 0;
+			q.Enqueue(h);
+			while (q.Count() != 0)
+			{
+				h = q.Dequeue();
+				if(h.Y != y)
+				{
+					y++;
+					h.X = x = 1;
+				}
+				else
+				{
+					h.X = ++x;
+				}
+				if (h.Left != null)
+				{
+					h.Left.Y = h.Y + 1;
+					q.Enqueue(h.Left);
+				}
+				if (h.Right != null)
+				{
+					h.Right.Y = h.Y + 1;
+					q.Enqueue(h.Right);
+				}
+
+			}
 		}
 
 		/// <summary>
@@ -877,7 +918,7 @@ namespace a4
 		/// <returns></returns>
 		private Node InsertUtil(Node h, Tuple<string,string> val)
 		{
-			Node newNode = new Node();					// Create new node to help swap nodes around without overwriting one.
+			Node newNode = new Node();
 			if(h == null) { return new Node(val, 1); }	// If current node position doesnt exist, create new node with value and subtree size of 1.
 			if(h.Left == null || h.Right == null)		// If either left or right child is null...
 			{
@@ -944,19 +985,17 @@ namespace a4
 		/// <param name="h">Node initially passed in as root then updated recursively.</param>
 		/// <param name="last">Last name to search.</param>
 		/// <returns>Tuple of ints referencing node.X and node.Y values (position).</returns>
-		private Tuple<int, int> BFSUtil(Node h, string last)
+		private Node BFSUtil(Node h, string last)
 		{
 			Queue<Node> q = new Queue<Node>();				// Create new built-int C# queue.
-			int x = 0, y = 0;								// X,Y values initialized.
-			if (h == null) { return Tuple.Create(-1, -1); }	// If tree is empty, return new tuple containing -1,-1 indicating search miss.
+			if (h == null) { return null; }	// If tree is empty, return new tuple containing -1,-1 indicating search miss.
 			q.Enqueue(h);									// Enqueue current node.
 			while (q.Count() != 0)							// While the queue isn't empty...
 			{
 				h = q.Dequeue();							// Save Node h as dequeued node.
 				if (h.Value.Item2 == last)					// If search hit...
 				{
-					x = h.X;								// Set x to node's X value
-					y = h.Y;								// Set y to node's Y value
+					return h;
 				}
 				else										// If search miss...
 				{
@@ -970,7 +1009,7 @@ namespace a4
 					}
 				}
 			}
-			return Tuple.Create(x, y);						// Reached after search hit. Returns tuple of ints containing x,y coordinates.
+			return null;						// Reached after search hit. Returns tuple of ints containing x,y coordinates.
 		}
 
 		/// <summary>
@@ -1129,13 +1168,37 @@ namespace a4
 			}
 		}
 
-		public void AssignXY(int h, int x, int y)
+		public void AssignXY(int h)
 		{
+			Queue<int> q = new Queue<int>();
+			int x = 0, y = 0;
 			if (Heap[h] == null) { return; }
-			Heap[h].X = x;
-			Heap[h].Y = y;
-			AssignXY(LeftChild(h), 2 * x - 1, y + 1);
-			AssignXY(RightChild(h), 2 * x, y + 1);
+			Heap[h].Y = 0;
+			q.Enqueue(h);
+			while (q.Count() != 0)
+			{
+				h = q.Dequeue();
+				if (Heap[h].Y != y)
+				{
+					y++;
+					Heap[h].X = x = 1;
+				}
+				else
+				{
+					Heap[h].X = ++x;
+				}
+				if (Heap[LeftChild(h)] != null)
+				{
+					Heap[LeftChild(h)].Y = Heap[h].Y + 1;
+					q.Enqueue(LeftChild(h));
+				}
+				if (Heap[RightChild(h)] != null)
+				{
+					Heap[RightChild(h)].Y = Heap[h].Y + 1;
+					q.Enqueue(RightChild(h));
+				}
+
+			}
 		}
 
 		/// <summary>
@@ -1143,9 +1206,19 @@ namespace a4
 		/// </summary>
 		/// <param name="first">First name to search.</param>
 		/// <returns>Returns X,Y position of item in "tree".</returns>
-		public Tuple<int,int> BFS(string first)
+		public Tuple<int,int, string, string, string> BFS(string first)
 		{
-			return BFSUtil(0, first);	// Return result of BFSUtil when passing in root and search string.
+			int h = BFSUtil(0, first); // Return result of BFSUtil when passing in root and search string.
+			string left, right;
+			if (h == -1) { return Tuple.Create(-1, -1, "null", "null", "null"); }    // If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else
+			{
+				if (Heap[LeftChild(h)] == null) { left = "null"; }
+				else { left = Heap[LeftChild(h)].Value.Item2; }
+				if (Heap[RightChild(h)] == null) { right = "null"; }
+				else { right = Heap[RightChild(h)].Value.Item2; }
+				return Tuple.Create(Heap[h].Y, Heap[h].X, Heap[h].Value.Item1, left, right);
+			}
 		}
 
 		/// <summary>
@@ -1153,11 +1226,19 @@ namespace a4
 		/// </summary>
 		/// <param name="first">First name to search.</param>
 		/// <returns>Returns X,Y position of item in "tree".</returns>
-		public Tuple<int,int> DFS(string first)
+		public Tuple<int,int, string, string, string> DFS(string first)
 		{
-			Node h = DFSUtil(0, first);					// Create new Node containing result of DFSUtil when passing in root and search string.
-			if (h == null) { return Tuple.Create(-1, -1); }	// If null node returned, return tuple with position -1,-1 indicating search miss.
-			else { return Tuple.Create(h.X, h.Y); }			// Otherwise, return the returned search results by creating tuple of X,Y values.
+			int h = DFSUtil(0, first);                 // Create new Node containing result of DFSUtil when passing in root and search string.
+			string left, right;
+			if (h == -1) { return Tuple.Create(-1, -1, "null", "null", "null"); }    // If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else
+			{
+				if (Heap[LeftChild(h)] == null) { left = "null"; }
+				else { left = Heap[LeftChild(h)].Value.Item2; }
+				if (Heap[RightChild(h)] == null) { right = "null"; }
+				else { right = Heap[RightChild(h)].Value.Item2; }
+				return Tuple.Create(Heap[h].Y, Heap[h].X, Heap[h].Value.Item1, left, right);
+			}
 		}
 
 		/// <summary>
@@ -1200,19 +1281,17 @@ namespace a4
 		/// <param name="h">Int passed in as root then updated recursively.</param>
 		/// <param name="first">First name to search.</param>
 		/// <returns>Tuple of ints containing X,Y coordinates of search result.</returns>
-		private Tuple<int, int> BFSUtil(int h, string first)
+		private int BFSUtil(int h, string first)
 		{
 			Queue<int> q = new Queue<int>();						// Create new queue to be used in this method. 
-			int x = 0, y = 0;										// Counters for X,Y positions.
-			if (Heap[h] == null) { return Tuple.Create(-1, -1); }	// If empty tree, return tuple with -1,-1 indicating search miss.
+			if (Heap[h] == null) { return -1; }	// If empty tree, return tuple with -1,-1 indicating search miss.
 			q.Enqueue(h);											// Enqueue current position.
 			while (q.Count() != 0)									// While queue isn't empty...
 			{	
 				h = q.Dequeue();									// Set h to dequeued value.
 				if (Heap[h].Value.Item1 == first)					// If search hit...
-				{	
-					x = Heap[h].X;									// Set x to current position's X property.
-					y = Heap[h].Y;									// Set y to current position's Y property.
+				{
+					return h;									// Set y to current position's Y property.
 				}
 				else												// Otherwise if search miss...
 				{
@@ -1226,7 +1305,7 @@ namespace a4
 					}
 				}
 			}
-			return Tuple.Create(x, y);								// Return a tuple containing x y values from search result.
+			return -1;								// Return a tuple containing x y values from search result.
 		}
 
 		/// <summary>
@@ -1235,19 +1314,19 @@ namespace a4
 		/// <param name="h">Int passed in as root then updated recursively.</param>
 		/// <param name="first">First name to search.</param>
 		/// <returns>Node object returned to call.</returns>
-		private Node DFSUtil(int h, string first)
+		private int DFSUtil(int h, string first)
 		{
 			if (Heap[h] != null)												// If heap isn't empty...
 			{
-				if (Heap[h].Value.Item1 == first) { return Heap[h]; }			// If search hit, return current Node.
+				if (Heap[h].Value.Item1 == first) { return h; }			// If search hit, return current Node.
 				else															// Otherwise...
 				{
-					Node ret = DFSUtil(LeftChild(h), first);					// Create temp Node and set to result from recursive search of left child.
-					if (ret == null) { ret = DFSUtil(RightChild(h), first); }	// If temp Node is null, set temp Node to result from recursive search of right child.
+					int ret = DFSUtil(LeftChild(h), first);					// Create temp Node and set to result from recursive search of left child.
+					if (ret == -1) { ret = DFSUtil(RightChild(h), first); }	// If temp Node is null, set temp Node to result from recursive search of right child.
 					return ret;													// Return the temp Node.
 				}
 			}
-			else { return null; }												// Otherwise, if heap is empty, return null.
+			else { return -1; }												// Otherwise, if heap is empty, return null.
 		}
 
 		/// <summary>
@@ -1268,9 +1347,9 @@ namespace a4
 		private void InOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
-			PreOrder(LeftChild(pos));
+			InOrder(LeftChild(pos));
 			Console.WriteLine($"{Heap[pos].Value.Item1}");
-			PreOrder(RightChild(pos));
+			InOrder(RightChild(pos));
 		}
 		/// <summary>
 		/// Same as Preorder and Inorder traversal methods but uses PostOrder traversal instead.
@@ -1279,8 +1358,8 @@ namespace a4
 		private void PostOrder(int pos)
 		{
 			if (Heap[pos] == null) { return; }
-			PreOrder(LeftChild(pos));
-			PreOrder(RightChild(pos));
+			PostOrder(LeftChild(pos));
+			PostOrder(RightChild(pos));
 			Console.WriteLine($"{Heap[pos].Value.Item1}");
 		}
 
@@ -1369,11 +1448,19 @@ namespace a4
 		/// </summary>
 		/// <param name="last"></param>
 		/// <returns></returns>
-		public Tuple<int,int> Get(string last)
+		public Tuple<int,int, string, string, string> Get(string last)
 		{
-			Node pos = GetUtil(root, last);						// Save new node as return from getUtil when passing in current root and search string.
-			if (pos == null) { return Tuple.Create(-1, -1); }	// If pos is null, return a new tuple with -1,-1 indicating search miss.
-			else { return Tuple.Create(pos.X, pos.Y); }			// Otherwise, return a new tuple containing X,Y coordinates of search item.
+			Node h = GetUtil(root, last);                     // Save new node as return from getUtil when passing in current root and search string.
+			string left, right;
+			if (h == null) { return Tuple.Create(-1, -1, "null", "null", "null"); }    // If search returns a null node, return new tuple with -1,-1 to indicate search miss.
+			else
+			{
+				if (h.Left == null) { left = "null"; }
+				else { left = h.Left.Value.Item2; }
+				if (h.Right == null) { right = "null"; }
+				else { right = h.Right.Value.Item2; }
+				return Tuple.Create(h.Y, h.X, h.Value.Item2, left, right);
+			}
 		}
 
 		/// <summary>
@@ -1391,13 +1478,37 @@ namespace a4
 			PostOrder(root);
 		}
 
-		public void AssignXY(Node h, int x, int y)
+		public void AssignXY(Node h)
 		{
+			Queue<Node> q = new Queue<Node>();
+			int x = 0, y = 0;
 			if (h == null) { return; }
-			h.X = x;
-			h.Y = y;
-			AssignXY(h.Left, 2 * x - 1, y + 1);
-			AssignXY(h.Right, 2 * x, y + 1);
+			h.Y = 0;
+			q.Enqueue(h);
+			while (q.Count() != 0)
+			{
+				h = q.Dequeue();
+				if (h.Y != y)
+				{
+					y++;
+					h.X = x = 1;
+				}
+				else
+				{
+					h.X = ++x;
+				}
+				if (h.Left != null)
+				{
+					h.Left.Y = h.Y + 1;
+					q.Enqueue(h.Left);
+				}
+				if (h.Right != null)
+				{
+					h.Right.Y = h.Y + 1;
+					q.Enqueue(h.Right);
+				}
+
+			}
 		}
 
 		/// <summary>

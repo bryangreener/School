@@ -1,0 +1,2 @@
+Grade: 20/20
+Getting args from user input instead of command line. Works with base 256. A lot of unnecessary stuff. It all looks good, but you dont need to spend so much time making the nice user interface, that's more of a focus in higher level languages and not this class.

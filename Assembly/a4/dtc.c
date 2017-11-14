@@ -1,6 +1,6 @@
 #include "dtc.h"
 
-void initialize_dtc(unsigned int channel, unsigned int *pointer) {
+void initialize_dtc(unsigned int channel, volatile unsigned int *pointer) {
   ADC10CTL0 &= ~ENC;                        // Disable ADC before configuration.
   ADC10CTL0 = ADC10ON;                      // Turn ADC on in single line before configuration.
   while(ADC10CTL1 & ADC10BUSY);             // Make sure the ADC is not running per 22.2.7

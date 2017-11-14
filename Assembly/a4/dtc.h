@@ -3,7 +3,7 @@
 
 #include <msp430.h>
 
-void initialize_dtc(unsigned int, unsigned int*);
+void initialize_dtc(unsigned int, volatile unsigned int*);
 
 #endif
 

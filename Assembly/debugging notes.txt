@@ -1,0 +1,8 @@
+make debug
+b button        // breaks at button interrupt (or function name given)
+c               // continue
+p HEAD          // prints head node
+p *HEAD         // prints head node with dereferenced items of struct
+p *HEAD->next   // and so on
+step #          // steps given number of lines
+p VARIABLE will print a variable's memory address

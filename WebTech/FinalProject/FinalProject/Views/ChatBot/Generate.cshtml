@@ -1,0 +1,13 @@
+﻿@model FinalProject.Models.Favorites
+@{
+    ViewBag.Title = "Generate";
+}
+
+<h2>Generate</h2>
+
+@using (Html.BeginForm("AddFav", "ChatBot", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+	@ViewData["GeneratedText"]<br />
+	<input type="submit" value="Add to Favorites" class="btn btn-info pull-Left" />
+}

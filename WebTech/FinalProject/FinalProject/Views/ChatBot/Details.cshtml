@@ -1,0 +1,29 @@
+﻿@model FinalProject.Models.Favorites
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Favorite</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Id)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Id)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Quote)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Quote)
+		</dd>
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to Hall of Quotes", "HallOfQuotes")
+</p>

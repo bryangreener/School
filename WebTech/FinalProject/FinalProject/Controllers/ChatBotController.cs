@@ -10,13 +10,13 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Data.Entity;
 using FinalProject.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace FinalProject.Controllers
 {
 	public class ChatBotController : Controller
 	{
 		private MarkovDBEntities1 db = new MarkovDBEntities1();
-
 		static Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
 
 		// GET: ChatBot
@@ -27,13 +27,14 @@ namespace FinalProject.Controllers
         }
 
 		[HttpPost]
-		public ActionResult Index(bool bibble, bool smash, bool pdf, HttpPostedFileBase customFile, string customText)
+		[ValidateAntiForgeryToken]
+		public ActionResult Generate(bool bibble, bool smash, bool pdf, HttpPostedFileBase customFile, string customText)
 		{
 			dictionary.Clear();
 			// Get Data from Index View
 
 			string[] fileEntries;
-			if(bibble == true)
+			if (bibble == true)
 			{
 				fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Content/bibble"));
 				foreach (string fileName in fileEntries)
@@ -42,7 +43,7 @@ namespace FinalProject.Controllers
 					Add(input);
 				}
 			}
-			if(smash == true)
+			if (smash == true)
 			{
 				fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Content/fanfic"));
 				foreach (string fileName in fileEntries)
@@ -62,16 +63,16 @@ namespace FinalProject.Controllers
 			}
 
 			string path = Server.MapPath("~/App_Data/Uploads/");
-			if(!Directory.Exists(path))
+			if (!Directory.Exists(path))
 			{
 				Directory.CreateDirectory(path);
 			}
-			if(customFile != null)
+			if (customFile != null)
 			{
 				string fileName = System.IO.Path.GetFileName(customFile.FileName);
 				var allowedFileTypes = new[] { ".txt", ".pdf" };
 				var extension = System.IO.Path.GetExtension(fileName);
-				if(!allowedFileTypes.Contains(extension))
+				if (!allowedFileTypes.Contains(extension))
 				{
 
 					ViewBag.Message += $"{fileName} denied. Incorrect File Type.";
@@ -102,17 +103,12 @@ namespace FinalProject.Controllers
 			ViewBag.feedCustomText = customText;
 			ViewBag.feedFile = customFile;
 
-			return View();
-		}
-
-		public ActionResult Generate()
-		{
 			TempData["GeneratedText"] = ViewData["GeneratedText"] = Print();
 			return View();
 		}
 
 		// GET: ChatBot/Details
-		public ActionResult Details(string id)
+		public ActionResult Details(int? id)
 		{
 			if(id == null)
 			{
@@ -128,21 +124,30 @@ namespace FinalProject.Controllers
 
 		public ActionResult HallOfQuotes()
 		{
-			return View();
+			var model = from favs in db.Favorites
+						select new DBViewModel
+						{
+							ID = favs.Id,
+							Added = (DateTime)favs.Added,
+							Quote = favs.Quote
+						};
+				return View(model.ToList());
 		}
 
 		// POST: ChatBot/AddFav
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult AddFav()
+		public ActionResult AddFav([Bind(Include = "Id,Added,Quote")] Favorites fav)
 		{
 			string temp = TempData["GeneratedText"].ToString();
-			int newId = db.Favorites.Count();
 			if (ModelState.IsValid)
 			{
 				// Add new fav to fav lsit with the information gathered from ChatBot view
-				db.Favorites.Add(new Favorites() { Id = newId, Quote = temp });
-
+				fav.Quote = temp;
+				fav.Added = DateTime.Now;
+				db.Favorites.Add(fav);
+				//db.Favorites.Add(new Favorites() { Id = fav.Id, Added = DateTime.Now, Quote = temp });
+				
 				// Save addition
 				db.SaveChanges();
 
@@ -153,44 +158,52 @@ namespace FinalProject.Controllers
 			return View(temp);
 		}
 
+		/*
 		//GET: ChatBot/Edit
-		public ActionResult Edit(string id)
+		public ActionResult Edit(int? id)
 		{
-			Favorites fav = db.Favorites.Find(id);
 			if(id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			if(fav == null)
+			Favorites fav = db.Favorites.Find(id);
+			if (fav == null)
 			{
 				return HttpNotFound();
 			}
 			return View(fav);
 		}
 		// POST: ChatBot/Edit
-		[HttpPost]
+		[HttpPost, ActionName("Edit")]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Quote")] Favorites fav)
+		public ActionResult EditPost(int? id)
 		{
-			if(ModelState.IsValid)
+			if (id == null)
 			{
-				var oldFav = db.Favorites.Find(fav.Id);
-				string oldQuote = oldFav.Quote;
-
-				db.Favorites.Remove(oldFav);
-
-				db.Entry(fav).State = EntityState.Modified;
-				db.SaveChanges();
-
-				db.Favorites.Add(new Favorites() { Id = fav.Id, Quote = fav.Quote });
-				db.SaveChanges();
-				return RedirectToAction("HallOfQuotes");
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			return View(fav);
+			var favToUpdate = db.Favorites.Find(id);
+			if (TryUpdateModel(favToUpdate, "",
+			   new string[] { "ID", "Quote" }))
+			{
+				try
+				{
+					db.SaveChanges();
+
+					return RedirectToAction("HallOfQuotes");
+				}
+				catch (RetryLimitExceededException)
+				{
+					//Log the error (uncomment dex variable name and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+				}
+			}
+			return View(favToUpdate);
 		}
+		*/
 
 		// GET: ChatBot/Delete
-		public ActionResult Delete(string id)
+		public ActionResult Delete(int? id)
 		{
 
 			// Error handling
@@ -215,7 +228,7 @@ namespace FinalProject.Controllers
 		// POST: ChatBot/Delete
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
-		public ActionResult DeleteConfirmed(string id)
+		public ActionResult DeleteConfirmed(int? id)
 		{
 			// Create new computer and device objects and populate with db data
 			Favorites fav = db.Favorites.Find(id);

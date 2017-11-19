@@ -7,7 +7,7 @@
 <div class="form-group">
 	<fieldset>
 		<legend>FEED ME</legend>
-		@using (Html.BeginForm("Index", "ChatBot", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
+		@using (Html.BeginForm("Generate", "ChatBot", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
 			{
 			@Html.AntiForgeryToken()
 			<label for="bibble">Bibble</label>

@@ -15,6 +15,7 @@ namespace FinalProject.Models
     public partial class Favorites
     {
         public int Id { get; set; }
+        public Nullable<System.DateTime> Added { get; set; }
         public string Quote { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd035f4651f949448495148f71692678" Name="Diagram1">
+      <Diagram DiagramId="b8bbe83908974f37a0f6fe5c484cfec8" Name="Diagram1">
         <EntityTypeShape EntityType="MarkovDBModel.Dictionary" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MarkovDBModel.Favorites" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MarkovDBModel.List" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />

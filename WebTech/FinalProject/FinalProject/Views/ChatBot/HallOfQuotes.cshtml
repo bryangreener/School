@@ -1,23 +1,24 @@
-﻿@model IEnumerable<FinalProject.Models.Favorites>
+﻿@model List<FinalProject.Models.DBViewModel>
 @{
-    ViewBag.Title = "HallOfQuotes";
+	ViewBag.Title = "HallOfQuotes";
 }
 
 <h2>HallOfQuotes</h2>
 
 <table class="table">
 	<tr>
-		<th>@Html.DisplayNameFor(model => model.Id)</th>
-		<th>@Html.DisplayNameFor(model => model.Quote)</th>
+		<th>Added On</th>
+		<th>Quote</th>
+		<th>Actions</th>
 	</tr>
 	@foreach(var item in Model)
 	{
-		<tr onclick="location.href = '@Url.Action("Edit", "ChatBot", new { id = item.Quote })'">
-			<td>@Html.DisplayFor(modelID => item.Id)</td>
-			<td>@Html.DisplayFor(modelQuote => item.Quote)</td>
+		<tr>
+			<td>@item.Added</td>
+			<td>@item.Quote</td>
 			<td>
-				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+				@Html.ActionLink("Details", "Details", new { id = item.ID })
+				@Html.ActionLink("Delete", "Delete", new { id = item.ID })
 			</td>
 		</tr>
 	}

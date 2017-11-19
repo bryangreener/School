@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MarkovDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MarkovDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dictionary">
           <Key>
             <PropertyRef Name="PK" />
@@ -16,8 +16,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Quote" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Added" Type="datetime" />
+          <Property Name="Quote" Type="varchar" MaxLength="1000" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\GIT\SCHOOL\WEBTECH\FINALPROJECT\FINALPROJECT\APP_DATA\MARKOVDB.MDF.dbo.List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -55,7 +56,8 @@ warning 6002: The table/view 'D:\GIT\SCHOOL\WEBTECH\FINALPROJECT\FINALPROJECT\AP
             <End Role="List" EntitySet="List" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MarkovDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -71,8 +73,9 @@ warning 6002: The table/view 'D:\GIT\SCHOOL\WEBTECH\FINALPROJECT\FINALPROJECT\AP
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Quote" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Added" Type="DateTime" Precision="3" />
+          <Property Name="Quote" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="List">
           <Key>
@@ -122,6 +125,7 @@ warning 6002: The table/view 'D:\GIT\SCHOOL\WEBTECH\FINALPROJECT\FINALPROJECT\AP
             <EntityTypeMapping TypeName="MarkovDBModel.Favorites">
               <MappingFragment StoreEntitySet="Favorites">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Added" ColumnName="Added" />
                 <ScalarProperty Name="Quote" ColumnName="Quote" />
               </MappingFragment>
             </EntityTypeMapping>

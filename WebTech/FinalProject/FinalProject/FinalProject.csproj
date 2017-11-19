@@ -158,6 +158,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBViewModel.cs" />
     <Compile Include="Models\Dictionary.cs">
       <DependentUpon>MarkovDB.tt</DependentUpon>
     </Compile>

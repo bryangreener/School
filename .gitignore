@@ -207,9 +207,9 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# SQL Server files
-*.mdf
-*.ldf
+# SQL Server files I WANT THESE GO AWAY GITIGNORE
+#*.mdf
+#*.ldf
 
 # Business Intelligence projects
 *.rdl.data

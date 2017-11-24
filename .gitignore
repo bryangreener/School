@@ -5,7 +5,7 @@
 xampp/*
 !xampp/htdocs/
 xampp/htdocs/*
-!xampp/htdocs/WebTech/
+!xampp/htdocs/WebTech/*
 
 !WebTech/FinalProject/FinalProject/App_Data
 

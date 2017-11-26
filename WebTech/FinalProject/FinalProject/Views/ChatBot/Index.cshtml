@@ -1,15 +1,17 @@
 ﻿@model FinalProject.Models.FeedOptions
 @{
-	ViewBag.Title = "Index";
+	ViewBag.Title = "Input";
 }
 
-<h2>Index</h2>
+<h2>Input</h2>
 <div class="form-group">
 	<fieldset>
-		<legend>FEED ME</legend>
+		<legend>Select Input Texts to Feed Bot</legend>
 		@using (Html.BeginForm("Generate", "ChatBot", FormMethod.Post, new { @class = "form-inline", enctype = "multipart/form-data" }))
 			{
 			@Html.AntiForgeryToken()
+			<label for="suggested">Suggested</label>
+			@Html.EditorFor(x => x.Suggested)<br />
 			<label for="bibble">Bibble</label>
 			@Html.EditorFor(x => x.Bibble)<br />
 			<label for="smash">Smash Bros Fanfic</label>
@@ -21,7 +23,7 @@
 			<label for="file">Upload a File (.txt or .pdf)</label>
 			@Html.TextBoxFor(x => x.CustomFile, new { type = "file" })<br />
 			@Html.ValidationMessageFor(x => x.CustomFile, "", new { @class = "error" })<br />
-			<input type="submit" value="Apply Selection" class="btn btn-info pull-Left" />
+			<input type="submit" value="Generate" class="btn btn-info pull-Left" />
 			}
 		@if (ViewBag.Message != null)
 		{
@@ -33,5 +35,4 @@
 		}
 	</fieldset>
 </div>
-@Html.ActionLink("Generate Wisdom", "Generate", "ChatBot")
 

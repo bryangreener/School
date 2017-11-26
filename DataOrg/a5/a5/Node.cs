@@ -13,6 +13,11 @@ namespace a5
 		{
 			Value = value;
 		}
+		public Node(Z value, Node<Z> parent)
+		{
+			Value = value;
+			Parent = parent;
+		}
 
 		public Node<Z> Parent { get; set; }
 		public Node<Z> A { get; set; }	// Left

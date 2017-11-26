@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using System.Text;
 using System.Data.Entity;
 using FinalProject.Models;
 using System.Data.Entity.Infrastructure;
@@ -16,7 +17,7 @@ namespace FinalProject.Controllers
 {
 	public class ChatBotController : Controller
 	{
-		private MarkovDBEntities1 db = new MarkovDBEntities1();
+		private MarkovEntities db = new MarkovEntities();
 		static Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
 
 		// GET: ChatBot
@@ -28,40 +29,11 @@ namespace FinalProject.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Generate(bool bibble, bool smash, bool pdf, HttpPostedFileBase customFile, string customText)
+		public ActionResult Generate(bool suggested, bool bibble, bool smash, bool pdf, HttpPostedFileBase customFile, string customText)
 		{
 			dictionary.Clear();
+			bool custom = false;
 			// Get Data from Index View
-
-			string[] fileEntries;
-			if (bibble == true)
-			{
-				fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Content/bibble"));
-				foreach (string fileName in fileEntries)
-				{
-					string input = System.IO.File.ReadAllText(fileName);
-					Add(input);
-				}
-			}
-			if (smash == true)
-			{
-				fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Content/fanfic"));
-				foreach (string fileName in fileEntries)
-				{
-					string input = System.IO.File.ReadAllText(fileName);
-					Add(input);
-				}
-			}
-			if (pdf == true)
-			{
-				fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Content/Books"));
-				foreach (string fileName in fileEntries)
-				{
-					string input = System.IO.File.ReadAllText(fileName);
-					Add(input);
-				}
-			}
-
 			string path = Server.MapPath("~/App_Data/Uploads/");
 			if (!Directory.Exists(path))
 			{
@@ -81,31 +53,64 @@ namespace FinalProject.Controllers
 				{
 					customFile.SaveAs(path + fileName);
 					ViewBag.Message += $"{fileName} uploaded.";
+					custom = true;
 				}
 			}
-
-			// For custom files uploaded
-			fileEntries = Directory.GetFiles(Server.MapPath("~/App_Data/Uploads/"));
-			foreach (string fileName in fileEntries)
+			if(suggested == false && bibble == false && smash == false && pdf == false && customText == "" && customFile == null)
 			{
-				string input = System.IO.File.ReadAllText(fileName);
-				Add(input);
+				return View("Index");
 			}
-
-			if (!String.IsNullOrWhiteSpace(customText))
+			else
 			{
-				Add(customText);
+				if (suggested == true) { ReadFiles("Bibble"); ReadFiles("Suggested"); }
+				if (bibble == true) { ReadFiles("Bibble"); }
+				if (smash == true) { ReadFiles("Fanfic"); }
+				if (pdf == true) { ReadFiles("PDF"); }
+				if (custom == true) { ReadFiles("../Uploads"); }
+				if (!String.IsNullOrWhiteSpace(customText)) { Add(customText); }
+
+				ViewBag.feedSuggested = suggested;
+				ViewBag.feedBibble = bibble;
+				ViewBag.feedSmash = smash;
+				ViewBag.feedPDF = pdf;
+				ViewBag.feedCustomText = customText;
+				ViewBag.feedFile = customFile;
+
+				TempData["GeneratedText"] = ViewData["GeneratedText"] = Print();
+				return View();
 			}
-
-			ViewBag.feedBibble = bibble;
-			ViewBag.feedSmash = smash;
-			ViewBag.feedPDF = pdf;
-			ViewBag.feedCustomText = customText;
-			ViewBag.feedFile = customFile;
-
-			TempData["GeneratedText"] = ViewData["GeneratedText"] = Print();
-			return View();
 		}
+		private void ReadFiles(string filePath)
+		{
+			string[] fileEntries;
+			fileEntries = Directory.GetFiles(Server.MapPath($"~/App_Data/Content/{filePath}"));
+
+			if (filePath == "../Uploads" || filePath == "Suggested" || filePath == "PDF")
+			{
+				foreach (string fileName in fileEntries)
+				{
+					using (PdfReader reader = new PdfReader(fileName))
+					{
+						StringBuilder text = new StringBuilder();
+						for (int i = 1; i < reader.NumberOfPages; i++)
+						{
+							text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
+						}
+						Add(text.ToString());
+					}
+				}
+			}
+			else
+			{
+				foreach (string fileName in fileEntries)
+				{
+					string input = System.IO.File.ReadAllText(fileName);
+					Add(input);
+
+				}
+			}
+		}
+
 
 		// GET: ChatBot/Details
 		public ActionResult Details(int? id)
@@ -292,15 +297,44 @@ namespace FinalProject.Controllers
 			int nextIndex = rnd.Next(dictionary.Count);
 			string currentGram = dictionary.ElementAt(nextIndex).Key;
 
+			if (result == "")
+			{
+				while (!char.IsUpper(currentGram[0]))
+				{
+					nextIndex = rnd.Next(dictionary.Count);
+					currentGram = dictionary.ElementAt(nextIndex).Key;
+				}
+			}
+
 			string nextGram = dictionary[currentGram][rnd.Next(dictionary[currentGram].Count)];
 			int wordcount = 0;
 
-			while (!nextGram.Contains('.') && !nextGram.Contains('?') && !nextGram.Contains('!') || wordcount < 10)
+
+			while (wordcount < 10)
 			{
 				result += $"{currentGram} ";
 				nextGram = dictionary[currentGram][rnd.Next(dictionary[currentGram].Count)];
 				currentGram = nextGram;
 				wordcount++;
+			}
+			int loops = 0;
+			while (nextGram[nextGram.Length - 1] != '.' && nextGram[nextGram.Length - 1] != '?' && nextGram[nextGram.Length - 1] != '!')
+			{
+
+				if (wordcount >= 25)
+				{
+
+					nextGram = dictionary[currentGram][rnd.Next(dictionary[currentGram].Count)];
+					currentGram = nextGram;
+					if (loops++ > 1000) { nextGram += "."; break; }
+				}
+				else
+				{
+					result += $"{currentGram} ";
+					nextGram = dictionary[currentGram][rnd.Next(dictionary[currentGram].Count)];
+					currentGram = nextGram;
+					wordcount++;
+				}
 			}
 			/*
 			for (int i = 0; i < 15; i++)

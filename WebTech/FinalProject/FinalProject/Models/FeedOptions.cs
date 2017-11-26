@@ -8,6 +8,7 @@ namespace FinalProject.Models
 {
 	public class FeedOptions
 	{
+		public bool Suggested { get; set; }
 		public bool Bibble { get; set; }
 		public bool Smash { get; set; }
 		public bool PDF { get; set; }

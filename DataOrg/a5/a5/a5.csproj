@@ -35,9 +35,6 @@
     <Reference Include="Graphviz, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Graphviz.2.38.0.2\lib\Graphviz.dll</HintPath>
     </Reference>
-    <Reference Include="GraphVizWrapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GraphViz.NET.1.0.0\lib\net40\GraphVizWrapper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,11 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BTree.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tree23.cs" />
-    <Compile Include="Tree234.cs" />
+    <Compile Include="TTFNode.cs" />
+    <Compile Include="TTFTree.cs" />
+    <Compile Include="TTNode.cs" />
+    <Compile Include="TTTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

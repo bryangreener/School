@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
 namespace a5
 {
 	public class Tree23<Z> where Z : IComparable<Z>
@@ -21,384 +21,183 @@ namespace a5
 					newInternal.KeyA = value;
 					newInternal.A = new Node<Z>(value);
 					newInternal.KeyB = root.Value;
-					newInternal.B = root;
-					root = newInternal;
+					newInternal.B = new Node<Z>(root.Value);
+					CopyNode(newInternal, root);
 				}
 				else
 				{
 					newInternal.KeyA = root.Value;
-					newInternal.A = root;
+					newInternal.A = new Node<Z>(root.Value);
 					newInternal.KeyB = value;
 					newInternal.B = new Node<Z>(value);
-					root = newInternal;
+					CopyNode(newInternal, root);
 				}
 				root.A.Parent = root;
 				root.B.Parent = root;
 			}
 			else
 			{
-				InsertUtil(FindUtil(root, value), value);
-			}
-		}
-		private Node<Z> InsertUtil(Node<Z> n, Z value)
-		{
-			if (IsLeaf(n.Parent)) { Console.WriteLine("TEST."); Console.ReadLine(); }
-			if (ChildCount(n.Parent) == 2)
-			{
-				n = n.Parent;
-				if (value.CompareTo(n.A.Value) < 0)
+				Node<Z> n = new Node<Z>();
+				n = FindUtil(root, value);
+				if (n.C == null)
 				{
-					n.C = n.B;
-					n.B = n.A;
-					n.A = new Node<Z>(value, n);
-					n.KeyA = n.A.Value;
-					n.KeyB = n.B.Value;
-				}
-				else if (value.CompareTo(n.B.Value) < 0)
-				{
-					n.C = n.B;
-					n.B = new Node<Z>(value, n);
-					n.KeyB = n.B.Value;
-				}
-				else if (value.CompareTo(n.B.Value) > 0)
-				{
-					n.C = new Node<Z>(value, n);
-				}
-				else { Console.WriteLine("ERROR in InsertUtil 2Node"); }
-			}
-			else
-			{
-				n = n.Parent;
-				if (value.CompareTo(n.A.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = n.B;
-					n.B = n.A;
-					n.A = new Node<Z>(value, n);
-					n.KeyA = n.A.Value;
-					n.KeyB = n.B.Value;
-				}
-				else if (value.CompareTo(n.B.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = n.B;
-					n.B = new Node<Z>(value, n);
-					n.KeyB = n.B.Value;
-				}
-				else if (value.CompareTo(n.C.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = new Node<Z>(value, n);
-				}
-				else if (value.CompareTo(n.C.Value) > 0)
-				{
-					n.D = new Node<Z>(value, n);
-				}
-				else { Console.WriteLine("ERROR in InsertUtil 3Node"); }
-
-				if(ChildCount(n) == 4)
-				{
-					Node<Z> newInternal = new Node<Z>();
-					newInternal.A = n.C;
-					newInternal.B = n.D;
-					newInternal.KeyA = n.C.Value;
-					newInternal.KeyB = n.D.Value;
-					newInternal.A.Parent = newInternal.B.Parent = newInternal;
-					n.C = n.D = null;
-					FixUp(n, newInternal);
-				}
-			}
-			return n;
-		}
-		private Node<Z> FindUtil(Node<Z> n, Z value)
-		{
-			if(n == null) { return null; }
-			if (!IsLeaf(n))
-			{
-				if (value.CompareTo(n.KeyA) < 0) { FindUtil(n.A, value); }
-				else if (value.CompareTo(n.KeyB) < 0) { FindUtil(n.B, value); }
-				else if (value.CompareTo(n.KeyB) > 0) { FindUtil(n.C, value); }
-				else { Console.WriteLine("ERROR in FindUtil: value = node value"); }
-			}
-			return n; // only called when at leaf (at insert position
-		}
-		private Node<Z> FixUp(Node<Z> n, Node<Z> m)
-		{
-			if(ChildCount(n.Parent) == 2)
-			{
-				if(m.KeyB.CompareTo(n.Parent.KeyA) < 0)
-				{
-					n.Parent.C = n.Parent.B;
-					n.Parent.B = n.Parent.A;
-					n.Parent.A = m;
-					n.Parent.KeyA = m.KeyB;
-					n.Parent.KeyB = n.Parent.B.KeyB;
-				}
-				else if(m.KeyB.CompareTo(n.Parent.KeyB) < 0)
-				{
-					n.Parent.C = n.Parent.B;
-					n.Parent.B = m;
-					n.Parent.KeyB = m.KeyB;
-				}
-				else if(m.KeyB.CompareTo(n.Parent.KeyB) > 0)
-				{
-					n.Parent.C = m;
-				}
-				else { Console.WriteLine("ERROR in FixUp: value = node value"); }
-			}
-			else if(ChildCount(n.Parent) == 3)
-			{
-				n = n.Parent;
-				if (m.KeyB.CompareTo(n.A.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = n.B;
-					n.B = n.A;
-					n.A = m;
-					n.KeyA = m.KeyB;
-					n.KeyB = n.B.KeyB;
-				}
-				else if (m.KeyB.CompareTo(n.B.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = n.B;
-					n.B = m;
-					n.KeyB = m.KeyB;
-				}
-				else if (m.KeyB.CompareTo(n.C.Value) < 0)
-				{
-					n.D = n.C;
-					n.C = m;
-				}
-				else if (m.KeyB.CompareTo(n.C.Value) > 0)
-				{
-					n.D = m;
-				}
-				else { Console.WriteLine("ERROR in FixUp 3Node"); }
-
-				if (ChildCount(n) == 4)
-				{
-					Node<Z> newInternal = new Node<Z>();
-					newInternal.A = n.C;
-					newInternal.B = n.D;
-					newInternal.KeyA = n.C.Value;
-					newInternal.KeyB = n.D.Value;
-					newInternal.A.Parent = newInternal.B.Parent = newInternal;
-					n.C = n.D = null;
-					FixUp(n, newInternal);
-				}
-			}
-			return n;
-		}
-
-
-
-		/*
-		public void Insert(Z value)
-		{
-			Node<Z> n = FindUtil(root, value); // find pos of new node before inserting
-			if(n == null)
-			{
-				n = new Node<Z>(value);
-			}
-			else if(IsLeaf(n))
-			{
-				Node<Z> newInternal = new Node<Z>();
-				if (value.CompareTo(root.Value) <= 0)
-				{
-					newInternal.KeyA = value;
-					newInternal.A = new Node<Z>(value);
-					newInternal.KeyB = root.Value;
-					newInternal.B = root;
-					root = newInternal;
-				}
-				else
-				{
-					newInternal.KeyA = root.Value;
-					newInternal.A = root;
-					newInternal.KeyB = value;
-					newInternal.B = new Node<Z>(value);
-					root = newInternal;
-
-				}
-				root.A.Parent = root;
-				root.B.Parent = root;
-			}
-			else
-			{
-				n = InsertUtil(n, value);
-			}
-			
-		}
-
-		private Node<Z> FindUtil(Node<Z> n, Z value)
-		{
-			if (n == null || n.Parent == null) { return null; }
-			if (!IsLeaf(n))
-			{
-				if (value.CompareTo(n.KeyA) <= 0) { FindUtil(n.A, value); }
-				else if (value.CompareTo(n.KeyB) <= 0) { FindUtil(n.B, value); }
-				else { FindUtil(n.C, value); }
-			}
-			return n;
-		}
-
-		private Node<Z> InsertUtil(Node<Z> n, Z value)
-		{
-			if(IsLeaf(n)) { return n; }
-			if(IsLeaf(n.A))
-			{
-				if(ChildCount(n) == 2)
-				{
-					if (value.CompareTo(n.A.Value) <= 0)
+					if(value.CompareTo(n.A.Value) < 0)
 					{
-						n.C = n.B;
-						n.B = n.A;
-						n.A = new Node<Z>(value);
-						n.A.Parent = n.B.Parent = n.C.Parent = n;
-						n.KeyA = n.A.Value;	// Left Max
-						n.KeyB = n.B.Value;	// Mid Max
+						CopyNode(n.B, n.C);
+						CopyNode(n.A, n.B);
+						n.A = new Node<Z>(value, n);
+						n.KeyB = n.KeyA;
+						n.KeyA = value;
 					}
-					else if (value.CompareTo(n.B.Value) <= 0)
+					else if(value.CompareTo(n.B.Value) < 0)
 					{
-						n.C = n.B;
-						n.B = new Node<Z>(value);
-						n.B.Parent = n.C.Parent = n;
-						n.KeyB = n.B.Value;
-					}
-					else if(value.CompareTo(n.B.Value) > 0)
-					{
-						n.C = new Node<Z>(value);
-						n.C.Parent = n;
+						CopyNode(n.B, n.C);
+						n.B = new Node<Z>(value, n);
+						n.KeyB = value;
 					}
 					else
 					{
-						Console.WriteLine("ERROR INSERTING IN 2NODE");
+						n.C = new Node<Z>(value, n);
 					}
 				}
-				else if(ChildCount(n) == 3)
+				else if (n.D == null)
 				{
-					if (value.CompareTo(n.A.Value) <= 0)
+					if (value.CompareTo(n.A.Value) < 0)
 					{
-						n.D = n.C;
-						n.C = n.B;
-						n.B = n.A;
-						n.A = new Node<Z>(value);
-						n.A.Parent = n.B.Parent = n.C.Parent = n.D.Parent = n;
-						n.KeyA = n.A.Value; // Left Max
-						n.KeyB = n.B.Value; // Mid Max
+						CopyNode(n.C, n.D);
+						CopyNode(n.B, n.C);
+						CopyNode(n.A, n.B);
+						n.A = new Node<Z>(value, n);
+						n.KeyB = n.KeyA;
+						n.KeyA = value;
 					}
-					else if (value.CompareTo(n.B.Value) <= 0)
+					else if (value.CompareTo(n.B.Value) < 0)
 					{
-						n.D = n.C;
-						n.C = n.B;
-						n.B = new Node<Z>(value);
-						n.B.Parent = n.C.Parent = n.D.Parent = n;
-						n.KeyB = n.B.Value;
+						CopyNode(n.C, n.D);
+						CopyNode(n.B, n.C);
+						n.B = new Node<Z>(value, n);
+						n.KeyB = value;
 					}
-					else if (value.CompareTo(n.C.Value) <= 0)
+					else if (value.CompareTo(n.C.Value) < 0)
 					{
-						n.D = n.C;
-						n.C = new Node<Z>(value);
-						n.C.Parent = n.D.Parent = n;
-					}
-					else if(value.CompareTo(n.C.Value) > 0)
-					{
-						n.D = new Node<Z>(value);
-						n.D.Parent = n;
+						CopyNode(n.C, n.D);
+						n.C = new Node<Z>(value, n);
 					}
 					else
 					{
-						Console.WriteLine("ERROR INSERTING IN 3NODE");
+						n.D = new Node<Z>(value, n);
 					}
-
 					Node<Z> m = new Node<Z>();
-					m.A = n.C;
-					m.B = n.D;
+					m.A = new Node<Z>();
+					m.B = new Node<Z>();
+					CopyNode(n.C, m.A);
+					CopyNode(n.D, m.B);
 					n.C = null;
 					n.D = null;
-					m.A.Parent = m.B.Parent = m;
 					m.KeyA = m.A.Value;
 					m.KeyB = m.B.Value;
-					FixParent(n, m);
+					m.A.Parent = m;
+					m.B.Parent = m;
+					m.Parent = n;
+					FixUp(n, m);
 				}
-				else
-				{
-					Console.WriteLine("ERROR AT LEAF");
-				}
 			}
-
-			if (value.CompareTo(n.KeyA) <= 0)
-			{
-				n.A = InsertUtil(n.A, value);
-
-			}
-			else if (value.CompareTo(n.KeyB) <=0 || ChildCount(n) == 2)
-			{
-				n.B = InsertUtil(n.B, value);
-			}
-			else if(value.CompareTo(n.KeyB) > 0 && ChildCount(n) == 3)
-			{
-				n.C = InsertUtil(n.C, value);
-			}
+		}
+		private Node<Z> FindUtil(Node<Z> n, Z value)
+		{
+			if (n.A == null) { return n.Parent; } // At leaf
+			else if(value.CompareTo(n.KeyA) < 0) { return FindUtil(n.A, value); }
+			else if(value.CompareTo(n.KeyB) < 0) { return FindUtil(n.B, value); }
 			else
 			{
-				Console.WriteLine("ERROR TRAVERSING");
+				if (n.C == null) { return FindUtil(n.B, value); }
+				else { return FindUtil(n.C, value); }
 			}
 
-			return n;
 		}
-		private Node<Z> FixParent(Node<Z> n, Node<Z> m)
+		private void FixUp(Node<Z> n, Node<Z> m)
 		{
-			if(n.Parent == null) { return n; }
-			if(ChildCount(n.Parent) == 2)
+			if (n.Parent == null)
 			{
-				if (n == n.Parent.A)
+				root = new Node<Z>();
+				root.A = new Node<Z>();
+				root.B = new Node<Z>();
+				CopyNode(n, root.A);
+				CopyNode(m, root.B);
+				n.Parent = root;
+				m.Parent = root;
+				root.KeyA = n.KeyB;
+				root.KeyB = m.KeyB;
+			}
+			else if (n.Parent.C == null)
+			{
+				n = n.Parent;
+				if (m.KeyB.CompareTo(n.B.Value) < 0)
 				{
-					n.Parent.C = n.Parent.B;
-					n.Parent.B = m;
-					n.Parent.B.Parent = n.Parent.C.Parent = n.Parent;
-					n.Parent.KeyB = n.Parent.B.Value; // Mid Max
+					CopyNode(n.B, n.C);
+					CopyNode(m, n.B);
+					n.B.Parent = n;
+					n.KeyB = n.B.KeyB;
 				}
 				else
 				{
-					n.Parent.C = m;
-					n.Parent.C.Parent = n.Parent;
+					n.C = new Node<Z>();
+					CopyNode(m, n.C);
+					n.C.Parent = n;
 				}
 			}
-			else if (ChildCount(n.Parent) == 3)
+			else if(n.Parent.D == null)
 			{
-				if (n == n.Parent.A)
+				n = n.Parent;
+				if (m.KeyB.CompareTo(n.B.Value) < 0)
 				{
-					n.Parent.D = n.Parent.C;
-					n.Parent.C = n.Parent.B;
-					n.Parent.B = m;
-					n.Parent.B.Parent = n.Parent.C.Parent = n.Parent.D.Parent = n.Parent;
-					n.Parent.KeyB = n.Parent.B.Value; // mid max
+					CopyNode(n.C, n.D);
+					CopyNode(n.B, n.C);
+					n.B = new Node<Z>();
+					CopyNode(m, n.B);
+					n.B.Parent = n;
+					n.KeyB = n.B.KeyB;
 				}
-				else if (n == n.Parent.B)
+				else if(m.KeyB.CompareTo(n.C.Value) < 0)
 				{
-					n.Parent.D = n.Parent.C;
-					n.Parent.C = m;
-					n.Parent.C.Parent = n.Parent.D.Parent = n.Parent;
+					CopyNode(n.C, n.D);
+					n.C = new Node<Z>();
+					CopyNode(n.C, m);
+					n.C.Parent = n;
 				}
 				else
 				{
-					n.Parent.D = m;
-					n.Parent.D.Parent = n.Parent;
+					n.D = new Node<Z>();
+					CopyNode(m, n.D);
+					n.D.Parent = n;
 				}
+
+				CopyNode(n.C, m.A);
+				CopyNode(n.D, m.B);
+				m.A.Parent = m.B.Parent = m;
+				m.Parent = n;
+				m.KeyA = m.A.KeyB;
+				m.KeyB = m.B.KeyB;
+				n.C = null;
+				n.D = null;
+				FixUp(n, m);
 			}
-			m = new Node<Z>();
-			m.A = n.Parent.C;
-			m.B = n.Parent.D;
-			m.A.Parent = m.B.Parent = m;
-			m.KeyA = m.A.Value;
-			m.KeyB = m.B.Value;
-			return FixParent(n.Parent, m);
 		}
-		*/
 
 		#region Helper Methods
+		private Node<Z> CopyNode(Node<Z> n, Node<Z> m)
+		{
+			if (n.Parent != null) { m.Parent = n.Parent; }
+			if (n.A != null) { m.A = n.A; }
+			if (n.B != null) { m.B = n.B; }
+			if (n.C != null) { m.C = n.C; }
+			if (n.D != null) { m.D = n.D; }
+			m.Value = n.Value;
+			m.KeyA = n.KeyA;
+			m.KeyB = n.KeyB;
+			return m;
+		}
+
 		private int ChildCount(Node<Z> n)
 		{
 			int count = 0;
@@ -410,7 +209,7 @@ namespace a5
 		}
 		private bool IsLeaf(Node<Z> n)
 		{
-			return (n.A == null && n.B == null && n.C == null);
+			return (ChildCount(n) == 0);
 		}
 		private int Size()
 		{

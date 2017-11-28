@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 // in a real application, these constants would likely be defined
 // within an external file
@@ -8,19 +8,16 @@ define("SHIPPING_THRESHOLD",2000);
 define("SHIPPING_FLAT_AMOUNT",100);   
 
 
-
-
 // outputs a single cart item
 function outputCartRow($file, $title, $quantity, $price) {
-   echo '<tr>';
-   echo '<td><img class="img-thumbnail" src="images/art/works/tiny/' . $file . '.jpg" alt="..."></td>';
-   echo '<td>' . $title . '</td>';
-   echo '<td>' . $quantity . '</td>';
-   echo '<td>$' . number_format($price,2) . '</td>';
-   echo '<td>$' . number_format($quantity * $price,2) . '</td>';
-   echo '</tr>';
+  echo '<tr>';
+  echo '<td><img class="img-thumbnail" src="images/art/works/tiny/' . $file . '.jpg" alt="..."></td>';
+  echo '<td>' . $title . '</td>';
+  echo '<td>' . $quantity . '</td>';
+  echo '<td>$' . number_format($price,2) . '</td>';
+  echo '<td>$' . number_format($quantity * $price,2) . '</td>';
+  echo '</tr>';
 }
-
 
 
 ?>
@@ -66,10 +63,19 @@ function outputCartRow($file, $title, $quantity, $price) {
          </tr>
          <?php
             // display all the items in the shopping cart
-
+            $cartSubtotal = 0;
+            if(isset($_SESSION['ShoppingCart']))
+            {
+              foreach($_SESSION['ShoppingCart'] as $item)
+              {
+                echo $item[0] . " " . $item[1] . " " . $item[2] . " " . $item[3];
+                outputCartRow($item[0], $item[1], $item[2], $item[3]);
+                $cartSubtotal += $item[3];
+              }
+            }
             
             // now calculate subtotal, tax, shipping, and grand total
-            $subtotal = 0;   // this will need to be changed to cart subtotal
+            $subtotal = $cartSubtotal;   // this will need to be changed to cart subtotal
             $tax = $subtotal * TAX_PERCENT;
             $shipping = 0;
             if ($subtotal <= SHIPPING_THRESHOLD)

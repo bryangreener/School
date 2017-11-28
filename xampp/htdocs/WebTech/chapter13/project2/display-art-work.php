@@ -8,7 +8,7 @@ require_once('lib/SubjectDB.class.php');
 require_once('lib/DatabaseHelper.class.php');
 
 
-
+session_start();
 
 if ( isset($_GET['id']) ) {
    $workId = $_GET['id'];
@@ -20,6 +20,9 @@ else {
 
 $artworkData = new ArtWorkDB();
 $requestedWork = $artworkData->findById($workId);
+
+$_SESSION['ArtWorkID'] = $requestedWork["ArtWorkID"];
+$_POST['id'] = $_SESSION['ArtWorkID'];
 
 $artistData = new ArtistDB();
 $artist = $artistData->findById($requestedWork["ArtistID"]);
@@ -81,7 +84,7 @@ $page = $_SERVER['PHP_SELF'];
                      <a href="#"><span class="glyphicon glyphicon-gift"></span> Add to Wish List</a>  
                  </button>
                  <button type="button" class="btn btn-default">
-                  <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Shopping Cart</a>
+                  <a href="addToCart.php?artworkID=<?php echo $_SESSION['ArtWorkID']; ?>"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Shopping Cart</a>
                  </button>
                </div>               
                <p>&nbsp;</p>

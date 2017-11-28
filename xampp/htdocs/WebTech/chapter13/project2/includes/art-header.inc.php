@@ -69,7 +69,7 @@
              <ul class="nav navbar-nav">
                <li class="active"><a href="#">Home</a></li>
                <li><a href="#">About Us</a></li>
-               <li><a href="#">Art Works</a></li>
+               <li><a href="display-art-work.php">Art Works</a></li>
                <li><a href="#">Artists</a></li>
                <li class="dropdown">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Specials <b class="caret"></b></a>

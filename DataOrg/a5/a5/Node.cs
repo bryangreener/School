@@ -37,6 +37,7 @@ namespace a5
 			get { return (this.Children.Count(x => x != null) == 0); }
 		}
 
+		public Z MaxValue { get; set; }
 		public int Degree { get; set; }
 		public Node<Z>[] Children { get; set; }
 		public Z[] Keys { get; set; }

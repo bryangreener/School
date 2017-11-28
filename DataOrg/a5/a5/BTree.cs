@@ -9,6 +9,140 @@ namespace a5
 	class BTree<Z> where Z : IComparable<Z>
 	{
 		private Node<Z> root;
+		private int degree;
+		public BTree(int degree)
+		{
+			root = null;
+			this.degree = degree;
+		}
+		public void Insert(Z value)
+		{
+			Node<Z> n = new Node<Z>(degree, value, null);
+			n.MaxValue = value;
+			if(root == null)
+			{
+				root = n;
+			}
+			else if(root.IsLeaf)
+			{
+				Node<Z> newRoot = new Node<Z>(degree);
+				if (n.Value.CompareTo(root.Value) < 0)
+				{
+					newRoot.Children[0] = n;
+					newRoot.Children[1] = root;
+					root = newRoot;
+					root.Keys[0] = root.Children[0].MaxValue;
+					root.Keys[1] = root.Children[1].MaxValue;
+					root.Children[0].Parent = root;
+					root.Children[1].Parent = root;
+				}
+				else
+				{
+					newRoot.Children[0] = root;
+					newRoot.Children[1] = n;
+					root = newRoot;
+					root.Keys[0] = root.Children[0].MaxValue;
+					root.Keys[1] = root.Children[1].MaxValue;
+					root.Children[0].Parent = root;
+					root.Children[1].Parent = root;
+				}
+			}
+			else
+			{
+				InsertUtil(n, root);
+			}
+		}
+
+		private void InsertUtil(Node<Z> n, Node<Z> m)
+		{
+			int pos = InsertPos(n, m);
+			if(m.ChildCount > degree)
+			{
+				Node<Z> newInternal = new Node<Z>(degree);
+				newInternal = Split(m);
+				if(m.Parent == null)
+				{
+					Node<Z> newRoot = new Node<Z>(degree);
+					newRoot.Children[0] = m;
+					newRoot.Children[1] = newInternal;
+					root = newRoot;
+					root.Keys[0] = root.Children[0].MaxValue;
+					root.Keys[1] = root.Children[1].MaxValue;
+					root.Children[0].Parent = root;
+					root.Children[1].Parent = root;
+				}
+				else
+				{
+					InsertUtil(newInternal, m.Parent);
+				}
+			}
+		}
+		private int InsertPos(Node<Z> n, Node<Z> m)
+		{
+			int retVal = -1;
+			for(int i = 0; i < m.KeyCount; i++)
+			{
+				if(n.MaxValue.CompareTo(m.Keys[i]) < 0)
+				{
+					for(int j = m.ChildCount -1; j > i; j--)
+					{
+						m.Children[j] = m.Children[j - 1];
+					}
+					m.Children[i] = n;
+					n.Parent = m;
+					for(int j = 0; j < m.ChildCount - 1; j++)
+					{
+						if(m.Children[j].IsLeaf)
+						{
+							m.Keys[j] = m.Children[j].Value;
+						}
+						else
+						{
+							m.Keys[j] = m.Children[j].MaxValue;
+						}
+					}
+					retVal = i;
+					break;
+				}
+				else
+				{
+					m.Children[m.ChildCount] = n;
+					m.Children[m.ChildCount - 1].MaxValue = n.MaxValue;
+					retVal = m.ChildCount;
+					break;
+				}
+			}
+			return retVal;
+		}
+
+		private Node<Z> Split(Node<Z> m)
+		{
+			int splitIndex = Convert.ToInt32(Math.Floor(Convert.ToDouble(m.ChildCount / 2)));
+			Node<Z> newNode = new Node<Z>(degree);
+			int oldCount = m.ChildCount;
+			for(int i = splitIndex, j = 0; i < oldCount; i++, j++)
+			{
+				newNode.Children[j] = m.Children[i];
+				newNode.Children[j].Parent = newNode;
+				if(newNode.Children[j].IsLeaf)
+				{
+					newNode.Keys[j] = newNode.Children[j].Value;
+				}
+				else
+				{
+					newNode.Keys[j] = newNode.Children[j].MaxValue;
+				}
+				m.Children[i] = null;
+			}
+			return newNode;
+		}
+
+
+
+
+
+		/*
+		private Node<Z> root;
 		private int degree; // min degree
 		public BTree(int degree)
 		{

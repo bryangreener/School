@@ -19,11 +19,11 @@ namespace a5
 		{
 			Node<Z> n = new Node<Z>(degree, value, null);
 			n.MaxValue = value;
-			if(root == null)
+			if (root == null)
 			{
 				root = n;
 			}
-			else if(root.IsLeaf)
+			else if (root.IsLeaf)
 			{
 				Node<Z> newRoot = new Node<Z>(degree);
 				if (n.Value.CompareTo(root.Value) < 0)
@@ -33,6 +33,7 @@ namespace a5
 					root = newRoot;
 					root.Keys[0] = root.Children[0].MaxValue;
 					root.Keys[1] = root.Children[1].MaxValue;
+					root.MaxValue = root.Keys[1];
 					root.Children[0].Parent = root;
 					root.Children[1].Parent = root;
 				}
@@ -43,6 +44,7 @@ namespace a5
 					root = newRoot;
 					root.Keys[0] = root.Children[0].MaxValue;
 					root.Keys[1] = root.Children[1].MaxValue;
+					root.MaxValue = root.Keys[1];
 					root.Children[0].Parent = root;
 					root.Children[1].Parent = root;
 				}
@@ -56,11 +58,11 @@ namespace a5
 		private void InsertUtil(Node<Z> n, Node<Z> m)
 		{
 			int pos = InsertPos(n, m);
-			if(m.ChildCount > degree)
+			if (m.ChildCount > degree)
 			{
 				Node<Z> newInternal = new Node<Z>(degree);
 				newInternal = Split(m);
-				if(m.Parent == null)
+				if (m.Parent == null)
 				{
 					Node<Z> newRoot = new Node<Z>(degree);
 					newRoot.Children[0] = m;
@@ -68,6 +70,7 @@ namespace a5
 					root = newRoot;
 					root.Keys[0] = root.Children[0].MaxValue;
 					root.Keys[1] = root.Children[1].MaxValue;
+					root.MaxValue = root.Keys[1];
 					root.Children[0].Parent = root;
 					root.Children[1].Parent = root;
 				}
@@ -80,36 +83,31 @@ namespace a5
 		private int InsertPos(Node<Z> n, Node<Z> m)
 		{
 			int retVal = -1;
-			for(int i = 0; i < m.KeyCount; i++)
+			for (int i = 0; i < m.KeyCount; i++)
 			{
-				if(n.MaxValue.CompareTo(m.Keys[i]) < 0)
+				if (n.MaxValue.CompareTo(m.Keys[i]) < 0)
 				{
-					for(int j = m.ChildCount -1; j > i; j--)
+					if (m.Children[i].IsLeaf)
 					{
-						m.Children[j] = m.Children[j - 1];
-					}
-					m.Children[i] = n;
-					n.Parent = m;
-					for(int j = 0; j < m.ChildCount - 1; j++)
-					{
-						if(m.Children[j].IsLeaf)
+						for (int j = m.ChildCount - 1; j > i; j--)
 						{
-							m.Keys[j] = m.Children[j].Value;
+							m.Children[j] = m.Children[j - 1];
 						}
-						else
+						m.Children[i] = n;
+						n.Parent = m;
+
+						for (int j = 0; j < m.ChildCount - 1; j++)
 						{
-							m.Keys[j] = m.Children[j].MaxValue;
+							m.Keys[j] = m.Children[j].IsLeaf ? m.Children[j].Value : m.Children[j].MaxValue;
 						}
+						retVal = i;
+						break;
 					}
-					retVal = i;
-					break;
+					else { InsertPos(n, m.Children[i]); }
 				}
-				else
+				else if(m.Children[m.KeyCount] != null)
 				{
-					m.Children[m.ChildCount] = n;
-					m.Children[m.ChildCount - 1].MaxValue = n.MaxValue;
-					retVal = m.ChildCount;
-					break;
+					
 				}
 			}
 			return retVal;
@@ -120,24 +118,38 @@ namespace a5
 			int splitIndex = Convert.ToInt32(Math.Floor(Convert.ToDouble(m.ChildCount / 2)));
 			Node<Z> newNode = new Node<Z>(degree);
 			int oldCount = m.ChildCount;
-			for(int i = splitIndex, j = 0; i < oldCount; i++, j++)
+			for (int i = splitIndex, j = 0; i < oldCount; i++, j++)
 			{
 				newNode.Children[j] = m.Children[i];
 				newNode.Children[j].Parent = newNode;
-				if(newNode.Children[j].IsLeaf)
-				{
-					newNode.Keys[j] = newNode.Children[j].Value;
-				}
-				else
-				{
-					newNode.Keys[j] = newNode.Children[j].MaxValue;
-				}
+				newNode.Keys[j] = newNode.Children[j].IsLeaf ? newNode.Children[j].Value : newNode.Children[j].MaxValue;
 				m.Children[i] = null;
 			}
+			m.MaxValue = m.Children[splitIndex - 1].IsLeaf ? m.Children[splitIndex - 1].Value : m.Children[splitIndex - 1].MaxValue;
+			newNode.MaxValue = newNode.Children[splitIndex - 1].IsLeaf ? newNode.Children[splitIndex - 1].Value : newNode.Children[splitIndex - 1].MaxValue;
+			FixKeys(m);
 			return newNode;
 		}
 
-
+		private void FixKeys(Node<Z> n)
+		{
+			if(n.Parent == null)
+			{
+				return;
+			}
+			else
+			{
+				int index = Array.IndexOf(n.Parent.Children, n);
+				if(n.Parent.Children[n.Parent.ChildCount - 1] == n) // if in max pos
+				{
+					FixKeys(n.Parent);
+				}
+				else
+				{
+					n.Parent.Keys[index] = n.IsLeaf ? n.Value : n.MaxValue;
+				}
+			}
+		}
 
 
 
@@ -358,5 +370,5 @@ namespace a5
 		}
 		*/
 	}
-	
+
 }

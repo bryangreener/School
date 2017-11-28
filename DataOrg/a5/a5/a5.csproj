@@ -50,10 +50,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tree23.cs" />
-    <Compile Include="TTFNode.cs" />
-    <Compile Include="TTFTree.cs" />
-    <Compile Include="TTNode.cs" />
-    <Compile Include="TTTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

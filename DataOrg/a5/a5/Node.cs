@@ -8,31 +8,40 @@ namespace a5
 {
 	public class Node<Z>
 	{
+		public Node() { }
 		public Node(int degree)
 		{
 			Degree = degree;
-			Children = new List<Node<Z>>(degree);
-			Keys = new List<Z>(degree);
+			Children = new Node<Z>[degree + 1];
+			Keys = new Z[degree - 1];
 		}
-		public Node(Z value, Node<Z> parent)
+		public Node(int degree, Z value, Node<Z> parent)
 		{
+			Degree = degree;
 			Value = value;
 			Parent = parent;
+			Children = new Node<Z>[degree + 1];
+			Keys = new Z[degree - 1];
 		}
 
+		public int KeyCount
+		{
+			get { return this.Keys.Count(x => x != null); }
+		}
 		public int ChildCount
 		{
-			get { return this.Children.Count(); }
+			get { return this.Children.Count(x => x != null); }
 		}
 		public bool IsLeaf
 		{
-			get { return (this.Children.Count() == 0); }
+			get { return (this.Children.Count(x => x != null) == 0); }
 		}
 
-		private int Degree { get; set; }
-		public List<Node<Z>> Children { get; set; }
-		public List<Z> Keys { get; set; }
+		public int Degree { get; set; }
+		public Node<Z>[] Children { get; set; }
+		public Z[] Keys { get; set; }
 		public Node<Z> Parent { get; set; }
 		public Z Value { get; set; }
+		public int N { get; set; }
 	}
 }

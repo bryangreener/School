@@ -57,7 +57,7 @@ namespace a5
 
 		private void InsertUtil(Node<Z> n, Node<Z> m)
 		{
-			int pos = InsertPos(n, m);
+			m = InsertPos(n, m);
 			if (m.ChildCount > degree)
 			{
 				Node<Z> newInternal = new Node<Z>(degree);
@@ -80,37 +80,64 @@ namespace a5
 				}
 			}
 		}
-		private int InsertPos(Node<Z> n, Node<Z> m)
+		private Node<Z> InsertPos(Node<Z> n, Node<Z> m)
 		{
 			int retVal = -1;
-			for (int i = 0; i < m.KeyCount; i++)
+			for (int i = 0; i < m.KeyCount; i++) // for each key given (max keys = degree - 1)
 			{
-				if (n.MaxValue.CompareTo(m.Keys[i]) < 0)
+				if (n.MaxValue.CompareTo(m.Keys[i]) < 0) // insert node's max < m.key[i]
 				{
-					if (m.Children[i].IsLeaf)
+					if (m.Children[i].IsLeaf) // if new position is going to be a leaf
 					{
-						for (int j = m.ChildCount - 1; j > i; j--)
+						for (int j = m.ChildCount - 1; j > i; j--) // shift m's children over to make room
 						{
 							m.Children[j] = m.Children[j - 1];
 						}
-						m.Children[i] = n;
-						n.Parent = m;
+						m.Children[i] = n; // insert
+						n.Parent = m; // maintain links
 
-						for (int j = 0; j < m.ChildCount - 1; j++)
+						for (int j = 0; j < m.ChildCount - 1; j++) // go through each key in m and fix with child's max val
 						{
 							m.Keys[j] = m.Children[j].IsLeaf ? m.Children[j].Value : m.Children[j].MaxValue;
 						}
+						
 						retVal = i;
 						break;
 					}
-					else { InsertPos(n, m.Children[i]); }
-				}
-				else if(m.Children[m.KeyCount] != null)
-				{
-					
+					else { return InsertPos(n, m.Children[i]); }
 				}
 			}
-			return retVal;
+
+			if(m.ChildCount != 0 && !m.Children[m.ChildCount - 1].IsLeaf && m.Children[m.ChildCount - 1].KeyCount < degree + 1 && n.IsLeaf)
+			{
+				return InsertPos(n, m.Children[m.KeyCount - 1]);
+			}
+			else if(m.Children[m.KeyCount] == null)
+			{
+				m.Children[m.KeyCount] = n;
+				n.Parent = m;
+			}
+			else if(n.MaxValue.CompareTo(m.Children[m.KeyCount].MaxValue) < 0)
+			{
+				m.Children[m.KeyCount + 1] = m.Children[m.KeyCount];
+				m.Children[m.KeyCount] = n;
+				n.Parent = m;
+			}
+			else if(n.MaxValue.CompareTo(m.Children[m.KeyCount].MaxValue) > 0)
+			{
+				m.Children[m.KeyCount + 1] = n;
+			}
+
+			for(int i = 0; i < m.ChildCount; i++)
+			{
+				if(i+1 > m.Children.Length - 1) { break; }
+				if (m.Children[i + 1] == null)
+				{
+					m.MaxValue = m.Children[i].IsLeaf ? m.Children[i].Value : m.Children[i].MaxValue;
+					break;
+				}
+			}
+			return m;
 		}
 
 		private Node<Z> Split(Node<Z> m)

@@ -89,7 +89,7 @@ namespace a5
 				{
 					if (m.Children[i].IsLeaf) // if new position is going to be a leaf
 					{
-						for (int j = m.ChildCount - 1; j > i; j--) // shift m's children over to make room
+						for (int j = m.ChildCount; j > i; j--) // shift m's children over to make room. Not Childcount-1 because it starts at first open place
 						{
 							m.Children[j] = m.Children[j - 1];
 						}
@@ -98,11 +98,12 @@ namespace a5
 
 						for (int j = 0; j < m.ChildCount - 1; j++) // go through each key in m and fix with child's max val
 						{
+							if(j > degree - 2) { break; }
 							m.Keys[j] = m.Children[j].IsLeaf ? m.Children[j].Value : m.Children[j].MaxValue;
 						}
 						
 						retVal = i;
-						break;
+						return m;
 					}
 					else { return InsertPos(n, m.Children[i]); }
 				}

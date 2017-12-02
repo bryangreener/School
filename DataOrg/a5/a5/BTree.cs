@@ -83,7 +83,7 @@ namespace a5
 			for (int i = 0; i < n.KeyCount; i++) // for each key given (max keys = degree - 1)
 			{
 				if(n.Children[i].IsLeaf && value.CompareTo(n.Children[i].Value) == 0) { return n.Children[i]; } // search hit
-				if (value.CompareTo(n.Keys[i]) < 0) // search node's max < m.key[i]
+				if (value.CompareTo(n.Keys[i]) <= 0) // search node's max < m.key[i]
 				{
 					if (n.Children[i].IsLeaf) { return null; } // search miss
 					else { return SearchUtil(n.Children[i], value); } // continue searching

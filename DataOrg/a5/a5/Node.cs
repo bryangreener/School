@@ -23,7 +23,7 @@ namespace a5
 			Children = new Node<Z>[degree + 1];
 			Keys = new Z[degree - 1];
 		}
-
+		/*
 		public int KeyCount
 		{
 			get { return this.Keys.Count(x => x != null); }
@@ -32,10 +32,13 @@ namespace a5
 		{
 			get { return this.Children.Count(x => x != null); }
 		}
+		
 		public bool IsLeaf
 		{
 			get { return (this.Children.Count(x => x != null) == 0); }
 		}
+		*/
+		public bool IsLeaf { get { return ChildCount == 0; } }
 
 		public Z MaxValue { get; set; }
 		public int Degree { get; set; }
@@ -44,5 +47,7 @@ namespace a5
 		public Node<Z> Parent { get; set; }
 		public Z Value { get; set; }
 		public int N { get; set; }
+		public int ChildCount { get; set; }
+		public int KeyCount { get; set; }
 	}
 }

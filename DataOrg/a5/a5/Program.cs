@@ -17,8 +17,8 @@ namespace a5
 				input[i].RemoveRange(5, 3);
 			}
 			// input[i] format = DEC,OCT,HEX,BIN,SYMBOL
-			int degree = 3;
-			BTree<string> dec = new BTree<string>(degree);
+			int degree = 5;
+			BTree<int> dec = new BTree<int>(degree);
 			BTree<int> oct = new BTree<int>(degree);
 			BTree<string> hex = new BTree<string>(degree);
 			BTree<int> bin = new BTree<int>(degree);
@@ -26,7 +26,7 @@ namespace a5
 
 			for (int i = 0; i < input.Count(); i++)
 			{
-				dec.Insert(input[i][0]);
+				dec.Insert(Convert.ToInt32(input[i][0]));
 			}
 			Console.ReadLine();
 			/*

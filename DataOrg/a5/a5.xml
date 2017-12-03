@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>a5</name>
+    </assembly>
+    <members>
+        <member name="T:a5.BTree`1">
+            <summary>
+            Generic BTree class that uses Node class to create BTree of
+            arbitrary degree.
+            i.e. 2-3 Tree, 2-3-4, etc.
+            </summary>
+            <typeparam name="Z">Generic used to handle different data type inputs.</typeparam>
+        </member>
+        <member name="M:a5.BTree`1.#ctor(System.Int32)">
+            <summary>
+            Default constructor. Initializes root, sets degree and key/child lengths.
+            </summary>
+            <param name="degree">The degree is the max number of children per node. Passed in by Program class.</param>
+        </member>
+        <member name="M:a5.BTree`1.Search(`0)">
+            <summary>
+            Public method that calls a search utility private class by passing in the root node of the btree.
+            </summary>
+            <param name="value">Generic value to be searched</param>
+            <returns>Returns a result node (null if search miss) from search.</returns>
+        </member>
+        <member name="M:a5.BTree`1.Insert(`0)">
+            <summary>
+            Public method that checks for base cases for inserting and handles these bases cases.
+            Otherwise, it calls a private insert utility method.
+            </summary>
+            <param name="value">Generic value to be inserted into a new node.</param>
+        </member>
+        <member name="M:a5.BTree`1.GetHeight">
+            <summary>
+            Helper method used to send tree height back to Program class.
+            </summary>
+            <returns>Integer height value of tree.</returns>
+        </member>
+        <member name="M:a5.BTree`1.Traverse">
+            <summary>
+            Public method that calls private Traverse utility method by passing in the root.
+            </summary>
+        </member>
+        <member name="M:a5.BTree`1.TraverseUtil(a5.Node{`0})">
+            <summary>
+            Private traverse utility method that uses level-by-level traversal using a queue
+            to print parent keys, current node keys, and all children keys.
+            </summary>
+            <param name="n">Generic node passed in as starting point for traversal. Initially passed in as root.</param>
+        </member>
+        <member name="M:a5.BTree`1.SearchUtil(a5.Node{`0},`0)">
+            <summary>
+            Private search utility method.
+            Used only when searching for a value, not used during the insert process.
+            Uses standard binary tree style search based on key values of current node.
+            </summary>
+            <param name="n">Current generic node. Initially passed in as root.</param>
+            <param name="value">Generic value being searched.</param>
+            <returns>Generic node returned to be handled by Program class.</returns>
+        </member>
+        <member name="M:a5.BTree`1.InsertUtil(a5.Node{`0},a5.Node{`0})">
+            <summary>
+            Private insert utility method.
+            Used to handle inserts beyond base cases.
+            Searches for new node position and adds height to tree if
+            needed. Recursively adds and splits nodes up tree.
+            </summary>
+            <param name="n">New generic node to be inserted.</param>
+            <param name="m">Current generic node that is being inserted into.</param>
+        </member>
+        <member name="M:a5.BTree`1.InsertPos(a5.Node{`0},a5.Node{`0})">
+            <summary>
+            Private insert helper method.
+            Recursively searches for position to insert a new node, inserts, then handles key updates as needed.
+            </summary>
+            <param name="n">Generic node being inserted.</param>
+            <param name="m">Current generic node in recursive call.</param>
+            <returns>Generic node returned to InsertUtil method for further operation.</returns>
+        </member>
+        <member name="M:a5.BTree`1.Split(a5.Node{`0})">
+            <summary>
+            Private insert helper method called by InsertUtil method.
+            Used to split a full node into two half nodes based on degree of tree.
+            </summary>
+            <param name="m">Generic node to be split. Remains partially in tact including parent pointer.</param>
+            <returns>Returns a free floating node wih half of m's old children. Will be inserted back into tree.</returns>
+        </member>
+        <member name="M:a5.BTree`1.FixKeys(a5.Node{`0})">
+            <summary>
+            Private insert helper method called by multiple other methods.
+            Recursively traverses up tree to root, fixing keys/maxValue on the way up.
+            </summary>
+            <param name="n">Generic node to start travelling up from.</param>
+        </member>
+        <member name="T:a5.Controller">
+            <summary>
+            Controller class used to convert between different number bases and associate
+            search results with items in the ascii table.
+            </summary>
+        </member>
+        <member name="M:a5.Controller.#ctor">
+            <summary>
+            Default constructor to instantiate class.
+            </summary>
+        </member>
+        <member name="M:a5.Controller.ConvertFromDec(System.Int32)">
+            <summary>
+            Helper method that converts from decimal to octal, hex, binary, and symbol in ascii table.
+            </summary>
+            <param name="n">decimal search result</param>
+            <returns>returns search result string containing converted values</returns>
+        </member>
+        <member name="M:a5.Controller.ConvertFromOct(System.Int32)">
+            <summary>
+            Helper method that converts from Octal to decimal, hex, binary, and symbol in ascii table.
+            </summary>
+            <param name="n">octal search result</param>
+            <returns>returns search result string containing converted values</returns>
+        </member>
+        <member name="M:a5.Controller.ConvertFromBin(System.Int32)">
+            <summary>
+            Helper method that converts from binary to decimal, octal, hex, and symbol in ascii table.
+            </summary>
+            <param name="n">binary search result</param>
+            <returns>returns search result string containing converted values</returns>
+        </member>
+        <member name="M:a5.Controller.ConvertFromHex(System.String)">
+            <summary>
+            Helper method that converts from hexidecimal to decimal, octal, binary, and symbol in ascii table.
+            </summary>
+            <param name="n">hexideximal search result</param>
+            <returns>returns search result string containing converted values</returns>
+        </member>
+        <member name="M:a5.Controller.ConvertFromSym(System.String)">
+            <summary>
+            Helper method that converts from a symbol in the ascii table to decinmal, octal, hex, and binary.
+            </summary>
+            <param name="n">ascii symbol search result</param>
+            <returns>returns search result string containing converted values</returns>
+        </member>
+        <member name="T:a5.Node`1">
+            <summary>
+            Generic node class used as object in BTree class.
+            </summary>
+            <typeparam name="Z">Generic parameter needed due to varying insert data types.</typeparam>
+        </member>
+        <member name="M:a5.Node`1.#ctor">
+            <summary>
+            Default constructor used to create completely null node.
+            </summary>
+        </member>
+        <member name="M:a5.Node`1.#ctor(System.Int32)">
+            <summary>
+            Basic node constructor only used to initialize a node with no data associated with it.
+            </summary>
+            <param name="degree">Integer passed in to set Children and Key array lengths.</param>
+        </member>
+        <member name="M:a5.Node`1.#ctor(System.Int32,`0,a5.Node{`0})">
+            <summary>
+            Main node constructor used both to initialize a node and to assign data/parent.
+            </summary>
+            <param name="degree">Integer passed in to set Children and Key array lengths.</param>
+            <param name="value">Generic value containing the actual data stored in the node.</param>
+            <param name="parent">Pointer to parent node in the tree.</param>
+        </member>
+        <member name="P:a5.Node`1.IsLeaf">
+            <summary>
+            Accessor used to return a boolean status of whether or not a node is a leaf.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.MaxValue">
+            <summary>
+            MaxValue used to help search for items and insert new items.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.Degree">
+            <summary>
+            Degree of tree (max children per node).
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.Children">
+            <summary>
+            Array of pointers to nodes that are the children of the current node.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.Keys">
+            <summary>
+            Array of values used to traverse tree.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.Parent">
+            <summary>
+            Pointer to parent of current node.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.Value">
+            <summary>
+            Data package for node.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.ChildCount">
+            <summary>
+            Integer used to keep track of number of children.
+            </summary>
+        </member>
+        <member name="P:a5.Node`1.KeyCount">
+            <summary>
+            Integer used to keep track of number of keys.
+            </summary>
+        </member>
+        <member name="T:a5.Program">
+            <summary>
+            Main class that instantiates BTree, UI, and Controller classes.
+            Also handles txt file input and sanitization as well as inserting into trees.
+            </summary>
+        </member>
+        <member name="M:a5.Program.Main(System.String[])">
+            <summary>
+            This class handles communication between the BTree, the input dataset, UI, and Controller classes 
+            </summary>
+            <param name="args">default params</param>
+        </member>
+        <member name="T:a5.UI">
+            <summary>
+            UI class used to control majority of program user input and program output.
+            </summary>
+        </member>
+        <member name="M:a5.UI.StartMenu">
+            <summary>
+            Called at start of program to prompt user for a search item.
+            </summary>
+            <returns>Returns a validated search string.</returns>
+        </member>
+        <member name="M:a5.UI.TTHeader(System.Int32,System.Int32)">
+            <summary>
+            Helper method used to print a large amount of text that acts
+            as a header for search results for a 2-3 Tree.
+            </summary>
+            <param name="height">Height of tree.</param>
+            <param name="leaves">Number of leaves in tree.</param>
+        </member>
+        <member name="M:a5.UI.TTFHeader(System.Int32,System.Int32)">
+            <summary>
+            Helper method used to print a large amount of text that acts
+            as a header for search results for a 2-3-4 Tree.
+            </summary>
+            <param name="height">Height of tree.</param>
+            <param name="leaves">Number of leaves in tree.</param>
+        </member>
+        <member name="M:a5.UI.Output(System.String[],System.Double,System.String)">
+            <summary>
+            Main output method that prints out search results passed in from Program class.
+            </summary>
+            <param name="arr">Array of strings containing search results.</param>
+            <param name="time">Total time (ms) of search/</param>
+            <param name="type">String specifying the tree used to search. 
+            This is needed since some searches return multiple different results from different columns in the ASCII table.</param>
+        </member>
+    </members>
+</doc>

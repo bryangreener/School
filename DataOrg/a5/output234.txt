@@ -1,0 +1,1762 @@
+____________________________________________________________________________________________________
+DECIMAL TREE TRAVERSAL
+____________________________________________________________________________________________________
+LEVEL BY LEVEL TRAVERSAL 
+OF 2-3-4 TREE
+INTERNAL: KEY[0]: 31     KEY[1]: 63     KEY[2]: 127    PARENT: NULL           
+             CHILD[0]: KEY[0]: 15     KEY[1]: 31     
+             CHILD[1]: KEY[0]: 47     KEY[1]: 63     
+             CHILD[2]: KEY[0]: 79     KEY[1]: 95     KEY[2]: 127    
+INTERNAL: KEY[0]: 15     KEY[1]: 31     PARENT: KEY[0]: 31     KEY[1]: 63     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 7      KEY[1]: 15     
+             CHILD[1]: KEY[0]: 23     KEY[1]: 31     
+INTERNAL: KEY[0]: 47     KEY[1]: 63     PARENT: KEY[0]: 31     KEY[1]: 63     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 39     KEY[1]: 47     
+             CHILD[1]: KEY[0]: 55     KEY[1]: 63     
+INTERNAL: KEY[0]: 79     KEY[1]: 95     KEY[2]: 127    PARENT: KEY[0]: 31     KEY[1]: 63     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 71     KEY[1]: 79     
+             CHILD[1]: KEY[0]: 87     KEY[1]: 95     
+             CHILD[2]: KEY[0]: 103    KEY[1]: 111    KEY[2]: 127    
+INTERNAL: KEY[0]: 7      KEY[1]: 15     PARENT: KEY[0]: 15     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 3      KEY[1]: 7      
+             CHILD[1]: KEY[0]: 11     KEY[1]: 15     
+INTERNAL: KEY[0]: 23     KEY[1]: 31     PARENT: KEY[0]: 15     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 19     KEY[1]: 23     
+             CHILD[1]: KEY[0]: 27     KEY[1]: 31     
+INTERNAL: KEY[0]: 39     KEY[1]: 47     PARENT: KEY[0]: 47     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 35     KEY[1]: 39     
+             CHILD[1]: KEY[0]: 43     KEY[1]: 47     
+INTERNAL: KEY[0]: 55     KEY[1]: 63     PARENT: KEY[0]: 47     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 51     KEY[1]: 55     
+             CHILD[1]: KEY[0]: 59     KEY[1]: 63     
+INTERNAL: KEY[0]: 71     KEY[1]: 79     PARENT: KEY[0]: 79     KEY[1]: 95     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 67     KEY[1]: 71     
+             CHILD[1]: KEY[0]: 75     KEY[1]: 79     
+INTERNAL: KEY[0]: 87     KEY[1]: 95     PARENT: KEY[0]: 79     KEY[1]: 95     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 83     KEY[1]: 87     
+             CHILD[1]: KEY[0]: 91     KEY[1]: 95     
+INTERNAL: KEY[0]: 103    KEY[1]: 111    KEY[2]: 127    PARENT: KEY[0]: 79     KEY[1]: 95     KEY[2]: 127    
+             CHILD[0]: KEY[0]: 99     KEY[1]: 103    
+             CHILD[1]: KEY[0]: 107    KEY[1]: 111    
+             CHILD[2]: KEY[0]: 115    KEY[1]: 119    KEY[2]: 127    
+INTERNAL: KEY[0]: 3      KEY[1]: 7      PARENT: KEY[0]: 7      KEY[1]: 15     
+             CHILD[0]: KEY[0]: 1      KEY[1]: 3      
+             CHILD[1]: KEY[0]: 5      KEY[1]: 7      
+INTERNAL: KEY[0]: 11     KEY[1]: 15     PARENT: KEY[0]: 7      KEY[1]: 15     
+             CHILD[0]: KEY[0]: 9      KEY[1]: 11     
+             CHILD[1]: KEY[0]: 13     KEY[1]: 15     
+INTERNAL: KEY[0]: 19     KEY[1]: 23     PARENT: KEY[0]: 23     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 17     KEY[1]: 19     
+             CHILD[1]: KEY[0]: 21     KEY[1]: 23     
+INTERNAL: KEY[0]: 27     KEY[1]: 31     PARENT: KEY[0]: 23     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 25     KEY[1]: 27     
+             CHILD[1]: KEY[0]: 29     KEY[1]: 31     
+INTERNAL: KEY[0]: 35     KEY[1]: 39     PARENT: KEY[0]: 39     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 33     KEY[1]: 35     
+             CHILD[1]: KEY[0]: 37     KEY[1]: 39     
+INTERNAL: KEY[0]: 43     KEY[1]: 47     PARENT: KEY[0]: 39     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 41     KEY[1]: 43     
+             CHILD[1]: KEY[0]: 45     KEY[1]: 47     
+INTERNAL: KEY[0]: 51     KEY[1]: 55     PARENT: KEY[0]: 55     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 49     KEY[1]: 51     
+             CHILD[1]: KEY[0]: 53     KEY[1]: 55     
+INTERNAL: KEY[0]: 59     KEY[1]: 63     PARENT: KEY[0]: 55     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 57     KEY[1]: 59     
+             CHILD[1]: KEY[0]: 61     KEY[1]: 63     
+INTERNAL: KEY[0]: 67     KEY[1]: 71     PARENT: KEY[0]: 71     KEY[1]: 79     
+             CHILD[0]: KEY[0]: 65     KEY[1]: 67     
+             CHILD[1]: KEY[0]: 69     KEY[1]: 71     
+INTERNAL: KEY[0]: 75     KEY[1]: 79     PARENT: KEY[0]: 71     KEY[1]: 79     
+             CHILD[0]: KEY[0]: 73     KEY[1]: 75     
+             CHILD[1]: KEY[0]: 77     KEY[1]: 79     
+INTERNAL: KEY[0]: 83     KEY[1]: 87     PARENT: KEY[0]: 87     KEY[1]: 95     
+             CHILD[0]: KEY[0]: 81     KEY[1]: 83     
+             CHILD[1]: KEY[0]: 85     KEY[1]: 87     
+INTERNAL: KEY[0]: 91     KEY[1]: 95     PARENT: KEY[0]: 87     KEY[1]: 95     
+             CHILD[0]: KEY[0]: 89     KEY[1]: 91     
+             CHILD[1]: KEY[0]: 93     KEY[1]: 95     
+INTERNAL: KEY[0]: 99     KEY[1]: 103    PARENT: KEY[0]: 103    KEY[1]: 111    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 97     KEY[1]: 99     
+             CHILD[1]: KEY[0]: 101    KEY[1]: 103    
+INTERNAL: KEY[0]: 107    KEY[1]: 111    PARENT: KEY[0]: 103    KEY[1]: 111    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 105    KEY[1]: 107    
+             CHILD[1]: KEY[0]: 109    KEY[1]: 111    
+INTERNAL: KEY[0]: 115    KEY[1]: 119    KEY[2]: 127    PARENT: KEY[0]: 103    KEY[1]: 111    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 113    KEY[1]: 115    
+             CHILD[1]: KEY[0]: 117    KEY[1]: 119    
+             CHILD[2]: KEY[0]: 121    KEY[1]: 123    KEY[2]: 127    
+INTERNAL: KEY[0]: 1      KEY[1]: 3      PARENT: KEY[0]: 3      KEY[1]: 7      
+             CHILD[0]: KEY[0]: 0      KEY[1]: 1      
+             CHILD[1]: KEY[0]: 2      KEY[1]: 3      
+INTERNAL: KEY[0]: 5      KEY[1]: 7      PARENT: KEY[0]: 3      KEY[1]: 7      
+             CHILD[0]: KEY[0]: 4      KEY[1]: 5      
+             CHILD[1]: KEY[0]: 6      KEY[1]: 7      
+INTERNAL: KEY[0]: 9      KEY[1]: 11     PARENT: KEY[0]: 11     KEY[1]: 15     
+             CHILD[0]: KEY[0]: 8      KEY[1]: 9      
+             CHILD[1]: KEY[0]: 10     KEY[1]: 11     
+INTERNAL: KEY[0]: 13     KEY[1]: 15     PARENT: KEY[0]: 11     KEY[1]: 15     
+             CHILD[0]: KEY[0]: 12     KEY[1]: 13     
+             CHILD[1]: KEY[0]: 14     KEY[1]: 15     
+INTERNAL: KEY[0]: 17     KEY[1]: 19     PARENT: KEY[0]: 19     KEY[1]: 23     
+             CHILD[0]: KEY[0]: 16     KEY[1]: 17     
+             CHILD[1]: KEY[0]: 18     KEY[1]: 19     
+INTERNAL: KEY[0]: 21     KEY[1]: 23     PARENT: KEY[0]: 19     KEY[1]: 23     
+             CHILD[0]: KEY[0]: 20     KEY[1]: 21     
+             CHILD[1]: KEY[0]: 22     KEY[1]: 23     
+INTERNAL: KEY[0]: 25     KEY[1]: 27     PARENT: KEY[0]: 27     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 24     KEY[1]: 25     
+             CHILD[1]: KEY[0]: 26     KEY[1]: 27     
+INTERNAL: KEY[0]: 29     KEY[1]: 31     PARENT: KEY[0]: 27     KEY[1]: 31     
+             CHILD[0]: KEY[0]: 28     KEY[1]: 29     
+             CHILD[1]: KEY[0]: 30     KEY[1]: 31     
+INTERNAL: KEY[0]: 33     KEY[1]: 35     PARENT: KEY[0]: 35     KEY[1]: 39     
+             CHILD[0]: KEY[0]: 32     KEY[1]: 33     
+             CHILD[1]: KEY[0]: 34     KEY[1]: 35     
+INTERNAL: KEY[0]: 37     KEY[1]: 39     PARENT: KEY[0]: 35     KEY[1]: 39     
+             CHILD[0]: KEY[0]: 36     KEY[1]: 37     
+             CHILD[1]: KEY[0]: 38     KEY[1]: 39     
+INTERNAL: KEY[0]: 41     KEY[1]: 43     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 40     KEY[1]: 41     
+             CHILD[1]: KEY[0]: 42     KEY[1]: 43     
+INTERNAL: KEY[0]: 45     KEY[1]: 47     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 44     KEY[1]: 45     
+             CHILD[1]: KEY[0]: 46     KEY[1]: 47     
+INTERNAL: KEY[0]: 49     KEY[1]: 51     PARENT: KEY[0]: 51     KEY[1]: 55     
+             CHILD[0]: KEY[0]: 48     KEY[1]: 49     
+             CHILD[1]: KEY[0]: 50     KEY[1]: 51     
+INTERNAL: KEY[0]: 53     KEY[1]: 55     PARENT: KEY[0]: 51     KEY[1]: 55     
+             CHILD[0]: KEY[0]: 52     KEY[1]: 53     
+             CHILD[1]: KEY[0]: 54     KEY[1]: 55     
+INTERNAL: KEY[0]: 57     KEY[1]: 59     PARENT: KEY[0]: 59     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 56     KEY[1]: 57     
+             CHILD[1]: KEY[0]: 58     KEY[1]: 59     
+INTERNAL: KEY[0]: 61     KEY[1]: 63     PARENT: KEY[0]: 59     KEY[1]: 63     
+             CHILD[0]: KEY[0]: 60     KEY[1]: 61     
+             CHILD[1]: KEY[0]: 62     KEY[1]: 63     
+INTERNAL: KEY[0]: 65     KEY[1]: 67     PARENT: KEY[0]: 67     KEY[1]: 71     
+             CHILD[0]: KEY[0]: 64     KEY[1]: 65     
+             CHILD[1]: KEY[0]: 66     KEY[1]: 67     
+INTERNAL: KEY[0]: 69     KEY[1]: 71     PARENT: KEY[0]: 67     KEY[1]: 71     
+             CHILD[0]: KEY[0]: 68     KEY[1]: 69     
+             CHILD[1]: KEY[0]: 70     KEY[1]: 71     
+INTERNAL: KEY[0]: 73     KEY[1]: 75     PARENT: KEY[0]: 75     KEY[1]: 79     
+             CHILD[0]: KEY[0]: 72     KEY[1]: 73     
+             CHILD[1]: KEY[0]: 74     KEY[1]: 75     
+INTERNAL: KEY[0]: 77     KEY[1]: 79     PARENT: KEY[0]: 75     KEY[1]: 79     
+             CHILD[0]: KEY[0]: 76     KEY[1]: 77     
+             CHILD[1]: KEY[0]: 78     KEY[1]: 79     
+INTERNAL: KEY[0]: 81     KEY[1]: 83     PARENT: KEY[0]: 83     KEY[1]: 87     
+             CHILD[0]: KEY[0]: 80     KEY[1]: 81     
+             CHILD[1]: KEY[0]: 82     KEY[1]: 83     
+INTERNAL: KEY[0]: 85     KEY[1]: 87     PARENT: KEY[0]: 83     KEY[1]: 87     
+             CHILD[0]: KEY[0]: 84     KEY[1]: 85     
+             CHILD[1]: KEY[0]: 86     KEY[1]: 87     
+INTERNAL: KEY[0]: 89     KEY[1]: 91     PARENT: KEY[0]: 91     KEY[1]: 95     
+             CHILD[0]: KEY[0]: 88     KEY[1]: 89     
+             CHILD[1]: KEY[0]: 90     KEY[1]: 91     
+INTERNAL: KEY[0]: 93     KEY[1]: 95     PARENT: KEY[0]: 91     KEY[1]: 95     
+             CHILD[0]: KEY[0]: 92     KEY[1]: 93     
+             CHILD[1]: KEY[0]: 94     KEY[1]: 95     
+INTERNAL: KEY[0]: 97     KEY[1]: 99     PARENT: KEY[0]: 99     KEY[1]: 103    
+             CHILD[0]: KEY[0]: 96     KEY[1]: 97     
+             CHILD[1]: KEY[0]: 98     KEY[1]: 99     
+INTERNAL: KEY[0]: 101    KEY[1]: 103    PARENT: KEY[0]: 99     KEY[1]: 103    
+             CHILD[0]: KEY[0]: 100    KEY[1]: 101    
+             CHILD[1]: KEY[0]: 102    KEY[1]: 103    
+INTERNAL: KEY[0]: 105    KEY[1]: 107    PARENT: KEY[0]: 107    KEY[1]: 111    
+             CHILD[0]: KEY[0]: 104    KEY[1]: 105    
+             CHILD[1]: KEY[0]: 106    KEY[1]: 107    
+INTERNAL: KEY[0]: 109    KEY[1]: 111    PARENT: KEY[0]: 107    KEY[1]: 111    
+             CHILD[0]: KEY[0]: 108    KEY[1]: 109    
+             CHILD[1]: KEY[0]: 110    KEY[1]: 111    
+INTERNAL: KEY[0]: 113    KEY[1]: 115    PARENT: KEY[0]: 115    KEY[1]: 119    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 112    KEY[1]: 113    
+             CHILD[1]: KEY[0]: 114    KEY[1]: 115    
+INTERNAL: KEY[0]: 117    KEY[1]: 119    PARENT: KEY[0]: 115    KEY[1]: 119    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 116    KEY[1]: 117    
+             CHILD[1]: KEY[0]: 118    KEY[1]: 119    
+INTERNAL: KEY[0]: 121    KEY[1]: 123    KEY[2]: 127    PARENT: KEY[0]: 115    KEY[1]: 119    KEY[2]: 127    
+             CHILD[0]: KEY[0]: 120    KEY[1]: 121    
+             CHILD[1]: KEY[0]: 122    KEY[1]: 123    
+             CHILD[2]: KEY[0]: 124    KEY[1]: 125    KEY[2]: 126    
+INTERNAL: KEY[0]: 0      KEY[1]: 1      PARENT: KEY[0]: 1      KEY[1]: 3      
+             LEAF[0]:  VALUE: 0
+             LEAF[1]:  VALUE: 1
+INTERNAL: KEY[0]: 2      KEY[1]: 3      PARENT: KEY[0]: 1      KEY[1]: 3      
+             LEAF[0]:  VALUE: 2
+             LEAF[1]:  VALUE: 3
+INTERNAL: KEY[0]: 4      KEY[1]: 5      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 4
+             LEAF[1]:  VALUE: 5
+INTERNAL: KEY[0]: 6      KEY[1]: 7      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 6
+             LEAF[1]:  VALUE: 7
+INTERNAL: KEY[0]: 8      KEY[1]: 9      PARENT: KEY[0]: 9      KEY[1]: 11     
+             LEAF[0]:  VALUE: 8
+             LEAF[1]:  VALUE: 9
+INTERNAL: KEY[0]: 10     KEY[1]: 11     PARENT: KEY[0]: 9      KEY[1]: 11     
+             LEAF[0]:  VALUE: 10
+             LEAF[1]:  VALUE: 11
+INTERNAL: KEY[0]: 12     KEY[1]: 13     PARENT: KEY[0]: 13     KEY[1]: 15     
+             LEAF[0]:  VALUE: 12
+             LEAF[1]:  VALUE: 13
+INTERNAL: KEY[0]: 14     KEY[1]: 15     PARENT: KEY[0]: 13     KEY[1]: 15     
+             LEAF[0]:  VALUE: 14
+             LEAF[1]:  VALUE: 15
+INTERNAL: KEY[0]: 16     KEY[1]: 17     PARENT: KEY[0]: 17     KEY[1]: 19     
+             LEAF[0]:  VALUE: 16
+             LEAF[1]:  VALUE: 17
+INTERNAL: KEY[0]: 18     KEY[1]: 19     PARENT: KEY[0]: 17     KEY[1]: 19     
+             LEAF[0]:  VALUE: 18
+             LEAF[1]:  VALUE: 19
+INTERNAL: KEY[0]: 20     KEY[1]: 21     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 20
+             LEAF[1]:  VALUE: 21
+INTERNAL: KEY[0]: 22     KEY[1]: 23     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 22
+             LEAF[1]:  VALUE: 23
+INTERNAL: KEY[0]: 24     KEY[1]: 25     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 24
+             LEAF[1]:  VALUE: 25
+INTERNAL: KEY[0]: 26     KEY[1]: 27     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 26
+             LEAF[1]:  VALUE: 27
+INTERNAL: KEY[0]: 28     KEY[1]: 29     PARENT: KEY[0]: 29     KEY[1]: 31     
+             LEAF[0]:  VALUE: 28
+             LEAF[1]:  VALUE: 29
+INTERNAL: KEY[0]: 30     KEY[1]: 31     PARENT: KEY[0]: 29     KEY[1]: 31     
+             LEAF[0]:  VALUE: 30
+             LEAF[1]:  VALUE: 31
+INTERNAL: KEY[0]: 32     KEY[1]: 33     PARENT: KEY[0]: 33     KEY[1]: 35     
+             LEAF[0]:  VALUE: 32
+             LEAF[1]:  VALUE: 33
+INTERNAL: KEY[0]: 34     KEY[1]: 35     PARENT: KEY[0]: 33     KEY[1]: 35     
+             LEAF[0]:  VALUE: 34
+             LEAF[1]:  VALUE: 35
+INTERNAL: KEY[0]: 36     KEY[1]: 37     PARENT: KEY[0]: 37     KEY[1]: 39     
+             LEAF[0]:  VALUE: 36
+             LEAF[1]:  VALUE: 37
+INTERNAL: KEY[0]: 38     KEY[1]: 39     PARENT: KEY[0]: 37     KEY[1]: 39     
+             LEAF[0]:  VALUE: 38
+             LEAF[1]:  VALUE: 39
+INTERNAL: KEY[0]: 40     KEY[1]: 41     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 40
+             LEAF[1]:  VALUE: 41
+INTERNAL: KEY[0]: 42     KEY[1]: 43     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 42
+             LEAF[1]:  VALUE: 43
+INTERNAL: KEY[0]: 44     KEY[1]: 45     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 44
+             LEAF[1]:  VALUE: 45
+INTERNAL: KEY[0]: 46     KEY[1]: 47     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 46
+             LEAF[1]:  VALUE: 47
+INTERNAL: KEY[0]: 48     KEY[1]: 49     PARENT: KEY[0]: 49     KEY[1]: 51     
+             LEAF[0]:  VALUE: 48
+             LEAF[1]:  VALUE: 49
+INTERNAL: KEY[0]: 50     KEY[1]: 51     PARENT: KEY[0]: 49     KEY[1]: 51     
+             LEAF[0]:  VALUE: 50
+             LEAF[1]:  VALUE: 51
+INTERNAL: KEY[0]: 52     KEY[1]: 53     PARENT: KEY[0]: 53     KEY[1]: 55     
+             LEAF[0]:  VALUE: 52
+             LEAF[1]:  VALUE: 53
+INTERNAL: KEY[0]: 54     KEY[1]: 55     PARENT: KEY[0]: 53     KEY[1]: 55     
+             LEAF[0]:  VALUE: 54
+             LEAF[1]:  VALUE: 55
+INTERNAL: KEY[0]: 56     KEY[1]: 57     PARENT: KEY[0]: 57     KEY[1]: 59     
+             LEAF[0]:  VALUE: 56
+             LEAF[1]:  VALUE: 57
+INTERNAL: KEY[0]: 58     KEY[1]: 59     PARENT: KEY[0]: 57     KEY[1]: 59     
+             LEAF[0]:  VALUE: 58
+             LEAF[1]:  VALUE: 59
+INTERNAL: KEY[0]: 60     KEY[1]: 61     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 60
+             LEAF[1]:  VALUE: 61
+INTERNAL: KEY[0]: 62     KEY[1]: 63     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 62
+             LEAF[1]:  VALUE: 63
+INTERNAL: KEY[0]: 64     KEY[1]: 65     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 64
+             LEAF[1]:  VALUE: 65
+INTERNAL: KEY[0]: 66     KEY[1]: 67     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 66
+             LEAF[1]:  VALUE: 67
+INTERNAL: KEY[0]: 68     KEY[1]: 69     PARENT: KEY[0]: 69     KEY[1]: 71     
+             LEAF[0]:  VALUE: 68
+             LEAF[1]:  VALUE: 69
+INTERNAL: KEY[0]: 70     KEY[1]: 71     PARENT: KEY[0]: 69     KEY[1]: 71     
+             LEAF[0]:  VALUE: 70
+             LEAF[1]:  VALUE: 71
+INTERNAL: KEY[0]: 72     KEY[1]: 73     PARENT: KEY[0]: 73     KEY[1]: 75     
+             LEAF[0]:  VALUE: 72
+             LEAF[1]:  VALUE: 73
+INTERNAL: KEY[0]: 74     KEY[1]: 75     PARENT: KEY[0]: 73     KEY[1]: 75     
+             LEAF[0]:  VALUE: 74
+             LEAF[1]:  VALUE: 75
+INTERNAL: KEY[0]: 76     KEY[1]: 77     PARENT: KEY[0]: 77     KEY[1]: 79     
+             LEAF[0]:  VALUE: 76
+             LEAF[1]:  VALUE: 77
+INTERNAL: KEY[0]: 78     KEY[1]: 79     PARENT: KEY[0]: 77     KEY[1]: 79     
+             LEAF[0]:  VALUE: 78
+             LEAF[1]:  VALUE: 79
+INTERNAL: KEY[0]: 80     KEY[1]: 81     PARENT: KEY[0]: 81     KEY[1]: 83     
+             LEAF[0]:  VALUE: 80
+             LEAF[1]:  VALUE: 81
+INTERNAL: KEY[0]: 82     KEY[1]: 83     PARENT: KEY[0]: 81     KEY[1]: 83     
+             LEAF[0]:  VALUE: 82
+             LEAF[1]:  VALUE: 83
+INTERNAL: KEY[0]: 84     KEY[1]: 85     PARENT: KEY[0]: 85     KEY[1]: 87     
+             LEAF[0]:  VALUE: 84
+             LEAF[1]:  VALUE: 85
+INTERNAL: KEY[0]: 86     KEY[1]: 87     PARENT: KEY[0]: 85     KEY[1]: 87     
+             LEAF[0]:  VALUE: 86
+             LEAF[1]:  VALUE: 87
+INTERNAL: KEY[0]: 88     KEY[1]: 89     PARENT: KEY[0]: 89     KEY[1]: 91     
+             LEAF[0]:  VALUE: 88
+             LEAF[1]:  VALUE: 89
+INTERNAL: KEY[0]: 90     KEY[1]: 91     PARENT: KEY[0]: 89     KEY[1]: 91     
+             LEAF[0]:  VALUE: 90
+             LEAF[1]:  VALUE: 91
+INTERNAL: KEY[0]: 92     KEY[1]: 93     PARENT: KEY[0]: 93     KEY[1]: 95     
+             LEAF[0]:  VALUE: 92
+             LEAF[1]:  VALUE: 93
+INTERNAL: KEY[0]: 94     KEY[1]: 95     PARENT: KEY[0]: 93     KEY[1]: 95     
+             LEAF[0]:  VALUE: 94
+             LEAF[1]:  VALUE: 95
+INTERNAL: KEY[0]: 96     KEY[1]: 97     PARENT: KEY[0]: 97     KEY[1]: 99     
+             LEAF[0]:  VALUE: 96
+             LEAF[1]:  VALUE: 97
+INTERNAL: KEY[0]: 98     KEY[1]: 99     PARENT: KEY[0]: 97     KEY[1]: 99     
+             LEAF[0]:  VALUE: 98
+             LEAF[1]:  VALUE: 99
+INTERNAL: KEY[0]: 100    KEY[1]: 101    PARENT: KEY[0]: 101    KEY[1]: 103    
+             LEAF[0]:  VALUE: 100
+             LEAF[1]:  VALUE: 101
+INTERNAL: KEY[0]: 102    KEY[1]: 103    PARENT: KEY[0]: 101    KEY[1]: 103    
+             LEAF[0]:  VALUE: 102
+             LEAF[1]:  VALUE: 103
+INTERNAL: KEY[0]: 104    KEY[1]: 105    PARENT: KEY[0]: 105    KEY[1]: 107    
+             LEAF[0]:  VALUE: 104
+             LEAF[1]:  VALUE: 105
+INTERNAL: KEY[0]: 106    KEY[1]: 107    PARENT: KEY[0]: 105    KEY[1]: 107    
+             LEAF[0]:  VALUE: 106
+             LEAF[1]:  VALUE: 107
+INTERNAL: KEY[0]: 108    KEY[1]: 109    PARENT: KEY[0]: 109    KEY[1]: 111    
+             LEAF[0]:  VALUE: 108
+             LEAF[1]:  VALUE: 109
+INTERNAL: KEY[0]: 110    KEY[1]: 111    PARENT: KEY[0]: 109    KEY[1]: 111    
+             LEAF[0]:  VALUE: 110
+             LEAF[1]:  VALUE: 111
+INTERNAL: KEY[0]: 112    KEY[1]: 113    PARENT: KEY[0]: 113    KEY[1]: 115    
+             LEAF[0]:  VALUE: 112
+             LEAF[1]:  VALUE: 113
+INTERNAL: KEY[0]: 114    KEY[1]: 115    PARENT: KEY[0]: 113    KEY[1]: 115    
+             LEAF[0]:  VALUE: 114
+             LEAF[1]:  VALUE: 115
+INTERNAL: KEY[0]: 116    KEY[1]: 117    PARENT: KEY[0]: 117    KEY[1]: 119    
+             LEAF[0]:  VALUE: 116
+             LEAF[1]:  VALUE: 117
+INTERNAL: KEY[0]: 118    KEY[1]: 119    PARENT: KEY[0]: 117    KEY[1]: 119    
+             LEAF[0]:  VALUE: 118
+             LEAF[1]:  VALUE: 119
+INTERNAL: KEY[0]: 120    KEY[1]: 121    PARENT: KEY[0]: 121    KEY[1]: 123    KEY[2]: 127    
+             LEAF[0]:  VALUE: 120
+             LEAF[1]:  VALUE: 121
+INTERNAL: KEY[0]: 122    KEY[1]: 123    PARENT: KEY[0]: 121    KEY[1]: 123    KEY[2]: 127    
+             LEAF[0]:  VALUE: 122
+             LEAF[1]:  VALUE: 123
+INTERNAL: KEY[0]: 124    KEY[1]: 125    KEY[2]: 126    PARENT: KEY[0]: 121    KEY[1]: 123    KEY[2]: 127    
+             LEAF[0]:  VALUE: 124
+             LEAF[1]:  VALUE: 125
+             LEAF[2]:  VALUE: 126
+             LEAF[3]:  VALUE: 127
+____________________________________________________________________________________________________
+OCTAL TREE TRAVERSAL
+____________________________________________________________________________________________________
+LEVEL BY LEVEL TRAVERSAL 
+OF 2-3-4 TREE
+INTERNAL: KEY[0]: 37     KEY[1]: 77     KEY[2]: 177    PARENT: NULL           
+             CHILD[0]: KEY[0]: 17     KEY[1]: 37     
+             CHILD[1]: KEY[0]: 57     KEY[1]: 77     
+             CHILD[2]: KEY[0]: 117    KEY[1]: 137    KEY[2]: 177    
+INTERNAL: KEY[0]: 17     KEY[1]: 37     PARENT: KEY[0]: 37     KEY[1]: 77     KEY[2]: 177    
+             CHILD[0]: KEY[0]: 7      KEY[1]: 17     
+             CHILD[1]: KEY[0]: 27     KEY[1]: 37     
+INTERNAL: KEY[0]: 57     KEY[1]: 77     PARENT: KEY[0]: 37     KEY[1]: 77     KEY[2]: 177    
+             CHILD[0]: KEY[0]: 47     KEY[1]: 57     
+             CHILD[1]: KEY[0]: 67     KEY[1]: 77     
+INTERNAL: KEY[0]: 117    KEY[1]: 137    KEY[2]: 177    PARENT: KEY[0]: 37     KEY[1]: 77     KEY[2]: 177    
+             CHILD[0]: KEY[0]: 107    KEY[1]: 117    
+             CHILD[1]: KEY[0]: 127    KEY[1]: 137    
+             CHILD[2]: KEY[0]: 147    KEY[1]: 157    KEY[2]: 177    
+INTERNAL: KEY[0]: 7      KEY[1]: 17     PARENT: KEY[0]: 17     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 3      KEY[1]: 7      
+             CHILD[1]: KEY[0]: 13     KEY[1]: 17     
+INTERNAL: KEY[0]: 27     KEY[1]: 37     PARENT: KEY[0]: 17     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 23     KEY[1]: 27     
+             CHILD[1]: KEY[0]: 33     KEY[1]: 37     
+INTERNAL: KEY[0]: 47     KEY[1]: 57     PARENT: KEY[0]: 57     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 43     KEY[1]: 47     
+             CHILD[1]: KEY[0]: 53     KEY[1]: 57     
+INTERNAL: KEY[0]: 67     KEY[1]: 77     PARENT: KEY[0]: 57     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 63     KEY[1]: 67     
+             CHILD[1]: KEY[0]: 73     KEY[1]: 77     
+INTERNAL: KEY[0]: 107    KEY[1]: 117    PARENT: KEY[0]: 117    KEY[1]: 137    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 103    KEY[1]: 107    
+             CHILD[1]: KEY[0]: 113    KEY[1]: 117    
+INTERNAL: KEY[0]: 127    KEY[1]: 137    PARENT: KEY[0]: 117    KEY[1]: 137    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 123    KEY[1]: 127    
+             CHILD[1]: KEY[0]: 133    KEY[1]: 137    
+INTERNAL: KEY[0]: 147    KEY[1]: 157    KEY[2]: 177    PARENT: KEY[0]: 117    KEY[1]: 137    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 143    KEY[1]: 147    
+             CHILD[1]: KEY[0]: 153    KEY[1]: 157    
+             CHILD[2]: KEY[0]: 163    KEY[1]: 167    KEY[2]: 177    
+INTERNAL: KEY[0]: 3      KEY[1]: 7      PARENT: KEY[0]: 7      KEY[1]: 17     
+             CHILD[0]: KEY[0]: 1      KEY[1]: 3      
+             CHILD[1]: KEY[0]: 5      KEY[1]: 7      
+INTERNAL: KEY[0]: 13     KEY[1]: 17     PARENT: KEY[0]: 7      KEY[1]: 17     
+             CHILD[0]: KEY[0]: 11     KEY[1]: 13     
+             CHILD[1]: KEY[0]: 15     KEY[1]: 17     
+INTERNAL: KEY[0]: 23     KEY[1]: 27     PARENT: KEY[0]: 27     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 21     KEY[1]: 23     
+             CHILD[1]: KEY[0]: 25     KEY[1]: 27     
+INTERNAL: KEY[0]: 33     KEY[1]: 37     PARENT: KEY[0]: 27     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 31     KEY[1]: 33     
+             CHILD[1]: KEY[0]: 35     KEY[1]: 37     
+INTERNAL: KEY[0]: 43     KEY[1]: 47     PARENT: KEY[0]: 47     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 41     KEY[1]: 43     
+             CHILD[1]: KEY[0]: 45     KEY[1]: 47     
+INTERNAL: KEY[0]: 53     KEY[1]: 57     PARENT: KEY[0]: 47     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 51     KEY[1]: 53     
+             CHILD[1]: KEY[0]: 55     KEY[1]: 57     
+INTERNAL: KEY[0]: 63     KEY[1]: 67     PARENT: KEY[0]: 67     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 61     KEY[1]: 63     
+             CHILD[1]: KEY[0]: 65     KEY[1]: 67     
+INTERNAL: KEY[0]: 73     KEY[1]: 77     PARENT: KEY[0]: 67     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 71     KEY[1]: 73     
+             CHILD[1]: KEY[0]: 75     KEY[1]: 77     
+INTERNAL: KEY[0]: 103    KEY[1]: 107    PARENT: KEY[0]: 107    KEY[1]: 117    
+             CHILD[0]: KEY[0]: 101    KEY[1]: 103    
+             CHILD[1]: KEY[0]: 105    KEY[1]: 107    
+INTERNAL: KEY[0]: 113    KEY[1]: 117    PARENT: KEY[0]: 107    KEY[1]: 117    
+             CHILD[0]: KEY[0]: 111    KEY[1]: 113    
+             CHILD[1]: KEY[0]: 115    KEY[1]: 117    
+INTERNAL: KEY[0]: 123    KEY[1]: 127    PARENT: KEY[0]: 127    KEY[1]: 137    
+             CHILD[0]: KEY[0]: 121    KEY[1]: 123    
+             CHILD[1]: KEY[0]: 125    KEY[1]: 127    
+INTERNAL: KEY[0]: 133    KEY[1]: 137    PARENT: KEY[0]: 127    KEY[1]: 137    
+             CHILD[0]: KEY[0]: 131    KEY[1]: 133    
+             CHILD[1]: KEY[0]: 135    KEY[1]: 137    
+INTERNAL: KEY[0]: 143    KEY[1]: 147    PARENT: KEY[0]: 147    KEY[1]: 157    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 141    KEY[1]: 143    
+             CHILD[1]: KEY[0]: 145    KEY[1]: 147    
+INTERNAL: KEY[0]: 153    KEY[1]: 157    PARENT: KEY[0]: 147    KEY[1]: 157    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 151    KEY[1]: 153    
+             CHILD[1]: KEY[0]: 155    KEY[1]: 157    
+INTERNAL: KEY[0]: 163    KEY[1]: 167    KEY[2]: 177    PARENT: KEY[0]: 147    KEY[1]: 157    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 161    KEY[1]: 163    
+             CHILD[1]: KEY[0]: 165    KEY[1]: 167    
+             CHILD[2]: KEY[0]: 171    KEY[1]: 173    KEY[2]: 177    
+INTERNAL: KEY[0]: 1      KEY[1]: 3      PARENT: KEY[0]: 3      KEY[1]: 7      
+             CHILD[0]: KEY[0]: 0      KEY[1]: 1      
+             CHILD[1]: KEY[0]: 2      KEY[1]: 3      
+INTERNAL: KEY[0]: 5      KEY[1]: 7      PARENT: KEY[0]: 3      KEY[1]: 7      
+             CHILD[0]: KEY[0]: 4      KEY[1]: 5      
+             CHILD[1]: KEY[0]: 6      KEY[1]: 7      
+INTERNAL: KEY[0]: 11     KEY[1]: 13     PARENT: KEY[0]: 13     KEY[1]: 17     
+             CHILD[0]: KEY[0]: 10     KEY[1]: 11     
+             CHILD[1]: KEY[0]: 12     KEY[1]: 13     
+INTERNAL: KEY[0]: 15     KEY[1]: 17     PARENT: KEY[0]: 13     KEY[1]: 17     
+             CHILD[0]: KEY[0]: 14     KEY[1]: 15     
+             CHILD[1]: KEY[0]: 16     KEY[1]: 17     
+INTERNAL: KEY[0]: 21     KEY[1]: 23     PARENT: KEY[0]: 23     KEY[1]: 27     
+             CHILD[0]: KEY[0]: 20     KEY[1]: 21     
+             CHILD[1]: KEY[0]: 22     KEY[1]: 23     
+INTERNAL: KEY[0]: 25     KEY[1]: 27     PARENT: KEY[0]: 23     KEY[1]: 27     
+             CHILD[0]: KEY[0]: 24     KEY[1]: 25     
+             CHILD[1]: KEY[0]: 26     KEY[1]: 27     
+INTERNAL: KEY[0]: 31     KEY[1]: 33     PARENT: KEY[0]: 33     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 30     KEY[1]: 31     
+             CHILD[1]: KEY[0]: 32     KEY[1]: 33     
+INTERNAL: KEY[0]: 35     KEY[1]: 37     PARENT: KEY[0]: 33     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 34     KEY[1]: 35     
+             CHILD[1]: KEY[0]: 36     KEY[1]: 37     
+INTERNAL: KEY[0]: 41     KEY[1]: 43     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 40     KEY[1]: 41     
+             CHILD[1]: KEY[0]: 42     KEY[1]: 43     
+INTERNAL: KEY[0]: 45     KEY[1]: 47     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 44     KEY[1]: 45     
+             CHILD[1]: KEY[0]: 46     KEY[1]: 47     
+INTERNAL: KEY[0]: 51     KEY[1]: 53     PARENT: KEY[0]: 53     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 50     KEY[1]: 51     
+             CHILD[1]: KEY[0]: 52     KEY[1]: 53     
+INTERNAL: KEY[0]: 55     KEY[1]: 57     PARENT: KEY[0]: 53     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 54     KEY[1]: 55     
+             CHILD[1]: KEY[0]: 56     KEY[1]: 57     
+INTERNAL: KEY[0]: 61     KEY[1]: 63     PARENT: KEY[0]: 63     KEY[1]: 67     
+             CHILD[0]: KEY[0]: 60     KEY[1]: 61     
+             CHILD[1]: KEY[0]: 62     KEY[1]: 63     
+INTERNAL: KEY[0]: 65     KEY[1]: 67     PARENT: KEY[0]: 63     KEY[1]: 67     
+             CHILD[0]: KEY[0]: 64     KEY[1]: 65     
+             CHILD[1]: KEY[0]: 66     KEY[1]: 67     
+INTERNAL: KEY[0]: 71     KEY[1]: 73     PARENT: KEY[0]: 73     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 70     KEY[1]: 71     
+             CHILD[1]: KEY[0]: 72     KEY[1]: 73     
+INTERNAL: KEY[0]: 75     KEY[1]: 77     PARENT: KEY[0]: 73     KEY[1]: 77     
+             CHILD[0]: KEY[0]: 74     KEY[1]: 75     
+             CHILD[1]: KEY[0]: 76     KEY[1]: 77     
+INTERNAL: KEY[0]: 101    KEY[1]: 103    PARENT: KEY[0]: 103    KEY[1]: 107    
+             CHILD[0]: KEY[0]: 100    KEY[1]: 101    
+             CHILD[1]: KEY[0]: 102    KEY[1]: 103    
+INTERNAL: KEY[0]: 105    KEY[1]: 107    PARENT: KEY[0]: 103    KEY[1]: 107    
+             CHILD[0]: KEY[0]: 104    KEY[1]: 105    
+             CHILD[1]: KEY[0]: 106    KEY[1]: 107    
+INTERNAL: KEY[0]: 111    KEY[1]: 113    PARENT: KEY[0]: 113    KEY[1]: 117    
+             CHILD[0]: KEY[0]: 110    KEY[1]: 111    
+             CHILD[1]: KEY[0]: 112    KEY[1]: 113    
+INTERNAL: KEY[0]: 115    KEY[1]: 117    PARENT: KEY[0]: 113    KEY[1]: 117    
+             CHILD[0]: KEY[0]: 114    KEY[1]: 115    
+             CHILD[1]: KEY[0]: 116    KEY[1]: 117    
+INTERNAL: KEY[0]: 121    KEY[1]: 123    PARENT: KEY[0]: 123    KEY[1]: 127    
+             CHILD[0]: KEY[0]: 120    KEY[1]: 121    
+             CHILD[1]: KEY[0]: 122    KEY[1]: 123    
+INTERNAL: KEY[0]: 125    KEY[1]: 127    PARENT: KEY[0]: 123    KEY[1]: 127    
+             CHILD[0]: KEY[0]: 124    KEY[1]: 125    
+             CHILD[1]: KEY[0]: 126    KEY[1]: 127    
+INTERNAL: KEY[0]: 131    KEY[1]: 133    PARENT: KEY[0]: 133    KEY[1]: 137    
+             CHILD[0]: KEY[0]: 130    KEY[1]: 131    
+             CHILD[1]: KEY[0]: 132    KEY[1]: 133    
+INTERNAL: KEY[0]: 135    KEY[1]: 137    PARENT: KEY[0]: 133    KEY[1]: 137    
+             CHILD[0]: KEY[0]: 134    KEY[1]: 135    
+             CHILD[1]: KEY[0]: 136    KEY[1]: 137    
+INTERNAL: KEY[0]: 141    KEY[1]: 143    PARENT: KEY[0]: 143    KEY[1]: 147    
+             CHILD[0]: KEY[0]: 140    KEY[1]: 141    
+             CHILD[1]: KEY[0]: 142    KEY[1]: 143    
+INTERNAL: KEY[0]: 145    KEY[1]: 147    PARENT: KEY[0]: 143    KEY[1]: 147    
+             CHILD[0]: KEY[0]: 144    KEY[1]: 145    
+             CHILD[1]: KEY[0]: 146    KEY[1]: 147    
+INTERNAL: KEY[0]: 151    KEY[1]: 153    PARENT: KEY[0]: 153    KEY[1]: 157    
+             CHILD[0]: KEY[0]: 150    KEY[1]: 151    
+             CHILD[1]: KEY[0]: 152    KEY[1]: 153    
+INTERNAL: KEY[0]: 155    KEY[1]: 157    PARENT: KEY[0]: 153    KEY[1]: 157    
+             CHILD[0]: KEY[0]: 154    KEY[1]: 155    
+             CHILD[1]: KEY[0]: 156    KEY[1]: 157    
+INTERNAL: KEY[0]: 161    KEY[1]: 163    PARENT: KEY[0]: 163    KEY[1]: 167    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 160    KEY[1]: 161    
+             CHILD[1]: KEY[0]: 162    KEY[1]: 163    
+INTERNAL: KEY[0]: 165    KEY[1]: 167    PARENT: KEY[0]: 163    KEY[1]: 167    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 164    KEY[1]: 165    
+             CHILD[1]: KEY[0]: 166    KEY[1]: 167    
+INTERNAL: KEY[0]: 171    KEY[1]: 173    KEY[2]: 177    PARENT: KEY[0]: 163    KEY[1]: 167    KEY[2]: 177    
+             CHILD[0]: KEY[0]: 170    KEY[1]: 171    
+             CHILD[1]: KEY[0]: 172    KEY[1]: 173    
+             CHILD[2]: KEY[0]: 174    KEY[1]: 175    KEY[2]: 176    
+INTERNAL: KEY[0]: 0      KEY[1]: 1      PARENT: KEY[0]: 1      KEY[1]: 3      
+             LEAF[0]:  VALUE: 0
+             LEAF[1]:  VALUE: 1
+INTERNAL: KEY[0]: 2      KEY[1]: 3      PARENT: KEY[0]: 1      KEY[1]: 3      
+             LEAF[0]:  VALUE: 2
+             LEAF[1]:  VALUE: 3
+INTERNAL: KEY[0]: 4      KEY[1]: 5      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 4
+             LEAF[1]:  VALUE: 5
+INTERNAL: KEY[0]: 6      KEY[1]: 7      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 6
+             LEAF[1]:  VALUE: 7
+INTERNAL: KEY[0]: 10     KEY[1]: 11     PARENT: KEY[0]: 11     KEY[1]: 13     
+             LEAF[0]:  VALUE: 10
+             LEAF[1]:  VALUE: 11
+INTERNAL: KEY[0]: 12     KEY[1]: 13     PARENT: KEY[0]: 11     KEY[1]: 13     
+             LEAF[0]:  VALUE: 12
+             LEAF[1]:  VALUE: 13
+INTERNAL: KEY[0]: 14     KEY[1]: 15     PARENT: KEY[0]: 15     KEY[1]: 17     
+             LEAF[0]:  VALUE: 14
+             LEAF[1]:  VALUE: 15
+INTERNAL: KEY[0]: 16     KEY[1]: 17     PARENT: KEY[0]: 15     KEY[1]: 17     
+             LEAF[0]:  VALUE: 16
+             LEAF[1]:  VALUE: 17
+INTERNAL: KEY[0]: 20     KEY[1]: 21     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 20
+             LEAF[1]:  VALUE: 21
+INTERNAL: KEY[0]: 22     KEY[1]: 23     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 22
+             LEAF[1]:  VALUE: 23
+INTERNAL: KEY[0]: 24     KEY[1]: 25     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 24
+             LEAF[1]:  VALUE: 25
+INTERNAL: KEY[0]: 26     KEY[1]: 27     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 26
+             LEAF[1]:  VALUE: 27
+INTERNAL: KEY[0]: 30     KEY[1]: 31     PARENT: KEY[0]: 31     KEY[1]: 33     
+             LEAF[0]:  VALUE: 30
+             LEAF[1]:  VALUE: 31
+INTERNAL: KEY[0]: 32     KEY[1]: 33     PARENT: KEY[0]: 31     KEY[1]: 33     
+             LEAF[0]:  VALUE: 32
+             LEAF[1]:  VALUE: 33
+INTERNAL: KEY[0]: 34     KEY[1]: 35     PARENT: KEY[0]: 35     KEY[1]: 37     
+             LEAF[0]:  VALUE: 34
+             LEAF[1]:  VALUE: 35
+INTERNAL: KEY[0]: 36     KEY[1]: 37     PARENT: KEY[0]: 35     KEY[1]: 37     
+             LEAF[0]:  VALUE: 36
+             LEAF[1]:  VALUE: 37
+INTERNAL: KEY[0]: 40     KEY[1]: 41     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 40
+             LEAF[1]:  VALUE: 41
+INTERNAL: KEY[0]: 42     KEY[1]: 43     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 42
+             LEAF[1]:  VALUE: 43
+INTERNAL: KEY[0]: 44     KEY[1]: 45     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 44
+             LEAF[1]:  VALUE: 45
+INTERNAL: KEY[0]: 46     KEY[1]: 47     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 46
+             LEAF[1]:  VALUE: 47
+INTERNAL: KEY[0]: 50     KEY[1]: 51     PARENT: KEY[0]: 51     KEY[1]: 53     
+             LEAF[0]:  VALUE: 50
+             LEAF[1]:  VALUE: 51
+INTERNAL: KEY[0]: 52     KEY[1]: 53     PARENT: KEY[0]: 51     KEY[1]: 53     
+             LEAF[0]:  VALUE: 52
+             LEAF[1]:  VALUE: 53
+INTERNAL: KEY[0]: 54     KEY[1]: 55     PARENT: KEY[0]: 55     KEY[1]: 57     
+             LEAF[0]:  VALUE: 54
+             LEAF[1]:  VALUE: 55
+INTERNAL: KEY[0]: 56     KEY[1]: 57     PARENT: KEY[0]: 55     KEY[1]: 57     
+             LEAF[0]:  VALUE: 56
+             LEAF[1]:  VALUE: 57
+INTERNAL: KEY[0]: 60     KEY[1]: 61     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 60
+             LEAF[1]:  VALUE: 61
+INTERNAL: KEY[0]: 62     KEY[1]: 63     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 62
+             LEAF[1]:  VALUE: 63
+INTERNAL: KEY[0]: 64     KEY[1]: 65     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 64
+             LEAF[1]:  VALUE: 65
+INTERNAL: KEY[0]: 66     KEY[1]: 67     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 66
+             LEAF[1]:  VALUE: 67
+INTERNAL: KEY[0]: 70     KEY[1]: 71     PARENT: KEY[0]: 71     KEY[1]: 73     
+             LEAF[0]:  VALUE: 70
+             LEAF[1]:  VALUE: 71
+INTERNAL: KEY[0]: 72     KEY[1]: 73     PARENT: KEY[0]: 71     KEY[1]: 73     
+             LEAF[0]:  VALUE: 72
+             LEAF[1]:  VALUE: 73
+INTERNAL: KEY[0]: 74     KEY[1]: 75     PARENT: KEY[0]: 75     KEY[1]: 77     
+             LEAF[0]:  VALUE: 74
+             LEAF[1]:  VALUE: 75
+INTERNAL: KEY[0]: 76     KEY[1]: 77     PARENT: KEY[0]: 75     KEY[1]: 77     
+             LEAF[0]:  VALUE: 76
+             LEAF[1]:  VALUE: 77
+INTERNAL: KEY[0]: 100    KEY[1]: 101    PARENT: KEY[0]: 101    KEY[1]: 103    
+             LEAF[0]:  VALUE: 100
+             LEAF[1]:  VALUE: 101
+INTERNAL: KEY[0]: 102    KEY[1]: 103    PARENT: KEY[0]: 101    KEY[1]: 103    
+             LEAF[0]:  VALUE: 102
+             LEAF[1]:  VALUE: 103
+INTERNAL: KEY[0]: 104    KEY[1]: 105    PARENT: KEY[0]: 105    KEY[1]: 107    
+             LEAF[0]:  VALUE: 104
+             LEAF[1]:  VALUE: 105
+INTERNAL: KEY[0]: 106    KEY[1]: 107    PARENT: KEY[0]: 105    KEY[1]: 107    
+             LEAF[0]:  VALUE: 106
+             LEAF[1]:  VALUE: 107
+INTERNAL: KEY[0]: 110    KEY[1]: 111    PARENT: KEY[0]: 111    KEY[1]: 113    
+             LEAF[0]:  VALUE: 110
+             LEAF[1]:  VALUE: 111
+INTERNAL: KEY[0]: 112    KEY[1]: 113    PARENT: KEY[0]: 111    KEY[1]: 113    
+             LEAF[0]:  VALUE: 112
+             LEAF[1]:  VALUE: 113
+INTERNAL: KEY[0]: 114    KEY[1]: 115    PARENT: KEY[0]: 115    KEY[1]: 117    
+             LEAF[0]:  VALUE: 114
+             LEAF[1]:  VALUE: 115
+INTERNAL: KEY[0]: 116    KEY[1]: 117    PARENT: KEY[0]: 115    KEY[1]: 117    
+             LEAF[0]:  VALUE: 116
+             LEAF[1]:  VALUE: 117
+INTERNAL: KEY[0]: 120    KEY[1]: 121    PARENT: KEY[0]: 121    KEY[1]: 123    
+             LEAF[0]:  VALUE: 120
+             LEAF[1]:  VALUE: 121
+INTERNAL: KEY[0]: 122    KEY[1]: 123    PARENT: KEY[0]: 121    KEY[1]: 123    
+             LEAF[0]:  VALUE: 122
+             LEAF[1]:  VALUE: 123
+INTERNAL: KEY[0]: 124    KEY[1]: 125    PARENT: KEY[0]: 125    KEY[1]: 127    
+             LEAF[0]:  VALUE: 124
+             LEAF[1]:  VALUE: 125
+INTERNAL: KEY[0]: 126    KEY[1]: 127    PARENT: KEY[0]: 125    KEY[1]: 127    
+             LEAF[0]:  VALUE: 126
+             LEAF[1]:  VALUE: 127
+INTERNAL: KEY[0]: 130    KEY[1]: 131    PARENT: KEY[0]: 131    KEY[1]: 133    
+             LEAF[0]:  VALUE: 130
+             LEAF[1]:  VALUE: 131
+INTERNAL: KEY[0]: 132    KEY[1]: 133    PARENT: KEY[0]: 131    KEY[1]: 133    
+             LEAF[0]:  VALUE: 132
+             LEAF[1]:  VALUE: 133
+INTERNAL: KEY[0]: 134    KEY[1]: 135    PARENT: KEY[0]: 135    KEY[1]: 137    
+             LEAF[0]:  VALUE: 134
+             LEAF[1]:  VALUE: 135
+INTERNAL: KEY[0]: 136    KEY[1]: 137    PARENT: KEY[0]: 135    KEY[1]: 137    
+             LEAF[0]:  VALUE: 136
+             LEAF[1]:  VALUE: 137
+INTERNAL: KEY[0]: 140    KEY[1]: 141    PARENT: KEY[0]: 141    KEY[1]: 143    
+             LEAF[0]:  VALUE: 140
+             LEAF[1]:  VALUE: 141
+INTERNAL: KEY[0]: 142    KEY[1]: 143    PARENT: KEY[0]: 141    KEY[1]: 143    
+             LEAF[0]:  VALUE: 142
+             LEAF[1]:  VALUE: 143
+INTERNAL: KEY[0]: 144    KEY[1]: 145    PARENT: KEY[0]: 145    KEY[1]: 147    
+             LEAF[0]:  VALUE: 144
+             LEAF[1]:  VALUE: 145
+INTERNAL: KEY[0]: 146    KEY[1]: 147    PARENT: KEY[0]: 145    KEY[1]: 147    
+             LEAF[0]:  VALUE: 146
+             LEAF[1]:  VALUE: 147
+INTERNAL: KEY[0]: 150    KEY[1]: 151    PARENT: KEY[0]: 151    KEY[1]: 153    
+             LEAF[0]:  VALUE: 150
+             LEAF[1]:  VALUE: 151
+INTERNAL: KEY[0]: 152    KEY[1]: 153    PARENT: KEY[0]: 151    KEY[1]: 153    
+             LEAF[0]:  VALUE: 152
+             LEAF[1]:  VALUE: 153
+INTERNAL: KEY[0]: 154    KEY[1]: 155    PARENT: KEY[0]: 155    KEY[1]: 157    
+             LEAF[0]:  VALUE: 154
+             LEAF[1]:  VALUE: 155
+INTERNAL: KEY[0]: 156    KEY[1]: 157    PARENT: KEY[0]: 155    KEY[1]: 157    
+             LEAF[0]:  VALUE: 156
+             LEAF[1]:  VALUE: 157
+INTERNAL: KEY[0]: 160    KEY[1]: 161    PARENT: KEY[0]: 161    KEY[1]: 163    
+             LEAF[0]:  VALUE: 160
+             LEAF[1]:  VALUE: 161
+INTERNAL: KEY[0]: 162    KEY[1]: 163    PARENT: KEY[0]: 161    KEY[1]: 163    
+             LEAF[0]:  VALUE: 162
+             LEAF[1]:  VALUE: 163
+INTERNAL: KEY[0]: 164    KEY[1]: 165    PARENT: KEY[0]: 165    KEY[1]: 167    
+             LEAF[0]:  VALUE: 164
+             LEAF[1]:  VALUE: 165
+INTERNAL: KEY[0]: 166    KEY[1]: 167    PARENT: KEY[0]: 165    KEY[1]: 167    
+             LEAF[0]:  VALUE: 166
+             LEAF[1]:  VALUE: 167
+INTERNAL: KEY[0]: 170    KEY[1]: 171    PARENT: KEY[0]: 171    KEY[1]: 173    KEY[2]: 177    
+             LEAF[0]:  VALUE: 170
+             LEAF[1]:  VALUE: 171
+INTERNAL: KEY[0]: 172    KEY[1]: 173    PARENT: KEY[0]: 171    KEY[1]: 173    KEY[2]: 177    
+             LEAF[0]:  VALUE: 172
+             LEAF[1]:  VALUE: 173
+INTERNAL: KEY[0]: 174    KEY[1]: 175    KEY[2]: 176    PARENT: KEY[0]: 171    KEY[1]: 173    KEY[2]: 177    
+             LEAF[0]:  VALUE: 174
+             LEAF[1]:  VALUE: 175
+             LEAF[2]:  VALUE: 176
+             LEAF[3]:  VALUE: 177
+____________________________________________________________________________________________________
+HEXIDECIMAL TREE TRAVERSAL
+____________________________________________________________________________________________________
+LEVEL BY LEVEL TRAVERSAL 
+OF 2-3-4 TREE
+INTERNAL: KEY[0]: 1F     KEY[1]: 3F     KEY[2]: 7F     PARENT: NULL           
+             CHILD[0]: KEY[0]: 0F     KEY[1]: 1F     
+             CHILD[1]: KEY[0]: 2F     KEY[1]: 3F     
+             CHILD[2]: KEY[0]: 4F     KEY[1]: 5F     KEY[2]: 7F     
+INTERNAL: KEY[0]: 0F     KEY[1]: 1F     PARENT: KEY[0]: 1F     KEY[1]: 3F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 07     KEY[1]: 0F     
+             CHILD[1]: KEY[0]: 17     KEY[1]: 1F     
+INTERNAL: KEY[0]: 2F     KEY[1]: 3F     PARENT: KEY[0]: 1F     KEY[1]: 3F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 27     KEY[1]: 2F     
+             CHILD[1]: KEY[0]: 37     KEY[1]: 3F     
+INTERNAL: KEY[0]: 4F     KEY[1]: 5F     KEY[2]: 7F     PARENT: KEY[0]: 1F     KEY[1]: 3F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 47     KEY[1]: 4F     
+             CHILD[1]: KEY[0]: 57     KEY[1]: 5F     
+             CHILD[2]: KEY[0]: 67     KEY[1]: 6F     KEY[2]: 7F     
+INTERNAL: KEY[0]: 07     KEY[1]: 0F     PARENT: KEY[0]: 0F     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 03     KEY[1]: 07     
+             CHILD[1]: KEY[0]: 0B     KEY[1]: 0F     
+INTERNAL: KEY[0]: 17     KEY[1]: 1F     PARENT: KEY[0]: 0F     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 13     KEY[1]: 17     
+             CHILD[1]: KEY[0]: 1B     KEY[1]: 1F     
+INTERNAL: KEY[0]: 27     KEY[1]: 2F     PARENT: KEY[0]: 2F     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 23     KEY[1]: 27     
+             CHILD[1]: KEY[0]: 2B     KEY[1]: 2F     
+INTERNAL: KEY[0]: 37     KEY[1]: 3F     PARENT: KEY[0]: 2F     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 33     KEY[1]: 37     
+             CHILD[1]: KEY[0]: 3B     KEY[1]: 3F     
+INTERNAL: KEY[0]: 47     KEY[1]: 4F     PARENT: KEY[0]: 4F     KEY[1]: 5F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 43     KEY[1]: 47     
+             CHILD[1]: KEY[0]: 4B     KEY[1]: 4F     
+INTERNAL: KEY[0]: 57     KEY[1]: 5F     PARENT: KEY[0]: 4F     KEY[1]: 5F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 53     KEY[1]: 57     
+             CHILD[1]: KEY[0]: 5B     KEY[1]: 5F     
+INTERNAL: KEY[0]: 67     KEY[1]: 6F     KEY[2]: 7F     PARENT: KEY[0]: 4F     KEY[1]: 5F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 63     KEY[1]: 67     
+             CHILD[1]: KEY[0]: 6B     KEY[1]: 6F     
+             CHILD[2]: KEY[0]: 73     KEY[1]: 77     KEY[2]: 7F     
+INTERNAL: KEY[0]: 03     KEY[1]: 07     PARENT: KEY[0]: 07     KEY[1]: 0F     
+             CHILD[0]: KEY[0]: 01     KEY[1]: 03     
+             CHILD[1]: KEY[0]: 05     KEY[1]: 07     
+INTERNAL: KEY[0]: 0B     KEY[1]: 0F     PARENT: KEY[0]: 07     KEY[1]: 0F     
+             CHILD[0]: KEY[0]: 09     KEY[1]: 0B     
+             CHILD[1]: KEY[0]: 0D     KEY[1]: 0F     
+INTERNAL: KEY[0]: 13     KEY[1]: 17     PARENT: KEY[0]: 17     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 11     KEY[1]: 13     
+             CHILD[1]: KEY[0]: 15     KEY[1]: 17     
+INTERNAL: KEY[0]: 1B     KEY[1]: 1F     PARENT: KEY[0]: 17     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 19     KEY[1]: 1B     
+             CHILD[1]: KEY[0]: 1D     KEY[1]: 1F     
+INTERNAL: KEY[0]: 23     KEY[1]: 27     PARENT: KEY[0]: 27     KEY[1]: 2F     
+             CHILD[0]: KEY[0]: 21     KEY[1]: 23     
+             CHILD[1]: KEY[0]: 25     KEY[1]: 27     
+INTERNAL: KEY[0]: 2B     KEY[1]: 2F     PARENT: KEY[0]: 27     KEY[1]: 2F     
+             CHILD[0]: KEY[0]: 29     KEY[1]: 2B     
+             CHILD[1]: KEY[0]: 2D     KEY[1]: 2F     
+INTERNAL: KEY[0]: 33     KEY[1]: 37     PARENT: KEY[0]: 37     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 31     KEY[1]: 33     
+             CHILD[1]: KEY[0]: 35     KEY[1]: 37     
+INTERNAL: KEY[0]: 3B     KEY[1]: 3F     PARENT: KEY[0]: 37     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 39     KEY[1]: 3B     
+             CHILD[1]: KEY[0]: 3D     KEY[1]: 3F     
+INTERNAL: KEY[0]: 43     KEY[1]: 47     PARENT: KEY[0]: 47     KEY[1]: 4F     
+             CHILD[0]: KEY[0]: 41     KEY[1]: 43     
+             CHILD[1]: KEY[0]: 45     KEY[1]: 47     
+INTERNAL: KEY[0]: 4B     KEY[1]: 4F     PARENT: KEY[0]: 47     KEY[1]: 4F     
+             CHILD[0]: KEY[0]: 49     KEY[1]: 4B     
+             CHILD[1]: KEY[0]: 4D     KEY[1]: 4F     
+INTERNAL: KEY[0]: 53     KEY[1]: 57     PARENT: KEY[0]: 57     KEY[1]: 5F     
+             CHILD[0]: KEY[0]: 51     KEY[1]: 53     
+             CHILD[1]: KEY[0]: 55     KEY[1]: 57     
+INTERNAL: KEY[0]: 5B     KEY[1]: 5F     PARENT: KEY[0]: 57     KEY[1]: 5F     
+             CHILD[0]: KEY[0]: 59     KEY[1]: 5B     
+             CHILD[1]: KEY[0]: 5D     KEY[1]: 5F     
+INTERNAL: KEY[0]: 63     KEY[1]: 67     PARENT: KEY[0]: 67     KEY[1]: 6F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 61     KEY[1]: 63     
+             CHILD[1]: KEY[0]: 65     KEY[1]: 67     
+INTERNAL: KEY[0]: 6B     KEY[1]: 6F     PARENT: KEY[0]: 67     KEY[1]: 6F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 69     KEY[1]: 6B     
+             CHILD[1]: KEY[0]: 6D     KEY[1]: 6F     
+INTERNAL: KEY[0]: 73     KEY[1]: 77     KEY[2]: 7F     PARENT: KEY[0]: 67     KEY[1]: 6F     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 71     KEY[1]: 73     
+             CHILD[1]: KEY[0]: 75     KEY[1]: 77     
+             CHILD[2]: KEY[0]: 79     KEY[1]: 7B     KEY[2]: 7F     
+INTERNAL: KEY[0]: 01     KEY[1]: 03     PARENT: KEY[0]: 03     KEY[1]: 07     
+             CHILD[0]: KEY[0]: 00     KEY[1]: 01     
+             CHILD[1]: KEY[0]: 02     KEY[1]: 03     
+INTERNAL: KEY[0]: 05     KEY[1]: 07     PARENT: KEY[0]: 03     KEY[1]: 07     
+             CHILD[0]: KEY[0]: 04     KEY[1]: 05     
+             CHILD[1]: KEY[0]: 06     KEY[1]: 07     
+INTERNAL: KEY[0]: 09     KEY[1]: 0B     PARENT: KEY[0]: 0B     KEY[1]: 0F     
+             CHILD[0]: KEY[0]: 08     KEY[1]: 09     
+             CHILD[1]: KEY[0]: 0A     KEY[1]: 0B     
+INTERNAL: KEY[0]: 0D     KEY[1]: 0F     PARENT: KEY[0]: 0B     KEY[1]: 0F     
+             CHILD[0]: KEY[0]: 0C     KEY[1]: 0D     
+             CHILD[1]: KEY[0]: 0E     KEY[1]: 0F     
+INTERNAL: KEY[0]: 11     KEY[1]: 13     PARENT: KEY[0]: 13     KEY[1]: 17     
+             CHILD[0]: KEY[0]: 10     KEY[1]: 11     
+             CHILD[1]: KEY[0]: 12     KEY[1]: 13     
+INTERNAL: KEY[0]: 15     KEY[1]: 17     PARENT: KEY[0]: 13     KEY[1]: 17     
+             CHILD[0]: KEY[0]: 14     KEY[1]: 15     
+             CHILD[1]: KEY[0]: 16     KEY[1]: 17     
+INTERNAL: KEY[0]: 19     KEY[1]: 1B     PARENT: KEY[0]: 1B     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 18     KEY[1]: 19     
+             CHILD[1]: KEY[0]: 1A     KEY[1]: 1B     
+INTERNAL: KEY[0]: 1D     KEY[1]: 1F     PARENT: KEY[0]: 1B     KEY[1]: 1F     
+             CHILD[0]: KEY[0]: 1C     KEY[1]: 1D     
+             CHILD[1]: KEY[0]: 1E     KEY[1]: 1F     
+INTERNAL: KEY[0]: 21     KEY[1]: 23     PARENT: KEY[0]: 23     KEY[1]: 27     
+             CHILD[0]: KEY[0]: 20     KEY[1]: 21     
+             CHILD[1]: KEY[0]: 22     KEY[1]: 23     
+INTERNAL: KEY[0]: 25     KEY[1]: 27     PARENT: KEY[0]: 23     KEY[1]: 27     
+             CHILD[0]: KEY[0]: 24     KEY[1]: 25     
+             CHILD[1]: KEY[0]: 26     KEY[1]: 27     
+INTERNAL: KEY[0]: 29     KEY[1]: 2B     PARENT: KEY[0]: 2B     KEY[1]: 2F     
+             CHILD[0]: KEY[0]: 28     KEY[1]: 29     
+             CHILD[1]: KEY[0]: 2A     KEY[1]: 2B     
+INTERNAL: KEY[0]: 2D     KEY[1]: 2F     PARENT: KEY[0]: 2B     KEY[1]: 2F     
+             CHILD[0]: KEY[0]: 2C     KEY[1]: 2D     
+             CHILD[1]: KEY[0]: 2E     KEY[1]: 2F     
+INTERNAL: KEY[0]: 31     KEY[1]: 33     PARENT: KEY[0]: 33     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 30     KEY[1]: 31     
+             CHILD[1]: KEY[0]: 32     KEY[1]: 33     
+INTERNAL: KEY[0]: 35     KEY[1]: 37     PARENT: KEY[0]: 33     KEY[1]: 37     
+             CHILD[0]: KEY[0]: 34     KEY[1]: 35     
+             CHILD[1]: KEY[0]: 36     KEY[1]: 37     
+INTERNAL: KEY[0]: 39     KEY[1]: 3B     PARENT: KEY[0]: 3B     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 38     KEY[1]: 39     
+             CHILD[1]: KEY[0]: 3A     KEY[1]: 3B     
+INTERNAL: KEY[0]: 3D     KEY[1]: 3F     PARENT: KEY[0]: 3B     KEY[1]: 3F     
+             CHILD[0]: KEY[0]: 3C     KEY[1]: 3D     
+             CHILD[1]: KEY[0]: 3E     KEY[1]: 3F     
+INTERNAL: KEY[0]: 41     KEY[1]: 43     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 40     KEY[1]: 41     
+             CHILD[1]: KEY[0]: 42     KEY[1]: 43     
+INTERNAL: KEY[0]: 45     KEY[1]: 47     PARENT: KEY[0]: 43     KEY[1]: 47     
+             CHILD[0]: KEY[0]: 44     KEY[1]: 45     
+             CHILD[1]: KEY[0]: 46     KEY[1]: 47     
+INTERNAL: KEY[0]: 49     KEY[1]: 4B     PARENT: KEY[0]: 4B     KEY[1]: 4F     
+             CHILD[0]: KEY[0]: 48     KEY[1]: 49     
+             CHILD[1]: KEY[0]: 4A     KEY[1]: 4B     
+INTERNAL: KEY[0]: 4D     KEY[1]: 4F     PARENT: KEY[0]: 4B     KEY[1]: 4F     
+             CHILD[0]: KEY[0]: 4C     KEY[1]: 4D     
+             CHILD[1]: KEY[0]: 4E     KEY[1]: 4F     
+INTERNAL: KEY[0]: 51     KEY[1]: 53     PARENT: KEY[0]: 53     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 50     KEY[1]: 51     
+             CHILD[1]: KEY[0]: 52     KEY[1]: 53     
+INTERNAL: KEY[0]: 55     KEY[1]: 57     PARENT: KEY[0]: 53     KEY[1]: 57     
+             CHILD[0]: KEY[0]: 54     KEY[1]: 55     
+             CHILD[1]: KEY[0]: 56     KEY[1]: 57     
+INTERNAL: KEY[0]: 59     KEY[1]: 5B     PARENT: KEY[0]: 5B     KEY[1]: 5F     
+             CHILD[0]: KEY[0]: 58     KEY[1]: 59     
+             CHILD[1]: KEY[0]: 5A     KEY[1]: 5B     
+INTERNAL: KEY[0]: 5D     KEY[1]: 5F     PARENT: KEY[0]: 5B     KEY[1]: 5F     
+             CHILD[0]: KEY[0]: 5C     KEY[1]: 5D     
+             CHILD[1]: KEY[0]: 5E     KEY[1]: 5F     
+INTERNAL: KEY[0]: 61     KEY[1]: 63     PARENT: KEY[0]: 63     KEY[1]: 67     
+             CHILD[0]: KEY[0]: 60     KEY[1]: 61     
+             CHILD[1]: KEY[0]: 62     KEY[1]: 63     
+INTERNAL: KEY[0]: 65     KEY[1]: 67     PARENT: KEY[0]: 63     KEY[1]: 67     
+             CHILD[0]: KEY[0]: 64     KEY[1]: 65     
+             CHILD[1]: KEY[0]: 66     KEY[1]: 67     
+INTERNAL: KEY[0]: 69     KEY[1]: 6B     PARENT: KEY[0]: 6B     KEY[1]: 6F     
+             CHILD[0]: KEY[0]: 68     KEY[1]: 69     
+             CHILD[1]: KEY[0]: 6A     KEY[1]: 6B     
+INTERNAL: KEY[0]: 6D     KEY[1]: 6F     PARENT: KEY[0]: 6B     KEY[1]: 6F     
+             CHILD[0]: KEY[0]: 6C     KEY[1]: 6D     
+             CHILD[1]: KEY[0]: 6E     KEY[1]: 6F     
+INTERNAL: KEY[0]: 71     KEY[1]: 73     PARENT: KEY[0]: 73     KEY[1]: 77     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 70     KEY[1]: 71     
+             CHILD[1]: KEY[0]: 72     KEY[1]: 73     
+INTERNAL: KEY[0]: 75     KEY[1]: 77     PARENT: KEY[0]: 73     KEY[1]: 77     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 74     KEY[1]: 75     
+             CHILD[1]: KEY[0]: 76     KEY[1]: 77     
+INTERNAL: KEY[0]: 79     KEY[1]: 7B     KEY[2]: 7F     PARENT: KEY[0]: 73     KEY[1]: 77     KEY[2]: 7F     
+             CHILD[0]: KEY[0]: 78     KEY[1]: 79     
+             CHILD[1]: KEY[0]: 7A     KEY[1]: 7B     
+             CHILD[2]: KEY[0]: 7C     KEY[1]: 7D     KEY[2]: 7E     
+INTERNAL: KEY[0]: 00     KEY[1]: 01     PARENT: KEY[0]: 01     KEY[1]: 03     
+             LEAF[0]:  VALUE: 00
+             LEAF[1]:  VALUE: 01
+INTERNAL: KEY[0]: 02     KEY[1]: 03     PARENT: KEY[0]: 01     KEY[1]: 03     
+             LEAF[0]:  VALUE: 02
+             LEAF[1]:  VALUE: 03
+INTERNAL: KEY[0]: 04     KEY[1]: 05     PARENT: KEY[0]: 05     KEY[1]: 07     
+             LEAF[0]:  VALUE: 04
+             LEAF[1]:  VALUE: 05
+INTERNAL: KEY[0]: 06     KEY[1]: 07     PARENT: KEY[0]: 05     KEY[1]: 07     
+             LEAF[0]:  VALUE: 06
+             LEAF[1]:  VALUE: 07
+INTERNAL: KEY[0]: 08     KEY[1]: 09     PARENT: KEY[0]: 09     KEY[1]: 0B     
+             LEAF[0]:  VALUE: 08
+             LEAF[1]:  VALUE: 09
+INTERNAL: KEY[0]: 0A     KEY[1]: 0B     PARENT: KEY[0]: 09     KEY[1]: 0B     
+             LEAF[0]:  VALUE: 0A
+             LEAF[1]:  VALUE: 0B
+INTERNAL: KEY[0]: 0C     KEY[1]: 0D     PARENT: KEY[0]: 0D     KEY[1]: 0F     
+             LEAF[0]:  VALUE: 0C
+             LEAF[1]:  VALUE: 0D
+INTERNAL: KEY[0]: 0E     KEY[1]: 0F     PARENT: KEY[0]: 0D     KEY[1]: 0F     
+             LEAF[0]:  VALUE: 0E
+             LEAF[1]:  VALUE: 0F
+INTERNAL: KEY[0]: 10     KEY[1]: 11     PARENT: KEY[0]: 11     KEY[1]: 13     
+             LEAF[0]:  VALUE: 10
+             LEAF[1]:  VALUE: 11
+INTERNAL: KEY[0]: 12     KEY[1]: 13     PARENT: KEY[0]: 11     KEY[1]: 13     
+             LEAF[0]:  VALUE: 12
+             LEAF[1]:  VALUE: 13
+INTERNAL: KEY[0]: 14     KEY[1]: 15     PARENT: KEY[0]: 15     KEY[1]: 17     
+             LEAF[0]:  VALUE: 14
+             LEAF[1]:  VALUE: 15
+INTERNAL: KEY[0]: 16     KEY[1]: 17     PARENT: KEY[0]: 15     KEY[1]: 17     
+             LEAF[0]:  VALUE: 16
+             LEAF[1]:  VALUE: 17
+INTERNAL: KEY[0]: 18     KEY[1]: 19     PARENT: KEY[0]: 19     KEY[1]: 1B     
+             LEAF[0]:  VALUE: 18
+             LEAF[1]:  VALUE: 19
+INTERNAL: KEY[0]: 1A     KEY[1]: 1B     PARENT: KEY[0]: 19     KEY[1]: 1B     
+             LEAF[0]:  VALUE: 1A
+             LEAF[1]:  VALUE: 1B
+INTERNAL: KEY[0]: 1C     KEY[1]: 1D     PARENT: KEY[0]: 1D     KEY[1]: 1F     
+             LEAF[0]:  VALUE: 1C
+             LEAF[1]:  VALUE: 1D
+INTERNAL: KEY[0]: 1E     KEY[1]: 1F     PARENT: KEY[0]: 1D     KEY[1]: 1F     
+             LEAF[0]:  VALUE: 1E
+             LEAF[1]:  VALUE: 1F
+INTERNAL: KEY[0]: 20     KEY[1]: 21     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 20
+             LEAF[1]:  VALUE: 21
+INTERNAL: KEY[0]: 22     KEY[1]: 23     PARENT: KEY[0]: 21     KEY[1]: 23     
+             LEAF[0]:  VALUE: 22
+             LEAF[1]:  VALUE: 23
+INTERNAL: KEY[0]: 24     KEY[1]: 25     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 24
+             LEAF[1]:  VALUE: 25
+INTERNAL: KEY[0]: 26     KEY[1]: 27     PARENT: KEY[0]: 25     KEY[1]: 27     
+             LEAF[0]:  VALUE: 26
+             LEAF[1]:  VALUE: 27
+INTERNAL: KEY[0]: 28     KEY[1]: 29     PARENT: KEY[0]: 29     KEY[1]: 2B     
+             LEAF[0]:  VALUE: 28
+             LEAF[1]:  VALUE: 29
+INTERNAL: KEY[0]: 2A     KEY[1]: 2B     PARENT: KEY[0]: 29     KEY[1]: 2B     
+             LEAF[0]:  VALUE: 2A
+             LEAF[1]:  VALUE: 2B
+INTERNAL: KEY[0]: 2C     KEY[1]: 2D     PARENT: KEY[0]: 2D     KEY[1]: 2F     
+             LEAF[0]:  VALUE: 2C
+             LEAF[1]:  VALUE: 2D
+INTERNAL: KEY[0]: 2E     KEY[1]: 2F     PARENT: KEY[0]: 2D     KEY[1]: 2F     
+             LEAF[0]:  VALUE: 2E
+             LEAF[1]:  VALUE: 2F
+INTERNAL: KEY[0]: 30     KEY[1]: 31     PARENT: KEY[0]: 31     KEY[1]: 33     
+             LEAF[0]:  VALUE: 30
+             LEAF[1]:  VALUE: 31
+INTERNAL: KEY[0]: 32     KEY[1]: 33     PARENT: KEY[0]: 31     KEY[1]: 33     
+             LEAF[0]:  VALUE: 32
+             LEAF[1]:  VALUE: 33
+INTERNAL: KEY[0]: 34     KEY[1]: 35     PARENT: KEY[0]: 35     KEY[1]: 37     
+             LEAF[0]:  VALUE: 34
+             LEAF[1]:  VALUE: 35
+INTERNAL: KEY[0]: 36     KEY[1]: 37     PARENT: KEY[0]: 35     KEY[1]: 37     
+             LEAF[0]:  VALUE: 36
+             LEAF[1]:  VALUE: 37
+INTERNAL: KEY[0]: 38     KEY[1]: 39     PARENT: KEY[0]: 39     KEY[1]: 3B     
+             LEAF[0]:  VALUE: 38
+             LEAF[1]:  VALUE: 39
+INTERNAL: KEY[0]: 3A     KEY[1]: 3B     PARENT: KEY[0]: 39     KEY[1]: 3B     
+             LEAF[0]:  VALUE: 3A
+             LEAF[1]:  VALUE: 3B
+INTERNAL: KEY[0]: 3C     KEY[1]: 3D     PARENT: KEY[0]: 3D     KEY[1]: 3F     
+             LEAF[0]:  VALUE: 3C
+             LEAF[1]:  VALUE: 3D
+INTERNAL: KEY[0]: 3E     KEY[1]: 3F     PARENT: KEY[0]: 3D     KEY[1]: 3F     
+             LEAF[0]:  VALUE: 3E
+             LEAF[1]:  VALUE: 3F
+INTERNAL: KEY[0]: 40     KEY[1]: 41     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 40
+             LEAF[1]:  VALUE: 41
+INTERNAL: KEY[0]: 42     KEY[1]: 43     PARENT: KEY[0]: 41     KEY[1]: 43     
+             LEAF[0]:  VALUE: 42
+             LEAF[1]:  VALUE: 43
+INTERNAL: KEY[0]: 44     KEY[1]: 45     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 44
+             LEAF[1]:  VALUE: 45
+INTERNAL: KEY[0]: 46     KEY[1]: 47     PARENT: KEY[0]: 45     KEY[1]: 47     
+             LEAF[0]:  VALUE: 46
+             LEAF[1]:  VALUE: 47
+INTERNAL: KEY[0]: 48     KEY[1]: 49     PARENT: KEY[0]: 49     KEY[1]: 4B     
+             LEAF[0]:  VALUE: 48
+             LEAF[1]:  VALUE: 49
+INTERNAL: KEY[0]: 4A     KEY[1]: 4B     PARENT: KEY[0]: 49     KEY[1]: 4B     
+             LEAF[0]:  VALUE: 4A
+             LEAF[1]:  VALUE: 4B
+INTERNAL: KEY[0]: 4C     KEY[1]: 4D     PARENT: KEY[0]: 4D     KEY[1]: 4F     
+             LEAF[0]:  VALUE: 4C
+             LEAF[1]:  VALUE: 4D
+INTERNAL: KEY[0]: 4E     KEY[1]: 4F     PARENT: KEY[0]: 4D     KEY[1]: 4F     
+             LEAF[0]:  VALUE: 4E
+             LEAF[1]:  VALUE: 4F
+INTERNAL: KEY[0]: 50     KEY[1]: 51     PARENT: KEY[0]: 51     KEY[1]: 53     
+             LEAF[0]:  VALUE: 50
+             LEAF[1]:  VALUE: 51
+INTERNAL: KEY[0]: 52     KEY[1]: 53     PARENT: KEY[0]: 51     KEY[1]: 53     
+             LEAF[0]:  VALUE: 52
+             LEAF[1]:  VALUE: 53
+INTERNAL: KEY[0]: 54     KEY[1]: 55     PARENT: KEY[0]: 55     KEY[1]: 57     
+             LEAF[0]:  VALUE: 54
+             LEAF[1]:  VALUE: 55
+INTERNAL: KEY[0]: 56     KEY[1]: 57     PARENT: KEY[0]: 55     KEY[1]: 57     
+             LEAF[0]:  VALUE: 56
+             LEAF[1]:  VALUE: 57
+INTERNAL: KEY[0]: 58     KEY[1]: 59     PARENT: KEY[0]: 59     KEY[1]: 5B     
+             LEAF[0]:  VALUE: 58
+             LEAF[1]:  VALUE: 59
+INTERNAL: KEY[0]: 5A     KEY[1]: 5B     PARENT: KEY[0]: 59     KEY[1]: 5B     
+             LEAF[0]:  VALUE: 5A
+             LEAF[1]:  VALUE: 5B
+INTERNAL: KEY[0]: 5C     KEY[1]: 5D     PARENT: KEY[0]: 5D     KEY[1]: 5F     
+             LEAF[0]:  VALUE: 5C
+             LEAF[1]:  VALUE: 5D
+INTERNAL: KEY[0]: 5E     KEY[1]: 5F     PARENT: KEY[0]: 5D     KEY[1]: 5F     
+             LEAF[0]:  VALUE: 5E
+             LEAF[1]:  VALUE: 5F
+INTERNAL: KEY[0]: 60     KEY[1]: 61     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 60
+             LEAF[1]:  VALUE: 61
+INTERNAL: KEY[0]: 62     KEY[1]: 63     PARENT: KEY[0]: 61     KEY[1]: 63     
+             LEAF[0]:  VALUE: 62
+             LEAF[1]:  VALUE: 63
+INTERNAL: KEY[0]: 64     KEY[1]: 65     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 64
+             LEAF[1]:  VALUE: 65
+INTERNAL: KEY[0]: 66     KEY[1]: 67     PARENT: KEY[0]: 65     KEY[1]: 67     
+             LEAF[0]:  VALUE: 66
+             LEAF[1]:  VALUE: 67
+INTERNAL: KEY[0]: 68     KEY[1]: 69     PARENT: KEY[0]: 69     KEY[1]: 6B     
+             LEAF[0]:  VALUE: 68
+             LEAF[1]:  VALUE: 69
+INTERNAL: KEY[0]: 6A     KEY[1]: 6B     PARENT: KEY[0]: 69     KEY[1]: 6B     
+             LEAF[0]:  VALUE: 6A
+             LEAF[1]:  VALUE: 6B
+INTERNAL: KEY[0]: 6C     KEY[1]: 6D     PARENT: KEY[0]: 6D     KEY[1]: 6F     
+             LEAF[0]:  VALUE: 6C
+             LEAF[1]:  VALUE: 6D
+INTERNAL: KEY[0]: 6E     KEY[1]: 6F     PARENT: KEY[0]: 6D     KEY[1]: 6F     
+             LEAF[0]:  VALUE: 6E
+             LEAF[1]:  VALUE: 6F
+INTERNAL: KEY[0]: 70     KEY[1]: 71     PARENT: KEY[0]: 71     KEY[1]: 73     
+             LEAF[0]:  VALUE: 70
+             LEAF[1]:  VALUE: 71
+INTERNAL: KEY[0]: 72     KEY[1]: 73     PARENT: KEY[0]: 71     KEY[1]: 73     
+             LEAF[0]:  VALUE: 72
+             LEAF[1]:  VALUE: 73
+INTERNAL: KEY[0]: 74     KEY[1]: 75     PARENT: KEY[0]: 75     KEY[1]: 77     
+             LEAF[0]:  VALUE: 74
+             LEAF[1]:  VALUE: 75
+INTERNAL: KEY[0]: 76     KEY[1]: 77     PARENT: KEY[0]: 75     KEY[1]: 77     
+             LEAF[0]:  VALUE: 76
+             LEAF[1]:  VALUE: 77
+INTERNAL: KEY[0]: 78     KEY[1]: 79     PARENT: KEY[0]: 79     KEY[1]: 7B     KEY[2]: 7F     
+             LEAF[0]:  VALUE: 78
+             LEAF[1]:  VALUE: 79
+INTERNAL: KEY[0]: 7A     KEY[1]: 7B     PARENT: KEY[0]: 79     KEY[1]: 7B     KEY[2]: 7F     
+             LEAF[0]:  VALUE: 7A
+             LEAF[1]:  VALUE: 7B
+INTERNAL: KEY[0]: 7C     KEY[1]: 7D     KEY[2]: 7E     PARENT: KEY[0]: 79     KEY[1]: 7B     KEY[2]: 7F     
+             LEAF[0]:  VALUE: 7C
+             LEAF[1]:  VALUE: 7D
+             LEAF[2]:  VALUE: 7E
+             LEAF[3]:  VALUE: 7F
+____________________________________________________________________________________________________
+BINARY TREE TRAVERSAL
+____________________________________________________________________________________________________
+LEVEL BY LEVEL TRAVERSAL 
+OF 2-3-4 TREE
+INTERNAL: KEY[0]: 11111  KEY[1]: 111111 KEY[2]: 1111111PARENT: NULL           
+             CHILD[0]: KEY[0]: 1111   KEY[1]: 11111  
+             CHILD[1]: KEY[0]: 101111 KEY[1]: 111111 
+             CHILD[2]: KEY[0]: 1001111KEY[1]: 1011111KEY[2]: 1111111
+INTERNAL: KEY[0]: 1111   KEY[1]: 11111  PARENT: KEY[0]: 11111  KEY[1]: 111111 KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 111    KEY[1]: 1111   
+             CHILD[1]: KEY[0]: 10111  KEY[1]: 11111  
+INTERNAL: KEY[0]: 101111 KEY[1]: 111111 PARENT: KEY[0]: 11111  KEY[1]: 111111 KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 100111 KEY[1]: 101111 
+             CHILD[1]: KEY[0]: 110111 KEY[1]: 111111 
+INTERNAL: KEY[0]: 1001111KEY[1]: 1011111KEY[2]: 1111111PARENT: KEY[0]: 11111  KEY[1]: 111111 KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1000111KEY[1]: 1001111
+             CHILD[1]: KEY[0]: 1010111KEY[1]: 1011111
+             CHILD[2]: KEY[0]: 1100111KEY[1]: 1101111KEY[2]: 1111111
+INTERNAL: KEY[0]: 111    KEY[1]: 1111   PARENT: KEY[0]: 1111   KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 11     KEY[1]: 111    
+             CHILD[1]: KEY[0]: 1011   KEY[1]: 1111   
+INTERNAL: KEY[0]: 10111  KEY[1]: 11111  PARENT: KEY[0]: 1111   KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 10011  KEY[1]: 10111  
+             CHILD[1]: KEY[0]: 11011  KEY[1]: 11111  
+INTERNAL: KEY[0]: 100111 KEY[1]: 101111 PARENT: KEY[0]: 101111 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 100011 KEY[1]: 100111 
+             CHILD[1]: KEY[0]: 101011 KEY[1]: 101111 
+INTERNAL: KEY[0]: 110111 KEY[1]: 111111 PARENT: KEY[0]: 101111 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 110011 KEY[1]: 110111 
+             CHILD[1]: KEY[0]: 111011 KEY[1]: 111111 
+INTERNAL: KEY[0]: 1000111KEY[1]: 1001111PARENT: KEY[0]: 1001111KEY[1]: 1011111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1000011KEY[1]: 1000111
+             CHILD[1]: KEY[0]: 1001011KEY[1]: 1001111
+INTERNAL: KEY[0]: 1010111KEY[1]: 1011111PARENT: KEY[0]: 1001111KEY[1]: 1011111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1010011KEY[1]: 1010111
+             CHILD[1]: KEY[0]: 1011011KEY[1]: 1011111
+INTERNAL: KEY[0]: 1100111KEY[1]: 1101111KEY[2]: 1111111PARENT: KEY[0]: 1001111KEY[1]: 1011111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1100011KEY[1]: 1100111
+             CHILD[1]: KEY[0]: 1101011KEY[1]: 1101111
+             CHILD[2]: KEY[0]: 1110011KEY[1]: 1110111KEY[2]: 1111111
+INTERNAL: KEY[0]: 11     KEY[1]: 111    PARENT: KEY[0]: 111    KEY[1]: 1111   
+             CHILD[0]: KEY[0]: 1      KEY[1]: 11     
+             CHILD[1]: KEY[0]: 101    KEY[1]: 111    
+INTERNAL: KEY[0]: 1011   KEY[1]: 1111   PARENT: KEY[0]: 111    KEY[1]: 1111   
+             CHILD[0]: KEY[0]: 1001   KEY[1]: 1011   
+             CHILD[1]: KEY[0]: 1101   KEY[1]: 1111   
+INTERNAL: KEY[0]: 10011  KEY[1]: 10111  PARENT: KEY[0]: 10111  KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 10001  KEY[1]: 10011  
+             CHILD[1]: KEY[0]: 10101  KEY[1]: 10111  
+INTERNAL: KEY[0]: 11011  KEY[1]: 11111  PARENT: KEY[0]: 10111  KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 11001  KEY[1]: 11011  
+             CHILD[1]: KEY[0]: 11101  KEY[1]: 11111  
+INTERNAL: KEY[0]: 100011 KEY[1]: 100111 PARENT: KEY[0]: 100111 KEY[1]: 101111 
+             CHILD[0]: KEY[0]: 100001 KEY[1]: 100011 
+             CHILD[1]: KEY[0]: 100101 KEY[1]: 100111 
+INTERNAL: KEY[0]: 101011 KEY[1]: 101111 PARENT: KEY[0]: 100111 KEY[1]: 101111 
+             CHILD[0]: KEY[0]: 101001 KEY[1]: 101011 
+             CHILD[1]: KEY[0]: 101101 KEY[1]: 101111 
+INTERNAL: KEY[0]: 110011 KEY[1]: 110111 PARENT: KEY[0]: 110111 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 110001 KEY[1]: 110011 
+             CHILD[1]: KEY[0]: 110101 KEY[1]: 110111 
+INTERNAL: KEY[0]: 111011 KEY[1]: 111111 PARENT: KEY[0]: 110111 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 111001 KEY[1]: 111011 
+             CHILD[1]: KEY[0]: 111101 KEY[1]: 111111 
+INTERNAL: KEY[0]: 1000011KEY[1]: 1000111PARENT: KEY[0]: 1000111KEY[1]: 1001111
+             CHILD[0]: KEY[0]: 1000001KEY[1]: 1000011
+             CHILD[1]: KEY[0]: 1000101KEY[1]: 1000111
+INTERNAL: KEY[0]: 1001011KEY[1]: 1001111PARENT: KEY[0]: 1000111KEY[1]: 1001111
+             CHILD[0]: KEY[0]: 1001001KEY[1]: 1001011
+             CHILD[1]: KEY[0]: 1001101KEY[1]: 1001111
+INTERNAL: KEY[0]: 1010011KEY[1]: 1010111PARENT: KEY[0]: 1010111KEY[1]: 1011111
+             CHILD[0]: KEY[0]: 1010001KEY[1]: 1010011
+             CHILD[1]: KEY[0]: 1010101KEY[1]: 1010111
+INTERNAL: KEY[0]: 1011011KEY[1]: 1011111PARENT: KEY[0]: 1010111KEY[1]: 1011111
+             CHILD[0]: KEY[0]: 1011001KEY[1]: 1011011
+             CHILD[1]: KEY[0]: 1011101KEY[1]: 1011111
+INTERNAL: KEY[0]: 1100011KEY[1]: 1100111PARENT: KEY[0]: 1100111KEY[1]: 1101111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1100001KEY[1]: 1100011
+             CHILD[1]: KEY[0]: 1100101KEY[1]: 1100111
+INTERNAL: KEY[0]: 1101011KEY[1]: 1101111PARENT: KEY[0]: 1100111KEY[1]: 1101111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1101001KEY[1]: 1101011
+             CHILD[1]: KEY[0]: 1101101KEY[1]: 1101111
+INTERNAL: KEY[0]: 1110011KEY[1]: 1110111KEY[2]: 1111111PARENT: KEY[0]: 1100111KEY[1]: 1101111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1110001KEY[1]: 1110011
+             CHILD[1]: KEY[0]: 1110101KEY[1]: 1110111
+             CHILD[2]: KEY[0]: 1111001KEY[1]: 1111011KEY[2]: 1111111
+INTERNAL: KEY[0]: 1      KEY[1]: 11     PARENT: KEY[0]: 11     KEY[1]: 111    
+             CHILD[0]: KEY[0]: 0      KEY[1]: 1      
+             CHILD[1]: KEY[0]: 10     KEY[1]: 11     
+INTERNAL: KEY[0]: 101    KEY[1]: 111    PARENT: KEY[0]: 11     KEY[1]: 111    
+             CHILD[0]: KEY[0]: 100    KEY[1]: 101    
+             CHILD[1]: KEY[0]: 110    KEY[1]: 111    
+INTERNAL: KEY[0]: 1001   KEY[1]: 1011   PARENT: KEY[0]: 1011   KEY[1]: 1111   
+             CHILD[0]: KEY[0]: 1000   KEY[1]: 1001   
+             CHILD[1]: KEY[0]: 1010   KEY[1]: 1011   
+INTERNAL: KEY[0]: 1101   KEY[1]: 1111   PARENT: KEY[0]: 1011   KEY[1]: 1111   
+             CHILD[0]: KEY[0]: 1100   KEY[1]: 1101   
+             CHILD[1]: KEY[0]: 1110   KEY[1]: 1111   
+INTERNAL: KEY[0]: 10001  KEY[1]: 10011  PARENT: KEY[0]: 10011  KEY[1]: 10111  
+             CHILD[0]: KEY[0]: 10000  KEY[1]: 10001  
+             CHILD[1]: KEY[0]: 10010  KEY[1]: 10011  
+INTERNAL: KEY[0]: 10101  KEY[1]: 10111  PARENT: KEY[0]: 10011  KEY[1]: 10111  
+             CHILD[0]: KEY[0]: 10100  KEY[1]: 10101  
+             CHILD[1]: KEY[0]: 10110  KEY[1]: 10111  
+INTERNAL: KEY[0]: 11001  KEY[1]: 11011  PARENT: KEY[0]: 11011  KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 11000  KEY[1]: 11001  
+             CHILD[1]: KEY[0]: 11010  KEY[1]: 11011  
+INTERNAL: KEY[0]: 11101  KEY[1]: 11111  PARENT: KEY[0]: 11011  KEY[1]: 11111  
+             CHILD[0]: KEY[0]: 11100  KEY[1]: 11101  
+             CHILD[1]: KEY[0]: 11110  KEY[1]: 11111  
+INTERNAL: KEY[0]: 100001 KEY[1]: 100011 PARENT: KEY[0]: 100011 KEY[1]: 100111 
+             CHILD[0]: KEY[0]: 100000 KEY[1]: 100001 
+             CHILD[1]: KEY[0]: 100010 KEY[1]: 100011 
+INTERNAL: KEY[0]: 100101 KEY[1]: 100111 PARENT: KEY[0]: 100011 KEY[1]: 100111 
+             CHILD[0]: KEY[0]: 100100 KEY[1]: 100101 
+             CHILD[1]: KEY[0]: 100110 KEY[1]: 100111 
+INTERNAL: KEY[0]: 101001 KEY[1]: 101011 PARENT: KEY[0]: 101011 KEY[1]: 101111 
+             CHILD[0]: KEY[0]: 101000 KEY[1]: 101001 
+             CHILD[1]: KEY[0]: 101010 KEY[1]: 101011 
+INTERNAL: KEY[0]: 101101 KEY[1]: 101111 PARENT: KEY[0]: 101011 KEY[1]: 101111 
+             CHILD[0]: KEY[0]: 101100 KEY[1]: 101101 
+             CHILD[1]: KEY[0]: 101110 KEY[1]: 101111 
+INTERNAL: KEY[0]: 110001 KEY[1]: 110011 PARENT: KEY[0]: 110011 KEY[1]: 110111 
+             CHILD[0]: KEY[0]: 110000 KEY[1]: 110001 
+             CHILD[1]: KEY[0]: 110010 KEY[1]: 110011 
+INTERNAL: KEY[0]: 110101 KEY[1]: 110111 PARENT: KEY[0]: 110011 KEY[1]: 110111 
+             CHILD[0]: KEY[0]: 110100 KEY[1]: 110101 
+             CHILD[1]: KEY[0]: 110110 KEY[1]: 110111 
+INTERNAL: KEY[0]: 111001 KEY[1]: 111011 PARENT: KEY[0]: 111011 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 111000 KEY[1]: 111001 
+             CHILD[1]: KEY[0]: 111010 KEY[1]: 111011 
+INTERNAL: KEY[0]: 111101 KEY[1]: 111111 PARENT: KEY[0]: 111011 KEY[1]: 111111 
+             CHILD[0]: KEY[0]: 111100 KEY[1]: 111101 
+             CHILD[1]: KEY[0]: 111110 KEY[1]: 111111 
+INTERNAL: KEY[0]: 1000001KEY[1]: 1000011PARENT: KEY[0]: 1000011KEY[1]: 1000111
+             CHILD[0]: KEY[0]: 1000000KEY[1]: 1000001
+             CHILD[1]: KEY[0]: 1000010KEY[1]: 1000011
+INTERNAL: KEY[0]: 1000101KEY[1]: 1000111PARENT: KEY[0]: 1000011KEY[1]: 1000111
+             CHILD[0]: KEY[0]: 1000100KEY[1]: 1000101
+             CHILD[1]: KEY[0]: 1000110KEY[1]: 1000111
+INTERNAL: KEY[0]: 1001001KEY[1]: 1001011PARENT: KEY[0]: 1001011KEY[1]: 1001111
+             CHILD[0]: KEY[0]: 1001000KEY[1]: 1001001
+             CHILD[1]: KEY[0]: 1001010KEY[1]: 1001011
+INTERNAL: KEY[0]: 1001101KEY[1]: 1001111PARENT: KEY[0]: 1001011KEY[1]: 1001111
+             CHILD[0]: KEY[0]: 1001100KEY[1]: 1001101
+             CHILD[1]: KEY[0]: 1001110KEY[1]: 1001111
+INTERNAL: KEY[0]: 1010001KEY[1]: 1010011PARENT: KEY[0]: 1010011KEY[1]: 1010111
+             CHILD[0]: KEY[0]: 1010000KEY[1]: 1010001
+             CHILD[1]: KEY[0]: 1010010KEY[1]: 1010011
+INTERNAL: KEY[0]: 1010101KEY[1]: 1010111PARENT: KEY[0]: 1010011KEY[1]: 1010111
+             CHILD[0]: KEY[0]: 1010100KEY[1]: 1010101
+             CHILD[1]: KEY[0]: 1010110KEY[1]: 1010111
+INTERNAL: KEY[0]: 1011001KEY[1]: 1011011PARENT: KEY[0]: 1011011KEY[1]: 1011111
+             CHILD[0]: KEY[0]: 1011000KEY[1]: 1011001
+             CHILD[1]: KEY[0]: 1011010KEY[1]: 1011011
+INTERNAL: KEY[0]: 1011101KEY[1]: 1011111PARENT: KEY[0]: 1011011KEY[1]: 1011111
+             CHILD[0]: KEY[0]: 1011100KEY[1]: 1011101
+             CHILD[1]: KEY[0]: 1011110KEY[1]: 1011111
+INTERNAL: KEY[0]: 1100001KEY[1]: 1100011PARENT: KEY[0]: 1100011KEY[1]: 1100111
+             CHILD[0]: KEY[0]: 1100000KEY[1]: 1100001
+             CHILD[1]: KEY[0]: 1100010KEY[1]: 1100011
+INTERNAL: KEY[0]: 1100101KEY[1]: 1100111PARENT: KEY[0]: 1100011KEY[1]: 1100111
+             CHILD[0]: KEY[0]: 1100100KEY[1]: 1100101
+             CHILD[1]: KEY[0]: 1100110KEY[1]: 1100111
+INTERNAL: KEY[0]: 1101001KEY[1]: 1101011PARENT: KEY[0]: 1101011KEY[1]: 1101111
+             CHILD[0]: KEY[0]: 1101000KEY[1]: 1101001
+             CHILD[1]: KEY[0]: 1101010KEY[1]: 1101011
+INTERNAL: KEY[0]: 1101101KEY[1]: 1101111PARENT: KEY[0]: 1101011KEY[1]: 1101111
+             CHILD[0]: KEY[0]: 1101100KEY[1]: 1101101
+             CHILD[1]: KEY[0]: 1101110KEY[1]: 1101111
+INTERNAL: KEY[0]: 1110001KEY[1]: 1110011PARENT: KEY[0]: 1110011KEY[1]: 1110111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1110000KEY[1]: 1110001
+             CHILD[1]: KEY[0]: 1110010KEY[1]: 1110011
+INTERNAL: KEY[0]: 1110101KEY[1]: 1110111PARENT: KEY[0]: 1110011KEY[1]: 1110111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1110100KEY[1]: 1110101
+             CHILD[1]: KEY[0]: 1110110KEY[1]: 1110111
+INTERNAL: KEY[0]: 1111001KEY[1]: 1111011KEY[2]: 1111111PARENT: KEY[0]: 1110011KEY[1]: 1110111KEY[2]: 1111111
+             CHILD[0]: KEY[0]: 1111000KEY[1]: 1111001
+             CHILD[1]: KEY[0]: 1111010KEY[1]: 1111011
+             CHILD[2]: KEY[0]: 1111100KEY[1]: 1111101KEY[2]: 1111110
+INTERNAL: KEY[0]: 0      KEY[1]: 1      PARENT: KEY[0]: 1      KEY[1]: 11     
+             LEAF[0]:  VALUE: 0
+             LEAF[1]:  VALUE: 1
+INTERNAL: KEY[0]: 10     KEY[1]: 11     PARENT: KEY[0]: 1      KEY[1]: 11     
+             LEAF[0]:  VALUE: 10
+             LEAF[1]:  VALUE: 11
+INTERNAL: KEY[0]: 100    KEY[1]: 101    PARENT: KEY[0]: 101    KEY[1]: 111    
+             LEAF[0]:  VALUE: 100
+             LEAF[1]:  VALUE: 101
+INTERNAL: KEY[0]: 110    KEY[1]: 111    PARENT: KEY[0]: 101    KEY[1]: 111    
+             LEAF[0]:  VALUE: 110
+             LEAF[1]:  VALUE: 111
+INTERNAL: KEY[0]: 1000   KEY[1]: 1001   PARENT: KEY[0]: 1001   KEY[1]: 1011   
+             LEAF[0]:  VALUE: 1000
+             LEAF[1]:  VALUE: 1001
+INTERNAL: KEY[0]: 1010   KEY[1]: 1011   PARENT: KEY[0]: 1001   KEY[1]: 1011   
+             LEAF[0]:  VALUE: 1010
+             LEAF[1]:  VALUE: 1011
+INTERNAL: KEY[0]: 1100   KEY[1]: 1101   PARENT: KEY[0]: 1101   KEY[1]: 1111   
+             LEAF[0]:  VALUE: 1100
+             LEAF[1]:  VALUE: 1101
+INTERNAL: KEY[0]: 1110   KEY[1]: 1111   PARENT: KEY[0]: 1101   KEY[1]: 1111   
+             LEAF[0]:  VALUE: 1110
+             LEAF[1]:  VALUE: 1111
+INTERNAL: KEY[0]: 10000  KEY[1]: 10001  PARENT: KEY[0]: 10001  KEY[1]: 10011  
+             LEAF[0]:  VALUE: 10000
+             LEAF[1]:  VALUE: 10001
+INTERNAL: KEY[0]: 10010  KEY[1]: 10011  PARENT: KEY[0]: 10001  KEY[1]: 10011  
+             LEAF[0]:  VALUE: 10010
+             LEAF[1]:  VALUE: 10011
+INTERNAL: KEY[0]: 10100  KEY[1]: 10101  PARENT: KEY[0]: 10101  KEY[1]: 10111  
+             LEAF[0]:  VALUE: 10100
+             LEAF[1]:  VALUE: 10101
+INTERNAL: KEY[0]: 10110  KEY[1]: 10111  PARENT: KEY[0]: 10101  KEY[1]: 10111  
+             LEAF[0]:  VALUE: 10110
+             LEAF[1]:  VALUE: 10111
+INTERNAL: KEY[0]: 11000  KEY[1]: 11001  PARENT: KEY[0]: 11001  KEY[1]: 11011  
+             LEAF[0]:  VALUE: 11000
+             LEAF[1]:  VALUE: 11001
+INTERNAL: KEY[0]: 11010  KEY[1]: 11011  PARENT: KEY[0]: 11001  KEY[1]: 11011  
+             LEAF[0]:  VALUE: 11010
+             LEAF[1]:  VALUE: 11011
+INTERNAL: KEY[0]: 11100  KEY[1]: 11101  PARENT: KEY[0]: 11101  KEY[1]: 11111  
+             LEAF[0]:  VALUE: 11100
+             LEAF[1]:  VALUE: 11101
+INTERNAL: KEY[0]: 11110  KEY[1]: 11111  PARENT: KEY[0]: 11101  KEY[1]: 11111  
+             LEAF[0]:  VALUE: 11110
+             LEAF[1]:  VALUE: 11111
+INTERNAL: KEY[0]: 100000 KEY[1]: 100001 PARENT: KEY[0]: 100001 KEY[1]: 100011 
+             LEAF[0]:  VALUE: 100000
+             LEAF[1]:  VALUE: 100001
+INTERNAL: KEY[0]: 100010 KEY[1]: 100011 PARENT: KEY[0]: 100001 KEY[1]: 100011 
+             LEAF[0]:  VALUE: 100010
+             LEAF[1]:  VALUE: 100011
+INTERNAL: KEY[0]: 100100 KEY[1]: 100101 PARENT: KEY[0]: 100101 KEY[1]: 100111 
+             LEAF[0]:  VALUE: 100100
+             LEAF[1]:  VALUE: 100101
+INTERNAL: KEY[0]: 100110 KEY[1]: 100111 PARENT: KEY[0]: 100101 KEY[1]: 100111 
+             LEAF[0]:  VALUE: 100110
+             LEAF[1]:  VALUE: 100111
+INTERNAL: KEY[0]: 101000 KEY[1]: 101001 PARENT: KEY[0]: 101001 KEY[1]: 101011 
+             LEAF[0]:  VALUE: 101000
+             LEAF[1]:  VALUE: 101001
+INTERNAL: KEY[0]: 101010 KEY[1]: 101011 PARENT: KEY[0]: 101001 KEY[1]: 101011 
+             LEAF[0]:  VALUE: 101010
+             LEAF[1]:  VALUE: 101011
+INTERNAL: KEY[0]: 101100 KEY[1]: 101101 PARENT: KEY[0]: 101101 KEY[1]: 101111 
+             LEAF[0]:  VALUE: 101100
+             LEAF[1]:  VALUE: 101101
+INTERNAL: KEY[0]: 101110 KEY[1]: 101111 PARENT: KEY[0]: 101101 KEY[1]: 101111 
+             LEAF[0]:  VALUE: 101110
+             LEAF[1]:  VALUE: 101111
+INTERNAL: KEY[0]: 110000 KEY[1]: 110001 PARENT: KEY[0]: 110001 KEY[1]: 110011 
+             LEAF[0]:  VALUE: 110000
+             LEAF[1]:  VALUE: 110001
+INTERNAL: KEY[0]: 110010 KEY[1]: 110011 PARENT: KEY[0]: 110001 KEY[1]: 110011 
+             LEAF[0]:  VALUE: 110010
+             LEAF[1]:  VALUE: 110011
+INTERNAL: KEY[0]: 110100 KEY[1]: 110101 PARENT: KEY[0]: 110101 KEY[1]: 110111 
+             LEAF[0]:  VALUE: 110100
+             LEAF[1]:  VALUE: 110101
+INTERNAL: KEY[0]: 110110 KEY[1]: 110111 PARENT: KEY[0]: 110101 KEY[1]: 110111 
+             LEAF[0]:  VALUE: 110110
+             LEAF[1]:  VALUE: 110111
+INTERNAL: KEY[0]: 111000 KEY[1]: 111001 PARENT: KEY[0]: 111001 KEY[1]: 111011 
+             LEAF[0]:  VALUE: 111000
+             LEAF[1]:  VALUE: 111001
+INTERNAL: KEY[0]: 111010 KEY[1]: 111011 PARENT: KEY[0]: 111001 KEY[1]: 111011 
+             LEAF[0]:  VALUE: 111010
+             LEAF[1]:  VALUE: 111011
+INTERNAL: KEY[0]: 111100 KEY[1]: 111101 PARENT: KEY[0]: 111101 KEY[1]: 111111 
+             LEAF[0]:  VALUE: 111100
+             LEAF[1]:  VALUE: 111101
+INTERNAL: KEY[0]: 111110 KEY[1]: 111111 PARENT: KEY[0]: 111101 KEY[1]: 111111 
+             LEAF[0]:  VALUE: 111110
+             LEAF[1]:  VALUE: 111111
+INTERNAL: KEY[0]: 1000000KEY[1]: 1000001PARENT: KEY[0]: 1000001KEY[1]: 1000011
+             LEAF[0]:  VALUE: 1000000
+             LEAF[1]:  VALUE: 1000001
+INTERNAL: KEY[0]: 1000010KEY[1]: 1000011PARENT: KEY[0]: 1000001KEY[1]: 1000011
+             LEAF[0]:  VALUE: 1000010
+             LEAF[1]:  VALUE: 1000011
+INTERNAL: KEY[0]: 1000100KEY[1]: 1000101PARENT: KEY[0]: 1000101KEY[1]: 1000111
+             LEAF[0]:  VALUE: 1000100
+             LEAF[1]:  VALUE: 1000101
+INTERNAL: KEY[0]: 1000110KEY[1]: 1000111PARENT: KEY[0]: 1000101KEY[1]: 1000111
+             LEAF[0]:  VALUE: 1000110
+             LEAF[1]:  VALUE: 1000111
+INTERNAL: KEY[0]: 1001000KEY[1]: 1001001PARENT: KEY[0]: 1001001KEY[1]: 1001011
+             LEAF[0]:  VALUE: 1001000
+             LEAF[1]:  VALUE: 1001001
+INTERNAL: KEY[0]: 1001010KEY[1]: 1001011PARENT: KEY[0]: 1001001KEY[1]: 1001011
+             LEAF[0]:  VALUE: 1001010
+             LEAF[1]:  VALUE: 1001011
+INTERNAL: KEY[0]: 1001100KEY[1]: 1001101PARENT: KEY[0]: 1001101KEY[1]: 1001111
+             LEAF[0]:  VALUE: 1001100
+             LEAF[1]:  VALUE: 1001101
+INTERNAL: KEY[0]: 1001110KEY[1]: 1001111PARENT: KEY[0]: 1001101KEY[1]: 1001111
+             LEAF[0]:  VALUE: 1001110
+             LEAF[1]:  VALUE: 1001111
+INTERNAL: KEY[0]: 1010000KEY[1]: 1010001PARENT: KEY[0]: 1010001KEY[1]: 1010011
+             LEAF[0]:  VALUE: 1010000
+             LEAF[1]:  VALUE: 1010001
+INTERNAL: KEY[0]: 1010010KEY[1]: 1010011PARENT: KEY[0]: 1010001KEY[1]: 1010011
+             LEAF[0]:  VALUE: 1010010
+             LEAF[1]:  VALUE: 1010011
+INTERNAL: KEY[0]: 1010100KEY[1]: 1010101PARENT: KEY[0]: 1010101KEY[1]: 1010111
+             LEAF[0]:  VALUE: 1010100
+             LEAF[1]:  VALUE: 1010101
+INTERNAL: KEY[0]: 1010110KEY[1]: 1010111PARENT: KEY[0]: 1010101KEY[1]: 1010111
+             LEAF[0]:  VALUE: 1010110
+             LEAF[1]:  VALUE: 1010111
+INTERNAL: KEY[0]: 1011000KEY[1]: 1011001PARENT: KEY[0]: 1011001KEY[1]: 1011011
+             LEAF[0]:  VALUE: 1011000
+             LEAF[1]:  VALUE: 1011001
+INTERNAL: KEY[0]: 1011010KEY[1]: 1011011PARENT: KEY[0]: 1011001KEY[1]: 1011011
+             LEAF[0]:  VALUE: 1011010
+             LEAF[1]:  VALUE: 1011011
+INTERNAL: KEY[0]: 1011100KEY[1]: 1011101PARENT: KEY[0]: 1011101KEY[1]: 1011111
+             LEAF[0]:  VALUE: 1011100
+             LEAF[1]:  VALUE: 1011101
+INTERNAL: KEY[0]: 1011110KEY[1]: 1011111PARENT: KEY[0]: 1011101KEY[1]: 1011111
+             LEAF[0]:  VALUE: 1011110
+             LEAF[1]:  VALUE: 1011111
+INTERNAL: KEY[0]: 1100000KEY[1]: 1100001PARENT: KEY[0]: 1100001KEY[1]: 1100011
+             LEAF[0]:  VALUE: 1100000
+             LEAF[1]:  VALUE: 1100001
+INTERNAL: KEY[0]: 1100010KEY[1]: 1100011PARENT: KEY[0]: 1100001KEY[1]: 1100011
+             LEAF[0]:  VALUE: 1100010
+             LEAF[1]:  VALUE: 1100011
+INTERNAL: KEY[0]: 1100100KEY[1]: 1100101PARENT: KEY[0]: 1100101KEY[1]: 1100111
+             LEAF[0]:  VALUE: 1100100
+             LEAF[1]:  VALUE: 1100101
+INTERNAL: KEY[0]: 1100110KEY[1]: 1100111PARENT: KEY[0]: 1100101KEY[1]: 1100111
+             LEAF[0]:  VALUE: 1100110
+             LEAF[1]:  VALUE: 1100111
+INTERNAL: KEY[0]: 1101000KEY[1]: 1101001PARENT: KEY[0]: 1101001KEY[1]: 1101011
+             LEAF[0]:  VALUE: 1101000
+             LEAF[1]:  VALUE: 1101001
+INTERNAL: KEY[0]: 1101010KEY[1]: 1101011PARENT: KEY[0]: 1101001KEY[1]: 1101011
+             LEAF[0]:  VALUE: 1101010
+             LEAF[1]:  VALUE: 1101011
+INTERNAL: KEY[0]: 1101100KEY[1]: 1101101PARENT: KEY[0]: 1101101KEY[1]: 1101111
+             LEAF[0]:  VALUE: 1101100
+             LEAF[1]:  VALUE: 1101101
+INTERNAL: KEY[0]: 1101110KEY[1]: 1101111PARENT: KEY[0]: 1101101KEY[1]: 1101111
+             LEAF[0]:  VALUE: 1101110
+             LEAF[1]:  VALUE: 1101111
+INTERNAL: KEY[0]: 1110000KEY[1]: 1110001PARENT: KEY[0]: 1110001KEY[1]: 1110011
+             LEAF[0]:  VALUE: 1110000
+             LEAF[1]:  VALUE: 1110001
+INTERNAL: KEY[0]: 1110010KEY[1]: 1110011PARENT: KEY[0]: 1110001KEY[1]: 1110011
+             LEAF[0]:  VALUE: 1110010
+             LEAF[1]:  VALUE: 1110011
+INTERNAL: KEY[0]: 1110100KEY[1]: 1110101PARENT: KEY[0]: 1110101KEY[1]: 1110111
+             LEAF[0]:  VALUE: 1110100
+             LEAF[1]:  VALUE: 1110101
+INTERNAL: KEY[0]: 1110110KEY[1]: 1110111PARENT: KEY[0]: 1110101KEY[1]: 1110111
+             LEAF[0]:  VALUE: 1110110
+             LEAF[1]:  VALUE: 1110111
+INTERNAL: KEY[0]: 1111000KEY[1]: 1111001PARENT: KEY[0]: 1111001KEY[1]: 1111011KEY[2]: 1111111
+             LEAF[0]:  VALUE: 1111000
+             LEAF[1]:  VALUE: 1111001
+INTERNAL: KEY[0]: 1111010KEY[1]: 1111011PARENT: KEY[0]: 1111001KEY[1]: 1111011KEY[2]: 1111111
+             LEAF[0]:  VALUE: 1111010
+             LEAF[1]:  VALUE: 1111011
+INTERNAL: KEY[0]: 1111100KEY[1]: 1111101KEY[2]: 1111110PARENT: KEY[0]: 1111001KEY[1]: 1111011KEY[2]: 1111111
+             LEAF[0]:  VALUE: 1111100
+             LEAF[1]:  VALUE: 1111101
+             LEAF[2]:  VALUE: 1111110
+             LEAF[3]:  VALUE: 1111111
+____________________________________________________________________________________________________
+SYMBOL TREE TRAVERSAL
+____________________________________________________________________________________________________
+LEVEL BY LEVEL TRAVERSAL 
+OF 2-3-4 TREE
+INTERNAL: KEY[0]: NUL    KEY[1]: Z      PARENT: NULL           
+             CHILD[0]: KEY[0]: DLE    KEY[1]: NUL    
+             CHILD[1]: KEY[0]: STX    KEY[1]: U      KEY[2]: Z      
+INTERNAL: KEY[0]: DLE    KEY[1]: NUL    PARENT: KEY[0]: NUL    KEY[1]: Z      
+             CHILD[0]: KEY[0]: '      KEY[1]: DLE    
+             CHILD[1]: KEY[0]: I      KEY[1]: NUL    
+INTERNAL: KEY[0]: STX    KEY[1]: U      KEY[2]: Z      PARENT: KEY[0]: NUL    KEY[1]: Z      
+             CHILD[0]: KEY[0]: R      KEY[1]: STX    
+             CHILD[1]: KEY[0]: SYN    KEY[1]: U      
+             CHILD[2]: KEY[0]: V      KEY[1]: W      KEY[2]: X      
+INTERNAL: KEY[0]: '      KEY[1]: DLE    PARENT: KEY[0]: DLE    KEY[1]: NUL    
+             CHILD[0]: KEY[0]:        KEY[1]: '      
+             CHILD[1]: KEY[0]: %      KEY[1]: CR     KEY[2]: DLE    
+INTERNAL: KEY[0]: I      KEY[1]: NUL    PARENT: KEY[0]: DLE    KEY[1]: NUL    
+             CHILD[0]: KEY[0]: HT     KEY[1]: i      KEY[2]: I      
+             CHILD[1]: KEY[0]: K      KEY[1]: LF     KEY[2]: M      
+INTERNAL: KEY[0]: R      KEY[1]: STX    PARENT: KEY[0]: STX    KEY[1]: U      KEY[2]: Z      
+             CHILD[0]: KEY[0]: P      KEY[1]: R      
+             CHILD[1]: KEY[0]: s      KEY[1]: SO     KEY[2]: SOH    
+INTERNAL: KEY[0]: SYN    KEY[1]: U      PARENT: KEY[0]: STX    KEY[1]: U      KEY[2]: Z      
+             CHILD[0]: KEY[0]: SUB    KEY[1]: SYN    
+             CHILD[1]: KEY[0]: t      KEY[1]: T      KEY[2]: u      
+INTERNAL: KEY[0]: V      KEY[1]: W      KEY[2]: X      PARENT: KEY[0]: STX    KEY[1]: U      KEY[2]: Z      
+             CHILD[0]: KEY[0]: US     KEY[1]: v      KEY[2]: V      
+             CHILD[1]: KEY[0]: VT     KEY[1]: w      KEY[2]: W      
+             CHILD[2]: KEY[0]: x      KEY[1]: X      
+             CHILD[3]: KEY[0]: y      KEY[1]: Y      KEY[2]: z      
+INTERNAL: KEY[0]:        KEY[1]: '      PARENT: KEY[0]: '      KEY[1]: DLE    
+             LEAF[0]:  VALUE: 
+             LEAF[1]:  VALUE: '
+INTERNAL: KEY[0]: %      KEY[1]: CR     KEY[2]: DLE    PARENT: KEY[0]: '      KEY[1]: DLE    
+             CHILD[0]: KEY[0]: \#     KEY[1]: %      
+             CHILD[1]: KEY[0]: :      KEY[1]: BS     KEY[2]: CR     
+             CHILD[2]: KEY[0]: DC2    KEY[1]: DC3    KEY[2]: DC4    
+INTERNAL: KEY[0]: HT     KEY[1]: i      KEY[2]: I      PARENT: KEY[0]: I      KEY[1]: NUL    
+             CHILD[0]: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      
+             LEAF[1]:  VALUE: i
+             LEAF[2]:  VALUE: I
+INTERNAL: KEY[0]: K      KEY[1]: LF     KEY[2]: M      PARENT: KEY[0]: I      KEY[1]: NUL    
+             CHILD[0]: KEY[0]: j      KEY[1]: J      KEY[2]: k      
+             CHILD[1]: KEY[0]: l      KEY[1]: L      KEY[2]: LF     
+             CHILD[2]: KEY[0]: m      KEY[1]: M      
+             CHILD[3]: KEY[0]: n      KEY[1]: N      KEY[2]: NAK    
+INTERNAL: KEY[0]: P      KEY[1]: R      PARENT: KEY[0]: R      KEY[1]: STX    
+             CHILD[0]: KEY[0]: o      KEY[1]: O      KEY[2]: p      
+             CHILD[1]: KEY[0]: q      KEY[1]: Q      KEY[2]: r      
+INTERNAL: KEY[0]: s      KEY[1]: SO     KEY[2]: SOH    PARENT: KEY[0]: R      KEY[1]: STX    
+             CHILD[0]: KEY[0]: RS     KEY[1]: s      
+             CHILD[1]: KEY[0]: S      KEY[1]: SI     KEY[2]: SO     
+             LEAF[2]:  VALUE: SOH
+             LEAF[3]:  VALUE: STX
+INTERNAL: KEY[0]: SUB    KEY[1]: SYN    PARENT: KEY[0]: SYN    KEY[1]: U      
+             LEAF[0]:  VALUE: SUB
+             LEAF[1]:  VALUE: SYN
+INTERNAL: KEY[0]: t      KEY[1]: T      KEY[2]: u      PARENT: KEY[0]: SYN    KEY[1]: U      
+             LEAF[0]:  VALUE: t
+             LEAF[1]:  VALUE: T
+             LEAF[2]:  VALUE: u
+             LEAF[3]:  VALUE: U
+INTERNAL: KEY[0]: US     KEY[1]: v      KEY[2]: V      PARENT: KEY[0]: V      KEY[1]: W      KEY[2]: X      
+             LEAF[0]:  VALUE: US
+             LEAF[1]:  VALUE: v
+             LEAF[2]:  VALUE: V
+INTERNAL: KEY[0]: VT     KEY[1]: w      KEY[2]: W      PARENT: KEY[0]: V      KEY[1]: W      KEY[2]: X      
+             LEAF[0]:  VALUE: VT
+             LEAF[1]:  VALUE: w
+             LEAF[2]:  VALUE: W
+INTERNAL: KEY[0]: x      KEY[1]: X      PARENT: KEY[0]: V      KEY[1]: W      KEY[2]: X      
+             LEAF[0]:  VALUE: x
+             LEAF[1]:  VALUE: X
+INTERNAL: KEY[0]: y      KEY[1]: Y      KEY[2]: z      PARENT: KEY[0]: V      KEY[1]: W      KEY[2]: X      
+             LEAF[0]:  VALUE: y
+             LEAF[1]:  VALUE: Y
+             LEAF[2]:  VALUE: z
+             LEAF[3]:  VALUE: Z
+INTERNAL: KEY[0]: \#     KEY[1]: %      PARENT: KEY[0]: %      KEY[1]: CR     KEY[2]: DLE    
+             CHILD[0]: KEY[0]: !      KEY[1]: "      KEY[2]: \#     
+             CHILD[1]: KEY[0]: \$     KEY[1]: %      
+INTERNAL: KEY[0]: :      KEY[1]: BS     KEY[2]: CR     PARENT: KEY[0]: %      KEY[1]: CR     KEY[2]: DLE    
+             CHILD[0]: KEY[0]: \*     KEY[1]: :      
+             CHILD[1]: KEY[0]: BEL    KEY[1]: BS     
+             CHILD[2]: KEY[0]: c      KEY[1]: C      KEY[2]: CAN    
+INTERNAL: KEY[0]: DC2    KEY[1]: DC3    KEY[2]: DC4    PARENT: KEY[0]: %      KEY[1]: CR     KEY[2]: DLE    
+             CHILD[0]: KEY[0]: d      KEY[1]: D      KEY[2]: DC1    
+             LEAF[1]:  VALUE: DC3
+             LEAF[2]:  VALUE: DC4
+             LEAF[3]:  VALUE: DLE
+INTERNAL: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      PARENT: KEY[0]: HT     KEY[1]: i      KEY[2]: I      
+             CHILD[0]: KEY[0]: ENQ    KEY[1]: ETX    
+             CHILD[1]: KEY[0]: f      KEY[1]: F      KEY[2]: FF     
+             CHILD[2]: KEY[0]: FS     KEY[1]: g      KEY[2]: G      
+             CHILD[3]: KEY[0]: GS     KEY[1]: h      KEY[2]: H      
+INTERNAL: KEY[0]: j      KEY[1]: J      KEY[2]: k      PARENT: KEY[0]: K      KEY[1]: LF     KEY[2]: M      
+             LEAF[0]:  VALUE: j
+             LEAF[1]:  VALUE: J
+             LEAF[2]:  VALUE: k
+             LEAF[3]:  VALUE: K
+INTERNAL: KEY[0]: l      KEY[1]: L      KEY[2]: LF     PARENT: KEY[0]: K      KEY[1]: LF     KEY[2]: M      
+             LEAF[0]:  VALUE: l
+             LEAF[1]:  VALUE: L
+             LEAF[2]:  VALUE: LF
+INTERNAL: KEY[0]: m      KEY[1]: M      PARENT: KEY[0]: K      KEY[1]: LF     KEY[2]: M      
+             LEAF[0]:  VALUE: m
+             LEAF[1]:  VALUE: M
+INTERNAL: KEY[0]: n      KEY[1]: N      KEY[2]: NAK    PARENT: KEY[0]: K      KEY[1]: LF     KEY[2]: M      
+             LEAF[0]:  VALUE: n
+             LEAF[1]:  VALUE: N
+             LEAF[2]:  VALUE: NAK
+             LEAF[3]:  VALUE: NUL
+INTERNAL: KEY[0]: o      KEY[1]: O      KEY[2]: p      PARENT: KEY[0]: P      KEY[1]: R      
+             LEAF[0]:  VALUE: o
+             LEAF[1]:  VALUE: O
+             LEAF[2]:  VALUE: p
+             LEAF[3]:  VALUE: P
+INTERNAL: KEY[0]: q      KEY[1]: Q      KEY[2]: r      PARENT: KEY[0]: P      KEY[1]: R      
+             LEAF[0]:  VALUE: q
+             LEAF[1]:  VALUE: Q
+             LEAF[2]:  VALUE: r
+             LEAF[3]:  VALUE: R
+INTERNAL: KEY[0]: RS     KEY[1]: s      PARENT: KEY[0]: s      KEY[1]: SO     KEY[2]: SOH    
+             LEAF[0]:  VALUE: RS
+             LEAF[1]:  VALUE: s
+INTERNAL: KEY[0]: S      KEY[1]: SI     KEY[2]: SO     PARENT: KEY[0]: s      KEY[1]: SO     KEY[2]: SOH    
+             LEAF[0]:  VALUE: S
+             LEAF[1]:  VALUE: SI
+             LEAF[2]:  VALUE: SO
+INTERNAL: KEY[0]: !      KEY[1]: "      KEY[2]: \#     PARENT: KEY[0]: \#     KEY[1]: %      
+             CHILD[0]: KEY[0]: -      KEY[1]: \      KEY[2]: !      
+             LEAF[1]:  VALUE: "
+             LEAF[2]:  VALUE: \#
+INTERNAL: KEY[0]: \$     KEY[1]: %      PARENT: KEY[0]: \#     KEY[1]: %      
+             LEAF[0]:  VALUE: \$
+             LEAF[1]:  VALUE: %
+INTERNAL: KEY[0]: \*     KEY[1]: :      PARENT: KEY[0]: :      KEY[1]: BS     KEY[2]: CR     
+             CHILD[0]: KEY[0]: \(     KEY[1]: \*     
+             CHILD[1]: KEY[0]: \.     KEY[1]: :      
+INTERNAL: KEY[0]: BEL    KEY[1]: BS     PARENT: KEY[0]: :      KEY[1]: BS     KEY[2]: CR     
+             CHILD[0]: KEY[0]: 3      KEY[1]: 7      KEY[2]: BEL    
+             LEAF[1]:  VALUE: BS
+INTERNAL: KEY[0]: c      KEY[1]: C      KEY[2]: CAN    PARENT: KEY[0]: :      KEY[1]: BS     KEY[2]: CR     
+             LEAF[0]:  VALUE: c
+             LEAF[1]:  VALUE: C
+             LEAF[2]:  VALUE: CAN
+             LEAF[3]:  VALUE: CR
+INTERNAL: KEY[0]: d      KEY[1]: D      KEY[2]: DC1    PARENT: KEY[0]: DC2    KEY[1]: DC3    KEY[2]: DC4    
+             LEAF[0]:  VALUE: d
+             LEAF[1]:  VALUE: D
+             LEAF[2]:  VALUE: DC1
+             LEAF[3]:  VALUE: DC2
+INTERNAL: KEY[0]: ENQ    KEY[1]: ETX    PARENT: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      
+             CHILD[0]: KEY[0]: e      KEY[1]: E      KEY[2]: EM     
+             CHILD[1]: KEY[0]: EOT    KEY[1]: ESC    KEY[2]: ETB    
+INTERNAL: KEY[0]: f      KEY[1]: F      KEY[2]: FF     PARENT: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      
+             LEAF[0]:  VALUE: f
+             LEAF[1]:  VALUE: F
+             LEAF[2]:  VALUE: FF
+INTERNAL: KEY[0]: FS     KEY[1]: g      KEY[2]: G      PARENT: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      
+             LEAF[0]:  VALUE: FS
+             LEAF[1]:  VALUE: g
+             LEAF[2]:  VALUE: G
+INTERNAL: KEY[0]: GS     KEY[1]: h      KEY[2]: H      PARENT: KEY[0]: ETX    KEY[1]: FF     KEY[2]: G      
+             LEAF[0]:  VALUE: GS
+             LEAF[1]:  VALUE: h
+             LEAF[2]:  VALUE: H
+             LEAF[3]:  VALUE: HT
+INTERNAL: KEY[0]: -      KEY[1]: \      KEY[2]: !      PARENT: KEY[0]: !      KEY[1]: "      KEY[2]: \#     
+             LEAF[0]:  VALUE: -
+             LEAF[1]:  VALUE: \ 
+             LEAF[2]:  VALUE: !
+INTERNAL: KEY[0]: \(     KEY[1]: \*     PARENT: KEY[0]: \*     KEY[1]: :      
+             CHILD[0]: KEY[0]: &      KEY[1]: \(     
+             CHILD[1]: KEY[0]: \)     KEY[1]: \*     
+INTERNAL: KEY[0]: \.     KEY[1]: :      PARENT: KEY[0]: \*     KEY[1]: :      
+             CHILD[0]: KEY[0]: ,      KEY[1]: \.     
+             CHILD[1]: KEY[0]: /      KEY[1]: :      
+INTERNAL: KEY[0]: 3      KEY[1]: 7      KEY[2]: BEL    PARENT: KEY[0]: BEL    KEY[1]: BS     
+             CHILD[0]: KEY[0]: =      KEY[1]: 3      
+             CHILD[1]: KEY[0]: 5      KEY[1]: 7      
+             CHILD[2]: KEY[0]: 9      KEY[1]: A      KEY[2]: BEL    
+INTERNAL: KEY[0]: e      KEY[1]: E      KEY[2]: EM     PARENT: KEY[0]: ENQ    KEY[1]: ETX    
+             LEAF[0]:  VALUE: e
+             LEAF[1]:  VALUE: E
+             LEAF[2]:  VALUE: EM
+             LEAF[3]:  VALUE: ENQ
+INTERNAL: KEY[0]: EOT    KEY[1]: ESC    KEY[2]: ETB    PARENT: KEY[0]: ENQ    KEY[1]: ETX    
+             LEAF[0]:  VALUE: EOT
+             LEAF[1]:  VALUE: ESC
+             LEAF[2]:  VALUE: ETB
+             LEAF[3]:  VALUE: ETX
+INTERNAL: KEY[0]: &      KEY[1]: \(     PARENT: KEY[0]: \(     KEY[1]: \*     
+             LEAF[0]:  VALUE: &
+             LEAF[1]:  VALUE: \(
+INTERNAL: KEY[0]: \)     KEY[1]: \*     PARENT: KEY[0]: \(     KEY[1]: \*     
+             LEAF[0]:  VALUE: \)
+             LEAF[1]:  VALUE: \*
+INTERNAL: KEY[0]: ,      KEY[1]: \.     PARENT: KEY[0]: \.     KEY[1]: :      
+             LEAF[0]:  VALUE: ,
+             LEAF[1]:  VALUE: \.
+INTERNAL: KEY[0]: /      KEY[1]: :      PARENT: KEY[0]: \.     KEY[1]: :      
+             LEAF[0]:  VALUE: /
+             LEAF[1]:  VALUE: :
+INTERNAL: KEY[0]: =      KEY[1]: 3      PARENT: KEY[0]: 3      KEY[1]: 7      KEY[2]: BEL    
+             CHILD[0]: KEY[0]: \[     KEY[1]: \+     KEY[2]: <      
+             CHILD[1]: KEY[0]: 1      KEY[1]: 2      KEY[2]: 3      
+INTERNAL: KEY[0]: 5      KEY[1]: 7      PARENT: KEY[0]: 3      KEY[1]: 7      KEY[2]: BEL    
+             CHILD[0]: KEY[0]: 4      KEY[1]: 5      
+             CHILD[1]: KEY[0]: 6      KEY[1]: 7      
+INTERNAL: KEY[0]: 9      KEY[1]: A      KEY[2]: BEL    PARENT: KEY[0]: 3      KEY[1]: 7      KEY[2]: BEL    
+             CHILD[0]: KEY[0]: 8      KEY[1]: 9      
+             CHILD[1]: KEY[0]: a      KEY[1]: A      
+             CHILD[2]: KEY[0]: ACK    KEY[1]: b      KEY[2]: B      
+INTERNAL: KEY[0]: \[     KEY[1]: \+     KEY[2]: <      PARENT: KEY[0]: =      KEY[1]: 3      
+             CHILD[0]: KEY[0]: \?     KEY[1]: \[     
+             CHILD[1]: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     
+             LEAF[2]:  VALUE: <
+             LEAF[3]:  VALUE: =
+INTERNAL: KEY[0]: 1      KEY[1]: 2      KEY[2]: 3      PARENT: KEY[0]: =      KEY[1]: 3      
+             CHILD[0]: KEY[0]: >      KEY[1]: 0      KEY[2]: 1      
+             LEAF[1]:  VALUE: 2
+             LEAF[2]:  VALUE: 3
+INTERNAL: KEY[0]: 4      KEY[1]: 5      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 4
+             LEAF[1]:  VALUE: 5
+INTERNAL: KEY[0]: 6      KEY[1]: 7      PARENT: KEY[0]: 5      KEY[1]: 7      
+             LEAF[0]:  VALUE: 6
+             LEAF[1]:  VALUE: 7
+INTERNAL: KEY[0]: 8      KEY[1]: 9      PARENT: KEY[0]: 9      KEY[1]: A      KEY[2]: BEL    
+             LEAF[0]:  VALUE: 8
+             LEAF[1]:  VALUE: 9
+INTERNAL: KEY[0]: a      KEY[1]: A      PARENT: KEY[0]: 9      KEY[1]: A      KEY[2]: BEL    
+             LEAF[0]:  VALUE: a
+             LEAF[1]:  VALUE: A
+INTERNAL: KEY[0]: ACK    KEY[1]: b      KEY[2]: B      PARENT: KEY[0]: 9      KEY[1]: A      KEY[2]: BEL    
+             LEAF[0]:  VALUE: ACK
+             LEAF[1]:  VALUE: b
+             LEAF[2]:  VALUE: B
+             LEAF[3]:  VALUE: BEL
+INTERNAL: KEY[0]: \?     KEY[1]: \[     PARENT: KEY[0]: \[     KEY[1]: \+     KEY[2]: <      
+             CHILD[0]: KEY[0]: ;      KEY[1]: \?     
+             CHILD[1]: KEY[0]: @      KEY[1]: \[     
+INTERNAL: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     PARENT: KEY[0]: \[     KEY[1]: \+     KEY[2]: <      
+             CHILD[0]: KEY[0]: \\     KEY[1]: ]      
+             CHILD[1]: KEY[0]: \^     KEY[1]: _      
+             CHILD[2]: KEY[0]: `      KEY[1]: \{     
+             CHILD[3]: KEY[0]: \|     KEY[1]: }      KEY[2]: ~      
+INTERNAL: KEY[0]: >      KEY[1]: 0      KEY[2]: 1      PARENT: KEY[0]: 1      KEY[1]: 2      KEY[2]: 3      
+             LEAF[0]:  VALUE: >
+             LEAF[1]:  VALUE: 0
+             LEAF[2]:  VALUE: 1
+INTERNAL: KEY[0]: ;      KEY[1]: \?     PARENT: KEY[0]: \?     KEY[1]: \[     
+             LEAF[0]:  VALUE: ;
+             LEAF[1]:  VALUE: \?
+INTERNAL: KEY[0]: @      KEY[1]: \[     PARENT: KEY[0]: \?     KEY[1]: \[     
+             LEAF[0]:  VALUE: @
+             LEAF[1]:  VALUE: \[
+INTERNAL: KEY[0]: \\     KEY[1]: ]      PARENT: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     
+             LEAF[0]:  VALUE: \\
+             LEAF[1]:  VALUE: ]
+INTERNAL: KEY[0]: \^     KEY[1]: _      PARENT: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     
+             LEAF[0]:  VALUE: \^
+             LEAF[1]:  VALUE: _
+INTERNAL: KEY[0]: `      KEY[1]: \{     PARENT: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     
+             LEAF[0]:  VALUE: `
+             LEAF[1]:  VALUE: \{
+INTERNAL: KEY[0]: \|     KEY[1]: }      KEY[2]: ~      PARENT: KEY[0]: ]      KEY[1]: _      KEY[2]: \{     
+             LEAF[0]:  VALUE: \|
+             LEAF[1]:  VALUE: }
+             LEAF[2]:  VALUE: ~
+             LEAF[3]:  VALUE: \+

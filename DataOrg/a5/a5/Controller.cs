@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace a5
 {
+	/// <summary>
+	/// Controller class used to convert between different number bases and associate
+	/// search results with items in the ascii table.
+	/// </summary>
 	class Controller
 	{
+		/// <summary>
+		/// Default constructor to instantiate class.
+		/// </summary>
 		public Controller() { }
 
 		public string[] ASCII = new string[]
@@ -27,6 +34,11 @@ namespace a5
 			"y", "z", "{", "|", "}", "~", "DEL"
 		};
 
+		/// <summary>
+		/// Helper method that converts from decimal to octal, hex, binary, and symbol in ascii table.
+		/// </summary>
+		/// <param name="n">decimal search result</param>
+		/// <returns>returns search result string containing converted values</returns>
 		public string[] ConvertFromDec(int n)
 		{
 			string oct, hex, bin, sym;
@@ -36,24 +48,42 @@ namespace a5
 			sym = ASCII[n];
 			return new string[] { n.ToString(), oct, hex, bin, sym };
 		}
+
+		/// <summary>
+		/// Helper method that converts from Octal to decimal, hex, binary, and symbol in ascii table.
+		/// </summary>
+		/// <param name="n">octal search result</param>
+		/// <returns>returns search result string containing converted values</returns>
 		public string[] ConvertFromOct(int n)
 		{
 			string dec, hex, bin, sym;
-			dec = Convert.ToString(n, 10);
+			dec = Convert.ToInt32(n.ToString(), 8).ToString();
 			hex = Convert.ToInt32(dec).ToString("X");
-			bin = Convert.ToString(n, 2).PadLeft(8, '0');
+			bin = Convert.ToInt32(n.ToString(), 8).ToString().PadLeft(8, '0');
 			sym = ASCII[Convert.ToInt32(dec)];
 			return new string[] { dec, n.ToString(), hex, bin, sym };
 		}
+
+		/// <summary>
+		/// Helper method that converts from binary to decimal, octal, hex, and symbol in ascii table.
+		/// </summary>
+		/// <param name="n">binary search result</param>
+		/// <returns>returns search result string containing converted values</returns>
 		public string[] ConvertFromBin(int n)
 		{
 			string dec, oct, hex, sym;
-			dec = Convert.ToString(n, 10);
-			oct = Convert.ToString(n, 8).PadLeft(3, '0');
+			dec = Convert.ToInt32(n.ToString(), 2).ToString();
+			oct = Convert.ToString(Convert.ToInt32(dec), 8).ToString().PadLeft(3, '0');
 			hex = Convert.ToInt32(dec).ToString("X");
 			sym = ASCII[Convert.ToInt32(dec)];
 			return new string[] { dec, oct, hex, n.ToString().PadLeft(8, '0'), sym };
 		}
+
+		/// <summary>
+		/// Helper method that converts from hexidecimal to decimal, octal, binary, and symbol in ascii table.
+		/// </summary>
+		/// <param name="n">hexideximal search result</param>
+		/// <returns>returns search result string containing converted values</returns>
 		public string[] ConvertFromHex(string n)
 		{
 			string dec, oct, bin, sym;
@@ -65,6 +95,12 @@ namespace a5
 			return new string[] { dec, oct, n, bin, sym };
 
 		}
+
+		/// <summary>
+		/// Helper method that converts from a symbol in the ascii table to decinmal, octal, hex, and binary.
+		/// </summary>
+		/// <param name="n">ascii symbol search result</param>
+		/// <returns>returns search result string containing converted values</returns>
 		public string[] ConvertFromSym(string n)
 		{
 			string dec, oct, hex, bin;

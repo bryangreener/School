@@ -1,0 +1,14 @@
+System Programming Notes 2018-01-09
+
+Three files open when running programs: stdin, stdout, stderr.
+stdin: usually assigned to keyboard (buffered)
+stdout: normally assigned to console screen (buffered)
+stderr: normally assigned to console screen
+
+Data type is FILE *
+Buffered stream has a memory buffer in current process that is filled until it makes system call to write to kernal and out to console.
+
+printf  fprintf(stdout, sprintf
+scanf   fscanf(stdin,
+
+sprintf prints to string (char str[80]). Same for scanf

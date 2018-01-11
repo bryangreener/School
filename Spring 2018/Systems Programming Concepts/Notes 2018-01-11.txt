@@ -1,0 +1,36 @@
+System Programing Concepts Notes 2018-01-11
+
+
+int main( int argc, char * argv[]){
+    int i = 2;
+    long l = 124;
+    float f = 0.1F; // try to avoid floats
+    double d = 11.234; // use double instead
+    char str[] = "hello";
+    char ch = 'A';
+
+    printf("float %d, double %d, int %d, long %d",
+        sizeof(float), sizeof(double), sizeof(int), sizeof(long));
+    printf("float %f, double %lf, int %d, long %ld, string %s, char %c\n", // %.2F rounds to 2 decimals to the right
+        f, d, i, l, str, ch);
+    // for float of 0.1F, doing %.17f ends up outputting 0.1000000000012345634234 or some crazy number that isnt exactly 0.1.
+
+
+}
+
+look up strtok
+char str[5];
+char * token;
+str[0] = '\0';
+token = malloc(strlen(str) + 1));
+strncpy(token, str, 1);
+
+// Custom strcpy function
+void mystrcpy(char * dest, char * src){
+    int i;
+    i = 0;
+    // "ab\0"
+    while(*dest = *src){dest++; src++;}
+}
+// now using previous code...
+mystrcpy(token,)

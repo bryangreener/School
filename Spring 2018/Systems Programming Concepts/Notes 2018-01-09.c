@@ -40,3 +40,16 @@ int main(int argc, char * argv[])
 
     fclose(outFile);
 }
+
+1           2       3       4       5           6               7               8           9           10          11      12              13                  14      15          16              17                    19    20
+SongNumber,SongID,AlbumID,AlbumName,ArtistID,ArtistLatitude,ArtistLocation,ArtistLongitude,ArtistName,Dancibility,Duration,KeySignature,KeySignatureConfidence,Tempo,Hottttneessss,TimeSignature,TimeSignatureConfidence,Title,YEar
+
+Need:
+    4   AlbumName           char *
+    7   ArtistLocation      char *
+    9   ArtistName          char *
+    11  Duration            says to use float (maybe use double)
+    15  Hottttneessss       double
+    19  Title               char *
+    20  Year                int
+    

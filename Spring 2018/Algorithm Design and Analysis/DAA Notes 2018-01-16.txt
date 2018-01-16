@@ -62,8 +62,12 @@ Statement of the Problem:
 
 Mutually Compatible Jobs
     In a series of jobs, the jobs that do not overlap.
-    Find maximum cardinality subset of mutually compatible jobs.
+    Goal: Find maximum cardinality subset of mutually compatible jobs.
 Weighted Interval Scheduling
     INput: Set of jobs with start/finish times and weights.
     Goal: Find max weight subset of mutually compatible jobs.
+Bipartite Matching
+    Problem: Given a bipartite graph G=(L UNION R, E) find a max cardinality matching.
+    Def: A subset of edges M SUB E is a matching if each node appears in exactly one edge in M.
+
             

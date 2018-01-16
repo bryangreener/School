@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#2}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-01-14}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+
+\end{document}

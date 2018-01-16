@@ -170,7 +170,7 @@
 		\begin{bmatrix}[rrr|r]
 		1 & 1 & k & 1\\
 		0 & k-1 & 1-k & 0\\
-		0 & 1-k & 1-k^2 & 0\\
+		0 & 1-k & 1-k^2 & 1-k\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
 		R_{4}\\ R_{5}\\ R_{6}\\
@@ -184,13 +184,13 @@
 		\begin{bmatrix}[rrr|r]
 		1 & 1 & k & 1\\
 		0 & k-1 & 1-k & 0\\
-		0 & 0 & 2 - k^2 - k & 0\\
+		0 & 0 & 2 - k^2 - k & 1-k\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
 		R_{7}\\ R_{8}\\ R_{9}\\
 		\end{bmatrix}\\
 		%
-		2-k^2-k &=0\\
+		2-k^2-k &=1-k\\
 		k^2+k-2 &= 0\\
 		(k+2)(k-1) &=0\\
 		k=1, \quad k&=-2
@@ -200,9 +200,9 @@
 		\item [(ii)]
 		Using our result from 2.82.b.i, letting $k=-2$ gives us
 		\begin{align*}
-		(2-k^2-k)z &= 0\\
-		(2-(-2)^2-(-2))z &= 0\\
-		0 &= 0
+		(2-k^2-k)z &= 1-k\\
+		(2-(-2)^2-(-2))z &= 1-(-2)\\
+		0 &= 3
 		\end{align*}
 		Thus, when $k=-2$ the system has no solutions.\\
 
@@ -211,8 +211,8 @@
 		\item [(iii)]
 		Using our result from 2.82.b.i, letting $k = 1$ gives us
 		\begin{align*}
-		(2-k^2-k)z &= 0\\
-		(2-(1)^2-(1))z &= 0\\
+		(2-k^2-k)z &= 1-k\\
+		(2-(1)^2-(1))z &= 1-(1)\\
 		0 &= 0
 		\end{align*}
 		Thus, when $k=1$ the system has infinite solutions.\\
@@ -716,12 +716,11 @@ cx+dy &= 0\\
 cx+d(-\frac{c}{ad-bc}) &= 0\\
 x &= \frac{d}{ad-bc}
 \end{align*}
-Let $ad-bc=0$, $c=k$, $d=l$ for some nonzero integers $k$ and $l$.
+Assume that $ad-bc = 0$
 \begin{align*}
-y &= -\frac{k}{0}\\
-x &= \frac{l}{0}
+0 = 0x = (ad-bc)x = adx-bcx = d \neq 0.
 \end{align*}
-Since letting either $c$ or $d$ equal a nonzero integer results in division by 0, the system has no solution in either case.
+This is a contradiction so the solution set is empty.
 \end{enumerate}
 
 \end{document}

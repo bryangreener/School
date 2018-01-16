@@ -1,0 +1,406 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#2}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-01-14}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+% 2.82
+\item [2.82.] Find the values of k such that each of the following systems of unknowns x, y, and z has (i) a unique solution, (ii) no solution, (iii) an infinite number of solutions.
+	\begin{enumerate}
+	% 2.82.a	
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x-2y=1,x-y+kz=-2,ky+4z=6}
+	\medskip
+		\begin{enumerate}
+		% 2.82.a.i
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & -2 & 0 & 1\\
+		1 & -1 & k & -2\\
+		0 & k & 4 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%		
+		\begin{bmatrix}[r]
+		R_1\\
+		R_2 - R_1\\
+		R_3\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & -1 & 0 & 1\\
+		0 & 1 & k & -3\\
+		0 & k & 4 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]	
+		R_4\\
+		R_5\\
+		R_6 - kR_5\\	
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 0 & 0 & -2\\
+		0 & 1 & k & -3\\
+		0 & 0 & 4-k^2 & 6-3k\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9
+		\end{bmatrix}\\		
+		%		
+		4-k^2&= 6-3k\\
+		k^2-3k+2&=0\\
+		(k-2)(k-1)&=0\\
+		k=2, \quad k&=1
+		\end{align*}
+		ANSWER SHOULD BE $\pm 2$.\\
+		For a unique solution, $k \neq 2$ and $k \neq 1$.\\
+		% 2.82.a.ii
+		\item [(ii)] Using the result from 2.82.a.i, if $k=2$ then
+		\[ R_9(2): \quad 4-(k)^2 = 0 = 6-3(2) = 0 \]
+		Since the result is $0 = 0$, then there are no solutions when $k=2$.\\
+		% 2.82.a.iii
+		\item [(iii)] 
+		\end{enumerate}	
+		\medskip
+	% 2.82.b
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+y+kz=1,x+ky+z=1,kx+y+z=1}
+	\medskip
+		\begin{enumerate}
+		% 2.82.b.i			
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		1 & k & 1 & 1\\
+		k & 1 & 1 & 1\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_3\\ R_2\\ R_1\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		k & 1 & 1 & 1\\
+		1 & k & 1 & 1\\
+		1 & 1 & k & 1\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_4\\		
+		R_5 - R_6\\
+		R_6 - R_4\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		k & 1 & 1 & 1\\
+		0 & k-1 & 1-k & 0\\
+		1-k & 0 & k-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_7 + R_9\\
+		R_8\\
+		R_9\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		1-k & 0 & k-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{10}\\ R_{11}\\ R_{12}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_{10}\\
+		R_{11}\\
+		R_{12} + (k-1)R_{10}\\	
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		0 & k-1 & k^2-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{13}\\ R_{14}\\ R_{15}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_{13}\\
+		R_{14}\\
+		R_{15} - R_{14}\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		0 & 0 & k^2+k-2 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{16}\\ R_{17}\\ R_{18}\\
+		\end{bmatrix}\\
+		%
+		(k^2+k-2) &=0\\
+		(k+2)(k-1) &=0\\
+		k = -2, \quad k &= 1\\
+		\end{align*}
+		For a distinct solution, $k \neq -2$ and $k \neq 1$.\\
+		% 2.82.b.ii
+		\item [(ii)]
+		From the solution to 2.82.b.i, allowing $k=-2$ gives us
+		\[ z((-2)^2+(-2)-2) = z(0) = 0 \]
+		Since the result is $0 = 0$, we get no solutions.\\
+		% 2.82.b.iii
+		\item [(iii)]
+		From the solution to 2.82.b.ii, allowing $k=1$ gives us
+		\[ z((1)^2 + (1) - 2 = z(0) = 0 \]
+		FINISH THIS. ANSWER IS $\neq -2, 1 \quad , \quad -2, \quad 1$ just need to figure out why. I got the answer but I can't seem to reason why.
+		\end{enumerate}	
+		\medskip
+	%2.82.c
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+2y+2z=5,x+ky+3z=7,x+11y+kz=11}
+	\medskip
+		\begin{enumerate}
+		% 2.82.c.i
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		1 & k & 3 & 7\\
+		1 & 11 & k & 11\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_1\\
+		R_2 - R_1\\
+		R_3 - R_1\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		0 & k-2 & 1 & 2\\
+		0 & 9 & k-2 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_4\\
+		R_5\\
+		R_6 - \\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9\\
+		\end{bmatrix}
+		\end{align*}
+		% 2.82.c.ii
+		\item [(ii)]
+		% 2.82.c.iii
+		\item [(iii)]
+		\end{enumerate}
+	\end{enumerate}
+\medskip
+% 2.83
+\item [2.83.] Determine whether or not each system has a nonzero solution.
+	\begin{enumerate}
+	% 2.83.a	
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,x-8y+8z=0,3x-2y+4z=0}
+	\begin{align*}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	1 & -8 & 8 & 0\\
+	3 & -2 & 4 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\ R_3\\ R_2\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	3 & -2 & 4 & 0\\
+	1 & -8 & 8 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_4\\ R_5\\ R_6\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4\\
+	R_5 - 3R_4\\
+	R_6 - R_4\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	0 & -11 & -2 & 0\\
+	0 & -11 & 6 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_7\\ R_8\\ R_9\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_7\\
+	R_8\\
+	R_9 + R_8\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	- & -11 & -2 & 0\\
+	0 & 0 & 4 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{10}\\ R_{11}\\ R_{12}\\
+	\end{bmatrix}\\
+	6z&=0\\
+	z&=0\\
+	-11y-2(0)&=0\\
+	y&=0\\
+	x+3(0-2(0)&=0\\
+	x&=0
+	\end{align*}
+	Since x, y, and z are all zero, this linear system has no nonzero solutions.
+	\medskip
+	
+	% 2.83.b
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,2x-3y+z=0,3x-2y+2z=0}
+	
+	\medskip	
+	%2.83.c
+	\item
+	\sysdelim{.}{.}\systeme[xyzt]{x+2y-5z+4t=0,2x-3y+2z+3t=0,4x-7y+z-6t=0}
+	
+	\medskip	
+	\end{enumerate}
+% 2.86
+\item [2.86.] Reduce A to echelon form and then to row canonical form.
+	\begin{enumerate}
+	% 2.86.a	
+	\item
+	\begin{align*}
+	%\setlength\arraycolsep{5pt} % Changes column padding
+	A = 
+	\begin{bmatrix*}[r]
+	1 & 2 & -1 & 2 & 1\\
+	2 & 4 & 1 & -2 & 3\\
+	3 & 6 & 2 & -6 & 5\\
+	\end{bmatrix*}
+	\end{align*}
+	% 2.86.b
+	\item
+	\begin{align*}
+	A = 
+	\begin{bmatrix*}[r]
+	2 & 3 & -2 & 5 & 1\\
+	3 & -1 & 2 & 0 & 4\\
+	4 & -5 & 6 & -5 & 7\\
+	\end{bmatrix*}
+	\end{align*}
+	\end{enumerate}
+% 2.88
+\item [2.88.] Using only 0s and 1s, list all possible 2 x 2 matrices in row canonical form.
+% 2.89
+\item [2.89.] Using only 0s and 1s, list all possible 3 x 3 matrices in row canonical form.
+% 2.92
+\item [2.92.] Consider the following system of unknowns x and y:
+\[ \sysdelim{.}{.}\systeme[xy]{ax+by=1,cx+dy=0} \]
+Show that if $ad-bc \neq 0$, then the system has the unique solution
+\[ x=\frac{d}{ad-bc}, \quad y=-\frac{c}{ad-bc} \]
+And show that if $ad-bc=0$ and if $c \neq 0$ or $d \neq 0$, then the system has no solution.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,43 @@
+Systems Programming Concepts Notes 2018-01-16
+
+perror (prints stored error string)
+use the apue.h header along with error.c method for error handling and returning.
+err_ret(const char *fmt, ...) the ... is a variable argument list.
+
+STDIO and Buffers
+MMU - Memory Management Unit
+    Large part of CPU
+    Processes work in User Space and have virtual memory addresses.
+    Access to virtual memory goes through MMU to find its location in real memory.
+
+    Kernel Space has no protection and can go anywhere in real memory where it wants. It tells MMU how to translate User Space addresses in virtual memory.
+        Contains system calls such as read().
+    
+stdout data type is FILE *
+    Using printf() takes the printf string and pushes it to the FILE * buffer instead of the kernel.
+    Then kernel uses the write() function to write the item in buffer.
+
+    Writing stderr goes directly to kernel instead of writing to the buffer.
+
+    When closing program, the buffer should flush.
+
+    stdin is FILE # 0
+    stdout is 1
+    stderr is 2
+
+    kernel system calls are read() and write(). printf() and other commands like that are not true system calls.
+
+    The kernel write() is not called until the FILE buffer is full or manually flushed.
+
+    putchar puts a single char one at a time into the FILE buffer.
+
+    Can call a function to set size of buffer.
+
+    Can also call write() to directly call the kernel.
+
+Created makefile and a temp.c file in ubuntu CS3240 folder. See these for more information.
+
+To define only if not already defined:
+#ifndef ALL_H \\ checks if define already exists.
+#define ALL_H \\ if not defined, define
+

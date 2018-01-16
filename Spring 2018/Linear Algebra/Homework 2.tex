@@ -50,7 +50,7 @@
 
 \newtheorem*{lemma}{Lemma} %added
 \newtheorem*{result}{Result} %added
-
+\newtheorem*{theorem}{Theorem} %added
 
 
 % HEADER
@@ -95,48 +95,54 @@
 		\begin{bmatrix}[r]
 		R_1\\ R_2\\ R_3\\
 		\end{bmatrix}\\
-		%		
+		%
 		\begin{bmatrix}[r]
 		R_1\\
 		R_2 - R_1\\
 		R_3\\
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
-		1 & -1 & 0 & 1\\
+		1 & -2 & 0 & 1\\
 		0 & 1 & k & -3\\
 		0 & k & 4 & 6\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
-		R_4\\ R_5\\ R_6\\
+		R_{4}\\ R_{5}\\ R_{6}\\
 		\end{bmatrix}\\
 		%
-		\begin{bmatrix}[r]	
-		R_4\\
+		\begin{bmatrix}[r]
+		R_4\
 		R_5\\
-		R_6 - kR_5\\	
+		R_6 - kR_5\\
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
-		1 & 0 & 0 & -2\\
+		1 & -2 & 0 & 1\\
 		0 & 1 & k & -3\\
-		0 & 0 & 4-k^2 & 6-3k\\
-		\end{bmatrix}&
-		\begin{bmatrix}[r]
-		R_7\\ R_8\\ R_9
-		\end{bmatrix}\\		
-		%		
-		4-k^2&= 6-3k\\
-		k^2-3k+2&=0\\
-		(k-2)(k-1)&=0\\
-		k=2, \quad k&=1
+		0 & 0 & 4-k^2 & 6+3k\\
+		\end{bmatrix}&\\
+		(4-k^2)z &= 6+3k\\
+		z &= \frac{6+3k}{4-k^2}\\
 		\end{align*}
-		ANSWER SHOULD BE $\pm 2$.\\
-		For a unique solution, $k \neq 2$ and $k \neq 1$.\\
+		To obtain a unique solution, we let $k \neq \pm 2$.\\
+		
 		% 2.82.a.ii
-		\item [(ii)] Using the result from 2.82.a.i, if $k=2$ then
-		\[ R_9(2): \quad 4-(k)^2 = 0 = 6-3(2) = 0 \]
-		Since the result is $0 = 0$, then there are no solutions when $k=2$.\\
+		\item [(ii)]
+		Using our result from 2.82.a.i, letting $k=-2$ gives us
+		\begin{align*}
+		z &= \frac{6+3(-2)}{4-(-2)^2}\\
+		&= \frac{0}{0}
+		\end{align*}
+		Thus, when $k=-2$, the system has no solutions.\\
+		
 		% 2.82.a.iii
 		\item [(iii)] 
+		Using our result from 2.82.a.i, letting $k=2$ gives us
+		\begin{align*}
+		z &= \frac{6+3(2)}{4-(2)^2}\\
+		&= \frac{12}{0}
+		\end{align*}
+		Thus, when $k=2$, the system has infinite solutions.\\
+		
 		\end{enumerate}	
 		\medskip
 	% 2.82.b
@@ -157,88 +163,59 @@
 		\end{bmatrix}\\
 		%
 		\begin{bmatrix}[r]
-		R_3\\ R_2\\ R_1\\
-		\end{bmatrix}
-		\begin{bmatrix}[rrr|r]
-		k & 1 & 1 & 1\\
-		1 & k & 1 & 1\\
-		1 & 1 & k & 1\\
-		\end{bmatrix}&
-		\begin{bmatrix}[r]
-		R_4\\ R_5\\ R_6\\
-		\end{bmatrix}\\
-		%
-		\begin{bmatrix}[r]
-		R_4\\		
-		R_5 - R_6\\
-		R_6 - R_4\\
-		\end{bmatrix}
-		\begin{bmatrix}[rrr|r]
-		k & 1 & 1 & 1\\
-		0 & k-1 & 1-k & 0\\
-		1-k & 0 & k-1 & 0\\
-		\end{bmatrix}&
-		\begin{bmatrix}[r]
-		R_7\\ R_8\\ R_9\\
-		\end{bmatrix}\\
-		%
-		\begin{bmatrix}[r]
-		R_7 + R_9\\
-		R_8\\
-		R_9\\
+		R_1\\
+		R_2 - R_1\\
+		R_3 - kR_1\\
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
 		1 & 1 & k & 1\\
 		0 & k-1 & 1-k & 0\\
-		1-k & 0 & k-1 & 0\\
+		0 & 1-k & 1-k^2 & 0\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
-		R_{10}\\ R_{11}\\ R_{12}\\
+		R_{4}\\ R_{5}\\ R_{6}\\
 		\end{bmatrix}\\
 		%
 		\begin{bmatrix}[r]
-		R_{10}\\
-		R_{11}\\
-		R_{12} + (k-1)R_{10}\\	
+		R_4\\
+		R_5\\
+		R_6 + R_5\\
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
 		1 & 1 & k & 1\\
 		0 & k-1 & 1-k & 0\\
-		0 & k-1 & k^2-1 & 0\\
+		0 & 0 & 2 - k^2 - k & 0\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
-		R_{13}\\ R_{14}\\ R_{15}\\
+		R_{7}\\ R_{8}\\ R_{9}\\
 		\end{bmatrix}\\
 		%
-		\begin{bmatrix}[r]
-		R_{13}\\
-		R_{14}\\
-		R_{15} - R_{14}\\
-		\end{bmatrix}
-		\begin{bmatrix}[rrr|r]
-		1 & 1 & k & 1\\
-		0 & k-1 & 1-k & 0\\
-		0 & 0 & k^2+k-2 & 0\\
-		\end{bmatrix}&
-		\begin{bmatrix}[r]
-		R_{16}\\ R_{17}\\ R_{18}\\
-		\end{bmatrix}\\
-		%
-		(k^2+k-2) &=0\\
+		2-k^2-k &=0\\
+		k^2+k-2 &= 0\\
 		(k+2)(k-1) &=0\\
-		k = -2, \quad k &= 1\\
-		\end{align*}
-		For a distinct solution, $k \neq -2$ and $k \neq 1$.\\
+		k=1, \quad k&=-2
+		\end{align*}	
+		Thus, for a unique solution, $k \neq 1$ and $k \neq -2$.\\
 		% 2.82.b.ii
 		\item [(ii)]
-		From the solution to 2.82.b.i, allowing $k=-2$ gives us
-		\[ z((-2)^2+(-2)-2) = z(0) = 0 \]
-		Since the result is $0 = 0$, we get no solutions.\\
+		Using our result from 2.82.b.i, letting $k=-2$ gives us
+		\begin{align*}
+		(2-k^2-k)z &= 0\\
+		(2-(-2)^2-(-2))z &= 0\\
+		0 &= 0
+		\end{align*}
+		Thus, when $k=-2$ the system has no solutions.\\
+
 		% 2.82.b.iii
 		\item [(iii)]
-		From the solution to 2.82.b.ii, allowing $k=1$ gives us
-		\[ z((1)^2 + (1) - 2 = z(0) = 0 \]
-		FINISH THIS. ANSWER IS $\neq -2, 1 \quad , \quad -2, \quad 1$ just need to figure out why. I got the answer but I can't seem to reason why.
+		Using our result from 2.82.b.i, letting $k = 1$ gives us
+		\begin{align*}
+		(2-k^2-k)z &= 0\\
+		(2-(1)^2-(1))z &= 0\\
+		0 &= 0
+		\end{align*}
+		Thus, when $k=1$ the system has infinite solutions.\\
+		
 		\end{enumerate}	
 		\medskip
 	%2.82.c
@@ -260,33 +237,74 @@
 		%
 		\begin{bmatrix}[r]
 		R_1\\
-		R_2 - R_1\\
 		R_3 - R_1\\
+		R_2 - R_1\\
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
 		1 & 2 & 2 & 5\\
-		0 & k-2 & 1 & 2\\
 		0 & 9 & k-2 & 6\\
+		0 & k-2 & 1 & 2\\
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
-		R_4\\ R_5\\ R_6\\
+		R_{4}\\ R_{5}\\ R_{6}\\
 		\end{bmatrix}\\
 		%
 		\begin{bmatrix}[r]
 		R_4\\
-		R_5\\
-		R_6 - \\
+		(\frac{1}{9})R_5\\
+		R_6\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		0 & 1 & \frac{k-2}{9} & \frac{2}{3}\\
+		0 & k-2 & 1 & 2\\		
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{7}\\ R_{8}\\ R_{9}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_7\\
+		R_8\\
+		R_9 - (k-2)R_8\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		0 & 1 & \frac{k-2}{9} & \frac{2}{3}\\
+		0 & 0 & -\frac{(k-2)^2}{9} & \frac{2(5-k)}{3}\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{10}\\ R_{11}\\ R_{12}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
 		\end{bmatrix}
 		\begin{bmatrix}[rrr|r]
 		\end{bmatrix}&
 		\begin{bmatrix}[r]
-		R_7\\ R_8\\ R_9\\
-		\end{bmatrix}
+		R_{}\\ R_{}\\ R_{}\\
+		\end{bmatrix}\\
+		%
+		-\frac{(k-2)^2}{9} &= (\frac{2}{3})(5-k)\\
+		
+		k = 5, \quad k &= -1
 		\end{align*}
+		Thus, for a unique solution,$k \neq -1$ and $k \neq 5$. 
 		% 2.82.c.ii
 		\item [(ii)]
+		Using our result from 2.82.c.i, letting $k = 5$ gives us
+		\begin{align*}
+		-(\frac{(k-2)^2}{9})z &= (\frac{2}{3})(5-k)\\
+		-(\frac{((5)-2)^2}{9})z &= (\frac{2}{3})(5-(5))\\
+		-(\frac{(3)^2}{9})z &= (\frac{2}{3})(0)\\
+		-(1)z &= 0\\
+		-z &= 0
+		\end{align*}
+		Thus there are no solutions when $k = 5$.
+		
 		% 2.82.c.iii
 		\item [(iii)]
+		
 		\end{enumerate}
 	\end{enumerate}
 \medskip
@@ -307,11 +325,13 @@
 	\end{bmatrix}\\
 	%
 	\begin{bmatrix}[r]
-	R_1\\ R_3\\ R_2\\
+	R_1\\
+	R_2\\
+	R_3 - 2R_1\\
 	\end{bmatrix}
 	\begin{bmatrix}[rrr|r]
 	1 & 3 & -2 & 0\\
-	3 & -2 & 4 & 0\\
+	1 & -8 & 8 & 0\\
 	1 & -8 & 8 & 0\\
 	\end{bmatrix}&
 	\begin{bmatrix}[r]
@@ -320,81 +340,331 @@
 	%
 	\begin{bmatrix}[r]
 	R_4\\
-	R_5 - 3R_4\\
-	R_6 - R_4\\
+	R_5\\
+	R_6 - R_5\\
 	\end{bmatrix}
 	\begin{bmatrix}[rrr|r]
 	1 & 3 & -2 & 0\\
-	0 & -11 & -2 & 0\\
-	0 & -11 & 6 & 0\\
+	1 & -8 & 8 & 0\\
+	0 & 0 & 0 & 0\\
+	\end{bmatrix}&
+	\end{align*}
+	Since we now have fewer equations than unknowns, there exists a nonzero solution.
+	\medskip
+	
+	% 2.83.b
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,2x-3y+z=0,3x-2y+2z=0}
+	\begin{align*}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	2 & -3 & 1 & 0\\
+	3 & -2 & 2 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\
+	R_2 - 2R_1\\
+	R_3 - 3R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	0 & -9 & 5 & 0\\
+	0 & -11 & 8 & 0\\
+	\end{bmatrix}&
+	\end{align*}
+	Since there is no way to reduce and remove any equations in order to get free variables, there are no nonzero solutions to this system.
+	\medskip
+	
+	%2.83.c
+	\item
+	\sysdelim{.}{.}\systeme[xyzt]{x+2y-5z+4t=0,2x-3y+2z+3t=0,4x-7y+z-6t=0}
+	\begin{theorem}[2.6]
+	A homogeneous system with more unknowns than equations has a nonzero solution.
+	\end{theorem}
+	By theorem 2.6, since this system has four unknowns and only three equations, then this system has nonzero solutions.
+	\medskip	
+	\end{enumerate}
+	
+% 2.86
+\item [2.86.] Reduce A to echelon form and then to row canonical form.
+	\begin{enumerate}
+	
+	% 2.86.a	
+	\item
+	\begin{align*}
+	A = 
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & -1 & 2 & 1\\
+	2 & 4 & 1 & -2 & 3\\
+	3 & 6 & 2 & -6 & 5\\
+	\end{bmatrix}
+	\end{align*}
+	
+	\begin{align*}
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & -1 & 2 & 1\\
+	2 & 4 & 1 & -2 & 3\\
+	3 & 6 & 2 & -6 & 5\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\	
+	R_2 - 2R_1\\
+	R_3 - 3R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & -1 & 2 & 1\\
+	0 & 0 & 3 & -6 & 1\\
+	0 & 0 & 5 & -12 & 2\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_4\\ R_5\\ R_6\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4\\
+	R_6-2R_5\\	
+	R_5\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & -1 & 2 & 1\\
+	0 & 0 & -1 & 0 & 0\\	
+	0 & 0 & 3 & -6 & 1\\
 	\end{bmatrix}&
 	\begin{bmatrix}[r]
 	R_7\\ R_8\\ R_9\\
 	\end{bmatrix}\\
 	%
 	\begin{bmatrix}[r]
-	R_7\\
-	R_8\\
-	R_9 + R_8\\
+	R_7 - R_8\\
+	(-1)R_8\\
+	R_9 + 3R_8\\
 	\end{bmatrix}
-	\begin{bmatrix}[rrr|r]
-	1 & 3 & -2 & 0\\
-	- & -11 & -2 & 0\\
-	0 & 0 & 4 & 0\\
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & 0 & 2 & 1\\
+	0 & 0 & 1 & 0 & 0\\
+	0 & 0 & 0 & -6 & 1\\
 	\end{bmatrix}&
 	\begin{bmatrix}[r]
 	R_{10}\\ R_{11}\\ R_{12}\\
 	\end{bmatrix}\\
-	6z&=0\\
-	z&=0\\
-	-11y-2(0)&=0\\
-	y&=0\\
-	x+3(0-2(0)&=0\\
-	x&=0
-	\end{align*}
-	Since x, y, and z are all zero, this linear system has no nonzero solutions.
-	\medskip
-	
-	% 2.83.b
-	\item
-	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,2x-3y+z=0,3x-2y+2z=0}
-	
-	\medskip	
-	%2.83.c
-	\item
-	\sysdelim{.}{.}\systeme[xyzt]{x+2y-5z+4t=0,2x-3y+2z+3t=0,4x-7y+z-6t=0}
-	
-	\medskip	
-	\end{enumerate}
-% 2.86
-\item [2.86.] Reduce A to echelon form and then to row canonical form.
-	\begin{enumerate}
-	% 2.86.a	
-	\item
-	\begin{align*}
-	%\setlength\arraycolsep{5pt} % Changes column padding
-	A = 
-	\begin{bmatrix*}[r]
-	1 & 2 & -1 & 2 & 1\\
-	2 & 4 & 1 & -2 & 3\\
-	3 & 6 & 2 & -6 & 5\\
-	\end{bmatrix*}
+	%
+	\begin{bmatrix}[r]
+	R_{10} + (\frac{1}{3})R_{12}\\
+	R_{11}\\
+	(-\frac{1}{6})R_{12}\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & 2 & 0 & 0 & \frac{4}{3}\\
+	0 & 0 & 1 & 0 & 0\\
+	0 & 0 & 0 & 1 & -\frac{1}{6}\\
+	\end{bmatrix}&	
 	\end{align*}
 	% 2.86.b
 	\item
 	\begin{align*}
 	A = 
-	\begin{bmatrix*}[r]
+	\begin{bmatrix}[rrrrr]
 	2 & 3 & -2 & 5 & 1\\
 	3 & -1 & 2 & 0 & 4\\
 	4 & -5 & 6 & -5 & 7\\
-	\end{bmatrix*}
+	\end{bmatrix}
+	\end{align*}
+	
+	\begin{align*}
+	\begin{bmatrix}[rrrrr]
+	2 & 3 & -2 & 5 & 1\\
+	3 & -1 & 2 & 0 & 4\\
+	4 & -5 & 6 & -5 & 7\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_3 - R_2\\
+	R_2\\
+	2R_1 - R_3\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & -4 & 4 & -5 & 3\\
+	3 & -1 & 2 & 0 & 4\\
+	0 & 11 & -10 & 15 & -5\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_4\\ R_5\\ R_6\\
+	\end{bmatrix}\\
+	%	
+	\begin{bmatrix}[r]
+	R_4\\
+	R_5 - 3R_4\\
+	R_6\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & -4 & 4 & -5 & 3\\
+	0 & 11 & -10 & 15 & -5\\
+	0 & 11 & -10 & 15 & -5\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_7\\ R_8\\ R_9\\
+	\end{bmatrix}\\
+	%	
+	\begin{bmatrix}[r]
+	R_7\\
+	R_8\\
+	R_9 - R_8\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & -4 & 4 & -5 & 3\\
+	0 & 11 & -10 & 15 & -5\\
+	0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{10}\\ R_{11}\\ R_{12}\\
+	\end{bmatrix}\\
+	%	
+	\begin{bmatrix}[r]
+	R_{10}\\
+	(\frac{1}{11})R_{11}\\
+	R_{12}\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & -4 & 4 & -5 & 3\\
+	0 & 1 & -\frac{10}{11} & \frac{15}{11} & -\frac{5}{11}\\
+	0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{13}\\ R_{14}\\ R_{15}\\
+	\end{bmatrix}\\
+	%	
+	\begin{bmatrix}[r]
+	R_{13} + 4R_{14}\\
+	R_{14}\\
+	R_{15}\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrrr]
+	1 & 0 & \frac{4}{11} & \frac{5}{11} & \frac{13}{11}\\
+	0 & 1 & -\frac{10}{11} & \frac{15}{11} & -\frac{5}{11}\\
+	0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}&
 	\end{align*}
 	\end{enumerate}
 % 2.88
 \item [2.88.] Using only 0s and 1s, list all possible 2 x 2 matrices in row canonical form.
+\begin{align*}
+\begin{bmatrix}[rr]
+1 & 0\\
+0 & 1\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+1 & 1\\
+0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+1 & 0\\
+0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+0 & 1\\
+0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+0 & 0\\
+0 & 0\\
+\end{bmatrix}
+\end{align*}
 % 2.89
 \item [2.89.] Using only 0s and 1s, list all possible 3 x 3 matrices in row canonical form.
+\begin{align*}
+\begin{bmatrix}[rrr]
+0 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+0 & 0 & 1\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+0 & 1 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+0 & 1 & 1\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 1\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 1 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 1 & 1\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}\\
+%
+\begin{bmatrix}[rrr]
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 1\\
+0 & 1 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{bmatrix}
+\end{align*}
 % 2.92
 \item [2.92.] Consider the following system of unknowns x and y:
 \[ \sysdelim{.}{.}\systeme[xy]{ax+by=1,cx+dy=0} \]

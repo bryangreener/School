@@ -206,6 +206,7 @@
 		\end{align*}
 		Thus, when $k=-2$ the system has no solutions.\\
 
+		\pagebreak
 		% 2.82.b.iii
 		\item [(iii)]
 		Using our result from 2.82.b.i, letting $k = 1$ gives us
@@ -277,16 +278,7 @@
 		R_{10}\\ R_{11}\\ R_{12}\\
 		\end{bmatrix}\\
 		%
-		\begin{bmatrix}[r]
-		\end{bmatrix}
-		\begin{bmatrix}[rrr|r]
-		\end{bmatrix}&
-		\begin{bmatrix}[r]
-		R_{}\\ R_{}\\ R_{}\\
-		\end{bmatrix}\\
-		%
 		-\frac{(k-2)^2}{9} &= (\frac{2}{3})(5-k)\\
-		
 		k = 5, \quad k &= -1
 		\end{align*}
 		Thus, for a unique solution,$k \neq -1$ and $k \neq 5$. 
@@ -304,7 +296,15 @@
 		
 		% 2.82.c.iii
 		\item [(iii)]
-		
+		Using our result from 2.82.c.i, letting $k = -1$ gives us
+		\begin{align*}
+		-(\frac{(k-2)^2}{9})z &= (\frac{2}{3})(5-k)\\
+		-(\frac{((-1)-2)^2}{9})z &= (\frac{2}{3})(5-(-1))\\
+		-(\frac{(-3)^2}{9})z &= (\frac{2}{3})(6)\\
+		-(1)z &= 4\\
+		-z &= 4
+		\end{align*}
+		I couldn't get this solution to come out correctly. I checked the book to verify my answer which is how I got $k=-1$ as a solution however no matter how many times I reworked this problem I couldn't end up with a solution that satisfied this condition.
 		\end{enumerate}
 	\end{enumerate}
 \medskip
@@ -352,6 +352,7 @@
 	Since we now have fewer equations than unknowns, there exists a nonzero solution.
 	\medskip
 	
+	\pagebreak
 	% 2.83.b
 	\item
 	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,2x-3y+z=0,3x-2y+2z=0}
@@ -556,6 +557,7 @@
 	\end{bmatrix}&
 	\end{align*}
 	\end{enumerate}
+	
 % 2.88
 \item [2.88.] Using only 0s and 1s, list all possible 2 x 2 matrices in row canonical form.
 \begin{align*}
@@ -580,6 +582,7 @@
 0 & 0\\
 \end{bmatrix}
 \end{align*}
+
 % 2.89
 \item [2.89.] Using only 0s and 1s, list all possible 3 x 3 matrices in row canonical form.
 \begin{align*}
@@ -665,12 +668,60 @@
 0 & 0 & 1\\
 \end{bmatrix}
 \end{align*}
+
+\pagebreak
 % 2.92
 \item [2.92.] Consider the following system of unknowns x and y:
 \[ \sysdelim{.}{.}\systeme[xy]{ax+by=1,cx+dy=0} \]
 Show that if $ad-bc \neq 0$, then the system has the unique solution
 \[ x=\frac{d}{ad-bc}, \quad y=-\frac{c}{ad-bc} \]
 And show that if $ad-bc=0$ and if $c \neq 0$ or $d \neq 0$, then the system has no solution.
+
+\begin{align*}
+\begin{bmatrix}[rr|r]
+a & b & 1\\
+c & d & 0\\
+\end{bmatrix}&
+\begin{bmatrix}[r]
+R_1\\ R_2\\
+\end{bmatrix}\\
+%
+\begin{bmatrix}[r]
+R_1\\
+(\frac{1}{c})R_2\\
+\end{bmatrix}
+\begin{bmatrix}[rr|r]
+a & b & 1\\
+1 & \frac{d}{c} & 0\\
+\end{bmatrix}&
+\begin{bmatrix}[r]
+R_3\\ R_4\\
+\end{bmatrix}\\
+%
+\begin{bmatrix}[r]
+R_3\\
+R_4 - (\frac{1}{a})R_3\\
+\end{bmatrix}
+\begin{bmatrix}[rr|r]
+a & b & 1\\
+0 & \frac{d}{c} - \frac{b}{a} & -\frac{1}{a}\\
+\end{bmatrix}&
+\begin{bmatrix}[r]
+R_5\\ R_6\\
+\end{bmatrix}\\
+%
+(\frac{d}{c} - \frac{b}{a})y &= -\frac{1}{a}\\
+y &= -\frac{c}{ad-bc}\\
+cx+dy &= 0\\
+cx+d(-\frac{c}{ad-bc}) &= 0\\
+x &= \frac{d}{ad-bc}
+\end{align*}
+Let $ad-bc=0$, $c=k$, $d=l$ for some nonzero integers $k$ and $l$.
+\begin{align*}
+y &= -\frac{k}{0}\\
+x &= \frac{l}{0}
+\end{align*}
+Since letting either $c$ or $d$ equal a nonzero integer results in division by 0, the system has no solution in either case.
 \end{enumerate}
 
 \end{document}

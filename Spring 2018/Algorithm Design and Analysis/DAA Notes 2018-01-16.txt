@@ -63,4 +63,7 @@ Statement of the Problem:
 Mutually Compatible Jobs
     In a series of jobs, the jobs that do not overlap.
     Find maximum cardinality subset of mutually compatible jobs.
+Weighted Interval Scheduling
+    INput: Set of jobs with start/finish times and weights.
+    Goal: Find max weight subset of mutually compatible jobs.
             

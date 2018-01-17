@@ -77,31 +77,103 @@
 \begin{enumerate}
 \item[2.80.b.] Solve each system:\\
 	\sysdelim{.}{.}\systeme[xyzt]{x+2y-3z+2t=2,2x+5y-8z+6t=5,3x+4y-5z+2t=4}
+	\begin{align*}
+	\begin{bmatrix}[rrrr|r]
+	1 & 2 & -3 & 2 & 2\\
+	2 & 5 & -8 & 6 & 5\\
+	3 & 4 & -5 & 2 & 4\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\
+	R_2 - 2R_1\\
+	R_3-3R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrr|r]
+	1 & 2 & -3 & 2 & 2\\
+	0 & 1 & -2 & 2 & 1\\
+	0 & -2 & 4 & -4 & -2\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{4}\\ R_{5}\\ R_{6}\\	
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4\\
+	R_5\\
+	R_6 + 2R_5\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrr|r]
+	1 & 2 & -3 & 2 & 2\\
+	0 & 1 & -2 & 2 & 1\\
+	0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{7}\\ R_{8}\\ R_{9}\\	
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_7 - 2R_8\\
+	R_8\\
+	R_9\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrrr|r]
+	1 & 0 & 1 & -2 & 0\\
+	0 & 1 & -2 & 2 & 1\\
+	0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}\\
+	%
+	y-2z+2t&=1\\
+	y&=1+2z-2t\\
+	x+z-2t&=0\\
+	x&=-z+2t\\
+	\end{align*}
 \item[1.55.b.] Let $u=(1,-2,4)$, $v=(3,5,1)$, and $w=(2,1,-3)$. Find $4u-v-3w$.
+	\[ 4u-v-3w = 4(1,-2,4)-(3,5,1)-3(2,1,-3) = (4,-8,16)-(3,5,1)-(6,3,-9)
+		= (-5,-16,24) \]
 \item[1.56.] For the vectors in problem 1.55, find:
 	\begin{enumerate}
 	% 1.56.a
 	\item $u \cdot v$, $u \cdot w$, $v \cdot w$
-	
+	\begin{align*}
+		u \cdot v &= (1,-2,4)\cdot(3,5,1) = 3-10+4 = -3\\
+		u \cdot w &= (1,-2,4)\cdot(2,1,-3)= 2-2-12 = -12\\
+		v \cdot w &= (3,5,1) \cdot(2,1,-3)= 6+5-3  = 8
+	\end{align*}
 	% 1.56.b
 	\item $||u||$, $||v||$, $||w||$
+	\begin{align*}
+		||u|| &= \sqrt{(1,-2,4)^2} = \sqrt{1+4+16} = \sqrt{21}\\
+		||v|| &= \sqrt{(3,5,1)^2}  = \sqrt{9+25+1} = \sqrt{35}\\
+		||w|| &= \sqrt{(2,1,-3)^2} = \sqrt{4+1+9}  = \sqrt{14}
+	\end{align*}
 	\end{enumerate}
 \item[1.60.] Determine k so that u and v are orthagonal:
 	\begin{enumerate}
 	% 1.60.a
-	\item $u=(3,k,-2)$, $v=(6,-4,-3)$
-	
+	\item $u=(3,k,-2)$, $v=(6,-4,-3)$\\
+		Let $k=6$, then
+		\[ u \cdot v = 18 - 24 + 6 = 0 \]
 	% 1.60.b
-	\item $u=(5,k,-4,2)$, $v=(1,-3,2,2k)$
+	\item $u=(5,k,-4,2)$, $v=(1,-3,2,2k)$\\
+		Let $k=3$, then
+		\[ u \cdot v = 5 - 9 - 8 + 12 =  0 \]
 	\end{enumerate}
 \item[1.61.] Find x and y where:
 	\begin{enumerate}
 	% 1.61.a
-	\item $(x,x+y)=(y-2,6)$
-	
+	\item $(x,x+y)=(y-2,6)$\\
+		Let $x=2$ and $y=4$, then
+		\[ (x,x+y) = (2, 2+4) = (2,6) = (2-2,6) = (y-2,6) \]
 	% 1.61.b
-	\item $x(1,2)=-4(y,3)$
+	\item $x(1,2)=-4(y,3)$\\
+		Let $x=-6$ and $y=\frac{3}{2}$, then
+		\[ x(1,2) = (-6,2(-6)) = (-6,-12) = (-4(\frac{3}{2}),-12) = -4(y,3) \]
 	\end{enumerate}
+	
 \item[1.64.] Find $x$, $y$, and $z$ where
 	$x \begin{bmatrix}[r] 1\\ 2\\ 3\\ \end{bmatrix}
 	+ y \begin{bmatrix}[r] 2\\ 5\\ -1\\ \end{bmatrix}
@@ -143,7 +215,7 @@ c_1 & c_2 & c_3 & c_4\\
 	\begin{enumerate}
 	\item $e_iA=A_i$, the $i$th row of a matrix $A$.
 	\item $Be_j^T=B^j$, the $j$th column of $B$.
-	\item IF $e_iA
+	\item IF $e_iA$
 	\end{enumerate}
 \end{enumerate}
 

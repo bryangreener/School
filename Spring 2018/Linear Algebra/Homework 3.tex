@@ -178,12 +178,33 @@
 	$x \begin{bmatrix}[r] 1\\ 2\\ 3\\ \end{bmatrix}
 	+ y \begin{bmatrix}[r] 2\\ 5\\ -1\\ \end{bmatrix}
 	+ z \begin{bmatrix}[r] 4\\ -2\\ 3\\ \end{bmatrix}
-	= \begin{bmatrix}[r] 9\\ -3\\ 16\\ \end{bmatrix}$
+	= \begin{bmatrix}[r] 9\\ -3\\ 16\\ \end{bmatrix}$\\
+		
+	\[ x \begin{bmatrix}[r] 1\\ 2\\ 3\\ \end{bmatrix}
+	+ y \begin{bmatrix}[r] 2\\ 5\\ -1\\ \end{bmatrix}
+	+ z \begin{bmatrix}[r] 4\\ -2\\ 3\\ \end{bmatrix}
+	= \begin{bmatrix}[r] 9\\ -3\\ 16\\ \end{bmatrix}
+	= \begin{bmatrix}[r] x\\ 2x\\ 3x\\ \end{bmatrix}
+	+ \begin{bmatrix}[r] 2y\\ 5y\\ -y\\ \end{bmatrix}
+	+ \begin{bmatrix}[r] 4z\\ -2z\\ 3z\\ \end{bmatrix}
+	= \begin{bmatrix}[r] x+2y+4z\\ 2x+5y-2z\\ 3x-y+3z\\ \end{bmatrix}
+	\]
+	Let $x=3,y=-1,z=2$, then
+	\[ \begin{bmatrix}[r] (3)+2(-1)+4(2)\\ 2(3)+5(-1)-2(2)\\ 3(3)-(-1)+3(2)\\ \end{bmatrix}
+	= \begin{bmatrix}[r] 9\\ -3\\ 16\\ \end{bmatrix} \] 
 \item[1.65.] Normalize each vector:
 	\begin{enumerate}
-	\item $u=(5,-7)$
-	\item $v=(1,2,-2,4)$
-	\item $w=(\frac{1}{2},-\frac{1}{3},\frac{3}{4})$
+	% 1.65.a
+	\item $u=(5,-7)$\\
+		\[ \hat{u} = \frac{\vec{u}}{||\vec{u}||} = \frac{(5,-7)}{\sqrt{5^2 + (-7)^2}} = \frac{(5,-7)}{\sqrt{74}} = (\frac{5}{\sqrt{74}},\frac{-7}{\sqrt{74}}) \]
+	
+	% 1.65.b
+	\item $v=(1,2,-2,4)$\\
+		\[ \hat{u} = \frac{\vec{u}}{||\vec{u}||} = \frac{(1,2,-2,4)}{\sqrt{1^2 + 2^2 + (-2)^2 + 4^2}} = \frac{(1,2,-2,4)}{\sqrt{25}} = (\frac{1}{5},\frac{2}{5},-\frac{2}{5},\frac{4}{5}) \]
+		
+	% 1.65.c
+	\item $w=(\frac{1}{2},-\frac{1}{3},\frac{3}{4})$\\
+		\[ \hat{u} = \frac{\vec{u}}{||\vec{u}||} = \frac{(\frac{1}{2},-\frac{1}{3},\frac{3}{4})}{\sqrt{(\frac{1}{2})^2 + (-\frac{1}{3})^2 + (\frac{3}{4})^2}} =  (\frac{72}{133},-\frac{48}{133},\frac{108}{133}) \]
 	\end{enumerate}
 \item[1.67.] Find:
 	\begin{enumerate}

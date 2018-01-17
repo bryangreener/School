@@ -27,6 +27,7 @@ Requirements
     OS
     etc.
 
+Code Example
 
 
 Tasks are short implementations of parts of each story. Should be 1day - 1week implementation

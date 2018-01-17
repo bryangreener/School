@@ -59,23 +59,25 @@
  
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Homework \#2}
+\lhead{Homework \#3}
+\chead{\thepage}
 \rhead{Bryan Greener}
-\cfoot{\thepage}
 % END BLOCK============================================
 
 % TITLE
 % BEGIN BLOCK------------------------------------------
 \title{Bryan Greener}
 \author{MATH 2300 CRN:15163}
-\date{2018-01-14}
+\date{2018-01-17}
 \begin{document}
 \maketitle
 % END BLOCK============================================
 
 \TabPositions{4cm}
 \begin{enumerate}
-\item[2.80.b.] Solve each system:\\
+\item[2.80.] Solve each system:\\
+	\begin{enumerate}
+	\item[(b)]
 	\sysdelim{.}{.}\systeme[xyzt]{x+2y-3z+2t=2,2x+5y-8z+6t=5,3x+4y-5z+2t=4}
 	\begin{align*}
 	\begin{bmatrix}[rrrr|r]
@@ -131,9 +133,18 @@
 	x+z-2t&=0\\
 	x&=-z+2t\\
 	\end{align*}
-\item[1.55.b.] Let $u=(1,-2,4)$, $v=(3,5,1)$, and $w=(2,1,-3)$. Find $4u-v-3w$.
-	\[ 4u-v-3w = 4(1,-2,4)-(3,5,1)-3(2,1,-3) = (4,-8,16)-(3,5,1)-(6,3,-9)
-		= (-5,-16,24) \]
+	\end{enumerate}
+\item[1.55.] Let $u=(1,-2,4)$, $v=(3,5,1)$, and $w=(2,1,-3)$. 
+	\begin{enumerate}
+	\item[(b)]
+	Find $4u-v-3w$.
+	\begin{align*}
+		4u-v-3w
+		&= 4(1,-2,4)-(3,5,1)-3(2,1,-3)\\
+		&= (4,-8,16)-(3,5,1)-(6,3,-9)\\
+		&= (-5,-16,24)
+	\end{align*}
+	\end{enumerate}
 \item[1.56.] For the vectors in problem 1.55, find:
 	\begin{enumerate}
 	% 1.56.a
@@ -200,44 +211,126 @@
 	
 	% 1.65.b
 	\item $v=(1,2,-2,4)$\\
-		\[ \hat{u} = \frac{\vec{u}}{||\vec{u}||} = \frac{(1,2,-2,4)}{\sqrt{1^2 + 2^2 + (-2)^2 + 4^2}} = \frac{(1,2,-2,4)}{\sqrt{25}} = (\frac{1}{5},\frac{2}{5},-\frac{2}{5},\frac{4}{5}) \]
+		\[ \hat{v} = \frac{\vec{v}}{||\vec{v}||} = \frac{(1,2,-2,4)}{\sqrt{1^2 + 2^2 + (-2)^2 + 4^2}} = \frac{(1,2,-2,4)}{\sqrt{25}} = (\frac{1}{5},\frac{2}{5},-\frac{2}{5},\frac{4}{5}) \]
 		
 	% 1.65.c
 	\item $w=(\frac{1}{2},-\frac{1}{3},\frac{3}{4})$\\
-		\[ \hat{u} = \frac{\vec{u}}{||\vec{u}||} = \frac{(\frac{1}{2},-\frac{1}{3},\frac{3}{4})}{\sqrt{(\frac{1}{2})^2 + (-\frac{1}{3})^2 + (\frac{3}{4})^2}} =  (\frac{72}{133},-\frac{48}{133},\frac{108}{133}) \]
+		\[ \hat{w} = \frac{\vec{w}}{||\vec{w}||} = \frac{(\frac{1}{2},-\frac{1}{3},\frac{3}{4})}{\sqrt{(\frac{1}{2})^2 + (-\frac{1}{3})^2 + (\frac{3}{4})^2}} =  (\frac{6}{\sqrt{133}},-\frac{4}{\sqrt{133}},\frac{9}{\sqrt{133}}) \]
 	\end{enumerate}
+
+\bigskip
+Problems 1.67 to 1.70 refer to the following matrices:
+\[ 	A= \begin{bmatrix}[rr] 1 & 2\\ 3 & -4\\ \end{bmatrix}, \quad
+	B= \begin{bmatrix}[rr] 5 & 0\\ -6 & 7\\ \end{bmatrix}, \quad
+	C= \begin{bmatrix}[rrr] 1 & -3 & 4\\ 2 & 6 & -5\\ \end{bmatrix}, \quad
+	D= \begin{bmatrix}[rrr] 3 & 7 & -1\\ 4 & -8 & 9\\ \end{bmatrix} \]
 \item[1.67.] Find:
 	\begin{enumerate}
+	% 1.67.a
 	\item $5A-2B$
+		\[ 	5A-2B 
+			= 5 \begin{bmatrix}[rr] 1 & 2\\ 3 & -4\\ \end{bmatrix}
+			- 2 \begin{bmatrix}[rr] 5 & 0 \\ -6 & 7\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] 5 & 10\\ 15 & -20\\ \end{bmatrix}
+			- \begin{bmatrix}[rr] 10 & 0\\ -12 & 14\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] -5 & 10\\ 27 & -34\\ \end{bmatrix} \]				
+	
+	% 1.67.b
 	\item $C+D$
+		\[ 	C+D 
+			= \begin{bmatrix}[rrr] 1 & -3 & 4\\ 2 & 6 & -5\\ \end{bmatrix}
+			+ \begin{bmatrix}[rrr] 3 & 7 & -1\\ 4 & -8 & 9\\ \end{bmatrix}
+			= \begin{bmatrix}[rrr] 4 & 4 & 3\\  6 & -2 & 4\\ \end{bmatrix} \]	
+	
+	% 1.67.c
 	\item $2C-3D$
+		\[ 	2C-3D
+			= 2 \begin{bmatrix}[rrr] 1 & -3 & 4\\ 2 & 6 & -5\\ \end{bmatrix}
+			- 3 \begin{bmatrix}[rrr] 3 & 7 & -1\\ 4 & -8 & 9\\ \end{bmatrix}
+			= \begin{bmatrix}[rrr] 2 & -6 & 8\\ 4 & 12 & -10\\ \end{bmatrix}
+			- \begin{bmatrix}[rrr] 9 & 21 & -3\\ 12 & -24 & 27\\ \end{bmatrix} \]
+			\[ = \begin{bmatrix}[rrr] -7 & -27 & 11\\ -8 & 36 & -37\\ \end{bmatrix} \]
 	\end{enumerate}
 \item[1.68.] Find:
 	\begin{enumerate}
 	\item $AB$
+		\[ 	AB
+			= \begin{bmatrix}[rr] 1 & 2\\ 3 & -4\\ \end{bmatrix}
+			\begin{bmatrix}[rr] 5 & 0\\ -6 & 7\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] (1)(5)+(2)(-6) & (1)(0)+(2)(7)\\
+								  (3)(5)+(-4)(-6) & (3)(0)+(-4)(7)\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] -7 & 14\\ 39 & 28\\ \end{bmatrix} \]
 	\item $BA$
+		\[ 	BA
+			= \begin{bmatrix}[rr] 5 & 0\\ -6 & 7\\ \end{bmatrix}
+			\begin{bmatrix}[rr] 1 & 2\\ 3 & -4\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] (5)(1)+(0)(3) & (5)(2)+(0)(-4)\\
+								  (-6)(1)+(7)(3) & (-6)(2)+(7)(-4)\\ \end{bmatrix}
+			= \begin{bmatrix}[rr] 5 & 10\\ 15 & -40\\ \end{bmatrix} \]
+			
 	\end{enumerate}
 \item[1.70.] Find:
 	\begin{enumerate}
 	% 1.70.a
 	\item $A^T$
-	
+		\[ 	A^T = \begin{bmatrix}[rr] 1 & 3\\ 2 & -4\\ \end{bmatrix} \]
+		
 	% 1.70.c	
 	\item[(c)] $C^T C$
+		\begin{align*}
+		C^TC 
+		&= \begin{bmatrix}[rr] 1 & 2\\ -3 & 6\\ 4 & -5\\ \end{bmatrix}
+		\begin{bmatrix}[rrr] 1 & -3 & 4\\ 2 & 6 & -5\\ \end{bmatrix}\\
+		&= \begin{bmatrix}[rrr]
+		(1)(1)+(2)(2) & (1)(-3)+(2)(6) & (1)(4)+(2)(-5)\\
+		(-3)(1)+(6)(2) & (-3)(-3)+(6)(6) & (-3)(4)+(6)(-5)\\
+		(4)(1)+(-5)(2) & (4)(-3)+(-5)(6) & (4)(4)+(-5)(-5)\\
+		\end{bmatrix}\\
+		&= \begin{bmatrix}[rrr] 
+		5 & 9 & -6\\ 
+		9 & 45 & -42\\ 
+		-6 & -42 & 41\\ 
+		\end{bmatrix} 				
+		\end{align*}
+	
 	\end{enumerate}
 \item[1.76.] Let $A=\begin{bmatrix}[rr] 1 & 2\\ 3 & 6\\ \end{bmatrix}$.
-	Find a 2 x 3 matrix $B$ with distinct entries such that $AB = 0$.
+	Find a 2 x 3 matrix $B$ with distinct entries such that $AB = 0$.\\
+	Let $B= \begin{bmatrix}[rrr] 2 & 6 & 8\\ -1 & -3 & -4\\ \end{bmatrix}$, then
+	\[ AB
+	= \begin{bmatrix}[rrr]
+	(1)(2)+(2)(-1) & (1)(6)+(2)(-3) & (1)(8)+(2)(-4)\\
+	(3)(2)+(6)(-1) & (3)(6)+(6)(-3) & (3)(8)+(6)(-4)\\
+	\end{bmatrix}
+	= \begin{bmatrix}[rrr]
+	0 & 0 & 0\\
+	0 & 0 & 0\\
+	\end{bmatrix} \]
+	
 \item[1.78.] Suppose $e_1=[1,0,0]$, $e_2=[0,1,0]$, $e_3=[0,0,1]$, and suppose $A=
-\begin{bmatrix}[rrrr]
-a_1 & a_2 & a_3 & a_4\\
-b_1 & b_2 & b_3 & b_4\\
-c_1 & c_2 & c_3 & c_4\\
-\end{bmatrix}$. Find:
-	\begin{enumerate}
-	\item $e_iA=A_i$, the $i$th row of a matrix $A$.
-	\item $Be_j^T=B^j$, the $j$th column of $B$.
-	\item IF $e_iA$
-	\end{enumerate}
+	\begin{bmatrix}[rrrr]
+	a_1 & a_2 & a_3 & a_4\\
+	b_1 & b_2 & b_3 & b_4\\
+	c_1 & c_2 & c_3 & c_4\\
+	\end{bmatrix}$\\
+	Find $e_1A$, $e_2A$, and $e_3A$.
+	\begin{align*}
+	e_1A &=
+	\begin{bmatrix}[rrrr]
+	1a_1+0b_1+0c_1 & 1a_2+0b_2+0c_2 & 1a_3+0b_3+0c_3 & 1a_4+0b_4+0c_4\\
+	\end{bmatrix}\\
+	&= \begin{bmatrix}[rrrr] a_1 & a_2 & a_3 & a_4\\ \end{bmatrix}\\
+	e_2A &= 
+	\begin{bmatrix}[rrrr]
+	0a_1+1b_1+0c_1 & 0a_2+1b_2+0c_2 & 0a_3+1b_3+0c_3 & 0a_4+1b_4+0c_4\\
+	\end{bmatrix}\\
+	&= \begin{bmatrix}[rrrr] b_1 & b_2 & b_3 & b_4\\ \end{bmatrix}\\
+	e_3A &= 
+	\begin{bmatrix}[rrrr]
+	0a_1+0b_1+1c_1 & 0a_2+0b_2+1c_2 & 0a_3+0b_3+1c_3 & 0a_4+0b_4+1c_4\\
+	\end{bmatrix}\\
+	&= \begin{bmatrix}[rrrr] c_1 & c_2 & c_3 & c_4\\ \end{bmatrix}
+	\end{align*}
 \end{enumerate}
 
 

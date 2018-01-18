@@ -52,5 +52,93 @@
  
 \today {} Linear Algebra Notes\\
 
+For 1.76 in homework, you can write each of the equations in the 2x3 matrix as an augmented matrix 6x2 and solve as normal for the 12 unknowns.\\
+2.80(b) on homework:\\
+z and t become free variables and x and y are dependent variables.\\
+When writing out solution set, you want to assign z and t (or any free variables) to a new set of variables.\\
+Ex:\\
+Parameterization of solution set:
+\begin{align*}
+t &= q\\
+z &= p\\
+y &= 2p-2q+1\\
+x &= -p+2q
+\end{align*}
+
+\section*{Invertibility}
+\begin{defn} A square matrix A is invertible if there is another square matrix B such that AB is the identity matrix.
+\end{defn}
+
+Ex:
+\[
+A = 
+\begin{bmatrix}[rr]
+5 & 17\\
+2 & 7\\
+\end{bmatrix}
+\]
+Inverse of A is
+\[
+\begin{bmatrix}[rr]
+7 & -17\\
+-2 & 5\\
+\end{bmatrix}
+\]
+
+\[
+\begin{bmatrix}[rr]
+5 & 17\\ 2 & 7\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+7 & -17\\ -2 & 5\\
+\end{bmatrix}
+=
+\begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}
+\]
+
+Notation:
+\[ 
+A^{-1} = \begin{bmatrix}[rr]
+5 & 17\\
+2 & 7\\
+\end{bmatrix} ^{-1}
+\]
+
+Alternate method of writing matrices in 1.64\\
+Find $\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}$ such that
+\[
+\begin{bmatrix}[rrr] 1 & 2 & 4\\ 3 & 5 & -2\\ 3 & -1 & 3\\ \end{bmatrix}
+\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}
+=
+\begin{bmatrix} 9\\ -3\\ 16\\ \end{bmatrix}
+\]
+Solution
+\[
+\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}
+=
+\begin{bmatrix}[rrr] 1 & 2 & 4\\ 3 & 5 & -2\\ 3 & -1 & 3\\ \end{bmatrix}^{-1}
+\begin{bmatrix} 9\\ -3\\ 16\\ \end{bmatrix}
+=
+\begin{bmatrix}[r] 3\\ -1\\ 2\\ \end{bmatrix}
+\]
+
+\begin{thrm} Suppose A is an invertible n x m matrix. Then
+\[ rref\begin{bmatrix}[r|r] A & I_n\\ \end{bmatrix}
+=
+\begin{bmatrix}[r|r] I_n & A_{-1}\\ \end{bmatrix}
+\]
+\end{thrm}
+
+Fact: Every elementary row operation can be written as an invertible matrix.\\
+\[
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\ 0 & 4 & 0\\ 0 & 0 & 1\\
+\end{bmatrix} ^{-1}
+=
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\ 0 & \frac{1}{4} & 0\\ 0 & 0 & 1\\
+\end{bmatrix}
+\]
+
 
 \end{document}

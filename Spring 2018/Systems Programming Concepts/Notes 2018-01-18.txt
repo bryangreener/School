@@ -1,0 +1,68 @@
+Systems Programming Concepts Notes 2018-01-18
+
+struct m * a[20]; \\ creates an array of pointers. need to allocate memory for each item in array
+for 1 to 20
+    a[i] = malloc(sizeof(m)); \\ allocates memory for 20 pointers the size of struct m
+
+Swap
+
+void f(struct m * s[20])
+    struct m * temp = s[0]
+    s[0] = s[1]; s[1] = temp;
+
+int main()
+    struct m * a[20];
+        a[0] = malloc(sizeof(struct m))
+        a[1] = ...
+    f(a) \\ calling this function swaps a[0] and a[1] by moving the memory addresses stored in this array
+    \\ each memory address just points to the beginning of a block of memory where a struct is saved.
+
+
+More struct examples:
+
+#includes stdio, stdlib, string
+
+typedef struct _node {char * data; struct _node * next;} node; \\ need the _node at beginning for the inside struct typedef to know what _node is
+typedef struct {char first[20]; char last[20];} name; \\ this compiles as well since we arent defining another struct inside the struct.
+typedef struct {char * first; char * last;}ptrName; \\ struct with pointers to prove a point no pun intended
+int main(int argc, char * argv[])
+{
+    prtName bob, sam;
+    bob.first = malloc(strlen("bob"+1));
+    bob.last = malloc(6); // alternate malloc method with hardcoded length accounting for break char
+
+    name bob, sam;
+    strcpy(bob.first, "bob"); strcpy(bob.last, "great"); \\ since we know the length of each string and array, we dont need to use strncpy (takes length of array)
+
+    bob.first = malloc(7); \\ by doing this, we just lost our pointer that we previously made to bob.first. That pointer still exists so we have a memory leak.
+
+    sam = bob; \\ copying structs copies each byte in the arrays (deep copy)
+    printf("sam %ld, bob %ld\n" sam.first, bob.first) \\ prints the address stored in sam and bob. %ld is the long digit data type which is what memory uses.
+    // when using the pointer structs, this copy ends with both outputs being the same since nothing was changed in the struct pointers.
+    printf("sam.first %s, bob.first %s\n" sam.first, bob.first);
+
+    free(bob); \\ this will free the memory used by the pointer bob. Need to do this otherwise we get memory leaks.
+    getchar();
+
+}
+
+
+MAKEFILE Review
+
+CC = gcc \\ compiler
+CFLAGS = -ggdb (or just -g) -Wall \\ defining this flag allows gdb use
+target : dependant.c a.c \\ adding a space and another filename.c to compile a second file
+    gcc dependant.c -o target \\ turns the dependent into a target. this line is redundant and not needed
+\\ ANOTHER METHOD
+target : dependant.o a.o \\ these are object files that need to be linked together to create the exe
+a.o : a.c \\ make already knows his so it is not needed
+
+dependant.o : a.h \\ editing a.h will also recompile dependant.o
+a.o depentant.o : a.h \\ same as above but two files are recompiled when a.h is changed
+
+Comments in makefile start with '#'
+
+clean:
+    rm -f *.0 core a1 #execute this by typing make clean
+run: a1
+    ./a1    #same as above but "make run"

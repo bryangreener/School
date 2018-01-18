@@ -1,0 +1,63 @@
+DAA Notes 2018-01-18
+Today's goals:
+    Survey of Common Runtime Algorithms
+    Graphs
+
+Overall goal of complexity is to be better than brute force algorithms.
+
+Linear Time Algorithms:
+    Running time is at most constant factor times the size of the input. O(n)
+        Ex 1: Array A of length n. Compute max value.
+            Traverse array comparing each item to a maxVal variable.
+        
+Claim: O(n) runs
+    "we do constant work per element for a total runtime of O(n)"
+
+    This is incorrect because we don't perform a constant amount of work per element. We may look at one element multiple times as we go through the list.
+
+    We can prove this incorrect with a counterexample.
+
+        n = even 
+            A:{1,3,5,...,2n-1}
+            B:{n,n+2,n+4,...,3n-2}
+        B will sit in front of the stack for (n/2) iterations while number from A are repeatedly selected.
+    
+Good way to argue and prove
+Claim:
+    1) Suppose we charge a cost of each iteration that is selected and added to the output list.
+    2) An element can be charged only once since at the moment it is charged, it is added to the output and never seen again.
+    3) Since there are only 2n elements the total runtime is O(n).
+    QED
+
+O(nlogn)
+    - Runtime of any algorithm that splits its input into 2 pieces.
+    - Solves each piece recursively.
+    - Combines the solution in linear time.
+
+Quadratic time
+    Suppose you are given n points in a plane. Each specifid by a (x,y) coordinate. 
+    Find a pair of points that are closest to each other in distance.
+
+    Solution:
+        At each point, compare that point with all other points.
+        Number of pair of points is n choose 2 = n(n-1)/2. O(n^2).
+
+Sub-linear time
+    Input can be queried. Example of this is a binary search tree search O(logn).
+
+    Sorted array A of size n. Determine whether a given number p belong to A.
+        - Probe the middle entry 'q' of A
+        - if (p == q), then we're done.
+        - if (q > p), in order for p to belong to A, it must be in the lower half of the array.
+    
+    Complexity: at each step there is a region of A where p might be.
+    We are shrinking the size of this region by a factor of 2.
+    After 'k' probes, the size of region to search is at mose ((1/2)^k)n
+    (1/2)^k = O(1/n) where k = log(base2)(n)
+
+Sampling Based Algorithms (sub-linear)
+    Have n points that need computation
+    Pick "representative" samples from n points such that solving for sample S gives an approximate solution for solving n. The sample S of n is MUCH smaller than n.
+
+Graphs
+    

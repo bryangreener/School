@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For headings
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+\newtheorem{fact}{Fact}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Linear Algebra Notes\\
+
+On number 1.76 in Homework 3, we need to find a better way of solving this type of system.
+\[
+\begin{bmatrix}[rr] 1 & 2\\ 3 & 6\\ \end{bmatrix}
+\begin{bmatrix}[r] 2\\ -1\\ \end{bmatrix}
+\]
+Except this doesn't use distinct values. But any multiple of the vector (2,-1) will give us a (0,0) result so to get distinct values, we just multiply the vector (2,-1) by any scalar.\\
+
+\begin{defn} An elementary matrix is any matrix that can be obtained by applying exactly one elementary row operation to the identity matrix. \end{defn}
+
+Example: Elementary or not?\\
+\[
+\begin{bmatrix}[rrr] 0 & 1 & 0\\ 1 & 0 & 0\\ 0 & 0 & 1\\ \end{bmatrix}
+\]
+Yes because it only takes one operation (swapping row 1 with row 2) to get to the identity matrix.
+\[
+\begin{bmatrix}[rrr] 0 & 0 & 1\\ 0 & 1 & 0\\ 1 & 0 & 0\\ \end{bmatrix}
+\]
+Yes for same reason as first problem.
+\[ 
+\begin{bmatrix}[rrr] 0 & 1 & 0\\ 0 & 0 & 1\\ 1 & 0 & 0\\ \end{bmatrix}
+\]
+No because it will take more than one elementary row operation to get the identity matrix.\\
+Other elementary row operations include multiplying or subtracting/adding rows in order to get the identity matrix.\\
+\section*{LDU Decomposition}
+
+Ex.\\
+\[
+\begin{bmatrix}[rrr]
+-3 & 12 & 0\\
+0 & 2 & 4\\
+9 & -36 & 4\\
+\end{bmatrix}
+=
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 1 & 0\\
+-3 & 0 & 1\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+-3 & 0 & 0\\
+0 & 2 & 0\\
+0 & 0 & 4\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & -4 & 0\\
+0 & 1 & 2\\
+0 & 0 & 1\\
+\end{bmatrix}
+\]
+The three matrices on the right half above have names. From left to right: Lower Triangular, Diagonal, Upper Triangular. This is where the LDU comes from.\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

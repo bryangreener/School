@@ -1,0 +1,294 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#4}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-01-21}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+
+\begin{enumerate}
+\item [3.69.] Let $A= \begin{bmatrix}[rr] 2 & -5\\ 3 & 1\\ \end{bmatrix}$. Find:
+	\begin{enumerate}
+	% 3.69.a
+	\item $A^2$ and $A^3$\\
+	\begin{align*}
+	 	A^2 = AA = 
+		\begin{bmatrix}[rr]
+		(2*2)+(-5*3) & (2*-5)+(-5*1)\\
+		(3*2)+(1*3) & (3*-5)+(1*1)\\
+		\end{bmatrix}
+		=
+		&\begin{bmatrix}[rr] -11 & -15\\ 9 & -14\\ \end{bmatrix}\\
+		A^3 = A^2A =
+		\begin{bmatrix}[rr]
+		(-11*2)+(-15*3) & (-11*-5)+(-15*1)\\
+		(9*2)+(-14*3) & (9*-5)+(-14*1)\\
+		\end{bmatrix}
+		=
+		&\begin{bmatrix}[rr] -67 & 40\\ -24 & -59\\ \end{bmatrix}
+	\end{align*}
+	
+	% 3.69.b	
+	\item $f(A)$ where $f(x)=x^3-2x^2-5$
+	\begin{align*}
+		f(A) =
+		\begin{bmatrix}[rr] -67 & 40\\ -24 & -59\\ \end{bmatrix}
+		-2 \begin{bmatrix}[rr] -11 & -15\\ 9 & -14\\ \end{bmatrix}
+		-5 \begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}
+		= \begin{bmatrix}[rr] -50 & 70\\ -42 & -36\\ \end{bmatrix}
+	\end{align*}
+	
+	% 3.69.c	
+	\item $g(A)$ where $g(x)=x^2-3x+17$
+	\begin{align*}
+		g(A) =
+		\begin{bmatrix}[rr] -11 & -15\\ 9 & -14\\ \end{bmatrix}
+		- 3 \begin{bmatrix}[rr] 2 & -5\\ 3 & 1\\ \end{bmatrix}
+		+ 17 \begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}
+		= \begin{bmatrix}[rr] 0 & 0\\ 0 & 0\\ \end{bmatrix}
+	\end{align*}
+	\end{enumerate}
+	
+\item [3.71.] Let $A= \begin{bmatrix}[rr] 6 & -4\\ 3 & -2\\ \end{bmatrix}$. Find a nonzero vector $u= \begin{bmatrix}[r] x\\ y\\ \end{bmatrix}$ such that $Au=4u$.
+	\begin{align*}
+		\begin{bmatrix}[rr] 6 & -4\\ 3 & -2\\ \end{bmatrix}
+		\begin{bmatrix}[r] x\\ y\\ \end{bmatrix}
+		&=
+		4 \begin{bmatrix}[r] x\\ y\\ \end{bmatrix}\\
+		\begin{bmatrix}[r] 6x-4y\\ 3x-2y\\ \end{bmatrix}
+		&=
+		\begin{bmatrix}[r] 4x\\ 4y\\ \end{bmatrix}
+	\end{align*}
+	\[
+		\sysdelim{.}{.}\systeme[xy]{6x-4y=4x,3x-2y=4y} \rightarrow
+		\sysdelim{.}{.}\systeme[xy]{2x-4y=0,3x-6y=0} \rightarrow 
+		\sysdelim{.}{.}\systeme[xy]{2x-4y=0,0=0} \rightarrow
+		2x-4y=0 \]
+	Let $y=a$, then $2x-4y=2x-4a=0$ and so $x=2a$. Thus $u=(2a,a)^T$.
+
+\item [3.72.] Let $A= \begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}$. Find $A^n$.
+	\[
+		A= \begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}, \quad
+		v= \begin{bmatrix}[r] x\\ y\\ \end{bmatrix}, \quad
+		(A-\lambda I)v = 
+		\begin{bmatrix}[rr] 1-\lambda & 2\\ 0 & 1-\lambda\\ \end{bmatrix}
+		\begin{bmatrix}[r] x\\ y\\ \end{bmatrix} = 0 \]
+	$(A-\lambda I)v=0$ has a nonzero solution, $|A-\lambda I| = 0$.
+	\begin{align*}
+		det \begin{bmatrix}[rr] 1-\lambda & 2\\ 0 & 1-\lambda\\ \end{bmatrix} &= 0\\
+		(1-\lambda)(1-\lambda) - (2)(0) &= 0\\
+		\lambda^2 - 2\lambda + 1 &= 0\\
+		(\lambda - 1)(\lambda - 1) &= 0\\
+		\lambda &= 1
+	\end{align*}
+	
+	For $\lambda = 1$,
+	\begin{align*}
+		\systeme{
+			\begin{bmatrix}[rr]1 & 2\\ 0 & 1\\ \end{bmatrix} 
+			\begin{bmatrix}[r] x\\ y\\ \end{bmatrix}
+			= \begin{bmatrix}[r] x\\ y\\ \end{bmatrix},
+			x^2+y^2=1}
+		\rightarrow
+		\systeme{x+2y=x,y=y,x^2+y^2=1}\\
+	\end{align*}
+	fuck this question 
+
+\item [3.77.] Find the inverse of each matrix (if it exists):
+	\[ 	A= \begin{bmatrix}[rr] 7 & 4\\ 5 & 3\\ \end{bmatrix}, \quad
+		B= \begin{bmatrix}[rr] 2 & 3\\ 4 & 5\\ \end{bmatrix}, \quad
+		C= \begin{bmatrix}[rr] 4 & -6\\ -2 & 3\\ \end{bmatrix}, \quad
+		D= \begin{bmatrix}[rr] 5 & -2\\ 6 & -3\\ \end{bmatrix} \]
+	\begin{align*}
+		A^{-1}= \frac{1}{(7)(3)-(4)(5)} \begin{bmatrix}[rr] 3 & -4\\ -5 & 7\\ \end{bmatrix}
+		= &\begin{bmatrix}[rr] 3 & -4\\ -5 & 7\\ \end{bmatrix}\\
+		B^{-1}= \frac{1}{-2} \begin{bmatrix}[rr] 5 & -3\\ -4 & 2\\ \end{bmatrix}
+		= &\begin{bmatrix}[rr] -\frac{5}{2} & \frac{3}{2}\\ 2 & -1\\ \end{bmatrix}\\
+		C^{-1}=& undefined\\
+		D^{-1}= \frac{1}{-3} \begin{bmatrix}[rr] -3 & 2\\ -6 & 5\\ \end{bmatrix}
+		= &\begin{bmatrix}[rr] 1 & -\frac{2}{3}\\ 2 & -\frac{5}{3}\\ \end{bmatrix}
+	\end{align*}
+
+
+\item [3.78.] Find the inverse of each matrix (if it exists):
+	\[	A= \begin{bmatrix}[rrr] 1 & 2 & -4\\ -1 & -1 & 5\\ 2 & 7 & -4\\ \end{bmatrix}, \quad
+		B= \begin{bmatrix}[rrr] 1 & -1 & 1\\ 0 & 2 & -2\\ 1 & 3 & -1\\ \end{bmatrix}, \quad
+		C= \begin{bmatrix}[rrr] 1 & 2 & 3\\ 2 & 5 & -1\\ 5 & 12 & 1\\ \end{bmatrix} \]
+
+
+\item [3.80.] Find the inverse of each matrix (where patterns of zeros have been omitted):
+	\[ 	A= \begin{bmatrix}[rrrrr] 	1  & 2  & {} & {} & {}\\
+									{} & 1  & 2  & {} & {}\\
+									{} & {} & 1  & 2  & {}\\
+									{} & {} & {} & 1  & 2 \\
+									{} & {} & {} & {} & 1\\ \end{bmatrix}, \quad
+		B= \begin{bmatrix}[rrrrr]	1  & 1  & 1  & 1  & 1\\
+									{} & 1  & 1  & 1  & 1\\
+									{} & {} & 1  & 1  & 1\\
+									{} & {} & {} & 1  & 1\\
+									{} & {} & {} & {} & 1\\ \end{bmatrix} \]
+
+
+\item [3.81.] Express each matrix as a product of elementary matrices:
+	\begin{enumerate}
+	% 3.81.a
+	\item $A= \begin{bmatrix}[rr] 1 & 2\\ 3 & 4\\ \end{bmatrix}$\\
+	
+	\end{enumerate}
+
+
+\item [3.82.] Express $A= \begin{bmatrix}[rrr] 1 & 2 & 0\\ 0 & 1 & 3\\ 3 & 8 & 7\\ \end{bmatrix}$ as a product of elementary matrices.\\
+
+
+\item [3.86.] Let $A=diag(1,2,3)$ and $B=diag(2,-5,0)$. Find:
+	\begin{enumerate}
+	% 3.86.b
+	\item [(b)] $f(A)$ where $f(x)=x^2+4x-3$
+	
+	\end{enumerate}
+
+
+\item [3.89.] Find all real triangular matrices $A$ such that $A^2=B$, where:
+	\begin{enumerate}
+	% 3.89.a
+	\item $B= \begin{bmatrix}[rr] 4 & 21\\ 0 & 25\\ \end{bmatrix}$\\
+	\end{enumerate}
+
+
+\item [3.90.] Let $B= \begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix}$. Find a triangular matrix $A$ with positive diagonal entries such that $A^2=B$.\\
+
+
+\item [3.94.] Find $x$ and $C$ if $C= \begin{bmatrix}[rr] 7 & x+1\\ 3x-7 & x-2\\ \end{bmatrix}$ is symmetric.\\
+
+
+\item [3.95.] Write $A$ as the sum of a symmetric matrix $B$ and a skew-symmetric matrix $C$, where:
+	\begin{enumerate}
+	% 3.95.a
+	\item $A= \begin{bmatrix}[rr] 4 & 5\\ 1 & 3\\ \end{bmatrix}$\\
+
+	\end{enumerate}
+	
+	
+\item [3.96.] Suppose $A$ and $B$ are n x n symmetric matrices. Show that each of the following is symmetric:
+	\begin{enumerate}
+	% 3.96.a
+	\item $A+B$\\
+	
+	% 3.96.b
+	\item $kA$ for any scalar $k$\\
+	
+	% 3.96.c	
+	\item $A^2$\\
+	
+	\end{enumerate}
+
+
+\item [3.97.] Find a 2 x 2 orthogonal matrix $P$ whose first row is:
+	\begin{enumerate}
+	% 3.97.a
+	\item $(\frac{5}{13}, \frac{12}{13})$\\
+
+	\end{enumerate}
+
+
+\item [3.99.] Find a 3 x 3 orthogonal matrix $P$ whose first two rows are multiples of:
+	\begin{enumerate}
+	% 3.99.a
+	\item $(3, -4)$\\
+
+	\end{enumerate}
+
+
+\item [3.100.] Suppose $A$ and $B$ are orthogonal matrices. Show that $A^T$, $A^{-1}$, and $AB$ are also orthogonal.\\
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

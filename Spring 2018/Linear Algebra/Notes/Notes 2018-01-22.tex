@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Linear Algebra Notes\\
+\begin{defn}
+	The $n^{th}$ power of a square matrix $A$ is either the identity matrix $I$ (if $n=0$) or $AA^{n-1}$ if $n \geq 1$.
+\end{defn}
+Example:
+\begin{align*}
+	A= \begin{bmatrix}[rr] 5 & 1\\ 0 & 2\\ \end{bmatrix}\\
+	A^0 = \begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}\\
+	A^2 = AA^{2-1} = 
+	\begin{bmatrix}[rr] 25 & 15\\ 0 & 4\\ \end{bmatrix}\\
+\end{align*}
+$A^0$ will be the base case for mathematical induction.\\
+Question 2 on quiz:\\
+\[ A= \begin{bmatrix}[rrr] 3 & 4 & 1\\ 1 & 1 & 2\\ \end{bmatrix} \]
+Find $Av=0$ where $v$ is 3 x 1. $\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}$
+\[ 	\begin{bmatrix}[r] 3x+4y+z\\ x+y+2z\\ \end{bmatrix}
+	= \begin{bmatrix}[r] 0\\ 0\\ \end{bmatrix} \]
+\[ \begin{bmatrix}[rrr|r] 1 & 0 & 7 & 0\\ 0 & 1 & -5 & 0\\ \end{bmatrix} \]
+$x=-7t,y=5t,z=t$.\\
+
+\section*{Mathematical Induction}
+Prove that $\sum_{k=1}^{n}k = \frac{n(n+1)}{2}$.
+\begin{proof}
+We proceed by induction.\\
+Let $n=1$, then $\frac{1(1+1)}{2} = 1$ so the formula holds for $n=1$.\\
+Assume that for some integer $k$, that $\sum_{i=1}^{k}i = \frac{k(k+1)}{2}$.\\
+We show that $\sum_{i=1}^{k+1}i = \frac{(k+1)(k+2)}{2}$.\\
+You know how the rest goes so finish it.
+\end{proof}
+
+\section*{Vector Spaces and Scaling}
+Scalar = Element of a Field\\
+\begin{defn} A field is a set $\mathbb{F}$ equipped with binary operations $+$ ("addition"), $\cdot$ ("multiplication") and elements $0 \neq 1$ such that all of the following hold:
+\begin{enumerate}
+	\item[(i)] $a+b=b+a$
+	\item[(ii)] $a+(b+c)=(a+b)+c$
+	\item[(iii)] $a+0=a$
+	\item[(iv)] For every $a \in \mathbb{F}$, there is $b \in \mathbb{F}$ such that $a+b=0$.
+	\item[(v)] $a \cdot b = v \cdot a$
+	\item[(vi)] $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+	\item[(vii)] $a \cdot 1 = a$
+	\item[(viii)] For every $a \neq 0$, there is $b \in \mathbb{F}$ such that $a \cdot b = 1$.
+	\item[(ix)] $a \cdot (b + c) = a \cdot b + a \cdot c$ for all $a, b, c \in \mathbb{F}$.
+\end{enumerate}
+\end{defn}
+Example:\\
+$\mathbb{R}$ is the field of all real numbers.\\
+$\mathbb{Q}$ is the field of rational numbers $\{\frac{a}{b}: a,b,integers,b \neq 0\}$.\\
+$\mathbb{C}$ is the field of all complex numbers $\{a+ib: a,b\in \mathbb{R}\}$.
+
+\end{document}

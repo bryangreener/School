@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Quadratic Solver\\
+\section{Stories}
+Title: Command Line Quadratic Solver\\
+Date: \today \\
+Intro: Client needs a program to solve quadratic equations to IEEE single precision floating point standard. Program will be used by engineers and installed by operations manager.\\
+Quadratic Equation: $ax^2 + bx + c = 0$\\
+
+$s_1$: Manager installs program on all engineering computers.\\
+$s_2$: Client enters three valid values associated with a, b, and c in the quadratic equation. A IEEE single precision decimal value is returned.\\
+$s_3$: Client enters any invalid value for a, b, or c. An error is returned explaining the point of the invalid value.\\ 
+
+\section{TPS}
+\begin{tabular}{c|c|c|c}
+Task & Time Est & Risk & Who\\
+\hline
+
+\end{tabular}
+
+\end{document}

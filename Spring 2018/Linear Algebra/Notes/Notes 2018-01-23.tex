@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+\newtheorem{ex}{Example}[section]
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Linear Algebra Notes\\
+
+Homework \#3.90 page 146\\
+Let $B= \begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix}$. Find a triangular matrix $A$ with positive diagonal entries such that $A^2=B$.\\
+Assume that \[ A= \begin{bmatrix}[rrr] a_1 & a_2 & a_3\\ 0 & a_4 & a_5\\ 0 & 0 & a_6\\ \end{bmatrix} \]
+Then
+\[ A^2 = \begin{bmatrix}[rrr]
+	a_1^2 & a_1a_2+a_2a_4 & a_1a_3+a_2a_5+a_3a_6\\
+	0 & a_4^2 & a_4a_3+a_4a_5\\
+	0 & 0 & a_6^2\\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix} \]
+\begin{align*}
+	a_1 &= 1\\ 
+	a_2 &=\\
+	a_3 &=\\
+	a_4 &= 3\\
+	a_5 &=\\
+	a_6 &= 2\\
+\end{align*}
+We chose these values 1, 3, and 2 because looking at the matrix, these values squared gives us our desired result.
+
+\section*{Vector Spaces}
+\begin{defn}
+	Let $\mathbb{F}$ be a field. A vector space over $\mathbb{F}$ is a set $V$ equipped with a binary operation $+$ (vector addition) and a function $\mathbb{F} x V \rightarrow V$ (scalar multiplication) and an element $\vec{o} \in V$ such that all of the following hold:
+	\begin{enumerate}
+	\item $\vec{v} + \vec{w} = \vec{w} + \vec{v}$
+	\item $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$
+	\item $\vec{o} + \vec{v} = \vec{v}$
+	\item For every $\vec{v} \in V$, there is $\vec{w} \in V$ such that $\vec{v} + \vec{w} = \vec{o}$
+	\item $(\lambda + \mu)\vec{v} = \lambda \vec{v} + \mu \vec{v}$
+	\item $\lambda (\vec{v} + \vec{w}) = \lambda \vec{v} + \lambda \vec{w}$
+	\item $(\lambda \mu) \vec{v} = \lambda(\mu \vec{v})$
+	\item $1\vec{v} = \vec{v}$
+	\end{enumerate}
+	In 1-3, all $\vec{u}, \vec{v}, \vec{w} \in V$ and in 5-8, all $\lambda, \mu \in \mathbb{F}$ and all $\vec{v}, \vec{w} \in V$.\\
+	$\mathbb{F}$ is the field of scalars (usually $\mathbb{R}$, $\mathbb{C}$, or $\mathbb{Q}$). Thus $\lambda$ and $\mu$ are scalars.
+\end{defn}
+\begin{ex}
+$V= \mathbb{R}^n =$ all column vectors with $n$ entries from $\mathbb{R}$.\\
+$+$ is the usual vector addition.\\
+$\cdot$ is the usual scalar multiplication.\\
+Prove that $(\mathbb{R}^n,+,\cdot)$ is a vector space.\\
+Proof that vector addition is commutative.
+\begin{proof}
+	Let $\vec{v}, \vec{w} \in V$. We show that $\vec{v} + \vec{w} = \vec{w} + \vec{v}$.\\
+	By definition of $V=\mathbb{R}^n$, there exists $a_1,a_2,...,a_n$ and $b_1,b_2,...,b_n \in \mathbb{R}^\prime$ such that $\vec{v} = \begin{bmatrix}[c] a_1\\ a_2\\ \vdots\\ a_n\\ \end{bmatrix}$ and $\vec{w} = \begin{bmatrix}[c] b_1\\ b_2\\ \vdots\\ b_n\\ \end{bmatrix}$
+	Notice $\vec{v} + \vec{w} = \begin{bmatrix}[c] a_1+b_1\\ a_2+b_2\\ \vdots\\ a_n+b_n\\ \end{bmatrix} = \begin{bmatrix}[c] b_1+a_1\\ b_2+a_2\\ \vdots\\ b_n+a_n\\ \end{bmatrix} = \vec{w} + \vec{v}$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}
+Example of something that is not a vector space.\\
+$V=\Z$ is not a vector space. Since $\Z$ isn't a field, there isn't a scalar field. It also doesn't have any reciprocals. Multiplicative inversion is not defined in $\Z$.\\
+For example. $2 \in \Z$, but there is not a single element $b \in \Z$ such that $2b = 1$.
+\end{ex}
+
+\begin{defn}
+Suppose $V$ is a vector space under the operations $(+,\cdot)$. A subset $W \subset V$ is a vector subset if it is a vector space under $(+,\cdot)$. 
+\end{defn}
+\begin{ex}
+$V=\mathbb{R}^3$, $W= \{\begin{bmatrix}[c] x\\ y\\ z\\ \end{bmatrix} : z=0 \} = \{ \begin{bmatrix}[c] x\\ y\\ z\\ \end{bmatrix} : x,y \in \mathbb{R} \}$\\
+Is $W$ a vector space?
+\end{ex}
+
+\begin{thrm}
+The subspace criterion:\\
+Suppose $V$ is a vector subspace and $W \subset V$.\\
+Then $W$ is a vector subspace iff all of the following hold:
+\begin{enumerate}
+\item $W \neq \emptyset$
+\item $\vec{v} + \vec{w} \in W$ for all $\vec{v},\vec{w} \in W$
+\item $\lambda \vec{v} \in W$ for all $\lambda \in \mathbb{F}$ and all $\vec{v} \in W$
+\end{enumerate}
+\end{thrm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

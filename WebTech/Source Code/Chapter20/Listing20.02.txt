@@ -1,9 +1,0 @@
-
-#listing 20.2 Robots.txt to allow googlebot full access, allow funbot partial access, and block all other bots
-
-User-agent: googlebot
-Disallow:
-User-agent: funbot
-Disallow: /secret/
-User-agent: *
-Disallow: /

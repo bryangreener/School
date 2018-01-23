@@ -1,0 +1,15 @@
+<body>
+  …
+  <div id="container"></div>
+  <script>
+    art = '<?xml version="1.0" encoding="ISO-8859-1"?>';
+    art += '<art><painting id="290"><title>Balcony … </art>';
+    xmlDoc = $.parseXML( art );
+    $xml = $( xmlDoc );
+    $paintings = $xml.find( "painting" );
+    $paintings.each(function() {
+    // add XML content to <div> element
+      $( "#container" ).append( $(this).attr("id") + " - ");
+      $( "#container" ).append( $(this).find( "title" ).text() + "<br/>");
+      });
+  </script>

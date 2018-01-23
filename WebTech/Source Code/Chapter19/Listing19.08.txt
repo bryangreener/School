@@ -1,4 +1,0 @@
-AuthUserFile /location/of/our/passwordFile
-AuthName "Enter your Password to access this secret folder"
-AuthType Basic
-require valid-user

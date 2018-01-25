@@ -137,32 +137,17 @@
 	Let $y=a$, then $2x-4y=2x-4a=0$ and so $x=2a$. Thus $u=(2a,a)^T$.
 
 \item [3.72.] Let $A= \begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}$. Find $A^n$.
-	\[
-		A= \begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}, \quad
-		v= \begin{bmatrix}[r] x\\ y\\ \end{bmatrix}, \quad
-		(A-\lambda I)v = 
-		\begin{bmatrix}[rr] 1-\lambda & 2\\ 0 & 1-\lambda\\ \end{bmatrix}
-		\begin{bmatrix}[r] x\\ y\\ \end{bmatrix} = 0 \]
-	$(A-\lambda I)v=0$ has a nonzero solution, $|A-\lambda I| = 0$.
-	\begin{align*}
-		det \begin{bmatrix}[rr] 1-\lambda & 2\\ 0 & 1-\lambda\\ \end{bmatrix} &= 0\\
-		(1-\lambda)(1-\lambda) - (2)(0) &= 0\\
-		\lambda^2 - 2\lambda + 1 &= 0\\
-		(\lambda - 1)(\lambda - 1) &= 0\\
-		\lambda &= 1
-	\end{align*}
-	
-	For $\lambda = 1$,
-	\begin{align*}
-		\systeme{
-			\begin{bmatrix}[rr]1 & 2\\ 0 & 1\\ \end{bmatrix} 
-			\begin{bmatrix}[r] x\\ y\\ \end{bmatrix}
-			= \begin{bmatrix}[r] x\\ y\\ \end{bmatrix},
-			x^2+y^2=1}
-		\rightarrow
-		\systeme{x+2y=x,y=y,x^2+y^2=1}\\
-	\end{align*}
-	fuck this question 
+	First, we need to convert this problem into a formula. Observe that $A^2=AA$, $A^3=AAA=A^A$, $A^4=AAAA=A^3A$. Thus for each value $n$, $A^n=A^{n-1}A$. We set out to prove this formula below.
+	\begin{proof}
+	We proceed by induction.\\
+	Let $n=1$, then $A^1 = A^0A = 1A = A$. Assume for an arbitrary integer $k \geq 1$, that $A^k=A^{k-1}A$. We show that $A^{k+1} = A^{(k+1)-1}A = A^kA$.\\
+	So,
+		\begin{align*}
+		A^{k+1} &= A^{(k+1)-1}A^1\\
+		&= A^kA
+		\end{align*}
+	Thus by the principle of mathematical induction, $A^n = A^{n-1}A$.
+	\end{proof}
 
 \item [3.77.] Find the inverse of each matrix (if it exists):
 	\[ 	A= \begin{bmatrix}[rr] 7 & 4\\ 5 & 3\\ \end{bmatrix}, \quad
@@ -500,7 +485,23 @@
 	\begin{enumerate}
 	% 3.97.a
 	\item $(\frac{5}{13}, \frac{12}{13})$\\
-
+	\[ P= \begin{bmatrix}[rr] \frac{5}{13} & \frac{12}{13}\\ x & y\\ \end{bmatrix}\]
+	\begin{align*}
+	\frac{5}{13}x + \frac{12}{13}y = 0 \rightarrow 5x+12y &= 0\\
+	x^2 + \frac{25}{169} = 1 \rightarrow x &= \pm \frac{12}{13}
+	\end{align*}
+	We must observe two cases: $x= \frac{12}{13}$ and $x= -\frac{12}{13}$.
+	\begin{align*}
+	x=\frac{12}{13} \rightarrow \frac{5}{13}(\frac{12}{13}) + \frac{12}{13}y &= 0\\
+	y &= -\frac{5}{13}\\
+	x=-\frac{12}{13} \rightarrow \frac{5}{13}(-\frac{12}{13}) + \frac{12}{13}y &= 0\\
+	y &= \frac{5}{13}
+	\end{align*}
+	This gives us two possible resulting matrices:
+	\begin{align*}
+	P= \begin{bmatrix}[rr] \frac{5}{13} & \frac{12}{13}\\ \frac{12}{13} & -\frac{5}{13} \end{bmatrix}, \quad
+	P= \begin{bmatrix}[rr] \frac{5}{13} & \frac{12}{13}\\ -\frac{12}{13} & \frac{5}{13} \end{bmatrix}
+	\end{align*}
 	\end{enumerate}
 
 

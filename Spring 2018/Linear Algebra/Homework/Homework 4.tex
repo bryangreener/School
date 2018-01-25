@@ -461,7 +461,7 @@
 	% 3.96.a
 	\item $A+B$
 	\begin{proof}
-	Assume that $(A+B)=(A+B)^T$. By a law of transposes, $(A+B)^T = A^T+B^T$. Since $A$ and $B$ are symmetric then $A^T=A$ and $B^T=B$. Therefore $(A+B)^T = (A+B)$.
+	Assume that $(A+B)^T$ is symmetric. By a law of transposes, $(A+B)^T = A^T+B^T$. Since $A^T$ and $B^T$ are symmetric then $A^T=A$ and $B^T=B$. Therefore $(A+B)^T = (A+B)$ and so $A+B$ is symmetric.
 	\end{proof}
 	
 	% 3.96.b
@@ -509,11 +509,39 @@
 	\begin{enumerate}
 	% 3.99.a
 	\item $(3, -4)$\\
-
+	We need to solve the unknowns such that $M^TM$ is equal to the identity matrix.
+	\begin{align*}
+	M= \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
+	MM^T = \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] R_1 & R_2 & R_3\\ \end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	R_1R_1^T & R_1R_2^T & R_1R_3^T\\
+	R_2R_1^T & R_2R_2^T & R_2R_3^T\\
+	R_3R_1^T & R_3R_2^T & R_3R_3^T\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	R_1 \cdot R_1 & R_1 \cdot R_2 & R_1 \cdot R_3\\
+	\vdots & \vdots & \vdots\\
+	\vdots & \vdots & \vdots\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	1 & 0 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1\\
+	\end{bmatrix}
+	\end{align*}
 	\end{enumerate}
 
 
-\item [3.100.] Suppose $A$ and $B$ are orthogonal matrices. Show that $A^T$, $A^{-1}$, and $AB$ are also orthogonal.\\
+\item [3.100.] Suppose $A$ and $B$ are orthogonal matrices. Show that $A^T$, $A^{-1}$, and $AB$ are also orthogonal (Pick one).\\
+\begin{proof}
+Assume that A is orthogonal. Then A is square and $A^TA=I$, implying that A can be inverted and $A^{-1}=A^T$. By multiplying by A on the left, $AA^{-1} = AA^T$ or $I=AA^T$.\\
+Notice that $(A^T)^T = A$, implying that $I=(A^T)^TA^T$.
+\end{proof}
+
 \end{enumerate}
 
 

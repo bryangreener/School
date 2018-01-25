@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+\newtheorem{ex}{Example}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Linear Algebra Notes\\
+Problem 3.99 in homework:\\
+We need to solve the unknowns such that $M^TM$ is equal to the identity matrix.
+	\begin{align*}
+	M &= \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
+	MM^T &= \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] R_1 & R_2 & R_3\\ \end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	R_1R_1^T & R_1R_2^T & R_1R_3^T\\
+	R_2R_1^T & R_2R_2^T & R_2R_3^T\\
+	R_3R_1^T & R_3R_2^T & R_3R_3^T\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	R_1 \cdot R_1 & R_1 \cdot R_2 & R_1 \cdot R_3\\
+	\vdots & \vdots & \vdots\\
+	\vdots & \vdots & \vdots\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rrr]
+	1 & 0 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1\\
+	\end{bmatrix}
+	\end{align*}
+	
+For problem 3.96.a:\\
+\begin{proof}
+Assume A and B are symmetric. Notice that $(A+B)^T=A^T+B^T = A + B$ by the law of transposes. Thus, $A+B$ is also symmetric.
+\end{proof}
+
+\section*{Subspaces}
+\begin{ex} V is any vector space implying $\{\vec{0}\}$ and $V$ are vector subspaces.\\
+Confirm that $\{\vec{0}\}$ satisfies the subspace criterion.\\
+Notice $\{\vec{0}\} \neq \{\}$. Also $\vec{0} + \vec{0} = \vec{0}\in \{\vec{0}\}$ implying closure under addition.\\
+Also $\lambda\vec{0} = \vec{0}$ for all $\lambda$ implying closure under multiplication.
+\end{ex}
+\begin{thrm}
+Every subspace of $\mathbb{R}^3$ is either
+	\begin{enumerate}
+	\item [0-D] The zero subspace $\{\begin{bmatrix}[r] 0\\ 0\\ 0\\ \end{bmatrix} \}$
+	\item [1-D] A line passing through $\begin{bmatrix}[r] 0\\ 0\\ 0\\ \end{bmatrix}$
+	\item [2-D] A plane passing through $\begin{bmatrix}[r] 0\\ 0\\ 0\\ \end{bmatrix}$
+	\item [3-D] All of $\mathbb{R}^3$
+	\end{enumerate}
+\end{thrm}
+\begin{ex}
+$\{\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix} : x^2+y^2+z^2=1 \}$ is a sphere. It is a subset of $\mathbb{R}^3$ but is not a vector subspace. Vector subspaces proposed in the theorem above are all flat objects.
+\end{ex}
+\begin{thrm}
+Let $A$ be an m x n matrix, and let $V$ be the set of all n-tuples (as columns) $\vec{V}$ such that $A\vec{v} = \vec{0}$. Then $V$ is a vector subspace of $\mathbb{R}^n$.\\
+$A$ is (m x n), $\vec{v}$ is (n x 1).
+\end{thrm}
+\begin{proof}
+Use the subspace criterion. (page 159 Theorem 4.2)\\
+\begin{enumerate}
+	\item Notice $A\vec{0}_n = \vec{0}_m$. Thus $\vec{0}_n \in V$.
+	\item Assume $\vec{v}, \vec{w} \in V$. We must show $\vec{v} + \vec{w} \in V$.\\
+	Notice $A(\vec{v} + \vec{w}) = A\vec{v} + A\vec{w} = \vec{0} + \vec{0} = \vec{0}$ by distributive law of matrix multiplication. Thus $V$ is closed under addition.
+	\item Assume $\lambda \in \mathbb{R}$ and $\vec{v} \in V$. We must show $\lambda\vec{v} \in V$.\\
+	Notice $A(\lambda\vec{v}) = \lambda(A\vec{v}) = \lambda\vec{0} = \vec{0}$ by property of matrix algebra. 
+\end{enumerate}
+\end{proof}
+
+
+
+\end{document}

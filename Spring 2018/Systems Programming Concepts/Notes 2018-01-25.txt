@@ -1,0 +1,17 @@
+//Systems Programming Concepts Notes 2018-01-25
+
+/*
+Writing a struct to a file.
+Write int to file example:
+*/
+
+typedef struct{
+    int id;
+} temp;
+int main(int argv, char *argc[])
+{
+    int *arr[10];
+    write(file, &arr[0]->id, sizeof(int));
+
+    return 0;
+}

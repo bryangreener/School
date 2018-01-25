@@ -185,6 +185,152 @@
 		B= \begin{bmatrix}[rrr] 1 & -1 & 1\\ 0 & 2 & -2\\ 1 & 3 & -1\\ \end{bmatrix}, \quad
 		C= \begin{bmatrix}[rrr] 1 & 2 & 3\\ 2 & 5 & -1\\ 5 & 12 & 1\\ \end{bmatrix} \]
 
+	\begin{align*}
+	A= 
+	\begin{bmatrix}[rrr|rrr]
+	1 & 2 & -4 & 1 & 0 & 0\\
+	-1 & -1 & 5 & 0 & 1 & 0\\
+	2 & 7 & -4 & 0 & 0 & 1\\	
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\
+	R_2 + R_1\\
+	R_3 - 2R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 2 & -4 & 1 & 0 & 0\\
+	0 & 1 & 1 & 1 & 1 & 0\\
+	0 & 3 & 4 & -2 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_4\\ R_5\\ R_6\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4 - 2R_5\\
+	R_5\\
+	R_6 - 3R_5\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & -6 & -1 & -2 & 0\\
+	0 & 1 & 1 & 1 & 1 & 0\\
+	0 & 0 & 1 & -5 & -3 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_7\\ R_8\\ R_9\\ \end{bmatrix} \\
+	%
+	\begin{bmatrix}[r]
+	R_7 + 6R_9\\
+	R_8 - R_9\\
+	R_9\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & 0 & -31 & -20 & 6\\
+	0 & 1 & 0 & 6 & 4 & -1\\
+	0 & 0 & 0 & -5 & -3 & 1\\
+	\end{bmatrix}&\\
+	%	
+	%%
+	%
+	B=
+	\begin{bmatrix}[rrr|rrr]
+	1 & -1 & 1 & 1 & 0 & 0\\
+	0 & 2 & -2 & 0 & 1 & 0\\
+	1 & 3 & -1 & 0 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\
+	R_2\\
+	R_3 - R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & -1 & 1 & 1 & 0 & 0\\
+	0 & 2 & -2 & 0 & 1 & 0\\
+	0 & 4 & -2 & -1 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_4\\ R_5\\ R_6\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4\\
+	(\frac{1}{2})R_5\\
+	R_6\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & -1 & 1 & 1 & 0 & 0\\
+	0 & 1 & -1 & 0 & \frac{1}{2} & 0\\
+	0 & 4 & -2 & -1 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_7\\ R_8\\ R_9\\ \end{bmatrix} \\
+	%
+	\begin{bmatrix}[r]
+	R_7 + R_8\\
+	R_8\\
+	R_9 - 4R_8\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & 0 & 1 & \frac{1}{2} & 0\\
+	0 & 1 & -1 & 0 & \frac{1}{2} & 0\\
+	0 & 0 & 2 & -1 & -2 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_{10}\\ R_{11}\\ R_{12}\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_{10}\\
+	R_{11} + (\frac{1}{2})R_{12}\\
+	(\frac{1}{2})R_12\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & 0 & 1 & \frac{1}{2} & 0\\
+	0 & 1 & 0 & -\frac{1}{2} & -\frac{1}{2} & \frac{1}{2}\\
+	0 & 0 & 1 & -\frac{1}{2} & -1 & \frac{1}{2}\\
+	\end{bmatrix}&\\
+	%
+	%%
+	%
+	C=
+	\begin{bmatrix}[rrr|rrr]
+	1 & 2 & 3 & 1 & 0 & 0\\
+	2 & 5 & -1 & 0 & 1 & 0\\
+	5 & 15 & 1 & 0 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\
+	R_2 - 2R_1\\
+	R_3 - 5R_1\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 2 & 3 & 1 & 0 & 0\\
+	0 & 1 & -7 & -2 & 1 & 0\\
+	0 & 5 & -14 & -5 & 0 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_4\\ R_5\\ R_6\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4 - 2R_5\\
+	R_5\\
+	R_6 - 5R_5\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & 17 & 5 & -2 & 0\\
+	0 & 1 & -7 & -2 & 1 & 0\\
+	0 & 0 & 21 & 5 & -5 & 1\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r] R_7\\ R_8\\ R_9\\ \end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_7 - 17((\frac{1}{21})R_9)\\
+	R_8 + 7((\frac{1}{21})R_9)\\
+	(\frac{1}{21})R_9\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|rrr]
+	1 & 0 & 0 & \frac{20}{21} & \frac{43}{21} & -\frac{17}{21}\\
+	0 & 1 & 0 & -\frac{1}{3} & -\frac{2}{3} & \frac{1}{3}\\
+	0 & 0 & 1 & \frac{5}{21} & -\frac{5}{21} & \frac{1}{21}\\
+	\end{bmatrix}&	
+	\end{align*}
 
 \item [3.80.] Find the inverse of each matrix (where patterns of zeros have been omitted):
 	\[ 	A= \begin{bmatrix}[rrrrr] 	1  & 2  & {} & {} & {}\\
@@ -197,23 +343,66 @@
 									{} & {} & 1  & 1  & 1\\
 									{} & {} & {} & 1  & 1\\
 									{} & {} & {} & {} & 1\\ \end{bmatrix} \]
+	For matrix $A$, we subtract each row by two times the row below it. For matrix $B$, we just subtract each row by the row below it. Performing these operations gives us the following inverse matrices:
+	\[ 	A= \begin{bmatrix}[rrrrr] 	1  & -2  & {} & {} & {}\\
+									{} & 1  & -2  & {} & {}\\
+									{} & {} & 1  & -2  & {}\\
+									{} & {} & {} & 1  & -2 \\
+									{} & {} & {} & {} & 1\\ \end{bmatrix}, \quad
+		B= \begin{bmatrix}[rrrrr]	1  & -1  & {}  & {}  & {}\\
+									{} & 1  & -1  & {}  & {}\\
+									{} & {} & 1  & -1  & {}\\
+									{} & {} & {} & 1  & -1\\
+									{} & {} & {} & {} & 1\\ \end{bmatrix} \]
 
 
 \item [3.81.] Express each matrix as a product of elementary matrices:
 	\begin{enumerate}
 	% 3.81.a
 	\item $A= \begin{bmatrix}[rr] 1 & 2\\ 3 & 4\\ \end{bmatrix}$\\
-	
+	To get this matrix to reduced row echelon form, we perform the following operations: $R_2 = R_2 - 3R_1$ then $R_2 = (-\frac{1}{2})R_2$ and finally $R_1 = R_1 - 2R_2$. Taking the inverse of each of these operation gives us the following inverse operations: $R_2 = R_2 + 3R_1$ then $R_2 = -2R_2$ and finally $R_1 = R_1+ 2R_2$. Performing these inverse operations on the reduced row echelon form of the original matrix produces the following result:
+	\begin{align*}
+	A= \begin{bmatrix}[rr] 1 & 0\\ 3 & 1\\ \end{bmatrix}
+	\begin{bmatrix}[rr] 1 & 0\\ 0 & -2\\ \end{bmatrix}
+	\begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}
+	= \begin{bmatrix}[rr] 1 & 2\\ 3 & 4\\ \end{bmatrix}
+	\end{align*}
 	\end{enumerate}
 
-
 \item [3.82.] Express $A= \begin{bmatrix}[rrr] 1 & 2 & 0\\ 0 & 1 & 3\\ 3 & 8 & 7\\ \end{bmatrix}$ as a product of elementary matrices.\\
-
-
+	To get this matrix to reduced row echelon form, we perform the following operations:
+	\begin{center}
+	\begin{tabular}{ c | c }
+	Operation & Inverse Operation\\
+	\hline
+	$R_3-3R_1$ & $R_3 + 3R_1$\\
+	$R_3-2R_2$ & $R_3 + 2R_2$\\
+	$R_2-3R_3$ & $R_2 + 3R_3$\\
+	$R_1-2R_2$ & $R_1 + 2R_2$\\
+	\end{tabular}
+	\end{center}
+	
+	Performing these inverse operations on the reduced row echelon form of the original matrix produces the following result:
+	\begin{align*}
+	A= 
+	\begin{bmatrix}[rrr] 1 & 0 & 0\\ 0 & 1 & 0\\ 3 & 0 & 1\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 2 & 1\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] 1 & 0 & 0\\ 0 & 1 & 3\\ 0 & 0 & 1\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] 1 & 2 & 0\\ 0 & 1 & 0\\ 0 & 0 & 0\\ \end{bmatrix}
+	=
+	\begin{bmatrix}[rrr] 1 & 2 & 0\\ 0 & 1 & 3\\ 3 & 8 & 7\\ \end{bmatrix}
+	\end{align*}
+	
 \item [3.86.] Let $A=diag(1,2,3)$ and $B=diag(2,-5,0)$. Find:
 	\begin{enumerate}
 	% 3.86.b
-	\item [(b)] $f(A)$ where $f(x)=x^2+4x-3$
+	\item [(b)] $f(A)$ where $f(x)=x^2+4x-3$\\
+	\begin{align*}
+	f(1) = 1^2+4(1)-3 &= 2\\
+	f(2) = 2^2+4(2)-3 &= 9\\
+	f(3) = 3^2+4(3)-3 &= 18\\
+	f(A) = diag(2,9,18)	
+	\end{align*}
 	
 	\end{enumerate}
 
@@ -222,33 +411,87 @@
 	\begin{enumerate}
 	% 3.89.a
 	\item $B= \begin{bmatrix}[rr] 4 & 21\\ 0 & 25\\ \end{bmatrix}$\\
+	Let $A= \begin{bmatrix}[rr] x & y\\ 0 & z\\ \end{bmatrix}$. Then 
+	\begin{align*}
+	A^2 =
+	\begin{bmatrix}[rr] x & y\\ 0 & z\\ \end{bmatrix}
+	\begin{bmatrix}[rr] x & y\\ 0 & z\\ \end{bmatrix}
+	=
+	\begin{bmatrix}[rr] 
+	x^2 & y(x+z)\\
+	0 & z^2\\
+	\end{bmatrix}
+	\end{align*}
+	This results in the following $(x,y,z)$ combinations:
+	\begin{align*}
+	(2,3,5),(-2,-3,-5),(2,-7,-5),(-2,7,5)\\
+	A^2 =
+	\begin{bmatrix}[rr] 2 & 3\\ 0 & 5\\ \end{bmatrix},
+	\begin{bmatrix}[rr] -2 & -3\\ 0 & -5\\ \end{bmatrix},
+	\begin{bmatrix}[rr] 2 & -7\\ 0 & -5\\ \end{bmatrix},
+	\begin{bmatrix}[rr] -2 & 7\\ 0 & 5\\ \end{bmatrix}
+	\end{align*}
 	\end{enumerate}
 
 
 \item [3.90.] Let $B= \begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix}$. Find a triangular matrix $A$ with positive diagonal entries such that $A^2=B$.\\
-
-
+	\begin{align*}
+	A^2 =
+	\begin{bmatrix}[rrr] a & b & c\\ 0 & d & e\\ 0 & 0 & f\\ \end{bmatrix}
+	\begin{bmatrix}[rrr] a & b & c\\ 0 & d & e\\ 0 & 0 & f\\ \end{bmatrix}
+	=
+	\begin{bmatrix}[rrr] 
+	a^2 & b(a+d) & c(a+f)+be\\ 
+	0 & d^2 & e(d+f)\\ 
+	0 & 0 & f^2\\ \end{bmatrix} 
+	\end{align*}
+	Using the matrix above, we get $a^2=1 \rightarrow a=\pm 1$, $d^2=9 \rightarrow d=\pm 3$, and $f^2=4 \rightarrow f=\pm 2$. Without loss of generality,we use the positive values for each. Thus 
+	\begin{align*}
+	b(a+d)&=8 \rightarrow b=2\\
+	e(d+f)&=5 \rightarrow e=1\\
+	c(a+f)+be&=5 \rightarrow c=1\\
+	A^2 &= \begin{bmatrix}[rrr] 1 & 2 & 1\\ 0 & 3 & 1\\ 0 & 0 & 2\\ \end{bmatrix}
+	\end{align*}
+	
+	
 \item [3.94.] Find $x$ and $C$ if $C= \begin{bmatrix}[rr] 7 & x+1\\ 3x-7 & x-2\\ \end{bmatrix}$ is symmetric.\\
-
+	First, we set the symmetric elements $x+1$ and $3x-7$ equal to each other to obtain $x+1=3x-7$ which gives us $x=4$. Thus $C= \begin{bmatrix}[rr] 7 & 5\\ 5 & 2\\ \end{bmatrix}$.
 
 \item [3.95.] Write $A$ as the sum of a symmetric matrix $B$ and a skew-symmetric matrix $C$, where:
 	\begin{enumerate}
 	% 3.95.a
 	\item $A= \begin{bmatrix}[rr] 4 & 5\\ 1 & 3\\ \end{bmatrix}$\\
-
+	\begin{align*}
+	A^T = \begin{bmatrix}[rr] 4 & 1\\ 5 & 3\\ \end{bmatrix}, \quad
+	A+A^T = \begin{bmatrix}[rr] 8 & 6\\ 6 & 6\\ \end{bmatrix}, \quad
+	A-A^T &= \begin{bmatrix}[rr] 0 & -4\\ 4 & 0\\ \end{bmatrix}\\
+	A=(\frac{1}{2}(A+A^T)) + (\frac{1}{2}(A-A^T)) 
+	&= \begin{bmatrix}8 & 2\\ 10 & 6\\ \end{bmatrix} 
+	\end{align*}
 	\end{enumerate}
 	
 	
 \item [3.96.] Suppose $A$ and $B$ are n x n symmetric matrices. Show that each of the following is symmetric:
 	\begin{enumerate}
 	% 3.96.a
-	\item $A+B$\\
+	\item $A+B$
+	\begin{proof}
+	Assume that $(A+B)=(A+B)^T$. By a law of transposes, $(A+B)^T = A^T+B^T$. Since $A$ and $B$ are symmetric then $A^T=A$ and $B^T=B$. Therefore $(A+B)^T = (A+B)$.
+	\end{proof}
 	
 	% 3.96.b
-	\item $kA$ for any scalar $k$\\
+	\item $kA$ for any scalar $k$
+	\begin{proof}
+	Assume that $kA=(kA)^T$. By a law of transposes, $(kA)^T = k(A^T)$. Since $A$ is symmetric, then $A^T=A$ and so $k(A^T) = kA$. Therefore $kA$ is symmetric for a scalar $k$.
+	\end{proof}		
+	
 	
 	% 3.96.c	
-	\item $A^2$\\
+	\item $A^2$
+	\begin{proof}
+	Assume that $A$ is symmetric, then $A=A^T$. We show that $A^2=(A^2)^T$.\\
+	Note that $A^2 = A*A$. Since $A$ is symmetric, then $A*A=A^T*A^T$ and by the distributive law,$A^T*A^T=(A*A)^T=(A^2)^T$.
+	\end{proof}	
 	
 	\end{enumerate}
 

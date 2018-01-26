@@ -17,7 +17,6 @@
 \newtheorem*{lemma}{Lemma}
 \newtheorem*{result}{Result}
 
-
 % For circled text
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
@@ -58,6 +57,55 @@
 %Or just google stuff
  
 \today {} Linear Algebra Notes\\
+\begin{defn}
+Let $A$ be an m x n matrix. The nullspace of $A$ is the set of all vectors $\vec{v}$ such that $A\vec{v} = \vec{0}$.\\
+Notation: $N(A) = null(A) = nulspace(A) = \{\vec{v}: A\vec{v} = \vec{0}\}$
+\end{defn}
+
+\begin{defn}
+$M$ is orthogonal is $MM^T = I$.
+\end{defn}
+
+Five Concepts Required for Linear Algebra:
+\begin{enumerate}
+\item Linear Combinations
+\item Span of Set (Spanning Set)
+\item Linear Independence
+\item Basis of a Vector Space
+\item Dimension
+\end{enumerate}
+
+\begin{defn}
+Let $V$ be a vector space and $S \subset V$. A linear combination of elements of $S$ is any expression having the form $C_1\vec{v}_1+C_2\vec{v}_2+\dots+C_n\vec{v}_n$ where $C_1,C_2,...,C_n$ are scalars and $\vec{v}_1,\vec{v}_2,...,\vec{v}_n$ are in S.
+\end{defn}
+
+\begin{ex}
+Write $(12,4)$ as a linear combination of $(1,0)$ and $(0,1)$.\\
+Solution: $(12,4) = 12(1,0)+4(0,1)$
+\end{ex}
+\begin{ex}
+Write $3+4x+x^2$ as a linear combination of $1$, $x$, and $x^2$.\\
+Solution: $3+4x+x^2=3(1)+4(x)+1(x^2)$
+\end{ex}
+\begin{ex}
+Write $(12,4)$ as a linear combination of $(0,1)$ and $(1,1)$.\\
+Solution: $(12,4) = x(0,1) + y(1,1)$.\\
+$12 = 0x+1y$, $4=1x+1y$\\
+$y=12$, $x=-8$\\
+$(12,4) = -8(0,1)+12(1,1)$
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}

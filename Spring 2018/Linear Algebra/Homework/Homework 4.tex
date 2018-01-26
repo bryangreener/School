@@ -136,6 +136,7 @@
 		2x-4y=0 \]
 	Let $y=a$, then $2x-4y=2x-4a=0$ and so $x=2a$. Thus $u=(2a,a)^T$.
 
+\pagebreak
 \item [3.72.] Let $A= \begin{bmatrix}[rr] 1 & 2\\ 0 & 1\\ \end{bmatrix}$. Find $A^n$.
 	First, we need to convert this problem into a formula. Observe that $A^2=AA$, $A^3=AAA=A^A$, $A^4=AAAA=A^3A$. Thus for each value $n$, $A^n=A^{n-1}A$. We set out to prove this formula below.
 	\begin{proof}
@@ -148,6 +149,41 @@
 		\end{align*}
 	Thus by the principle of mathematical induction, $A^n = A^{n-1}A$.
 	\end{proof}
+	Now we can solve the original problem.
+	\begin{align*}
+	\begin{bmatrix}[rr] 1& 2\\ 0 & 1\\ \end{bmatrix}^n
+	&= 
+	A^{n-1}A \\
+	&= 
+	\begin{bmatrix}[rr]
+	a^{n-2} & b(a^{n-1}+a^{n-2}c+a^{n-3}c^2+ \dots + a^2c^{n-3}+ac^{n-2}+c^{n-1})\\
+	0 & c^n-2\\
+	\end{bmatrix}
+	\begin{bmatrix}[rr]
+	a & b\\
+	0 & c\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rr]
+	a^{n-2} & b^{n-1}\\
+	0 & c^{n-2}\\
+	\end{bmatrix}
+	\begin{bmatrix}[rr]
+	a & b\\ 
+	0 & c\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rr]
+	a^{n-1} & b^n\\
+	0 & c^{n-1}\\
+	\end{bmatrix}\\
+	&=
+	\begin{bmatrix}[rr]
+	1 & 2^n\\
+	0 & 1\\
+	\end{bmatrix}
+	\end{align*}
+	The top right element in this matrix ended up being a bivariate polynomial. I had to look up the reduced form and found that it was $b^n$ but in this case since the matrix was $A^{n-1}$, the reduction was $b^{n-1}$.
 
 \item [3.77.] Find the inverse of each matrix (if it exists):
 	\[ 	A= \begin{bmatrix}[rr] 7 & 4\\ 5 & 3\\ \end{bmatrix}, \quad
@@ -163,12 +199,13 @@
 		D^{-1}= \frac{1}{-3} \begin{bmatrix}[rr] -3 & 2\\ -6 & 5\\ \end{bmatrix}
 		= &\begin{bmatrix}[rr] 1 & -\frac{2}{3}\\ 2 & -\frac{5}{3}\\ \end{bmatrix}
 	\end{align*}
-
-
-\item [3.78.] Find the inverse of each matrix (if it exists):
+	
+	
+\item [3.78.] Find the inverse of each matrix (if it exists):\\
 	\[	A= \begin{bmatrix}[rrr] 1 & 2 & -4\\ -1 & -1 & 5\\ 2 & 7 & -4\\ \end{bmatrix}, \quad
 		B= \begin{bmatrix}[rrr] 1 & -1 & 1\\ 0 & 2 & -2\\ 1 & 3 & -1\\ \end{bmatrix}, \quad
 		C= \begin{bmatrix}[rrr] 1 & 2 & 3\\ 2 & 5 & -1\\ 5 & 12 & 1\\ \end{bmatrix} \]
+		The solutions to these matrices are on the next page.
 
 	\begin{align*}
 	A= 
@@ -480,7 +517,7 @@
 	
 	\end{enumerate}
 
-
+\pagebreak
 \item [3.97.] Find a 2 x 2 orthogonal matrix $P$ whose first row is:
 	\begin{enumerate}
 	% 3.97.a
@@ -504,29 +541,55 @@
 	\end{align*}
 	\end{enumerate}
 
-
+\pagebreak
 \item [3.99.] Find a 3 x 3 orthogonal matrix $P$ whose first two rows are multiples of:
 	\begin{enumerate}
 	% 3.99.a
 	\item $(3, -4)$\\
 	We need to solve the unknowns such that $M^TM$ is equal to the identity matrix.
 	\begin{align*}
+	P = \begin{bmatrix}[rrr]
+	3x_1 & 3x_2 & 3x_3\\
+	-4y_1 & -4y_2 & -4y_3\\
+	z_1 & z_2 & z_3\\
+	\end{bmatrix}\\
+	P^T = \begin{bmatrix}[rrr]
+	3x_1 & -4y_1 & z_1\\
+	3x_2 & -4y_2 & z_2\\
+	3x_3 & -4y_3 & z_3\\
+	\end{bmatrix}\\	
+	PP^T = \begin{bmatrix}[rrr]
+	3x_1 & 3x_2 & 3x_3\\
+	-4y_1 & -4y_2 & -4y_3\\
+	z_1 & z_2 & z_3\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr]
+	3x_1 & -4y_1 & z_1\\
+	3x_2 & -4y_2 & z_2\\
+	3x_3 & -4y_3 & z_3\\
+	\end{bmatrix}\\
+	= \begin{bmatrix}[rrr]
+	9x_1^2+9x_2^2+9x_3^2 & -12x_1y_1-12x_2y_2-12x_3y_3 & 3x_1z_1+3x_2z_2+3x_3z_3\\
+	-12y_1x_1-12y_2x_2-12y_3x_3 & 16y_1^2+16y_2^2+16y_3^2 & -4y_1z_1-4y_2z_2-4y_3z_3\\
+	3z_1x_1+3z_2x_2+3z_3x_3 & -4z_1y_1-4z_2y_2-4z_3y_3 & z_1^2+z_2^2+z_3^2\\
+	\end{bmatrix}\\
+	%%%%%%%
 	M= \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}\\
 	MM^T = \begin{bmatrix}[r] R_1\\ R_2\\ R_3\\ \end{bmatrix}
 	\begin{bmatrix}[rrr] R_1 & R_2 & R_3\\ \end{bmatrix}\\
-	&=
+	=
 	\begin{bmatrix}[rrr]
 	R_1R_1^T & R_1R_2^T & R_1R_3^T\\
 	R_2R_1^T & R_2R_2^T & R_2R_3^T\\
 	R_3R_1^T & R_3R_2^T & R_3R_3^T\\
 	\end{bmatrix}\\
-	&=
+	=
 	\begin{bmatrix}[rrr]
 	R_1 \cdot R_1 & R_1 \cdot R_2 & R_1 \cdot R_3\\
 	\vdots & \vdots & \vdots\\
 	\vdots & \vdots & \vdots\\
 	\end{bmatrix}\\
-	&=
+	=
 	\begin{bmatrix}[rrr]
 	1 & 0 & 0\\
 	0 & 1 & 0\\

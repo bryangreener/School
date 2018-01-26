@@ -1,0 +1,349 @@
+
+\documentclass{article}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage[raggedright]{titlesec}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\usepackage[margin=1in]{geometry}
+
+\titleformat{\paragraph}[hang]
+  {\bfseries\small}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0em}
+
+\titleformat{\subparagraph}[hang]
+  {\bfseries\small}{\thesubparagraph}{1em}{}
+\titlespacing{\subparagraph}{32pt}{0.5em}{0em}
+
+\titleclass{\subsubparagraph}{straight}[\subparagraph]
+\newcounter{subsubparagraph}
+\renewcommand{\thesubsubparagraph}{\arabic{subsubparagraph}}
+\titleformat{\subsubparagraph}[runin]
+  {\normalfont\normalsize\bfseries}{\thesubsubparagraph}{1em}{}
+\titlespacing*{\subsubparagraph}{32pt}{3.25ex plus 1ex minus .2ex}{1em}
+
+\title{Chapter 8 and 9 Homework \\ Tree-Based Methods \\ Support Vector Machines \\ STAT5850 }
+
+\author{Paul R Phillips}
+
+\date{\today}
+
+
+
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+
+
+
+\tableofcontents
+
+
+
+
+
+\break
+
+\section{Problem 1}
+In the lab, a classification tree was applied to the \textit{Carseats} data set after converting \textit{Sales} into a qualitative response variable. Now we will seek to predict \textit{Sales} using regression trees and related approaches, treating the response as a qualitative variable. 
+
+	\subsection{Part A}
+Split the data set into a training set and a test set. \\
+
+Response: 
+
+\begin{verbatim}	
+	> set.seed(1129)
+	> train <- sample(1:nrow(Carseats), nrow(Carseats)/2)
+	> Carseats.train <- Carseats[train, ]
+	> Carseats.test <- Carseats[-train, ]
+\end{verbatim}
+
+	\subsection{Part B} 
+Fit a regression tree to the training set. Plot the tree, and interpret the results. What test error rate do you obtain? \\
+
+Response: 
+
+\begin{verbatim}
+	> tree.fit <- tree(formula = Sales ~., data = Carseats.train)
+	> summary(tree.fit)
+	
+	Regression tree:
+	tree(formula = Sales ~ ., data = Carseats.train)
+	Variables actually used in tree construction:
+	[1] "ShelveLoc"   "Price"       "CompPrice"   "Age"         "Advertising" "Population" 
+	[7] "Income"      "Education"  
+	Number of terminal nodes:  21 
+	Residual mean deviance:  2.034 = 364 / 179 
+	Distribution of residuals:
+	Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+	-4.34100 -0.80200 -0.05607  0.00000  0.82350  4.04300 
+	
+	> plot(tree.fit)
+	> text(tree.fit, pretty = 0)
+\end{verbatim}
+
+%\includegraphics{HW7_Dtree}
+
+\begin{verbatim}
+	# Testing Model
+	> yhat <- predict(tree.fit, newdata = Carseats.test)
+	> mean((yhat - Carseats.test$Sales)^2)
+	[1] 4.356117
+\end{verbatim}
+
+\break
+
+	\subsection{Part C}
+Use cross-validation in order to determine the optimal level of tree complexity. Does pruning the tree improve the test error rate? \\
+
+Response:  
+\begin{verbatim}
+	> set.seed(1129)
+	> cv.carseats <- cv.tree(tree.fit)
+	> plot(cv.carseats$size, cv.carseats$dev, type = "b")
+	
+	# Tree size with minimum error looks to be 5, with dev = 996.3
+	> tree.min <- which.min(cv.carseats$dev)
+	> tree.min
+	[1] 5
+	> cv.carseats$dev[tree.min]
+	[1] 996.3
+	
+	# Pruned tree model
+	> prune.carseats <- prune.tree(tree.fit, best = 5)
+	> plot(prune.carseats)
+	> text(prune.carseats, pretty = 0)
+	
+	# Test pruned model 
+	> yhat <- predict(prune.carseats, newdata = Carseats.test)
+	> mean((yhat - Carseats.test$Sales)^2)
+	[1] 4.886471
+	
+	# Pruning the tree actually increased the test MSE
+\end{verbatim} 
+
+%\includegraphics{HW7_Ptree}
+
+\break
+
+	\subsection{Part D}
+Use the bagging approach in order to analyze this data. What test error rate do you obtain? Use the \textit{importance()} function to determine which variables are most important. \\
+
+Response: 
+
+\begin{verbatim}
+	> bag.carseats <- randomForest(Sales ~ ., data = Carseats.train, mtry = 10, ntree = 500, importance = TRUE)
+	> yhat.bag <- predict(bag.carseats, newdata = Carseats.test)
+	> mean((yhat.bag - Carseats.test$Sales)^2)
+	[1] 2.472791
+	> importance(bag.carseats)
+	%IncMSE IncNodePurity
+	CompPrice   21.392927    170.711050
+	Income       8.396521     92.696364
+	Advertising 12.681034    102.761975
+	Population  -1.411075     54.331520
+	Price       63.086647    481.157766
+	ShelveLoc   55.098892    506.374604
+	Age          8.584061     91.913018
+	Education    4.136632     56.254946
+	Urban        1.522977      6.960012
+	US           1.012802     10.215652
+
+	# Price and ShelveLoc are the most important variables 
+\end{verbatim}
+
+	\subsection{Part E}
+Use random forests to analyze this data. What test error rate do you obtain? Use the \textit{importance()} function to determine which variables are most important. Describe the effect of \textit{m}, the number of variables considered at each split, on the error rate obtained. \\
+	
+Response: 
+
+\begin{verbatim}
+	# m = sqrt(p)
+	
+	> rf.carseats <- randomForest(Sales ~ ., data = Carseats.train, mtry = 3, ntree = 500, importance = TRUE)
+	> yhat.rf <- predict(rf.carseats, newdata = Carseats.test)
+	> mean((yhat.rf - Carseats.test$Sales)^2)
+	[1] 2.893072
+	> importance(rf.carseats)
+	%IncMSE IncNodePurity
+	CompPrice   11.0804948     155.20511
+	Income       5.5130743     125.96203
+	Advertising 10.2421732     137.37807
+	Population   0.9377379     111.00548
+	Price       38.7685601     389.46059
+	ShelveLoc   39.6948177     354.96605
+	Age          6.2004971     132.16994
+	Education    4.3751688      81.90699
+	Urban       -0.1607538      13.70737
+	US           2.7520391      16.61216
+	
+	# Again Price and ShelveLoc are the most important variables for predicting this response
+\end{verbatim}
+
+\section{Problem 2}
+In this problem, you will use support vector approaches in order to predict whether a given car gets high or low gas mileage based on the \textit{Auto} data set.
+
+	\subsection{Part A}
+Create a binary variable that takes on a 1 for cars with gas mileage above the median, and a 0 for cars with mileage below the median. \\
+
+Response: 
+
+\begin{verbatim}
+	> var <- ifelse(Auto$mpg > median(Auto$mpg), 1, 0)
+	> Auto$mpglevel <- as.factor(var)
+\end{verbatim}
+
+	\subsection{Part B}
+Fit a support classifier to the data with various values of \textit{cost}, in order to predict whether a car gets high or low gas mileage. Report the cross-validation errors associated with different values of this parameter. Comment on your results. \\
+
+Response:
+
+\begin{verbatim}
+	> set.seed(1129)
+	> tune.out <- tune(svm, mpglevel ~ ., data = Auto, kernel = "linear", ranges = list(cost = c(0.01, 0.1, 
+	+                  1, 5, 10, 100, 1000)))
+	> summary(tune.out)
+	
+	Parameter tuning of ‘svm’:
+	
+	- sampling method: 10-fold cross validation 
+	
+	- best parameters:
+	cost
+	1
+	
+	- best performance: 0.01025641 
+	
+	- Detailed performance results:
+	cost      error dispersion
+	1 1e-02 0.07397436 0.02546808
+	2 1e-01 0.04089744 0.03866140
+	3 1e+00 0.01025641 0.01792836
+	4 5e+00 0.01538462 0.02162241
+	5 1e+01 0.01794872 0.02110955
+	6 1e+02 0.03064103 0.02008502
+	7 1e+03 0.03064103 0.02008502
+	
+	# Cost of 1 seems to perform the best in this situation with CV error of 0.01025641
+\end{verbatim}
+
+\break
+
+	\subsection{Part C}
+Now repeat (b), this time using SVM's with radial and polynomial basis kernels, with different values of \textit{gammas} and \textit{degree} and \textit{cost}. Comment on your results. \\
+
+Response:
+
+	\begin{verbatim}
+		# SVM with polynomial basis kernel
+		
+		> set.seed(1129)
+		> tune.out <- tune(svm, mpglevel ~ ., data = Auto, kernel = "polynomial", ranges = list(cost = c(0.01, 
+		+                  0.1, 1, 5, 10, 100, 1000), degree = c(2, 3, 4)))
+		> summary(tune.out)
+		
+		Parameter tuning of ‘svm’:
+		
+		- sampling method: 10-fold cross validation 
+		
+		- best parameters:
+		cost degree
+		1000      2
+		
+		- best performance: 0.2477564 
+		
+		- Detailed performance results:
+		cost degree     error dispersion
+		1  1e-02      2 0.5588462 0.04776470
+		2  1e-01      2 0.5588462 0.04776470
+		3  1e+00      2 0.5588462 0.04776470
+		4  5e+00      2 0.5588462 0.04776470
+		5  1e+01      2 0.5333974 0.06042775
+		6  1e+02      2 0.3010256 0.06228711
+		7  1e+03      2 0.2477564 0.08007847
+		8  1e-02      3 0.5588462 0.04776470
+		9  1e-01      3 0.5588462 0.04776470
+		10 1e+00      3 0.5588462 0.04776470
+		11 5e+00      3 0.5588462 0.04776470
+		12 1e+01      3 0.5588462 0.04776470
+		13 1e+02      3 0.3442949 0.09403188
+		14 1e+03      3 0.2502564 0.05740129
+		15 1e-02      4 0.5588462 0.04776470
+		16 1e-01      4 0.5588462 0.04776470
+		17 1e+00      4 0.5588462 0.04776470
+		18 5e+00      4 0.5588462 0.04776470
+		19 1e+01      4 0.5588462 0.04776470
+		20 1e+02      4 0.5588462 0.04776470
+		21 1e+03      4 0.5485897 0.04834238
+		
+		# In this case cost of 1000 with 2 degrees performed the best
+		
+		# SVM with radial basis kernel
+		> set.seed(1129)
+		> tune.out <- tune(svm, mpglevel ~ ., data = Auto, kernel = "radial", ranges = list(cost = c(0.01, 0.1,
+		+                  1, 5, 10, 100), gamma = c(0.01, 0.1, 1, 5, 10, 100)))
+		> summary(tune.out)
+		
+		Parameter tuning of ‘svm’:
+		
+		- sampling method: 10-fold cross validation 
+		
+		- best parameters:
+		cost gamma
+		100  0.01
+		
+		- best performance: 0.01025641 
+		
+		- Detailed performance results:
+		cost gamma      error dispersion
+		1  1e-02 1e-02 0.55884615 0.04776470
+		2  1e-01 1e-02 0.08666667 0.03839120
+		3  1e+00 1e-02 0.07397436 0.02819088
+		4  5e+00 1e-02 0.04346154 0.03643372
+		5  1e+01 1e-02 0.02044872 0.03150887
+		6  1e+02 1e-02 0.01025641 0.01792836
+		7  1e-02 1e-01 0.21705128 0.07529085
+		8  1e-01 1e-01 0.07647436 0.02677351
+		9  1e+00 1e-01 0.05871795 0.03436280
+		10 5e+00 1e-01 0.02557692 0.02417544
+		11 1e+01 1e-01 0.02051282 0.02648194
+		12 1e+02 1e-01 0.02814103 0.03070454
+		13 1e-02 1e+00 0.55884615 0.04776470
+		14 1e-01 1e+00 0.55884615 0.04776470
+		15 1e+00 1e+00 0.06128205 0.03858977
+		16 5e+00 1e+00 0.06128205 0.04863935
+		17 1e+01 1e+00 0.06128205 0.04863935
+		18 1e+02 1e+00 0.06128205 0.04863935
+		19 1e-02 5e+00 0.55884615 0.04776470
+		20 1e-01 5e+00 0.55884615 0.04776470
+		21 1e+00 5e+00 0.48730769 0.06124828
+		22 5e+00 5e+00 0.48474359 0.06178858
+		23 1e+01 5e+00 0.48474359 0.06178858
+		24 1e+02 5e+00 0.48474359 0.06178858
+		25 1e-02 1e+01 0.55884615 0.04776470
+		26 1e-01 1e+01 0.55884615 0.04776470
+		27 1e+00 1e+01 0.51807692 0.05978692
+		28 5e+00 1e+01 0.51807692 0.05978692
+		29 1e+01 1e+01 0.51807692 0.05978692
+		30 1e+02 1e+01 0.51807692 0.05978692
+		31 1e-02 1e+02 0.55884615 0.04776470
+		32 1e-01 1e+02 0.55884615 0.04776470
+		33 1e+00 1e+02 0.55884615 0.04776470
+		34 5e+00 1e+02 0.55884615 0.04776470
+		35 1e+01 1e+02 0.55884615 0.04776470
+		36 1e+02 1e+02 0.55884615 0.04776470
+		
+		# In this case cost of 100 with .01 gamma performed the best
+	\end{verbatim}	
+	
+\end{document}

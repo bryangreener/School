@@ -30,5 +30,6 @@ print("{0:b}".format(bnum))
 # PART 5
 string1 = input("Enter string 1:")
 string2 = input("Enter string 2:")
-print(string1 in string2)
+res = {0 : 'f', 1 : 't'}
+print(res[string1 in string2])
 

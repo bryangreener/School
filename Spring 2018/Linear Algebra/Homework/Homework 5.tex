@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#5}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-01-28}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[4.36.] Let $V$ be the set of ordered pairs $(a,b)$ of real numbers with addition in $V$ and scalar multiplication on $V$ defined by
+			\[ (a,b) + (c,d) = (a+c,b+d) \quad k(a,b) = (ka,0) \]
+			Show that $V$ satisfies all the axioms of a vector space except $[M_4]$, that is, except $1u=u$. Hence $[M_4]$ is not a consequence of the other axioms.
+			
+\item[4.38.] Let $V$ be the set of ordered pairs $(a,b)$ of real numbers. Show that $V$ is not a vector space over $\mathbb{R}$ with addition in $V$ and scalar multiplication on $V$ defined by
+	\begin{enumerate}
+	% 4.38.i
+	\item[(i)] $(a,b)+(c,d)=(a+d,b+c)$ and $k(a,b)=(ka,kb)$
+
+	% 4.38.ii
+	\item[(ii)] $(a,b)+(c,d)=(a+c,b+d)$ and $k(a,b)=(a,b)$
+
+	% 4.38.iii
+	\item[(iii)] $(a,b)+(c,d)=(0,0)$ and $k(a,b)=(ka,kb)$
+	
+	% 4.38.iv
+	\item[(iv)] $(a,b)+(c,d)=(ac,bd)$ and $k(a,b)=(ka,kb)$
+	\end{enumerate}
+	
+\item[4.41.] Consider the vectors $u=(1,2,3)$ and $v=(2,3,1)$ in $\mathbb{R}^3$.
+	\begin{enumerate}
+	% 4.41.a
+	\item Write $w=(1,3,8)$ as a linear combination of $u$ and $v$.
+
+	% 4.41.b
+	\item Write $w=(2,4,5)$ as a linear combination of $u$ and $v$.
+
+	% 4.41.c
+	\item Find $k$ so that $(1,k,5)$ is a linear combination of $u$ and $v$.
+
+	% 4.41.d
+	\item Find a condition on $a$, $b$, and $c$ so that $(a,b,c)$ is a linear combination of $u$ and $v$.
+	\end{enumerate}
+	
+\item[4.43.] Write $u$ as a linear combination of the polynomials $v=2t^2+3t-4$ and $w=t^2-2t-3$, where:
+	\begin{enumerate}
+	% 4.43.a
+	\item $u=3t^2+8t-5$
+
+	% 4.43.b
+	\item $u=4t^2-6t-1$
+	\end{enumerate}
+	
+\item[4.45.] Determine whether or not $W$ is a subspace of $\mathbb{R}^3$, where $W$ consists of all vectors $(a,b,c)$ in $\mathbb{R}^3$ such that:
+	\begin{enumerate}
+	% 4.45.a
+	\item $a=3b$
+
+	% 4.45.b
+	\item $a \leq b \leq c$
+
+	% 4.45.c
+	\item $ab=0$
+	\end{enumerate}
+
+\item[4.49.] Suppose $U$ and $W$ are subspaces of $V$ for which $U \cup W$ is a subspace. Show that $U \subseteq W$ or $W \subseteq U$.
+
+\item[4.51.] Show that the vectors $u_1,u_2,u_3$ span $\mathbb{R}^3$ [that is, show that any vector $v=(a,b,c)$ in $\mathbb{R}^3$ is a linear combination of $u_1,u_2,u_3$] where:
+	\begin{enumerate}
+	% 4.51.a	
+	\item $u_1=(1,1,1),u_2=(0,1,2),u_3=(0,1,3)$
+	
+	% 4.51.b
+	\item $u_1=(1,1,0),u_2=(0,1,1),u_3=(0,2,1)$
+	\end{enumerate}
+	
+\item[4.52.] Show that the vectors $u_1,u_2,u_3$ do not span $\mathbb{R}^3$. Specifically, find conditions on $a,b,c$ so that $v=(a,b,c)$ in $\mathbb{R}^3$ is a linear combination of $u_1,u_2,u_3$:
+	\begin{enumerate}
+	% 4.52.a
+	\item $u_1=(1,1,1),u_2=(1,2,3),u_3=(0,1,2)$
+	
+	% 4.52.b	
+	\item $u_1=(1,1,0),u_2=(0,1,1),u_3=(1,3,2)$
+	\end{enumerate}
+
+\item[4.53.] Show that the polynomials $p_1=(y-1)^2$, $p_2=t-1$, and $p_3=1$ span the space $\mathbb{P}_2(t)$ of polynomials of degree $\leq 2$, that is, show that any polynomial $f=at^2+bt+c$ in $\mathbb{P}_2(t)$ is a linear combination of $p_1,p_2,p_3$.
+
+\item[4.55.] Prove that span$(S)$ is the intersection of all subspaces of $V$ containing $S$.
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

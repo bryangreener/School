@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Bibliography
+\usepackage{url}
+\usepackage{biblatex}
+\addbibresource{sources.bib}
+
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{result}{Result}
+
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Week of 2018-01-22}
+\chead{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{TPS Report}
+\author{Bryan Greener\\ Dylan Martin\\ Paul Phillips}
+\date{Week of 2018-01-22}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\section*{TPS}
+\resizebox{\textwidth}{!}{\begin{tabular}{| c | r | c | c | c | c | c | c |}
+\hline
+Project Timeline & Task & Time Est \small{(min)} & Risk & Member & Actual Time & \% Complete & Code Review\\
+\hline
+{} & Creating Shared Task Directory & 60 & 1 & Paul & 67 & 100 & {}\\
+\hline
+{} & Spike: qsolver (1st phase validates input) & {} & {} & {} & {} & {} & {}\\
+\hline
+{} & Spike: IEEE fp & 120 & 1 & Bryan & 60 & 75 & {}\\
+\hline
+{} & QuadSolver Repository & {} & {} & Dylan & {} & {} & {}\\
+\hline
+{} & IEEE fp (references) & {} & {} & Dylan & {} & {} & {}\\
+\hline
+{} & IEEE fp (ranges \& precision) & 35 & 1 & Paul & 20 & 100 & {}\\
+\hline
+{} & gcc compiler & {} & {} & Dylan & {} & {} & {}\\
+\hline
+{} & Establish C Programming Standard & 60 & 1 & Paul & 90 & 100 & {}\\
+\hline
+{} & Relative/Absolute Error: Develop general understanding & 30 & 1 & Bryan & 15 & {} & {}\\
+\hline
+{} & Inital QuadSolver (Phase 1) & {} & {} & {} & {} & {} & {}\\
+\hline
+{} & TPS Documentation & 120 & 1 & Bryan & 120 & 90 & {}\\
+\hline
+\end{tabular}}
+
+
+\section*{Paul Phillips}
+\subsection*{Research}
+Notes on Programming Standards
+\begin{itemize}
+\item Internal Documentation Standards\\
+	The purpose of following an internal documentation standard is to increase readability of a given software module. 
+	\begin{itemize}
+	\item SISPEG (Science Infusion Software Engineering Process Group) states that if a file contains one or more software modules or a shell script, it should also consist of a comment block at the beginning. This comment block should consist of the name of the author of the file, the date the file was created, the author's development group, and an overview of the purpose of the modules and shell scripts. Along with this information the comment block should also include a list of calling arguments, their types, and a brief explanation of their purpose. 
+	\item Any files or databases which a given module is dependent on should also be mentioned as well as whether it is expected that these things be active prior to usage of the module. 		\item Return values, error codes, and exceptions should be included. 
+	\end{itemize}
+	The purpose of including this information is to provide any given actor or additional user an expectation of their experience with the module.
+	
+\item Coding Standards\\
+	\begin{itemize}
+	\item SISPEG suggests the use of indentation in order to preserve easily interpretable and maintainable programs. Indentation is used to emphasize the body structure of a control statement such as a loop, conditional statements, and the scope of the code blocks. 
+	\item Minimum requirement for an indent is three spaces but more importantly the number of spaces for an indent needs to be consistent throughout the program. 
+	\item Tabs are discouraged as use for indentation. 
+	\item Inline comments should be used frequently for describing functionality of a subroutine or aspects of an algorithm.
+	\end{itemize}
+		
+	The following structured programming techniques need to be followed. 
+	\begin{itemize}
+	\item \verb|GOTO| statements are not recommended. 
+	\item Each module should be constrained to one function or action. 
+	\item Classes, subroutines, functions, and methods should have verb names (such as \verb|get_name|, \verb|quadsolver|), as these components are action-takers. 
+	\item Name of the source script should be aligned with the function it stores. 
+	\item Variable names should be easily interpreted and should make sense in respect to the context of the program. 
+	\item Curly braces are also to be used, in used in a way where the end brace aligns with the element call. Ex:
+	\begin{verbatim}
+	for(int i = 0; i < max_iterations; i++){
+		/*purpose of control statement*/
+	}
+	\end{verbatim}
+	\end{itemize}
+\item Coding Guidelines\\
+	The following suggestions are not necessarily required by SISPEG but are recommended in order to further preserve interpretability.
+	\begin{itemize}
+	 \item As Kent Beck mentions in "Extreme Programming Explained", it should be impossible to determine which member of the team wrote any given part of the program. 
+	 \item Line length is recommended to be no more than eighty characters. 
+	 \item Keywords followed by a parenthesis should be separated by a space. 
+	 \item Blank spaces should be inserted after each comma in an argument list (ex: lapply(<vector>,  <function>)).
+	 \item All binary operators with exception of "." should be separated with spaces. 
+	 \item Blank spaces should never separate unary operators. 
+	 \item When an expression does not fit into a single line, it should be primarily broken after a comma. If a comma is not convenient to use for breaking a line the next best choice is an operator.
+	 \item High-level breaks should also be considered before low-level breaks (in order to preserve program logic). 
+	 \item Variables declared should span multiple lines and should always be preceded by a type. 
+	 \item Program statements should not exceed one per line. 
+	 \item Nested statements should be avoided whenever possible. 
+	 \item Parentheses should be applied liberally.
+	\end{itemize}
+\end{itemize}
+
+\section*{Bryan Greener}
+\subsection*{Research}
+IEEE Single Precision Floating Point (SPFP)\\
+\begin{itemize}
+	\item The C math (and some other) libraries are not guaranteed to support SPFP.
+	\begin{itemize}
+		\item One known case is the pow function.
+		\item The sqrt is required by IEEE to be exact. The only other operations required to be exact are the arithmetic operators and the function fma. After rounding to the return type using the default rounding model, the result of sqrt is indistinguishable from the infinitely precise result. $\epsilon < 0.5 ulp$.\cite{1}
+	\end{itemize}
+\end{itemize}
+Absolute vs. Relative Error\\
+Absolute Error (v is some value):
+	\[ \epsilon = |v-v_{approx}| \]
+Relative Error:
+	\[ \epsilon_{relative} = \frac{\epsilon}{|v|} = |\frac{v-v_{approx}}{v}| = |1-\frac{v_{approx}}{v}| \]
+Absolute error is the amount of physical error in a measurement. Relative error gives an indication of how good a measurement is relative to the size of the thing being measured.\cite{2}
+
+\begin{thebibliography}{999}
+\bibitem{cppreference}
+	http://en.cppreference.com/w/c/numeric/math/sqrt
+\bibitem{ilstu.edu}
+	http://www2.phy.ilstu.edu/~wenning/slh/Absolute\%20Relative\%20Error.pdf
+	
+\end{thebibliography}
+
+\end{document}

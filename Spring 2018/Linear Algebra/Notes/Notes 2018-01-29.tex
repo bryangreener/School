@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{result}{Result}
+
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+ 
+
+
+
+
+\begin{document}
+\TabPositions{4cm}
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\today {} Linear Algebra Notes\\
+\begin{defn}
+Suppose $V$ is a vector space, and $S\subset V$ is any subset. The span of $S$ is the set of all linear combinations of elements of $S$.
+\[ span(S) = \{ c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_n\vec{v_n}: c_1,c_2,...,c_n \in \mathbb{F}, \vec{v_1},\vec{v_2},...,\vec{v_n} \in S \} \]
+If $S=\{\}$, then $span(S)=\{\vec{0}\}$
+\end{defn}
+\begin{ex}
+$span\{(1,0),(0,1)\} =$ all of $\mathbb{R}^2$\\
+Notice $(x,y)=x(1,0)+y(0,1)$
+\end{ex}
+\begin{ex}
+$span\{(0,1,0),(0,0,1)\} \subset \mathbb{R}^3$ is the $(y,z)$ plane in $\mathbb{R}^3$.
+\end{ex}
+\begin{ex}
+$span\{(1,0,0),(2,0,0)\}$ is the x-axis in $\mathbb{R}^3$.\\
+Since one of these vectors is a scaled version of the other, then we can remove it since it is redundant. Essentially if we have multiple vectors where a single elementary row operation can make two equal, then it can be removed. 
+\end{ex}
+\begin{thrm}
+Suppose $V$ is a vector space, and $S \subset V$ is any subset. Then the span of $S$ is a vector subspace of $V$.
+\end{thrm}
+\begin{proof}
+Use the subspace criterion.\\
+Special case $S=\{\} \Rightarrow span(S)=\{\vec{0}\}$ the zero subspace.\\
+Assume $S$ is not empty.
+	\begin{enumerate}
+	\item Notice $\vec{0} = 0\vec{v}$ for any $\vec{v} \in S$\\
+	$\Rightarrow \vec{0} \in span(S)$.
+	\item We use a shortcut to combine parts two and three of the subspace criterion.\\
+	Assume $\lambda \in \mathbb{F}$ and $\vec{v},\vec{w} \in span(S)$. Prove $\lambda\vec{v}+\vec{w} \in span(S)$.
+	\end{enumerate}
+\end{proof}
+
+\section*{Spanning Set}
+\begin{defn}
+Suppose $V$ is a vector space and $W$ is a subspace. A spanning set for $W$ is a subset $S$ such that $span(S) = W$.
+\end{defn}
+\begin{ex}
+Does the given set span $\mathbb{R}^3$?\\
+$S_1=\{(1,0,0),(0,1,0),(0,0,1)\}$ YES\\
+$S_2=\{(1,0,0),(0,1,0)\}$ NO (only two vectors)\\
+$S_3=\{(1,0,0),(0,1,0),(0,0,1),(1,1,1)\}$ YES\\
+$S_4=\{(1,0,0),(1,1,0),(1,1,1)\}$ YES\\
+$S_4:(x,y,x)=(x-y)(1,0,0)+(y-z)(1,1,0)+z(1,1,1)$\\
+$S_5=\{(1,2,3),(5,6,7)\}$ NO (only two vectors)\\
+$S_6=\{(1,0,0),(0,1,0),(0,0,0)\}$ NO\\
+$S_7=\{(0,1,1),(1,0,1),(1,1,0)\}$ YES (tip: write out as matrix where each vector is a column then do rref)\\
+$S_8=\{(0,1,-1),(1,0,-1),(1,-1,0)\}$ NO
+\end{ex}
+
+
+\end{document}

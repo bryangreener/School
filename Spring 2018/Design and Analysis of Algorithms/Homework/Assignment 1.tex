@@ -175,6 +175,19 @@
 	g_7(n) &= 2^{n^2}
 	\end{align*}
 	In order from left to right in terms of growth rate, we get: $g_1,g_3,g_4,g_5,g_2,g_7,g_6$
+
+\item Assume you have functions $f$ and $g$ such that $f(n)$ is $O(g(n))$. For each of the following statements, decide whether you think it is true or false and give a proof or counterexample.
+	\begin{enumerate}
+	\item $\log_2(f(n))$ is $O(\log_2(g(n)))$\\
+	Let $f(n)=2$ and $g(n)=1$. Then $\log_2(f(n))=\log_2(2) = 1$ and $\log_2(g(n) = \log_2(1) = 0$. Thus, this is a case where $f(n) \geq O(g(n))$ and so the original statement is false. 
+	
+	\item $2^{f(n)}$ is $O(2^{g(n)})$\\
+	Let $f(n) = 2n$ and $g(n) = n$. Then $2^{f(n)} = 2^{2n} = 4^n$ and $2^{g(n)} = 2^n$. Since $4^n \geq 2^n$, the original statement is false.
+	\item $f(n)^2$ is $O(g(n)^2)$\\
+	
+	\end{enumerate}
+
+
 \end{enumerate}
 
 \end{document}

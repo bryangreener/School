@@ -23,11 +23,12 @@ word = contents.split()
 wd = {}
 # For each word
 for x in range(0,len(word)):
-    # If word exists increment, otherwise add to dict    
-    if word[x] in wd.keys():
-        wd[word[x]] += 1
-    else:
-        wd[word[x]] = 1
+    # If word exists increment, otherwise add to dict
+    if len(word[x]) > 1:
+        if word[x] in wd.keys():
+            wd[word[x]] += 1
+        else:
+            wd[word[x]] = 1
 # Lists used to store most and least used words. Unique counter
 most = [""]*10
 least = [""]*10
@@ -57,7 +58,7 @@ for key, value in wd.items():
             least[i] = key
             break
     # If item is unique, increment unique count.
-    if wd[key] == 1:
+    if value == 1:
         unique += 1
 # Print out results
 print("-----------------------------------")

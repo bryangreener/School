@@ -1,0 +1,9 @@
+\contentsline {chapter}{\numberline {1}2018-01-25}{2}
+\contentsline {section}{\numberline {1.1}Subspaces}{2}
+\contentsline {chapter}{\numberline {2}2018-01-26}{4}
+\contentsline {chapter}{\numberline {3}2018-01-29}{5}
+\contentsline {section}{\numberline {3.1}Spanning Set}{5}
+\contentsline {chapter}{\numberline {4}2018-01-30}{7}
+\contentsline {section}{\numberline {4.1}Row and Column Spaces}{7}
+\contentsline {section}{\numberline {4.2}Class Questions}{7}
+\contentsline {section}{\numberline {4.3}Linear Independence}{8}

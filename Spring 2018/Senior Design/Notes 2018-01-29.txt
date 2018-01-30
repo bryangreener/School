@@ -1,0 +1,13 @@
+Senior Design Notes 2018-01-29
+
+Determine the difference between Morals and Ethics
+    - Look for how they are typically perceived in business and philosophy
+
+There are company standards and professional standards
+
+Know HIPAA and FERPA
+
+Professional standards uses ACM
+Company standards uses NDAs
+
+print args to log file

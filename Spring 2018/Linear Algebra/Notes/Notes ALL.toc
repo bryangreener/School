@@ -1,9 +1,25 @@
-\contentsline {chapter}{\numberline {1}2018-01-25}{2}
-\contentsline {section}{\numberline {1.1}Subspaces}{2}
-\contentsline {chapter}{\numberline {2}2018-01-26}{4}
-\contentsline {chapter}{\numberline {3}2018-01-29}{5}
-\contentsline {section}{\numberline {3.1}Spanning Set}{5}
-\contentsline {chapter}{\numberline {4}2018-01-30}{7}
-\contentsline {section}{\numberline {4.1}Row and Column Spaces}{7}
-\contentsline {section}{\numberline {4.2}Class Questions}{7}
-\contentsline {section}{\numberline {4.3}Linear Independence}{8}
+\contentsline {chapter}{\numberline {1}2018-01-11}{2}
+\contentsline {section}{\numberline {1.1}Gauss-Jordan Elimination}{2}
+\contentsline {section}{\numberline {1.2}Matrix/Vector Algebra}{3}
+\contentsline {chapter}{\numberline {2}2018-01-12}{4}
+\contentsline {section}{\numberline {2.1}Gauss-Jordan Elimination}{4}
+\contentsline {section}{\numberline {2.2}Matrix/Vector Algebra}{5}
+\contentsline {chapter}{\numberline {3}2018-01-16}{6}
+\contentsline {chapter}{\numberline {4}2018-01-18}{10}
+\contentsline {section}{\numberline {4.1}Invertibility}{10}
+\contentsline {chapter}{\numberline {5}2018-01-19}{12}
+\contentsline {section}{\numberline {5.1}LDU Decomposition}{12}
+\contentsline {chapter}{\numberline {6}2018-01-22}{13}
+\contentsline {section}{\numberline {6.1}Mathematical Induction}{13}
+\contentsline {section}{\numberline {6.2}Vector Spaces and Scaling}{14}
+\contentsline {chapter}{\numberline {7}2018-01-23}{15}
+\contentsline {section}{\numberline {7.1}Vector Spaces}{15}
+\contentsline {chapter}{\numberline {8}2018-01-25}{17}
+\contentsline {section}{\numberline {8.1}Subspaces}{17}
+\contentsline {chapter}{\numberline {9}2018-01-26}{19}
+\contentsline {chapter}{\numberline {10}2018-01-29}{20}
+\contentsline {section}{\numberline {10.1}Spanning Set}{20}
+\contentsline {chapter}{\numberline {11}2018-01-30}{22}
+\contentsline {section}{\numberline {11.1}Row and Column Spaces}{22}
+\contentsline {section}{\numberline {11.2}Class Questions}{22}
+\contentsline {section}{\numberline {11.3}Linear Independence}{23}

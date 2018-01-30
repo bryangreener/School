@@ -54,6 +54,919 @@
 \begin{document}
  
 \tableofcontents{}
+\chapter{2018-01-11}
+\section{Gauss-Jordan Elimination}
+\begin{align*}
+IF \quad M=
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+2 & 4 & 1 & -2 & 3\\
+3 & 6 & 2 & -6 & 5\\
+\end{bmatrix}
+\begin{bmatrix}
+R_1\\ R_2\\ R_3\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_1\\
+R_2 - 2R_1\\
+R_3-3R_1\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 2 & 1\\
+0 & 0 & \circled{3} & -6 & 1\\
+0 & 0 & \circled{5} & -12 & 2\\
+\end{bmatrix}
+\begin{bmatrix}
+R_4\\ R_5\\ R_6\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_4\\
+(\frac{1}{3})R_5\\
+R_6\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+0 & 0 & 1 & -2 & \frac{1}{3}\\
+0 & 0 & 5 & -12 & 2\\
+\end{bmatrix}
+\begin{bmatrix}
+R_7\\ R_8\\ R_9
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_7\\
+R_8\\
+R_9 - 5R_8\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 2 & 1\\
+0 & 0 & \circled{1} & -2 & \frac{1}{3}\\
+0 & 0 & 0 & \circled{-2} & \frac{1}{3}\\
+\end{bmatrix}
+\begin{bmatrix}
+R_{10}\\ R_{11}\\ R_{12}\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_{10}\\
+R_{11}\\
+(-\frac{1}{2})R_{12}\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+0 & 0 & 1 & -2 & \frac{1}{3}\\
+0 & 0 & 0 & 1 & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_1\\ S_2\\ S_3\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+S_1 - 2S_3\\
+S_2 + 2S_3\\
+S_3\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 0 & \frac{4}{3}\\
+0 & 0 & \circled{1} & 0 & 0\\
+0 & 0 & 0 & \circled{1} & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_4\\ S_5\\ S_6\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+S_4 + S_5\\
+S_5\\
+S_6\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & 0 & 0 & \frac{4}{3}\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_7\\
+S_8\\
+S_9\\
+\end{bmatrix}
+\end{align*}
+This is now in reduced row-echelon form.\\
+\\
+\section{Matrix/Vector Algebra}
+Vector:
+\begin{align*}
+\begin{bmatrix}
+x_1\\ x_2\\ x_3\\ \vdots \\ x_n
+\end{bmatrix}\\
+\end{align*}
+Matrix Addition:
+\begin{align*}
+\begin{bmatrix}
+2 & 0\\
+-1 & 1\\
+5 & 4\\
+\end{bmatrix}
++
+\begin{bmatrix}
+1 & 4\\
+3 & 1\\
+7 & 7\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 & 4\\
+2 & 2\\
+12 & 11\\
+\end{bmatrix}
+\end{align*}
+Scalar Multiplication:
+\begin{align*}
+5 *
+\begin{bmatrix}
+1 & 4\\
+3 & 1\\
+7 & 7\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 & 20\\
+15 & 5\\
+35 & 35\\
+\end{bmatrix}
+\end{align*}
+Adding vectors can be represented by a graph with vectors on it.\\
+Vector addition can be expressed using the tip-to-tail rule.\\
+Scalar multiplication can also be expressed by a graph with vectors on it.\\
+
+\begin{defn}
+Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tuples. The dot product of $V_a$ and $V_b$ is $V_a \dot V_b$
+\end{defn}
+
+%==========================================
+
+\chapter{2018-01-12}
+\section{Gauss-Jordan Elimination}
+\begin{align*}
+IF \quad M=
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+2 & 4 & 1 & -2 & 3\\
+3 & 6 & 2 & -6 & 5\\
+\end{bmatrix}
+\begin{bmatrix}
+R_1\\ R_2\\ R_3\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_1\\
+R_2 - 2R_1\\
+R_3-3R_1\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 2 & 1\\
+0 & 0 & \circled{3} & -6 & 1\\
+0 & 0 & \circled{5} & -12 & 2\\
+\end{bmatrix}
+\begin{bmatrix}
+R_4\\ R_5\\ R_6\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_4\\
+(\frac{1}{3})R_5\\
+R_6\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+0 & 0 & 1 & -2 & \frac{1}{3}\\
+0 & 0 & 5 & -12 & 2\\
+\end{bmatrix}
+\begin{bmatrix}
+R_7\\ R_8\\ R_9
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_7\\
+R_8\\
+R_9 - 5R_8\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 2 & 1\\
+0 & 0 & \circled{1} & -2 & \frac{1}{3}\\
+0 & 0 & 0 & \circled{-2} & \frac{1}{3}\\
+\end{bmatrix}
+\begin{bmatrix}
+R_{10}\\ R_{11}\\ R_{12}\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+R_{10}\\
+R_{11}\\
+(-\frac{1}{2})R_{12}\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & -1 & 2 & 1\\
+0 & 0 & 1 & -2 & \frac{1}{3}\\
+0 & 0 & 0 & 1 & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_1\\ S_2\\ S_3\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+S_1 - 2S_3\\
+S_2 + 2S_3\\
+S_3\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+\circled{1} & 2 & -1 & 0 & \frac{4}{3}\\
+0 & 0 & \circled{1} & 0 & 0\\
+0 & 0 & 0 & \circled{1} & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_4\\ S_5\\ S_6\\
+\end{bmatrix}\\
+%========================================
+\begin{bmatrix}
+S_4 + S_5\\
+S_5\\
+S_6\\
+\end{bmatrix}
+\begin{bmatrix}[cccc|c]
+1 & 2 & 0 & 0 & \frac{4}{3}\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & -\frac{1}{6}\\
+\end{bmatrix}
+\begin{bmatrix}
+S_7\\
+S_8\\
+S_9\\
+\end{bmatrix}
+\end{align*}
+This is now in reduced row-echelon form.\\
+\\
+\section{Matrix/Vector Algebra}
+Vector:
+\begin{align*}
+\begin{bmatrix}
+x_1\\ x_2\\ x_3\\ \vdots \\ x_n
+\end{bmatrix}\\
+\end{align*}
+Matrix Addition:
+\begin{align*}
+\begin{bmatrix}
+2 & 0\\
+-1 & 1\\
+5 & 4\\
+\end{bmatrix}
++
+\begin{bmatrix}
+1 & 4\\
+3 & 1\\
+7 & 7\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 & 4\\
+2 & 2\\
+12 & 11\\
+\end{bmatrix}
+\end{align*}
+Scalar Multiplication:
+\begin{align*}
+5 *
+\begin{bmatrix}
+1 & 4\\
+3 & 1\\
+7 & 7\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 & 20\\
+15 & 5\\
+35 & 35\\
+\end{bmatrix}
+\end{align*}
+Adding vectors can be represented by a graph with vectors on it.\\
+Vector addition can be expressed using the tip-to-tail rule.\\
+Scalar multiplication can also be expressed by a graph with vectors on it.\\
+
+\begin{defn}
+Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tuples. The dot product of $V_a$ and $V_b$ is $V_a \dot V_b$
+\end{defn}
+
+%===========================================
+
+\chapter{2018-01-16}
+\begin{enumerate}
+% 2.82
+\item [2.82.] Find the values of k such that each of the following systems of unknowns x, y, and z has (i) a unique solution, (ii) no solution, (iii) an infinite number of solutions.
+	\begin{enumerate}
+	% 2.82.a	
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x-2y=1,x-y+kz=-2,ky+4z=6}
+	\medskip
+		\begin{enumerate}
+		% 2.82.a.i
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & -2 & 0 & 1\\
+		1 & -1 & k & -2\\
+		0 & k & 4 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%		
+		\begin{bmatrix}[r]
+		R_1\\
+		R_2 - R_1\\
+		R_3\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & -1 & 0 & 1\\
+		0 & 1 & k & -3\\
+		0 & k & 4 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]	
+		R_4\\
+		R_5\\
+		R_6 - kR_5\\	
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 0 & 0 & -2\\
+		0 & 1 & k & -3\\
+		0 & 0 & 4-k^2 & 6-3k\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9
+		\end{bmatrix}\\		
+		%		
+		4-k^2&= 6-3k\\
+		k^2-3k+2&=0\\
+		(k-2)(k-1)&=0\\
+		k=2, \quad k&=1
+		\end{align*}
+		ANSWER SHOULD BE $\pm 2$.\\
+		For a unique solution, $k \neq 2$ and $k \neq 1$.\\
+		% 2.82.a.ii
+		\item [(ii)] Using the result from 2.82.a.i, if $k=2$ then
+		\[ R_9(2): \quad 4-(k)^2 = 0 = 6-3(2) = 0 \]
+		Since the result is $0 = 0$, then there are no solutions when $k=2$.\\
+		% 2.82.a.iii
+		\item [(iii)] 
+		\end{enumerate}	
+		\medskip
+	% 2.82.b
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+y+kz=1,x+ky+z=1,kx+y+z=1}
+	\medskip
+		\begin{enumerate}
+		% 2.82.b.i			
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		1 & k & 1 & 1\\
+		k & 1 & 1 & 1\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_3\\ R_2\\ R_1\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		k & 1 & 1 & 1\\
+		1 & k & 1 & 1\\
+		1 & 1 & k & 1\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_4\\		
+		R_5 - R_6\\
+		R_6 - R_4\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		k & 1 & 1 & 1\\
+		0 & k-1 & 1-k & 0\\
+		1-k & 0 & k-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_7 + R_9\\
+		R_8\\
+		R_9\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		1-k & 0 & k-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{10}\\ R_{11}\\ R_{12}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_{10}\\
+		R_{11}\\
+		R_{12} + (k-1)R_{10}\\	
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		0 & k-1 & k^2-1 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{13}\\ R_{14}\\ R_{15}\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_{13}\\
+		R_{14}\\
+		R_{15} - R_{14}\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 1 & k & 1\\
+		0 & k-1 & 1-k & 0\\
+		0 & 0 & k^2+k-2 & 0\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_{16}\\ R_{17}\\ R_{18}\\
+		\end{bmatrix}\\
+		%
+		(k^2+k-2) &=0\\
+		(k+2)(k-1) &=0\\
+		k = -2, \quad k &= 1\\
+		\end{align*}
+		For a distinct solution, $k \neq -2$ and $k \neq 1$.\\
+		% 2.82.b.ii
+		\item [(ii)]
+		From the solution to 2.82.b.i, allowing $k=-2$ gives us
+		\[ z((-2)^2+(-2)-2) = z(0) = 0 \]
+		Since the result is $0 = 0$, we get no solutions.\\
+		% 2.82.b.iii
+		\item [(iii)]
+		From the solution to 2.82.b.ii, allowing $k=1$ gives us
+		\[ z((1)^2 + (1) - 2 = z(0) = 0 \]
+		FINISH THIS. ANSWER IS $\neq -2, 1 \quad , \quad -2, \quad 1$ just need to figure out why. I got the answer but I can't seem to reason why.
+		\end{enumerate}	
+		\medskip
+	%2.82.c
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+2y+2z=5,x+ky+3z=7,x+11y+kz=11}
+	\medskip
+		\begin{enumerate}
+		% 2.82.c.i
+		\item [(i)]
+		\begin{align*}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		1 & k & 3 & 7\\
+		1 & 11 & k & 11\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_1\\ R_2\\ R_3\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_1\\
+		R_2 - R_1\\
+		R_3 - R_1\\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		1 & 2 & 2 & 5\\
+		0 & k-2 & 1 & 2\\
+		0 & 9 & k-2 & 6\\
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_4\\ R_5\\ R_6\\
+		\end{bmatrix}\\
+		%
+		\begin{bmatrix}[r]
+		R_4\\
+		R_5\\
+		R_6 - \\
+		\end{bmatrix}
+		\begin{bmatrix}[rrr|r]
+		\end{bmatrix}&
+		\begin{bmatrix}[r]
+		R_7\\ R_8\\ R_9\\
+		\end{bmatrix}
+		\end{align*}
+		% 2.82.c.ii
+		\item [(ii)]
+		% 2.82.c.iii
+		\item [(iii)]
+		\end{enumerate}
+	\end{enumerate}
+\medskip
+% 2.83
+\item [2.83.] Determine whether or not each system has a nonzero solution.
+	\begin{enumerate}
+	% 2.83.a	
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,x-8y+8z=0,3x-2y+4z=0}
+	\begin{align*}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	1 & -8 & 8 & 0\\
+	3 & -2 & 4 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_1\\ R_2\\ R_3\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_1\\ R_3\\ R_2\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	3 & -2 & 4 & 0\\
+	1 & -8 & 8 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_4\\ R_5\\ R_6\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_4\\
+	R_5 - 3R_4\\
+	R_6 - R_4\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	0 & -11 & -2 & 0\\
+	0 & -11 & 6 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_7\\ R_8\\ R_9\\
+	\end{bmatrix}\\
+	%
+	\begin{bmatrix}[r]
+	R_7\\
+	R_8\\
+	R_9 + R_8\\
+	\end{bmatrix}
+	\begin{bmatrix}[rrr|r]
+	1 & 3 & -2 & 0\\
+	- & -11 & -2 & 0\\
+	0 & 0 & 4 & 0\\
+	\end{bmatrix}&
+	\begin{bmatrix}[r]
+	R_{10}\\ R_{11}\\ R_{12}\\
+	\end{bmatrix}\\
+	6z&=0\\
+	z&=0\\
+	-11y-2(0)&=0\\
+	y&=0\\
+	x+3(0-2(0)&=0\\
+	x&=0
+	\end{align*}
+	Since x, y, and z are all zero, this linear system has no nonzero solutions.
+	\medskip
+	
+	% 2.83.b
+	\item
+	\sysdelim{.}{.}\systeme[xyz]{x+3y-2z=0,2x-3y+z=0,3x-2y+2z=0}
+	
+	\medskip	
+	%2.83.c
+	\item
+	\sysdelim{.}{.}\systeme[xyzt]{x+2y-5z+4t=0,2x-3y+2z+3t=0,4x-7y+z-6t=0}
+	
+	\medskip	
+	\end{enumerate}
+% 2.86
+\item [2.86.] Reduce A to echelon form and then to row canonical form.
+	\begin{enumerate}
+	% 2.86.a	
+	\item
+	\begin{align*}
+	%\setlength\arraycolsep{5pt} % Changes column padding
+	A = 
+	\begin{bmatrix*}[r]
+	1 & 2 & -1 & 2 & 1\\
+	2 & 4 & 1 & -2 & 3\\
+	3 & 6 & 2 & -6 & 5\\
+	\end{bmatrix*}
+	\end{align*}
+	% 2.86.b
+	\item
+	\begin{align*}
+	A = 
+	\begin{bmatrix*}[r]
+	2 & 3 & -2 & 5 & 1\\
+	3 & -1 & 2 & 0 & 4\\
+	4 & -5 & 6 & -5 & 7\\
+	\end{bmatrix*}
+	\end{align*}
+	\end{enumerate}
+% 2.88
+\item [2.88.] Using only 0s and 1s, list all possible 2 x 2 matrices in row canonical form.
+% 2.89
+\item [2.89.] Using only 0s and 1s, list all possible 3 x 3 matrices in row canonical form.
+% 2.92
+\item [2.92.] Consider the following system of unknowns x and y:
+\[ \sysdelim{.}{.}\systeme[xy]{ax+by=1,cx+dy=0} \]
+Show that if $ad-bc \neq 0$, then the system has the unique solution
+\[ x=\frac{d}{ad-bc}, \quad y=-\frac{c}{ad-bc} \]
+And show that if $ad-bc=0$ and if $c \neq 0$ or $d \neq 0$, then the system has no solution.
+\end{enumerate}
+
+%===============================================
+
+\chapter{2018-01-18}
+For 1.76 in homework, you can write each of the equations in the 2x3 matrix as an augmented matrix 6x2 and solve as normal for the 12 unknowns.\\
+2.80(b) on homework:\\
+z and t become free variables and x and y are dependent variables.\\
+When writing out solution set, you want to assign z and t (or any free variables) to a new set of variables.\\
+Ex:\\
+Parameterization of solution set:
+\begin{align*}
+t &= q\\
+z &= p\\
+y &= 2p-2q+1\\
+x &= -p+2q
+\end{align*}
+
+\section{Invertibility}
+\begin{defn} A square matrix A is invertible if there is another square matrix B such that AB is the identity matrix.
+\end{defn}
+
+Ex:
+\[
+A = 
+\begin{bmatrix}[rr]
+5 & 17\\
+2 & 7\\
+\end{bmatrix}
+\]
+Inverse of A is
+\[
+\begin{bmatrix}[rr]
+7 & -17\\
+-2 & 5\\
+\end{bmatrix}
+\]
+
+\[
+\begin{bmatrix}[rr]
+5 & 17\\ 2 & 7\\
+\end{bmatrix}
+\begin{bmatrix}[rr]
+7 & -17\\ -2 & 5\\
+\end{bmatrix}
+=
+\begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}
+\]
+
+Notation:
+\[ 
+A^{-1} = \begin{bmatrix}[rr]
+5 & 17\\
+2 & 7\\
+\end{bmatrix} ^{-1}
+\]
+
+Alternate method of writing matrices in 1.64\\
+Find $\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}$ such that
+\[
+\begin{bmatrix}[rrr] 1 & 2 & 4\\ 3 & 5 & -2\\ 3 & -1 & 3\\ \end{bmatrix}
+\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}
+=
+\begin{bmatrix} 9\\ -3\\ 16\\ \end{bmatrix}
+\]
+Solution
+\[
+\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}
+=
+\begin{bmatrix}[rrr] 1 & 2 & 4\\ 3 & 5 & -2\\ 3 & -1 & 3\\ \end{bmatrix}^{-1}
+\begin{bmatrix} 9\\ -3\\ 16\\ \end{bmatrix}
+=
+\begin{bmatrix}[r] 3\\ -1\\ 2\\ \end{bmatrix}
+\]
+
+\begin{thrm} Suppose A is an invertible n x m matrix. Then
+\[ rref\begin{bmatrix}[r|r] A & I_n\\ \end{bmatrix}
+=
+\begin{bmatrix}[r|r] I_n & A_{-1}\\ \end{bmatrix}
+\]
+\end{thrm}
+
+Fact: Every elementary row operation can be written as an invertible matrix.\\
+\[
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\ 0 & 4 & 0\\ 0 & 0 & 1\\
+\end{bmatrix} ^{-1}
+=
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\ 0 & \frac{1}{4} & 0\\ 0 & 0 & 1\\
+\end{bmatrix}
+\]
+
+%==================================================
+
+\chapter{2018-01-19}
+On number 1.76 in Homework 3, we need to find a better way of solving this type of system.
+\[
+\begin{bmatrix}[rr] 1 & 2\\ 3 & 6\\ \end{bmatrix}
+\begin{bmatrix}[r] 2\\ -1\\ \end{bmatrix}
+\]
+Except this doesn't use distinct values. But any multiple of the vector (2,-1) will give us a (0,0) result so to get distinct values, we just multiply the vector (2,-1) by any scalar.\\
+
+\begin{defn} An elementary matrix is any matrix that can be obtained by applying exactly one elementary row operation to the identity matrix. \end{defn}
+
+Example: Elementary or not?\\
+\[
+\begin{bmatrix}[rrr] 0 & 1 & 0\\ 1 & 0 & 0\\ 0 & 0 & 1\\ \end{bmatrix}
+\]
+Yes because it only takes one operation (swapping row 1 with row 2) to get to the identity matrix.
+\[
+\begin{bmatrix}[rrr] 0 & 0 & 1\\ 0 & 1 & 0\\ 1 & 0 & 0\\ \end{bmatrix}
+\]
+Yes for same reason as first problem.
+\[ 
+\begin{bmatrix}[rrr] 0 & 1 & 0\\ 0 & 0 & 1\\ 1 & 0 & 0\\ \end{bmatrix}
+\]
+No because it will take more than one elementary row operation to get the identity matrix.\\
+Other elementary row operations include multiplying or subtracting/adding rows in order to get the identity matrix.\\
+\section{LDU Decomposition}
+
+Ex.\\
+\[
+\begin{bmatrix}[rrr]
+-3 & 12 & 0\\
+0 & 2 & 4\\
+9 & -36 & 4\\
+\end{bmatrix}
+=
+\begin{bmatrix}[rrr]
+1 & 0 & 0\\
+0 & 1 & 0\\
+-3 & 0 & 1\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+-3 & 0 & 0\\
+0 & 2 & 0\\
+0 & 0 & 4\\
+\end{bmatrix}
+\begin{bmatrix}[rrr]
+1 & -4 & 0\\
+0 & 1 & 2\\
+0 & 0 & 1\\
+\end{bmatrix}
+\]
+The three matrices on the right half above have names. From left to right: Lower Triangular, Diagonal, Upper Triangular. This is where the LDU comes from.\\
+
+%===============================================
+
+\chapter{2018-01-22}
+\begin{defn}
+	The $n^{th}$ power of a square matrix $A$ is either the identity matrix $I$ (if $n=0$) or $AA^{n-1}$ if $n \geq 1$.
+\end{defn}
+Example:
+\begin{align*}
+	A= \begin{bmatrix}[rr] 5 & 1\\ 0 & 2\\ \end{bmatrix}\\
+	A^0 = \begin{bmatrix}[rr] 1 & 0\\ 0 & 1\\ \end{bmatrix}\\
+	A^2 = AA^{2-1} = 
+	\begin{bmatrix}[rr] 25 & 15\\ 0 & 4\\ \end{bmatrix}\\
+\end{align*}
+$A^0$ will be the base case for mathematical induction.\\
+Question 2 on quiz:\\
+\[ A= \begin{bmatrix}[rrr] 3 & 4 & 1\\ 1 & 1 & 2\\ \end{bmatrix} \]
+Find $Av=0$ where $v$ is 3 x 1. $\begin{bmatrix}[r] x\\ y\\ z\\ \end{bmatrix}$
+\[ 	\begin{bmatrix}[r] 3x+4y+z\\ x+y+2z\\ \end{bmatrix}
+	= \begin{bmatrix}[r] 0\\ 0\\ \end{bmatrix} \]
+\[ \begin{bmatrix}[rrr|r] 1 & 0 & 7 & 0\\ 0 & 1 & -5 & 0\\ \end{bmatrix} \]
+$x=-7t,y=5t,z=t$.\\
+
+\section{Mathematical Induction}
+Prove that $\sum_{k=1}^{n}k = \frac{n(n+1)}{2}$.
+\begin{proof}
+We proceed by induction.\\
+Let $n=1$, then $\frac{1(1+1)}{2} = 1$ so the formula holds for $n=1$.\\
+Assume that for some integer $k$, that $\sum_{i=1}^{k}i = \frac{k(k+1)}{2}$.\\
+We show that $\sum_{i=1}^{k+1}i = \frac{(k+1)(k+2)}{2}$.\\
+You know how the rest goes so finish it.
+\end{proof}
+
+\section{Vector Spaces and Scaling}
+Scalar = Element of a Field\\
+\begin{defn} A field is a set $\mathbb{F}$ equipped with binary operations $+$ ("addition"), $\cdot$ ("multiplication") and elements $0 \neq 1$ such that all of the following hold:
+\begin{enumerate}
+	\item[(i)] $a+b=b+a$
+	\item[(ii)] $a+(b+c)=(a+b)+c$
+	\item[(iii)] $a+0=a$
+	\item[(iv)] For every $a \in \mathbb{F}$, there is $b \in \mathbb{F}$ such that $a+b=0$.
+	\item[(v)] $a \cdot b = v \cdot a$
+	\item[(vi)] $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+	\item[(vii)] $a \cdot 1 = a$
+	\item[(viii)] For every $a \neq 0$, there is $b \in \mathbb{F}$ such that $a \cdot b = 1$.
+	\item[(ix)] $a \cdot (b + c) = a \cdot b + a \cdot c$ for all $a, b, c \in \mathbb{F}$.
+\end{enumerate}
+\end{defn}
+Example:\\
+$\mathbb{R}$ is the field of all real numbers.\\
+$\mathbb{Q}$ is the field of rational numbers $\{\frac{a}{b}: a,b,integers,b \neq 0\}$.\\
+$\mathbb{C}$ is the field of all complex numbers $\{a+ib: a,b\in \mathbb{R}\}$.
+
+%==============================================
+
+\chapter{2018-01-23}
+Homework \#3.90 page 146\\
+Let $B= \begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix}$. Find a triangular matrix $A$ with positive diagonal entries such that $A^2=B$.\\
+Assume that \[ A= \begin{bmatrix}[rrr] a_1 & a_2 & a_3\\ 0 & a_4 & a_5\\ 0 & 0 & a_6\\ \end{bmatrix} \]
+Then
+\[ A^2 = \begin{bmatrix}[rrr]
+	a_1^2 & a_1a_2+a_2a_4 & a_1a_3+a_2a_5+a_3a_6\\
+	0 & a_4^2 & a_4a_3+a_4a_5\\
+	0 & 0 & a_6^2\\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix} \]
+\begin{align*}
+	a_1 &= 1\\ 
+	a_2 &=\\
+	a_3 &=\\
+	a_4 &= 3\\
+	a_5 &=\\
+	a_6 &= 2\\
+\end{align*}
+We chose these values 1, 3, and 2 because looking at the matrix, these values squared gives us our desired result.
+
+\section{Vector Spaces}
+\begin{defn}
+	Let $\mathbb{F}$ be a field. A vector space over $\mathbb{F}$ is a set $V$ equipped with a binary operation $+$ (vector addition) and a function $\mathbb{F} x V \rightarrow V$ (scalar multiplication) and an element $\vec{o} \in V$ such that all of the following hold:
+	\begin{enumerate}
+	\item $\vec{v} + \vec{w} = \vec{w} + \vec{v}$
+	\item $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$
+	\item $\vec{o} + \vec{v} = \vec{v}$
+	\item For every $\vec{v} \in V$, there is $\vec{w} \in V$ such that $\vec{v} + \vec{w} = \vec{o}$
+	\item $(\lambda + \mu)\vec{v} = \lambda \vec{v} + \mu \vec{v}$
+	\item $\lambda (\vec{v} + \vec{w}) = \lambda \vec{v} + \lambda \vec{w}$
+	\item $(\lambda \mu) \vec{v} = \lambda(\mu \vec{v})$
+	\item $1\vec{v} = \vec{v}$
+	\end{enumerate}
+	In 1-3, all $\vec{u}, \vec{v}, \vec{w} \in V$ and in 5-8, all $\lambda, \mu \in \mathbb{F}$ and all $\vec{v}, \vec{w} \in V$.\\
+	$\mathbb{F}$ is the field of scalars (usually $\mathbb{R}$, $\mathbb{C}$, or $\mathbb{Q}$). Thus $\lambda$ and $\mu$ are scalars.
+\end{defn}
+\begin{ex}
+$V= \mathbb{R}^n =$ all column vectors with $n$ entries from $\mathbb{R}$.\\
+$+$ is the usual vector addition.\\
+$\cdot$ is the usual scalar multiplication.\\
+Prove that $(\mathbb{R}^n,+,\cdot)$ is a vector space.\\
+Proof that vector addition is commutative.
+\begin{proof}
+	Let $\vec{v}, \vec{w} \in V$. We show that $\vec{v} + \vec{w} = \vec{w} + \vec{v}$.\\
+	By definition of $V=\mathbb{R}^n$, there exists $a_1,a_2,...,a_n$ and $b_1,b_2,...,b_n \in \mathbb{R}^\prime$ such that $\vec{v} = \begin{bmatrix}[c] a_1\\ a_2\\ \vdots\\ a_n\\ \end{bmatrix}$ and $\vec{w} = \begin{bmatrix}[c] b_1\\ b_2\\ \vdots\\ b_n\\ \end{bmatrix}$
+	Notice $\vec{v} + \vec{w} = \begin{bmatrix}[c] a_1+b_1\\ a_2+b_2\\ \vdots\\ a_n+b_n\\ \end{bmatrix} = \begin{bmatrix}[c] b_1+a_1\\ b_2+a_2\\ \vdots\\ b_n+a_n\\ \end{bmatrix} = \vec{w} + \vec{v}$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}
+Example of something that is not a vector space.\\
+$V=\Z$ is not a vector space. Since $\Z$ isn't a field, there isn't a scalar field. It also doesn't have any reciprocals. Multiplicative inversion is not defined in $\Z$.\\
+For example. $2 \in \Z$, but there is not a single element $b \in \Z$ such that $2b = 1$.
+\end{ex}
+
+\begin{defn}
+Suppose $V$ is a vector space under the operations $(+,\cdot)$. A subset $W \subset V$ is a vector subset if it is a vector space under $(+,\cdot)$. 
+\end{defn}
+\begin{ex}
+$V=\mathbb{R}^3$, $W= \{\begin{bmatrix}[c] x\\ y\\ z\\ \end{bmatrix} : z=0 \} = \{ \begin{bmatrix}[c] x\\ y\\ z\\ \end{bmatrix} : x,y \in \mathbb{R} \}$\\
+Is $W$ a vector space?
+\end{ex}
+
+\begin{thrm}
+The subspace criterion:\\
+Suppose $V$ is a vector subspace and $W \subset V$.\\
+Then $W$ is a vector subspace iff all of the following hold:
+\begin{enumerate}
+\item $W \neq \emptyset$
+\item $\vec{v} + \vec{w} \in W$ for all $\vec{v},\vec{w} \in W$
+\item $\lambda \vec{v} \in W$ for all $\lambda \in \mathbb{F}$ and all $\vec{v} \in W$
+\end{enumerate}
+\end{thrm}
+
+%===========================================
+
+
 
 \chapter{2018-01-25}
 Problem 3.99 in homework:\\

@@ -57,6 +57,8 @@ for key, value in wd.items():
                 least[y] = least[y-1]
             least[i] = key
             break
+    if value == 1:
+        unique += 1
 # Print out results
 print("-----------------------------------")
 print("# Most Frequent Words:")
@@ -71,4 +73,4 @@ print("___________________________________")
 for x in range(0, 10):
     print(least[x].ljust(20), wd.get(least[x]))
 print("-----------------------------------")
-print("Number of Unique Words:\n%s" % len(wd))
+print("Number of Unique Words:\n%s" % unique)

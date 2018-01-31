@@ -49,14 +49,15 @@ for key, value in wd.items():
             break
     for i in range(0,10):
         # Repeat for least[] list
-        if least[i] == "":
-            least[i] = key
-            break
-        elif value <= wd[least[i]]:
-            for y in range(9, i-1, -1):
-                least[y] = least[y-1]
-            least[i] = key
-            break
+        if value > 1:
+            if least[i] == "":
+                least[i] = key
+                break
+            elif value <= wd[least[i]]:
+                for y in range(9, i-1, -1):
+                    least[y] = least[y-1]
+                least[i] = key
+                break
     if value == 1:
         unique += 1
 # Print out results

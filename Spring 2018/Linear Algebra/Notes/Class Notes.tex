@@ -1,6 +1,4 @@
 \documentclass{report}
-%\setcounter{tocdepth}{1}
-%\setcounter{secnumdepth}{4}
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{tabto}
@@ -46,7 +44,13 @@
   \array{#1}}
 \makeatother 
  
- 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
 
 
 
@@ -54,7 +58,7 @@
 \begin{document}
  
 \tableofcontents{}
-\chapter{2018-01-11}
+\mychapter{1}{2018-01-11}
 \section{Gauss-Jordan Elimination}
 \begin{align*}
 IF \quad M=
@@ -207,7 +211,7 @@ Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tupl
 
 %==========================================
 
-\chapter{2018-01-12}
+\mychapter{2}{2018-01-12}
 \section{Gauss-Jordan Elimination}
 \begin{align*}
 IF \quad M=
@@ -360,8 +364,10 @@ Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tupl
 
 %===========================================
 
-\chapter{2018-01-16}
+\mychapter{3}{2018-01-16}
+\section{Homework Review}
 \begin{enumerate}
+\subsection{2.82}
 % 2.82
 \item [2.82.] Find the values of k such that each of the following systems of unknowns x, y, and z has (i) a unique solution, (ii) no solution, (iii) an infinite number of solutions.
 	\begin{enumerate}
@@ -576,6 +582,7 @@ Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tupl
 		\end{enumerate}
 	\end{enumerate}
 \medskip
+\subsection{2.83}
 % 2.83
 \item [2.83.] Determine whether or not each system has a nonzero solution.
 	\begin{enumerate}
@@ -652,6 +659,7 @@ Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tupl
 	
 	\medskip	
 	\end{enumerate}
+\subsection{2.86}
 % 2.86
 \item [2.86.] Reduce A to echelon form and then to row canonical form.
 	\begin{enumerate}
@@ -677,10 +685,13 @@ Suppose $V_a=(a_1,a_2,a_3,...,a_n)$ and $V_b = (b_1,b_2,b_3,...,b_n)$ are n-tupl
 	\end{bmatrix*}
 	\end{align*}
 	\end{enumerate}
+\subsection{2.88}
 % 2.88
 \item [2.88.] Using only 0s and 1s, list all possible 2 x 2 matrices in row canonical form.
+\subsection{2.89}
 % 2.89
 \item [2.89.] Using only 0s and 1s, list all possible 3 x 3 matrices in row canonical form.
+\subsection{2.92}
 % 2.92
 \item [2.92.] Consider the following system of unknowns x and y:
 \[ \sysdelim{.}{.}\systeme[xy]{ax+by=1,cx+dy=0} \]
@@ -691,8 +702,11 @@ And show that if $ad-bc=0$ and if $c \neq 0$ or $d \neq 0$, then the system has 
 
 %===============================================
 
-\chapter{2018-01-18}
+\mychapter{4}{2018-01-18}
+\section{Homework Review}
+\subsection{1.76}
 For 1.76 in homework, you can write each of the equations in the 2x3 matrix as an augmented matrix 6x2 and solve as normal for the 12 unknowns.\\
+\subsection{2.80}
 2.80(b) on homework:\\
 z and t become free variables and x and y are dependent variables.\\
 When writing out solution set, you want to assign z and t (or any free variables) to a new set of variables.\\
@@ -782,7 +796,9 @@ Fact: Every elementary row operation can be written as an invertible matrix.\\
 
 %==================================================
 
-\chapter{2018-01-19}
+\mychapter{5}{2018-01-19}
+\section{Homework Review}
+\subsection{1.76}
 On number 1.76 in Homework 3, we need to find a better way of solving this type of system.
 \[
 \begin{bmatrix}[rr] 1 & 2\\ 3 & 6\\ \end{bmatrix}
@@ -790,6 +806,7 @@ On number 1.76 in Homework 3, we need to find a better way of solving this type 
 \]
 Except this doesn't use distinct values. But any multiple of the vector (2,-1) will give us a (0,0) result so to get distinct values, we just multiply the vector (2,-1) by any scalar.\\
 
+\section{Elementary Matrices/Row Operations}
 \begin{defn} An elementary matrix is any matrix that can be obtained by applying exactly one elementary row operation to the identity matrix. \end{defn}
 
 Example: Elementary or not?\\
@@ -836,7 +853,8 @@ The three matrices on the right half above have names. From left to right: Lower
 
 %===============================================
 
-\chapter{2018-01-22}
+\mychapter{6}{2018-01-22}
+\section{nth Power of Matrices}
 \begin{defn}
 	The $n^{th}$ power of a square matrix $A$ is either the identity matrix $I$ (if $n=0$) or $AA^{n-1}$ if $n \geq 1$.
 \end{defn}
@@ -888,7 +906,9 @@ $\mathbb{C}$ is the field of all complex numbers $\{a+ib: a,b\in \mathbb{R}\}$.
 
 %==============================================
 
-\chapter{2018-01-23}
+\mychapter{7}{2018-01-23}
+\section{Homework Review}
+\subsection{3.90}
 Homework \#3.90 page 146\\
 Let $B= \begin{bmatrix}[rrr] 1 & 8 & 5\\ 0 & 9 & 5\\ 0 & 0 & 4\\ \end{bmatrix}$. Find a triangular matrix $A$ with positive diagonal entries such that $A^2=B$.\\
 Assume that \[ A= \begin{bmatrix}[rrr] a_1 & a_2 & a_3\\ 0 & a_4 & a_5\\ 0 & 0 & a_6\\ \end{bmatrix} \]
@@ -968,7 +988,9 @@ Then $W$ is a vector subspace iff all of the following hold:
 
 
 
-\chapter{2018-01-25}
+\mychapter{8}{2018-01-25}
+\section{Homework Review}
+\subsection{3.99}
 Problem 3.99 in homework:\\
 We need to solve the unknowns such that $M^TM$ is equal to the identity matrix.
 	\begin{align*}
@@ -994,7 +1016,7 @@ We need to solve the unknowns such that $M^TM$ is equal to the identity matrix.
 	0 & 0 & 1\\
 	\end{bmatrix}
 	\end{align*}
-	
+\subsection{3.96}
 For problem 3.96.a:\\
 \begin{proof}
 Assume A and B are symmetric. Notice that $(A+B)^T=A^T+B^T = A + B$ by the law of transposes. Thus, $A+B$ is also symmetric.
@@ -1035,7 +1057,8 @@ Use the subspace criterion. (page 159 Theorem 4.2)\\
 
 %====================================================
 
-\chapter{2018-01-26}
+\mychapter{9}{2018-01-26}
+\section{Nullspaces}
 \begin{defn}
 Let $A$ be an m x n matrix. The nullspace of $A$ is the set of all vectors $\vec{v}$ such that $A\vec{v} = \vec{0}$.\\
 Notation: $N(A) = null(A) = nulspace(A) = \{\vec{v}: A\vec{v} = \vec{0}\}$
@@ -1045,6 +1068,7 @@ Notation: $N(A) = null(A) = nulspace(A) = \{\vec{v}: A\vec{v} = \vec{0}\}$
 $M$ is orthogonal is $MM^T = I$.
 \end{defn}
 
+\section{Linear Algebra Core Concepts}
 Five Concepts Required for Linear Algebra:
 \begin{enumerate}
 \item Linear Combinations
@@ -1076,7 +1100,8 @@ $(12,4) = -8(0,1)+12(1,1)$
 
 %==========================================
 
-\chapter{2018-01-29}
+\mychapter{10}{2018-01-29}
+\section{Spans}
 \begin{defn}
 Suppose $V$ is a vector space, and $S\subset V$ is any subset. The span of $S$ is the set of all linear combinations of elements of $S$.
 \[ span(S) = \{ c_1\vec{v_1}+c_2\vec{v_2}+\dots+c_n\vec{v_n}: c_1,c_2,...,c_n \in \mathbb{F}, \vec{v_1},\vec{v_2},...,\vec{v_n} \in S \} \]
@@ -1126,7 +1151,8 @@ $S_8=\{(0,1,-1),(1,0,-1),(1,-1,0)\}$ NO
 \end{ex}
 
 %=================================================
-\chapter{2018-01-30}
+
+\mychapter{11}{2018-01-30}
 \section{Row and Column Spaces}
 \begin{defn}
 Suppose $A$ is an m x n matrix. The row space of $A$ is the span of the rows of $A$. The column space of $A$ is the span of the columns of $A$.
@@ -1144,18 +1170,15 @@ Spanning set for null space of $A$:
 \[ s= \{\begin{bmatrix}[r]-2\\1\\0\\0\\0\\ \end{bmatrix}, \begin{bmatrix}[r]-3\\0\\1\\0\\0\\ \end{bmatrix},\begin{bmatrix}[r]-6\\0\\0\\-7\\1\\ \end{bmatrix} \} \]
 To tell if you can reduce vectors, look at the zero rows. Since multiplying by a scalar will always give a zero in those rows, this means that there is no combination in which we get a nonzero value in the zero row. This means there are no redundancies. 
 
-\section{Class Questions}
-\# 4.36 in homework: $(a,b)+(c,d) = (a+c,b+d)$\\
+\section{Homework Review}
+\subsection{4.36}
+$(a,b)+(c,d) = (a+c,b+d)$\\
 Above is a function for how to add vectors together.\\
 $k(a,b)=(ka,0)$ This is the function for vector scalars.\\
 Verify that this satisfies $A_4$\\
 Suppose that $(a,b),(c,d)$ are given. Notice $(a,b)\vec{+}(c,d)=(a+c,b+d)$ by definition of "$\vec{+}$". By the commutative property of addition, we can rewrite this as $(c+a,a+b) = (c,d)\vec{+}(a,b)$ by definition of "$\vec{+}$".\\
 $A_1-A_4$: These hold because the addition is defined as usual.\\
 To show $M_4$ is violated, find a specific $\vec{u}$ such that $1\vec{u} \neq \vec{u}$.
-\section{Linear Independence}
-
-
-
 
 
 

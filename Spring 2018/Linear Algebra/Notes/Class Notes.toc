@@ -45,3 +45,10 @@
 \contentsline {section}{\numberline {11.1}Row and Column Spaces}{23}
 \contentsline {section}{\numberline {11.2}Homework Review}{23}
 \contentsline {subsection}{\numberline {11.2.1}4.36}{23}
+\contentsline {chapter}{\numberline {12}2018-02-01}{25}
+\contentsline {section}{\numberline {12.1}Homework Review}{25}
+\contentsline {subsection}{\numberline {12.1.1}4.43}{25}
+\contentsline {subsection}{\numberline {12.1.2}4.49}{25}
+\contentsline {subsection}{\numberline {12.1.3}4.51}{25}
+\contentsline {subsection}{\numberline {12.1.4}4.52}{26}
+\contentsline {section}{\numberline {12.2}Zero Vector Lemma}{26}

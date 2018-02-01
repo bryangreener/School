@@ -1181,10 +1181,59 @@ $A_1-A_4$: These hold because the addition is defined as usual.\\
 To show $M_4$ is violated, find a specific $\vec{u}$ such that $1\vec{u} \neq \vec{u}$.
 
 
+\chapter{2018-02-01}
+\section{Homework Review}
+\subsection{4.43}
 
+Part (b)\\
+$v=2t^2+3t-4$, $w=t^2-2t-3$\\
+Write $u=4t^2-6t-1$ as a linear combination of $v$ and $w$ if possible.\\
+$4t^2-6t-1=x(2t^2+3t-4)+y(t^2-2t-3)$\\
+Equate coefficients:
+\begin{align*}
+	t^2 \quad 4 &= 2x+y\\
+	t \quad -6 &= 3x-2y\\
+	1 \quad -1 &= -4x-3y\\
+	\begin{bmatrix}[rr|r]
+	2&1&4\\3&-2&-6\\4-&-3&-1\\
+	\end{bmatrix}
+	&= \begin{bmatrix}[rr|r] 1&0&0\\0&1&0\\0&0&1\\ \end{bmatrix}\\
+	0x+0y&=1
+\end{align*}
+Thus, there is no solution to this system. Empty Solution Set (or inconsistent system).
 
+\subsection{4.49}
+Assume $V$ is a vector space and $W$, $U$, and $U \cup W$ are subspaces of $V$. Show $U \subset W$ or $W \subset U$.\\
+\begin{proof}
+Proof by Contradiction.\\
+Assume $U \not\subset W$ and $W \not\subset U$. Then $V=\mathbb{R}^2$, $U=\{(x,y):y=0\}$, and $W=\{(x,y):x=0\}$. Notice that $U \cup W$ is not a subspace of $V$. Notice that $(1,0)\in U$ and $(0,1) \in W$ but $(1,0)+(0,1)=(1,1) \not\in U \cup W$. [TO BE COMPLETED. THIS WONT BE ON TEST]
+\end{proof}
 
+\subsection{4.51}
+(a) Solve the system:\\
+\[ (x,y,z)=C_1(1,1,1) + C_2(0,1,2)+C_3(0,1,3) \]
+$x=C_1$, $y=C_1+C_2+C_3$, and $z=C_1+2C_2+3C_3$
+\begin{align*}
+\begin{bmatrix}[r]x\\y\\z\\ \end{bmatrix}
+= \begin{bmatrix}[rrr]1&0&0\\1&1&1\\1&2&3\\ \end{bmatrix}
+\begin{bmatrix}[r]C_1\\C_2\\C_3\\ \end{bmatrix}
+\end{align*}
 
+\subsection{4.52}
+(a) 
+$\sysdelim{.}{.}\systeme[C_1C_2C_3abc]{C_1+C_2+C_3 = a, C_1+2C_2+C_3 =b, C_1+3C_2+2C_3 = c}$
+\begin{align*}
+rref \begin{bmatrix}[rrr|r]
+1&1&0&a\\ 1&2&1&b\\ 1&3&2&c\\
+\end{bmatrix}
+= \begin{bmatrix}[rrr|r] 1&1&0&a\\0&1&1&b-a\\0&2&2&c-a\\ \end{bmatrix}
+=
+\begin{bmatrix}[rrr|r] 1&1&0&a\\0&1&1&b-a\\0&0&0&a-2b+c\\ \end{bmatrix}
+\end{align*}
+Since we end with an equation $0 = a-2b+c$ , then only few vectors work as a solution.
+
+\section{Zero Vector Lemma}
+\begin{lemma} In any vector space, there is only one zero vector. \end{lemma}
 
 
 

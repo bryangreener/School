@@ -78,7 +78,10 @@
 \begin{enumerate}
 \item[4.36.] Let $V$ be the set of ordered pairs $(a,b)$ of real numbers with addition in $V$ and scalar multiplication on $V$ defined by
 			\[ (a,b) + (c,d) = (a+c,b+d) \quad k(a,b) = (ka,0) \]
-			Show that $V$ satisfies all the axioms of a vector space except $[M_4]$, that is, except $1u=u$. Hence $[M_4]$ is not a consequence of the other axioms.
+			Show that $V$ satisfies all the axioms of a vector space except $[M_4]$, that is, except $1u=u$. Hence $[M_4]$ is not a consequence of the other axioms.\\~\\
+			Let $u=(a,b)$. Then
+			\[ 1u = 1(a,b) = (1a, 0) \neq (a,b) = u \]
+			Thus since $1u \neq u$, axiom $M_4$ fails and this is not a vector space.
 			
 \item[4.38.] Let $V$ be the set of ordered pairs $(a,b)$ of real numbers. Show that $V$ is not a vector space over $\mathbb{R}$ with addition in $V$ and scalar multiplication on $V$ defined by
 	\begin{enumerate}
@@ -155,35 +158,29 @@
 		This system has no solutions.\\
 
 	% 4.41.c
-	\item Find $k$ so that $(1,k,5)$ is a linear combination of $u$ and $v$.
+	\item Find $k$ so that $(1,k,-2)$ is a linear combination of $u$ and $v$.
 		\begin{align*}
-		\begin{bmatrix}[r]1\\k\\5\\ \end{bmatrix}
+		\begin{bmatrix}[r]1\\k\\-2\\ \end{bmatrix}
 		= x \begin{bmatrix}[r] 1\\2\\3\\ \end{bmatrix}
 		+ y \begin{bmatrix}[r] 2\\3\\1\\ \end{bmatrix}
 		= \begin{bmatrix}[r] x+2y\\ 2x+3y\\ 3x+y\\ \end{bmatrix}
 		\end{align*}
 		This can be rewritten as
-		\[ \sysdelim{.}{.}\systeme[xy]{x+2y=1,2x+3y=k,3x+y=5} \]
-		or
-		\[ \sysdelim{.}{.}\systeme[xyk]{x+2y=1,2x+3y-k=0,3x+y=5} \]
-		\begin{align*}
-		\begin{bmatrix}[rrr|r] 1&2&0&1\\2&3&-1&0\\3&1&0&5\\ \end{bmatrix}
-		= \begin{bmatrix}[rrr|r] 1&2&0&1\\3&1&0&5\\2&3&-1&0\\ \end{bmatrix}
-		= \begin{bmatrix}[rrr|r] 1&2&0&1\\3&1&0&5\\-3&-3&1\\ \end{bmatrix}
-		= \begin{bmatrix}[rrr|r] 1&2&0&1\\0&-5&0&5\\-2&-3&1&0\\ \end{bmatrix}\\
-		= \begin{bmatrix}[rrr|r] 1&2&0&1\\0&1&0&-1\\-2&-3&1&0\\ \end{bmatrix}
-		= \begin{bmatrix}[rrr|r] 1&0&0&3\\0&1&0&-1\\-2&-3&1&0\\ \end{bmatrix}
-		= \begin{bmatrix}[rrr|r] 1&0&0&3\\0&1&0&-1\\0&0&1&3\\ \end{bmatrix}
-		\end{align*}
-		Parameterization of solution set:
-		\begin{align*}
-		x&=3\\ y&= -1\\ k&= 3
-		\end{align*}
-		Thus when $k=3$, $(1,k,5) = 3u-v$.		
-		
+		\[ \sysdelim{.}{.}\systeme[xy]{x+2y=1,2x+3y=k,3x+y=-2} \]
+		So $y=-2-3x$. Plugging this into the first equations gives us $x=-1$ and so $y=1$. Plugging both $x$ and $y$ into the second equation results in $k=1$.		
 		
 	% 4.41.d
 	\item Find a condition on $a$, $b$, and $c$ so that $(a,b,c)$ is a linear combination of $u$ and $v$.
+		\begin{align*}
+		\begin{bmatrix}[r]a\\b\\c\\ \end{bmatrix}
+		= x \begin{bmatrix}[r] 1\\2\\3\\ \end{bmatrix}
+		+ y \begin{bmatrix}[r] 2\\3\\1\\ \end{bmatrix}
+		= \begin{bmatrix}[r] x+2y\\ 2x+3y\\ 3x+y\\ \end{bmatrix}
+		\end{align*}
+		This can be rewritten as
+		\[ \sysdelim{.}{.}\systeme[xy]{x+2y=a,2x+3y=b,3x+y=c} \]
+		
+		
 	\end{enumerate}
 	
 \item[4.43.] Write $u$ as a linear combination of the polynomials $v=2t^2+3t-4$ and $w=t^2-2t-3$, where:

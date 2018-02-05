@@ -1235,7 +1235,69 @@ Since we end with an equation $0 = a-2b+c$ , then only few vectors work as a sol
 \section{Zero Vector Lemma}
 \begin{lemma} In any vector space, there is only one zero vector. \end{lemma}
 
+% =========================================
 
+\mychapter{13}{2018-02-05}
+\section{Exam Review}
+\subsection{\#3}
+$x+7y-5z=0$. Find a finite spanning set for the solution space.
+\[ \begin{bmatrix}[rrr|r] 1&7&-5&0\\ \end{bmatrix} \]
+x is dependent and y and z are free variables.\\
+Parametrization of Solution Set:
+\[ \begin{bmatrix}[r] x\\y\\z\\ \end{bmatrix} = \begin{bmatrix}[r] -7y+5z\\free\\free\\ \end{bmatrix} = \begin{bmatrix}[r] -7s+5t\\s\\t\\ \end{bmatrix} \]
+Rewrite vector as linear combination:
+\[ =s \begin{bmatrix}[r]-7\\1\\0\\ \end{bmatrix} +t \begin{bmatrix}[r] 5\\0\\1\\ \end{bmatrix} \]
+Spanning Set = $\{\begin{bmatrix}[r]-7\\1\\0\\ \end{bmatrix} , \begin{bmatrix}[r]5\\0\\1\\ \end{bmatrix} \}$
+
+\subsection{\#6b}
+Skew symmetric means that it is the negative of its transpose.\\
+Notice: $M=\frac{1}{2}M + \frac{1}{2}M + \frac{1}{2}M^T-\frac{1}{2}M^T = \frac{1}{2}(M+M^T)+\frac{1}{2}(M-M^T)$
+
+\section{Homework Review}
+\subsection{5.50(a)}
+Consider the solution space
+\[ C_1(1,2,-3,1) + C_2(3,7,1,-2)+C_3(1,3,7,-4) = (0,0,0,0) \]
+\begin{align*}
+rref
+\begin{bmatrix}[rrr|r]
+1&3&1&0\\2&7&3&0\\-3&1&7&0\\1&-2&-4&0\\ \end{bmatrix}
+&= \begin{bmatrix}[rrr|r]
+1&0&-2&0\\ 0&1&1&0\\0&0&0&0\\0&0&0&0\\ \end{bmatrix}\\
+C_1 &= 2\\ C_2 &= -1\\ C_3 &= 1\\
+\end{align*}
+Now we verify our results:
+\[ 2(1,2,-3,1)+(-1)(3,7,1,-2)+1(1,3,7,-4) = (0,0,0,0) \]
+When looking at this equation, we can see that there is a linear independence. We can see this easier by moving the sets around to show that one of the sets is in the span of the others.
+\[ (3,7,1,-2) = 2(1,2,-3,1)+1(1,3,7,-4) \]
+
+\section{Linear Dependence/Independence}
+\begin{defn}
+Let $V$ be a vector space. Then a subset $S=\{\vec{v_1},\vec{v_2},...,\vec{v_n}\}$ is linearly dependent if the system $C_1\vec{v_1}+C_2\vec{v_2}+\dots+C_n\vec{v_n} = \vec{)}$ has only the trivial solution $C_1 = C_2 = \dots = C_n = 0$.
+\end{defn}
+\begin{defn}
+A set $S=\{\vec{v_1},\vec{v_2},...,\vec{v_n}\}$ is linearly independent if one of the vectors in $S$ lies in the span of the others.
+\end{defn}
+\begin{ex}
+Dependent or Independent?\\
+\begin{align*}
+S_1&=\{(1,0,0),(0,1,0),(0,0,1)\}\\
+S_2&=\{(1,0,0),(0,1,0)\}\\
+S_3&=\{(1,2,0),(3,6,0)\}\\
+S_4&=\{(1,0,0),(0,1,0),(0,0,1),(1,2,3)\}\\
+S_5&=\{(1,0,-1),(1,-1,0),(0,1,-1)\}
+\end{align*}
+Start by writing down each system.
+\[ S_1: \quad C_1(1,0,0)+C_2(0,1,0)+C_3(0,0,1)=(0,0,0) \]
+How many solutions does this have?\\
+Simplifying the left side of this equation gives us $(C_1,C_2,C_3)=(0,0,0)$. This has a unique solution therefore it is independent.
+\begin{align*}
+S_1: &I\\ S_2: &I\\ S_3: &D\\ S_4: &D\\ S_5: &D
+\end{align*}
+Another way to solve this using rref:
+\[ rref \begin{bmatrix}[rrr]1&0&-1\\1&-1&0\\0&1&-1\\ \end{bmatrix} = \begin{bmatrix}[rrr] 1&0&-1\\0&1&-1\\0&0&0\\ \end{bmatrix} \]
+Since this produced a zero row, we get linear dependence.\\
+Another example: $S_6=\{(1,2,3),(0,0,0)\}$. This one is dependent since the first vector can easily be written as a multiple of the second vector.
+\end{ex}
 
 
 \end{document}

@@ -1,0 +1,31 @@
+-----------------------------------
+# Most Frequent Words:
+WORD                 COUNT
+___________________________________
+the                  1506
+of                   879
+and                  635
+in                   603
+to                   547
+is                   362
+that                 270
+it                   264
+or                   263
+they                 221
+-----------------------------------
+# Least Frequent Words:
+WORD                 COUNT
+___________________________________
+oppressions          2
+progress             2
+theft                2
+understands          2
+unmasks              2
+race                 2
+pessimistic          2
+icon                 2
+massive              2
+oppression           2
+-----------------------------------
+Number of Unique Words:
+2166

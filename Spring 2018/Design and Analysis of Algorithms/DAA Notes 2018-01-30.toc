@@ -1,3 +1,0 @@
-\contentsline {section}{\numberline {1}Depth First Search (DFS)}{1}
-\contentsline {subsection}{\numberline {1.1}BFS vs DFS}{1}
-\contentsline {subsection}{\numberline {1.2}DFS (u)}{1}

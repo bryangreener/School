@@ -1,0 +1,51 @@
+Meeting with McKane
+
+Need to make help file for R functions with helpful comments (like for errors as well)
+Some probability functions (like bday problem)
+Also want to write a paper explaining what the R functions do and how to use package.
+There are also data sets built into the package.
+User can also use their own data sets with functions.
+Package will be fully public
+Some functions will require external packages
+    Need rfit package
+Want to get this on github as a package eventually
+    May or may not have a github account for us to host this on
+Intro to Mathematical Statistics 8th Edition (NEED)
+help commands in R pull data directly from the manfile in the directory created when creating a function.
+
+See R script example:
+    Look up how to add license info in the commands listed
+    Need to add LazyLoad in description
+
+R CMD build [mypkg] to build package in bash. Title field in RD is required. This command builds package and gives a package number and a .tar.gz file. To install in R. Run sudo R CMD install [packagename]
+At any point in progress you can use the build command.
+
+stat.wmich.edu/mckean/hmchomepage
+On this page, there is a link to source commands that you can run in R.
+
+End Goal: Get package on CRAN and if possible submit a journal.
+
+
+Program Information:
+    - Needs a manpage for each function
+    - Functions return helpful information on errors
+    - Package will include data sets and user will be able to use their own data sets with functions
+    - Some functions require 3rd party packages
+        -- RFit is an example of one package that is needed
+    - Help commands in R pull data from manpage
+    - "R CMD build [package name]" in bash will build the package.
+        -- Requires Title field
+        -- This command can be run at any point
+        -- Title field in the RD file is required.
+        -- This command builds the packae and gives a package number and a .tar.gz file (maybe .zip in windows?)
+    - Need to add license info in the package config
+    - Will probably need LazyLoad enabled
+Additional Information:
+    - The functions needed are in McKean's book Intro to Mathematical Statistics 8th Edition
+        -- Many functions are also on his page at stat.wmich.edu/mckean/hmchomepage
+    - This package will be fully public. No restrictions.
+    - We want to keep this package on github for public access
+Main Goal:
+    We want to eventually get this package submitted and published on CRAN.
+Additional Goals (not needed):
+    If everything goes smooth, we can write up a journal to be published regarding this work.

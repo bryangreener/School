@@ -1,4 +1,0 @@
-DAA Notes 2018-01-23
-
-Adjacency Matrix has space complexity of O(v^2).
-Adjacency list uses less space and is a linked list of linked lists.

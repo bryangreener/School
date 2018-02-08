@@ -1,0 +1,226 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#6}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-01-28}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[4.63] Let $A$ and $B$ be matrices for which the product $AB$ is defined. Show that the column space of $AB$ is contained in the column space of $A$.
+
+\item[5.48] Determine whether or not $u$ and $v$ are linearly dependent, where:
+	\begin{enumerate}
+	%5.48.a	
+	\item $u=(1,2,3),v=(3,2,1)$\\
+		\[ rref\begin{bmatrix}[rrr]1&2&3\\3&2&1\\\end{bmatrix} =
+		\begin{bmatrix}[rrr]1&0&-1\\0&1&2\\\end{bmatrix} \]
+		Since the rref of these vectors does not produce a zero row, then the two vectors are not multiples of each other and therefore this system is linearly independent.
+	%5.48.c
+	\item[(c)] $u=(1,2,3,4),v=(0,0,0,0)$\\
+		Since $\vec{u}$ is a multiple of $\vec{v}$, this system is linearly dependent.
+	\end{enumerate}
+	
+\item[5.49] Determine whether or not $u$ and $v$ are linearly dependent, where:
+	\begin{enumerate}
+	%5.49.a	
+	\item $u=\begin{bmatrix}[rr]4&-2\\0&-1\\\end{bmatrix},v=\begin{bmatrix}[rr]-2&1\\0&\frac{1}{2}\\\end{bmatrix}$\\
+		\begin{align*}
+		x\begin{bmatrix}[rr]4&-2\\0&-1\\\end{bmatrix}+y\begin{bmatrix}[rr]-2&1\\0&\frac{1}{2}\\\end{bmatrix} &= \begin{bmatrix}[rr]0&0\\0&0\\\end{bmatrix}\\
+		\begin{bmatrix}[rr]4x-2y&-2x+y\\{}&-x+\frac{1}{2}y\\\end{bmatrix} &= \begin{bmatrix}[rr]0&0\\0&0\\\end{bmatrix}
+		\end{align*}		
+		This results in the following system of linear equations:
+		\[ \sysdelim{.}{.}\systeme[xy]{4x-2y=0,-2x+y=0,-x+\frac{1}{2}y=0} \]
+		This can be further reduced by subtracting two times the third equation from the second equation. This results in one of the equations zeroing out as seen below.
+		\[ \sysdelim{.}{.}\systeme[xy]{4x-2y=0,-x+\frac{1}{2}y=0,0x+0y=0} \]
+		Thus since we get a zero row, this system is linearly dependent.
+	%5.49.b
+	\item $u=2t^2+8t-6,v=-3t^2-12t+9$\\
+		By performing $\frac{1}{2}u = t^2+4t-3$, we notice that $v=-3u$. Thus since one of the equations is a multiple of the other, we get linear dependence.
+	\end{enumerate}
+	
+\item[5.50] Determine whether the following vectors in $\mathbb{R}^4$ are linearly dependent or independent:
+	\begin{enumerate}
+	%5.50.a
+	\item $(1,2,-3,1),(3,7,1,-2),(1,3,7,-4)$
+		\[ rref\begin{bmatrix}[rrrr]1&2&-3&1\\3&7&1&-2\\1&3&7&-4\\\end{bmatrix} = \begin{bmatrix}[rrrr]1&0&-23&11\\0&1&10&-5\\0&0&0&0\\\end{bmatrix} \]
+		Since rref of this system produces a zero row, this system is linearly dependent.
+	%5.50.b
+	\item $(1,3,1,-2),(2,5,-1,3),(1,3,7,-2)$
+		\[ rref\begin{bmatrix}[rrrr]1&3&1&-1\\2&5&-1&3\\1&3&7&-2\\\end{bmatrix} = \begin{bmatrix}[rrrr]1&0&0&19\\0&1&0&-7\\0&0&1&0\\\end{bmatrix} \]
+		Thus we get the following system of equations
+		\[ \sysdelim{.}{.}\systeme[abcd]{a+19d=0,b-7d=0,c=0} \]
+		Since we get the free variable $d$, this system is linearly independent.
+	\end{enumerate}
+	
+\item[5.51] Determine whether the polynomials $u$, $v$, $w$ in $\mathbb{P}(t)$ are linearly dependent or independent:
+	\begin{enumerate}
+	%5.51.a
+	\item $u=t^3-4t^2+3t+3,v=t^3+2t^2+4t-1,w=2t^3-t^2-3t+5$
+		\begin{align*}
+		x(t^3-4t^2+3t+3)+y(t^3+2t^2+4t-1)+z(2t^3-t^2-3t+5) &= 0\\
+		or \qquad (x+y+2z)t^3+(-4x+2y-z)t^2+(3x+4y-3z)t+(3x-y+5z) &= 0\\
+		\end{align*}
+		This gives us the following system of equations:
+		\[ \sysdelim{.}{.}\systeme[xyz]{x+y+2z=0,-4x+2y-z=0,3x+4y-3z=0,3x-y+5z=0} \]
+		\[ rref\begin{bmatrix}[rrr|r]1&1&2&0\\-4&2&-1&0\\3&4&-3&0\\3&-1&5&0\\\end{bmatrix} = \begin{bmatrix}[rrr|r]1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&0\\\end{bmatrix} \]
+		Since this results in the identity matrix, this system is linearly independent.
+	\end{enumerate}
+	
+\item[5.52] Show that the following functions of $f$, $g$, and $h$ are linearly independent:
+	\begin{enumerate}
+	%5.52.a
+	\item $f(t)=e^t,g(t)=sin(t),h(t)=t^2$
+		\[ xf(t)+yg(t)+zh(t) = xe^t+ysin(t)+zt^2 = 0 \]
+		Let $t=0$, then $x(1)+y(0)+z(0) = 0$ so $x=0$.\\
+		Let $t=\frac{\pi}{2}$, then $x(e^{\frac{\pi}{2}})+y(1)+z((\frac{\pi}{2})^2)=0$ so $y+z(\frac{\pi^2}{4})=0$.\\
+		Let $t=\pi$, then $x(e^{\pi})+y(0)+z(\pi^2)=0$ so $z(\pi^2)=0$.\\
+		By back substitution, we get $x=0$, $y=0$, and $z=0$. Thus this system is linearly independent.
+	%5.52.b
+	\item $f(t)=e^t,g(t)=e^{2t},h(t)=t$
+	\[ xf(t)+yg(t)+zh(t) = xe^t+ye^{2t}+zt = 0 \]
+	Let $t=0$, then $x(1)+y(1)+z(0) = 0$ so $x+y=0$.\\
+	Let $t=\frac{\pi}{2}$, then $x(e^{\frac{\pi}{2}})+y(e^{\pi})+z(\frac{\pi}{2}) = 0$.\\
+	Let $t=\pi$, then $x(e^\pi)+y(e^{2\pi})+z(\pi)=0$.\\
+	Since there is no reduction possible, this system is linearly dependent.
+	\end{enumerate}
+\item[5.55] Suppose that $\{u_1,...,u_r,w_1,...,w_s\}$ is a linearly independent subset of a vector space $V$. Show that $span(u_i) \cap span(w_j)=\{0\}$. [Recall that $span(u_i)$ is the subspace of $V$ spanned by the $u_i$.]
+\item[5.60] Find a subset of $u_1,u_2,u_3,u_4$ which gives a basis for $W=span(u_1,u_2,u_3,u_4)$ of $\mathbb{R}^5$ where:
+	\begin{enumerate}
+	%5.60.a
+	\item $u_1=(1,1,1,2,3),u_2=(1,2,-1,-2,1),u_3=(3,5,-1,-2,5),u_4=(1,2,1,-1,4)$
+		\[ rref\begin{bmatrix}[rrrr]1&1&3&1\\1&2&5&2\\1&-1&-1&1\\2&-2&-2&-1\\3&1&5&4\\\end{bmatrix} = \begin{bmatrix}[rrrr]1&0&1&0\\0&1&2&0\\0&0&0&1\\0&0&0&0\\0&0&0&0\\\end{bmatrix} \]
+		Since the pivot entries are in columns 1, 2, and 4, we get the subset $u_1,u_2,u_4$.
+	%5.60.b
+	\item $u_1=(1,-2,1,3,-1),u_2=(-2,4,-2,-6,2),u_3=(1,-3,1,2,1),u_4=(3,-7,3,8,-1)$\\
+		Repeating the formula from part 5.60.a, we get pivots at 1 and 3. Thus we get the subset $u_1,u_3$.
+	%5.60.c
+	\item $u_1=(1,0,1,0,1),u_2=(1,1,2,1,0),u_3=(1,2,3,1,1),u_4=(1,2,1,1,1)$\\
+		Repeating the formula from part 5.60.a, we get pivots at 1, 2, 3, and 4. Thus we get the subset $u_1,u_2,u_3,u_4$.
+	%5.60.d
+	\item $u_1=(1,0,1,1,1),u_2=(2,1,2,0,1),u_3=(1,1,2,3,4),u_4=(4,2,5,4,6)$\\
+		Repeating the formula from part 5.60.a, we get pivots at 1, 2, and 3. Thus we get the subset $u_1,u_2,u_3$.
+	\end{enumerate}
+\item[5.62] Find a basis and the dimension of the solution space $W$ of each homogeneous system:
+	\begin{enumerate}
+	%5.62.a
+	\item $\sysdelim{.}{.}\systeme[xyz]{x+3y+2z=0,x+5y+z=0,3x+5y+8z=0}$\\
+		\[ rref\begin{bmatrix}[rrr]1&3&2\\1&5&1\\3&5&8\\\end{bmatrix}=\begin{bmatrix}[rrr]1&0&\frac{7}{2}\\0&1&-\frac{1}{2}\\0&0&0\\\end{bmatrix} \]
+		Since $z$ is our only free variable then our dim $W=1$.\\
+		Let $z=k$ for $k\in\mathbb{R}$. Then
+		\begin{align*}
+		y-\frac{1}{2}k&=0\\
+		y&=\frac{1}{2}k\\
+		x+\frac{7}{2}k&=0\\
+		x&=-\frac{7}{2}k		
+		\end{align*} 
+		So $\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=\begin{bmatrix}[r]-\frac{7}{2}k\\\frac{1}{2}k\\k\\\end{bmatrix}=k\begin{bmatrix}[r]-\frac{7}{2}\\\frac{1}{2}\\1\\\end{bmatrix}$.\\
+		Thus the basis for the solution space is $(-\frac{7}{2},\frac{1}{2},1)$.
+	%5.62.b
+	\item $\sysdelim{.}{.}\systeme[xyz]{x-2y+7z=0,2x+3y-2z=0,2x-y+z=0}$\\
+		\[ rref\begin{bmatrix}[rrr]1&-2&7\\2&3&-2\\2&-1&1\\\end{bmatrix}=\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\\end{bmatrix} \]
+		Since we get a triangular matrix (in this case the identity matrix), we get no basis and dim $W=0$
+		
+	\end{enumerate}
+\item[5.63] Find a basis and the dimension of the solution space $W$ of each homogeneous system:
+	\begin{enumerate}
+	%5.63.a
+	\item $\sysdelim{.}{.}\systeme[xyzst]{x+2y-2z+2s-t=0,x+2y-z+3s-2t=0,2x+4y-7z+s+t=0}$
+		\[ rref\begin{bmatrix}[rrrrr]1&2&-2&2&-1\\1&2&-1&3&-2\\2&4&-7&1&1\\\end{bmatrix}=\begin{bmatrix}[rrrrr]1&2&0&4&-3\\0&0&1&1&-1\\0&0&0&0&0\\\end{bmatrix} \]
+		So we have three free variables $y$, $s$, and $t$. Thus we have dim $W=3$. Next, let $y=a$, $s=b$, and $t=c$.\\
+		Parametrization of Solution Set:
+		\begin{align*}
+		x&=-2a-4b+3c\\
+		y&=a\\
+		z&=c-b\\
+		s&=b\\
+		t&=c\\
+		\end{align*}
+		Which can be written as
+		\[ a\begin{bmatrix}[r]-2\\1\\0\\0\\0\\\end{bmatrix} +b\begin{bmatrix}[r]-4\\0\\-1\\1\\0\\\end{bmatrix}+c\begin{bmatrix}[r]3\\0\\1\\0\\1\\\end{bmatrix} \]
+		Therefore our basis is $\{(-2,1,0,0,0),(-4,0,-1,1,0),(3,0,1,0,1)\}$.
+	\end{enumerate}
+	
+\item[5.64] Find a homogeneous system whose solution space is spanned by the three vectors: \[ u_1=(1,-2,0,3,-1), \quad u_2=(2,-3,2,5,-3), \quad u_3=(1,-2,1,2,-2) \]
+	Let $v=(x,y,z,s,t)$. We form a matrix whose first rows are $u_1$, $u_2$, and $u_3$ and whose last row is $v$. We then reduce to row echelon form.
+	\[ rref\begin{bmatrix}[rrrrr]1&2&1&x\\-2&-3&-2&y\\0&2&1&z\\3&5&2&s\\-1&-3&-2&t\\\end{bmatrix}=\begin{bmatrix}[rrrrr]1&2&1&x\\0&1&0&2x+y\\0&0&1&-4x-2y+z\\0&0&0&-5x-y+z+s\\0&0&0&-x-y+z+t\\\end{bmatrix} \]
+	Setting the last two rows equal to zero gives us our homogeneous system
+	\[ \sysdelim{.}{.}\systeme[xyzst]{-5x-y+z+s=0,-x-y+z+t=0} \]
+
+
+
+
+\end{enumerate}
+
+
+
+\end{document}

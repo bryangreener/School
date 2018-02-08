@@ -64,3 +64,8 @@
 \contentsline {subsection}{\numberline {14.1.1}4.63}{29}
 \contentsline {section}{\numberline {14.2}Target and Range}{29}
 \contentsline {chapter}{2018-02-08}{31}
+\contentsline {section}{\numberline {14.1}Homework Review}{31}
+\contentsline {subsection}{\numberline {14.1.1}5.58}{31}
+\contentsline {subsection}{\numberline {14.1.2}5.62.a}{31}
+\contentsline {section}{\numberline {14.2}Basis}{31}
+\contentsline {section}{\numberline {14.3}Rank}{32}

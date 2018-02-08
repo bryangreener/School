@@ -1366,5 +1366,62 @@ Thus since we get an identity matrix, this system is independent.
 
 
 \mychapter{14}{2018-02-08}
+\section{Homework Review}
+\subsection{5.58}
+Assume $Au_1,Au_2,...,Au_r$ are linearly independent where $A$ is a matrix.\\
+Suppose $c_1,c_2,...,c_r$ are scalars such that $c_1\vec{u_1}+c_2\vec{u_2}+\dots+c_r\vec{u_r} = \vec{0}$.\\
+We are still missing something here. We need to include something about the matrix A and matrix multiplication (multiply both sides by A).
+Hence $c_1=c_2=c=\dots=c_r=0$.
+[At very end] Therefore, by definition, $u_1,u_2,...,u_r$ are linearly independent.
+
+\subsection{5.62.a}
+\[ \sysdelim{.}{.}\systeme[xyz]{x+3y+2z=0,x+5y+z=0,3x+5y+8z=0} \]
+See homework 6 for the rref of this system.\\
+So we get
+\[ \begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=\begin{bmatrix}[r]-\frac{7}{2}z\\\frac{1}{2}z\\z\\\end{bmatrix}=\begin{bmatrix}[r]-\frac{7}{2}t\\\frac{1}{2}t\\t\\\end{bmatrix}=t\begin{bmatrix}[r]-\frac{7}{2}\\\frac{1}{2}\\1\\\end{bmatrix} \]
+A basis for the solution set:
+\[ S=\{\begin{bmatrix}[r]-\frac{7}{2}\\\frac{1}{2}\\1\\\end{bmatrix}\} \]
+Suppose $c\in\mathbb{R}$ and $c\begin{bmatrix}[r]-\frac{7}{2}\\ \frac{1}{2}\\1\\\end{bmatrix} = \begin{bmatrix}[r]0\\0\\0\\\end{bmatrix}$.\\
+This has the unique solution $c=0$.
+You can also multiply this basis by any scalar and still get a valid basis.\\
+See the following section for more information on bases.
+
+\section{Basis}
+\begin{defn}
+Let $V$ be a vector space. Then a subset $S\subset V$ is a basis for $V$ if both of the following hold:
+	\begin{enumerate}
+	\item $S$ is a spanning set for $V$
+	\item $S$ is linearly independent.
+	\end{enumerate}
+\end{defn}
+\begin{thrm}
+Suppose $B_1$ and $B_2$ are bases for a vector space. Then $B_1$ and $B_2$ have the same number of elements.
+\end{thrm}
+\begin{defn}
+The dimension of a vector space $V$ is the number of elements in any basis of $V$.
+\end{defn}
+
+\section{Rank}
+\begin{defn}
+Let $A$ be a matrix. The row rank of $A$ is the dimension of the row space of $A$. The column rank of $A$ is the dimension of the column space of $A$.
+\end{defn}
+\begin{ex}
+\[ M=\begin{bmatrix}[rrrr]1&0&1&1\\1&1&3&0\\0&1&2&-1\\\end{bmatrix} \]
+$rowspace \subset \mathbb{R}^4$ because each row is a vector of four entries.\\
+$colspace \subset \mathbb{R}^3$ because each column is a vector of three entries.\\
+$rowrank(M)=2$
+\[ rref(M)=\begin{bmatrix}[rrrr]1&0&1&1\\0&1&2&-1\\0&0&0&0\\\end{bmatrix} \]
+Since we get linear independence and a zero row, then our row rank is 2.\\
+$colrank(M)=rowrank(M^T)=2$\\
+Repeating the same process as rowrank but on the transpose of the matrix gives us the column rank.
+\end{ex}
+
+
+
+
+
+
+
+
 
 \end{document}

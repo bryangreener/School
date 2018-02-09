@@ -77,7 +77,9 @@
 
 \begin{enumerate}
 \item[4.63] Let $A$ and $B$ be matrices for which the product $AB$ is defined. Show that the column space of $AB$ is contained in the column space of $A$.
-
+	\begin{proof}
+	By matrix multiplication, every column vector of $AB$ is a linear combination of the column vectors of $A$. Therefore every vector in the column space $AB$ is also in the column space of $A$.
+	\end{proof}
 \item[5.48] Determine whether or not $u$ and $v$ are linearly dependent, where:
 	\begin{enumerate}
 	%5.48.a	
@@ -154,6 +156,10 @@
 	Since there is no reduction possible, this system is linearly dependent.
 	\end{enumerate}
 \item[5.55] Suppose that $\{u_1,...,u_r,w_1,...,w_s\}$ is a linearly independent subset of a vector space $V$. Show that $span(u_i) \cap span(w_j)=\{0\}$. [Recall that $span(u_i)$ is the subspace of $V$ spanned by the $u_i$.]
+	\begin{proof}
+	Assume that $span(u_i)\cap span(w_j)$. Since the subset of $V$ is linearly independent, then none of $u$ or $w$ are multiples of each other. Thus $span(u_i)$ and $span(w_j)$ have no common values. Therefore $span(u_i)\cap span(w_j) = \{0\}$.
+	\end{proof}
+	
 \item[5.60] Find a subset of $u_1,u_2,u_3,u_4$ which gives a basis for $W=span(u_1,u_2,u_3,u_4)$ of $\mathbb{R}^5$ where:
 	\begin{enumerate}
 	%5.60.a
@@ -189,8 +195,9 @@
 	\item $\sysdelim{.}{.}\systeme[xyz]{x-2y+7z=0,2x+3y-2z=0,2x-y+z=0}$\\
 		\[ rref\begin{bmatrix}[rrr]1&-2&7\\2&3&-2\\2&-1&1\\\end{bmatrix}=\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\\end{bmatrix} \]
 		Since we get a triangular matrix (in this case the identity matrix), we get no basis and dim $W=0$
-		
 	\end{enumerate}
+	
+\pagebreak
 \item[5.63] Find a basis and the dimension of the solution space $W$ of each homogeneous system:
 	\begin{enumerate}
 	%5.63.a

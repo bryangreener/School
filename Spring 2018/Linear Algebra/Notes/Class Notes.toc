@@ -69,3 +69,9 @@
 \contentsline {subsection}{\numberline {14.1.2}5.62.a}{31}
 \contentsline {section}{\numberline {14.2}Basis}{31}
 \contentsline {section}{\numberline {14.3}Rank}{32}
+\contentsline {chapter}{2018-02-12}{33}
+\contentsline {section}{\numberline {15.1}Homework Review}{33}
+\contentsline {subsection}{\numberline {15.1.1}5.52.b}{33}
+\contentsline {subsection}{\numberline {15.1.2}5.82.a}{33}
+\contentsline {section}{\numberline {15.2}Examples of Bases}{33}
+\contentsline {section}{\numberline {15.3}Rank Continued}{34}

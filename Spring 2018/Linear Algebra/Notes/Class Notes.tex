@@ -1416,9 +1416,79 @@ $colrank(M)=rowrank(M^T)=2$\\
 Repeating the same process as rowrank but on the transpose of the matrix gives us the column rank.
 \end{ex}
 
+\mychapter{15}{2018-02-12}
+\section{Homework Review}
+\subsection{5.52.b}
+\[ v_1 = e^t \quad v_2 = e^{2t} \quad v_3 = t \]
+When $t=0$, $\begin{bmatrix}[r]1\\1\\0\\\end{bmatrix}$, $t=1$, $\begin{bmatrix}[r]e\\e^2\\1\\\end{bmatrix}$, $t=2$, $\begin{bmatrix}[r]e^2\\e^4\\2\\\end{bmatrix}$.\\
+Show $rref\begin{bmatrix}[lll]1&1&0\\e&e^2&1\\e^2&e^4&2\\\end{bmatrix}$ is the identity matrix.
 
+\subsection{5.82.a}
+Find the dimension of the space of all n x n symmetric matrices.\\
+\begin{tabular}{c|c}
+n & $dim(Sym^n)$\\
+\hline
+1 & 1\\
+2 & 3\\
+3 & 6\\
+4 & 10\\
+5\\
+\end{tabular}\\
+Basis for $sy^1=\{[1]\}$. Is ever 1 x 1 symmetric matrix a linear combination of this? Yes.\\
+Basis for $sym^2=\{\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix},\begin{bmatrix}[rr]0&0\\0&1\\\end{bmatrix},\begin{bmatrix}[rr]0&1\\1&0\\\end{bmatrix}\}$. \\These matrices follow the form of $\begin{bmatrix}[rr]a&c\\c&b\\\end{bmatrix}$.\\
+Basis for $sym^3 = \begin{bmatrix}[rrr]a&b&c\\b&d&e\\c&e&f\\\end{bmatrix}$. This pattern is formed because of its symmetry.
 
+\section{Examples of Bases}
+These can all be described as standard bases.
+\begin{ex}
+The standard basis for $\mathbb{R}^n$ (n-tuples as columns)\\
+$e_i = $ the 0/1 column whose ith entry is 1, 0s elsewhere.
+\end{ex}
+\begin{ex} The standard basis for $P_n(t)$ (polynomials in $t$ with $deg\in n$.
+\[ \{1,t,t^2,t^3,...,t^{n-1},t^n\} \]
+To write $t^3$ as a linear combination of all items in this set, we need to write $\{ 0,0,0,1,0,0,...,0\}$.\\
+$\therefore dim(P_n(t)) = n+1$
+\end{ex}
+\begin{ex}
+Standard basis for $M_{2,3}\mathbb{R}$ is all 2 x 3 matrices with entries in $\mathbb{R}$.\\
+The dimension is 6. We get this by taking 2 times 3.
+\[ \{\begin{bmatrix}[rrr]1&0&0\\0&0&0\\\end{bmatrix},\begin{bmatrix}[rrr]0&1&0\\0&0&0\\\end{bmatrix}, \begin{bmatrix}[rrr]0&0&1\\0&0&0\\\end{bmatrix}, \begin{bmatrix}[rrr]0&0&0\\1&0&0\\\end{bmatrix}, \begin{bmatrix}[rrr]0&0&0\\0&1&0\\\end{bmatrix}, \begin{bmatrix}[rrr]0&0&0\\0&0&1\\\end{bmatrix}\} \]
+Fact: As a vector space, $\mathbb{R}_{2,3}$ is isomorphic to $\mathbb{R}^6$.
+\end{ex}
 
+\section{Rank Continued}
+\begin{thrm}
+Suppose $A$ is an m x n matrix, then the column rank of $A$ is equal to the row rank of $A$.
+\end{thrm}
+\begin{defn}
+The rank of a matrix $A$ is the row rank of $A$ and therefore also the column rank of $A$ because of the previous theorem.
+\end{defn}
+\begin{lemma}
+Suppose $a,b\in \mathbb{R}$ and $a\leq b$ and $b\leq a$. Then $a=b$.
+\end{lemma}
+\begin{proof}
+We prove the previously stated theorem.\\
+Let the rows of $A$ be denoted
+\begin{align*}
+R_1 &= (a_{1,1},a_{1,2}, ..., a_{1,n})\\
+R_2 &= (a_{2,1},a_{2,2}, ..., a_{2,n})\\
+\vdots\\
+R_m &= (a_{m,1},a_{m,2}, ..., a_{m,n})
+\end{align*}
+Suppose a basis for $rowspace(A)$ is
+\begin{align*}
+S_1 &= (b_{1,1},b_{1,2}, ..., b_{1,n})\\
+S_2 &= (b_{2,1},b_{2,2}, ..., b_{2,n})\\
+\vdots\\
+S_r &= (b_{r,1},b_{r,2}, ..., b_{r,n})
+\end{align*}
+(This is assuming that $r=rowrank(A)$. Both sets have the same span.)\\
+There exist scalars $k_{i,j}$ such that
+\[ R_i = \sum_{j=1}^rk_{i,j}S_j \]
+This gives a system of linear equations for each column.
+\[ columnrank(A) \leq rowrank(A) = columnrank(A^T) \leq rowrank(A^T) = columnrank(A) \]
+By our lemma, $columnrank(A) = rowrank(A)$.
+\end{proof}
 
 
 

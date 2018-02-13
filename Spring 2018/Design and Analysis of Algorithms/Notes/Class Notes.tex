@@ -17,7 +17,6 @@
 \newtheorem*{lemma}{Lemma}
 \newtheorem*{result}{Result}
 
-
 % For circled text
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
@@ -155,8 +154,38 @@ $\Theta(N)$ steps in terms of key positions = $\Theta(N)$ time.
 $\Theta(N^2)$ time.\\
 Can we make this algorithm better than $\Theta(N^2)$?
 
+\mychapter{3}{2018-02-13}
+\section{Counting Inversions}
+\begin{problem}\\
+We are given n numbers $\{a_1,a_2,...,a_n\}$. We want to define a measure that tells us how far this list is from being in ascending order.
+\end{problem}
+\begin{ex}
+Given a list $\{2,4,1,3,5\}$. We want to find how far this list is from $\{1,2,3,4,5\}$ In other words, how many of the numbers in the first list are out of order.\\
+Starting from the left of the first list 2 is less than 4 so it is in order but 4 is greater than 1 so that is out of order. So the number of inversions for this list is $(2,1)$, $(4,1)$, $(4,3)$.\\
+Naive Algorithm: Each pair $(a_i,a_j)$ and determine whether it constitutes an inversion. $O(n^2)$.\\
+Better solution:
+\begin{enumerate}
+\item Divide the list into two pieces $\{a_1,...,a_m\}$ and $\{a_{m+1},...,a_n\}$
+\item Count the inversions in each half separately.
+\item Count the number of inversions of both halves combined.
+\end{enumerate}
+$T(n) \leq 2T(\frac{n}{2})+cn \rightarrow O(n\log(n))$
+Algorithm:
+\begin{enumerate}
+\item Recursively sort first and second half and count the number of inversions in each half.
+\item We now have two sorted lists $A$ and $B$ containing the first and second half.
+\item Create single sorted list $C$ while counting the number of compares that are inverted.
+\end{enumerate}
+Counting the Inversions:
+\begin{enumerate}
+\item Because $A$ and $B$ are sorted, every time $a_i$ is appended to $C$ no new inversions are encountered because $a_i$ is smaller than all of the elements in $B$.
+\item Every time $b_j$ is appended to list $C$ then it is smaller than all of the elements in $A$. Then the number of inversions that will be counted would be the number of elements recursively in $A$.
+\item Counting line $i$.
+\end{enumerate}
+So when you're merging the two remaining lists together, you compare item by item. Which ever item is smaller than the other means that that item is smaller than every item in the other list. So if you have two lists of length five, on the first comparison, which ever item is smaller gets put into the final list and the number of inversions is incremented by five. You only count these inversions for one list however. So if you choose list $B$ to be the inversion counter, then any time an item in $A$ is smaller, the number of inversions doesn't go up.\\
+At any point in this merge, when an element in the inversion counting list is smaller than the comparison element in the other list, the inversion count goes up by however many items are remaining in the other list.\\ 
 
-
+\end{ex}
 
 
 \end{document}

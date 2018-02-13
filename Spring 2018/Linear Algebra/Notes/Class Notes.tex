@@ -1490,7 +1490,61 @@ This gives a system of linear equations for each column.
 By our lemma, $columnrank(A) = rowrank(A)$.
 \end{proof}
 
+\mychapter{15}{2018-02-13}
+\section{Homework Review}
+\subsection{5.55}
+Given $A=\{u_1,u_2,u_3,...,u_m\}$, $B=\{v_1,v_2,v_3,...,v_n\}$ lie in a vector space $V$. Assume that $A\cup B$ is linearly independent. Show $span(A)\cap span(B) = \{\vec{0}\}$.
+\begin{proof}
+First notice $\{\vec{0}\} \subset span(A) \cap span(B)$. We still must show $span(A) \cap span(B) \subset \{\vec{0}\}$.\\
+Suppose $\vec{w}\in span(A) \cap span(B)$. Since $\vec{w}\in span(A)$, there are scalars $a_1,a_2,...,a_m$ such that (by definition of span)
+\[ \vec{w}=a_1u1+a_2u_2+\dots+a_mu_m \] Also since $\vec{w}\in span(B)$ there are scalars $b_1,b_2,...,b_n$ such that 
+\[ \vec{w}=b_1v_1+b_2v_2+\dots+b_nv_n \]
+Hence $a_1u_1+a_2u_2+\dots+a_mu_m = b_1v_1+b_2v_2+\dots+b_nv_n$.\\
+Thus $a_1u_1+a_2u_2+\dots+a_mu_m+(-b_1)v_1+(-b_2)v_2+\dots+(-b_n)v_n = \vec{0}$.\\
+Since $A \cup B = \{u_1,...u_m,v_1,...,v_n\}$ is linearly independent, then
+\[ a_1 = a_2 = \dots = a_m = -b_1 = -b_2 = \dots = -b_n = 0 \]
+\[ \Rightarrow \vec{w}=0u_1+0u_2+\dots+0u_m=\vec{0} \]
+\end{proof}
 
+\section{Intersect of Subspaces}
+\begin{thrm}
+Suppose $V$ is a vector space and $W_1$ and $W_2$ are vector subspaces of $V$. Then $W_1\cap W_2$ is a vector subspace of $V$.
+\end{thrm}
+\begin{proof}
+Use the subspace criterion (Thrm 4.2 in book).
+\end{proof}
+\begin{ex}
+$V=\mathbb{R}^3$\\
+$W_1 = span\{(1,0,0),(0,1,0)\}$\\
+$W_2 = span\{(0,1,0),(0,0,1)\}$\\
+$W_1$ is a plane in $\mathbb{R}^3$. It has infinite solutions and its vectors are linearly independent. The plane can be expressed as $z=0$.\\
+$W_2$ is also a plane just the same as $W_1$ however it can be expressed as $z=0$.\\
+$W_1 \cap W_2 = span\{(0,3,0)\}$\\
+There are infinite possible entries for $y$ and the intersect of these subspaces gives us a line (y-axis). The three in the final result is arbitrary.
+\end{ex}
+
+\section{Sums of Subspaces}
+\begin{defn}
+Suppose $V$ is a vector space and $W_1$ and $W_2$ are subsets of $V$. The sum of $W_1$ and $W_2$ is $W_1+W_2:= \{\vec{w_1}+\vec{w_2} : \vec{w_1} \in W_1, \vec{w_2} \in W_2 \}$.
+\end{defn}
+Look up the diamond of inclusions diagram.
+\begin{ex}
+$V=\mathbb{R}^2$ (ordered pairs)\\
+$W_1 = \{(x,): 0\leq x \leq 3\}$\\
+$W_2=\{(0,y): 0\leq y \leq 2\}$\\
+These are subsets however they are not subspaces since they aren't closed under addition.\\
+$W_1+W_2=\{(x,y): 0\leq x\leq 3, 0\leq y \leq 2\}$\\
+This forms a rectangle bound by $(0,2),(3,2),(0,0),(3,0)$. The point $(2,1)=[(2,0)\in W_1]+[(0,1)\in W_2]\in W_1+W_2$ which shows that this point is within this region.
+\end{ex}
+\begin{thrm}
+Let $V$ be a vector space with subspaces $W_1$ and $W_2$. Then $W_1+W_2=span(W_1 \cup W_2)$.
+\end{thrm}
+\begin{proof}
+(exercise)
+\end{proof}
+
+
+\mychapter{16}{2018-02-15}
 
 
 

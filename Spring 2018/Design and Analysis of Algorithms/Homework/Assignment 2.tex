@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#2}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{Design and Analysis of Algorithms}
+\date{2018-01-28}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\section{Chapter 3 Solved Exercises}
+\begin{enumerate}
+\item Consider the directed acyclic graph $G$ in Figure 3.9. How many topological orderings does it have?\\
+\begin{solution}
+There are only three possible topological orderings for graph $G$. This is because there is only one possible start node and only one possible end node. Thus we only have to rearrange the middle three nodes which leaves us with only three possible orderings.
+\end{solution}
+
+\item Some friends of yours are working on techniques for coordinating groups of mobile robots. Each robot has a radio transmitter that it uses to communicate with a base station, and your friends find that if the robots get too close to one another, then there are problems with interference among the transmitters. So a natural problem arises: how to plan the motion of the robots in such a way that each robot gets to its intended destination, but in the process the robots don't come close enough together to cause interference problems.\\
+We can model this problem abstractly as follows. Suppose that we have an undirected graph $G=(V<E)$, representing the floor plan of a building, and there are two robots initially located at nodes $a$ and $b$ in the graph. The robot at node $a$ wants to travel to node $c$ along a path in $G$, and the robot at node $b$ wants to travel to node $d$. This is accomplished by means of a schedule: at each time step, the schedule specifies that one of the robots moves across a single edge, from one node to a neighboring node; at the end of the schedule, the robot from node $a$ should be sitting on $c$, and the robot from $b$ should be sitting on $d$.\\
+A schedule is interference-free if there is no point at which the two robots occupy nodes that are at a distance $\leq r$ from one another in the graph, for a given parameter $r$. We'll assume that the two starting nodes $a$ and $b$ are at a  distance greater than $r$, so are the two ending nodes $c$ and $d$.\\
+Give a polynomial-time algorithm that decides whether there exists an interference-free schedule by which each robot can get to its destination.
+\end{enumerate}
+
+\section{Chapter 3 Exercises}
+\begin{enumerate}
+\item Consider the directed acyclic graph $G$ in figure 3.10. How many topological orderings does it have?
+\begin{solution}
+Just like in solved exercise 3.1, we have only one possible start node and only one possible end node. Thus all we need to do is rearrange the four items in between. Therefore we get the final solution of $1+(4*3*2*1)+1 = 26$ possible topological orderings.
+\end{solution}
+
+\item Give an algorithm to detect whether a given undirected graph contains a cycle. If the graph contains a cycle, then your algorithm should output one. (It should not output all cycles in the graph, just one of them.) The running time of your algorithm should be $O(m+n)$ for a graph with $n$ nodes and $m$ edges.
+\begin{solution}
+Assume we have a starting node $s$ and all vertices have a boolean property "visited" that we can set in $O(1)$ time. We then perform a depth-first search on the graph:
+\begin{verbatim}
+FOR each adjacent vertex
+  IF vertex has been visited
+    RETURN current vertex
+  ELSE add the vertex to a queue and mark vertex as visited
+WHILE the queue isn't empty
+  Recursively call this function, moving to the current dequeued vertex
+Output returned vertices in reverse order
+\end{verbatim}
+\end{solution}
+
+\item The algorithm described in section 3.6 for computing a topological ordering of a DAG repeatedly finds a node with no incoming edges and deletes it. This will eventually produce a topological ordering, provided that the input graph really is a DAG.\\
+But suppose that we're given an arbitrary graph that may or may not be a DAG. Extend the topological ordering algorithm so that, given an input directed graph $G$, it outputs one of two things: (a) a topological ordering, thus establishing that $G$ is a DAG; or (b) a cycle in $G$, thus establishing that $G$ is not a DAG. The running time of your algorithm should be $O(m+n)$ for a directed graph with $n$ nodes and $m$ edges.
+\item[6] We have a connected graph $G=(V,E)$, and a specific vertex $u\in V$. Suppose we compute a depth-first search tree rooted at $u$, and obtain a tree $T$ that includes all nodes of $G$. Suppose we then compute a breadth-first search tree rooted at $u$, and obtain the same tree $T$. Prove that $G=T$. (In other words, if $T$ is both a depth-first search tree and a breadth-first search tree rooted at $u$, then $G$ cannot contain any edges that do not belong to $T$.)
+\end{enumerate}
+
+\end{document}

@@ -184,7 +184,6 @@ Counting the Inversions:
 \end{enumerate}
 So when you're merging the two remaining lists together, you compare item by item. Which ever item is smaller than the other means that that item is smaller than every item in the other list. So if you have two lists of length five, on the first comparison, which ever item is smaller gets put into the final list and the number of inversions is incremented by five. You only count these inversions for one list however. So if you choose list $B$ to be the inversion counter, then any time an item in $A$ is smaller, the number of inversions doesn't go up.\\
 At any point in this merge, when an element in the inversion counting list is smaller than the comparison element in the other list, the inversion count goes up by however many items are remaining in the other list.\\ 
-
 \end{ex}
 
 

@@ -81,5 +81,34 @@ Think of bad stuff that people can put in. Think of the limits of data input and
 \item {[}T{]}imely
 \end{itemize}
 
+\subsection{Right-BICEP}
+\begin{tabular}{ll}
+Right & Are the results right?\\
+B & Are all the boundary conditions correct?\\
+I & Can you check inverse relationships?\\
+C & Can you cross-check results using other means?\\
+E & Can you force error conditions to happen?\\
+P & Are performance characteristics within bounds?\\
+\end{tabular}
+
+\begin{defn}
+Boundary conditions are the range of values that values must remain within. An example of this is entering in patient ages where to qualify for a treatment they must be between 50 and 70 yrs old. Anything outside of this range will be denied. An example for our quad solver is for input a we cannot allow the number 0 to be input. Thus we get a boundary condition.
+\end{defn}
+
+\begin{defn}
+To force error conditions is just to apply inputs or methods that will definitely cause errors. Then you look for the appropriate error flagging and responses from the program.
+\end{defn}
+
+\subsection{Boundary Conditions: "CORRECT"}
+\begin{itemize}
+\item Conformance\\  Does the value conform to an expected format?
+\item Ordering\\  Is the set of values ordered or unordered as appropriate?
+\item Range\\  Is the value within reasonable min and max values?
+\item Reference\\  Does the code reference anything external that isn't under direct control of the code itself?
+\item Existence\\  Does the value exist (is it non-null, nonzero, present in a set, and so on)?
+\item Cardinality\\  Are there exactly enough values?
+\item Time (abs and rel)\\  Is everything happening in order? At the right time? In time?
+\end{itemize}
+
 
 \end{document}

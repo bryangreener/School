@@ -1555,7 +1555,70 @@ Let $V$ be a vector space with subspaces $W_1$ and $W_2$. Then $W_1+W_2=span(W_1
 
 
 \mychapter{16}{2018-02-15}
+\section{Homework Review}
+\subsection{5.70.a}
+For each of the following matrices, find (i) columns that are linear combinations of preceding columns, and (ii) columns that form a basis for the column space:\\	
+$A=\begin{bmatrix}[rrrrrr]1&1&2&2&3&3\\2&2&5&6&8&7\\1&1&4&6&7&7\\\end{bmatrix}$
+		\begin{enumerate}
+		%5.70.a.i		
+		\item[(i)] Column 1 and 2 are the same as each other. $C_2 = 1C_1$. $\{C_1,C_3\}$ are linearly independent since they are not linear combinations of each other.\\
+		Is $C_4 \in span\{C_1,C_3\}$? Yes. We need to find a linear combination that gets us $C_4$.\\
+		$C_4 = (-2)C_1 + 2C_3$. Thus $C_4$ is a linear combination of $\{C_1,C_3\}$.\\
+		$C_5 = C_1+C_4 = C_1+(-2)C_1+2C_3 = -C_1+2C_3$\\
+		$\{C_1,C_3,C_6\}$ are linearly independent and span colspace.\\
+		Thus the rank of the matrix is 3 since we found three linearly independent columns.\\
+		We can also find these by taking the transpose of the matrix then running rref and finding the zero rows. 
+		%5.70.a.ii		
+		\item[(ii)] 	$\{C_1,C_3,C_6\}$ forms a basis since they are linearly independent and span the column space. We can also replace $C_1$ with $C_2$ to form a different basis. Or we can do the following:\\
+		$\{\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\1\\\end{bmatrix}\}$\\
+		$\mathrm{rref}(A^T)=\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\0&0&0\\0&0&0\\0&0&0\\\end{bmatrix}$\\		
+		\end{enumerate}
+		
+\subsection{5.72}
+$\mathrm{rref}\begin{bmatrix}[rrrr]0&1&3&4\\0&3&9&12\\3&1&4&8\\1&2&5&8\\4&1&2&7\\\end{bmatrix} = \begin{bmatrix}[rrrr]1&0&0&1\\0&1&0&1\\0&0&1&1\\0&0&0&0\\0&0&0&0\\\end{bmatrix}$\\
+A basis for the column space:\\
+This is the transpose of the nonzero rows which is why these form a column space instead of a row space.
+$\{\begin{bmatrix}[r]1\\0\\0\\1\\\end{bmatrix},\begin{bmatrix}[r]0\\1\\0\\1\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\1\\1\\\end{bmatrix}\}$
+
+\subsection{5.77}
+Use the theorem in the sums and intersections section.
+$U=\mathrm{rowspace}\begin{bmatrix}[rrrrr]1&3&-3&-1&-4\\1&4&-1&-2&-2\\2&9&0&-5&-2\\\end{bmatrix} \rightarrow \mathrm{rref}=\begin{bmatrix}[rrrrr]{}\\ {}\\ 0&0&0&0&0\\\end{bmatrix}$\\
+Thus $\mathrm{dim}(U)=2$.\\
+$W=\mathrm{rowspace}\begin{bmatrix}[rrrrr]1&6&2&-2&3\\2&8&-1&-6&-5\\1&3&-1&-5&-6\\\end{bmatrix} \rightarrow \mathrm{rref}=\begin{bmatrix}[rrrrr]1&0&0&*&*\\0&1&0&*&*\\0&0&1&*&*\\\end{bmatrix}$.\\
+Thus $\mathrm{dim}(W)=3$.\\
+$\mathrm{dim}(U+W=3)$. To find this, stick the two matrices together into a big 6 x 5 matrix and take the rref of that.\\
+$\begin{bmatrix}[r]u-vectors\\ \hline w-vectors\\\end{bmatrix}$\\
+$\mathrm{dim}(U\cap W) = \mathrm{dim}(U) + \mathrm{dim}(W) - \mathrm{dim}(U+W) = 2+3-3=2$\\
+This system will also be used in 5.75.
+
+\section{Sums and Intersections Continued}
+\begin{thrm}
+Suppose $V$ is a vector space within subspaces $U$ and $W$. Then 
+\[ \mathrm{dim}(u+w)+\mathrm{dim}(U\cap W) = \mathrm{dim}(U)+\mathrm{dim}(W) \]
+\end{thrm}
+
+\begin{defn}
+$\oplus$ = Direct Sum\\
+Setup: $V_1$ and $V_2$ are vector spaces over $\mathbb{F}$(scalar field).\\
+\[ V_1 \oplus V_2 = \{(\vec{v_1},\vec{v_2}): \vec{v_1}\in V_1, \vec{v_2}\in V_2\} \]
+This is a vector space with the operations:\\
+\begin{align*}
+(\vec{v_1},\vec{v_2})+(\vec{w_1},\vec{w_2}) :=(\vec{v_1}+\vec{w_1},\vec{v_2}+\vec{w_2})\\
+k(\vec{v_1},\vec{v_2}) := (k\vec{v_1},k\vec{v_2})
+\end{align*}
+\end{defn}
+\begin{ex}
+$V_1=\mathbb{R}^2 = \{\begin{bmatrix}[r]x\\y\\\end{bmatrix}: x,y\in\mathbb{R}\}$ (as columns)
+\[ V_2  =\mathbb{R}^1 = \{[z]: z\in \mathbb{R}\} \]
+Basis for $V_1 \oplus V_2$:
+\[ \{(\begin{bmatrix}[r]1\\0\\\end{bmatrix},[0]),(\begin{bmatrix}[r]0\\1\\\end{bmatrix},[0]),(\begin{bmatrix}[r]0\\0\\\end{bmatrix},[1])\} \]
+Notice $\mathbb{R}^2 \oplus \mathbb{R}^1$ is isomorphic to $\mathbb{R}^3$.
+\end{ex}
 
 
+
+
+
+\mychapter{17}{2018-02-16}
 
 \end{document}

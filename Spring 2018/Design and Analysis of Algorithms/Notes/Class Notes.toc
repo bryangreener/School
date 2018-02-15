@@ -10,3 +10,9 @@
 \contentsline {subsection}{\numberline {2.1.3}Insertion Sort}{5}
 \contentsline {chapter}{2018-02-13}{6}
 \contentsline {section}{\numberline {3.1}Counting Inversions}{6}
+\contentsline {chapter}{2018-02-15}{7}
+\contentsline {section}{\numberline {4.1}Quicksort}{7}
+\contentsline {subsection}{\numberline {4.1.1}Algorithm}{7}
+\contentsline {subsection}{\numberline {4.1.2}Pseudocode}{7}
+\contentsline {subsection}{\numberline {4.1.3}Partitioning}{7}
+\contentsline {subsection}{\numberline {4.1.4}Runtime Analysis}{8}

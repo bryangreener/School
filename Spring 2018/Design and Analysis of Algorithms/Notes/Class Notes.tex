@@ -186,5 +186,57 @@ So when you're merging the two remaining lists together, you compare item by ite
 At any point in this merge, when an element in the inversion counting list is smaller than the comparison element in the other list, the inversion count goes up by however many items are remaining in the other list.\\ 
 \end{ex}
 
+\mychapter{4}{2018-02-15}
+\section{Quicksort}
+Quicksort is a divide and conquer style algorithm.
+\subsection{Algorithm}
+Quicksort follows the following steps:
+\begin{enumerate}
+\item Select an element of the array. This will be our 'pivot'.
+\item Partition the remaining elements to two groups:\\
+$S_1 = \{x\in S - \{v\} | x\leq v\}$\\
+$S_2 = \{x\in S - \{v\} | x \geq v\}$
+\item Recursively sort $S_1$ and $S_2$.
+\item Combine
+\end{enumerate}
+\subsection{Pseudocode}
+\begin{verbatim}
+QUICKSORT(A, p, r)
+  IF p < q
+    q = PARTITION(A, p, r)
+    QUICKSORT(A, p, q - 1)
+    QUICKSORT(A, q + 1, r)
+\end{verbatim}
+
+\subsection{Partitioning}
+\begin{enumerate}
+\item Select a random element as the pivot.
+\item Swap the pivot with the last element A[p].
+\item Let i start at the first element and j start at the last element.
+\end{enumerate}
+Pseudocode for partitioning:
+\begin{verbatim}
+When i < j
+  Move j right, skipping elements smaller than pivot
+  Move j left, skipping elements greater than or equal to pivot
+  When both i and j have stopped
+    A[i] >= pivot
+    A[j] <= pivot
+    Swap A[i] and A[j]
+  Repeat process until i and j cross
+  Swap A[i] and A[p]
+\end{verbatim}
+
+\subsection{Runtime Analysis}
+$k$ is the subset left of pivot, $n-k$ is subset right of pivot.
+\[ T(n) = T(k) + T(n-k) + O(n) \]
+The best case of Quicksort occurs when the pivot we pick happens to divide the array into two exactly equal parts (or evenly balanced as possible), in every step.\\
+This results in a runtime of $O(n\log(n))$.\\
+The worst case of Quicksort occurs when the pivot we pick happens to be the first/last element of the array and the array is already sorted.\\
+This results in a runtime of $O(n^2)$.\\
+
+
+
+
 
 \end{document}

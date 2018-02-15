@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#7}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-02-14}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[5.68] Find the rank of each matrix:
+	\begin{enumerate}
+	%5.68.a
+	\item $\begin{bmatrix}[rrrrr]1&3&-2&5&4\\1&4&1&3&5\\1&4&2&4&3\\2&7&-3&6&13\\\end{bmatrix}$
+	\[ \mathrm{rref}\begin{bmatrix}[rrrrr]1&3&-2&5&4\\1&4&1&3&5\\1&4&2&4&3\\2&7&-3&6&13\\\end{bmatrix} = \begin{bmatrix}[rrrrr]1&0&0&22&-21\\0&1&0&-5&7\\0&0&1&1&-2\\0&0&0&0&0\\\end{bmatrix} \]
+	Since we get 1 zero row, this shows linear independence and dim $\mathrm{rowspace}(A)=3$. Thus our rank is 3.
+	%5.68.b	
+	\item $\begin{bmatrix}[rrrrr]1&2&-3&-2&-3\\1&3&-2&0&-4\\3&8&-7&-2&-11\\2&1&-9&-10&-3\\\end{bmatrix}$
+	\[ \mathrm{rref}\begin{bmatrix}[rrrrr]1&2&-3&-2&-3\\1&3&-2&0&-4\\3&8&-7&-2&-11\\2&1&-9&-10&-3\\\end{bmatrix} = \begin{bmatrix}[rrrrr]1&0&-5&-6&-1\\0&1&1&2&-1\\0&0&0&0&0\\0&0&0&0&0\\\end{bmatrix} \]
+	Since we get 2 zero rows, this shows linear independence and dim $\mathrm{rowspace}(A)=2$. Thus our rank is 2.
+	%5.68.c	
+	\item $\begin{bmatrix}[rrr]1&1&2\\4&5&5\\5&8&1\\-1&-2&-2\\\end{bmatrix}$
+	\[ \mathrm{rref}\begin{bmatrix}[rrr]1&1&2\\4&5&5\\5&8&1\\-1&-2&-2\\\end{bmatrix} = \begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\0&0&0\\\end{bmatrix} \]
+	Since we get 1 zero row, this shows linearly independence and dim $\mathrm{rowspace}(A)=3$. Thus our rank is 3.
+	%5.68.d	
+	\item $\begin{bmatrix}[rr]2&1\\3&-7\\-6&1\\5&-8\\\end{bmatrix}$
+	\[ \mathrm{rref}\begin{bmatrix}[rr]2&1\\3&-7\\-6&1\\5&-8\\\end{bmatrix} = \begin{bmatrix}[rr]1&\frac{1}{2}\\0&1\\0&0\\0&0\\\end{bmatrix} \]
+	Since we get 2 zero rows, this shows linear independence and dim $\mathrm{rowspace}(A)=2$. Thus our rank is 2.
+	\end{enumerate}
+
+\item[5.70] For each of the following matrices, find (i) columns that are linear combinations of preceding columns, and (ii) columns that form a basis for the column space:
+	\begin{enumerate}
+	%5.70.a	
+	\item $A=\begin{bmatrix}[rrrrrr]1&1&2&2&3&3\\2&2&5&6&8&7\\1&1&4&6&7&7\\\end{bmatrix}$
+		\begin{enumerate}
+		%5.70.a.i		
+		\item
+		%5.70.a.ii		
+		\item		
+		\end{enumerate}			
+	%5.70.b	
+	\item $B=\begin{bmatrix}[rrrrrr]1&1&2&2&3&3\\2&3&4=5&8&10&7\\1&3&4&11&11&6\\\end{bmatrix}$
+		\begin{enumerate}
+		%5.70.b.i		
+		\item
+		%5.70.b.ii
+		\item
+		\end{enumerate}			
+	\end{enumerate}
+
+\item[5.72] Find a basis for (i) the row space and (ii) the column space of each matrix $M$:
+	\begin{enumerate}
+	%5.72.a	
+	\item $M=\begin{bmatrix}[rrrrr]0&0&3&1&4\\1&3&1&2&1\\3&9&4&5&2\\4&12&8&8&7\\\end{bmatrix}$
+	%5.72.b
+	\item $M=\begin{bmatrix}[rrrrr]1&2&1&0&1\\1&2&2&1&3\\3&6&5&2&7\\2&4&1&-1&0\\\end{bmatrix}$
+	\end{enumerate}
+
+\item[5.74] Let $r=rank(A+B)$. Find 2 x 2 matrices $A$ and $B$ such that: (a) $r<rank(A),rank(B)$; (b) $b=rank(A)=rank(B)$; (c) $r>rank(A),rank(B)$.
+	\begin{enumerate}
+	%5.74.a	
+	\item
+	%5.74.b
+	\item
+	%5.74.c
+	\item
+	\end{enumerate}
+
+\item[5.75] Let $U$ and $W$ be subspaces of $\mathbb{R}^3$ for which $\mathrm{dim}U=4$, $\mathrm{dim}W=5$, and $\mathrm{dim}V=7$. Find the possible dimensions of $U \cap W$.
+
+\item[5.77] Consider the following subspaces of $\mathbb{R}^5$:
+	\begin{align*}
+		U &= span[(1,3,-3,-1,-4),(1,4,-1,-2,-2),(2,9,0,-5,-2)]\\
+		W &= span[(1,6,2,-2,3),(2,8,-1,-6,-5),(1,3,-1,-5,-6)]
+	\end{align*}
+	Find: (a) $\mathrm{dim}(U+W)$; (b) $\mathrm{dim}(U\cap W)$.
+	\begin{enumerate}
+	%5.77.a	
+	\item
+	%5.77.b
+	\item
+	\end{enumerate}
+
+\item[5.80] Answer true or false. If false, prove it with a counterexample.
+	\begin{enumerate}
+	%5.80.a
+	\item If $u_1,u_2,u_3$ span $V$, then $\mathrm{dim}V = 3$.
+	%5.80.b
+	\item If $A$ is a 4 x 8 matrix, then any size columns are linearly dependent.
+	%5.80.c	
+	\item If $u_1,u_2,u_3$ are linearly independent, then $u_1,u_2,u_3,w$ are linearly dependent.
+	%5.80.d
+	\item If $u_1,u_2,u_3$ are linearly independent, then $\mathrm{dim}V \geq 4$.
+	%5.80.e	
+	\item If $u_1,u_2,u_3$ span $V$, then $w,u_1,u_2,u_3$ span $V$.
+	\end{enumerate}
+
+\item[5.81] Answer true or false. If false, prove it with a counterexample.
+	\begin{enumerate}
+	%5.81.a	
+	\item If any row is deleted from a matrix in echelon form, then the resulting matrix is still in echelon form.
+	%5.81.b	
+	\item If any column is deleted from a matrix in echelon form, then the resulting matrix is still in echelon form.
+	%5.81.c	
+	\item If any row is deleted from a matrix in row canonical form, then the resulting matrix is still in row canonical form.
+	%5.81.d	
+	\item If any column is deleted from a matrix in row canonical form, then the resulting matrix is still in row canonical form.
+	%5.81.e	
+	\item If any column without a pivot is deleted from a matrix in row canonical form, then the resulting matrix is in row canonical form.
+	\end{enumerate}
+
+\item[5.82] Determine the dimension of the vector space $W$ of the following n-square matrices: (a) symmetric matrices; (b) antisymmetric matrices; (c) diagonal matrices; (d) scalar matrices.
+	\begin{enumerate}
+	%5.82.a
+	\item
+	%5.82.b
+	\item
+	%5.82.c
+	\item
+	%5.82.d
+	\item
+	\end{enumerate}
+\end{enumerate}
+\end{document}

@@ -70,14 +70,14 @@
 % BEGIN BLOCK------------------------------------------
 \title{Bryan Greener}
 \author{Design and Analysis of Algorithms}
-\date{2018-01-28}
+\date{2018-02-14}
 \begin{document}
 \maketitle
 % END BLOCK============================================
 
 \TabPositions{4cm}
 
-\section{Chapter 3 Solved Exercises}
+\section*{Chapter 3 Solved Exercises}
 \begin{enumerate}
 \item Consider the directed acyclic graph $G$ in Figure 3.9. How many topological orderings does it have?\\
 \begin{solution}
@@ -87,10 +87,17 @@ There are only three possible topological orderings for graph $G$. This is becau
 \item Some friends of yours are working on techniques for coordinating groups of mobile robots. Each robot has a radio transmitter that it uses to communicate with a base station, and your friends find that if the robots get too close to one another, then there are problems with interference among the transmitters. So a natural problem arises: how to plan the motion of the robots in such a way that each robot gets to its intended destination, but in the process the robots don't come close enough together to cause interference problems.\\
 We can model this problem abstractly as follows. Suppose that we have an undirected graph $G=(V<E)$, representing the floor plan of a building, and there are two robots initially located at nodes $a$ and $b$ in the graph. The robot at node $a$ wants to travel to node $c$ along a path in $G$, and the robot at node $b$ wants to travel to node $d$. This is accomplished by means of a schedule: at each time step, the schedule specifies that one of the robots moves across a single edge, from one node to a neighboring node; at the end of the schedule, the robot from node $a$ should be sitting on $c$, and the robot from $b$ should be sitting on $d$.\\
 A schedule is interference-free if there is no point at which the two robots occupy nodes that are at a distance $\leq r$ from one another in the graph, for a given parameter $r$. We'll assume that the two starting nodes $a$ and $b$ are at a  distance greater than $r$, so are the two ending nodes $c$ and $d$.\\
-Give a polynomial-time algorithm that decides whether there exists an interference-free schedule by which each robot can get to its destination.
+Give a polynomial-time algorithm that decides whether there exists an interference-free schedule by which each robot can get to its destination.\\
+
+\begin{solution}
+Let $r$ be a variable distance at which any two robots cannot be within that distance at any time in their path in graph $G$. Also let $u,v$ be the start and end vertices for each robot.\\
+We first find a path for the first robot from $u$ to $v$. At each node that this robot visits we perform a breadth-first search of depth $r$ and delete every node apart from those that are along our path that are visited in this search. We'll consider this augmented graph to be $G^\prime$.\\
+We then repeat these steps for each remaining robot on the newly augmented graph, augmenting the graph further as we go.\\
+This system verifies that at any point in time, no two robots will be within the specified distance-- in our case a number of edges-- $r$ from each other.
+\end{solution}
 \end{enumerate}
 
-\section{Chapter 3 Exercises}
+\section*{Chapter 3 Exercises}
 \begin{enumerate}
 \item Consider the directed acyclic graph $G$ in figure 3.10. How many topological orderings does it have?
 \begin{solution}
@@ -112,8 +119,37 @@ Output returned vertices in reverse order
 \end{solution}
 
 \item The algorithm described in section 3.6 for computing a topological ordering of a DAG repeatedly finds a node with no incoming edges and deletes it. This will eventually produce a topological ordering, provided that the input graph really is a DAG.\\
-But suppose that we're given an arbitrary graph that may or may not be a DAG. Extend the topological ordering algorithm so that, given an input directed graph $G$, it outputs one of two things: (a) a topological ordering, thus establishing that $G$ is a DAG; or (b) a cycle in $G$, thus establishing that $G$ is not a DAG. The running time of your algorithm should be $O(m+n)$ for a directed graph with $n$ nodes and $m$ edges.
-\item[6] We have a connected graph $G=(V,E)$, and a specific vertex $u\in V$. Suppose we compute a depth-first search tree rooted at $u$, and obtain a tree $T$ that includes all nodes of $G$. Suppose we then compute a breadth-first search tree rooted at $u$, and obtain the same tree $T$. Prove that $G=T$. (In other words, if $T$ is both a depth-first search tree and a breadth-first search tree rooted at $u$, then $G$ cannot contain any edges that do not belong to $T$.)
-\end{enumerate}
+But suppose that we're given an arbitrary graph that may or may not be a DAG. Extend the topological ordering algorithm so that, given an input directed graph $G$, it outputs one of two things: (a) a topological ordering, thus establishing that $G$ is a DAG; or (b) a cycle in $G$, thus establishing that $G$ is not a DAG. The running time of your algorithm should be $O(m+n)$ for a directed graph with $n$ nodes and $m$ edges.\\
+\begin{solution}
+Each node contains an 'active' status and also keeps track of the number of incoming edges that it has from active nodes. We also have a set $S$ of all active nodes in our graph $G$ that have no incoming edges from other active nodes.\\
+We start by initializing all nodes as active and initializing set $S$ by iterating through each node. We then follow the algorithm below:
+\begin{verbatim}
+WHILE set S is not empty
+  Pop any vertex v from S
+  FOR EACH incoming edge to v
+    Decrement incoming edges
+    IF new number of incoming edges equals 0
+      Add current vertex to set S
+\end{verbatim}
+After running through this $O(m+n)$ algorithm, we then go back through the graph with our algorithm from the previous exercise which is also $O(m+n)$ to find if there is a cycle. Thus our total runtime between both algorithms is $2(m+n)$ which is the same as $O(m+n)$.
+\end{solution}
 
+\item[6] We have a connected graph $G=(V,E)$, and a specific vertex $u\in V$. Suppose we compute a depth-first search tree rooted at $u$, and obtain a tree $T$ that includes all nodes of $G$. Suppose we then compute a breadth-first search tree rooted at $u$, and obtain the same tree $T$. Prove that $G=T$. (In other words, if $T$ is both a depth-first search tree and a breadth-first search tree rooted at $u$, then $G$ cannot contain any edges that do not belong to $T$.)
+\begin{solution}
+\begin{proof}
+Assume that tree $T$ is a breadth-first search tree rooted at $u$ in the connected graph $G$. We number each vertex in this graph as $V=\{v_1, v_2, v_3,...,v_n\}$ where $n$ is the total number of vertices in the graph. Then at any point in a breadth first search from vertex $v$, we have adjacent vertices $A_m=\{a_{m,1},a_{m,2},a_{m,3},...,a_{m,n}\}$ where $A_m\subset V$ and $m\in \{1,2,3,...,n\}$.\\
+Thus the set of all adjacency sets of graph $G$ is
+\begin{align*}
+A_1 &= \{a_{1,1}, a_{1,2}, a_{1,3}, ... a_{1,n}\}\\
+A_2 &= \{a_{2,1},a_{2,2},a_{2,3},...,a_{2,n}\}\\
+\vdots\\
+A_m &= \{a_{m,1},a_{m,2},a_{m,3},...,a_{m,n}\}
+\end{align*}
+Since graph $G$ is defined as a connected graph, then from any vertex in $G$ there is at least one path to every other vertex in $G$. Hence $\{A_1 \cup A_2 \cup A_3 \cup \dots \cup A_m\}  \subset V$ and $V \subset \{A_1 \cup A_2 \cup A_3 \cup \dots \cup A_m\}$ and so $\{A_1 \cup A_2 \cup A_3 \cup \dots \cup A_m\} = V$.
+Therefore there is no edge in $G$ that does not belong to $T$ so $G = T$.
+\end{proof}
+\end{solution}
+
+
+\end{enumerate}
 \end{document}

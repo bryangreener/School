@@ -5,6 +5,8 @@
 # FUNCTION BLOCK
 def check_hex(user_input): #Validate hex input
     try:
+        if(len(user_input) > 8):
+            return False
         user_input = int(user_input, 16)
         user_input = hex(user_input)
         return True

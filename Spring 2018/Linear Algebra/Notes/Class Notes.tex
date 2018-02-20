@@ -1648,5 +1648,65 @@ Suppose $V$ is a vector space with subspaces $V_1$ and $V_2$. Then $V$ is an int
 Under these conditions, we can write $V = V_1 \oplus V_2$.
 \end{defn}
 
-\mychapter{18}{2018-02-19}
+\mychapter{18}{2018-02-20}
+\section{Coordinate Vectors}
+\subsection{Change of Basis Matrix}
+\begin{defn}
+Let $S=[\vec{v_1},\vec{v_2},\vec{v_3},...,\vec{v_n}]$ and $T=[\vec{w_1},\vec{w_2},\vec{w_3},...,\vec{w_n}]$ be bases for a vector space $V$. Then the change of basis matrix is:
+\[ Q_T^S = \begin{bmatrix}[rrrrr]C_T(\vec{v_1})&C_T(\vec{v_2})&C_T(\vec{v_3})& \cdots& C_T(\vec{v_n})\\\end{bmatrix} \]
+where $C_T(\vec{v})$ denotes the coordinate vector of $\vec{v}$ with respect to $T$. 
+\end{defn}
+\begin{ex}
+$S=[1,t,t^2]$ and $T=[1,1+t,(1+t)^2]$ are bases for $P_2(t)$. Compute the change of basis matrix.\\
+$C_T(t^2) = \begin{bmatrix}[r]a_0\\a_1\\a_2\\\end{bmatrix}$ where $t^2 = a_0(1)+a_1(1+t)+a_2(1+2t+t^2) = (a_1+a_1+a_2)(1)+(a_1+2a_2)(t)+a_2(t^2)$
+\[ \sysdelim{.}{.}\systeme[a_0a_1a_2]{0=a_0+a_1+a_2,0=a_1+a_2,1=a_2} \]
+So $C_T(t^2) = \begin{bmatrix}[r]a_0\\a_1\\a_2\\\end{bmatrix} = \begin{bmatrix}[r]1\\-2\\1\\\end{bmatrix}$
+\begin{align*}
+Q_T^S &= \begin{bmatrix}[rrr]C_T(1) & C_T(t) & C_T(t^2)\\\end{bmatrix}\\
+&=\begin{bmatrix}[rrr]1&-1&1\\0&1&-2\\0&0&1\\\end{bmatrix}
+\end{align*} 
+\end{ex}
+\begin{ex}
+Using the same $S$ and $T$ as the previous example, let $\vec{w} = t+3t^2\in \mathrm{span}(S) \in \mathrm{span}(T)$. Compute $C_S(\vec{w})$ and $C_T(\vec{w})$.
+$C_S(\vec{w}) = C_S(t+3t^2) = \begin{bmatrix}[r]0\\1\\3\\\end{bmatrix}$.\\
+$C_T(\vec{w})=\begin{bmatrix}[r]2\\-5\\3\\\end{bmatrix}$.\\
+Notice: $Q_T^SC_S(\vec{w}) = \begin{bmatrix}[rrr]1&-1&1\\0&1&-2\\0&0&1\\\end{bmatrix}\begin{bmatrix}[r]0\\1\\3\\\end{bmatrix} = \begin{bmatrix}[r]2\\-5\\3\\\end{bmatrix}$.\\
+In this case, the S's cancel.
+\end{ex}
+\begin{thrm}
+$(Q_T^S)^{-1} = Q_S^T$
+\end{thrm}
+
+\section{Linear Mappings}
+\begin{defn}
+Suppose $V$ and $W$ are vector spaces over a scalar field $\mathbb{F}$. A linear mapping (linear transformation) is a function $V\xrightarrow[]{f} W$ such that the following hold:
+\begin{enumerate}
+\item $f(\vec{v_1}+\vec{v_2}) = f(\vec{v_1}) + f(\vec{v_2}) $ for all $\vec{v_1},\vec{v_2}\in V$.
+\item $f(k\vec{v}) = kf(\vec{v})$ for all $k\in \mathbb{F}, \vec{v}\in V$.
+\end{enumerate}
+These can also be written as:
+\begin{enumerate}
+\item f respects or preserves addition.
+\item f respects or preserves scalar multiplication.
+\end{enumerate}
+\end{defn}
+The most important example:
+\begin{ex}
+$v=\mathbb{R}^n$, $w=\mathbb{R}^m$, and $A$ any fixed m x n matrix.\\
+Define $f_A(\vec{v}) = A\vec{v}$ (mult by a A from the left). $\vec{v} \in \mathbb{R}^n$.\\
+$A(\vec{v_1}+\vec{v_2}) = A\vec{v_1}+A\vec{v_2}$.\\
+$A(k\vec{v})=kA\vec{v}$.
+\end{ex}
+\begin{ex}
+$f\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[r]3x-y+2z\\7x+11y-z\\\end{bmatrix}$. \\
+$V = \mathrm{domain} = \mathbb{R}^3$\\
+$W= \mathrm{codomain/target} = \mathbb{R}^2$\\
+Notice:
+\[ \begin{bmatrix}[rrr]3&-1&2\\7&11&-1\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=f\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}
+ \]
+\end{ex}
+
+
+
+\mychapter{19}{2018-02-22}
 \end{document}

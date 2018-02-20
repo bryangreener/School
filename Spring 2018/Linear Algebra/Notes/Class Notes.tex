@@ -1620,5 +1620,33 @@ Notice $\mathbb{R}^2 \oplus \mathbb{R}^1$ is isomorphic to $\mathbb{R}^3$.
 
 
 \mychapter{17}{2018-02-16}
+\section{Homework Review}
+\subsection{5.79}
+Prove $dim(U\oplus W) = dim(U)+dim(W)$.\\
+See example 5.42: Prove $dim(U+W)=dim(U)+dim(W)-dim(U\cap W)$.\\
+Use the theorem from 5.42.\\
+Notice $U\cap W = \{\vec{0}\}$ by hypothesis. This implies two things:\\
+\[ dim(U\cap W) = 0 \]
+\[ U \oplus W = U + W \]
+Thus using the formula, $dim(U \oplus W) = dim(U+W) = dim(U) + dim(W) - dim(U \cap W)$. 
 
+\subsection{4.80.b}
+$A=\mathbb{R}^{4 x 8}$\\
+$rank(A)\in \{0,1,2,3,4\}$\\
+We can get rank 0 if all items in matrix are zero.\\
+$colrank(A)\in \{0,1,2,3,4\}$
+
+\section{Direct Sums}
+We only use $U \oplus W$ when $U \cap W = \{\vec{0}\}$.
+
+\begin{defn}
+Suppose $V$ is a vector space with subspaces $V_1$ and $V_2$. Then $V$ is an internal direct sum of $V_1$ and $V_2$ if both of the following hold:
+\begin{enumerate}
+\item $V = V_1+V_2$
+\item $V_1\cap V_2 = \{\vec{0}\}$
+\end{enumerate}
+Under these conditions, we can write $V = V_1 \oplus V_2$.
+\end{defn}
+
+\mychapter{18}{2018-02-19}
 \end{document}

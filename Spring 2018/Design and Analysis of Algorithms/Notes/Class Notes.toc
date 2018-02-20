@@ -16,3 +16,10 @@
 \contentsline {subsection}{\numberline {4.1.2}Pseudocode}{7}
 \contentsline {subsection}{\numberline {4.1.3}Partitioning}{7}
 \contentsline {subsection}{\numberline {4.1.4}Runtime Analysis}{8}
+\contentsline {chapter}{2018-02-20}{9}
+\contentsline {section}{\numberline {5.1}Greedy Algorithms}{9}
+\contentsline {subsection}{\numberline {5.1.1}Coin Changing Problems}{9}
+\contentsline {subsection}{\numberline {5.1.2}Minimum Spanning Tree of a Graph}{9}
+\contentsline {subsection}{\numberline {5.1.3}Kruskal's Algorithm}{9}
+\contentsline {subsection}{\numberline {5.1.4}Prim's Algorithm}{11}
+\contentsline {chapter}{2018-02-22}{12}

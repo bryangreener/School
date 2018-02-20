@@ -236,7 +236,86 @@ The worst case of Quicksort occurs when the pivot we pick happens to be the firs
 This results in a runtime of $O(n^2)$.\\
 
 
+\mychapter{5}{2018-02-20}
+\section{Greedy Algorithms}
+\begin{defn}
+A greedy algorithm is an algorithmic strategy that makes the optimal choice at each small stage with the goal of this eventually leading to a globally optimal solution.
+\end{defn}
 
+\subsection{Coin Changing Problems}
+In these problems, we are given a certain amount of money and we need to give an optimal change for this value.
+\begin{ex}
+Given a set of coins ${1,3,4,5}$ we need to find the least number of coins to represent 7 cents.\\
+$7-5 = 2$, $2-1 = 1$, $1-0 = 0$.\\
+Thus our solution is the set of coins ${5,1,1}$.\\
+This however is not an optimal solution as we could have chosen the set of coins ${4,3}$ instead.
+\end{ex}
+We can solve the problem above using a better method called Minimum Spanning Trees.
+\subsection{Minimum Spanning Tree of a Graph}
+A spanning tree of a graph contains all vertices of a graph. It is a connected acyclic graph.\\
+\includegraphics[scale=0.5]{SpanningTree1.png}
+\begin{defn}
+Spanning Tree is the subset of edges of graph $G$ that contain all the minimum spanning tree problems in a weighted graph $G(V,E)$ and edge weights $W:E\rightarrow\mathbb{R}$, find the spanning tree of minimum total weight.
+\end{defn}
+\subsection{Kruskal's Algorithm}
+\begin{defn}
+Input: A weighted connected graph $G(V,E)$.\\
+Output: A minimum spanning tree $T$ for graph $G$.
+\begin{enumerate}
+\item Sort all edges in non-decreasing order of their weight.
+\item Pick the edge with the smallest weight and add it to the tree if it doesn't form a cycle.
+\item Repeat step 2 until $|v|-1$ edges are added to the tree.
+\end{enumerate}
+\end{defn}
+\begin{center}
+\includegraphics[scale=0.5]{SpanningTreeEx1.png}
+\end{center}
+\begin{ex}
+Using the graph from figure above, we get the following:
+\begin{itemize}
+\item[(A,B)] 4
+\item[(G,F)] 5
+\item[(C,E)] 6
+\item[(B,D)] 8
+\item[(B,F)] 8
+\item[(A,D)] 10
+\item[(B,E)] 11
+\item[(D,F)] 12
+\item[(F,E)] 13
+\item[(C,B)] 14
+\item[(D,G)] 17
+\end{itemize}
+Following the algorithm gives us the following spanning tree:
+\begin{center}
+\includegraphics[scale=0.5]{SpanningTreeEx2.png}
+\end{center}
+\end{ex}
+
+\subsection{Prim's Algorithm}
+\begin{defn}
+Input: A weighted connected graph $G(V,E)$.\\
+Output: A minimum spanning tree $T$ for graph $G$.
+\begin{enumerate}
+\item Start with an arbitrary vertex $v$.
+\item $v_+ \leftarrow {v_0}$
+\item $E_+ \leftarrow 0$.
+\item For $i=1$ to $|v|-1$
+\item Find minimum edge between $v$ and $u$ such that $v$ is in $V_+$ and $u$ is in $v-v_+$ and it is not added to the tree.
+\item Add $u$ to $v_+$
+\item Add $(u,v)$ to $E_+$
+\end{enumerate}
+\end{defn}
+\begin{center}
+\includegraphics[scale=0.5]{SpanningTreePrim1.png}
+\end{center}
+\begin{ex}
+Given the graph above, using Prim's algorithm we get the resulting spanning tree:
+\begin{center}
+\includegraphics[scale=0.5]{SpanningTreePrim2.png}
+\end{center}
+\end{ex}
+
+\mychapter{6}{2018-02-22}
 
 
 \end{document}

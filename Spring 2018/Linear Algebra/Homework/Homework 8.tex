@@ -52,7 +52,9 @@
 \newtheorem*{lemma}{Lemma} %added
 \newtheorem*{result}{Result} %added
 \newtheorem*{theorem}{Theorem} %added
-
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
 
 % HEADER
 % BEGIN BLOCK------------------------------------------
@@ -60,7 +62,7 @@
  
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Homework \#7}
+\lhead{Homework \#8}
 \rhead{Bryan Greener}
 \cfoot{\thepage}
 % END BLOCK============================================
@@ -79,32 +81,79 @@
 \begin{enumerate}
 \item[6.22] The vectors $u_1=(1,-2)$ and $u_2=(4,-7)$ form a basis $S$ of $\mathbb{R}^2$. Find the coordinate vector $[v]$ of $v$ relative to $S$, where: (a) $v=(5,3)$; (b) $v=(1,1)$; (c) $v=(3,-6)$; (d) $v=(a,b)$.
 	\begin{enumerate}
+	\item 
+		\begin{align*}
+		\begin{bmatrix}[r]5\\3\\\end{bmatrix} &= x\begin{bmatrix}[r]1\\-2\\\end{bmatrix}+y\begin{bmatrix}[r]4\\-7\\\end{bmatrix}\\
+		5&=x+4y\\
+		3&=-2x-7y
+		\end{align*}
+		The solution to this system is $y=13,x=-47$. Thus $v=-47u_1+13u_2$ and so $[v]_S=[-47,13]$.
 	\item
+		\[ \sysdelim{.}{.}\systeme[xy]{1=x+4y,1=-2x-7y} \]
+		The solution to this system is $y=3,x=-11$. Thus $v=-11u_1+3u_2$ and so $[v]_S=[-11,3]$.
 	\item
+		\[ \sysdelim{.}{.}\systeme[xy]{3=x+4y,-6=-2x-7y} \]
+		The solution to this system is $y=0,x=3$. Thus $v=3u_1+0u_2$ and so $[v]_S=[3,0]$.
 	\item
-	\item
+		\[ \sysdelim{.}{.}\systeme[xy]{a=x+4y,b=-2x-7y} \]
+		The solution to this system is $y=b+2a, x=-7a-4b$. Thus $v=(-7a-4b)u_1+(b+2a)u_2$ and so $[v]_S=[b+2a,-7a-4b]$.
 	\end{enumerate}
+	
 \item[6.24] The vectors $u_1=(1,1,1)$, $u_2=(1,1,0)$, and $u_3=(1,0,0)$ form a basis of $\mathbb{R}^3$. Find the coordinate vector $[v]$ of $v$ relative to $S$, where: (a) $v=(3,-4,2)$; (b) $v=(a,b,c)$.
 	\begin{enumerate}
 	\item
+		\[ \sysdelim{.}{.}\systeme[xyz]{3=x+y+z, \-4=x+y,2=x} \]
+		The solution to this system is $x=2,y=-6,z=7$. Thus $v=2u_1-6u_2+7u_3$ and so $[v]_S=[2,-6,7]$.
 	\item
+		\[ \sysdelim{.}{.}\systeme[xyz]{a=x+y+z,b=x+y,c=x} \]
+		The solution to this system is $x=c, y=b-c, z=a-b$. Thus $v=(a-b)u_1+(b-c)u_2+(c)u_3$ and so $[v]_S=[c,b-c,a-b]$.
 	\end{enumerate}
+	
 \item[6.25] Consider the basis $S=\{t^3+t^2, t^2+t, t+1, 1\}$ of the vector space $\mathbb{P}_3(t)$. Find the coordinate vector $[v]$ of $v$ relative to $S$, where: (a) $v=2t^3+t^2-3t+2$; (b) $v=t^2+2t-3$; (c) $v=at^3+bt^2+ct+d$.
 	\begin{enumerate}
 	\item
+		\begin{align*}
+		2t^3+t^2-3t+2 &= x(t^3+t^2)+y(t^2+t)+z(t+1)+s(1)\\
+		&= xt^3+xt^2+yt^2+yt+zt+z+s\\
+		&= xt^3+(x+y)t^2+(y+z)t+(z+s)\\
+		2=x, \quad 1&=x+y, \quad -3=y+z, \quad 2=z+s
+		\end{align*}
+		The solution to this system is $x=2, y=-1, z=-2, s=4$. Thus $[v]=[2,-1,-2,4]$.
 	\item
+		Using the resulting equation $xt^3+(x+y)t^2+(y+z)t+(z+s)$ from the previous question, we get the system
+		\[ \sysdelim{.}{.}\systeme[xyzs]{0=x,1=x+y,2=y+z, \-3=z+s} \]
+		The solution to this system is $x=0, y=1, z=1, s=-4$. Thus $[v]=[0,1,1-4]$.
 	\item
+		Using the resulting equation $xt^3+(x+y)t^2+(y+z)t+(z+s)$ from the previous questions, we get the system
+		\[ \sysdelim{.}{.}\systeme[xyzs]{a=x,b=x+y,c=y+z,d=z+s} \]
+		The solution to this system is $x=a,y=b-a,z=c-(b-a),s=d-(c-(b-a))$. Thus $[v]=[a,b-a,c-b+a,d-c+b-a]$.
 	\end{enumerate}
+	
 \item[6.26] In the vector space $M=M_{2,2}$ of 2 x 2 matrices find the coordinate vector $[A]$ of the matrix $A$ relative to the basis
 \[ S=\{\begin{bmatrix}[rr]1&1\\1&1\\\end{bmatrix},\begin{bmatrix}[rr]1&-1\\1&0\\\end{bmatrix},\begin{bmatrix}[rr]1&1\\0&0\\\end{bmatrix},\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix}\} \]
 where (a) $A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$.
 	\begin{enumerate}
 	\item
+		\begin{align*}
+		A&= \begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix} = x\begin{bmatrix}[rr]1&1\\1&1\\\end{bmatrix}+y\begin{bmatrix}[rr]1&-1\\1&0\\\end{bmatrix}+z\begin{bmatrix}[rr]1&1\\0&0\\\end{bmatrix}+t\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix}\\
+		&=\begin{bmatrix}[rr]x+y+z+t & x-y+z\\ x+y & x\\\end{bmatrix}\\
+		&x+y+z+t = 3, \quad x-y+z = -5, \quad x+y = 6, \quad x = 7
+		\end{align*}
+		The solution to this system is $x=7, y=-1, z=-13, t=10$. Thus $[A]=[7,-1,-13,10]$.
 	\item
+		Using the resulting matrix from the previous question gives us the following system
+		\[ \sysdelim{.}{.}\systeme[xyzt]{a=x+y+z+t,b=x-y+z,c=x+y,d=x} \]
+		The solution to this system is $x=d, y=c-d, z=(b-d)+(c-d), t= (a-d)-(c-d)-((b-d)+(c-d))$. Thus $[A]=[d,c-d,b+c-2d,a-b-2c+2d]$.
 	\end{enumerate}
+	
 \item[6.28] In the space $M=M_{2,3}$ determine whether or not the following matrices are linearly dependent:
 \[ A=\begin{bmatrix}[rrr]1&2&1\\3&1&2\\\end{bmatrix}, \quad B=\begin{bmatrix}[rrr]2&4&3\\7&5&6\\\end{bmatrix}, \quad C=\begin{bmatrix}[rrr]1&2&3\\5&7&6\\\end{bmatrix} \]
 If they are linearly dependent, find the dimension and a basis of the subspace $W$ spanned by the matrices.
+	\begin{solution}
+	We form a matrix $M$ from the coordinate vectors of the given matrices as follows:
+	\[ M=\begin{bmatrix}[rrrrrr]1&2&1&3&1&2\\2&4&3&7&5&6\\1&2&3&5&7&6\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrrrrr]1&2&0&2&-2&0\\0&0&1&1&3&2\\0&0&0&0&0&0\\\end{bmatrix}\]
+	Thus dim$W=2$ and our basis is $\begin{bmatrix}[rrr]1&2&0\\2&-2&0\\\end{bmatrix},\begin{bmatrix}[rrr]0&0&1\\1&3&2\\\end{bmatrix}$.
+	\end{solution}
 
 \item[6.29] Consider the subspaces $U=\mathrm{span}(u_1,u_2,u_3)$ and $W=\mathrm{span}(w_1,w_2,w_3)$ of $\mathbb{P}_3(t)$, where:
 \begin{align*}
@@ -112,28 +161,71 @@ If they are linearly dependent, find the dimension and a basis of the subspace $
 &w_1=t^3+t^2+t+2, \quad &&w_2=t^3+3t^2+7t+4, \quad &&w_3=2t^3+3t^2+6t+5
 \end{align*}
 Find: (a) dim$(U+W)$; (b) dim$(U \cap W)$.
+	\begin{enumerate}
+	\item $M_1=\begin{bmatrix}[rrrr]1&1&2&2\\2&3&7&5\\1&3&8&4\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrrr]1&0&-1&1\\0&1&3&1\\0&0&0&0\\\end{bmatrix}$\\
+	$M_2=\begin{bmatrix}[rrrr]1&1&1&2\\1&3&7&4\\2&3&6&5\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrrr]1&0&0&1\\0&1&0&1\\0&0&1&0\\\end{bmatrix}$
+	From these matrices, we get dim$U=2$ and dim$W=3$.
+	Next, we form matrix $M$ by combining our resulting vectors $M_1$ and $M_2$.
+	\[ M = \begin{bmatrix}[rrrr]1&0&-1&1\\0&1&3&1\\1&0&0&1\\0&1&0&1\\0&0&1&0\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrrr]1&0&0&1\\0&1&0&1\\0&0&1&0\\0&0&0&0\\0&0&0&0\\\end{bmatrix} \]
+	Thus dim$(U+W)=3$.\\
+	Therefore dim$(U \cap W) = \mathrm{dim}U+\mathrm{dim}W-\mathrm{dim}(U+W)=2+3-3=2$.
+	\end{enumerate}
 
 \item[6.30] Find the change-of-basis matrix $P$ from the usual basis $E$ of $\mathbb{R}^2$ to the basis $S$, the change-of-basis matrix $Q$ from $S$ back to $E$, and the coordinate vector $[v]$ of $v=(a,b)$ relative to $S$, where: (a) $S=\{(1,2),(3,5)\}$; (b) $S=\{(1,-3),(3,-8)\}$.
 	\begin{enumerate}
-	\item
-	\item
+	\item We start by writing the basis vectors in $S$ as columns.
+	\[ P = \begin{bmatrix}[rr]1&3\\2&5\\\end{bmatrix} \]
+	Next we find the inverse of $P$.
+	\[ Q = P^{-1} = \begin{bmatrix}[rr]-5&3\\2&-1\\\end{bmatrix} \]
+	Finally we use the fact that $[v]_S=P^{-1}[v]_E$ and $[v]_E=[a,b]^T$ to form the following:
+	\[ [v]_S = P^{-1}[v]_E=\begin{bmatrix}[rr]-5&3\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]a\\b\\\end{bmatrix}=\begin{bmatrix}[r]-5a+3b\\2a-b\\\end{bmatrix} \]
+	\item We start by writing the basis vectors in $S$ as columns.
+	\[ P = \begin{bmatrix}[rr]1&3\\-3&-8\\\end{bmatrix} \]
+	Next we find the inverse of $P$.
+	\[ Q = P^{-1} = \begin{bmatrix}[rr]-8&-3\\3&1\\\end{bmatrix} \]
+	Finally we use the fact that $[v]_S=P^{-1}[v]_E$ and $[v]_E=[a,b]^T$ to form the following:
+	\[ [v]_S = P^{-1}[v]_E=\begin{bmatrix}[rr]-8&-3\\3&1\\\end{bmatrix}\begin{bmatrix}[r]a\\b\\\end{bmatrix}=\begin{bmatrix}[r]-8a-3b\\3a+b\\\end{bmatrix} \]
 	\end{enumerate}
+	
 \item[6.31] Consider the bases $S=\{(1,2),(2,3)\}$ and $S^\prime=\{(1,3),(1,4)\}$ of $\mathbb{R}^2$. Find: (a) the change-of-basis matrix $P$ from $S$ to $S^\prime$; (b) the change-of-basis matrix $Q$ from $S^\prime$ back to $S$.
 	\begin{enumerate}
-	\item
-	\item
+	\item Let $u_1,u_2$ be the basis vectors of $S$ and $v_1,v_2$ be the basis vectors of $S^\prime$. We write each of the basis vectors of $S^\prime$ as a linear combination of the original basis vectors of $S$. So
+	\[ (1,3)=x(1,2)+y(2,3)\quad\Rightarrow\quad\sysdelim{.}{.}\systeme[xy]{x+2y=1,2x+3y=3}\quad\Rightarrow\quad x=3, y=-1 \]
+	\[ (1,4)=x(1,2)+y(2,3)\quad\Rightarrow\quad\sysdelim{.}{.}\systeme[xy]{x+2y=1,2x+3y=4} \quad\Rightarrow\quad x=5,y=-2 \]
+	Thus $v_1=3u_1-u_2$ and $v_2=5u_1-2u_2$. Writing coefficients of $u_1$ and $u_2$ as columns gives us the change-of-basis matrix $P$ from $S$ to $S^\prime$.
+	\[ P = \begin{bmatrix}[rr]3&5\\-1&-2\\\end{bmatrix} \]
+	\item Next to find the change-of-basis matrix $Q$ from $S^\prime$ to $S$, we use the fact that $Q=P^{-1}$.
+	\[ Q = P^{-1} = \begin{bmatrix}[rr]2&5\\-1&-3\\\end{bmatrix} \]
 	\end{enumerate}
+	
 \item[6.32] Suppose that the $x$ and $y$ axes in the plane $\mathbb{R}^2$ are rotated counterclockwise $30\deg$ to yield new $x^\prime$ and $y^\prime$ axes for the plane. Find: (a) the unit vectors in the direction of the new $x^\prime$ and $y^\prime$ axes; (b) the change-of-basis matrix $P$ for the new coordinate system; (c) the new coordinates of each of the following points under the new coordinate system: $A(1,3), B(2,-5), C(a,b)$.
 	\begin{enumerate}
+	\item 
+	\[ \begin{bmatrix}[rr]\cos(30^{\circ} )&-\sin(30^{\circ})\\\sin(30^{\circ})&\cos(30^{\circ})\\\end{bmatrix} \]
+	This matrix results in the two unit vectors $u_1=[\frac{\sqrt{3}}{2},\frac{1}{2}]$ and $u_2=[-\frac{1}{2},\frac{\sqrt{3}}{2}]$. Using this result, we get the change of basis matrix $P=\begin{bmatrix}[rr]\frac{\sqrt{3}}{2}&-\frac{1}{2}\\\frac{1}{2}&\frac{\sqrt{3}}{2}\\\end{bmatrix}$. To get the new coordinates we multiply $P^{-1}A$.
+	\[ P^{-1}A = \begin{bmatrix}[rr]\frac{\sqrt{3}}{2}&\frac{1}{2}\\-\frac{1}{2}&\frac{2}{\sqrt{3}}\\\end{bmatrix}\begin{bmatrix}[r]1\\3\\\end{bmatrix} = [\frac{3+\sqrt{3}}{2}, -\frac{1+3\sqrt{3}}{2} \]
+	\item 
+	\[ P^{-1}B = P^{-1}\begin{bmatrix}[r]2\\-5\\\end{bmatrix} = [-\frac{5}{2}+\sqrt{3}, -1-\frac{5\sqrt{3}}{2}] \]
 	\item
-	\item
-	\item
+	\[ P^{-1}C = P^{-1}\begin{bmatrix}[r]a\\b\\\end{bmatrix} = [\frac{\sqrt{3}a}{2}+\frac{b}{2}, \frac{\sqrt{3}b}{2}-\frac{a}{2}] \]
 	\end{enumerate}
+	
 \item[6.33] Find the change-of-basis matrix $P$ from the usual basis $E$ of $\mathbb{R}^3$ to the basis $S$, the change-of-basis matrix $Q$ from $S$ back to $E$ and the coordinate vector $[v]$ of $v=(a,b,c)$ relative to $S$, where $S$ consists of the vectors: (a) $u_1=(1,1,0)$, $u_2=(0,1,2)$, $u_3=(0,1,1)$; (b) $u_1=(1,0,1)$, $u_2=(1,1,2)$, $u_3=(1,2,4)$; (c) $u_1=(1,2,1)$, $u_2=(1,3,4)$, $u_3=(2,5,6)$.
 	\begin{enumerate}
-	\item
+	\item We start by writing the basis vectors as columns.
+	\[ P = \begin{bmatrix}[rrr]1&0&0\\1&1&1\\0&2&1\\\end{bmatrix} \]
+	Next we find $Q$ by taking the inverse of matrix $P$.
+	\[ Q = P^{-1} = \begin{bmatrix}[rrr]1&0&0\\1&-1&1\\-2&2&-1\\\end{bmatrix} \]
+	Finally we use the fact that $[v]_S = P^{-1}[v]_E$ and $[v]_E=[a,b,c]^T$ to get the following:
+	\[ [v]_S=P^{-1}[v]_E = \begin{bmatrix}[rrr]1&0&0\\1&-1&1\\-2&2&-1\\\end{bmatrix}\begin{bmatrix}[r]a\\b\\c\\\end{bmatrix} = \begin{bmatrix}[r]a\\a-b+c\\-2a+2b-c\\\end{bmatrix} \]
 	\end{enumerate}
+	
 \item[6.34] Suppose $S_1$, $S_2$, and $S_3$ are bases of a vector space $V$. Suppose also that $P$ is the change-of-basis matrix from $S_1$ to $S_2$ and $Q$ is the change-of-basis matrix from $S_2$ to $S_3$. Prove that the product $PQ$ is the change-of-basis matrix from $S_1$ to $S_3$.
+	\begin{proof}
+	Assume to the contrary that if $P$ is a change-of-basis matrix from $S_1$ to $S_2$ and $Q$ is a change-of-basis matrix from $S_2$ to $S_3$, then $PQ$ is not a change-of-basis matrix from $S_1$ to $S_3$.\\
+	Note that the change-of-basis matrix $Q$ is equal to the inverse of the change-of-basis matrix $P$ and multiplying $P$ by $Q$ gives us the identity matrix.
+	\end{proof}
+
 \item[8.53] Figure 8-9 is a diagram of maps:
 \[ f: A\rightarrow B, g: B \rightarrow A, h: C \rightarrow B, F: B\rightarrow C, G:A\rightarrow C \]
 Determine whether each of the following defines a mapping, and if it does, find its domain and codomain: (a) $g \circ f$; (b) $h \circ f$; (c) $F \circ f$; (d) $G \circ f$; (e) $g \circ h$; (f) $h \circ G \circ g$.

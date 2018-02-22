@@ -96,3 +96,9 @@
 \contentsline {subsection}{\numberline {18.1.1}Change of Basis Matrix}{41}{subsection.18.1.1}
 \contentsline {section}{\numberline {18.2}Linear Mappings}{42}{section.18.2}
 \contentsline {chapter}{2018-02-22}{43}{chapter*.22}
+\contentsline {section}{\numberline {19.1}Homework Review}{43}{section.19.1}
+\contentsline {subsection}{\numberline {19.1.1}6.34}{43}{subsection.19.1.1}
+\contentsline {subsection}{\numberline {19.1.2}8.53}{43}{subsection.19.1.2}
+\contentsline {section}{\numberline {19.2}Rank Nullity Theorem}{43}{section.19.2}
+\contentsline {section}{\numberline {19.3}Image and Kernel}{44}{section.19.3}
+\contentsline {chapter}{2018-02-22}{45}{chapter*.23}

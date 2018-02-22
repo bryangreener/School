@@ -1706,7 +1706,64 @@ Notice:
  \]
 \end{ex}
 
-
-
 \mychapter{19}{2018-02-22}
+\section{Homework Review}
+\subsection{6.34}
+Assumption can also be written as $S_2=S_1P$ and $S_3=S_2Q$.
+Then $S_3=S_2Q=(S_1P)Q=S_1(PQ)$ since matrix multiplication is associative.
+
+\subsection{8.53}
+Part A) We have to check if the codomain of f is the same as the domain of g.\\
+Written in form $domain \rightarrow codomain$.
+$domain(g)=B$\\
+$codomain(F)=B$\\
+$domain(g\circ f) = B$\\
+$codomain(g \circ f) = B$
+Part C) $F\circ f$.\\
+$domain(F) = B$\\
+$codomain(f) = B$\\
+$A\xrightarrow[]{f} B \xrightarrow[]{F} C$\\
+$domain(F \circ f) = A$\\
+$codomain(F \circ f) = C$\\
+Therefore composition is not defined.
+
+\section{Rank Nullity Theorem}
+\begin{defn}
+Suppose $A$ is a matrix. The nullity of $A$ is the dimension of the nullspace of $A$.
+\end{defn}
+\begin{ex}
+$A=\begin{bmatrix}[rrr]1&2&3\\3&6&9\\\end{bmatrix}$. The nullity of this is $2$.\\
+Consider the system $Av=0, v=\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}$ or $\sysdelim{.}{.}\systeme[xyz]{x+2y+3z=0,3x+6y+9z=0}$.\\
+Are there any redundant rows in the matrix (redundant equations)? Yes since row 2 is three times the first row.\\
+\[ rref(A)=\begin{bmatrix}[rrr]1&2&3\\0&0&0\\\end{bmatrix} \]
+There are two free parameters. $x$ is dependent, $y,z$ are free.\\
+\[ \begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[r]-2s-3t\\s\\t\\\end{bmatrix} = s\begin{bmatrix}[r]-2\\1\\0\\\end{bmatrix}+t\begin{bmatrix}[r]-3\\0\\1\\\end{bmatrix} \Rightarrow = \{\begin{bmatrix}[r]-2\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]-3\\0\\1\\\end{bmatrix}\} \]
+Then $rank(A)=1$.
+\end{ex}
+\begin{thrm}
+Let $A$ be any m x n matrix. Then $rank(A)+nullity(A)=n$.
+\end{thrm}
+
+\section{Image and Kernel}
+\begin{defn}
+Suppose $V \xrightarrow[]{f} W$ is a linear transformation.\\
+(1) The image of $f$ is $im(f)=\{f(\vec{v}): \vec{v}\in V\} \subset W$.\\
+The kernel of $f$ is $ker(f)=\{\vec{v}:f(\vec{v})=\vec{0}\}\subset V = f^{-1}(\vec{0})$.
+\end{defn}
+\begin{ex}
+$V=P_2(t), W=\mathbb{R}^2$\\
+$f(p)=\begin{bmatrix}[r]P(1)\\P(2)\\\end{bmatrix}$\\
+Recall $P_2(t)=\{a_0+a_1t+a_2t^2\} = span\{1,t,t^2\}$\\
+$f(t^2-t)=\begin{bmatrix}[r](t^2-t)|_{t=1}\\(t^2-t)|_{t=2}\\\end{bmatrix}=\begin{bmatrix}[r]0\\2\\\end{bmatrix}\Rightarrow \begin{bmatrix}[r]0\\2\\\end{bmatrix}\in im(f)$\\
+The diagram for this if $P_2(t)\xrightarrow[]{f} \mathbb{R}^2$.\\
+We can also get $\begin{bmatrix}[r]0\\4\\\end{bmatrix} \in im(f)$ with the polynomial $f(2t^2-2t) = \begin{bmatrix}[r]0\\2\\\end{bmatrix}$.\\
+Is $\begin{bmatrix}[r]1\\0\\\end{bmatrix} \in im(f)$?\\
+Using $f(a_0+a_1t+a_2t^2)$ as a system of linear equations we can solve this. Let
+\[ f(a_0+a_1t+a_2t^2) = \begin{bmatrix}[r]a_0+a_1+a_2\\a_0+2a_1+4a_2\\\end{bmatrix} = \begin{bmatrix}[r]1\\0\\\end{bmatrix} \Rightarrow \sysdelim{.}{.}\systeme[a_0a_1a_2]{a_0+a_1+a_2=1,a_0+2a_1+4a_2=0} \]
+\end{ex}
+
+
+
+\mychapter{20}{2018-02-22}
+
 \end{document}

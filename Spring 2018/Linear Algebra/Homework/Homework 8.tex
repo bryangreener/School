@@ -98,7 +98,8 @@
 		\[ \sysdelim{.}{.}\systeme[xy]{a=x+4y,b=-2x-7y} \]
 		The solution to this system is $y=b+2a, x=-7a-4b$. Thus $v=(-7a-4b)u_1+(b+2a)u_2$ and so $[v]_S=[b+2a,-7a-4b]$.
 	\end{enumerate}
-	
+
+\pagebreak
 \item[6.24] The vectors $u_1=(1,1,1)$, $u_2=(1,1,0)$, and $u_3=(1,0,0)$ form a basis of $\mathbb{R}^3$. Find the coordinate vector $[v]$ of $v$ relative to $S$, where: (a) $v=(3,-4,2)$; (b) $v=(a,b,c)$.
 	\begin{enumerate}
 	\item
@@ -123,6 +124,7 @@
 		Using the resulting equation $xt^3+(x+y)t^2+(y+z)t+(z+s)$ from the previous question, we get the system
 		\[ \sysdelim{.}{.}\systeme[xyzs]{0=x,1=x+y,2=y+z, \-3=z+s} \]
 		The solution to this system is $x=0, y=1, z=1, s=-4$. Thus $[v]=[0,1,1-4]$.
+\pagebreak
 	\item
 		Using the resulting equation $xt^3+(x+y)t^2+(y+z)t+(z+s)$ from the previous questions, we get the system
 		\[ \sysdelim{.}{.}\systeme[xyzs]{a=x,b=x+y,c=y+z,d=z+s} \]
@@ -145,7 +147,8 @@ where (a) $A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix}$; (b) $A=\begin{bmatrix
 		\[ \sysdelim{.}{.}\systeme[xyzt]{a=x+y+z+t,b=x-y+z,c=x+y,d=x} \]
 		The solution to this system is $x=d, y=c-d, z=(b-d)+(c-d), t= (a-d)-(c-d)-((b-d)+(c-d))$. Thus $[A]=[d,c-d,b+c-2d,a-b-2c+2d]$.
 	\end{enumerate}
-	
+
+\pagebreak
 \item[6.28] In the space $M=M_{2,3}$ determine whether or not the following matrices are linearly dependent:
 \[ A=\begin{bmatrix}[rrr]1&2&1\\3&1&2\\\end{bmatrix}, \quad B=\begin{bmatrix}[rrr]2&4&3\\7&5&6\\\end{bmatrix}, \quad C=\begin{bmatrix}[rrr]1&2&3\\5&7&6\\\end{bmatrix} \]
 If they are linearly dependent, find the dimension and a basis of the subspace $W$ spanned by the matrices.
@@ -168,11 +171,12 @@ Find: (a) dim$(U+W)$; (b) dim$(U \cap W)$.
 	Next, we form matrix $M$ by combining our resulting vectors $M_1$ and $M_2$.
 	\[ M = \begin{bmatrix}[rrrr]1&0&-1&1\\0&1&3&1\\1&0&0&1\\0&1&0&1\\0&0&1&0\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrrr]1&0&0&1\\0&1&0&1\\0&0&1&0\\0&0&0&0\\0&0&0&0\\\end{bmatrix} \]
 	Thus dim$(U+W)=3$.\\
-	Therefore dim$(U \cap W) = \mathrm{dim}U+\mathrm{dim}W-\mathrm{dim}(U+W)=2+3-3=2$.
+	\item Therefore dim$(U \cap W) = \mathrm{dim}U+\mathrm{dim}W-\mathrm{dim}(U+W)=2+3-3=2$.
 	\end{enumerate}
 
 \item[6.30] Find the change-of-basis matrix $P$ from the usual basis $E$ of $\mathbb{R}^2$ to the basis $S$, the change-of-basis matrix $Q$ from $S$ back to $E$, and the coordinate vector $[v]$ of $v=(a,b)$ relative to $S$, where: (a) $S=\{(1,2),(3,5)\}$; (b) $S=\{(1,-3),(3,-8)\}$.
 	\begin{enumerate}
+\pagebreak
 	\item We start by writing the basis vectors in $S$ as columns.
 	\[ P = \begin{bmatrix}[rr]1&3\\2&5\\\end{bmatrix} \]
 	Next we find the inverse of $P$.
@@ -201,13 +205,13 @@ Find: (a) dim$(U+W)$; (b) dim$(U \cap W)$.
 \item[6.32] Suppose that the $x$ and $y$ axes in the plane $\mathbb{R}^2$ are rotated counterclockwise $30\deg$ to yield new $x^\prime$ and $y^\prime$ axes for the plane. Find: (a) the unit vectors in the direction of the new $x^\prime$ and $y^\prime$ axes; (b) the change-of-basis matrix $P$ for the new coordinate system; (c) the new coordinates of each of the following points under the new coordinate system: $A(1,3), B(2,-5), C(a,b)$.
 	\begin{enumerate}
 	\item 
-	\[ \begin{bmatrix}[rr]\cos(30^{\circ} )&-\sin(30^{\circ})\\\sin(30^{\circ})&\cos(30^{\circ})\\\end{bmatrix} \]
-	This matrix results in the two unit vectors $u_1=[\frac{\sqrt{3}}{2},\frac{1}{2}]$ and $u_2=[-\frac{1}{2},\frac{\sqrt{3}}{2}]$. Using this result, we get the change of basis matrix $P=\begin{bmatrix}[rr]\frac{\sqrt{3}}{2}&-\frac{1}{2}\\\frac{1}{2}&\frac{\sqrt{3}}{2}\\\end{bmatrix}$. To get the new coordinates we multiply $P^{-1}A$.
-	\[ P^{-1}A = \begin{bmatrix}[rr]\frac{\sqrt{3}}{2}&\frac{1}{2}\\-\frac{1}{2}&\frac{2}{\sqrt{3}}\\\end{bmatrix}\begin{bmatrix}[r]1\\3\\\end{bmatrix} = [\frac{3+\sqrt{3}}{2}, -\frac{1+3\sqrt{3}}{2} \]
+	\[ \begin{bmatrix}[rr]-\cos(30^{\circ} )&\sin(30^{\circ})\\-\sin(30^{\circ})&-\cos(30^{\circ})\\\end{bmatrix} \]
+	This matrix results in the two unit vectors $u_1=[-\frac{\sqrt{3}}{2},-\frac{1}{2}]$ and $u_2=[\frac{1}{2},-\frac{\sqrt{3}}{2}]$. Using this result, we get the change of basis matrix $P=\begin{bmatrix}[rr]-\frac{\sqrt{3}}{2}&\frac{1}{2}\\-\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\end{bmatrix}$. To get the new coordinates we multiply $P^{-1}A$.
+	\[ P^{-1}A = \begin{bmatrix}[rr]\frac{-\sqrt{3}}{2}&-\frac{1}{2}\\\frac{1}{2}&-\frac{\sqrt{3}}{2}\\\end{bmatrix}\begin{bmatrix}[r]1\\3\\\end{bmatrix} = [\frac{-3-\sqrt{3}}{2}, \frac{1-3\sqrt{3}}{2} \]
 	\item 
-	\[ P^{-1}B = P^{-1}\begin{bmatrix}[r]2\\-5\\\end{bmatrix} = [-\frac{5}{2}+\sqrt{3}, -1-\frac{5\sqrt{3}}{2}] \]
+	\[ P^{-1}B = P^{-1}\begin{bmatrix}[r]2\\-5\\\end{bmatrix} = [\frac{5}{2}-\sqrt{3}, 1+\frac{5\sqrt{3}}{2}] \]
 	\item
-	\[ P^{-1}C = P^{-1}\begin{bmatrix}[r]a\\b\\\end{bmatrix} = [\frac{\sqrt{3}a}{2}+\frac{b}{2}, \frac{\sqrt{3}b}{2}-\frac{a}{2}] \]
+	\[ P^{-1}C = P^{-1}\begin{bmatrix}[r]a\\b\\\end{bmatrix} = [-\frac{\sqrt{3}a-b}{2}, \frac{a-\sqrt{3}b}{2}] \]
 	\end{enumerate}
 	
 \item[6.33] Find the change-of-basis matrix $P$ from the usual basis $E$ of $\mathbb{R}^3$ to the basis $S$, the change-of-basis matrix $Q$ from $S$ back to $E$ and the coordinate vector $[v]$ of $v=(a,b,c)$ relative to $S$, where $S$ consists of the vectors: (a) $u_1=(1,1,0)$, $u_2=(0,1,2)$, $u_3=(0,1,1)$; (b) $u_1=(1,0,1)$, $u_2=(1,1,2)$, $u_3=(1,2,4)$; (c) $u_1=(1,2,1)$, $u_2=(1,3,4)$, $u_3=(2,5,6)$.
@@ -222,8 +226,7 @@ Find: (a) dim$(U+W)$; (b) dim$(U \cap W)$.
 	
 \item[6.34] Suppose $S_1$, $S_2$, and $S_3$ are bases of a vector space $V$. Suppose also that $P$ is the change-of-basis matrix from $S_1$ to $S_2$ and $Q$ is the change-of-basis matrix from $S_2$ to $S_3$. Prove that the product $PQ$ is the change-of-basis matrix from $S_1$ to $S_3$.
 	\begin{proof}
-	Assume to the contrary that if $P$ is a change-of-basis matrix from $S_1$ to $S_2$ and $Q$ is a change-of-basis matrix from $S_2$ to $S_3$, then $PQ$ is not a change-of-basis matrix from $S_1$ to $S_3$.\\
-	Note that the change-of-basis matrix $Q$ is equal to the inverse of the change-of-basis matrix $P$ and multiplying $P$ by $Q$ gives us the identity matrix.
+	By our assumption, we can rewrite our functions as $S_2=S_1P$ and $S_3=S_2Q$. Then by the law of matrix association, $S_3=S_2Q=(S_1P)Q=S_1(PQ)$. Thus there is transitivity from $S_1$ to $S_3$. 
 	\end{proof}
 
 \item[8.53] Figure 8-9 is a diagram of maps:
@@ -276,7 +279,12 @@ Determine whether each of the following defines a mapping, and if it does, find 
 	F(v+w) &= A(v+w) = Av + Aw = F(v) + F(w)\\
 	F(\begin{bmatrix}[r]x_1\\y_1\\\end{bmatrix} + \begin{bmatrix}[r]x_2\\y_2\\\end{bmatrix}) &= \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}(\begin{bmatrix}[r]x_1+x_2\\y_1+y_2\\\end{bmatrix})\\
 	 &= \begin{bmatrix}[r]ax_1+ax_2+by_1+by_2\\cx_1+cx_2+by_1+by_2\\\end{bmatrix} = \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[r]x_1\\y_1\\\end{bmatrix}+\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[r]x_2\\y_2\\\end{bmatrix}\\
-	 &= \begin{bmatrix}[r]ax_1+by_1\\cx_1+dy_1\\\end{bmatrix}+\begin{bmatrix}[r]ax_2+by_2\\cx_2+dy_2\\\end{bmatrix} = \begin{bmatrix}[r]ax_1+ax_2+by_1+by_2\\cx_1+cx_2+dy_1+dy_2\\\end{bmatrix}
+	 &= \begin{bmatrix}[r]ax_1+by_1\\cx_1+dy_1\\\end{bmatrix}+\begin{bmatrix}[r]ax_2+by_2\\cx_2+dy_2\\\end{bmatrix} = \begin{bmatrix}[r]ax_1+ax_2+by_1+by_2\\cx_1+cx_2+dy_1+dy_2\\\end{bmatrix}\\
+	F(kv)&=A(kv)=kA(v)=kF(v)\\
+	F(k\begin{bmatrix}[r]x\\y\\\end{bmatrix}) &= \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}(\begin{bmatrix}[r]kx\\ky\\\end{bmatrix})\\
+	&= \begin{bmatrix}[r]kax+kby\\kcx+kdy\\\end{bmatrix}\\
+	&= k\begin{bmatrix}[r]ax+by\\cx+dy\\\end{bmatrix}\\
+	&= kF(\begin{bmatrix}[r]x\\y\\\end{bmatrix}
 	\end{align*}
 	\end{enumerate}
 	

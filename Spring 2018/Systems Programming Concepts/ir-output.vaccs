@@ -1,0 +1,1101 @@
+invocation~!~pgm
+binary~!~pgm
+architecture~!~i386
+ccode~!~#include <limits.h>
+ccode~!~
+ccode~!~int main(){
+ccode~!~
+ccode~!~  unsigned long ul;
+ccode~!~  unsigned char uc;
+ccode~!~
+ccode~!~  long  sl;
+ccode~!~  int   si;
+ccode~!~  short ss;
+ccode~!~  char  sc;
+ccode~!~ 
+ccode~!~
+ccode~!~  ul=ULONG_MAX;
+ccode~!~  sl=LONG_MAX;
+ccode~!~  sl=ULONG_MAX;
+ccode~!~  
+ccode~!~
+ccode~!~  si=INT_MAX;
+ccode~!~  /* What would be the value in hex and decimal if si were cast to a
+ccode~!~         signed long
+ccode~!~         unsigned long
+ccode~!~         unsigned int
+ccode~!~         signed short
+ccode~!~         unsigned short
+ccode~!~  */
+ccode~!~
+ccode~!~  
+ccode~!~  si=-1;
+ccode~!~  /* What would be the value in hex and decimal if si were cast to a
+ccode~!~         signed long
+ccode~!~         unsigned long
+ccode~!~         unsigned int
+ccode~!~         signed short
+ccode~!~         unsigned short
+ccode~!~  */
+ccode~!~
+ccode~!~  ss=SHRT_MIN;
+ccode~!~    /* What would be the value in hex and decimal if sl were cast to a 
+ccode~!~         signed long
+ccode~!~         unsigned long
+ccode~!~         signed char
+ccode~!~         unsigned char
+ccode~!~  */
+ccode~!~  
+ccode~!~  sc=SCHAR_MAX;
+ccode~!~  sc=sc+1;
+ccode~!~  /* What is the value of sc? */
+ccode~!~  /* Is a "char" signed or unsigned? */
+ccode~!~  
+ccode~!~  sc=SCHAR_MIN;
+ccode~!~  sc=sc-1;
+ccode~!~  /* What is the value of sc? */
+ccode~!~
+ccode~!~  uc=UCHAR_MAX;
+ccode~!~  uc=uc+1;
+ccode~!~  /* What is the value of uc? */
+ccode~!~
+ccode~!~  uc=0;
+ccode~!~  uc=uc-1;
+ccode~!~  /* What is the value of uc? */
+ccode~!~
+ccode~!~  uc=UCHAR_MAX;  
+ccode~!~  si=0;
+ccode~!~  if ((uc+uc)>UCHAR_MAX)
+ccode~!~    si=5;
+ccode~!~
+ccode~!~  /* What is the value of si? */
+ccode~!~
+ccode~!~  return(0);
+ccode~!~}
+section~!~|SectID|Type|File Address|Per|File Off.|File Size|Flags|Section Name
+section~!~|0x00000001|regular| |---|0x00000000|0x00000000|0x00000000|pgm.
+section~!~|0x00000002|regular|[0x0000000008048154-0x0000000008048167)|r--|0x00000154|0x00000013|0x00000002|pgm..interp
+section~!~|0x00000003|regular|[0x0000000008048168-0x0000000008048188)|r--|0x00000168|0x00000020|0x00000002|pgm..note.ABI-tag
+section~!~|0x00000004|regular|[0x0000000008048188-0x00000000080481ac)|r--|0x00000188|0x00000024|0x00000002|pgm..note.gnu.build-id
+section~!~|0x00000005|regular|[0x00000000080481ac-0x00000000080481cc)|r--|0x000001ac|0x00000020|0x00000002|pgm..gnu.hash
+section~!~|0x00000006|elf-dynamic-symbols|[0x00000000080481cc-0x000000000804820c)|r--|0x000001cc|0x00000040|0x00000002|pgm..dynsym
+section~!~|0x00000007|regular|[0x000000000804820c-0x0000000008048251)|r--|0x0000020c|0x00000045|0x00000002|pgm..dynstr
+section~!~|0x00000008|regular|[0x0000000008048252-0x000000000804825a)|r--|0x00000252|0x00000008|0x00000002|pgm..gnu.version
+section~!~|0x00000009|regular|[0x000000000804825c-0x000000000804827c)|r--|0x0000025c|0x00000020|0x00000002|pgm..gnu.version_r
+section~!~|0x0000000a|elf-relocation-entries|[0x000000000804827c-0x0000000008048284)|r--|0x0000027c|0x00000008|0x00000002|pgm..rel.dyn
+section~!~|0x0000000b|elf-relocation-entries|[0x0000000008048284-0x000000000804828c)|r--|0x00000284|0x00000008|0x00000042|pgm..rel.plt
+section~!~|0x0000000c|regular|[0x000000000804828c-0x00000000080482af)|r-x|0x0000028c|0x00000023|0x00000006|pgm..init
+section~!~|0x0000000d|regular|[0x00000000080482b0-0x00000000080482d0)|r-x|0x000002b0|0x00000020|0x00000006|pgm..plt
+section~!~|0x0000000e|regular|[0x00000000080482d0-0x00000000080482d8)|r-x|0x000002d0|0x00000008|0x00000006|pgm..plt.got
+section~!~|0x0000000f|code|[0x00000000080482e0-0x00000000080484c2)|r-x|0x000002e0|0x000001e2|0x00000006|pgm..text
+section~!~|0x00000010|regular|[0x00000000080484c4-0x00000000080484d8)|r-x|0x000004c4|0x00000014|0x00000006|pgm..fini
+section~!~|0x00000011|regular|[0x00000000080484d8-0x00000000080484e4)|r--|0x000004d8|0x0000000c|0x00000002|pgm..rodata
+section~!~|0x00000012|regular|[0x00000000080484e4-0x0000000008048510)|r--|0x000004e4|0x0000002c|0x00000002|pgm..eh_frame_hdr
+section~!~|0x00000013|eh-frame|[0x0000000008048510-0x00000000080485d0)|r--|0x00000510|0x000000c0|0x00000002|pgm..eh_frame
+section~!~|0x00000014|regular|[0x0000000008049f0c-0x0000000008049f10)|rw-|0x00000f0c|0x00000004|0x00000003|pgm..init_array
+section~!~|0x00000015|regular|[0x0000000008049f10-0x0000000008049f14)|rw-|0x00000f10|0x00000004|0x00000003|pgm..fini_array
+section~!~|0x00000016|elf-dynamic-link-info|[0x0000000008049f14-0x0000000008049ffc)|rw-|0x00000f14|0x000000e8|0x00000003|pgm..dynamic
+section~!~|0x00000017|regular|[0x0000000008049ffc-0x000000000804a000)|rw-|0x00000ffc|0x00000004|0x00000003|pgm..got
+section~!~|0x00000018|regular|[0x000000000804a000-0x000000000804a010)|rw-|0x00001000|0x00000010|0x00000003|pgm..got.plt
+section~!~|0x00000019|data|[0x000000000804a010-0x000000000804a014)|rw-|0x00001010|0x00000004|0x00000003|pgm..data
+section~!~|0x0000001a|zero-fill|[0x000000000804a014-0x000000000804a018)|rw-|0x00001014|0x00000000|0x00000003|pgm..bss
+section~!~|0x0000001b|regular| |---|0x00001014|0x0000002c|0x00000030|pgm..comment
+section~!~|0x0000001c|dwarf-aranges| |---|0x00001040|0x00000020|0x00000000|pgm..debug_aranges
+section~!~|0x0000001d|dwarf-info| |---|0x00001060|0x000000b8|0x00000000|pgm..debug_info
+section~!~|0x0000001e|dwarf-abbrev| |---|0x00001118|0x00000053|0x00000000|pgm..debug_abbrev
+section~!~|0x0000001f|dwarf-line| |---|0x0000116b|0x0000004d|0x00000000|pgm..debug_line
+section~!~|0x00000020|dwarf-str| |---|0x000011b8|0x000000e3|0x00000030|pgm..debug_str
+section~!~|0x00000021|elf-symbol-table| |---|0x0000129c|0x00000430|0x00000000|pgm..symtab
+section~!~|0x00000022|regular| |---|0x000016cc|0x000001b8|0x00000000|pgm..strtab
+section~!~|0x00000023|regular| |---|0x00001884|0x00000145|0x00000000|pgm..shstrtab
+register~!~0|14|eax|0xf7fb3d9c
+register~!~0|14|ebx|0x00000000
+register~!~0|14|ecx|0xba512c34
+register~!~0|14|edx|0xffffd084
+register~!~0|14|edi|0x00000000
+register~!~0|14|esi|0xf7fb2000
+register~!~0|14|ebp|0xffffd058
+register~!~0|14|esp|0xffffd048
+register~!~0|14|eip|0x080483dc
+register~!~0|14|eflags|0x00000286
+register~!~0|14|cs|0x00000023
+register~!~0|14|fs|0x00000000
+register~!~0|14|gs|0x00000063
+register~!~0|14|ss|0x0000002b
+register~!~0|14|ds|0x0000002b
+register~!~0|14|es|0x0000002b
+function_invocation~!~0|14|ld-linux.so.2`tunable_list|--------
+function_invocation~!~0|14|pgm`_start|--------
+function_invocation~!~0|14|libc.so.6`__libc_start_main|--------
+function_invocation~!~0|14|pgm`main|0xffffd058
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~0|14|main|0xffffd054|unsigned long|ul|4160430080
+variable_access~!~0|14|main|0xffffd048|unsigned char|uc|'i'
+variable_access~!~0|14|main|0xffffd050|long|sl|-134537216
+variable_access~!~0|14|main|0xffffd04c|int|si|0
+variable_access~!~0|14|main|0xffffd04a|short|ss|2052
+variable_access~!~0|14|main|0xffffd049|char|sc|'\x84'
+assembly~!~14|7
+assembly~!~14|8   	  long  sl;
+assembly~!~14|9   	  int   si;
+assembly~!~14|10  	  short ss;
+assembly~!~14|11  	  char  sc;
+assembly~!~14|12
+assembly~!~14|13
+assembly~!~14|14  	  ul=ULONG_MAX;
+assembly~!~14|
+assembly~!~14|pgm`main:
+assembly~!~14|0x80483dc <+6>: movl   $0xffffffff, -0x4(%ebp)   ; imm = 0xFFFFFFFF
+register~!~1|15|eip|0x080483e3
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~1|15|main|0xffffd054|unsigned long|ul|4294967295
+assembly~!~15|7
+assembly~!~15|8   	  long  sl;
+assembly~!~15|9   	  int   si;
+assembly~!~15|10  	  short ss;
+assembly~!~15|11  	  char  sc;
+assembly~!~15|12
+assembly~!~15|13
+assembly~!~15|14  	  ul=ULONG_MAX;
+assembly~!~15|15  	  sl=LONG_MAX;
+assembly~!~15|
+assembly~!~15|pgm`main:
+assembly~!~15|0x80483e3 <+13>: movl   $0x7fffffff, -0x8(%ebp)   ; imm = 0x7FFFFFFF
+register~!~2|16|eip|0x080483ea
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~2|16|main|0xffffd050|long|sl|2147483647
+assembly~!~16|7
+assembly~!~16|8   	  long  sl;
+assembly~!~16|9   	  int   si;
+assembly~!~16|10  	  short ss;
+assembly~!~16|11  	  char  sc;
+assembly~!~16|12
+assembly~!~16|13
+assembly~!~16|14  	  ul=ULONG_MAX;
+assembly~!~16|15  	  sl=LONG_MAX;
+assembly~!~16|16  	  sl=ULONG_MAX;
+assembly~!~16|
+assembly~!~16|pgm`main:
+assembly~!~16|0x80483ea <+20>: movl   $0xffffffff, -0x8(%ebp)   ; imm = 0xFFFFFFFF
+register~!~3|19|eip|0x080483f1
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~3|19|main|0xffffd050|long|sl|-1
+assembly~!~19|7
+assembly~!~19|8   	  long  sl;
+assembly~!~19|9   	  int   si;
+assembly~!~19|10  	  short ss;
+assembly~!~19|11  	  char  sc;
+assembly~!~19|12
+assembly~!~19|13
+assembly~!~19|14  	  ul=ULONG_MAX;
+assembly~!~19|15  	  sl=LONG_MAX;
+assembly~!~19|16  	  sl=ULONG_MAX;
+assembly~!~19|17
+assembly~!~19|18
+assembly~!~19|19  	  si=INT_MAX;
+assembly~!~19|
+assembly~!~19|pgm`main:
+assembly~!~19|0x80483f1 <+27>: movl   $0x7fffffff, -0xc(%ebp)   ; imm = 0x7FFFFFFF
+register~!~4|29|eip|0x080483f8
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~4|29|main|0xffffd04c|int|si|2147483647
+assembly~!~29|7
+assembly~!~29|8   	  long  sl;
+assembly~!~29|9   	  int   si;
+assembly~!~29|10  	  short ss;
+assembly~!~29|11  	  char  sc;
+assembly~!~29|12
+assembly~!~29|13
+assembly~!~29|14  	  ul=ULONG_MAX;
+assembly~!~29|15  	  sl=LONG_MAX;
+assembly~!~29|16  	  sl=ULONG_MAX;
+assembly~!~29|17
+assembly~!~29|18
+assembly~!~29|19  	  si=INT_MAX;
+assembly~!~29|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~29|21  	         signed long
+assembly~!~29|22  	         unsigned long
+assembly~!~29|23  	         unsigned int
+assembly~!~29|24  	         signed short
+assembly~!~29|25  	         unsigned short
+assembly~!~29|26  	  */
+assembly~!~29|27
+assembly~!~29|28
+assembly~!~29|29  	  si=-1;
+assembly~!~29|
+assembly~!~29|pgm`main:
+assembly~!~29|0x80483f8 <+34>: movl   $0xffffffff, -0xc(%ebp)   ; imm = 0xFFFFFFFF
+register~!~5|38|eip|0x080483ff
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~5|38|main|0xffffd04c|int|si|-1
+assembly~!~38|7
+assembly~!~38|8   	  long  sl;
+assembly~!~38|9   	  int   si;
+assembly~!~38|10  	  short ss;
+assembly~!~38|11  	  char  sc;
+assembly~!~38|12
+assembly~!~38|13
+assembly~!~38|14  	  ul=ULONG_MAX;
+assembly~!~38|15  	  sl=LONG_MAX;
+assembly~!~38|16  	  sl=ULONG_MAX;
+assembly~!~38|17
+assembly~!~38|18
+assembly~!~38|19  	  si=INT_MAX;
+assembly~!~38|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~38|21  	         signed long
+assembly~!~38|22  	         unsigned long
+assembly~!~38|23  	         unsigned int
+assembly~!~38|24  	         signed short
+assembly~!~38|25  	         unsigned short
+assembly~!~38|26  	  */
+assembly~!~38|27
+assembly~!~38|28
+assembly~!~38|29  	  si=-1;
+assembly~!~38|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~38|31  	         signed long
+assembly~!~38|32  	         unsigned long
+assembly~!~38|33  	         unsigned int
+assembly~!~38|34  	         signed short
+assembly~!~38|35  	         unsigned short
+assembly~!~38|36  	  */
+assembly~!~38|37
+assembly~!~38|38  	  ss=SHRT_MIN;
+assembly~!~38|
+assembly~!~38|pgm`main:
+assembly~!~38|0x80483ff <+41>: movw   $0x8000, -0xe(%ebp)       ; imm = 0x8000
+register~!~6|46|eip|0x08048405
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~6|46|main|0xffffd04a|short|ss|-32768
+assembly~!~46|7
+assembly~!~46|8   	  long  sl;
+assembly~!~46|9   	  int   si;
+assembly~!~46|10  	  short ss;
+assembly~!~46|11  	  char  sc;
+assembly~!~46|12
+assembly~!~46|13
+assembly~!~46|14  	  ul=ULONG_MAX;
+assembly~!~46|15  	  sl=LONG_MAX;
+assembly~!~46|16  	  sl=ULONG_MAX;
+assembly~!~46|17
+assembly~!~46|18
+assembly~!~46|19  	  si=INT_MAX;
+assembly~!~46|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~46|21  	         signed long
+assembly~!~46|22  	         unsigned long
+assembly~!~46|23  	         unsigned int
+assembly~!~46|24  	         signed short
+assembly~!~46|25  	         unsigned short
+assembly~!~46|26  	  */
+assembly~!~46|27
+assembly~!~46|28
+assembly~!~46|29  	  si=-1;
+assembly~!~46|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~46|31  	         signed long
+assembly~!~46|32  	         unsigned long
+assembly~!~46|33  	         unsigned int
+assembly~!~46|34  	         signed short
+assembly~!~46|35  	         unsigned short
+assembly~!~46|36  	  */
+assembly~!~46|37
+assembly~!~46|38  	  ss=SHRT_MIN;
+assembly~!~46|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~46|40  	         signed long
+assembly~!~46|41  	         unsigned long
+assembly~!~46|42  	         signed char
+assembly~!~46|43  	         unsigned char
+assembly~!~46|44  	  */
+assembly~!~46|45
+assembly~!~46|46  	  sc=SCHAR_MAX;
+assembly~!~46|
+assembly~!~46|pgm`main:
+assembly~!~46|0x8048405 <+47>: movb   $0x7f, -0xf(%ebp)
+register~!~7|47|eip|0x08048409
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~7|47|main|0xffffd049|char|sc|'\x7f'
+assembly~!~47|7
+assembly~!~47|8   	  long  sl;
+assembly~!~47|9   	  int   si;
+assembly~!~47|10  	  short ss;
+assembly~!~47|11  	  char  sc;
+assembly~!~47|12
+assembly~!~47|13
+assembly~!~47|14  	  ul=ULONG_MAX;
+assembly~!~47|15  	  sl=LONG_MAX;
+assembly~!~47|16  	  sl=ULONG_MAX;
+assembly~!~47|17
+assembly~!~47|18
+assembly~!~47|19  	  si=INT_MAX;
+assembly~!~47|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~47|21  	         signed long
+assembly~!~47|22  	         unsigned long
+assembly~!~47|23  	         unsigned int
+assembly~!~47|24  	         signed short
+assembly~!~47|25  	         unsigned short
+assembly~!~47|26  	  */
+assembly~!~47|27
+assembly~!~47|28
+assembly~!~47|29  	  si=-1;
+assembly~!~47|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~47|31  	         signed long
+assembly~!~47|32  	         unsigned long
+assembly~!~47|33  	         unsigned int
+assembly~!~47|34  	         signed short
+assembly~!~47|35  	         unsigned short
+assembly~!~47|36  	  */
+assembly~!~47|37
+assembly~!~47|38  	  ss=SHRT_MIN;
+assembly~!~47|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~47|40  	         signed long
+assembly~!~47|41  	         unsigned long
+assembly~!~47|42  	         signed char
+assembly~!~47|43  	         unsigned char
+assembly~!~47|44  	  */
+assembly~!~47|45
+assembly~!~47|46  	  sc=SCHAR_MAX;
+assembly~!~47|47  	  sc=sc+1;
+assembly~!~47|
+assembly~!~47|pgm`main:
+assembly~!~47|0x8048409 <+51>: movzbl -0xf(%ebp), %eax
+assembly~!~47|0x804840d <+55>: addl   $0x1, %eax
+assembly~!~47|0x8048410 <+58>: movb   %al, -0xf(%ebp)
+register~!~8|51|eax|0x00000080
+register~!~8|51|eip|0x08048413
+register~!~8|51|eflags|0x00000212
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~8|51|main|0xffffd049|char|sc|'\x80'
+assembly~!~51|7
+assembly~!~51|8   	  long  sl;
+assembly~!~51|9   	  int   si;
+assembly~!~51|10  	  short ss;
+assembly~!~51|11  	  char  sc;
+assembly~!~51|12
+assembly~!~51|13
+assembly~!~51|14  	  ul=ULONG_MAX;
+assembly~!~51|15  	  sl=LONG_MAX;
+assembly~!~51|16  	  sl=ULONG_MAX;
+assembly~!~51|17
+assembly~!~51|18
+assembly~!~51|19  	  si=INT_MAX;
+assembly~!~51|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~51|21  	         signed long
+assembly~!~51|22  	         unsigned long
+assembly~!~51|23  	         unsigned int
+assembly~!~51|24  	         signed short
+assembly~!~51|25  	         unsigned short
+assembly~!~51|26  	  */
+assembly~!~51|27
+assembly~!~51|28
+assembly~!~51|29  	  si=-1;
+assembly~!~51|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~51|31  	         signed long
+assembly~!~51|32  	         unsigned long
+assembly~!~51|33  	         unsigned int
+assembly~!~51|34  	         signed short
+assembly~!~51|35  	         unsigned short
+assembly~!~51|36  	  */
+assembly~!~51|37
+assembly~!~51|38  	  ss=SHRT_MIN;
+assembly~!~51|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~51|40  	         signed long
+assembly~!~51|41  	         unsigned long
+assembly~!~51|42  	         signed char
+assembly~!~51|43  	         unsigned char
+assembly~!~51|44  	  */
+assembly~!~51|45
+assembly~!~51|46  	  sc=SCHAR_MAX;
+assembly~!~51|47  	  sc=sc+1;
+assembly~!~51|48  	  /* What is the value of sc? */
+assembly~!~51|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~51|50
+assembly~!~51|51  	  sc=SCHAR_MIN;
+assembly~!~51|
+assembly~!~51|pgm`main:
+assembly~!~51|0x8048413 <+61>: movb   $-0x80, -0xf(%ebp)
+register~!~9|52|eip|0x08048417
+return_address~!~main|0x00000000|0xf7e242c3
+assembly~!~52|7
+assembly~!~52|8   	  long  sl;
+assembly~!~52|9   	  int   si;
+assembly~!~52|10  	  short ss;
+assembly~!~52|11  	  char  sc;
+assembly~!~52|12
+assembly~!~52|13
+assembly~!~52|14  	  ul=ULONG_MAX;
+assembly~!~52|15  	  sl=LONG_MAX;
+assembly~!~52|16  	  sl=ULONG_MAX;
+assembly~!~52|17
+assembly~!~52|18
+assembly~!~52|19  	  si=INT_MAX;
+assembly~!~52|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~52|21  	         signed long
+assembly~!~52|22  	         unsigned long
+assembly~!~52|23  	         unsigned int
+assembly~!~52|24  	         signed short
+assembly~!~52|25  	         unsigned short
+assembly~!~52|26  	  */
+assembly~!~52|27
+assembly~!~52|28
+assembly~!~52|29  	  si=-1;
+assembly~!~52|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~52|31  	         signed long
+assembly~!~52|32  	         unsigned long
+assembly~!~52|33  	         unsigned int
+assembly~!~52|34  	         signed short
+assembly~!~52|35  	         unsigned short
+assembly~!~52|36  	  */
+assembly~!~52|37
+assembly~!~52|38  	  ss=SHRT_MIN;
+assembly~!~52|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~52|40  	         signed long
+assembly~!~52|41  	         unsigned long
+assembly~!~52|42  	         signed char
+assembly~!~52|43  	         unsigned char
+assembly~!~52|44  	  */
+assembly~!~52|45
+assembly~!~52|46  	  sc=SCHAR_MAX;
+assembly~!~52|47  	  sc=sc+1;
+assembly~!~52|48  	  /* What is the value of sc? */
+assembly~!~52|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~52|50
+assembly~!~52|51  	  sc=SCHAR_MIN;
+assembly~!~52|52  	  sc=sc-1;
+assembly~!~52|
+assembly~!~52|pgm`main:
+assembly~!~52|0x8048417 <+65>: movzbl -0xf(%ebp), %eax
+assembly~!~52|0x804841b <+69>: subl   $0x1, %eax
+assembly~!~52|0x804841e <+72>: movb   %al, -0xf(%ebp)
+register~!~10|55|eax|0x0000007f
+register~!~10|55|eip|0x08048421
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~10|55|main|0xffffd049|char|sc|'\x7f'
+assembly~!~55|7
+assembly~!~55|8   	  long  sl;
+assembly~!~55|9   	  int   si;
+assembly~!~55|10  	  short ss;
+assembly~!~55|11  	  char  sc;
+assembly~!~55|12
+assembly~!~55|13
+assembly~!~55|14  	  ul=ULONG_MAX;
+assembly~!~55|15  	  sl=LONG_MAX;
+assembly~!~55|16  	  sl=ULONG_MAX;
+assembly~!~55|17
+assembly~!~55|18
+assembly~!~55|19  	  si=INT_MAX;
+assembly~!~55|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~55|21  	         signed long
+assembly~!~55|22  	         unsigned long
+assembly~!~55|23  	         unsigned int
+assembly~!~55|24  	         signed short
+assembly~!~55|25  	         unsigned short
+assembly~!~55|26  	  */
+assembly~!~55|27
+assembly~!~55|28
+assembly~!~55|29  	  si=-1;
+assembly~!~55|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~55|31  	         signed long
+assembly~!~55|32  	         unsigned long
+assembly~!~55|33  	         unsigned int
+assembly~!~55|34  	         signed short
+assembly~!~55|35  	         unsigned short
+assembly~!~55|36  	  */
+assembly~!~55|37
+assembly~!~55|38  	  ss=SHRT_MIN;
+assembly~!~55|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~55|40  	         signed long
+assembly~!~55|41  	         unsigned long
+assembly~!~55|42  	         signed char
+assembly~!~55|43  	         unsigned char
+assembly~!~55|44  	  */
+assembly~!~55|45
+assembly~!~55|46  	  sc=SCHAR_MAX;
+assembly~!~55|47  	  sc=sc+1;
+assembly~!~55|48  	  /* What is the value of sc? */
+assembly~!~55|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~55|50
+assembly~!~55|51  	  sc=SCHAR_MIN;
+assembly~!~55|52  	  sc=sc-1;
+assembly~!~55|53  	  /* What is the value of sc? */
+assembly~!~55|54
+assembly~!~55|55  	  uc=UCHAR_MAX;
+assembly~!~55|
+assembly~!~55|pgm`main:
+assembly~!~55|0x8048421 <+75>: movb   $-0x1, -0x10(%ebp)
+register~!~11|56|eip|0x08048425
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~11|56|main|0xffffd048|unsigned char|uc|'\xff'
+assembly~!~56|7
+assembly~!~56|8   	  long  sl;
+assembly~!~56|9   	  int   si;
+assembly~!~56|10  	  short ss;
+assembly~!~56|11  	  char  sc;
+assembly~!~56|12
+assembly~!~56|13
+assembly~!~56|14  	  ul=ULONG_MAX;
+assembly~!~56|15  	  sl=LONG_MAX;
+assembly~!~56|16  	  sl=ULONG_MAX;
+assembly~!~56|17
+assembly~!~56|18
+assembly~!~56|19  	  si=INT_MAX;
+assembly~!~56|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~56|21  	         signed long
+assembly~!~56|22  	         unsigned long
+assembly~!~56|23  	         unsigned int
+assembly~!~56|24  	         signed short
+assembly~!~56|25  	         unsigned short
+assembly~!~56|26  	  */
+assembly~!~56|27
+assembly~!~56|28
+assembly~!~56|29  	  si=-1;
+assembly~!~56|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~56|31  	         signed long
+assembly~!~56|32  	         unsigned long
+assembly~!~56|33  	         unsigned int
+assembly~!~56|34  	         signed short
+assembly~!~56|35  	         unsigned short
+assembly~!~56|36  	  */
+assembly~!~56|37
+assembly~!~56|38  	  ss=SHRT_MIN;
+assembly~!~56|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~56|40  	         signed long
+assembly~!~56|41  	         unsigned long
+assembly~!~56|42  	         signed char
+assembly~!~56|43  	         unsigned char
+assembly~!~56|44  	  */
+assembly~!~56|45
+assembly~!~56|46  	  sc=SCHAR_MAX;
+assembly~!~56|47  	  sc=sc+1;
+assembly~!~56|48  	  /* What is the value of sc? */
+assembly~!~56|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~56|50
+assembly~!~56|51  	  sc=SCHAR_MIN;
+assembly~!~56|52  	  sc=sc-1;
+assembly~!~56|53  	  /* What is the value of sc? */
+assembly~!~56|54
+assembly~!~56|55  	  uc=UCHAR_MAX;
+assembly~!~56|56  	  uc=uc+1;
+assembly~!~56|
+assembly~!~56|pgm`main:
+assembly~!~56|0x8048425 <+79>: addb   $0x1, -0x10(%ebp)
+register~!~12|59|eip|0x08048429
+register~!~12|59|eflags|0x00000257
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~12|59|main|0xffffd048|unsigned char|uc|'\0'
+assembly~!~59|7
+assembly~!~59|8   	  long  sl;
+assembly~!~59|9   	  int   si;
+assembly~!~59|10  	  short ss;
+assembly~!~59|11  	  char  sc;
+assembly~!~59|12
+assembly~!~59|13
+assembly~!~59|14  	  ul=ULONG_MAX;
+assembly~!~59|15  	  sl=LONG_MAX;
+assembly~!~59|16  	  sl=ULONG_MAX;
+assembly~!~59|17
+assembly~!~59|18
+assembly~!~59|19  	  si=INT_MAX;
+assembly~!~59|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~59|21  	         signed long
+assembly~!~59|22  	         unsigned long
+assembly~!~59|23  	         unsigned int
+assembly~!~59|24  	         signed short
+assembly~!~59|25  	         unsigned short
+assembly~!~59|26  	  */
+assembly~!~59|27
+assembly~!~59|28
+assembly~!~59|29  	  si=-1;
+assembly~!~59|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~59|31  	         signed long
+assembly~!~59|32  	         unsigned long
+assembly~!~59|33  	         unsigned int
+assembly~!~59|34  	         signed short
+assembly~!~59|35  	         unsigned short
+assembly~!~59|36  	  */
+assembly~!~59|37
+assembly~!~59|38  	  ss=SHRT_MIN;
+assembly~!~59|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~59|40  	         signed long
+assembly~!~59|41  	         unsigned long
+assembly~!~59|42  	         signed char
+assembly~!~59|43  	         unsigned char
+assembly~!~59|44  	  */
+assembly~!~59|45
+assembly~!~59|46  	  sc=SCHAR_MAX;
+assembly~!~59|47  	  sc=sc+1;
+assembly~!~59|48  	  /* What is the value of sc? */
+assembly~!~59|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~59|50
+assembly~!~59|51  	  sc=SCHAR_MIN;
+assembly~!~59|52  	  sc=sc-1;
+assembly~!~59|53  	  /* What is the value of sc? */
+assembly~!~59|54
+assembly~!~59|55  	  uc=UCHAR_MAX;
+assembly~!~59|56  	  uc=uc+1;
+assembly~!~59|57  	  /* What is the value of uc? */
+assembly~!~59|58
+assembly~!~59|59  	  uc=0;
+assembly~!~59|
+assembly~!~59|pgm`main:
+assembly~!~59|0x8048429 <+83>: movb   $0x0, -0x10(%ebp)
+register~!~13|60|eip|0x0804842d
+return_address~!~main|0x00000000|0xf7e242c3
+assembly~!~60|7
+assembly~!~60|8   	  long  sl;
+assembly~!~60|9   	  int   si;
+assembly~!~60|10  	  short ss;
+assembly~!~60|11  	  char  sc;
+assembly~!~60|12
+assembly~!~60|13
+assembly~!~60|14  	  ul=ULONG_MAX;
+assembly~!~60|15  	  sl=LONG_MAX;
+assembly~!~60|16  	  sl=ULONG_MAX;
+assembly~!~60|17
+assembly~!~60|18
+assembly~!~60|19  	  si=INT_MAX;
+assembly~!~60|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~60|21  	         signed long
+assembly~!~60|22  	         unsigned long
+assembly~!~60|23  	         unsigned int
+assembly~!~60|24  	         signed short
+assembly~!~60|25  	         unsigned short
+assembly~!~60|26  	  */
+assembly~!~60|27
+assembly~!~60|28
+assembly~!~60|29  	  si=-1;
+assembly~!~60|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~60|31  	         signed long
+assembly~!~60|32  	         unsigned long
+assembly~!~60|33  	         unsigned int
+assembly~!~60|34  	         signed short
+assembly~!~60|35  	         unsigned short
+assembly~!~60|36  	  */
+assembly~!~60|37
+assembly~!~60|38  	  ss=SHRT_MIN;
+assembly~!~60|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~60|40  	         signed long
+assembly~!~60|41  	         unsigned long
+assembly~!~60|42  	         signed char
+assembly~!~60|43  	         unsigned char
+assembly~!~60|44  	  */
+assembly~!~60|45
+assembly~!~60|46  	  sc=SCHAR_MAX;
+assembly~!~60|47  	  sc=sc+1;
+assembly~!~60|48  	  /* What is the value of sc? */
+assembly~!~60|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~60|50
+assembly~!~60|51  	  sc=SCHAR_MIN;
+assembly~!~60|52  	  sc=sc-1;
+assembly~!~60|53  	  /* What is the value of sc? */
+assembly~!~60|54
+assembly~!~60|55  	  uc=UCHAR_MAX;
+assembly~!~60|56  	  uc=uc+1;
+assembly~!~60|57  	  /* What is the value of uc? */
+assembly~!~60|58
+assembly~!~60|59  	  uc=0;
+assembly~!~60|60  	  uc=uc-1;
+assembly~!~60|
+assembly~!~60|pgm`main:
+assembly~!~60|0x804842d <+87>: subb   $0x1, -0x10(%ebp)
+register~!~14|63|eip|0x08048431
+register~!~14|63|eflags|0x00000297
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~14|63|main|0xffffd048|unsigned char|uc|'\xff'
+assembly~!~63|7
+assembly~!~63|8   	  long  sl;
+assembly~!~63|9   	  int   si;
+assembly~!~63|10  	  short ss;
+assembly~!~63|11  	  char  sc;
+assembly~!~63|12
+assembly~!~63|13
+assembly~!~63|14  	  ul=ULONG_MAX;
+assembly~!~63|15  	  sl=LONG_MAX;
+assembly~!~63|16  	  sl=ULONG_MAX;
+assembly~!~63|17
+assembly~!~63|18
+assembly~!~63|19  	  si=INT_MAX;
+assembly~!~63|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~63|21  	         signed long
+assembly~!~63|22  	         unsigned long
+assembly~!~63|23  	         unsigned int
+assembly~!~63|24  	         signed short
+assembly~!~63|25  	         unsigned short
+assembly~!~63|26  	  */
+assembly~!~63|27
+assembly~!~63|28
+assembly~!~63|29  	  si=-1;
+assembly~!~63|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~63|31  	         signed long
+assembly~!~63|32  	         unsigned long
+assembly~!~63|33  	         unsigned int
+assembly~!~63|34  	         signed short
+assembly~!~63|35  	         unsigned short
+assembly~!~63|36  	  */
+assembly~!~63|37
+assembly~!~63|38  	  ss=SHRT_MIN;
+assembly~!~63|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~63|40  	         signed long
+assembly~!~63|41  	         unsigned long
+assembly~!~63|42  	         signed char
+assembly~!~63|43  	         unsigned char
+assembly~!~63|44  	  */
+assembly~!~63|45
+assembly~!~63|46  	  sc=SCHAR_MAX;
+assembly~!~63|47  	  sc=sc+1;
+assembly~!~63|48  	  /* What is the value of sc? */
+assembly~!~63|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~63|50
+assembly~!~63|51  	  sc=SCHAR_MIN;
+assembly~!~63|52  	  sc=sc-1;
+assembly~!~63|53  	  /* What is the value of sc? */
+assembly~!~63|54
+assembly~!~63|55  	  uc=UCHAR_MAX;
+assembly~!~63|56  	  uc=uc+1;
+assembly~!~63|57  	  /* What is the value of uc? */
+assembly~!~63|58
+assembly~!~63|59  	  uc=0;
+assembly~!~63|60  	  uc=uc-1;
+assembly~!~63|61  	  /* What is the value of uc? */
+assembly~!~63|62
+assembly~!~63|63  	  uc=UCHAR_MAX;
+assembly~!~63|
+assembly~!~63|pgm`main:
+assembly~!~63|0x8048431 <+91>: movb   $-0x1, -0x10(%ebp)
+register~!~15|64|eip|0x08048435
+return_address~!~main|0x00000000|0xf7e242c3
+assembly~!~64|7
+assembly~!~64|8   	  long  sl;
+assembly~!~64|9   	  int   si;
+assembly~!~64|10  	  short ss;
+assembly~!~64|11  	  char  sc;
+assembly~!~64|12
+assembly~!~64|13
+assembly~!~64|14  	  ul=ULONG_MAX;
+assembly~!~64|15  	  sl=LONG_MAX;
+assembly~!~64|16  	  sl=ULONG_MAX;
+assembly~!~64|17
+assembly~!~64|18
+assembly~!~64|19  	  si=INT_MAX;
+assembly~!~64|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~64|21  	         signed long
+assembly~!~64|22  	         unsigned long
+assembly~!~64|23  	         unsigned int
+assembly~!~64|24  	         signed short
+assembly~!~64|25  	         unsigned short
+assembly~!~64|26  	  */
+assembly~!~64|27
+assembly~!~64|28
+assembly~!~64|29  	  si=-1;
+assembly~!~64|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~64|31  	         signed long
+assembly~!~64|32  	         unsigned long
+assembly~!~64|33  	         unsigned int
+assembly~!~64|34  	         signed short
+assembly~!~64|35  	         unsigned short
+assembly~!~64|36  	  */
+assembly~!~64|37
+assembly~!~64|38  	  ss=SHRT_MIN;
+assembly~!~64|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~64|40  	         signed long
+assembly~!~64|41  	         unsigned long
+assembly~!~64|42  	         signed char
+assembly~!~64|43  	         unsigned char
+assembly~!~64|44  	  */
+assembly~!~64|45
+assembly~!~64|46  	  sc=SCHAR_MAX;
+assembly~!~64|47  	  sc=sc+1;
+assembly~!~64|48  	  /* What is the value of sc? */
+assembly~!~64|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~64|50
+assembly~!~64|51  	  sc=SCHAR_MIN;
+assembly~!~64|52  	  sc=sc-1;
+assembly~!~64|53  	  /* What is the value of sc? */
+assembly~!~64|54
+assembly~!~64|55  	  uc=UCHAR_MAX;
+assembly~!~64|56  	  uc=uc+1;
+assembly~!~64|57  	  /* What is the value of uc? */
+assembly~!~64|58
+assembly~!~64|59  	  uc=0;
+assembly~!~64|60  	  uc=uc-1;
+assembly~!~64|61  	  /* What is the value of uc? */
+assembly~!~64|62
+assembly~!~64|63  	  uc=UCHAR_MAX;
+assembly~!~64|64  	  si=0;
+assembly~!~64|
+assembly~!~64|pgm`main:
+assembly~!~64|0x8048435 <+95>: movl   $0x0, -0xc(%ebp)
+register~!~16|65|eip|0x0804843c
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~16|65|main|0xffffd04c|int|si|0
+assembly~!~65|7
+assembly~!~65|8   	  long  sl;
+assembly~!~65|9   	  int   si;
+assembly~!~65|10  	  short ss;
+assembly~!~65|11  	  char  sc;
+assembly~!~65|12
+assembly~!~65|13
+assembly~!~65|14  	  ul=ULONG_MAX;
+assembly~!~65|15  	  sl=LONG_MAX;
+assembly~!~65|16  	  sl=ULONG_MAX;
+assembly~!~65|17
+assembly~!~65|18
+assembly~!~65|19  	  si=INT_MAX;
+assembly~!~65|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~65|21  	         signed long
+assembly~!~65|22  	         unsigned long
+assembly~!~65|23  	         unsigned int
+assembly~!~65|24  	         signed short
+assembly~!~65|25  	         unsigned short
+assembly~!~65|26  	  */
+assembly~!~65|27
+assembly~!~65|28
+assembly~!~65|29  	  si=-1;
+assembly~!~65|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~65|31  	         signed long
+assembly~!~65|32  	         unsigned long
+assembly~!~65|33  	         unsigned int
+assembly~!~65|34  	         signed short
+assembly~!~65|35  	         unsigned short
+assembly~!~65|36  	  */
+assembly~!~65|37
+assembly~!~65|38  	  ss=SHRT_MIN;
+assembly~!~65|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~65|40  	         signed long
+assembly~!~65|41  	         unsigned long
+assembly~!~65|42  	         signed char
+assembly~!~65|43  	         unsigned char
+assembly~!~65|44  	  */
+assembly~!~65|45
+assembly~!~65|46  	  sc=SCHAR_MAX;
+assembly~!~65|47  	  sc=sc+1;
+assembly~!~65|48  	  /* What is the value of sc? */
+assembly~!~65|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~65|50
+assembly~!~65|51  	  sc=SCHAR_MIN;
+assembly~!~65|52  	  sc=sc-1;
+assembly~!~65|53  	  /* What is the value of sc? */
+assembly~!~65|54
+assembly~!~65|55  	  uc=UCHAR_MAX;
+assembly~!~65|56  	  uc=uc+1;
+assembly~!~65|57  	  /* What is the value of uc? */
+assembly~!~65|58
+assembly~!~65|59  	  uc=0;
+assembly~!~65|60  	  uc=uc-1;
+assembly~!~65|61  	  /* What is the value of uc? */
+assembly~!~65|62
+assembly~!~65|63  	  uc=UCHAR_MAX;
+assembly~!~65|64  	  si=0;
+assembly~!~65|65  	  if ((uc+uc)>UCHAR_MAX)
+assembly~!~65|
+assembly~!~65|pgm`main:
+assembly~!~65|0x804843c <+102>: movzbl -0x10(%ebp), %eax
+assembly~!~65|0x8048440 <+106>: addl   %eax, %eax
+assembly~!~65|0x8048442 <+108>: cmpl   $0xff, %eax
+assembly~!~65|0x8048447 <+113>: jle    0x8048450                 ; <+122> at pgm.c:70
+register~!~17|66|eax|0x000001fe
+register~!~17|66|eip|0x08048449
+register~!~17|66|eflags|0x00000216
+return_address~!~main|0x00000000|0xf7e242c3
+assembly~!~66|7
+assembly~!~66|8   	  long  sl;
+assembly~!~66|9   	  int   si;
+assembly~!~66|10  	  short ss;
+assembly~!~66|11  	  char  sc;
+assembly~!~66|12
+assembly~!~66|13
+assembly~!~66|14  	  ul=ULONG_MAX;
+assembly~!~66|15  	  sl=LONG_MAX;
+assembly~!~66|16  	  sl=ULONG_MAX;
+assembly~!~66|17
+assembly~!~66|18
+assembly~!~66|19  	  si=INT_MAX;
+assembly~!~66|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~66|21  	         signed long
+assembly~!~66|22  	         unsigned long
+assembly~!~66|23  	         unsigned int
+assembly~!~66|24  	         signed short
+assembly~!~66|25  	         unsigned short
+assembly~!~66|26  	  */
+assembly~!~66|27
+assembly~!~66|28
+assembly~!~66|29  	  si=-1;
+assembly~!~66|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~66|31  	         signed long
+assembly~!~66|32  	         unsigned long
+assembly~!~66|33  	         unsigned int
+assembly~!~66|34  	         signed short
+assembly~!~66|35  	         unsigned short
+assembly~!~66|36  	  */
+assembly~!~66|37
+assembly~!~66|38  	  ss=SHRT_MIN;
+assembly~!~66|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~66|40  	         signed long
+assembly~!~66|41  	         unsigned long
+assembly~!~66|42  	         signed char
+assembly~!~66|43  	         unsigned char
+assembly~!~66|44  	  */
+assembly~!~66|45
+assembly~!~66|46  	  sc=SCHAR_MAX;
+assembly~!~66|47  	  sc=sc+1;
+assembly~!~66|48  	  /* What is the value of sc? */
+assembly~!~66|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~66|50
+assembly~!~66|51  	  sc=SCHAR_MIN;
+assembly~!~66|52  	  sc=sc-1;
+assembly~!~66|53  	  /* What is the value of sc? */
+assembly~!~66|54
+assembly~!~66|55  	  uc=UCHAR_MAX;
+assembly~!~66|56  	  uc=uc+1;
+assembly~!~66|57  	  /* What is the value of uc? */
+assembly~!~66|58
+assembly~!~66|59  	  uc=0;
+assembly~!~66|60  	  uc=uc-1;
+assembly~!~66|61  	  /* What is the value of uc? */
+assembly~!~66|62
+assembly~!~66|63  	  uc=UCHAR_MAX;
+assembly~!~66|64  	  si=0;
+assembly~!~66|65  	  if ((uc+uc)>UCHAR_MAX)
+assembly~!~66|66  	    si=5;
+assembly~!~66|
+assembly~!~66|pgm`main:
+assembly~!~66|0x8048449 <+115>: movl   $0x5, -0xc(%ebp)
+register~!~18|70|eip|0x08048450
+return_address~!~main|0x00000000|0xf7e242c3
+variable_access~!~18|70|main|0xffffd04c|int|si|5
+assembly~!~70|7
+assembly~!~70|8   	  long  sl;
+assembly~!~70|9   	  int   si;
+assembly~!~70|10  	  short ss;
+assembly~!~70|11  	  char  sc;
+assembly~!~70|12
+assembly~!~70|13
+assembly~!~70|14  	  ul=ULONG_MAX;
+assembly~!~70|15  	  sl=LONG_MAX;
+assembly~!~70|16  	  sl=ULONG_MAX;
+assembly~!~70|17
+assembly~!~70|18
+assembly~!~70|19  	  si=INT_MAX;
+assembly~!~70|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~70|21  	         signed long
+assembly~!~70|22  	         unsigned long
+assembly~!~70|23  	         unsigned int
+assembly~!~70|24  	         signed short
+assembly~!~70|25  	         unsigned short
+assembly~!~70|26  	  */
+assembly~!~70|27
+assembly~!~70|28
+assembly~!~70|29  	  si=-1;
+assembly~!~70|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~70|31  	         signed long
+assembly~!~70|32  	         unsigned long
+assembly~!~70|33  	         unsigned int
+assembly~!~70|34  	         signed short
+assembly~!~70|35  	         unsigned short
+assembly~!~70|36  	  */
+assembly~!~70|37
+assembly~!~70|38  	  ss=SHRT_MIN;
+assembly~!~70|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~70|40  	         signed long
+assembly~!~70|41  	         unsigned long
+assembly~!~70|42  	         signed char
+assembly~!~70|43  	         unsigned char
+assembly~!~70|44  	  */
+assembly~!~70|45
+assembly~!~70|46  	  sc=SCHAR_MAX;
+assembly~!~70|47  	  sc=sc+1;
+assembly~!~70|48  	  /* What is the value of sc? */
+assembly~!~70|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~70|50
+assembly~!~70|51  	  sc=SCHAR_MIN;
+assembly~!~70|52  	  sc=sc-1;
+assembly~!~70|53  	  /* What is the value of sc? */
+assembly~!~70|54
+assembly~!~70|55  	  uc=UCHAR_MAX;
+assembly~!~70|56  	  uc=uc+1;
+assembly~!~70|57  	  /* What is the value of uc? */
+assembly~!~70|58
+assembly~!~70|59  	  uc=0;
+assembly~!~70|60  	  uc=uc-1;
+assembly~!~70|61  	  /* What is the value of uc? */
+assembly~!~70|62
+assembly~!~70|63  	  uc=UCHAR_MAX;
+assembly~!~70|64  	  si=0;
+assembly~!~70|65  	  if ((uc+uc)>UCHAR_MAX)
+assembly~!~70|66  	    si=5;
+assembly~!~70|67
+assembly~!~70|68  	  /* What is the value of si? */
+assembly~!~70|69
+assembly~!~70|70  	  return(0);
+assembly~!~70|
+assembly~!~70|pgm`main:
+assembly~!~70|0x8048450 <+122>: movl   $0x0, %eax
+register~!~19|71|eax|0x00000000
+register~!~19|71|eip|0x08048455
+return_address~!~main|0x00000000|0xf7e242c3
+assembly~!~71|7
+assembly~!~71|8   	  long  sl;
+assembly~!~71|9   	  int   si;
+assembly~!~71|10  	  short ss;
+assembly~!~71|11  	  char  sc;
+assembly~!~71|12
+assembly~!~71|13
+assembly~!~71|14  	  ul=ULONG_MAX;
+assembly~!~71|15  	  sl=LONG_MAX;
+assembly~!~71|16  	  sl=ULONG_MAX;
+assembly~!~71|17
+assembly~!~71|18
+assembly~!~71|19  	  si=INT_MAX;
+assembly~!~71|20  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~71|21  	         signed long
+assembly~!~71|22  	         unsigned long
+assembly~!~71|23  	         unsigned int
+assembly~!~71|24  	         signed short
+assembly~!~71|25  	         unsigned short
+assembly~!~71|26  	  */
+assembly~!~71|27
+assembly~!~71|28
+assembly~!~71|29  	  si=-1;
+assembly~!~71|30  	  /* What would be the value in hex and decimal if si were cast to a
+assembly~!~71|31  	         signed long
+assembly~!~71|32  	         unsigned long
+assembly~!~71|33  	         unsigned int
+assembly~!~71|34  	         signed short
+assembly~!~71|35  	         unsigned short
+assembly~!~71|36  	  */
+assembly~!~71|37
+assembly~!~71|38  	  ss=SHRT_MIN;
+assembly~!~71|39  	    /* What would be the value in hex and decimal if sl were cast to a
+assembly~!~71|40  	         signed long
+assembly~!~71|41  	         unsigned long
+assembly~!~71|42  	         signed char
+assembly~!~71|43  	         unsigned char
+assembly~!~71|44  	  */
+assembly~!~71|45
+assembly~!~71|46  	  sc=SCHAR_MAX;
+assembly~!~71|47  	  sc=sc+1;
+assembly~!~71|48  	  /* What is the value of sc? */
+assembly~!~71|49  	  /* Is a "char" signed or unsigned? */
+assembly~!~71|50
+assembly~!~71|51  	  sc=SCHAR_MIN;
+assembly~!~71|52  	  sc=sc-1;
+assembly~!~71|53  	  /* What is the value of sc? */
+assembly~!~71|54
+assembly~!~71|55  	  uc=UCHAR_MAX;
+assembly~!~71|56  	  uc=uc+1;
+assembly~!~71|57  	  /* What is the value of uc? */
+assembly~!~71|58
+assembly~!~71|59  	  uc=0;
+assembly~!~71|60  	  uc=uc-1;
+assembly~!~71|61  	  /* What is the value of uc? */
+assembly~!~71|62
+assembly~!~71|63  	  uc=UCHAR_MAX;
+assembly~!~71|64  	  si=0;
+assembly~!~71|65  	  if ((uc+uc)>UCHAR_MAX)
+assembly~!~71|66  	    si=5;
+assembly~!~71|67
+assembly~!~71|68  	  /* What is the value of si? */
+assembly~!~71|69
+assembly~!~71|70  	  return(0);
+assembly~!~71|71  	}
+assembly~!~71|
+assembly~!~71|pgm`main:
+assembly~!~71|0x8048455 <+127>: leave
+assembly~!~71|0x8048456 <+128>: retl

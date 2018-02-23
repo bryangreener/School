@@ -1764,6 +1764,37 @@ Using $f(a_0+a_1t+a_2t^2)$ as a system of linear equations we can solve this. Le
 
 
 
-\mychapter{20}{2018-02-22}
+\mychapter{20}{2018-02-23}
+\section{Homework Review}
+\subsection{6.31}
+	$S=\{(1,2),(2,3)\}, S^\prime = \{(1,3),(1,4)\}$\\
+	Find change of basis matrix from $S$ to $S^\prime$.\\
+	$Q_S^{S^\prime} = \begin{bmatrix}[rr]C_S(1,3) & C_S(1,4)\\\end{bmatrix} = \begin{bmatrix}[rr]x_1&x_2\\y_1&y_2\\\end{bmatrix}$ where $x_1(1,2)+y_1(2,3)=(1,3)$ and $x_2(1,2)+y_2(2,3)=(1,4)$.\\
+	$x_1+2y_1 = 1$, $2x_1+3y_1=4$, $x_2+2y_2=1$, $2x_2+3y_2=4$.\\
+	$\begin{bmatrix}[rr]1&2\\2&3\\\end{bmatrix}\begin{bmatrix}[rr]x_1&x_2\\y_1&y_2\\\end{bmatrix}=\begin{bmatrix}[rr]1&1\\3&4\\\end{bmatrix} \Rightarrow \begin{bmatrix}[rr]x_1&x_2\\y_1&y_2\\\end{bmatrix} = \begin{bmatrix}[rr]1&2\\2&3\\\end{bmatrix}^{-1}\begin{bmatrix}[rr]1&1\\3&4\\\end{bmatrix} = \begin{bmatrix}[rr]3&5\\-1&-2\\\end{bmatrix}$\\
+	For part b of this problem just take the inverse of this result.
 
+\section{Image and Kernel Continued}
+\subsection{Linear Transformation Example}
+\begin{ex}
+$V=P_4(t), W=P_4(t)$\\
+These are $\mathrm{span}\{1,t,t^2,t^3,t^4\}$ (be prepared to prove this span is linearly independent on the exam)\\
+$T(p) = \frac{d}{dt}p=p^\prime$\\
+$T(t^3+2t+1)=3t^2+2 \Rightarrow 3t^2+2 \in \mathrm{image}(T)$\\
+This all implies that $T$ is a linear transformation from $V$ to $W$.\\
+Is $1 \in \mathrm{im}(T)$?\\
+$T(t)=1$, $T(\frac{1}{2}t^2) = t$, $T(\frac{1}{3}t^3) = t^2$. This continues up to $t^4$ but $t^4 \not\in \mathrm{im}(T)$.\\
+Is $6+7t-14t^2+t^3$ in the image?\\
+$T(6t+\frac{7}{2}t^2-\frac{14}{3}t^3+\frac{1}{4}t^4) = 6+7t-14t^2+t^3$.\\
+$\mathrm{range}(T)=\{a_0+a_1t+a_2t^2+a_3t^3\} = \mathrm{span}\{1,t,t^2,t^3\}$ (remember that image and range are the same thing)\\
+$\mathrm{ker}(T)=\{p: T(p) = 0\} = \mathrm{span}\{1\}$\\
+$\mathrm{dim}(\mathrm{ker}(T))=1$\\
+$\mathrm{dim}(\mathrm{ker}(T)) + \mathrm{dim}(\mathrm{im}(T)) = \mathrm{dim}(V)$ (dim of kernel + dim of image (or range) is equal to dim of domain)
+\end{ex}
+
+
+
+
+
+\mychapter{21}{2018-02-26}
 \end{document}

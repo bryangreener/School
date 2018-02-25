@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#9}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-02-25}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[8.70] For each of the following linear maps $F$ find a basis as well as the dimension of the kernel and the image of $F$:
+	\begin{enumerate}
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+2y-3z,2x+5y-4z,x+4y+z)$.
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z,t)=(x+2y+3z+2t,2x+4y+7z+5t,x+2y+6z+5t)$.
+	\end{enumerate}
+
+\item[8.71.a] For each of the following linear maps $G$ find a basis as well as the dimension of the kernel and the image of $G$: $G:\mathbb{R}^3\rightarrow\mathbb{R}^2$ defined by $G(x,y,z)=(x+y+z,2x+2y+2z)$.
+
+\item[8.72.a] Each of the following matrices determines a linear map from $\mathbb{R}^4$ into $\mathbb{R}^3$:\\
+	\[ A=\begin{bmatrix}[rrrr]1&2&0&1\\2&-1&2&-1\\1&-3&2&-2\\\end{bmatrix} \]
+	Find a basis as well as the dimension of the kernel and the image of each linear map.
+
+\item[8.73] Find a linear mapping $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ for whose image is spanned by $(1,2,3)$ and $(4,5,6)$.
+
+\item[8.75] Let $V=P_{10}(t)$, the vector space of polynomials of degree $\leq 10$. Consider the linear map $\mathbb{R}^4: V\rightarrow V$, where $\mathbb{D}^4$ denotes the fourth derivative of $\frac{d^4f}{dt^4}$. Find a basis and the dimension of: (a) the image of $\mathbb{D}^4$; (b) the kernel of $\mathbb{D}^4$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}		
+
+\item[8.76] Suppose $F:V\rightarrow U$ is linear. Show that (a) the image of any subspace of $V$ is a subspace of $U$; (b) the preimage of any subspace of $U$ if a subspace of $V$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+
+\item[8.80] Let $H:\mathbb{R}^2\rightarrow\mathbb{R}^2$ be defined by $H(x,y)=(y,2x)$. Using the maps $F$ and $G$ in problem 8.79, find formulas defining the mappings: (a) $H\circ F$ and $H\circ G$; (b) $F\circ H$ and $G\circ H$; (c) $H\circ(F+G)$ and $H\circ F + H\circ G$.
+	\begin{enumerate}
+	\item
+	\item
+	\item
+	\end{enumerate}
+	
+\item[8.85] Determine whether or not each linear map is nonsingular. If not, find a nonzero vector $v$ whose image is 0; otherwise find a formula for the inverse map:
+	\begin{enumerate}
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+y+z,2x+3y+5z,x+3y+7z)$.
+	\item $G:\mathbb{R}^3\rightarrow\mathbb{P}_2(t)$ defined by $G(x,y,z)=(x+y)t^2+(x+2y+2z)t+y+z$.
+	\item $H:\mathbb{R}^2\rightarrow\mathbb{P}_2(t)$ defined by $H(x,y)=(x+2y)t^2+(x-y)t+x+y$.
+	\end{enumerate}
+
+\item[8.95] Suppose $F:V\rightarrow U$ is linear and $k$ is a nonzero scalar. Prove that the maps $F$ and $kF$ have the same kernel and the same image.
+
+\item[8.101] Let $v$ and $w$ be elements of a real vector space $V$. The line segment $L$ from $v$ to $v+w$ is defined to be the set of vectors $v+tw$ for $0\leq t \leq 1$.
+	\begin{enumerate}
+	\item Show that the line segment $L$ between vectors $v$ and $u$ consists of the points: (i) $(1-t)v+tu$ for $0 \leq t \leq 1$, and (ii) $t_1v+t_2u$ for $t_1+t_2=1, t_1\geq 0, t_2\geq 0$.
+	\item Let $F:V\rightarrow U$ be linear. Show that the image $F(L)$ of a line segment $L$ in $V$ is a line segment in $U$.
+	\end{enumerate}
+
+\item[9.27] Let $F:\mathbb{R}^2\rightarrow\mathbb{R}^2$ be defined by $F(x,y)=(4x+5y,2x-y)$.
+	\begin{enumerate}
+	\item Find the matrix $A$ representing $F$ in the usual basis $E$.
+	\item Find the matrix $B$ representing $F$ in the basis
+		\[ S=\{u_1,u_2\}=\{(1,4),(2,9)\} \]
+	\item Find $P$ such that $B=P^{-1}AP$.
+	\item For $v=(a,b)$, find $[v]_S$ and $[F(v)]_S$. Verify that $[F]_S[v]_S=[F(v)]_S$.
+	\end{enumerate}
+	
+\item[8.98] Suppose $V$ has finite dimension. Suppose $T$ is a linear operator on $V$ such that rank$(T^2)=\mathrm{rank}(T)$. Show that $\mathrm{ker}T \cap \mathrm{im}T = \{0\}$.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{enumerate}
+
+\end{document}

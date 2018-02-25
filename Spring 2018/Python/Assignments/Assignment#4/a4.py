@@ -14,7 +14,7 @@ class Customer:
         output = ""
         output = (("\n%s, %s - Phone Number: %s - Email Address(es): %s - Date: %s - Purchase history: {") %
                 (self.last_name, self.first_name, self.phone, self.email, self.date))
-        for i in customers_db:
+        for i in customers_db: #get to searched customer then print history
             if(i.first_name == self.first_name and i.last_name == self.last_name):
                 for j in i.history:
                     output += str(j) + ", "
@@ -39,7 +39,7 @@ class ItemToPurchase:
     def print_item_cost(self):
         try:
             if(self.item_price <= 0):
-                raise ValueError('Price cannot be <= 0.')
+                raise ValueError('Price cannot be <= 0.') #manually output error
             else:
                 print(("%s %d @ $%f = $%f") %
                       (self.item_name, self.item_quantity, self.item_price,
@@ -55,7 +55,7 @@ class ShoppingCart:
         self.cart_items.append(ItemToPurchase)
     def remove_item(self, ItemToRemove):
         try:
-            for i in self.cart_items:
+            for i in self.cart_items: #check for item in cart then remove
                 if(i.item_name == ItemToRemove):
                     self.cart_items.remove(i)
                     return
@@ -65,7 +65,7 @@ class ShoppingCart:
     def modify_item(self, ItemToPurchase):
         try:
             for i in self.cart_items:
-                if(i.item_name == ItemToPurchase):
+                if(i.item_name == ItemToPurchase): #check for item in cart then update quantity
                     i.item_quantity = int(input("Enter the new quantity:\n"))
                     return
             raise ValueError
@@ -75,7 +75,7 @@ class ShoppingCart:
         try:
             for i in customers_db:
                 if(i.first_name == Cust):
-                    for j in i.history:
+                    for j in i.history: #check for item in history and remove it
                         if(j.item_name == ItemToRemove):
                             i.history.remove(j)
                             print("The item is found and returned successfully")
@@ -91,7 +91,7 @@ class ShoppingCart:
         return total_items
     def get_cost_of_cart(self):
         total_cost = 0.0
-        for i in self.cart_items:
+        for i in self.cart_items: #accumulate cart item prices
             total_cost += (i.item_price * i.item_quantity)
         return total_cost
     def print_total(self):
@@ -104,7 +104,7 @@ class ShoppingCart:
             print(i) #should use __str__ from ItemToPurchase
                   
 def print_menu():
-    options = ['a','r','c','u','i','o','q']
+    options = ['a','r','c','u','i','o','q'] #Used to easily validate input
     while(1):
         print(  "\nMENU\n"
                 "a - Add item to cart\n"
@@ -119,27 +119,26 @@ def print_menu():
             return choice
         else:
             print("INVALID MENU OPTION")
-
+#Lists used to store customer and cart objects
 customers_db = []
 shopping_cart = []
-
+#Get number of users input
 try:
     num_customers = int(input("Enter the number of customers:\n"))
 except ValueError as e:
     print(e)
-
-for i in range(0, num_customers):
+for i in range(0, num_customers): #Get customer info for each customer
     customers_db.append(Customer())
     print("Enter customer info. #%d" % (i + 1))
     customers_db[i].add_contact()
     print(customers_db[i])
-for i in range(0, num_customers):
+for i in range(0, num_customers): #Loop through menu for each customer
     print(("Customer name: %s %s") % (customers_db[i].first_name, customers_db[i].last_name))
     print("Today's date:", customers_db[i].date)
     shopping_cart.append(ShoppingCart(customers_db[i].first_name, customers_db[i].date))
     shopping_cart[i].cart_items = []
     menu_choice = 'z'
-    while(menu_choice != 'q'):
+    while(menu_choice != 'q'): #Keep looping through menu until user says to quit
         menu_choice = print_menu()
         if(menu_choice == 'a'):
             print("\nADD ITEM TO CART")
@@ -154,7 +153,7 @@ for i in range(0, num_customers):
         elif(menu_choice == 'u'):
             print("\nRETURN ITEM")
             cnametoreturn = input("Enter the customer name:\n")
-            for j in customers_db:
+            for j in customers_db: #for each customer, check if at entered customer
                 if(j.first_name == cnametoreturn):
                     print(j)
                     ShoppingCart.return_item(shopping_cart[i], cnametoreturn,
@@ -172,12 +171,12 @@ for i in range(0, num_customers):
                   "Number of Items: %d\n") %
                   (customers_db[i].first_name, shopping_cart[i].current_date,
                   ShoppingCart.get_num_items_in_cart(shopping_cart[i])))
-            for j in shopping_cart[i].cart_items:
+            for j in shopping_cart[i].cart_items: #for each cart item, print item
                 ItemToPurchase.print_item_cost(j)
             print("\n")
             ShoppingCart.print_total(shopping_cart[i])
         elif(menu_choice == 'q'):
-            for j in shopping_cart[i].cart_items:
+            for j in shopping_cart[i].cart_items: #add cart items to current user history
                 customers_db[i].history.append(j)
 
 

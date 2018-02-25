@@ -1,0 +1,17 @@
+MainWindowX:-7.0
+MainWindowY:0.0
+MainWindowWidth:974.0
+MainWindowHeight:1047.0
+FontSize:0.8
+VarRepFontSize:1.0
+PlayerX:1283.0
+PlayerY:184.0
+PlayerSpeed:8
+DetailLevel:NOVICE
+ShowAllFunctions:false
+ShowRegisters:false
+ShowAllSectionsByDefault:false
+ShowAssembly:false
+ShowOutputs:false
+ShowOffsets:false
+FunctionsFilter:_start

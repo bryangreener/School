@@ -1793,8 +1793,86 @@ $\mathrm{dim}(\mathrm{ker}(T)) + \mathrm{dim}(\mathrm{im}(T)) = \mathrm{dim}(V)$
 \end{ex}
 
 
-
-
-
 \mychapter{21}{2018-02-26}
+\section{Exam Problem}
+\begin{thrm}
+Suppose $V\xrightarrow[]{f} W$ is a linear mapping (transformation). Then (a) The image of $f$ is a vector subspace of $W$, and (b) the kernel of $f$ is a vector subspace of $V$.
+\end{thrm}
+We will have to prove this theorem on the exam.
+\begin{proof}
+(Exercise: Use the subspace criterion.)
+\end{proof}
+
+\section{Rank Nullity}
+\subsection{The Rank Nullity Theorem for Linear Mappings}
+\begin{thrm}
+Suppose $V \xrightarrow[]{f} W$ is a linear mapping and $V$ is finite dimensional. Then
+\[ \mathrm{rank}(f) = \mathrm{nullity}(f) = \mathrm{dim}(V) \]
+where $\mathrm{rank}(f) = \mathrm{dim}(\mathrm{image}(V))$ and $\mathrm{nullity}(f)=\mathrm{dim}(\mathrm{ker}(f))$.
+\end{thrm}
+\subsection{8.75}
+\begin{ex}
+Given $V=P_{10}(v) = \mathrm{span}\{1,t,t^2,...,t^{10}\}$, $\mathrm{dim}(V)=11$.\\
+$f=\frac{d^4}{dt^4}$. Notice: $(P+Q)^{\prime\prime\prime\prime} = P^{\prime\prime\prime\prime} + Q^{\prime\prime\prime\prime}$ and $(kP)^{\prime\prime\prime\prime} = kP^{\prime\prime\prime\prime}$ where $P$ and $Q$ are polynomials and $k$ is a scalar. This shows that $f$ is a linear mapping.\\
+We have to find bases and dimensions of (a) $\mathrm{im}(D^4)$ and (b) $\mathrm{ker}(D^4)$.\\
+(a) $\mathrm{im}(D^4)=P_6(t) \Rightarrow \mathrm{basis}\{1,t,...,t^6\} \Rightarrow \mathrm{dim} = 7$.\\
+(b) $\mathrm{dim}(\mathrm{ker}) = 11-7=4$.\\
+$\mathrm{ker} = P_3(t) \Rightarrow \mathrm{basis}=\{1,t,t^2,t^3\}$.\\
+The kernel of $D^4$ in this case is equal to the number of polynomials in $V$ where the fourth derivative of those polynomials is equal to zero. $D^4$ represents the fourth derivative.
+\end{ex}
+
+\subsection{Alternate Example of Rank Nullity Theorem}
+\begin{ex}
+Let $V=P_4(t)$. $L(f)=f^{\prime\prime} + tf^\prime$.
+\begin{enumerate}
+\item[(a)] Prove $L$ is a linear mapping.\\
+Notice 
+\[ L(f+g) = (f+g)^{\prime\prime} + t(f+g)^\prime = f^{\prime\prime} + g^{\prime\prime} + tf^\prime + tg^\prime = (f^{\prime\prime}+tf^\prime)+(g^{\prime\prime}+tg^\prime) = L(f) + L(g) \] 
+Thus $L$ respects addition. Also
+\[ l(kf) = (kf)^{\prime\prime}+t(kf)^\prime = kf^{\prime\prime}+ktf^\prime = kL(f) \] 
+Thus $L$ respects multiplication.
+\item[(b)] Find a basis for the kernel of $L$.\\
+$f=a_0+a_1t+a_2t^2+a_3t^3+a_4t^4$. We want $f^{\prime\prime}+tf^\prime = 0$. Second derivative of that function is
+\[ (2a_2+6a_3t+12a_4t^3) + t(a_1+2a_2t+3a_3t^2+4a_4t^3) = 2a_2+(6a_3+a_1)t+(12a_4+2a_2)t^2+3a_3t^3+4a_4t^4 \]
+We need to solve this by setting it equal to zero. We have a linear system of equations.\\
+\begin{align*}
+a_0&=\mathrm{free}\\
+a_1&=0\\
+a_2&=0\\
+a_3&=0\\
+a_4&=0
+\end{align*}
+$basis:\{1\}$ or any nonzero constant. Thus $dim(ker)=1$.
+\item[(c)] Find a basis for the image of $L$.\\
+From the previous result, $dim(im)=4$.
+\end{enumerate}
+We know $V=\mathrm{span}\{1,t,t^2,t^3,t^4\}$. Now we just plug in our basis into the given formula $L(f)=f^{\prime\prime}+tf^\prime$.
+\begin{align*}
+L(1)&=0\\
+L(t)&=t\\
+L(t^2)&=2+2t^2\\
+L(t^3)&=6t+3t^3\\
+L(t^4)&=12t^2+4t^4
+\end{align*}
+Since this contains the zero vector, this is not a linearly independent set. The equations above, excluding $L(1)$ yields a basis for $\mathrm{im}(L)$. 
+\end{ex}
+
+\section{Matrix Representations of Linear Mappings}
+\begin{defn}
+Suppose $V$ has the basis $E=\{\vec{v_1},\vec{v_2},...,\vec{v_n}\}$, $W$ has the basis $F=\{\vec{w_1},\vec{w_2},...,\vec{w_n}\}$, and $V\xrightarrow[]{T} W$ is a linear mapping. The matrix of $T$ with respect to the pair $(E,F)$ is
+\[ [T]^E_F = \begin{bmatrix}[rrrr]C_V(T(\vec{v_1})) & C_F(T(\vec{v_2})) & \cdots & C_F(T(\vec{v_n}))\\\end{bmatrix} \]
+\end{defn}
+\begin{ex}
+$V=P_3(t)$ with a basis $E=[1,t,t^2,t^3]$\\
+$W=P_2(t)$ with a basis $F=[1,t,t^2]$\\
+$T(f)=f^\prime = \frac{df}{dt}$\\
+Find the matrix of $T$ with respect to $(E,F)$.\\
+\begin{align*}
+[T]^E_F &= \begin{bmatrix}[rrrr]C_FT(1) & C_FT(t) & C_FT(t^2) & C_FT(t^3)\\\end{bmatrix}\\
+&= \begin{bmatrix}[rrrr]C_F(0) & C_F(1) & C_F(2t) & C_F(3t^2)\\\end{bmatrix}\\
+&= \begin{bmatrix}{rrrr]0&1&0&0\\0&0&2&0\\0&0&0&3\\\end{bmatrix}
+\end{align*}
+\end{ex}
+
+\mychapter{22}{2018-02-27}
 \end{document}

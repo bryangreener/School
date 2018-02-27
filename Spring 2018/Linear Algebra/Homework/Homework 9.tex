@@ -132,34 +132,56 @@
 \item[8.75] Let $V=P_{10}(t)$, the vector space of polynomials of degree $\leq 10$. Consider the linear map $\mathbb{R}^4: V\rightarrow V$, where $\mathbb{D}^4$ denotes the fourth derivative of $\frac{d^4f}{dt^4}$. Find a basis and the dimension of: (a) the image of $\mathbb{D}^4$; (b) the kernel of $\mathbb{D}^4$.
 	\begin{enumerate}
 	\item $\mathrm{im}(D^4) = P_6(t)$ which gives us the basis $\{1,t,t^2,...,t^6\}$. Thus $\mathrm{dim}(\mathrm{im}(D^4))=7$.
-	\item $\mathrm{ker}(D^4)=P_3(t)$ which gives us the basis $\{1,t,t^2,t^3\}$. Thus $\mathrm{fim}(\mathrm{ker}(D^4))=4$.
+	\item $\mathrm{ker}(D^4)=P_3(t)$ which gives us the basis $\{1,t,t^2,t^3\}$. Thus $\mathrm{dim}(\mathrm{ker}(D^4))=4$.
 	\end{enumerate}		
 
 \item[8.76] Suppose $F:V\rightarrow U$ is linear. Show that (a) the image of any subspace of $V$ is a subspace of $U$; (b) the preimage of any subspace of $U$ if a subspace of $V$.
 	\begin{enumerate}
 	\item
+	\begin{proof}
+	
+	\end{proof}
 	\item
 	\end{enumerate}
 
-\item[8.80] Let $H:\mathbb{R}^2\rightarrow\mathbb{R}^2$ be defined by $H(x,y)=(y,2x)$. Using the maps $F$ and $G$ in problem 8.79, find formulas defining the mappings: (a) $H\circ F$ and $H\circ G$; (b) $F\circ H$ and $G\circ H$; (c) $H\circ(F+G)$ and $H\circ F + H\circ G$.
+\item[8.80] Let $H:\mathbb{R}^2\rightarrow\mathbb{R}^2$ be defined by $H(x,y)=(y,2x)$. Using the maps $F$ and $G$ in problem 8.79, find formulas defining the mappings: (a) $H\circ F$ and $H\circ G$; (b) $F\circ H$ and $G\circ H$; (c) $H\circ(F+G)$ and $H\circ F + H\circ G$.\\
+Formulas from 8.79: $F(x,y,z)=(y,x+z)$, $G(x,y,z)=(2z,x-y)$
 	\begin{enumerate}
-	\item
-	\item
-	\item
+	\item $[H \circ F](x,y,z)=H(F(x,y,z)) = H(y,x+z) = (x+z,2y)$\\
+	$[H \circ G](x,y,z)=H(G(x,y,z)) = H(2z,x-y) = (x-y,4z)$
+	\item This has no solution since $H$ is of lower dimension than $F$ and $G$.
+	\item $[H \circ (F+G)](x,y,z) = H(F(x,y,z)) + H(F(x,y,z)) = H(y,x+z)+H(2z,x-y) = (x+z,2y)+(x-y,4z) = (2x-y+z,2y+4z)$
 	\end{enumerate}
 	
 \item[8.85] Determine whether or not each linear map is nonsingular. If not, find a nonzero vector $v$ whose image is 0; otherwise find a formula for the inverse map:
 	\begin{enumerate}
-	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+y+z,2x+3y+5z,x+3y+7z)$.
-	\item $G:\mathbb{R}^3\rightarrow\mathbb{P}_2(t)$ defined by $G(x,y,z)=(x+y)t^2+(x+2y+2z)t+y+z$.
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+y+z,2x+3y+5z,x+3y+7z)$.\\
+	\[ F = \begin{bmatrix}[rrr]1&1&1\\2&3&5\\1&3&7\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&-2\\0&1&3\\0&0&0\\\end{bmatrix} \]
+	Thus $\mathrm{rank}(F)=2$ and $\mathrm{dim}(\mathrm{kernel}(F))=1$.\\
+	By setting our free variable $z=1$, we get the nullspace of $\left\{\begin{bmatrix}[r]2\\-3\\1\\\end{bmatrix}\right\}$.
+	\item $G:\mathbb{R}^3\rightarrow\mathbb{P}_2(t)$ defined by $G(x,y,z)=(x+y)t^2+(x+2y+2z)t+y+z$.\\
+	\[ G=\begin{bmatrix}[rrr]1&1&0\\1&2&2\\0&1&1\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\\end{bmatrix} \]
+	Thus $\mathrm{rank}(G=3$ and $\mathrm{dim}(\mathrm{ker}(G))=0$ and our system is nonsingular so we must find the inverse.
+	\[ G^{-1} = \begin{bmatrix}[rrr]0&1&-2\\1&-1&2\\-1&1&-1\\\end{bmatrix} \]
+	We then rewrite this matrix in the original format.
+	\[ G^{-1}(xt^2+yt+z)=(y-2z)t^2+(x-y+2z)t+(-x+y-z) \]
 	\item $H:\mathbb{R}^2\rightarrow\mathbb{P}_2(t)$ defined by $H(x,y)=(x+2y)t^2+(x-y)t+x+y$.
+	\[ H=\begin{bmatrix}[rr]1&2\\1&-1\\1&1\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rr]1&0\\0&1\\0&0\\\end{bmatrix} \]
+	Thus $\mathrm{rank}(H)=2$ and $\mathrm{dim}(\mathrm{ker}(H)) = 0$ and our system is nonsingular but this matrix is not invertible.
 	\end{enumerate}
 
 \item[8.95] Suppose $F:V\rightarrow U$ is linear and $k$ is a nonzero scalar. Prove that the maps $F$ and $kF$ have the same kernel and the same image.
+	\begin{proof}
+	
+	\end{proof}
 
 \item[8.101] Let $v$ and $w$ be elements of a real vector space $V$. The line segment $L$ from $v$ to $v+w$ is defined to be the set of vectors $v+tw$ for $0\leq t \leq 1$.
 	\begin{enumerate}
 	\item Show that the line segment $L$ between vectors $v$ and $u$ consists of the points: (i) $(1-t)v+tu$ for $0 \leq t \leq 1$, and (ii) $t_1v+t_2u$ for $t_1+t_2=1, t_1\geq 0, t_2\geq 0$.
+		\begin{enumerate}
+		\item[(i)] $v+tw = (1-t)v+tu) \Rightarrow $
+		\item[(ii)]
+		\end{enumerate}
 	\item Let $F:V\rightarrow U$ be linear. Show that the image $F(L)$ of a line segment $L$ in $V$ is a line segment in $U$.
 	\end{enumerate}
 

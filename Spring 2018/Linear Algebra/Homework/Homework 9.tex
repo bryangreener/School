@@ -81,22 +81,58 @@
 \begin{enumerate}
 \item[8.70] For each of the following linear maps $F$ find a basis as well as the dimension of the kernel and the image of $F$:
 	\begin{enumerate}
-	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+2y-3z,2x+5y-4z,x+4y+z)$.
-	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z,t)=(x+2y+3z+2t,2x+4y+7z+5t,x+2y+6z+5t)$.
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z)=(x+2y-3z,2x+5y-4z,x+4y+z)$.\\
+	We start by finding the images of the usual basis of $\mathbb{R}^3$.
+	\[ F(1,0,0)=(1,2,1) \quad F(0,1,0)=(2,5,4) \quad F(0,0,1)=(-3,-4,1) \]
+	Next we put these row vectors into a matrix and find the rref.
+	\[ \begin{bmatrix}[rrr]1&2&1\\2&5&4\\-3&-4&1\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&-3\\0&1&2\\0&0&0\\\end{bmatrix} \]
+	Thus $(1,0,-3),(0,1,2)$ form the basis for the image of $F$. Therefore $\mathrm{dim}(\mathrm{im}(F)) = 2$.\\
+	Next we set $F(v)=0$ where $v=(x,y,z)$.
+	\[ F(x,y,z)=(x+2y-3z,2x+5y-4z,x+4y+z)=(0,0,0) \]
+	This gives us a homogeneous system whose solution space is $\mathrm{ker}(F)$.
+	\[ \sysdelim{.}{.}\systeme[xyz]{x+2y-3z=0,2x+5y-4z=0,x+4y+z=0} \quad \mathrm{or} \quad \sysdelim{.}{.}\systeme[xyz]{x-7z=0,y+2z=0} \]
+	Since our only free variable is $z$, $\mathrm{dim}(\mathrm{ker}(F)) = 1$. Let $z=1$ then $y=-2$ and $x=7$. Thus $(7,-2,1)$ forms a basis of $\mathrm{ker}(F)$.
+	\item $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ defined by $F(x,y,z,t)=(x+2y+3z+2t,2x+4y+7z+5t,x+2y+6z+5t)$.\\
+	We start by finding the images of the usual basis of $\mathbb{R}^4$.
+	\[ F(1,0,0,0)=(1,2,1) \quad F(0,1,0,0)=(2,4,2) \quad F(0,0,1,0)=(3,7,6) \quad F(0,0,0,1)=(2,5,5) \]
+	Next we put these row vectors into a matrix and find the rref.
+	\[ \begin{bmatrix}[rrr]1&2&1\\2&4&2\\3&7&6\\2&5&5\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&-5\\0&1&3\\0&0&0\\0&0&0\\\end{bmatrix} \]
+	Thus $(1,0,-5),(0,1,3)$ form the basis for the image of $F$. Therefore $\mathrm{dim}(\mathrm{im}(F))=2$.\\
+	Next we set $F(v)=0$ where $v=(x,y,z,t)$. This gives us a homogeneous system whose solution space is $\mathrm{ker}(F)$.
+	\[ \sysdelim{.}{.}\systeme[xyzt]{x+2y+3z+2t=0,2x+4y+7z+5t=0,x+2y+6z+5t=0} \quad \mathrm{or} \quad \sysdelim{.}{.}\systeme[xyzt]{x+2y-t=0,z+t=0} \]
+	Our free variables are $y$ and $t$ so $\mathrm{dim}(\mathrm{ker}(F))=2$. First let $y=1,t=0$, then $x=-2$ and $z=0$. Next let $y=0,t=1$, then $x=1$ and $z=-1$. Thus $\{(-2,1,0,0),(1,0,-1,1)\}$ forms a basis of $\mathrm{ker}(F)$.
 	\end{enumerate}
 
-\item[8.71.a] For each of the following linear maps $G$ find a basis as well as the dimension of the kernel and the image of $G$: $G:\mathbb{R}^3\rightarrow\mathbb{R}^2$ defined by $G(x,y,z)=(x+y+z,2x+2y+2z)$.
+\item[8.71.a] For each of the following linear maps $G$ find a basis as well as the dimension of the kernel and the image of $G$: $G:\mathbb{R}^3\rightarrow\mathbb{R}^2$ defined by $G(x,y,z)=(x+y+z,2x+2y+2z)$.\\
+	We start by finding the images of the usual basis of $\mathbb{R}^3$.
+	\[ G(1,0,0)=(1,2) \quad G(0,1,0)=(1,2) \quad G(0,0,1)=(1,2) \]
+	We can already see that we have redundant rows so $(1,2)$ will form a basis for the image of $F$. Therefore $\mathrm{dim}(\mathrm{im}(F))=1$.\\
+	Next we set $F(v)=0$ where $v=(x,y,z)$. This gives us a homogeneous system whose solution space is $\mathrm{ker}(F)$.
+	\[ \sysdelim{.}{.}\systeme[xyz]{x+y+z=0,2x+2y+2z=0} \quad or \quad \sysdelim{.}{.}\systeme[xyz]{x+y+z=0} \]
+	Our free variables are $y$ and $z$ so $\mathrm{dim}(\mathrm{ker}(F))=2$. First let $y=1,z=0$, then $z=-1$. This result is the same when we let $y=0,z=1$. Thus $\{(-1,1,0),(-1,0,1)\}$ forms a basis of $\mathrm{ker}(F)$.
 
-\item[8.72.a] Each of the following matrices determines a linear map from $\mathbb{R}^4$ into $\mathbb{R}^3$:\\
+\item[8.72.a] Each of the following matrices determines a linear map from $\mathbb{R}^4$ into $\mathbb{R}^3$:
 	\[ A=\begin{bmatrix}[rrrr]1&2&0&1\\2&-1&2&-1\\1&-3&2&-2\\\end{bmatrix} \]
-	Find a basis as well as the dimension of the kernel and the image of each linear map.
+	Find a basis as well as the dimension of the kernel and the image of each linear map.\\
+	\begin{solution}
+	We start by finding the rref of the transpose of matrix $A$.
+	\[ \mathrm{rref}A^T = \begin{bmatrix}[rrr]1&0&-1\\0&1&1\\0&0&0\\0&0&0\\\end{bmatrix} \]
+	Thus $\{(1,0,-1),(0,1,1)\}$ forms a basis of $\mathrm{im}(A)$ and $\mathrm{dim}(\mathrm{im}(A))=2$.\\
+	Next we need to reduce our original matrix to echelon form and solve the resulting system.
+	\[ \mathrm{rref}(A)=\begin{bmatrix}[rrrr]1&2&0&1\\0&1&-\frac{2}{5}&\frac{3}{5}\\0&0&0&0\\\end{bmatrix} \quad or \quad \sysdelim{.}{.}\systeme[xyzt]{x+2y+t=0,5y-2z+3t=0} \]
+	Our free variables are $z$ and $t$. Thus $\mathrm{dim}(\mathrm{ker}(A))=2$. Let $z=1,t=0$, then $x=-\frac{4}{5}$ and $y=\frac{2}{5}$. Next let $z=0,t=1$, then $x=\frac{1}{5}$ and $y=-\frac{3}{5}$.\\
+	Therefore $\{(-4,2,1,0),(1,-3,0,1)\}$ forms a basis of $\mathrm{ker}(A)$.
+	\end{solution}
 
 \item[8.73] Find a linear mapping $F:\mathbb{R}^3\rightarrow\mathbb{R}^3$ for whose image is spanned by $(1,2,3)$ and $(4,5,6)$.
+	\begin{solution}
+	\[ \begin{bmatrix}[rr]1&4\\2&5\\3&6\\\end{bmatrix} \]
+	\end{solution}
 
 \item[8.75] Let $V=P_{10}(t)$, the vector space of polynomials of degree $\leq 10$. Consider the linear map $\mathbb{R}^4: V\rightarrow V$, where $\mathbb{D}^4$ denotes the fourth derivative of $\frac{d^4f}{dt^4}$. Find a basis and the dimension of: (a) the image of $\mathbb{D}^4$; (b) the kernel of $\mathbb{D}^4$.
 	\begin{enumerate}
-	\item
-	\item
+	\item $\mathrm{im}(D^4) = P_6(t)$ which gives us the basis $\{1,t,t^2,...,t^6\}$. Thus $\mathrm{dim}(\mathrm{im}(D^4))=7$.
+	\item $\mathrm{ker}(D^4)=P_3(t)$ which gives us the basis $\{1,t,t^2,t^3\}$. Thus $\mathrm{fim}(\mathrm{ker}(D^4))=4$.
 	\end{enumerate}		
 
 \item[8.76] Suppose $F:V\rightarrow U$ is linear. Show that (a) the image of any subspace of $V$ is a subspace of $U$; (b) the preimage of any subspace of $U$ if a subspace of $V$.

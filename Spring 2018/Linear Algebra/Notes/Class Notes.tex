@@ -1866,13 +1866,69 @@ Suppose $V$ has the basis $E=\{\vec{v_1},\vec{v_2},...,\vec{v_n}\}$, $W$ has the
 $V=P_3(t)$ with a basis $E=[1,t,t^2,t^3]$\\
 $W=P_2(t)$ with a basis $F=[1,t,t^2]$\\
 $T(f)=f^\prime = \frac{df}{dt}$\\
-Find the matrix of $T$ with respect to $(E,F)$.\\
+Find the matrix of $T$ with respect to $(E,F)$.
 \begin{align*}
 [T]^E_F &= \begin{bmatrix}[rrrr]C_FT(1) & C_FT(t) & C_FT(t^2) & C_FT(t^3)\\\end{bmatrix}\\
 &= \begin{bmatrix}[rrrr]C_F(0) & C_F(1) & C_F(2t) & C_F(3t^2)\\\end{bmatrix}\\
-&= \begin{bmatrix}{rrrr]0&1&0&0\\0&0&2&0\\0&0&0&3\\\end{bmatrix}
+&= \begin{bmatrix}[rrrr]0&1&0&0\\0&0&2&0\\0&0&0&3\\\end{bmatrix}
 \end{align*}
 \end{ex}
 
 \mychapter{22}{2018-02-27}
+\section{Homework Review}
+\subsection{8.73}
+\[ F\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[rrr]1&4&0\\2&5&0\\3&6&0\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[r]x+4y\\2x+5y\\3x+6y\\\end{bmatrix} \]
+Notice: $F\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix}=\begin{bmatrix}[r]1\\2\\3\\\end{bmatrix} \Rightarrow \begin{bmatrix}[r]1\\2\\3\\\end{bmatrix} \in \mathrm{image}(F)$.\\
+For a matrix, image = columnspace.
+
+\subsection{8.85.a}
+Does the given system have a nontrivial kernel (is it singular)?
+\[ F\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[rrr]1&1&1\\2&3&5\\1&3&7\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} = \begin{bmatrix}[r]0\\0\\0\\\end{bmatrix} \]
+$\mathrm{rank}(F)=2$ so $\mathrm{nullity}(F)=1$.
+\[ \mathrm{rref}(F)=\begin{bmatrix}[rrr]1&0&-2\\0&1&3\\0&0&0\\\end{bmatrix} \]
+$\mathrm{nullspace}=\mathrm{ker}=\mathrm{span}\{\begin{bmatrix}[r]2\\-3\\1\\\end{bmatrix}\}$. We get this matrix by setting our free variable $z=1$ then solving the system.\\
+Not needed to solve this problem but the basis for the range is $\{\begin{bmatrix}[r]1\\2\\1\\\end{bmatrix},\begin{bmatrix}[r]1\\5\\7\\\end{bmatrix}\}$.\\
+Notice we can verify our result by multiplying our answer by the original matrix in order to get the zero matrix.
+\[ \begin{bmatrix}[rrr]1&1&1\\2&3&5\\1&3&7\\\end{bmatrix}\begin{bmatrix}[r]2\\-3\\1\\\end{bmatrix} = \begin{bmatrix}[r]0\\0\\0\\\end{bmatrix} \]
+
+\subsection{8.80.c}
+Assume $F(x,y,z)=(y,x+z)$, $G(x,y,z)=(2z,x-y)$, $H(x,y)=(y,2x)$.\\
+\begin{align*}
+[H \circ (F+G)](x,y,z) &= H(F(x,y,z))+H(G(x,y,z))\\
+&= H(y,x+z)+H(2z,x-y)\\
+&= (x+z,2y)+(x-y,4z)\\
+&= (2x-y+z,2y+4z)
+\end{align*}
+In this problem we are just plugging and chugging.\\
+We can do this an a different way as well. Start by writing these as matrices.
+\[ F\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=\begin{bmatrix}[rrr]0&1&0\\1&0&1\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}\]
+\[ G\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=\begin{bmatrix}[rrr]0&0&2\\1&-1&0\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}\]
+\[ H\begin{bmatrix}[r]x\\y\\\end{bmatrix}=\begin{bmatrix}[rr]0&1\\2&0\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}\]
+We will refer to these matrices as $M_F, M_G, M_H$.\\
+Notice:
+\begin{align*}
+M_H(M_F+M_G) &= \begin{bmatrix}[rr]0&1\\2&0\\\end{bmatrix}\left(\begin{bmatrix}[rrr]0&1&0\\1&0&1\\\end{bmatrix}+\begin{bmatrix}[rrr]0&0&2\\1&-1&0\\\end{bmatrix}\right )\\
+&= \begin{bmatrix}[rr]0&1\\2&0\\\end{bmatrix}\begin{bmatrix}[rrr]0&1&2\\2&-1&1\\\end{bmatrix}\\
+&=\begin{bmatrix}[rrr]2&-1&1\\0&2&4\\\end{bmatrix}
+\end{align*}
+$H(a,b)=(b,2a)M_H$
+
+\subsection{8.70}
+\[ F\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix}=\begin{bmatrix}[rrr]1&2&-3\\2&5&-4\\1&4&1\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\z\\\end{bmatrix} \]
+\[ \mathrm{rref}=\begin{bmatrix}[rrr]1&0&-7\\0&1&2\\0&0&0\\\end{bmatrix} \]
+So $\mathrm{rank}(F)=2=\mathrm{dim}(\mathrm{im}(F))$ and $\left \{\begin{bmatrix}[r]1\\2\\1\\\end{bmatrix},\begin{bmatrix}[r]2\\5\\4\\\end{bmatrix}\right\}$ forms a basis.\\
+\[ F\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix}=\begin{bmatrix}[r]1\\2\\1\\\end{bmatrix} \]
+Basis for rowspace: $\{[1,2,-3],[2,5,-4]\}$.\\
+Crossproduct:
+\[ \begin{bmatrix}[rrr]\hat{i} & \hat{j} & \hat{k}\\1&2&-3\\2&5&-4\\\end{bmatrix}=((2)(-4)-(-3)(5)),(-3)(2)-(1)(-4), (1)(5)-(2)(2)) = (7,-2,1) \]
+Basis for the nullspace (kernel) is given by $\left\{\begin{bmatrix}[r]7\\-2\\1\\\end{bmatrix}\right\}$.\\
+Notice: $\begin{bmatrix}[rrr]1&2&-3\\2&5&-4\\1&4&1\\\end{bmatrix}\begin{bmatrix}[r]7\\-2\\1\\\end{bmatrix}$ will give us the zero matrix.
+
+\section{Singularity}
+\begin{defn}
+$V \xrightarrow[]{F} U$ is singular if $\mathrm{ker}(F) \neq \{\vec{0}\}$
+\end{defn}
+This definition is used in problem 8.85 in the previous section.
+
+\mychapter{23}{2018-02-xx}
 \end{document}

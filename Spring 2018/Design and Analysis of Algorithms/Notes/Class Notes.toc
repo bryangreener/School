@@ -22,4 +22,6 @@
 \contentsline {subsection}{\numberline {5.1.2}Minimum Spanning Tree of a Graph}{9}
 \contentsline {subsection}{\numberline {5.1.3}Kruskal's Algorithm}{9}
 \contentsline {subsection}{\numberline {5.1.4}Prim's Algorithm}{11}
-\contentsline {chapter}{2018-02-22}{12}
+\contentsline {chapter}{2018-02-27}{12}
+\contentsline {section}{\numberline {6.1}Closest Pair in 2D Plane (Ch5.4)}{12}
+\contentsline {chapter}{2018-02-xx}{13}

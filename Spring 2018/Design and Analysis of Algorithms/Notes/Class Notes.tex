@@ -7,6 +7,9 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 
+\usepackage{psfrag}
+\usepackage{graphviz}
+
 % For definitions
 %\newtheorem{defn}{Definition}[section]
 %\newtheorem{thrm}{Theorem}[section]
@@ -315,7 +318,24 @@ Given the graph above, using Prim's algorithm we get the resulting spanning tree
 \end{center}
 \end{ex}
 
-\mychapter{6}{2018-02-22}
+\mychapter{6}{2018-02-27}
+\section{Closest Pair in 2D Plane (Ch5.4)}
+\begin{ex}
+Given set of points $P=\{P_1,P_2,...,P_n\}$, two points $P_i,P_j\in P$, denote $d(P_i,P_j)$ as euclidean distance.\\
+Goal: $d(P_i,P_j)$ is minimum for any pair of points $P_i$ and $P_j$. Find pair of points who are closest together in a 2D field of points.\\
+The naive solution is to compare every point with every other point then store the minimum distance. Output the minimum distance. This has a time complexity of $O(n^2)$.\\
+A betters solution follows the divide and conquer style.\\
+We start with our 2D plane $P$ of points. We split this line in two with a line $L$ which results in the sub-planes $Q$ and $R$. Before our recursion, we sort all points in $P$ by r-coordinate $P_x$. Recursively, find closes pair of points in $Q$.\\
+Suppose $q_0^*$ and $q_1^*$ are the closes pair of points in $Q$. $r_0^*$ and $r_1^*$ are the closes pair of points from $R$.\\
+Next we combine the solution as follows:\\
+Let $\delta$ be the minimum distance $d(q_0^*,q_1^*)$ and $d(r_0^*,r_1^*)$.\\
+Question: Are the points $q\in Q$ and $r\in R$ for which $d(q,r) < \delta$. If not, then we are done.\\
+Let $x^*$ denote x-coordinate of the rightmost part in $Q$.\\
+$L\rightarrow $ equation $n=x^*$.\\
+This algorithm will have a time complexity of $O(n\log(n))$. This algorithm is explained in further detail in chapter 5.4 in the textbook.
+\end{ex}
 
+\digraph[scale=0.5]{abc}{rankdir=LR; a->b->c->}
 
+\mychapter{7}{2018-02-xx}
 \end{document}

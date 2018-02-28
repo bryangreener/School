@@ -172,7 +172,14 @@ Formulas from 8.79: $F(x,y,z)=(y,x+z)$, $G(x,y,z)=(2z,x-y)$
 
 \item[8.95] Suppose $F:V\rightarrow U$ is linear and $k$ is a nonzero scalar. Prove that the maps $F$ and $kF$ have the same kernel and the same image.
 	\begin{proof}
-	
+	Since $F$ is a linear mapping then the image of $F$ is a subspace of $U$ and the kernel of $F$ is a subspace of $V$.\\
+	Since $F(0)=0$ then $0\in \mathrm{im}(F)$. Let $k,a,b$ be scalars and $u,u^\prime \in \mathrm{im}(F)$. Then there exist vectors $\vec{v},\vec{v^\prime} \in V$ such that $F(\vec{v})=u$ and $F(\vec{v^\prime})=u^\prime$. Then
+	\[ kF(a\vec{v}+b\vec{v^\prime}) = F(ka\vec{v}+kb\vec{v^\prime}) = kaF(\vec{v})+kbF(\vec{v^\prime}) = kau+kbu^\prime \in \mathrm{im}(F) \]
+	Thus the image of $kF$ is a subspace of $U$.\\
+	Since $F(0)=0$ then $0\in \mathrm{ker}(F)$. Let $k,a,b$ be scalars and $v,w\in\mathrm{ker}(F)$. Since $v$ and $w$ belong to the kernel of $F$, then $F(v)=0$ and $F(w)=0$. Thus
+	\[ kF(av+bw)=kaF(v)+kbF(w)=ka0+kb0=0 \]
+	and so $kav+kbw \in \mathrm{ker}(F)$. Therefore the kernel of $F$ is a subspace of $V$.\\
+	Finally since $F$ is closed under scalar multiplication, then both $F$ and $kF$ have the same image and kernel.
 	\end{proof}
 
 \item[8.101] Let $v$ and $w$ be elements of a real vector space $V$. The line segment $L$ from $v$ to $v+w$ is defined to be the set of vectors $v+tw$ for $0\leq t \leq 1$.
@@ -193,14 +200,6 @@ Formulas from 8.79: $F(x,y,z)=(y,x+z)$, $G(x,y,z)=(2z,x-y)$
 	\item Find $P$ such that $B=P^{-1}AP$.
 	\item For $v=(a,b)$, find $[v]_S$ and $[F(v)]_S$. Verify that $[F]_S[v]_S=[F(v)]_S$.
 	\end{enumerate}
-	
-\item[8.98] Suppose $V$ has finite dimension. Suppose $T$ is a linear operator on $V$ such that rank$(T^2)=\mathrm{rank}(T)$. Show that $\mathrm{ker}T \cap \mathrm{im}T = \{0\}$.
-	
-	
-	
-	
-	
-	
 	
 	
 	

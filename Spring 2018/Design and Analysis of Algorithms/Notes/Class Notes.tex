@@ -7,9 +7,6 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 
-\usepackage{psfrag}
-\usepackage{graphviz}
-
 % For definitions
 %\newtheorem{defn}{Definition}[section]
 %\newtheorem{thrm}{Theorem}[section]
@@ -58,6 +55,7 @@
 }
 
 \usepackage{graphicx}
+\usepackage[pdf]{graphviz}
 \graphicspath{ {images/} }
 
 \begin{document}
@@ -335,7 +333,7 @@ $L\rightarrow $ equation $n=x^*$.\\
 This algorithm will have a time complexity of $O(n\log(n))$. This algorithm is explained in further detail in chapter 5.4 in the textbook.
 \end{ex}
 
-\digraph[scale=0.5]{abc}{rankdir=LR; a->b->c->}
+\digraph[scale=0.5]{abc}{rankdir=LR; a->b; b->c}
 
 \mychapter{7}{2018-02-xx}
 \end{document}

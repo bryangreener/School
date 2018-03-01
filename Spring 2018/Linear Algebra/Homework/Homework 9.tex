@@ -137,11 +137,23 @@
 
 \item[8.76] Suppose $F:V\rightarrow U$ is linear. Show that (a) the image of any subspace of $V$ is a subspace of $U$; (b) the preimage of any subspace of $U$ if a subspace of $V$.
 	\begin{enumerate}
-	\item
+	\item 
 	\begin{proof}
-	
+	Let $W$ be a subspace of $V$. Then the image of $W$ is $F(W)=\{F(\vec{w}: \vec{w}\in W\}$. Let $F(W)$ be a subspace of $U$. Since $F(\vec{0})=\vec{0}$, then $\vec{0}\in F(w)$.\\
+	Let $\vec{w_1},\vec{w_2} \in W$. Then $F(\vec{w_1})$ and $F(\vec{w_2})$ are elements of $F(W)$. Note that
+	\[ F(\vec{w_1}) + F(\vec{w_2}) = F(\vec{w_1}+\vec{w_2}) \]
+	since $F$ is linear. However since $W$ is a subspace of $V$, $c\vec{w}\in W$.
 	\end{proof}
-	\item
+	\item 
+	\begin{proof}
+	Let $W$ be a subspace of $U$. The preimage of $W$ if the set
+	\[ F^{-1}(W) = \{\vec{v}\in V: F(\vec{v} \in W\} \]
+	Since $F(\vec{0})=\vec{0}$ it follows that $\vec{0}\in F^{-1}(W)$. Let $\vec{v_1},\vec{v_2}\in F^{-1}(W)$, then $F(\vec{v_1}),F(\vec{v_2})\in W$. Since $W$ is a subspace of $U$ it follows that
+	\[ F(\vec{v_1})+F(\vec{v_2})\in W \]
+	Since $F$ is linear we have $F(\vec{v_1}+\vec{v_2})=F(\vec{v_1})+F(\vec{v_2})$. Thus
+	\[ F(\vec{v_1}+\vec{v_2})\in W \]
+	Therefore $\vec{v_1}+\vec{v_2}\in F^{-1}(W)$.
+	\end{proof}
 	\end{enumerate}
 
 \item[8.80] Let $H:\mathbb{R}^2\rightarrow\mathbb{R}^2$ be defined by $H(x,y)=(y,2x)$. Using the maps $F$ and $G$ in problem 8.79, find formulas defining the mappings: (a) $H\circ F$ and $H\circ G$; (b) $F\circ H$ and $G\circ H$; (c) $H\circ(F+G)$ and $H\circ F + H\circ G$.\\

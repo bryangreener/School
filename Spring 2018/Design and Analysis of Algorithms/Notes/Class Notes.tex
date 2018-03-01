@@ -333,7 +333,37 @@ $L\rightarrow $ equation $n=x^*$.\\
 This algorithm will have a time complexity of $O(n\log(n))$. This algorithm is explained in further detail in chapter 5.4 in the textbook.
 \end{ex}
 
-\digraph[scale=0.5]{abc}{rankdir=LR; a->b; b->c}
 
-\mychapter{7}{2018-02-xx}
+\mychapter{7}{2018-03-01}
+\section{Memory Architecture}
+\subsection{Distributed Memory Arch.}
+\begin{center}
+\includegraphics[scale=0.5]{DistributedMemoryArch.png}
+\end{center}
+\subsection{Shared Memory Arch.}
+\begin{center}
+\includegraphics[scale=0.5]{SharedMemoryArch.png}
+\end{center}
+\subsection{Parallel Algorithm}
+\begin{defn}
+An algorithm which can be executed a piece at a time on many different processors and combine together again to get the correct result.
+\end{defn}
+For parallelizing algorithms, distributed memory architectures use a system called MPI while shared memory architectures use a system called OPENMP.
+\subsection{Parallel Sample Sort}
+We start by splitting our data set equally among multiple processors. From there we sort each local set of data. We next sample the numbers on each processor. This means we pick numbers at set intervals from each. We then take those sample numbers then sort it. This gives us a sample of the local distribution of numbers. We then sample that sorted sample set. Our first sample in that set from left to right tells us that any number less than that number will go to Processor 0. Then the next sample number tells us anything between that and the first sample number will go into processor 1. We continue this for the number of processors.
+
+\section{Midterm and Project Information}
+\subsection{Project}
+This project is a large part of our grade.\\
+It will be a mini-research project. The purpose of the project is to implement a certain class of algorithms that we have studied in the class (or not). Classes of algorithms include divide and conquer, greedy, and graph algorithms. There are many more but those are just some examples.\\
+We will select a problem from a given list. Then we download a paper related to the problem and get it approved by Dr. Saeed. Then we study the algorithm and do the analysis of the algorithm and make sure we understand it.\\
+We will then go on and implement the algorithm that we selected. We can use any platform and languages to implement it.\\
+Once the algorithm is implemented we will go on and perform experiments to determine the quality of the results, the scalability of the algorithm, and compare the results with the results of the paper.\\
+Optional: We will try to improve the algorithm in either quality, complexity, or scalability.\\
+Finally: We will give a presentation to the class which will be peer reviewed.\\
+Presentation will include all info about algorithm, the efforts put in to implement it, the results and any possible improvements.
+
+
+
+\mychapter{8}{2018-03-xx}
 \end{document}

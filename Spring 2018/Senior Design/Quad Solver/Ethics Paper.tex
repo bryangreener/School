@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For clickable TOC
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{result}{Result}
+
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
+
+\author{Bryan Greener \and Paul Phillips}
+\title{Business Ethics:\\A Case Study on Ethics in the Workplace}
+
+
+\begin{document}
+\maketitle
+
+\pagebreak
+%\tableofcontents{}
+%\mychapter{1}{2018-01-11}
+\section*{Preface}
+\paragraph{}More often now days the topic of ethics in business comes up. With the global connectivity that the internet provides it is easier than ever to raise awareness of a company's wrongdoings. Thus the topic of ethics in business has grown larger than ever and must be dissected in order to better understand how businesses should conduct themselves.
+
+\paragraph{}This study will cover the generalized idea of ethics, ethical standards in business specifically relating to computer science, laws that impact how a business is allowed to operate, and the policies that companies set for themselves and how they reflect the business' ethical image.
+
+\paragraph{}The intent of this paper is not to tell the audience what constitutes a "proper" code of ethics but to educate in hopes that it allows them to form their own code of ethics and follow their own path.
+
+\section*{Ethics}
+\paragraph{}Merriam Webster defines ethics as being the discipline dealing with what is good and bad and with moral duty and obligation. This gives a very broad meaning to the word ethics, however and so the meaning of this word must be explored further. The two types of ethics that are important to this study are individual and business ethics. There is a strong connection between these two areas since the ethics that are shared between the majority of individuals are what generally determine the ethical code that a business follows. To understand this connection, it is important to understand the ethics of an individual.
+\paragraph{}Every person has their own ethical code. This code is developed by the environments and encounters that a person experiences throughout their life. While there may be outliers here and there, for the most part a person will develop a set of ethics that matches that of their community. This is where business ethics come in to play. The community of individuals with similar ethics dictates how businesses conduct themselves. This is because a company needs to have a good public image in order to succeed. If a company doesn't follow the ethical code that is most prevalent in their target market then they must swim against the current and work harder to make sales. Clearly this is not a good business strategy as working harder typically requires more money. Thus there is a balance formed between the ethics of individuals and the ethical standards that companies follow.
+
+\section*{Ethical Standards}
+\paragraph{}In the world of programming and information technology there are two ethical standards that are indispensable: the Association for Computing Machinery (ACM) and the IEEE standards. Both groups are large communities that help form standards for how both individuals and businesses in computing should act in both the technical and the ethical sense. Though it is outside the scope of this study, it is important to know the more common standards set by IEEE, most notably the 802.x set of wireless standards which specify the formatting of LAN/MAN data packets and their transmission. These standards are necessary knowledge for anyone pursuing a career in programming and IT. However the focus of this paper is to dissect the ethical standards of each group, not the technical standards.
+\paragraph{ACM Code of Ethics}The ACM code of ethics is split into four categories. We will examine each in depth to better understand how they tie in with each other. The fourth category is omitted from this review as it only specifies that a person or business will observe these standards and follow them otherwise they will not be able to consider themselves ACM compliant.
+\paragraph{}The first section is "General Moral Imperatives" and contains very basic ethics that are mostly intuitive. This section includes topics such as avoiding harm to others, contributing to human well-being, being honest, and observing intellectual property laws. As an employee you will not usually run into issues with any of these as your work will be well defined ahead of time by the employer who should be managing the legal side of the project. Along with that, as long as the employer follows ethical standards when laying out a project then the employee shouldn't be in any position to infringe on basic human rights given they follow the guidelines laid out for them. The overall message that this section conveys is that both individuals and businesses should inconvenience others as little as possible as to keep everyone happy.
+\paragraph{}The second section titled "more specific professional responsibilities" focuses more on the business environment and how professional workplaces should operate. Many of the points made focus on employees and employers producing the best product possible within reason and carrying out contracts properly. Following this section will help to avoid running into any legal conflicts but it will also make the individual or business look more professional which will in turn help to keep the customers coming.
+\paragraph{}The third section, "organizational leadership imperatives", has a note mentioning that it draws from the IFIP code of ethics, namely the IFIP organizational ethics and international concerns sections. This section focuses entirely on how business owners and managers should operate their business in order to make their employees and their customers human rights in tact. For example, standard 3.2 in the ACM code of ethics is to "manage personnel and resources to design and build information systems that enhance the quality of working life." This particular standard is summarized as follows
+	\begin{quote}
+	Organizational leaders are responsible for ensuring that computer systems enhance, not degrade, the quality of working life. When implementing a computer system, organizations must consider the personal and professional development, physical safety, and human dignity of all workers. Appropriate human-computer ergonomic standards should be considered in system design and in the workplace.
+	\end{quote}
+To sum up, this standard's focus is to improve the happiness of personnel by providing good workplace conditions. An example of one of these improvements would be providing ergonomic mice and keyboards for employees. This is something that may seem very obvious however it is often such a small change that many people may overlook something like this when planning out a workplace. There are many examples of changes that would improve personnel happiness, many of which fall under OSHA compliance requirements, but this is a good example of one of the many fine details that must be looked into when following these ethical standards.
+\paragraph{}Overall, many of the ethical standards observed by ACM may seem intuitive however it is easy for both individuals and businesses to overlook some of the finer details as often is the case. Thus having ACM publish these standards publicly helps people keep track of where they can improve both the well-being of the stakeholders of a company and its public image.
+\paragraph{IEEE Code of Ethics}The IEEE code of ethics is a much shorter and more generalized list than the ACM code of ethics, though this does not make it any less important to observe. That said, many of the ACM and IEEE ethics overlap such as being honest, avoiding discrimination, avoiding harm to people, and so on. Thus we will focus on new concepts provided by the IEEE ethics. Each new concept is stated then examined in detail to better understand its effects.
+	\begin{quote}
+	Improve the understanding by individuals and society of the capabilities and societal implications of conventional and emerging technologies, including intelligent systems.
+	\end{quote}
+\paragraph{}This is the first new concept that we see in the IEEE standards. One of the biggest fears people have with technology is that it will end in a Terminator-esque rise of artificial intelligence. It is the job of people in technological fields to inform the public of how these new technologies will work as to avoid any fear of problems that may not even be in the realm of possibilities. That said, if there are actually some negative outcomes that could arise then the public must not be kept in the dark as it is not ethical to hide that information either. In the end, people do not like being uninformed so it is best to keep everyone up to date with emerging technologies.
+	\begin{quote}
+	Maintain and improve our technical competence and to undertake technological tasks for others only if qualified by training or experience, or after full disclosure of pertinent limitations.
+	\end{quote}
+\paragraph{}This concept can apply to any type of work however it is aimed toward technology in particular since this is the IEEE code. This is saying that a person should not take a job that they cannot complete without first informing the appropriate people of their inability to complete the task. This benefits both parties as it will not look good for the person that fails to complete the task and the customer would also be left without a promised product or service that was promised to them. Thus this standard should come as intuition but it is a firm reminder to a person to not over-promise when negotiating with clients.
+\paragraph{}There are many more organizations and codes that lay out ethical standards for both individuals and for businesses however the ACM and IEEE codes of ethics gives a solid base that one can build on in order to develop a code of ethics for themselves or for their business. Though at the end of the day the client is the focus and so any ethical standards that are followed should appeal to the majority of clients in order to generate the largest reliable customer base.
+
+\section*{Laws}
+\paragraph{}There are many laws that come into play when operating a business or even developing products for distribution as an individual. However we will focus on laws that affect the moral and ethical decisions made when producing a technological product. These laws can be split into four major categories. This does not mean that more categories do not exist, these are simply the biggest categories that should be highest priority in the United States.
+\paragraph{International}International laws clearly only apply when expanding outside of the United States however these laws should still be observed in order to prevent any issues further down the line when expanding the business. The most widely accepted laws are ones that maintain basic human rights. The basic human rights specified by the UN include the following rights that everyone is entitled to without any discrimination based on any aspect of a person or group of people:
+	\begin{itemize}
+	\item Everyone has the right to life, liberty, and security of person.
+	\item No one shall be held in slavery or servitude.
+	\item No one shall be subjected to torture or cruel, inhumane, or degrading treatment or punishment.
+	\item Everyone has the right to recognition everywhere as a person before the law.
+	\item All are equal before the law and are entitled without any discrimination to equal protection of the law.
+	\end{itemize}
+These are only a few of the many human rights established by the UN. There are many more organizations that set human rights laws however the UN is more widely known. There are also international organizations whose focus it is to set international laws for businesses and technology. One important organization to note is the International Technology Law Association. They are a non-profit association that helps set information technology and intellectual property laws for international business operations.
+\paragraph{Federal}
+\paragraph{State}
+\paragraph{Local}
+\section*{Company Policies}
+
+
+\end{document}

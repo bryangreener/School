@@ -1930,5 +1930,58 @@ $V \xrightarrow[]{F} U$ is singular if $\mathrm{ker}(F) \neq \{\vec{0}\}$
 \end{defn}
 This definition is used in problem 8.85 in the previous section.
 
-\mychapter{23}{2018-02-xx}
+\mychapter{23}{2018-03-12}
+\section{Midterm Review}
+\begin{enumerate}
+\item[1.] (b) Notice $rank(A)=2$. From there pick two linearly independent columns.
+\item[3.] One possible answer for (a):
+\[ S=\left \{ \begin{bmatrix}[rrr]0&-1&0\\1&0&0\\0&0&0\\\end{bmatrix},\begin{bmatrix}[rrr]0&0&-1\\0&0&0\\1&0&0\\\end{bmatrix},\begin{bmatrix}[rrr]0&0&0\\0&0&-1\\0&1&0\\\end{bmatrix} \right \} \]
+These are all skew symmetric.\\
+For part (b), let $H(M)=M+M^T$. The kernel of this is all matrices such that that equation is equal to zero which is in turn the definition of a skew symmetric matrix.
+\item[4.] We need $G^{-1}(at^2+bt+c)=(x,y,z)$ where $G(x,y,z)=(x+y)t^2+(2y+2z)t+z = (at^2+bt+c)$. Thus we solve the system for (x,y,z).\\
+$a=x+y$, $b=2y+2z$, $c=z$.  
+\end{enumerate}
+
+\section{Chapter 7: Geometry}
+\subsection{Magnitude and Angle}
+\begin{defn}
+The magnitude of $(a_1,a_2,...,a_n)\in \mathbb{R}^n$ is $||(a_1,a_2,...,a_n)||=\sqrt{a_1^2+a_2^2+\dots +a_n^2}$.\\
+The magnitude of $||\vec{v} = \sqrt{\vec{v}\cdot \vec{v}}$.
+\end{defn}
+\begin{defn}
+Let $\vec{v},\vec{w}\in\mathbb{R}^n$. The angle between $\vec{v}$ and $\vec{w}$ is $\phi_{v,w}$ where
+\[ \cos(\phi_{v,w})=\frac{v \cdot w}{||v|| * ||w||} \]
+\end{defn}
+\begin{ex}
+Let $u=(3,0,0)$, $v=(1,1,0)$, $w=(0,2,2)$. Compute (a) The magnitudes; (b) The angles.\\
+(a) $||u||=\sqrt{3^2+0^2+0^2} = 3$, $||v|| = \sqrt{2}$, $||w|| = 2\sqrt{2} = \sqrt{8}$.\\
+(b) 
+\[ \phi_{u,v}=\cos^{-1}(\frac{u\cdot v}{||u||*||v||}) = \cos^{-1}(\frac{3}{\sqrt{2}} = 45^\circ \]
+\[ \phi_{u,w}= \cos^{-1}(\frac{u\cdot w}{||u||*||w||}) = \cos^{-1}(\frac{0}{*}) = 90^\circ \]
+\[ \phi_{v,w} = \cos^{-1}(\frac{v\cdot w}{||v||*||w||}) = \cos^{-1}(\frac{2}{\sqrt{2}*2\sqrt{2}})=\cos^{-1}(\frac{1}{2})=60^\circ \]
+Notice that $u \cdot v = 0$ is the same as saying $u$ and $v$ are perpendicular assuming neither $u$ nor $v$ are equal to zero.
+\end{ex}
+
+\subsection{Orthogonality}
+\begin{defn}
+A subset $S=\{v_1,v_2,...,v_k\}\in \mathbb{R}^n$ is orthogonal if $v_i \cdot v_j = 0$ whenever $i \neq j$.
+\end{defn}
+\begin{ex}
+\[ S=\left \{ \begin{bmatrix}[r]1\\0\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\1\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\0\\1\\\end{bmatrix}\right\}\in \mathbb{R}^4 \]
+is an orthogonal set.
+\end{ex}
+\subsection{Orthonormal}
+\begin{defn}
+A subset $S=\{v_1,v_2,...,v_n\}\in \mathbb{R}^n$ is orthonormal if
+\[v_i\cdot v_j = \{0 i\neq j,1 i=j\} \]
+\end{ex}
+\begin{ex}
+\[ s=\left\{\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\3\\4\\\end{bmatrix},\begin{bmatrix}[r]0\\4\\-3\\\end{bmatrix}\right\}\in\mathbb{R}^3 \]
+is orthogonal but it is not orthonormal. The dot product of the first vector with itself is 1 but the dot product of the second set is 25. To get an orthonormal set we divide by the magnitudes.
+\[ T+\left\{\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\\frac{3}{5}\\\frac{4}{5}\\\end{bmatrix},\begin{bmatrix}[r]0\\\frac{4}{5}\\\frac{-3}{5}\\\end{bmatrix}\right\} \]
+is orthonormal.
+\end{ex}
+
+
+\mychapter{24}{2018-03-xx}
 \end{document}

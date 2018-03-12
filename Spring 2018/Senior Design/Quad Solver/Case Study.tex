@@ -1,0 +1,98 @@
+\documentclass[notitlepage,a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For clickable TOC
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{result}{Result}
+
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
+
+\usepackage{fancyhdr,afterpage}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\author{Bryan Greener}
+\title{Case Study:\\Human and Artificial Intelligence and Privacy}
+
+\begin{document}
+\maketitle
+
+\section*{Article}
+Raicu, I. (2018, March 6). On Human and Artificial Intelligence, and Privacy.\\Retrieved from \url{https://www.scu.edu/ethics/internet-ethics-blog}
+
+\section*{Introduction}
+The aforementioned article presents the reader with a generalized ethical question regarding the very near future of computers and artificial intelligence and how we as a species interact with it. It analyzes an essay written by the same author in 2017 and the novel East of Eden by John Steinbeck. It then asks if people will be so willing to allow computers to analyze their brains in order to progress the field of artificial intelligence. These questions stem from research by company BrainCo who were testing a headband that uses biofeedback to perform simple tasks such as changing the color of a lamp. In this case study, we will analyze the questions put forth by Raicu and the underlying ethics involved.
+
+\section*{Case}
+This article's focus is on the progress of technology and artificial intelligence and how we as a species interact with it. One of the big concepts brought up is the idea of individuality and expressiveness of the human mind and how these concepts are threatened in the workplace by artificial intelligence. It focuses on future development of different industries and touches on the fact that there is a large moral dilemma regarding whether or not this will create new jobs or reduce the amount of available jobs. It also talks about data gathering techniques and how we may start to use technology to observe the brain patterns of people, namely school children, throughout the day in order to further develop our understanding of intelligence. This would all be done in order to improve our artificial intelligence technology. In turn, this could stifle creativity due to the observer effect where people will feel put on the spot to perform and act a certain way to counteract the pressure. The overarching theme of the article is that technology may begin to kill off the one thing that makes a person an individual in the near future.
+
+\section*{Raicu's Analysis}
+Throughout the article, Raicu tries hard to remain neutral however near the end of the article there is an undertone of fear of the suggested future. At one point in the article, Raicu is analyzing a statement from Steinbeck's novel that says that "our species is the only creative species and it has only one creative instrument, the individual mind and spirit of a man." Raicu follows this up by saying "in our time the trajectory seems to be headed toward handing over creativity, too, to algorithms, leaving aside the human mind." At this point, they break from being neutral into an analysis of the current state of technology, saying that it is killing off creativity. Though afterwards they step back and remind the reader that "it is still the human mind that decides what data to collect." Raicu then analyzes a hypothetical put forth by CSO magazine where students are required to wear brainwave detecting headbands that monitor attention levels. Raicu relates this hypothetical to a part of Steinbeck's novel where he talks about fighting against any system in which a person's individuality is destroyed and how systems built on patterns are by nature forced to destroy the free mind. Raicu then gives an example of this hypothetical coming to life:
+\begin{quote}
+This is not fiction. A company named BrainCo claims to offer the “world’s first wearable device specifically designed to detect and analyze users’ attention levels,” in conjunction with “the world’s first integrated classroom system that improves education outcomes through real-time attention-level reports.”
+\end{quote}
+Raicu goes on to mention that "as the CSO article notes, BrainCo representatives 'did not rule out that students' brainwave data might be used "for a number of different things"'". Wrapping up their analysis, they discuss how creativity requires privacy and how the use of these types of data analysis technologies invade privacy and so they inhibit creativity.
+
+\section*{Reviewer Analysis}
+Raicu's analysis of both Steinbeck's novel and the original article raises many good points regarding creativity and individuality. That said, the analysis of mankind handing over creativity to algorithms is somewhat negative. Just as with any form of energy, when energy appears to be lost within a system, it is only converted to a different form of energy. Such is likely the case with the "loss" of creativity. Instead of humans handing over their creativity to machines, this can be viewed as more traditional forms of creativity being exchanged for new forms of creativity. So instead of a loss, this is load balancing where creativity that was once needed to complete a complex task that computers now handle can be focused on a different task that computers have yet to be able to complete. In the end, no matter how perfect artificial intelligence becomes, it will be unable to replace a person's desire and ability to have creative outlets that feel rewarding.\\
+{}\\
+When it comes to wearable technology and human analysis and data collecting, some good points are made about the pressure put on the wearer to perform. Most people will struggle to perform the same under observation as they would if all alone. This fact is why blind studies exist in psychology. Though this is all under subjective observation of people who have lived in a time where technology has progressed so rapidly. It isn't possible to know whether or not this performance anxiety will affect generations who have been using wearable data collecting technology their entire life. In the future, this may become second nature and it might not inhibit any creative processes.\\
+{}\\
+Each generation is living in a time where technology is progressing faster than the majority of people can comprehend and thus these moral concerns will always arise and be repeated until the end of time. An example of this is the concern of the effects of instant gratification of younger generations. This was a concern brought up by older generations as the invention of the printing press brought about mass newspaper publishing, it was a concern when telephones became a household staple, and most recent it was a concern because of smartphones and internet access. While it is easy to speculate that technology will strip humans of their humanity, most people ignore the fact that it is humans that are developing this technology. The inherent lack of trust for others is likely the cause of this panic however that is a topic for a psychology paper.
+
+\end{document}

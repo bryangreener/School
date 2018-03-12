@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[notitlepage,a4paper,12pt]{article}
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{tabto}
@@ -62,14 +62,19 @@
 	\addcontentsline{toc}{chapter}{#2}
 }
 
+\usepackage{fancyhdr,afterpage}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
 \author{Bryan Greener \and Paul Phillips}
 \title{Business Ethics:\\A Case Study on Ethics in the Workplace}
 
 
 \begin{document}
 \maketitle
-
-\pagebreak
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{1}
 %\tableofcontents{}
 %\mychapter{1}{2018-01-11}
 \section*{Introduction}
@@ -132,6 +137,6 @@ To sum up, this standard's focus is to improve the happiness of personnel by pro
 \paragraph{}Each of these policies helps shape a company and each reflects the company's ethical standards. By setting a good set of policies, the company can improve their public appearance in order to get more customers. This also improves their employee base as more people will seek out jobs in a friendly environment as opposed to a restrictive one.
 
 \section*{Conclusion}
-
+\paragraph{}By taking the concepts laid out in this paper, one should have a good understanding of how ethics play into business operation and how those business operations affect individuals. These ethics are applied in business by following a set of standards put forth by organizations such as ACM and IEEE or even by forming a unique set of ethics. Though these ethics must abide by law on every level from local to international. After this, a company is free to form their own set of policies that dictate things such as time off awards, NDAs, non-compete clauses, and more operational policies. The company can also mandate how employees must carry themselves along with suggestions that form an organizational culture. These all give a good jumping off point for any company to form their own identity and flourish.
 
 \end{document}

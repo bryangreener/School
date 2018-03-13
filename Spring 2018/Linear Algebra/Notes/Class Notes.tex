@@ -1974,7 +1974,7 @@ is an orthogonal set.
 \begin{defn}
 A subset $S=\{v_1,v_2,...,v_n\}\in \mathbb{R}^n$ is orthonormal if
 \[v_i\cdot v_j = \{0 i\neq j,1 i=j\} \]
-\end{ex}
+\end{defn}
 \begin{ex}
 \[ s=\left\{\begin{bmatrix}[r]1\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\3\\4\\\end{bmatrix},\begin{bmatrix}[r]0\\4\\-3\\\end{bmatrix}\right\}\in\mathbb{R}^3 \]
 is orthogonal but it is not orthonormal. The dot product of the first vector with itself is 1 but the dot product of the second set is 25. To get an orthonormal set we divide by the magnitudes.
@@ -1982,6 +1982,61 @@ is orthogonal but it is not orthonormal. The dot product of the first vector wit
 is orthonormal.
 \end{ex}
 
+\mychapter{24}{2018-03-13}
+\section{Homework Review}
+\subsection{9.29.b}
+$L$ is the reflection in $\mathbb{R}^2$ about the line $y=x$.\\
+Think of $L$ as a $2\times 2$ matrix.
+\[ L\begin{bmatrix}[r]1\\0\\\end{bmatrix} = \begin{bmatrix}[r]0\\1\\\end{bmatrix} \]
+\[ L\begin{bmatrix}[r]0\\1\\\end{bmatrix} = \begin{bmatrix}[r]1\\0\\\end{bmatrix} \]
+\[ L\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} = \begin{bmatrix}[rr]0&1\\1&0\\\end{bmatrix} = L \]
+\[ L\begin{bmatrix}[r]1\\0\\\end{bmatrix} = \begin{bmatrix}[r]\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\\\end{bmatrix} \]
 
-\mychapter{24}{2018-03-xx}
+\section{Normalizing Orthogonal Sets}
+\begin{defn}
+$M\in \mathbb{R}^{m\times n}$ is orthogonal if $MM^T=I_m$.
+\[ M=\begin{bmatrix}[r]\vec{r_1}\\\vec{r_2}\\\vdots\\\vec{r_n}\\\end{bmatrix} \]
+\[ MM^T = \begin{bmatrix}[r]\vec{r_1}\\\vec{r_2}\\\vdots\\\vec{r_n}\\\end{bmatrix}\begin{bmatrix}[rrrr]\vec{r_1^T} & \vec{r_2^T} & \cdots & \vec{r_n^T}\\\end{bmatrix} \]
+\end{defn}
+\begin{thrm}
+If $M$ is an orthogonal matrix, then $M$ is invertible and $M^{-1}=M^T$.
+\end{thrm}
+
+\section{Inner Product Spaces}
+\begin{defn}
+An inner product space is a pair $(V,f)$ where $V$ is a vector space over $\mathbb{R}$ and $V\times V\xrightarrow[]{f}\mathbb{R}$ is a function such that all of the following hold $\forall u,v,w\in V$ and $\forall \lambda \in \mathbb{R}$:
+\begin{enumerate}
+\item $f(\vec{v},\vec{u})=f(\vec{u},\vec{v})$ (Symmetry)
+\item $f(\lambda \vec{u},\vec{v}) = \lambda f(\vec{u},\vec{v})$ (Linearity)
+\item $f(\vec{u}+\vec{w},\vec{v})=f(\vec{u},\vec{v})+f(\vec{w},\vec{v})$ (Linearity)
+\item $f(\vec{v},\vec{v}) \geq 0$ (Positive Definiteness)
+\item $f(\vec{v},\vec{v})=0$ only when $\vec{v}=0$ (Positive Definiteness)
+\end{enumerate}
+\end{defn}
+\begin{thrm}
+$(\mathbb{R}^n, \cdot)$ is an inner product space.
+\end{thrm}
+\begin{ex}
+$V=\mathbb{R}[t]$ is the space of all polynomials in $t$ with coefficients in $\mathbb{R}$.\\
+Note: $\{1,t,t^2,t^3,\cdots,t^n\}$ is a basis.\\
+Define an inner product by
+\[ <p,q>=\int_{-1}^1p(t)q(t)dt \]
+Swapping p and q results in the same result so this is symmetric.\\
+Since we can take constant out of integrals then it fits linearity.\\
+Sum of integral is the same as the integral of sums so it holds addition.\\
+Integrating something that is nonnegative gives us an answer that is nonnegative so 4 holds as well.
+\end{ex}
+\begin{ex}
+Find the angle between $p(t)=t$ and $q(t)=t^2$.
+\[ \phi_{p,q}=\cos^{-1}(\frac{<p,q>}{||p||*||q||}) \]
+\[ ||p|| = \sqrt{<p,q>} = \sqrt{\int_{-1}^1t^2dt}=\sqrt{\frac{2}{3}} \]
+\[ ||q|| = \sqrt{\int_{-1}^1t^4dt} = \sqrt{frac{2}{5}}^{-1} \]
+\[ <p,q>=\int_{-1}^1t^3dt \]
+$\left\{\frac{t}{\sqrt{\frac{2}{3}}},\frac{t^2}{\sqrt{\frac{2}{5}}}\right\}$ is an orthonormal set with respect to the given inner product.
+\end{ex}
+
+
+
+
+\mychapter{25}{2018-03-xx}
 \end{document}

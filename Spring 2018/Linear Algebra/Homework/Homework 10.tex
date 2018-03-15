@@ -92,7 +92,12 @@
 		We write each transformation as a column vector to get our end result.
 		\[ \begin{bmatrix}[rr]3&7\\5&-2\\\end{bmatrix} \]
 	\item $L$ is defined by $L(1,1)=(3,7)$ and $L(1,2)=(5,-4)$.\\
-		
+		\begin{align*}
+		\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[r]1\\1\\\end{bmatrix} &= \begin{bmatrix}[r]3\\7\\\end{bmatrix}\\
+		\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[r]1\\2\\\end{bmatrix} &= \begin{bmatrix}[r]5\\-4\\\end{bmatrix}\\
+		\mathrm{rref}\begin{bmatrix}[rrr]1&1&3\\1&1&7\\\end{bmatrix}&=\begin{bmatrix}[rrr]1&1&0\\0&0&1\\\end{bmatrix}\\
+		\mathrm{rref}\begin{bmatrix}[rrr]1&2&5\\1&2&-4\\\end{bmatrix} &= \begin{bmatrix}[rrr]1&2&0\\0&0&1\\\end{bmatrix}
+		\end{align*}
 	\end{enumerate}
 \item[9.30]Find the matrix representing each of the following linear transformations $T$ on $\mathbb{R}^3$ relative to the usual basis of $\mathbb{R}^3$:
 	\begin{enumerate}
@@ -150,23 +155,97 @@
 	\begin{enumerate}
 	\item Find the matrix $A$ representing $G$ relative to the bases
 	\[ S=\{(1,1,0),(1,2,3),(1,3,5)\} \quad \mathrm{and} \quad S^\prime = \{(1,2),(2,3)\} \]
-	\item For any $v=(a,b,c)$ in $\mathbb{R}^3$, find $[v]_S$ and $[G(v)]_S$.
+		\begin{align*}
+		[G]_{S^\prime}^S&=\begin{bmatrix}[rrr]C_{S^\prime}(G(1,1,0)) & C_{S^\prime}(G(1,2,3)) & 		C_{S^\prime}(G(1,3,5))\\\end{bmatrix}\\
+		&= \begin{bmatrix}[rrr]C_{S^\prime}(5,3) & C_{S^\prime}(5,8) & C_{S^\prime}(6,1)\\	\end{bmatrix}\\
+		(5,3)&=C_1(1,2)+C_2(2,3)\\
+		C_1+2C_2&=5\\
+		2C_1+3C_2&=3\\
+		\begin{bmatrix}[rr]1&2\\2&3\\\end{bmatrix}\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=	\begin{bmatrix}[r]5\\3\\\end{bmatrix}\\
+		\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\	\end{bmatrix}\begin{bmatrix}[r]5\\3\\\end{bmatrix}\\
+		&= \begin{bmatrix}[r]-9\\7\\\end{bmatrix}\\
+		\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]5\\8\\\end{bmatrix}\\
+		&=\begin{bmatrix}[r]1\\2\\\end{bmatrix}\\
+		\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]6\\11\\\end{bmatrix}\\
+		&=\begin{bmatrix}[r]4\\1\\\end{bmatrix}\\
+		[G]_{S^\prime}^S&=\begin{bmatrix}[rrr]-9&1&4\\7&2&1\\\end{bmatrix}
+		\end{align*}
+	\item For any $v=(a,b,c)$ in $\mathbb{R}^3$, find $[v]_S$ and $[G(v)]_S$.\\
+		$C_S(v)=C_S(a,b,c)=\begin{bmatrix}[r]C_1\\C_2\\C_3\\\end{bmatrix}$ such that $(a,b,c)=C_1(1,1,0)+C_2(1,2,3)+C_3(1,3,5)$.
+		\begin{align*}
+		C_1+C_2+C_3 &= a\\
+		C_1+2C_2+3C_3 &=b\\
+		0C_1+3C_2+5C_3&=c\\
+		\mathrm{rref}\begin{bmatrix}[rrrr]1&1&1&a\\1&2&3&b\\0&3&5&c\\\end{bmatrix} &= \begin{bmatrix}[rrrr]1&0&0&-a+2b-c\\0&1&0&5a-5b+2c\\0&0&1&-3a+3b-c\\\end{bmatrix}\\
+		[v]_S&=\{-a+2b-c,5a-5b+2c,-3a+3b-c\}
+		\end{align*}
+		
 	\item Verify that $A[v]_S=[G(v)]_{S^\prime}$
 	\end{enumerate}
-\item[7.60]Let $V$ be the vector space of polynomials over $\mathbb{R}$ of degree $\leq 2$ with inner product defined by $<f,g>=\int_0^1f(t)g(t)dt$. Find a basis of the subspace $W$ orthogonal to $h(t)=2t+1$.
+\item[7.60]Let $V$ be the vector space of polynomials over $\mathbb{R}$ of degree $\leq 2$ with inner product defined by $<f,g>=\int_0^1f(t)g(t)dt$. Find a basis of the subspace $W$ orthogonal to $h(t)=2t+1$.\\
+	\begin{align*}
+	<f,h>&=\int_0^1(at^2+bt+c)(2t+1)dt\\
+	&= \int_0^1(2at^3+at^2+2bt^2+bt+2ct+c)dt\\
+	&= \frac{2a}{4}+\frac{a}{3}+\frac{2b}{3}+\frac{b}{2}+\frac{2c}{2}+c\\
+	&= \frac{5}{6}a+\frac{7}{6}b+2c\\
+	&= 0\\
+	&\begin{bmatrix}[rrr|r]\frac{5}{6}&\frac{7}{6}&2&0\\\end{bmatrix}\\
+	\mathrm{rref}\begin{bmatrix}[rrr]\frac{5}{6}&\frac{7}{6}&2\\\end{bmatrix} &= \begin{bmatrix}[rrr]1&\frac{7}{5}&\frac{12}{5}\\\end{bmatrix}\\
+	&\{7t^2-5t,12t^2-5t\}
+	\end{align*}
+	
 \item[7.61]Find a basis of the subspace $W$ of $\mathbb{R}^4$ orthogonal to $u_1=(1,-2,3,4)$ and $u_2=(3,-5,7,8)$.
+	Let $w=<a,b,c,d>$. Then $w\cdot u_1 = a-2b+3c+4d$ and $w\cdot u_2=3a-5b+7c+8d$.\\
+	\[ \mathrm{rref}\begin{bmatrix}[rrrr]1&-2&3&4\\3&-5&7&8\\\end{bmatrix} = \begin{bmatrix}[rrrr]1&0&-1&-4\\0&1&-2&-4\\\end{bmatrix} \]
+	Parametrization of solution space:\\
+	\begin{align*}
+	d&=y\\
+	c&=x\\
+	b&=2x+4y\\
+	a&=x+4y\\
+	&\rightarrow x\begin{bmatrix}[r]1\\2\\1\\0\\\end{bmatrix} + y\begin{bmatrix}[r]4\\4\\0\\1\\\end{bmatrix}
+	\end{align*}
+	Basis = $\{(1,2,1,0),(4,4,0,1)\}$.
 \item[7.63]Let $w=(1,-2,-1,3)$ be a vector in $\mathbb{R}^4$. Find:
 	\begin{enumerate}
 	\item an orthogonal basis for $w^\perp$.
+		Let $u=<a,b,c,d>$, then $u\cdot w = a-2b-c+3$.\\
+		Parametrization of solution space:
+		\begin{align*}
+		d&=z\\
+		c&=y\\
+		b&=x\\
+		a&=2x+y-3z\\
+		&\rightarrow x\begin{bmatrix}[r]2\\1\\0\\0\\\end{bmatrix}+y\begin{bmatrix}[r]1\\0\\1\\0\\\end{bmatrix}+z\begin{bmatrix}[r]-3\\0\\0\\1\\\end{bmatrix}
+		\end{align*}
+		Basis: $\{(2,1,0,0),(1,0,1,0),(-3,0,0,1)\}$.
 	\item an orthonormal basis for $w^\perp$.
 	\end{enumerate}
 \item[7.65]Let $S$ consist of the following vectors in $\mathbb{R}^4$:
 \[ u_1=(1,1,1,1), \quad u_2=(1,1,-1,-1), \quad u_3=(1,-1,1,-1), \quad u_4=(1,-1,-1,1) \]
 	\begin{enumerate}
-	\item Show that $S$ is orthogonal and a basis of $\mathbb{R}^4$.
+	\item Show that $S$ is orthogonal and a basis of $\mathbb{R}^4$.\\
+		\begin{align*}
+		u_1\cdot u_2&=0\\
+		u_1\cdot u_3 &= 0\\
+		u_1\cdot u_4 &= 0\\
+		u_2\cdot u_3 &= 0\\
+		u_2\cdot u_4 &= 0\\
+		u_3\cdot u_4&= 0
+		\end{align*}
 	\item Write $v=(1,3,-5,6)$ as a linear combination of $u_1,u_2,u_3,u_4$.
-	\item Find the coordinates of an arbitrary vector $v=(a,b,c,d)$ in $\mathbb{R}^4$ relative to the basis $S$.
-	\item Normalize $S$ to obtain an orthonormal basis of $\mathbb{R}^4$.
+		\begin{align*}
+		u_1\cdot u_1 &= 4\\
+		&\vdots\\
+		u_i\cdot u_i &= 4 \forall i\\
+		pr_u(\vec{v})&=\frac{v\cdot u_1}{4}u_1+\frac{v\cdot u_2}{4}u_2+\frac{v\cdot u_3}{4}u_3+\frac{v\cdot u_4}{4}u_4\\
+		&=\frac{5}{4}u_1+\frac{3}{4}u_2-\frac{13}{4}u_3+\frac{9}{4}u_4
+		\end{align*}
+	\item Find the coordinates of an arbitrary vector $v=(a,b,c,d)$ in $\mathbb{R}^4$ relative to the basis $S$.\\
+		\[ pr_u(\vec{v}) = \frac{a+b+c+d}{4}u_1+\frac{a+b-c-d}{4}u_2+\frac{a-b+c-d}{4}u_3+\frac{a-b-c+d}{4}u_4 \]
+	\item Normalize $S$ to obtain an orthonormal basis of $\mathbb{R}^4$.\\
+		Basis: 
+		\[ \frac{u_1+u_2+u_3+u_4}{\sqrt{4}} \]
 	\end{enumerate}
 
 

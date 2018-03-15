@@ -2078,6 +2078,18 @@ C_1+2C_2+3C_3 &=b\\
 $[G(v)]_{S^\prime}=[G]_{S^\prime}^SC_S(v)$
 \end{enumerate}
 
+\subsection{7.60}
+Seek $f$ such that $f \perp h$.
+\[ f=at^2+bt+c \]
+Notice: 
+\begin{align*}
+<f,h>&=\int_0^1(at^2+bt+c)(2t+1)dt\\
+&= \int_0^1(2at^3+at^2+2bt^2+bt+2ct+c)dt\\
+&= \frac{2a}{4}+\frac{a}{3}+\frac{2b}{3}+\frac{b}{2}+\frac{2c}{2}+c\\
+&= \frac{5}{6}a+\frac{7}{6}b+2c\\
+&= 0\\
+&\begin{bmatrix}[rrr|r]\frac{5}{6}&\frac{7}{6}&2&0\\\end{bmatrix}
+\end{align*}
 \section{Orthogonal Projection}
 \begin{thrm}
 Suppose $U\in\mathbb{R}^n$ is a subspace and $|vec{v}\in\mathbb{R}^n$. Then there is a unique vector $pr_u(\vec{v})$ such that 

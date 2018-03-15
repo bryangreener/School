@@ -131,4 +131,9 @@
 \contentsline {subsection}{\numberline {24.1.1}9.29.b}{54}{subsection.24.1.1}
 \contentsline {section}{\numberline {24.2}Normalizing Orthogonal Sets}{54}{section.24.2}
 \contentsline {section}{\numberline {24.3}Inner Product Spaces}{54}{section.24.3}
-\contentsline {chapter}{2018-03-xx}{56}{chapter*.28}
+\contentsline {chapter}{2018-03-15}{56}{chapter*.28}
+\contentsline {section}{\numberline {25.1}Homework Review}{56}{section.25.1}
+\contentsline {subsection}{\numberline {25.1.1}7.65.b}{56}{subsection.25.1.1}
+\contentsline {subsection}{\numberline {25.1.2}9.43}{57}{subsection.25.1.2}
+\contentsline {section}{\numberline {25.2}Orthogonal Projection}{57}{section.25.2}
+\contentsline {chapter}{2018-03-xx}{58}{chapter*.29}

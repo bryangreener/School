@@ -2035,8 +2035,65 @@ Find the angle between $p(t)=t$ and $q(t)=t^2$.
 $\left\{\frac{t}{\sqrt{\frac{2}{3}}},\frac{t^2}{\sqrt{\frac{2}{5}}}\right\}$ is an orthonormal set with respect to the given inner product.
 \end{ex}
 
+\mychapter{25}{2018-03-15}
+\section{Homework Review}
+\subsection{7.65.b}
+See theorems in next section for orthogonal projection.	
+To show the given vectors form a basis, show that they are linearly independent.
+Given $\vec{V}=(1,3,-5,6)$
+\begin{align*}
+u_1\cdot u_1 &= 4\\
+&\vdots\\
+u_i\cdot u_i &= 4 \forall i\\
+pr_u(\vec{v})&=\frac{v\cdot u_1}{4}u_1+\frac{v\cdot u_2}{4}u_2+\frac{v\cdot u_3}{4}u_3+\frac{v\cdot u_4}{4}u_4\\
+&=\frac{5}{4}(1,1,1,1)+\cdots
+\end{align*}
+
+\subsection{9.43}
+\begin{enumerate}
+\item[(a)]
+\begin{align*}
+[G]_{S^\prime}^S&=\begin{bmatrix}[rrr]C_{S^\prime}(G(1,1,0)) & C_{S^\prime}(G(1,2,3)) & C_{S^\prime}(G(1,3,5))\\\end{bmatrix}\\
+&= \begin{bmatrix}[rrr]C_{S^\prime}(5,3) & C_{S^\prime}(5,8) & C_{S^\prime}(6,1)\\\end{bmatrix}\\
+(5,3)&=C_1(1,2)+C_2(2,3)\\
+C_1+2C_2&=5\\
+2C_1+3C_2&=3\\
+\begin{bmatrix}[rr]1&2\\2&3\\\end{bmatrix}\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[r]5\\3\\\end{bmatrix}\\
+\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]5\\3\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]-9\\7\\\end{bmatrix}\\
+\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]5\\8\\\end{bmatrix}\\
+&=\begin{bmatrix}[r]1\\2\\\end{bmatrix}\\
+\begin{bmatrix}[r]C_1\\C_2\\\end{bmatrix}&=\begin{bmatrix}[rr]-3&2\\2&-1\\\end{bmatrix}\begin{bmatrix}[r]6\\11\\\end{bmatrix}\\
+&=\begin{bmatrix}[r]4\\1\\\end{bmatrix}\\
+[G]_{S^\prime}^S&=\begin{bmatrix}[rrr]-9&1&4\\7&2&1\\\end{bmatrix}
+\end{align*}
+\item[(b)]
+$C_S(v)=C_S(a,b,c)=\begin{bmatrix}[r]C_1\\C_2\\C_3\\\end{bmatrix}$ such that $(a,b,c)=C_1(1,1,0)+C_2(1,2,3)+C_3(1,3,5)$.
+\begin{align*}
+C_1+C_2+C_3 &= a\\
+C_1+2C_2+3C_3 &=b\\
+0C_1+3C_2+5C_3&=c
+\end{align*}
+\item[(c)]
+$[G(v)]_{S^\prime}=[G]_{S^\prime}^SC_S(v)$
+\end{enumerate}
+
+\section{Orthogonal Projection}
+\begin{thrm}
+Suppose $U\in\mathbb{R}^n$ is a subspace and $|vec{v}\in\mathbb{R}^n$. Then there is a unique vector $pr_u(\vec{v})$ such that 
+\[ \vec{v}-pr_u(\vec{v}) \perp pr_u(\vec{v} \]
+$pr_u(\vec{v})$ = orthogonal projection of $\vec{v}$ onto $U$.
+\end{thrm}
+\begin{thrm}
+Suppose $\{\vec{v_1},\vec{v_2},...,\vec{v_k}\}$ is an orthogonal basis for $U\in\mathbb{R}^n$ and $\vec{v}\in\mathbb{R}^n$. Then the orthogonal projection of $\vec{v}$ along $U$ is
+\[ pr_u(\vec{v})=\sum_{i=1}^k\frac{\vec{v}\cdot\vec{v_i}}{\vec{v_i}\cdot\vec{v_i}}\vec{v_i} \]
+$\frac{\vec{v}\cdot\vec{v_i}}{\vec{v_i}\cdot\vec{v_i}}$ is the fourier coefficient.
+\end{thrm}
 
 
 
-\mychapter{25}{2018-03-xx}
+
+
+
+\mychapter{26}{2018-03-xx}
 \end{document}

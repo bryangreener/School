@@ -82,31 +82,71 @@
 \item[9.29]For each of the following linear transformations $L$ on $\mathbb{R}^2$, find the matrix $A$ representing $L$ (relative to the usual basis of $\mathbb{R}^2$):
 	\begin{enumerate}
 	\item $L$ is the rotation in $\mathbb{R}^2$ counterclockwise by $45^\circ$.
+		\begin{align*}
+		\begin{bmatrix}[rr]\cos(45^\circ)&-\sin(45^\circ)\\\sin(45^\circ)&\cos(45^\circ)\\\end{bmatrix}\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} &= \begin{bmatrix}[rr]\frac{\sqrt{2}}{2}&-\frac{\sqrt{2}}{2}\\\frac{\sqrt{2}}{2}&\frac{\sqrt{2}}{2}\\\end{bmatrix}
+		\end{align*}
 	\item $L$ is the reflection in $\mathbb{R}^2$ about the line $y=x$.
-	\item $L$ is defined by $L(1,0)=(3,5)$ and $L(0,1)=(7,-2)$.
-	\item $L$ is defined by $L(1,1)=(3,7)$ and $L(1,2)=(5,-4)$.
+		\[ L\begin{bmatrix}[r]1\\0\\\end{bmatrix} = \begin{bmatrix}[r]0\\1\\\end{bmatrix} \quad L\begin{bmatrix}[r]0\\1\\\end{bmatrix} = \begin{bmatrix}[r]1\\0\\\end{bmatrix} \]
+		\[ L\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} = \begin{bmatrix}[rr]0&1\\1&0\\\end{bmatrix} \]
+	\item $L$ is defined by $L(1,0)=(3,5)$ and $L(0,1)=(7,-2)$.\\
+		We write each transformation as a column vector to get our end result.
+		\[ \begin{bmatrix}[rr]3&7\\5&-2\\\end{bmatrix} \]
+	\item $L$ is defined by $L(1,1)=(3,7)$ and $L(1,2)=(5,-4)$.\\
+		
 	\end{enumerate}
 \item[9.30]Find the matrix representing each of the following linear transformations $T$ on $\mathbb{R}^3$ relative to the usual basis of $\mathbb{R}^3$:
 	\begin{enumerate}
 	\item $T(x,y,z)=(x,y,0)$
+		\[ \begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&0\\\end{bmatrix} \]
 	\item $T(x,y,z)=(2x-7y-4z,3x+y+4z,6x-8y+z)$
+		\[ \begin{bmatrix}[rrr]2&-7&-4\\3&1&4\\6&-8&1\\\end{bmatrix} \]
 	\end{enumerate}
 \item[9.33]Let $D$ denote the differential operator, that is $F(f(t))=\frac{df}{dt}$. Each of the following sets is a basis of a vector space $V$ of functions. Find the matrix representing $D$ in each basis:
 	\begin{enumerate}
 	\item $\{a^t,e^{2t},te^{2t}\}$
+		\begin{align*}
+		D(a^t)&=t\\
+		D(e^{2t})&=2e^{2t}\\
+		D(te^{2t})&=e^{2t}+2te^{2t}\\
+		[D] &= \begin{bmatrix}[rrr]1&0&0\\0&2&1\\0&0&2\\\end{bmatrix}
+		\end{align*}
 	\item $\{1,t,\sin(3t),\cos(3t)\}$
+		\begin{align*}
+		D(1)&=0\\
+		D(t)&=1\\
+		D(\sin(3t))&=3\cos(3t)\\
+		D(\cos(3t))&=3-\sin(3t)\\
+		[D] &= \begin{bmatrix}[rrrr]0&1&0&0\\0&0&0&0\\0&0&0&-3\\0&0&3&0\\\end{bmatrix}
+		\end{align*}
 	\end{enumerate}
-\item[9.34]Let $V$ be the vector space of real $2\times2$ matrices and let $M=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$. Find the matrix representing each of the following linear operators $T$ on $V$ relative to the usual basis of $V$ (defined in problem 9.10).
+\item[9.34]Let $V$ be the vector space of real $2\times2$ matrices and let $M=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$. Find the matrix representing each of the following linear operators $T$ on $V$ relative to the usual basis of $V$:
+\[ \left\{ E_1=\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix}, E_2=\begin{bmatrix}[rr]0&1\\0&0\\\end{bmatrix}, E_3=\begin{bmatrix}[rr]0&0\\1&0\\\end{bmatrix},E_4=\begin{bmatrix}[rr]0&0\\0&1\\\end{bmatrix} \right\} \]
 	\begin{enumerate}
 	\item $T(A)=MA$
+		\begin{align*}
+		T(E_1)&=ME_1 = \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix} = \begin{bmatrix}[rr]a&0\\c&0\\\end{bmatrix} = aE_1+0E_2+cE_3+0E_4\\
+		T(E_2)&=ME_2 = 0E_1+aE_2+0E_3+cE_4\\
+		T(E_3)&=ME_3 = bE_1+0E_2+dE_3+0E_4\\
+		T(E_4)&=ME_4 = 0E_1+bE_2+0E_3+dE_4\\
+		[T]&= \begin{bmatrix}[rrrr]a&0&b&0\\0&a&0&b\\c&0&d&0\\0&c&0&d\\\end{bmatrix}
+		\end{align*}
 	\item $T(A)=AM$
+		\begin{align*}
+		E_1M&= aE_1+bE_2+0E_3+0E_4\\
+		E_2M&= cE_1+dE_2+0E_3+0E_4\\
+		E_3M&= 0E_1+0E_2+aE_3+bE_4\\
+		E_4M&= 0E_1+0E_2+cE_3+dE_4\\
+		[T]&=\begin{bmatrix}[rrrr]a&c&0&0\\b&d&0&0\\0&0&a&c\\0&0&b&d\\\end{bmatrix}
+		\end{align*}
 	\item $T(A)=MA-AM$
+		\[ MA-AM=\begin{bmatrix}[rrrr]a&0&b&0\\0&a&0&b\\c&0&d&0\\0&c&0&d\\\end{bmatrix}-\begin{bmatrix}[rrrr]a&c&0&0\\b&d&0&0\\0&0&a&c\\0&0&b&d\\\end{bmatrix} = \begin{bmatrix}[cccc]0&-c&b&0\\-b&a-d&0&b\\c&0&d-a&-c\\0&c&-b&0\\\end{bmatrix} \]
 	\end{enumerate}
 \item[9.38]Find the trace of each linear map on $\mathbb{R}^3$:
 	\begin{enumerate}
-	\item $F(x,y,z)=(x+3y,3x-2z,x-4y-3z)$
+	\item $F(x,y,z)=(x+3y,3x-2z,x-4y-3z)$\\
+		Setting each equation as a row in a $3\times 3$ matrix then adding the values in the diagonal from top left to bottom right gives us the trace of $-2$.
 	\end{enumerate}
-\item[9.43]Let $G:\mathbb{R}^3\rightarrow\mathbb{R}^2$ be defined by $G9x,y,z)=(2x+3y-z,4x-y+2x)$.
+\item[9.43]Let $G:\mathbb{R}^3\rightarrow\mathbb{R}^2$ be defined by $G(x,y,z)=(2x+3y-z,4x-y+2x)$.
 	\begin{enumerate}
 	\item Find the matrix $A$ representing $G$ relative to the bases
 	\[ S=\{(1,1,0),(1,2,3),(1,3,5)\} \quad \mathrm{and} \quad S^\prime = \{(1,2),(2,3)\} \]

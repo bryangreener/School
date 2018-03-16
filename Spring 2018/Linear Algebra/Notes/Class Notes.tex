@@ -2102,10 +2102,31 @@ Suppose $\{\vec{v_1},\vec{v_2},...,\vec{v_k}\}$ is an orthogonal basis for $U\in
 $\frac{\vec{v}\cdot\vec{v_i}}{\vec{v_i}\cdot\vec{v_i}}$ is the fourier coefficient.
 \end{thrm}
 
+\mychapter{26}{2018-03-16}
+\section{Homework Review}
+\subsection{9.47}
+Prove $[F]_{S^\prime}^S[v]=[F(v)]_{S^\prime}$.
+\begin{proof}
+Assume $S=[v_1,v_2,...,v_n]$ and $T=[w_1,w_2,...,w_m]$.\\
+\[ F_{S^\prime}^S] = \begin{bmatrix}[rrr]C_{S^\prime}F(v_1)&\cdots & C_{S^\prime}F(v_n)\\\end{bmatrix} \]
+\[ C_{S^\prime}(F(v_i))=\begin{bmatrix}[c]C_{i,1}\\C_{i,2}\\\vdots\\C_{i,m}\\\end{bmatrix} \]
+such that $F(v_i)=\sum_{j=1}^mC_{i,j}W_j$.\\
+Also $[v]_S=\begin{bmatrix}[c]a_1\\a_2\\\vdots\\a_n\\\end{bmatrix}$ such that $v=\sum_{i=1}^na_iv_i$.\\
+\[ [F(v)_{S^\prime}=\begin{bmatrix}[c]d_1\\d_2\\\vdots\\d_m\\\end{bmatrix} \]
+such that $F(v)=\sum_{j=1}^md_jw_j$.\\
+\[ F(v)=\sum_{i=1}^na_iF(v_i)=\sum_{i=1}^na_i\sum_{j=1}^mC_{i,j}w_j = \sum_{j=1}^m\left (\sum_{i=1}^na_iC_{i,j}\right )w_j \]
+\end{proof}
+
+\section{Gram-Schmidt Orthogonalization}
+Page 255 in book\\
+Input: A linearly independent set:
+\[ S=\{v_1,v_2,...,v_n\} \]
+Output: An orthogonal set:
+\[ T+\{w_1,w_2,...,w_n\} \]
+such that $\mathrm{span}(T)=\mathrm{span}(S)$. If the input is already orthogonal then it outputs itself.
 
 
 
+\mychapter{27}{2018-03-19}
 
-
-\mychapter{26}{2018-03-xx}
 \end{document}

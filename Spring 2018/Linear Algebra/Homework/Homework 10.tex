@@ -248,9 +248,31 @@
 		\[ \frac{u_1+u_2+u_3+u_4}{\sqrt{4}} \]
 	\end{enumerate}
 
-
-two of 9.41,9.47,9.48,7.57
-
+\item[9.41]Show that all matrices similar to an invertible matrix are invertible. More generally, show that similar matrices have the same rank.\\
+	\begin{proof}
+	Assume that we have similar matrices $U_1$ and $U_2$. Then $U_2=(M^{-1})U_1M$ for some invertible matrix $M$.\\
+	Let $M$ be invertible, then $\mathrm{rank}(U_1M)=\mathrm{rank}(U_1)$ and $\mathrm{rank}(MU_1)=\mathrm{rank}(U_1)$. Thus
+	\[ \mathrm{rank}(U_2)=\mathrm{rank}([M^{-1}U_1]M)=\mathrm{rank}(M^{-1}U_1)=\mathrm{rank}(U_1) \]
+	Therefore, similar matrices have the same rank and so all matrices similar to an invertible matrix are invertible.
+	\end{proof}
+\item[9.47]Prove theorem 9.6: For any vector $v\in V,[F]_{S,S^\prime}[v]_S=[F(v)]_{S^\prime}$. (Hint: See problem 9.21)\\
+	\begin{proof}
+	Suppose $V \xrightarrow[]{F} U$ is a linear mapping. Then $[F]_{S,S^\prime}$ is the matrix representation of $F$ relative to the bases $S$ and $S^\prime$. So
+	\[ [F]_{S,S^\prime} = \begin{bmatrix}[cccc]a_{1,1}&a_{2,1}&\cdots &a_{m,1}\\a_{1,2}&a_{2,2}&\cdots &a_{m,2}\\\vdots & \vdots & \vdots & \vdots\\a_{1,n}&a_{2,n}&\cdots &a_{m,n}\\\end{bmatrix} \]
+	Thus for $i=1,2,...,n$, $F(u_i)=\sum_{j=1}^n a_{i,j}u_i$.\\
+	Next suppose $v=k_1u_1+k_2u_2+\cdots +k_nu_n=\sum_{i=1}^n k_iu_i$. Writing a column vector as the transpose of a row vector, we have $[v]_S=(k_1,k_2,...,k_n)^T$.\\
+	Using the linearity of $F$,
+	\begin{align*}
+	F(v)&=F\left (\sum_{i=1}^nk_iu_i\right )\\
+	&=\sum_{i=1}^nk_iF(u_i)=\sum_{i=1}^nk_i\left (\sum_{j=1}^na_{i,j}u_j\right )\\
+	&= \sum_{j=1}^n\left (\sum_{i=1}^na_{i,j}k_i\right )u_j = \sum_{j=1}^n(a_{1,j}k_1+a_{2,j}k_2+\cdots + a_{n,j}k_n)u_j
+	\end{align*}
+	Thus $[F(v)]_{S^\prime}$ is the column vector whose jth entry is
+	\[ a_{1,j}k_1+a_{2,j}k_2+\cdots +a_{n,j}k_n \]
+	Finally, the jth entry of $[F]_{S,S^\prime}[v]_S$ is obtained by multiplying the jth row of $[F]_{S,S^\prime}$ by $[v]_S$. Hence $[F]_{S,S^\prime}$ and $[F(v)]_{S^\prime}$ have the same entries. Therefore $[F]_{S,S^\prime}[v]_s=[F(v)]_{S^\prime}$.
+	\end{proof}
+\item[9.48] Prove theorem 9.7: The mapping $m:\mathrm{Hom}(V,U)\rightarrow M$ defined by $m(F)=[F]$ is an isomorphism. (Hint: See problem 9.22.)
+\item[7.57]Let $V$ be the vector space of $m\times n$ matrices over $\mathbb{R}$. Show that $<A,B>=\mathrm{tr}(B^TA)$ defined an inner product in $V$.
 
 
 

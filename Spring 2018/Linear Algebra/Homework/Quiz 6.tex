@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.25in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+\usepackage{enumitem,kantlipsum}
+\TabPositions{4cm}
+
+\begin{document}
+\begin{center}
+\textbf{Name \underline{Bryan Greener\hspace{6cm}} Section: a.m. \circled{p.m.}}
+\end{center}
+\begin{center}
+\textbf{Elementary Linear Algebra (MATH 2300)\\Quiz \#6}
+\end{center}
+\textbf{Instructions.} Show or explain all of your work.
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt]
+\item Let $U$ be the space of polynomials with basis $E=[1,t,t^2]$, let $V\cong\mathbb{R}^2$ have the basis $F=[(1,0),(1,1)]$, and define a linear map $U\xrightarrow[]{T}V$ by $T(f)=(f(3),f^\prime(3))$.
+\item[(a)] $[4]$ Determine the matrix representing $T$ relative to the bases $E$ and $F$. What is the rank of $T$?\\
+	\begin{solution}
+	\begin{align*}
+	\begin{bmatrix}[rr]1&0\\1&1\\\end{bmatrix}\begin{bmatrix}[r]a\\b\\\end{bmatrix}&=\begin{bmatrix}[r]f(3)\\f^\prime(3)\\\end{bmatrix}\\
+	\begin{bmatrix}[r]a\\b\\\end{bmatrix} &= \begin{bmatrix}[rr]1&0\\1&1\\\end{bmatrix}^{-1}\begin{bmatrix}[r]f(3)\\f^\prime(3)\\\end{bmatrix}\\
+	&= \begin{bmatrix}[r]f(3)\\-f(3)+f^\prime(3)\\\end{bmatrix}\\
+	T(1)=\begin{bmatrix}[r]1\\-1+0\\\end{bmatrix}, \quad T(t)&=\begin{bmatrix}[r]3\\-3+1\\\end{bmatrix}, \quad T(t^2)=\begin{bmatrix}[r]9\\-9+6\\\end{bmatrix}
+	\end{align*}
+	We combine these three $2\times 1$ matrices into a single matrix
+	\[ [T]_F^E = \begin{bmatrix}[rrr]1&3&9\\-1&-2&-3\\\end{bmatrix} \xrightarrow[]{rref} \begin{bmatrix}[rrr]1&0&-9\\0&1&6\\\end{bmatrix} \]
+	Rank is 2.
+	\end{solution}
+\item[(b)] $[2]$ Exhibit a basis for the kernel of $T$.
+	\[ \left\{\sysdelim{.}{.}\systeme[abc]{a-9c=0,b+6c=0}\right\} \]
+	Let $c=x$, then
+	\begin{align*}
+	a&=9x\\
+	b&=-6x\\
+	c&=x\\
+	\mathrm{basis}(\mathrm{ker}(T))=\begin{bmatrix}[r]9\\-6\\1\\\end{bmatrix}
+	\end{align*}
+	Verify:
+	\[ \begin{bmatrix}1&0&-9\\0&1&6\\\end{bmatrix}\begin{bmatrix}[r]9\\-6\\1\\\end{bmatrix}=\begin{bmatrix}[r]9-9\\-6+6\\\end{bmatrix} = \begin{bmatrix}[r]0\\0\\\end{bmatrix} \]
+\item $[4]$ Suppose a subspace $W\subset\mathbb{R}^4$ is spanned by $(1,1,3,4)$ and $(1,2,1,2)$. Exhibit a basis for the subspace $W^\perp\subset\mathbb{R}^4$ orthogonal to $W$.
+	\begin{solution}
+	Let $u=(1,1,3,4)$, $v=(1,2,1,2)$, and $w=(a,b,c,d)$.
+	\begin{align*}
+	<w,u,> &= a+b+3c+4d =0\\
+	<w,v>  &= a+2b+c+2d = 0
+	\end{align*}
+	We get the system
+	\[ \sysdelim{.}{.}\systeme[abcd]{a+b+3c+4d=0,a+2b+c+2d=0} \]
+	\[ \mathrm{rref}\begin{bmatrix}[rrrr|r]1&1&3&4&0\\1&2&1&2&0\\\end{bmatrix}=\begin{bmatrix}[rrrr|r]1&0&5&6&0\\0&1&-2&-2&0\\\end{bmatrix} \]
+	Our free variables are $c$ and $d$. Let $c=1,d=0$, then $w_1=(-5,2,1,0)$. Next let $c=0,d=1$, then $w_2=(-6,2,0,1)$. Thus $\{w_1,w_2\}$ form a basis of $w^\perp$.\\
+	Verify:\\
+	$(-5,2,1,0)\cdot (1,1,3,4) = -5+2+3+0 = 0$ and $(-6,2,0,1)\cdot (1,2,1,2) = -6+4+0+2 = 0$
+	\end{solution}
+\end{enumerate}
+\end{document}

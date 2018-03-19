@@ -2126,7 +2126,58 @@ Output: An orthogonal set:
 such that $\mathrm{span}(T)=\mathrm{span}(S)$. If the input is already orthogonal then it outputs itself.
 
 
-
 \mychapter{27}{2018-03-19}
+\section{Quiz 6 Review}
+\begin{enumerate}
+\item
+\begin{align*}
+[T]_F^E&=\begin{bmatrix}[rrr]C_FT(1)&C_FT(t)&C_FT(t^2)\\\end{bmatrix}\\
+&=\begin{bmatrix}[rrr]C_F(1,0)&C_F(3,1)&C_F(9,6)\\\end{bmatrix}\\
+&=\begin{bmatrix}[rrr]1&2&*\\0&1&*\\\end{bmatrix}
+\end{align*}
+Some values are denoted by '*' as we didn't solve them in class to prevent giving away the entire answer.
 
+\item This question is similar to \#7.61 in the book. We solve \#7.61 below: 
+\begin{align*}
+\begin{bmatrix}[rrrr]1&-2&3&4\\3&-5&7&8\\\end{bmatrix} \xrightarrow[]{rref}& \begin{bmatrix}[rrrr]1&0&-1&-4\\0&1&-2&-4\\\end{bmatrix}\\
+\mathrm{nullspace}=&\mathrm{span}\left\{\begin{bmatrix}[r]1\\0\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\4\\0\\1\\\end{bmatrix}\right\}\\
+\mathrm{basis}(W^\perp)=&\mathrm{span}\{(1,0,1,0),(0,4,0,1)\}
+\end{align*}
+\end{enumerate}
+
+\section{Homework Review}
+\subsection{7.69}
+\begin{enumerate}
+\item[(b)]Prove $(U\cap W)^perp = U^\perp + W^\perp$\\
+	i.e. Show $(U\cap W)^\perp\subset U^\perp + W^\perp$ and $U^\perp + W^\perp \subset (U\cap W)^\perp$.
+	\begin{proof}
+	Suppose $\vec{v}\in(U\cap W)^\perp$, then $\vec{v}\cdot\vec{u}=0$ for all $\vec{u}\in U\cap W$.
+	\end{proof}
+\end{enumerate}
+
+\section{Over-determined System / Inconsistent System}
+\subsection{Line of Best Fit}
+\begin{ex}
+Find the line $y=a+bx$ that passes through $(0,1),(1,1),(2,2),(3,3),(5,4)$.\\
+\begin{align*}
+(0,1): 1&=a+0b\\
+(1,1): 1&=a+1b\\
+(2,2): 2&=a+2b\\
+(3,3): 3&=a+3b\\
+(5,4): 4&=a+5b
+\end{align*}
+\[ \begin{bmatrix}[rr]1&0\\1&1\\1&2\\1&3\\1&5\\\end{bmatrix}\begin{bmatrix}[r]a\\b\\\end{bmatrix}=\begin{bmatrix}[r]1\\1\\2\\3\\4\\\end{bmatrix} \]
+\begin{align*}
+M\vec{v}&=\vec{w}\\
+(M^TM)\vec{v}&=M^T\vec{w}\Rightarrow \vec{v}\approx (M^TM)^{-1}M^T\vec{w}\\
+M^TM&=\begin{bmatrix}[rrrrr]1&1&1&1&1\\0&1&2&3&5\\\end{bmatrix}\begin{bmatrix}[rr]1&0\\1&1\\1&2\\1&3\\1&5\\\end{bmatrix}= \begin{bmatrix}[rr]5&11\\11&39\\\end{bmatrix}\\
+M^T\vec{w} &= \begin{bmatrix}[rrrrr]1&1&1&1&1\\0&1&2&3&5\\\end{bmatrix}\begin{bmatrix}[r]1\\1\\2\\3\\5\\\end{bmatrix} = \begin{bmatrix}[r]11\\34\\\end{bmatrix}\\
+\vec{v}&\approx \begin{bmatrix}[rr]5&11\\11&39\\\end{bmatrix}^{-1}\begin{bmatrix}[r]11\\34\\\end{bmatrix} \approx \begin{bmatrix}[r]0.74\\0.66\\\end{bmatrix}\\
+\mathrm{y-intercept}&\approx 0.74\\
+\mathrm{slope}&\approx 0.66
+\end{align*}
+Formula: $\mathrm{projection}(\vec{w})=(M^TM)^{-1}M^T\vec{w}$
+\end{ex}
+
+\mychapter{28}{2018-03-20}
 \end{document}

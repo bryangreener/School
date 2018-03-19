@@ -142,3 +142,9 @@
 \contentsline {subsection}{\numberline {26.1.1}9.47}{59}{subsection.26.1.1}
 \contentsline {section}{\numberline {26.2}Gram-Schmidt Orthogonalization}{59}{section.26.2}
 \contentsline {chapter}{2018-03-19}{60}{chapter*.30}
+\contentsline {section}{\numberline {27.1}Quiz 6 Review}{60}{section.27.1}
+\contentsline {section}{\numberline {27.2}Homework Review}{60}{section.27.2}
+\contentsline {subsection}{\numberline {27.2.1}7.69}{60}{subsection.27.2.1}
+\contentsline {section}{\numberline {27.3}Over-determined System / Inconsistent System}{61}{section.27.3}
+\contentsline {subsection}{\numberline {27.3.1}Line of Best Fit}{61}{subsection.27.3.1}
+\contentsline {chapter}{2018-03-20}{62}{chapter*.31}

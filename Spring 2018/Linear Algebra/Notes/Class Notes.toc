@@ -148,3 +148,7 @@
 \contentsline {section}{\numberline {27.3}Over-determined System / Inconsistent System}{61}{section.27.3}
 \contentsline {subsection}{\numberline {27.3.1}Line of Best Fit}{61}{subsection.27.3.1}
 \contentsline {chapter}{2018-03-20}{62}{chapter*.31}
+\contentsline {section}{\numberline {28.1}Homework Review}{62}{section.28.1}
+\contentsline {subsection}{\numberline {28.1.1}7.69 Continued}{62}{subsection.28.1.1}
+\contentsline {section}{\numberline {28.2}Determinants}{62}{section.28.2}
+\contentsline {chapter}{2018-03-22}{63}{chapter*.32}

@@ -2180,4 +2180,34 @@ Formula: $\mathrm{projection}(\vec{w})=(M^TM)^{-1}M^T\vec{w}$
 \end{ex}
 
 \mychapter{28}{2018-03-20}
+\section{Homework Review}
+\subsection{7.69 Continued}
+Picking up from yesterday's notes:\\
+To show $(U+W)^\perp \subset U^\perp\cap W^\perp$\\
+Suppose $\vec{v}\in (U+W)^\perp$. Then
+\[ 4\vec{v}\cdot (\vec{u}+\vec{w})=0 \forall \vec{u}\in U, \forall \vec{w}\in W \]
+For example $\vec{v}\cdot (\vec{0}+\vec{w})=0 \forall \vec{w}\in W$. So $\vec{v}\cdot\vec{w}=0 \Rightarrow \vec{v}\in W^\perp$. The same argument shows that $\vec{v}\in U^\perp$. Since $\vec{v}$ is in both $W^\perp$ and $U^\perp$, then $\vec{v}\in (U\cap W)$. Thus $(U+W)^\perp \subset U^\perp\cap W^\perp$.\\
+We need to solve the other way from here. We can use $(W^\perp)^\perp = W$ to help solve the second half.
+
+\section{Determinants}
+Fact: $\mathrm{Det:}\mathbb{R}^{n \times n} \rightarrow \mathbb{R}$
+\begin{ex}
+\[ \mathrm{Det:}[a] = a \]
+Alternate Notation: $|[a]|$ or $\begin{vmatrix}[r]a\\\end{vmatrix}$.
+\[ \mathrm{Det}\begin{bmatrix}[rr]a_1&b_1\\a_2&b_2\\\end{bmatrix}=a_1b_2-a_2b_1 \]
+\[ \mathrm{Det}\begin{bmatrix}[rrr]a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\\\end{bmatrix}=a_1b_2c_3+a_2b_3c_1+a_3b_1c_2-a_1b_3c_2-a_2b_1c_3-a_3b_2c_1 \]
+The pattern for number of items in each determinant is following factorials.
+\end{ex}
+\begin{ex}
+\begin{align*}
+\mathrm{det}\begin{bmatrix}[rrrr]a_1&b_1&c_1&d_1\\a_2&b_2&c_2&d_2\\a_3&b_3&c_3&d_3\\a_4&b_4&c_4&d_4\\\end{bmatrix}&=a_1\mathrm{det}\begin{bmatrix}[rrr]b_2&c_2&d_2\\b_3&c_3&d_3\\b_4&c_4&d_4\\\end{bmatrix}\\
+&-b_1\mathrm{det}\begin{bmatrix}[rrr]a_2&c_2&d_2\\a_3&c_3&d_3\\a_4&c_4&d_4\\\end{bmatrix}\\
+&+c_1\mathrm{det}\begin{bmatrix}[rrr]a_2&b_2&d_2\\a_3&b_3&d_3\\a_4&b_4&d_4\\\end{bmatrix}\\
+&-d_1\mathrm{det}\begin{bmatrix}[rrr]a_2&b_2&c_2\\a_3&b_3&c_3\\a_4&b_4&c_4\\\end{bmatrix}
+\end{align*}
+\end{ex}
+
+
+
+\mychapter{29}{2018-03-22}
 \end{document}

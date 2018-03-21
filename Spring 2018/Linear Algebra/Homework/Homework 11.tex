@@ -123,21 +123,27 @@
 		\begin{align*}
 		w_2&=v_2-\frac{<v_2,w_1>}{||w_1||^2}w_1 = (1,-1,2,2)-\frac{4}{4}(1,1,1,1) = (0,-2,1,1)\\
 		w_3&=v_3-\frac{<v_3,w_1>}{||w_1||^2}w_1-\frac{<v_3,w_2>}{||w_2||^2}w_2\\
-		&= (1,2,-3,-4)-\frac{-4}{4}(1,1,1,1)-\frac{-11}{6}(0,-2,1,1) = (2,-\frac{2}{3},-\frac{1}{6},-\frac{7}{6})
+		&= (1,2,-3,-4)-\frac{-4}{4}(1,1,1,1)-\frac{-11}{6}(0,-2,1,1) = (12,-4,-1,-7)
 		\end{align*}
 		Next we normalize the orthogonal basis: $||w_1||^2 = 4$, $||w_2||^2=6$, and $||w_3||^2=\frac{121}{6}$. Thus the following form an orthogonal basis of $U$:
-		\[ u_1=\frac{1}{2}(1,1,1,1), \quad u_2=\frac{1}{\sqrt{6}}(0,-2,1,1), \quad \frac{\sqrt{6}}{11}(2,-\frac{2}{3},-\frac{1}{6},-\frac{7}{6}) \]
+		\[ u_1=\frac{1}{2}(1,1,1,1), \quad u_2=\frac{1}{\sqrt{6}}(0,-2,1,1), \quad u_3 = \frac{\sqrt{6}}{11}(12,-4,-1,-7) \]
 	\item Find the projection of $v=(1,2,-3,4)$ onto $U$.\\
 	Since $U$ is orthogonal, we need to compute the Fourier coefficients.
 	\begin{align*}
 	c_1 &= \frac{<v,u_1>}{||u_1||^2} = 1\\
 	c_2 &= \frac{<v,u_2>}{||u_2||^2} = -\frac{1}{2}\\
-	c_3 &= \frac{<v,u_3>}{||u_3||^2} = -\frac{29}{210}\\
-	u&=\mathrm{proj}(v,U)=c_1u_1+c_2u_2+c_3u_3 = 1(1,1,1,1)-\frac{1}{2}(0,-2,1,1)-\frac{29}{210}(12,-4,-1,-7)
+	c_3 &= \frac{<v,u_3>}{||u_3||^2} = -\frac{1}{10}\\
+	u&=\mathrm{proj}(v,U)=c_1u_1+c_2u_2+c_3u_3\\
+	&= 1(1,1,1,1)-\frac{1}{2}(0,-2,1,1)-\frac{1}{10}(12,-4,-1,-7)\\
+	&= \frac{1}{5}(-1,12,3,6)
 	\end{align*}
 	\end{enumerate}
 
-\item[7.73]Consider the subspace $W=P_2(t)$ of $P(t)$ with inner product $<f,g>=\int_0^1f(t)g(t)dt$. Find the projection of $f(t)=t^3$ onto $W$. (Hint: Use the orthogonal polynomials $1,2t-1,6t^2-6t+1$ obtained in Problem 7.21.)
+\item[7.73]Consider the subspace $W=P_2(t)$ of $P(t)$ with inner product $<f,g>=\int_0^1f(t)g(t)dt$. Find the projection of $f(t)=t^3$ onto $W$. (Hint: Use the orthogonal polynomials $1,2t-1,6t^2-6t+1$ obtained in Problem 7.21.)\\
+	Since we have an orthogonal basis, we need to compute the Fourier coefficients.
+	\begin{align*}
+	c_1=\frac{<v,}{}
+	\end{align*}
 
 \item[7.76]Find a $3\times 3$ orthogonal matrix $P$ whose first two rows are multiples of $u=(1,1,1)$ and $v=(1,-2,3)$, respectively.
 
@@ -168,13 +174,14 @@
 	\item $\begin{bmatrix}[rrr]2&1&1\\0&5&-2\\1&-3&4\\\end{bmatrix}$
 	\[ (2*5*4)+(1*-2*1)+(1*0*-3)-(2*-2*-3)-(1*0*4)-(1*5*1) = 21 \]
 	\item $\begin{bmatrix}[rrr]3&-2&-4\\2&5&-1\\0&6&1\\\end{bmatrix}$
-	\[ (3*5*1)+(-2*-1*0)+(-4*2*6)-(3*-1*6)-(-2*2*1)-(-4*5*0*)=11 \]
+	\[ (3*5*1)+(-2*-1*0)+(-4*2*6)-(3*-1*6)-(-2*2*1)-(-4*5*0*)=-11 \]
 	\item $\begin{bmatrix}[rrr]-2&-1&4\\6&-3&-2\\4&1&2\\\end{bmatrix}$
+	\[ (-2*-3*2)+(-1*-2*4)+(4*6*1)-(-2*-2*1)-(-1*6*2)-(4*-3*4) = 100 \]
 	\end{enumerate}
 
 \item[10.54]Evaluate the determinant of each matrix: (a) $\begin{bmatrix}[rrrr]1&2&2&3\\1&0&-2&0\\3&-1&1&-2\\4&-3&0&2\\\end{bmatrix}$; (b) $\begin{bmatrix}[rrrr]2&1&3&2\\3&0&1&-2\\1&-1&4&3\\2&2&-1&1\\\end{bmatrix}$
 	\begin{enumerate}
-	\item
+	\item $-131$
 	\end{enumerate}
 
 \item[two of 7.74 7.78 7.84(a)]

@@ -185,6 +185,33 @@ Correction: Let $u_1=(1,2,1)$, $u_2=(1,-2,3)$. Original problem vectors were not
 	\item $-131$
 	\end{enumerate}
 
-\item[two of 7.74 7.78 7.84(a)]
+\item[7.74]Consider $P(t)$ with inner product $\langle f,g \rangle = \int_{-1}^1f(t)g(t)dt$.
+	\begin{enumerate}
+	\item Find an orthogonal basis for the subspace $W=P_3(t)$ by applying the Gram-Schmidt algorithm to $\{1,t,t^2,t^3\}$.\\
+	We follow the gram-schmidt formula.
+	\begin{align*}
+		w_1&=v_1\\
+		w_2&=v_2-\frac{\langle v_2,w_1\rangle}{\langle 1,1 \rangle}w_1 = t\\
+		w_3&=v_3-\frac{\langle v_3,w_1 \rangle}{\langle 1,1 \rangle}w_1-\frac{\langle v_3,w_2\rangle}{\langle t,t \rangle}w_2 = 3t^2-1\\
+		w_4&=v_4-\frac{\langle v_4,w_1\rangle}{\langle 1,1 \rangle}w_1-\frac{\langle v_4,w_2\rangle}{\langle t,t \rangle}w_2-\frac{\langle v_4,w_3\rangle}{\langle t^2,t^2 \rangle}w_3 = 5t^3-3t
+	\end{align*}
+	Thus we form the basis for v: $[1,t,3t^2-1,5t^3-3t]$
+	\item Find the projection of $f(t)=t^5$ onto $W$.
+	\begin{align*}
+	c_1 &= \frac{\langle v,u_1 \rangle}{\langle 1,1 \rangle} = \\
+	c_2 &= \frac{\langle v,u_2 \rangle}{\langle t,t \rangle} = \\
+	c_3 &= \frac{\langle v,u_3 \rangle}{\langle 3t^3-1,3t^2-1 \rangle} = \\
+	c_2 &= \frac{\langle v,u_4 \rangle}{\langle 5t^3-3t,5t^3-3t \rangle} = \\
+	\end{align*}
+	\end{enumerate}
+	
+\item[7.84] Suppose $A$ and $B$ are positive definite matrices. Show that: (a) $A+B$ is positive definite; (b) $kA$ is positive definite for $k>0$.
+	\begin{enumerate}
+	\item
+	\begin{proof}
+	Since $A$ and $B$ are positive definite, then $u^T(A+B)u \geq 0$ for all columns $u$ and $u^T(A+B)u=0$ only when $u=\vec{0}$.\\
+	So $u^T(A+B)u=a^TAu+u^TBu$. Since both $A$ and $B$ are positive definite, then neither $u^TAu$ nor $u^TBu$ can be less than zero. Thus, their addition cannot result in any negative values. Therefore $u^T(A+B)u$ observes all the conditions for a positive-definite matrix.
+	\end{proof}
+	\end{enumerate}
 \end{enumerate}
 \end{document}

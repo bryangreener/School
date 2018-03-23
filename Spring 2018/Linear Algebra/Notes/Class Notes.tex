@@ -2256,11 +2256,21 @@ $c_1\begin{bmatrix}[r]1\\2\\\end{bmatrix}+c_2\begin{bmatrix}[r]3\\1\\\end{bmatri
 \begin{thrm}
 Suppose $u_1,u_2,...,u_n\in\mathbb{R}^n$. Then the n-dimensional volume of the parallelepiped $P(u_1,u_2,...,u_n)$ is $|\mathrm{det}(u_1,u_2,...,u_n)|$.
 \end{thrm}
-Thus from the previous example, the 2D volume (area) of our parallelogram is $|\mathrm{det}\begin{bmatrix}[rr]1&3\\2&1\\\end{bmatrix}|=5u^2$.\\
+Thus from the previous example, the 2D volume (area) of our parallelogram is $\left |\mathrm{det}\begin{bmatrix}[rr]1&3\\2&1\\\end{bmatrix}\right |=5u^2$.\\
 \begin{ex}
-$\P(\begin{bmatrix}[r]2\\0\\0\\\end{bmatrix}\begin{bmatrix}[r]0\\3\\0\\\end{bmatrix}\begin{bmatrix}[r]0\\0\\5\\\end{bmatrix})$ forms a cube with one dimension equaling 2, another equaling 3, and the last equaling 5. 
+$P\left (\begin{bmatrix}[r]2\\0\\0\\\end{bmatrix}\begin{bmatrix}[r]0\\3\\0\\\end{bmatrix}\begin{bmatrix}[r]0\\0\\5\\\end{bmatrix}\right )$ forms a cube with one dimension equaling 2, another equaling 3, and the last equaling 5. \\
 \end{ex}
 
 
 \mychapter{30}{2018-03-23}
+\section{Homework Review}
+\subsection{7.78}
+The relation is: $A~B$ if $B=P^TAP$ for $P\in O(n)$ (the set of all $n\times n$ orthogonal matrices).\\
+You must show: (i) $A~A$ for all $A$; (ii) If $A~B$, then $B~A$; (iii) If $A~B$ and $B~C$ then $A~C$.
+\begin{proof}
+(i) Let $A$ be a matrix. Let $P=I$. Notice $I^TI=II=I\Rightarrow I\in O(n).$ Next notice $A=IAI=I^TAI$. Thus $A~A$.\\
+(ii) Suppose $A~B$, then by definition of "$~$", there is $P\in O(n)$ such that $B=P^TAP$. Thus for this $P$, $BP^{-1}=P^TA\Rightarrow (P^T)^{-1}BP^{-1}=A$ but $(P^T)^{-1}=(P^{-1})^T$. Thus we have $(P^{-1})^TB(P^{-1}=A$. Since $P^{-1}\in O(n)$, then $B~A$.
+\end{proof}
+
+\mychapter{31}{2018-03-26}
 \end{document}

@@ -12,3 +12,14 @@
 \contentsline {subsection}{\numberline {2.2.1}Feasibility Report}{5}
 \contentsline {chapter}{2018-03-21}{7}
 \contentsline {section}{\numberline {3.1}Quad Evaluation Grading}{7}
+\contentsline {chapter}{2018-03-26}{9}
+\contentsline {section}{\numberline {4.1}Senior Design Presentations}{9}
+\contentsline {subsection}{\numberline {4.1.1}Senior Design Presentation Review Papers}{9}
+\contentsline {subsection}{\numberline {4.1.2}Senior Design Presentation Paper Outline}{9}
+\contentsline {subsection}{\numberline {4.1.3}Presentation Style}{10}
+\contentsline {section}{\numberline {4.2}Testing Plan}{10}
+\contentsline {subsection}{\numberline {4.2.1}Introduction}{10}
+\contentsline {subsection}{\numberline {4.2.2}Unit Testing}{10}
+\contentsline {subsection}{\numberline {4.2.3}System Testing}{10}
+\contentsline {subsection}{\numberline {4.2.4}Usability Testing}{11}
+\contentsline {subsection}{\numberline {4.2.5}Items for each Section}{11}

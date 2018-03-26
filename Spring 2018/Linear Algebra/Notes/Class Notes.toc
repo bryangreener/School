@@ -162,3 +162,8 @@
 \contentsline {section}{\numberline {30.1}Homework Review}{65}{section.30.1}
 \contentsline {subsection}{\numberline {30.1.1}7.78}{65}{subsection.30.1.1}
 \contentsline {chapter}{2018-03-26}{66}{chapter*.34}
+\contentsline {section}{\numberline {31.1}Quiz Review}{66}{section.31.1}
+\contentsline {section}{\numberline {31.2}Possible Exam Question}{66}{section.31.2}
+\contentsline {section}{\numberline {31.3}Determinants Continued}{66}{section.31.3}
+\contentsline {subsection}{\numberline {31.3.1}Cofactor Expansion Formula}{66}{subsection.31.3.1}
+\contentsline {chapter}{2018-03-27}{69}{chapter*.35}

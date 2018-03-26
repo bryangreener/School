@@ -2273,4 +2273,81 @@ You must show: (i) $A~A$ for all $A$; (ii) If $A~B$, then $B~A$; (iii) If $A~B$ 
 \end{proof}
 
 \mychapter{31}{2018-03-26}
+\section{Quiz Review}
+\begin{enumerate}
+\item[2]Write a formula for the linear mapping $\mathbb{R}^2 \xrightarrow[]{T}\mathbb{R}^3$ such that $T(3,1)=(1,0,1)$ and $T(5,2)=(0,1,1)$.\\
+We can write the given items as follows:
+\[ T\begin{bmatrix}[rr]3&5\\1&2\\\end{bmatrix}=\begin{bmatrix}[rr]1&0\\0&1\\1&1\\\end{bmatrix} \]
+\[ T = \begin{bmatrix}[rr]1&0\\0&1\\1&1\\\end{bmatrix}\begin{bmatrix}[rr]2&-5\\-1&3\\\end{bmatrix} = \begin{bmatrix}[rr]2&-5\\-1&3\\1&-2\\\end{bmatrix} \]
+So $T(x,y)=(2x-5y,-x+3y,x-2y)$.\\
+Verify: $T(3,1)=(6-5,-3+3,3-2)=(1,0,1)$. Repeat for $T(5,2)$.
+\end{enumerate}
+
+\section{Possible Exam Question}
+Prove $T(0)=0$ for every linear mapping. (Look near beginning of ch.9 in book) Read definition of linear mapping.
+
+\section{Determinants Continued}
+\subsection{Cofactor Expansion Formula}
+\begin{defn}
+Let $A$ be an $n\times n$ matrix with entries $a_{i,j}$ and suppose $(i,j)$ is given.\\
+The $(i,j)$ minor of $A$ is $\mathrm{det}(\hat{A}_{i,j})$ where $\hat{A}_{i,j}$ is the matrix obtained by deleting the i$^{\mathrm{th}}$ row and j$^{\mathrm{th}}$ column of $A$.
+\end{defn}
+
+\begin{align*}
+\mathrm{det}(A)&=\sum_{i=1}^n(-1)^{i+j}a_{i,j}\mathrm{det}(\hat{A}_{i,j})\\
+&= \sum_{j=1}^n(-1)^{i+j}a_{i,j}\mathrm{det}(\hat{A}_{i,j})
+\end{align*}
+The first equation here is expansion about the j$^{\mathrm{th}}$ column. The second equation is expansion about the i$^{\mathrm{th}}$ row.
+\begin{thrm}
+$\mathrm{det}(A^T)=\mathrm{det}(A)$
+\end{thrm}
+
+\begin{thrm}
+Det is multi-linear with respect to rows (or columns).
+\end{thrm}
+\begin{ex}
+\[ \mathrm{det}\begin{bmatrix}[rrr]a_1+b_1&c_1&d_1\\a_2+b_2&c_2&d_2\\a_3+b_3&c_3&d_3\\\end{bmatrix} = \mathrm{det}\begin{bmatrix}[rrr]a_1&c_1&d_1\\a_2&c_2&d_2\\a_3&c_3&d_3\\\end{bmatrix}+\begin{bmatrix}[rrr]b_1&c_1&d_1\\b_2&c_2&d_2\\b_3&c_3&d_3\\\end{bmatrix} \]
+Thus the determinant respects addition in the first column.
+\end{ex}
+\begin{thrm}
+If $A$ is upper-trianguar with diagonal entries $\lambda_1,\lambda_2,...,\lambda_n$ then
+\[ \mathrm{det}(A)=\prod_{i=1}^n \lambda_i = \lambda_1 \lambda_2 \cdots \lambda_n \]
+\end{thrm}
+\begin{ex}
+\[ \mathrm{det}\begin{bmatrix}[rrrrrr]3&4&\pi &10^{100} & 10^{(10^{100})}\\0&2&-1&\sqrt{3} & ln7&\gamma\\0&0&-1&\sqrt{4} & 81&e\\0&0&0&\sqrt{5}&0&i\\0&0&0&0&7&7\\0&0&0&0&0&1\\\end{bmatrix} = 3*2(-1)*\sqrt{5}*7*1 \]
+If you want the determinant of the first row then you multiply the first row by the determinant of the $5\times 5$ square matrix at the bottom right corner of this $6 \times 6$ matrix. Then from there you recursively go further into that bottom right corner taking the determinant of smaller and smaller matrices.\\
+This is the same process as lower-triangular matrices and diagonal matrices (since by definition diagonal matrices are upper-triangular).
+\end{ex}
+\begin{thrm}
+Suppose $A\in F^{n\times n}$ has an all zero row (or column). Then $\mathrm{det}(A)=0$.
+\end{thrm}
+\begin{thrm}
+Suppose the rows (or columns) of $A$ are linearly independent. Then $\mathrm{det}(A)=0$.
+\end{thrm}
+Recall elementary matrices.
+\begin{thrm}
+\begin{enumerate}
+\item If $A$ is scaling a row by $k$, then the determinant of $A$ is $k$.
+\item If $A$ adds a multiple of one row to another, then the determinant of $A$ is $1$.
+\item If $A$ swaps a pair of rows, then the determinant of $A$ is $-1$.
+\end{enumerate}
+\end{thrm}
+Something with elementary row operations will likely be on the exam.
+\begin{ex}
+\[ \mathrm{det}\begin{bmatrix}[rrrrr]1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&0\\0&0&0&3&0\\0&0&0&0&1\\\end{bmatrix} = 3 \]
+We get this by multiplying the diagonal entries.
+\[ \mathrm{det}\begin{bmatrix}[rrrr]1&0&0&0\\0&1&0&0\\3&0&1&0\\0&0&0&1\\\end{bmatrix} = 1 \]
+In this case we ignore the $3$ since it is not in the diagonal.
+\[ \mathrm{det}\begin{bmatrix}[rrrrr]0&0&0&0&1\\0&1&0&0&0\\0&0&1&0&0\\0&0&0&1&0\\1&0&0&0&0\\\end{bmatrix} = -1 \]
+...since row 1 and row 5 can be swapped to get the identity matrix in one operation.
+\end{ex}
+\begin{thrm}
+Suppose $A,B\in F^{n\times n}$. Then $\mathrm{det}(AB)=\mathrm{det}(A)\mathrm{det}(B)$.
+\end{thrm}
+From all the information above, one may use row operations to compute the determinant of a matrix. As long as we can get it into a triangular form, then we can do this.
+
+
+
+\mychapter{32}{2018-03-27}
+
 \end{document}

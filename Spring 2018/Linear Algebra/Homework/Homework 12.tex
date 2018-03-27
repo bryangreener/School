@@ -81,7 +81,7 @@
 \begin{enumerate}
 \item[10.57]Consider the matrix $A=\begin{bmatrix}[rrrr]1&2&-2&3\\3&-1&5&0\\4&0&2&1\\1&7&2&-3\\\end{bmatrix}$. Find the cofactor: (a)$A_{3,1}$;(b)$A_{2,3}$;(c)$A_{4,2}$.
 	\begin{enumerate}
-	\item We delete row 4 and column 1 from the matrix to get
+	\item We delete row 3 and column 1 from the matrix to get
 	\[ A_{3,1}=\mathrm{det}\begin{bmatrix}[rrr]2&-2&3\\-1&5&0\\7&2&-3\\\end{bmatrix} = -135 \]
 	\item We delete row 2 and column 3 from the matrix to get
 	\[ A_{2,3}=\mathrm{det}\begin{bmatrix}[rrr]1&2&3\\4&0&1\\1&7&-3\\\end{bmatrix} = 103 \]
@@ -93,15 +93,18 @@
 	\item
 	\begin{align*}
 	\mathrm{det}(A)&= -2\\
-	A^{-1}&=\frac{1}{|A|}(\mathrm{adj}(A))=-\frac{1}{2}\begin{bmatrix}[rrr]-1&-1&1\\-1&1&-1\\2&-2&0\\\end{bmatrix} = \begin{bmatrix}[rrr]\frac{1}{2}&\frac{1}{2}&-\frac{1}{2}\\\frac{1}{2}&-\frac{1}{2}&\frac{1}{2}\\-1&2&0\\\end{bmatrix}
+	A^{-1}&=\frac{1}{|A|}(\mathrm{adj}(A))=-\frac{1}{2}\begin{bmatrix}[rrr]-1&-1&1\\-1&1&-1\\2&-2&0\\\end{bmatrix} = \begin{bmatrix}[rrr]\frac{1}{2}&\frac{1}{2}&-\frac{1}{2}\\\frac{1}{2}&-\frac{1}{2}&\frac{1}{2}\\-1&1&0\\\end{bmatrix}
 	\end{align*}
 	\end{enumerate}		
 	
 \item[10.59]Find the classical adjoint of each matrix in Problem 10.54.
 	\begin{enumerate}
 	\item
-	\[ \mathrm{adj}(A)= \begin{bmatrix}[rrr]A_{1,1}&-A_{1,2}&A_{1,3}\\-A_{2,1}&A_{2,2}&-A_{2,3}\\A_{3,1}&-A_{3,2}&A_{3,3}\\\end{bmatrix} = \begin{bmatrix}[rrr]-1&-1&1\\-1&1&-1\\2&-2&0\\\end{bmatrix} \]
-	We get our result by calculating the cofactors at each index then take the transpose of that resulting matrix.
+	\begin{align*}
+	A&=\begin{bmatrix}[rrrr]1&2&2&3\\1&0&-2&0\\3&-1&1&-2\\4&-3&0&2\\\end{bmatrix}\\
+	\mathrm{det}(A)A^{-1} &= \begin{bmatrix}[rrrr]-16&-29&-26&-2\\-30&-38&-16&29\\-8&51&-13&-1\\-13&1&28&-18\\\end{bmatrix}
+	\end{align*}
+	Since $A$ is invertible we are able to use the formula above instead of writing out each determinant per index.
 	\end{enumerate}		
 
 \item[10.63]For $k=1,2,3$ find the sum $S_k$ of all principal minors of order $k$ for:\\
@@ -164,7 +167,8 @@
 	\item We start by writing the mappings of $\tau$ and $\sigma$.
 	\[ \tau = \begin{matrix}1&2&3&4&5\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\1&3&5&2&4\\\end{matrix} \qquad \sigma = \begin{matrix}1&2&3&4&5\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\3&2&1&5&4\\\end{matrix} \]
 	Next we plug in our values from $\sigma$ into $\tau$ to get $\tau \circ \sigma = 53142$.
-	\item We repeat the steps from part (a) but instead plug $\sigma$ into $\pi$ to get $\pi \circ \sigma = 52413$.
+	\item[(c)] \[ \sigma^{-1}=\begin{matrix}[rrrrr]3&2&1&5&4\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\1&2&3&4&5\\\end{matrix} \]
+	Thus $\sigma^{-1}=32154$.
 	\end{enumerate}		
 	
 \item[10.74]Let $D: V\rightarrow V$ be the differential operator, that is, $D(f(t))=df/dt$. Find $\mathrm{det}(T)$ if $V$ is the vector space of functions with bases: (a) $\{1,t,...,t^5\}$; (b) $\{e^t,e^{2t},e^{3t}\}$; (c) $\{\sin t, \cos t\}$.
@@ -184,8 +188,8 @@
 	\item
 	\begin{align*}
 	D(e^t)&=e^t=1e^t+0e^{2t}+0e^{3t}\\
-	D(e^{2t}&=2e^{2t}=0e^t+2e^{2t}+0e^{3t}\\
-	D(e^{3t}&=3e^{3t}=0e^t+0e^{2t}+3e^{3t}\\
+	D(e^{2t})&=2e^{2t}=0e^t+2e^{2t}+0e^{3t}\\
+	D(e^{3t})&=3e^{3t}=0e^t+0e^{2t}+3e^{3t}\\
 	D&=\begin{bmatrix}[rrr]1&0&0\\0&2&0\\0&0&3\\\end{bmatrix}\\
 	\mathrm{det}(D)&=6
 	\end{align*}
@@ -198,10 +202,10 @@
 	\end{align*}
 	\end{enumerate}
 	
-\item[10.76]Prove: (a) $\mathrm{det}(1_V)=1$, where $1_V$ if the identity operator; (b) $\mathrm{det}(T^{-1})=\mathrm{det}(T)^{-1}$ when $T$ is invertible.
+\item[10.76]Prove: (a) $\mathrm{det}(1_V)=1$, where $1_V$ is the identity operator; (b) $\mathrm{det}(T^{-1})=\mathrm{det}(T)^{-1}$ when $T$ is invertible.
 	\begin{enumerate}
-	\item
-	\item
+	\item By the definition of an identity mapping, $\mathrm{det}(1_V) = \mathrm{det}(I)$ and since $I$ is diagonal then $\mathrm{det}(I)=1$. Thus $\mathrm{det}(1_V)=1$.
+	\item Note that $T^{-1}T=I$. So $1=\mathrm{det}(I)=\mathrm{det}(T^{-1}T) = \mathrm{det}(T^{-1})\mathrm{det}(T)$ and so $\mathrm{det}(T^{-1}) = \mathrm{det}(T)^{-1}$.
 	\end{enumerate}
 	
 \item[10.77]Find the volume $V(S)$ of the parallelepiped $S$ in $\mathbb{R}^3$ determined by the vectores: (a) $u_1=(1,2,-3),u_2=(3,4,-1),u_3=(2,-1,5)$; (b) $u_1=(1,1,3),u_2=(1,-2,-4),u_3=(4,1,2)$.
@@ -213,22 +217,24 @@
 	
 \item[10.79]Let $V$ be the space of $2 \times 2$ matrices $M=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ over $\mathbb{R}$. Determine whether or not $D: V\rightarrow R$ is 2-linear (with respect to the rows), where: (a) $D(M)=ac-bd$; (b) $D(M)=ab-cd$; (c) $D(M)=0$; (d) $D(M)=1$.
 	\begin{enumerate}
-	\item Let $A=(a_1,a_2)$, $B=(b_1,b_2)$, and $C=(c_1,c_2)$. Then
-	\[ D(A,C)=D\begin{bmatrix}[rr]a_1&a_2\\c_1&c_2\\\end{bmatrix}=a_1c_1-a_2c_2 \quad \mathrm{and} \quad D(B,C) = D\begin{bmatrix}[rr]b_1&b_2\\c_1&c_2\\\end{bmatrix}=b_1c_1-b_2c_2 \]
-	Thus for any scalars $s,t\in\mathbb{R}$
-	\begin{align*}
-	D(sA+tB,C)&=D\begin{bmatrix}[rr]sa_1+tb_1&sa_2+tb_2\\c_1&c_2\\\end{bmatrix}\\
-	&= (sa_1+tb_1)c_1-(sa_2+tb_2)c_2\\
-	&= s(a_1c_1)t(b_1c_1)-s(a_2c_2)t(b_2c_2)\\
-	&= s
-	\end{align*}
+	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ac-db$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=ca-bd$.Next let $kD(A,B)=\begin{bmatrix}[rr]ka&kb\\kc&kd\\\end{bmatrix}=k(ac-bd)$ and $D(kA,B)=\begin{bmatrix}[rr]ka&kb\\c&d\\\end{bmatrix}=kac-kbd=k(ac-bd)$. Thus $D(M)$ is 2-linear.
 	\item
 	\item
 	\item
 	\end{enumerate}
 	
 \item[10.82]Suppose $A$ is orthogonal, that is $A^TA=1$. Show that $\mathrm{det}(A)=\pm 1$.
-
+	\begin{proof}
+	By theorem 10.1, $\mathrm{det}(A) = \mathrm{det}(A^T)$.\\
+		
+	\end{proof}
+	
 \item TWO OF 10.67, 10.83, 10.85, 10.86	
+\item[10.67]Prove theorem 10.11: The homogeneous system $AX=0$ has a nonzero solution if and only if $D=|A|=0$.
+	\begin{proof}
+	First we prove that if $AX=0$ has a nonzero solution, then $D=|A|=0$.\\
+	Suppose that $AX=0$, then $A^{-1}(AX)=A^{-1}0$. So $1X=0$.\\
+	Next we prove that if $D=|A|=0$, then $AX=0$. FINISH ME
+	\end{proof}
 \end{enumerate}
 \end{document}

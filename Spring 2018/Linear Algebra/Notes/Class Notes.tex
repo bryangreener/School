@@ -2347,7 +2347,81 @@ Suppose $A,B\in F^{n\times n}$. Then $\mathrm{det}(AB)=\mathrm{det}(A)\mathrm{de
 From all the information above, one may use row operations to compute the determinant of a matrix. As long as we can get it into a triangular form, then we can do this.
 
 
-
 \mychapter{32}{2018-03-27}
+\section{Homework Review}
+\subsection{10.59}
+\[ M=\begin{bmatrix}[rrrr]1&2&2&3\\1&0&-2&0\\3&-1&1&-2\\4&-3&0&2\\\end{bmatrix} \]
+Since this matrix is invertible we can use $\mathrm{adj}(M) = \mathrm{det}(M)M^{-1}$.
+
+\section{Adjoints}
+\begin{thrm}
+Suppose $A$ is an $n \times n$ matrix. Then $A*\mathrm{adj}(A) = \mathrm{det}(A)I_n$.\\
+Corollary: If $A$ is invertible, then $A^{-1} = \frac{1}{\mathrm{det}(A)}\mathrm{adj}(A)$.\\
+So we can also use $\mathrm{adj}(A)=\mathrm{det}(A)A^{-1}$.
+\end{thrm}
+\begin{defn}
+Let $A$ be an $n \times n$ matrix. The adjoint of $A$ is the $n \times n$ matrix $\mathrm{adj}(A)$ whose $(i,j)$ entry is $(-1)^{i+j}\mathrm{det}(\hat{A}_{j,i})$.\\
+Recall $\hat{A}_{i,j}$ is the matrix obtained by deleting row i and column j.
+\end{defn}
+\begin{ex}
+Notice below that the signs for each index in the matrix are determined by $(-1)^{i+j}$. So for example, at the center index we are doing $A_{2,2} \rightarrow (-1)^{2+2} = 1$ so our center cofactor expansion is multiplied by $1$.
+\begin{align*}
+\mathrm{adj}\begin{bmatrix}[rrr]3&1&2\\1&5&6\\4&9&5\\\end{bmatrix} &= \begin{bmatrix}[rrr]-29&19&-11\\13&7&-23\\-4&-16&14\\\end{bmatrix}^T=\begin{bmatrix}[rrr]-29&13&-4\\19&7&-16\\-11&-23&14\\\end{bmatrix}
+\end{align*}
+Verify:
+\[ \begin{bmatrix}[rrr]3&1&2\\1&5&6\\4&9&5\\\end{bmatrix}\begin{bmatrix}[rrr]-29&13&-4\\19&7&-16\\-11&-23&14\\\end{bmatrix} = \begin{bmatrix}[rrr]-90&0&0\\0&-90&0\\0&0&-90\\\end{bmatrix} = -90I_3 \]
+Notice $A\mathrm{adj}(A)=\mathrm{det}(A)I_n$.
+\end{ex}
+
+\section{Permutations and the Determinant}
+\begin{defn}
+Let $[n]=\{1,2,3,...,n\}$. A permutation of $[n]$ is a function $[n]\xrightarrow[]{f} [n]$ that is both $1-1$ and onto. Onto means that the range is the entire set.
+\end{defn}
+\begin{ex}
+Let $n=5$ and $f(k)=21453$.\\
+The mappings can be viewed as follows:
+\[ \begin{matrix}1&2&3&4&5\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\2&1&4&5&3\\\end{matrix} \]
+The permutation matrix for f:
+\[ \begin{bmatrix}[rrrrr]0&1&0&0&0\\1&0&0&0&0\\0&0&0&1&0\\0&0&0&0&1\\0&0&1&0&0\\\end{bmatrix} \]
+Note that in the first row there is a 1 value at position $(1,2)$. This shows a mapping from 1 to 2.\\
+Notice $\mathrm{det}(P_f)=(-1)^3 = -1$. We get the 3 in the exponent by finding the "closeness" of two rows.
+\end{ex}
+\begin{defn}
+Let $f$ be a permutation of $[n]$. Then the sign of $f$ is $\mathrm{det}(P_f)$.\\
+Notice $\mathrm{det}(P_f)=(-1)^k$ where it requires $k$ rowswaps to bring $P_f$ to the identity matrix.\\
+The parity is even or odd depending on $k$'s sign.
+\end{defn}
+$S_n$ is the set of all permutations of set $[n]$. $|S_n| = n!$.
+\begin{thrm}
+Let $A$ be an $n \times n$ matrix with entries $a_{i,j}$. Then $\mathrm{det}(A)=\sum_{f\in S_n} \mathrm{sign}(f) \prod_{i=1}^na_{i,f(i)}$.
+\end{thrm}
+\begin{ex}
+\[ \mathrm{det}\begin{bmatrix}[rrr]a_{1,1}&a_{1,2}&a_{1,3}\\a_{2,1}&a_{2,2}&a_{2,3}\\a_{3,1}&a_{3,2}&a_{3,3}\\\end{bmatrix} \]
+\begin{center}
+\begin{tabular}{c|c}
+f&sign(f)\\
+\hline
+123&1\\
+213&-1\\
+132&-1\\
+312&1\\
+321&-1\\
+231&1\\
+\end{tabular}\\
+These values are based on how many swaps it takes to get the value in $f$.
+\end{center}
+\begin{align*}
+\mathrm{det}&\begin{bmatrix}[rrr]a_{1,1}&a_{1,2}&a_{1,3}\\a_{2,1}&a_{2,2}&a_{2,3}\\a_{3,1}&a_{3,2}&a_{3,3}\\\end{bmatrix}\\
+&=a_{1,1}a_{2,2}a_{3,3}\\
+&-a_{1,2}a_{2,1}a_{3,3}\\
+&-a_{1,1}a_{2,3}a_{3,2}\\
+&+a_{1,3}a_{2,1}a_{3,2}\\
+&-a_{1,3}a_{2,2}a_{3,1}\\
+&+a_{1,2}a_{2,3}a_{3,1} 
+\end{align*}
+\end{ex}
+
+
+\mychapter{33}{2018-03-29}
 
 \end{document}

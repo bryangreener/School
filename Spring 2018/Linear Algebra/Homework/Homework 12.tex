@@ -1,0 +1,234 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#11}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-03-19}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[10.57]Consider the matrix $A=\begin{bmatrix}[rrrr]1&2&-2&3\\3&-1&5&0\\4&0&2&1\\1&7&2&-3\\\end{bmatrix}$. Find the cofactor: (a)$A_{3,1}$;(b)$A_{2,3}$;(c)$A_{4,2}$.
+	\begin{enumerate}
+	\item We delete row 4 and column 1 from the matrix to get
+	\[ A_{3,1}=\mathrm{det}\begin{bmatrix}[rrr]2&-2&3\\-1&5&0\\7&2&-3\\\end{bmatrix} = -135 \]
+	\item We delete row 2 and column 3 from the matrix to get
+	\[ A_{2,3}=\mathrm{det}\begin{bmatrix}[rrr]1&2&3\\4&0&1\\1&7&-3\\\end{bmatrix} = 103 \]
+	\end{enumerate}
+	
+\item[10.58]Find $\mathrm{det}(A)$, $\mathrm{adj}(A)$, and $A^{-1}$, where:\\
+(a) $A=\begin{bmatrix}[rrr]1&1&0\\1&1&1\\0&2&1\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rrr]1&2&2\\3&1&0\\1&1&1\\\end{bmatrix}$
+	\begin{enumerate}
+	\item
+	\begin{align*}
+	\mathrm{det}(A)&= -2\\
+	A^{-1}&=\frac{1}{|A|}(\mathrm{adj}(A))=-\frac{1}{2}\begin{bmatrix}[rrr]-1&-1&1\\-1&1&-1\\2&-2&0\\\end{bmatrix} = \begin{bmatrix}[rrr]\frac{1}{2}&\frac{1}{2}&-\frac{1}{2}\\\frac{1}{2}&-\frac{1}{2}&\frac{1}{2}\\-1&2&0\\\end{bmatrix}
+	\end{align*}
+	\end{enumerate}		
+	
+\item[10.59]Find the classical adjoint of each matrix in Problem 10.54.
+	\begin{enumerate}
+	\item
+	\[ \mathrm{adj}(A)= \begin{bmatrix}[rrr]A_{1,1}&-A_{1,2}&A_{1,3}\\-A_{2,1}&A_{2,2}&-A_{2,3}\\A_{3,1}&-A_{3,2}&A_{3,3}\\\end{bmatrix} = \begin{bmatrix}[rrr]-1&-1&1\\-1&1&-1\\2&-2&0\\\end{bmatrix} \]
+	We get our result by calculating the cofactors at each index then take the transpose of that resulting matrix.
+	\end{enumerate}		
+
+\item[10.63]For $k=1,2,3$ find the sum $S_k$ of all principal minors of order $k$ for:\\
+(a)$A=\begin{bmatrix}[rrr]1&3&2\\2&-4&3\\5&-2&1\\\end{bmatrix}$; (b) $B=\begin{bmatrix}[rrr]1&5&-4\\2&6&1\\3&-2&0\\\end{bmatrix}$; (c) $C=\begin{bmatrix}[rrr]1&-4&3\\2&1&5\\4&-7&11\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item We start by finding $S_1$ which is just the trace of $A$.
+	\[ S_1 = \mathrm{tr}(A)=1-4+1=-2 \]
+	Next to find $S_2$ we add the cofactors $A_{1,1}, A_{2,2}, A_{3,3}$. 
+	\begin{align*}
+	A_{1,1}&=\mathrm{det}\begin{bmatrix}[rr]-4&3\\-2&1\\\end{bmatrix} = 2\\
+	A_{2,2}&=\mathrm{det}\begin{bmatrix}[rr]1&2\\5&1\\\end{bmatrix} = -9\\
+	A_{3,3}&=\mathrm{det}\begin{bmatrix}[rr]1&3\\2&-4\\\end{bmatrix} = -10\\
+	S_2 &= 2-9-10 = -17
+	\end{align*}
+	Finally we find $S_3$ by taking the determinant of $A$ itself.
+	\[ \mathrm{det}(A)= 73 \]
+	\end{enumerate}		
+	
+\item[10.65]Solve by determinants: (a) $\sysdelim{.}{.}\systeme[xy]{3x+5y=8,4x-2y=1}$; (b) $\sysdelim{.}{.}\systeme[xy]{2x-3y=-1,4x+7y=-1}$.
+	\begin{enumerate}
+	\item We start by finding the determinant of the system
+	\[ \mathrm{det}\begin{bmatrix}[rr]3&5\\4&-2\\\end{bmatrix} = -26 \]
+	Since the determinant is not zero, this system has a unique solution. Next we find $N_x$ and $N_y$ by replacing $x$ and $y$ (respective to the $N$ value we are computing) with the coefficients to the right of the equal signs in the system.
+	\[ N_x = \mathrm{det}\begin{bmatrix}[rr]8&5\\1&-2\\\end{bmatrix} = -21, \quad N_y = \mathrm{det}\begin{bmatrix}[rr]3&8\\4&1\\\end{bmatrix} = -29 \]
+	Thus the unique solution to the system is $x=\frac{N_x}{D} = \frac{21}{26}$, $y=\frac{N_y}{D} = \frac{29}{26}$.
+	\end{enumerate}		
+	
+\item[10.68]Find the parity of the permutations $\sigma = 32154$, $\tau = 13524$, and $\pi = 42531$ in $S_5$.\\
+	\begin{solution}
+	We find the number of inversions per set then if the number of inversions is even, then $\mathrm{sgn}(\sigma) = 1$, otherwise $\mathrm{sgn}(\sigma)=-1$. This rule will apply for $\sigma$, $\tau$, and $\pi$.\\
+	Below are the numbers producing inversions and their corresponding inversions to their right:
+	\begin{align*}
+	\sigma&\\
+	3&: (3,2),(3,1)\\
+	2&: (2,1)\\
+	1&: \mathrm{none}\\
+	5&: (5,4)\\
+	4&: \mathrm{none}\\
+	=& 1\\
+	{}\\
+	\tau&\\
+	1&: \mathrm{none}\\
+	3&: (3,2)\\
+	5&: (5,2),(5,4)\\
+	2&: \mathrm{none}\\
+	4&: \mathrm{none}\\
+	=& -1\\
+	{}\\
+	\pi&\\
+	4&: (4,2),(4,3),(4,1)\\
+	2&: (2,1)\\
+	5&: (5,3),(5,1)\\
+	3&: (3,1)\\
+	1&: \mathrm{none}\\
+	=& -1
+	\end{align*}
+	\end{solution}
+\item[10.69]For the permutations in Problem 10.68, find: (a) $\tau\circ\sigma$; (b) $\pi\circ\sigma$; (c) $\sigma^{-1}$; (b) $\tau^{-1}$.
+	\begin{enumerate}
+	\item We start by writing the mappings of $\tau$ and $\sigma$.
+	\[ \tau = \begin{matrix}1&2&3&4&5\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\1&3&5&2&4\\\end{matrix} \qquad \sigma = \begin{matrix}1&2&3&4&5\\\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\3&2&1&5&4\\\end{matrix} \]
+	Next we plug in our values from $\sigma$ into $\tau$ to get $\tau \circ \sigma = 53142$.
+	\item We repeat the steps from part (a) but instead plug $\sigma$ into $\pi$ to get $\pi \circ \sigma = 52413$.
+	\end{enumerate}		
+	
+\item[10.74]Let $D: V\rightarrow V$ be the differential operator, that is, $D(f(t))=df/dt$. Find $\mathrm{det}(T)$ if $V$ is the vector space of functions with bases: (a) $\{1,t,...,t^5\}$; (b) $\{e^t,e^{2t},e^{3t}\}$; (c) $\{\sin t, \cos t\}$.
+	\begin{enumerate}
+	\item
+	\begin{align*}
+	D(t^5)&=5t^4=0t^5+5t^4+0t^3+0t^2+-t+0\\
+	D(t^4)&=4t^3=0t^5+0t^4+4t^3+0t^2+0t+0\\
+	D(t^3)&=3t^2=0t^5+0t^4+0t^3+3t^2+0t+0\\
+	D(t^2)&=2t  =0t^5+0t^4+0t^3+0t^2+2t+0\\
+	D(t)  &=1   =0t^5+0t^4+0t^3+0t^2+0t+1\\
+	D(1)  &=0   =0t^5+0t^4+0t^3+0t^2+0t+0\\
+	D&= \begin{bmatrix}[rrrrrr]0&5&0&0&0&0\\0&0&4&0&0&0\\0&0&0&3&0&0\\0&0&0&0&2&0\\0&0&0&0&0&1\\0&0&0&0&0&0\\\end{bmatrix}\\
+	\mathrm{det}(D) &= 0
+	\end{align*}
+	
+	\item
+	\begin{align*}
+	D(e^t)&=e^t=1e^t+0e^{2t}+0e^{3t}\\
+	D(e^{2t}&=2e^{2t}=0e^t+2e^{2t}+0e^{3t}\\
+	D(e^{3t}&=3e^{3t}=0e^t+0e^{2t}+3e^{3t}\\
+	D&=\begin{bmatrix}[rrr]1&0&0\\0&2&0\\0&0&3\\\end{bmatrix}\\
+	\mathrm{det}(D)&=6
+	\end{align*}
+	\item
+	\begin{align*}
+	D(\sin t) &= 0\sin t + 1\cos t\\
+	D(\cos t) &= -1\sin t + 0\cos t\\
+	D&=\begin{bmatrix}[rr]0&1\\-1&0\\\end{bmatrix}\\
+	\mathrm{det}(D)&= 1
+	\end{align*}
+	\end{enumerate}
+	
+\item[10.76]Prove: (a) $\mathrm{det}(1_V)=1$, where $1_V$ if the identity operator; (b) $\mathrm{det}(T^{-1})=\mathrm{det}(T)^{-1}$ when $T$ is invertible.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+	
+\item[10.77]Find the volume $V(S)$ of the parallelepiped $S$ in $\mathbb{R}^3$ determined by the vectores: (a) $u_1=(1,2,-3),u_2=(3,4,-1),u_3=(2,-1,5)$; (b) $u_1=(1,1,3),u_2=(1,-2,-4),u_3=(4,1,2)$.
+	\begin{enumerate}
+	\item We set the given vectors as rows in a matrix and find its determinant:
+	\[ \mathrm{det}\begin{bmatrix}[rrr]1&2&-3\\3&4&-1\\2&-1&5\\\end{bmatrix} = 18 \]
+	Thus $V(S) = |-18| = 18$.
+	\end{enumerate}
+	
+\item[10.79]Let $V$ be the space of $2 \times 2$ matrices $M=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ over $\mathbb{R}$. Determine whether or not $D: V\rightarrow R$ is 2-linear (with respect to the rows), where: (a) $D(M)=ac-bd$; (b) $D(M)=ab-cd$; (c) $D(M)=0$; (d) $D(M)=1$.
+	\begin{enumerate}
+	\item Let $A=(a_1,a_2)$, $B=(b_1,b_2)$, and $C=(c_1,c_2)$. Then
+	\[ D(A,C)=D\begin{bmatrix}[rr]a_1&a_2\\c_1&c_2\\\end{bmatrix}=a_1c_1-a_2c_2 \quad \mathrm{and} \quad D(B,C) = D\begin{bmatrix}[rr]b_1&b_2\\c_1&c_2\\\end{bmatrix}=b_1c_1-b_2c_2 \]
+	Thus for any scalars $s,t\in\mathbb{R}$
+	\begin{align*}
+	D(sA+tB,C)&=D\begin{bmatrix}[rr]sa_1+tb_1&sa_2+tb_2\\c_1&c_2\\\end{bmatrix}\\
+	&= (sa_1+tb_1)c_1-(sa_2+tb_2)c_2\\
+	&= s(a_1c_1)t(b_1c_1)-s(a_2c_2)t(b_2c_2)\\
+	&= s
+	\end{align*}
+	\item
+	\item
+	\item
+	\end{enumerate}
+	
+\item[10.82]Suppose $A$ is orthogonal, that is $A^TA=1$. Show that $\mathrm{det}(A)=\pm 1$.
+
+\item TWO OF 10.67, 10.83, 10.85, 10.86	
+\end{enumerate}
+\end{document}

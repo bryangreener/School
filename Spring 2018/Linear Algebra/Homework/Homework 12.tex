@@ -217,9 +217,12 @@
 	
 \item[10.79]Let $V$ be the space of $2 \times 2$ matrices $M=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ over $\mathbb{R}$. Determine whether or not $D: V\rightarrow R$ is 2-linear (with respect to the rows), where: (a) $D(M)=ac-bd$; (b) $D(M)=ab-cd$; (c) $D(M)=0$; (d) $D(M)=1$.
 	\begin{enumerate}
-	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ac-db$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=ca-bd$.Next let $kD(A,B)=\begin{bmatrix}[rr]ka&kb\\kc&kd\\\end{bmatrix}=k(ac-bd)$ and $D(kA,B)=\begin{bmatrix}[rr]ka&kb\\c&d\\\end{bmatrix}=kac-kbd=k(ac-bd)$. Thus $D(M)$ is 2-linear.
-	\item
-	\item
+	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ac-db$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=ca-bd$. So $ac-db = ca-bd$.\\
+	Next let $kD(A,B)=\begin{bmatrix}[rr]ka&kb\\kc&kd\\\end{bmatrix}=k(ac-bd)$ and $D(kA,B)=\begin{bmatrix}[rr]ka&kb\\c&d\\\end{bmatrix}=kac-kbd=k(ac-bd)$.\\
+	Since $M$ holds under addition and multiplication, then $D(M)$ is 2-linear.
+	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ab-cd$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=cd-ab$. So $ -ab+cd \neq ab-cd$.\\
+	Since $M$ does not hold under addition then $M$ is not 2-linear.
+	\item 
 	\item
 	\end{enumerate}
 	

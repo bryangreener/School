@@ -62,7 +62,7 @@
  
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Homework \#11}
+\lhead{Homework \#12}
 \rhead{Bryan Greener}
 \cfoot{\thepage}
 % END BLOCK============================================
@@ -71,7 +71,7 @@
 % BEGIN BLOCK------------------------------------------
 \title{Bryan Greener}
 \author{MATH 2300 CRN:15163}
-\date{2018-03-19}
+\date{2018-03-29}
 \begin{document}
 \maketitle
 % END BLOCK============================================
@@ -223,22 +223,26 @@
 	Since $M$ holds under addition and multiplication, then $D(M)$ is 2-linear.
 	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ab-cd$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=cd-ab$. So $ -ab+cd \neq ab-cd$.\\
 	Since $M$ does not hold under addition then $M$ is not 2-linear.
-	\item 
-	\item
+	\item Let $A=(a,b)$ and $B=(c,d)$. Then $D(A,B)=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}=ad-bc=0$ and $D(B,A)=\begin{bmatrix}[rr]c&d\\a&b\\\end{bmatrix}=cb-da=0$. So $(ad-bc) - (cb-da) = ad-bc-bc-ad \Rightarrow ab-bc = 0$.\\
+	Next let $kD(A,B)=\begin{bmatrix}[rr]ka&kb\\kc&kd\\\end{bmatrix}=k(ad-bc) = 0$ and $D(kA,B)=\begin{bmatrix}[rr]ka&kb\\c&d\\\end{bmatrix}=kad-kbc=k(ad-bc) = 0$. Since both equations are equal and both equal zero, then $D$ is 2-linear.
 	\end{enumerate}
 	
 \item[10.82]Suppose $A$ is orthogonal, that is $A^TA=1$. Show that $\mathrm{det}(A)=\pm 1$.
 	\begin{proof}
-	By theorem 10.1, $\mathrm{det}(A) = \mathrm{det}(A^T)$.\\
-		
+	By theorem 10.1, $\mathrm{det}(A) = \mathrm{det}(A^T)$. Since $A$ is orthogonal, then by the rules of orthogonal matrices, multiplying an orthogonal matrix by its transverse results in the identity matrix and the determinant of an identity matrix is equal to 1.\\
 	\end{proof}
 	
-\item TWO OF 10.67, 10.83, 10.85, 10.86	
 \item[10.67]Prove theorem 10.11: The homogeneous system $AX=0$ has a nonzero solution if and only if $D=|A|=0$.
 	\begin{proof}
 	First we prove that if $AX=0$ has a nonzero solution, then $D=|A|=0$.\\
-	Suppose that $AX=0$, then $A^{-1}(AX)=A^{-1}0$. So $1X=0$.\\
-	Next we prove that if $D=|A|=0$, then $AX=0$. FINISH ME
+	Suppose that $AX=0$, then $A^{-1}(AX)=A^{-1}0$. So $1X=0$ and thus $\mathrm{det}(A)=0$.\\
+	Next we prove that if $D=|A|=0$, then $AX=0$. Assume that $\mathrm{det}(A)\neq 0$, then $X=A^{-1}0 = 0$. Thus we get a contradiction.
 	\end{proof}
+
+\item[10.83]Let $V$ be the space of m-square matrices viewed as m-tuples of row vectors. Suppose $D:V \rightarrow K$ is m-linear an alternating. Show that if $A_1,A_2,...,A_m$ are linearly dependent, then $D(A_1,...,A_m)=0$.
+\begin{proof}
+	Since $D$ is m-linear an alternating, then there exist scalars $(C_1,C_2,...,C_n)$, not all zero, such that $\sum_{i=1}^nC_iA_i=0$. So, without loss of generality, there exist scalars $C_2,C_3,...,C_n$ such that $A_1=C_2A_2+C_3A_3+\cdots+C_nA_n$.\\
+	Notice that $D(A_1,A_2,...,A_n)=D((C_2A_2,C_3A_3,...,C_nA_n),A_2,A_3,...,A_n)$. This allows us to cancel rows that are multiples of each other. Since we get rows that can be canceled, then the determinant of $D(A_1,...,A_m)=0$.
+\end{proof}
 \end{enumerate}
 \end{document}

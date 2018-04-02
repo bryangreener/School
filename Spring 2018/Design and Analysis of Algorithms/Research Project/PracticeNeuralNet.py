@@ -1,9 +1,7 @@
 '''
 Code and information source:
     https://github.com/stephencwelch/Neural-Networks-Demystified/blob/master/partSix.py
-
 '''
-
 
 import numpy as np
 from scipy import optimize # For BFGS Gradient Descent optimization
@@ -17,7 +15,7 @@ class NeuralNetwork(object):
     def __init__(self):
         self.inputLayerSize = 2
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 3
+        self.hiddenLayerSize = 16
         
         self.W1 = np.random.randn(self.inputLayerSize, self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize, self.outputLayerSize)
@@ -213,36 +211,53 @@ NN = NeuralNetwork()
 #Training Data
 import csv
 crimData = csv.reader(open('crimtab.csv', 'rt'), delimiter=",")
-column1, column2, column3 = [], [], []
+co1, co2, co3, co4, co5, co6 = [], [], [], [], [], []
 for row in crimData:
-    column1.append(row[1])
-    column2.append(row[2])
-    column3.append(row[3])
+    co1.append(row[0])
+    co2.append(row[1])
+    co3.append(row[2])
+    #co4.append(row[3])
+    #co5.append(row[4])
+    #co6.append(row[5])
+    
+co1.pop(0)
+co2.pop(0)
+co3.pop(0)
+#co4.pop(0)
+#co5.pop(0)
+#co6.pop(0)
 
-column1.pop(0)
-tc1 = column1[800:]
-column2.pop(0)
-tc2 = column2[800:]
-column3.pop(0)
-tc3 = column3[800:]
-
-trainX = np.array(list(zip(column1, column2))[:799], dtype=float)
-trainY = np.array(list(map(lambda x: [x], column3[:799])), dtype=float)
-testX = np.array(list(zip(tc1, tc2)), dtype=float)
-testY = np.array(list(map(lambda x: [x], tc3)), dtype=float)
-
+c1 = [float(i) for i in co1[:799]]
+tc1 = [float(i) for i in co1[800:]]
+c2 = [float(i) for i in co2[:799]]
+tc2 = [float(i) for i in co2[800:]]
+c3 = [float(i) for i in co3[:799]]
+tc3 = [float(i) for i in co3[800:]]
+'''
+c4 = [float(i) for i in co4[:1249]]
+tc4 = [float(i) for i in co4[1250:]]
+c5 = [float(i) for i in co5[:1249]]
+tc5 = [float(i) for i in co5[1250:]]
+c6 = [float(i) for i in co6[:1249]]
+tc6 = [float(i) for i in co6[1250:]]
+'''
+#Training Data
+trainX = np.array(list(zip(c1,c2)), dtype=float)
+trainY = np.array(list(map(lambda x: [x], c3)), dtype=float)
 #trainX = np.array(([1,1],[8,1],[10,2],[6,3],[8,5],[7.5,4],[8,10],[8,8],[10,100]), dtype=float)
 #trainY = np.array(([50],[65],[70],[70],[80],[80],[95],[90],[5]), dtype=float)
 
 #Testing Data
+testX = np.array(list(zip(tc1,tc2)), dtype=float)
+testY = np.array(list(map(lambda x: [x], tc3)), dtype=float)
 #testX = np.array(([4,5.5],[4.5,1],[9,2.5],[6,2]),dtype=float)
 #testY = np.array(([70],[89],[75],[82]),dtype=float)
 
 #Normalize
 trainX = trainX/np.amax(trainX, axis=0)
-trainY = trainY/58.
+trainY = trainY/max(c3)
 testX = testX/np.amax(testX, axis=0)
-testY = testY/1.
+testY = testY/max(tc3)
 
 #Train NN with new data
 NN = NeuralNetwork()
@@ -259,14 +274,19 @@ plt.xlabel('Iterations')
 plt.ylabel('Cost')
 plt.show()
 
-tc1 = [float(i) for i in tc1]
-tc2 = [float(i) for i in tc2]
-tc1 = [float(i)/max(tc1) for i in tc1]
-tc2 = [float(i)/max(tc2) for i in tc2]
-tc1 = np.array(list(map(lambda x: [x], tc1)))
-tc2 = np.array(list(map(lambda x: [x], tc2)))
+
+# Test network nfor various combinations of sleep/study
+testa = np.linspace(0, 10, 100)
+testb = np.linspace(0, 5, 100)
+    
+#Normalize data( same way training data was normalized)
+testan = testa/10.
+testbn = testb/5.
+
 #Create 2-d versions of input for plotting
-a, b = np.meshgrid(tc1, tc2)
+#testa = np.array([x[0] for x in testX])
+#testb = np.array([x[1] for x in testX])
+a, b = np.meshgrid(testan, testbn)
     
 #Join into a single input matrix
 allInputs = np.zeros((a.size, 2))
@@ -276,9 +296,10 @@ allInputs[:, 1] = b.ravel()
 allOutputs = NN.forward(allInputs)
 
 #Make contour plot
-yy = np.dot(tc1.reshape(tc1.shape[0], 1), np.ones((1,tc1.shape[0])))
-xx = np.dot(tc2.reshape(tc2.shape[0], 1), np.ones((1, tc2.shape[0]))).T
-CS = plt.contour(xx, yy, len(tc1)*allOutputs.reshape(tc1.shape[0],tc2.shape[0]))
+fig = plt.figure()
+yy = np.dot(testa.reshape(100, 1), np.ones((1,100)))
+xx = np.dot(testb.reshape(100, 1), np.ones((1, 100))).T
+CS = plt.contour(xx, yy, 100*allOutputs.reshape(100,100))
 
 plt.clabel(CS, inline=1, fontsize=10)
 plt.xlabel('Var1')
@@ -288,7 +309,7 @@ plt.show()
     #matplotlib qt
 fig = plt.figure()
 ax = fig.gca(projection = '3d')
-surf = ax.plot_surface(xx, yy, len(tc1)*allOutputs.reshape(len(tc1),len(tc2)),cmap=cm.jet)
+surf = ax.plot_surface(xx, yy, 100*allOutputs.reshape(100,100),cmap=cm.jet)
 ax.set_xlabel('Var1')
 ax.set_ylabel('Var2')
 ax.set_zlabel('Freq')

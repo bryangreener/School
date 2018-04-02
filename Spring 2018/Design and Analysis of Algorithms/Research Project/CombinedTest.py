@@ -13,7 +13,7 @@ class NeuralNetwork(object):
     Lambda = 0.00001
     def __init__(self):
         self.inputLayerSize = 784
-        self.outputLayerSize = 10
+        self.outputLayerSize = 1
         self.hiddenLayer1Size = 16
         self.hiddenLayer2Size = 16
         

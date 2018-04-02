@@ -193,38 +193,56 @@ def tests():
     xx = np.dot(hoursSleep.reshape(100,1), np.ones((1, 100))).T
     CS = plt.contour(xx, yy, 100*allOutputs.reshape(100,100))
     plt.clabel(CS, inline=1, fontsize=10)
-    plt.xlabel('Hours Sleep')
-    plt.ylabel('Hours Study')
-    
+    plt.xlabel('Var1')
+    plt.ylabel('Var2')    
     #Make 3d plot
     #matplotlib qt
-    
     fig = plt.figure()
     ax = fig.gca(projection = '3d')
     surf = ax.plot_surface(xx, yy, 100*allOutputs.reshape(100,100),cmap=cm.jet)
-    ax.set_xlabel('Hours Sleep')
-    ax.set_ylabel('Hours Study')
-    ax.set_zlabel('Test Score')
-    #ax.mouse_init()
-    plt.ion()
+    ax.set_xlabel('Var1')
+    ax.set_ylabel('Var2')
+    ax.set_zlabel('Freq')
+    ax.mouse_init()
+    plt.show()
     
 ''' MAIN '''
 
 NN = NeuralNetwork()
 # X= (hours sleep, hours study), y = score
 #Training Data
-trainX = np.array(([3,5],[5,1],[10,2],[6,1.5]), dtype=float)
-trainY = np.array(([75],[82],[93],[70]), dtype=float)
+import csv
+crimData = csv.reader(open('crimtab.csv', 'rt'), delimiter=",")
+column1, column2, column3 = [], [], []
+for row in crimData:
+    column1.append(row[1])
+    column2.append(row[2])
+    column3.append(row[3])
+
+column1.pop(0)
+tc1 = column1[800:]
+column2.pop(0)
+tc2 = column2[800:]
+column3.pop(0)
+tc3 = column3[800:]
+
+trainX = np.array(list(zip(column1, column2))[:799], dtype=float)
+trainY = np.array(list(map(lambda x: [x], column3[:799])), dtype=float)
+testX = np.array(list(zip(tc1, tc2)), dtype=float)
+testY = np.array(list(map(lambda x: [x], tc3)), dtype=float)
+
+#trainX = np.array(([1,1],[8,1],[10,2],[6,3],[8,5],[7.5,4],[8,10],[8,8],[10,100]), dtype=float)
+#trainY = np.array(([50],[65],[70],[70],[80],[80],[95],[90],[5]), dtype=float)
 
 #Testing Data
-testX = np.array(([4,5.5],[4.5,1],[9,2.5],[6,2]),dtype=float)
-testY = np.array(([70],[89],[75],[82]),dtype=float)
+#testX = np.array(([4,5.5],[4.5,1],[9,2.5],[6,2]),dtype=float)
+#testY = np.array(([70],[89],[75],[82]),dtype=float)
 
 #Normalize
 trainX = trainX/np.amax(trainX, axis=0)
-trainY = trainY/100.
+trainY = trainY/58.
 testX = testX/np.amax(testX, axis=0)
-testY = testY/100.
+testY = testY/1.
 
 #Train NN with new data
 NN = NeuralNetwork()
@@ -233,14 +251,49 @@ T.train(trainX, trainY, testX, testY)
 
 #Plot costs during training:
 #You can see where overfitting begins by observing the T.testJ line
+
 plt.plot(T.J)
 plt.plot(T.testJ)
 plt.grid(1)
 plt.xlabel('Iterations')
 plt.ylabel('Cost')
 plt.show()
-tests()
 
+tc1 = [float(i) for i in tc1]
+tc2 = [float(i) for i in tc2]
+tc1 = [float(i)/max(tc1) for i in tc1]
+tc2 = [float(i)/max(tc2) for i in tc2]
+tc1 = np.array(list(map(lambda x: [x], tc1)))
+tc2 = np.array(list(map(lambda x: [x], tc2)))
+#Create 2-d versions of input for plotting
+a, b = np.meshgrid(tc1, tc2)
+    
+#Join into a single input matrix
+allInputs = np.zeros((a.size, 2))
+allInputs[:, 0] = a.ravel()
+allInputs[:, 1] = b.ravel()
+    
+allOutputs = NN.forward(allInputs)
+
+#Make contour plot
+yy = np.dot(tc1.reshape(tc1.shape[0], 1), np.ones((1,tc1.shape[0])))
+xx = np.dot(tc2.reshape(tc2.shape[0], 1), np.ones((1, tc2.shape[0]))).T
+CS = plt.contour(xx, yy, len(tc1)*allOutputs.reshape(tc1.shape[0],tc2.shape[0]))
+
+plt.clabel(CS, inline=1, fontsize=10)
+plt.xlabel('Var1')
+plt.ylabel('Var2')
+plt.show()    
+    #Make 3d plot
+    #matplotlib qt
+fig = plt.figure()
+ax = fig.gca(projection = '3d')
+surf = ax.plot_surface(xx, yy, len(tc1)*allOutputs.reshape(len(tc1),len(tc2)),cmap=cm.jet)
+ax.set_xlabel('Var1')
+ax.set_ylabel('Var2')
+ax.set_zlabel('Freq')
+ax.mouse_init()
+plt.show()
 
 '''  
 # Make sure nothing broke. Do numerical gradient checking

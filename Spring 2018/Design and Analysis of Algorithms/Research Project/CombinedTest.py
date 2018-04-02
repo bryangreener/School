@@ -194,10 +194,10 @@ trainY = list(map(lambda x: [x], trainY))
 #Train NN with new data
 NN = NeuralNetwork()
 T = trainer(NN)
-T.train(np.array(np.multiply((1.0/255.0), trainX), dtype=float), 
-        np.array(trainY), 
-        np.array(np.multiply((1.0/255.0),testX), dtype=float), 
-        np.array(testY))
+T.train(np.array(np.multiply((1.0/255.0), trainX[1:100]), dtype=float), 
+        np.array(trainY[1:10]), 
+        np.array(np.multiply((1.0/255.0),testX[1:100]), dtype=float), 
+        np.array(testY[1:10]]))
 
 #Plot costs during training:
 #You can see where overfitting begins by observing the T.testJ line

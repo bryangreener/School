@@ -80,12 +80,20 @@
 
 \begin{enumerate}
 \item[11.53]Let $A=\begin{bmatrix}[rr]2&-3\\5&1\\\end{bmatrix}$ and $B=\begin{bmatrix}[rr]1&2\\0&3\\\end{bmatrix}$. Find $f(A)$, $g(A)$, $f(B)$, and $g(B)$ where $f(t)=2t^2-5t+6$ and $g(t)=t^3-2t^2+t+3$.
-
-\item[11.54]Let $B=\begin{bmatrix}[rrr]8&12&0\\0&8&12\\0&0&8\\\end{bmatrix}$. Find a real matrix $A$ such that $B=A^3$.
+	\begin{enumerate}
+	\item[f(A)]$=2\begin{bmatrix}[rr]2&-3\\5&1\\\end{bmatrix}^2-5\begin{bmatrix}[rr]2&-3\\5&1\\\end{bmatrix}+6\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} = \begin{bmatrix}[rr]-26&-3\\5&-27\\\end{bmatrix}$
+	\item[g(A)]$=\begin{bmatrix}[rr]1&2\\0&3\\\end{bmatrix}^3-2\begin{bmatrix}[rr]1&2\\0&3\\\end{bmatrix}^2+\begin{bmatrix}[rr]1&2\\0&3\\\end{bmatrix}+3\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} = \begin{bmatrix}[rr]-40&39\\-65&-27\\\end{bmatrix}$
+	\item[f(B)]$=\begin{bmatrix}[rr]3&6\\0&9\\\end{bmatrix}$
+	\item[g(B)]$=\begin{bmatrix}[rr]3&12\\0&15\\\end{bmatrix}$
+	\end{enumerate}
+\item[11.54]Let $B=\begin{bmatrix}[rrr]8&12&0\\0&8&12\\0&0&8\\\end{bmatrix}$. Find a real matrix $A$ such that $B=A^3$.\\
+	Let $B = \begin{bmatrix}[rrr]a&b&c\\d&e&f\\g&h&i\\\end{bmatrix}^3$.
+	Expanding the cubed matrix then solving the system gives us the following matrix for $A$: $\begin{bmatrix}[rrr]2&1&-\frac{1}{2}\\0&2&1\\0&0&2\\\end{bmatrix}$
 
 \item[11.55]For each matrix, find a polynomial having the matrix as a root:
 	\begin{enumerate}
-	\item $A=\begin{bmatrix}[rr]2&5\\1&-3\\\end{bmatrix}$
+	\item $A=\begin{bmatrix}[rr]2&5\\1&-3\\\end{bmatrix}$\\
+	First we find the trace of $A$. $\mathrm{tr}(A)=-1$. Next we find the determinant of $A$. $\mathrm{det}(A)=-11$. Next we plug this into $\Delta (t) = t^2+t-11$.
 	\end{enumerate}
 	
 \item[11.56]Let $A$ be any square matrix and let $f(t)$ be any polynomial. Prove:
@@ -96,17 +104,38 @@
 \item[11.58]Let $A=\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}$
 	\begin{enumerate}
 	\item Find all eigenvalues and corresponding linearly independent eigenvectors.
-	\item Find a nonsingular matrix $P$ such that $D=P^{-1}AP$ is diagonal. 
-	\item Find $A^8$ and $f(A)$ where $f(t)=t^4-5t^3+7t^2-2t+5$.
-	\item Find a mtrix $B$ such that $B^2=A$.
+	\[ \chi_A (\lambda) = \mathrm{det}(\lambda I_2-A) = \mathrm{det}\begin{bmatrix}[rr]\lambda - 2&-(-1)\\-(-2) & \lambda - 3\\\end{bmatrix} = (\lambda - 2)(\lambda - 3) - 2 = \lambda^2-5\lambda + 4=(\lambda - 1)(\lambda - 4) \]
+	So our eigenvalues are 1 and 4.\\
+	Let $\lambda=1$
+	\[ \lambda I_2 - A = \begin{bmatrix}[rr]-1&1\\2&-2\\\end{bmatrix} \Rightarrow v_1=\begin{bmatrix}[r]1\\1\\\end{bmatrix} \]
+	Let $\lambda=4$
+	\[ \lambda I_2 - A=\begin{bmatrix}[rr]2&1\\2&1\\\end{bmatrix} \Rightarrow v_4=\begin{bmatrix}[r]1\\-2\\\end{bmatrix} \]
+	\item Find a nonsingular matrix $P$ such that $D=P^{-1}AP$ is diagonal. \\
+	Let $P=\begin{bmatrix}[rr]v_1&v_4\\\end{bmatrix}=\begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}$.\\
+	Notice $P^{-1}AP=-\frac{1}{3}\begin{bmatrix}[rr]-2&-1\\-1&1\\\end{bmatrix}\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}\begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}=\begin{bmatrix}[rr]1&0\\0&4\\\end{bmatrix}$
+	\item Find $A^8$ and $f(A)$ where $f(t)=t^4-5t^3+7t^2-2t+5$.\\
+	From $P^{-1}AP=D$, we get $AP=PD$ and so $A=PDP^{-1}$. Then $A^8=(PDP^{-1})^8$. Expanding this formula, we can cancel all inner $P$ and $P^{-1}$ since multiplying those two together gives the identity matrix. Thus
+	\[ A^8=PD^8P^{-1}=\begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}\begin{bmatrix}[rr]1&0\\0&4^8\\\end{bmatrix}\begin{bmatrix}[rr]2&1\\1&-1\\\end{bmatrix}\frac{1}{3} \]
+	\[ f(A) = \begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}^4-5\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}^3+7\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}^2-2\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}+5\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix} \]
+	\[ = \begin{bmatrix}[rr]2&-6\\2&9\\\end{bmatrix} \]
+	\item Find a matrix $B$ such that $B^2=A$.\\
+	Let $B=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$. Then expanding $B^2$ and setting it equal to matrix $A$, then solving the system gives us the matrix $B=\begin{bmatrix}[rr]\frac{4}{3}&-\frac{1}{3}\\-\frac{2}{3}&\frac{5}{3}\\\end{bmatrix}$.
+	
 	\end{enumerate}
 	
 \item[11.60]For each matrix, find all eigenvalues and maximum set $S$ of linearly independent eigenvectors:
 	\[ A=\begin{bmatrix}[rrr]1&-3&3\\3&-5&3\\6&-6&4\\\end{bmatrix} \quad B=\begin{bmatrix}[rrr]3&-1&1\\7&-5&1\\6&-6&4\\\end{bmatrix} \quad  C=\begin{bmatrix}[rrr]1&2&2\\1&2&-1\\-1&1&4\\\end{bmatrix} \]
 	Which matrices can be diagonalized and why?
 	\begin{enumerate}
-	\item 
-	\item 
+	\item $\chi_A (\lambda) = \mathrm{det}(\lambda I_3 - A) = \mathrm{det}\begin{bmatrix}[rrr]\lambda-1&3&-3\\-3&\lambda+5 & -3\\-6&6&\lambda - 4\\\end{bmatrix} = (\lambda+2)(\lambda-4)(\lambda+2)$\\
+	Thus our eigenvalues are 4 and -2 with a multiplicity of 2.\\
+	Let $\lambda=4$
+	\[ \lambda I_3-A = \begin{bmatrix}[rrr]3&3&-3\\-3&9&-3\\-6&6&0\\\end{bmatrix} \]
+	\[ v_4 = \begin{bmatrix}[r]\frac{1}{2}\\\frac{1}{2}\\1\\\end{bmatrix} \]
+	Let $\lambda=-2$	
+	\[ \lambda I_3 - A = \begin{bmatrix}[rrr]-3&3&-3\\-3&3&-3\\-6&6&-6\\\end{bmatrix} \]
+	\[ u_{2} = \begin{bmatrix}[r]1\\1\\0\\\end{bmatrix}, v_2=\begin{bmatrix}[r]1\\0\\-1\\\end{bmatrix} \]
+	\item We repeat the steps above to find our eigenvalues $\chi_A(\lambda)=(\lambda-4)(\lambda-2)(\lambda+4)$. Thus our eigenvalues are 4, -4, and 2.
 	\item 
 	\end{enumerate}
 \item[11.62]Let $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ be a real matrix. Find necessary and sufficient conditions on $a,b,c,d$ so that $A$ is diagonalizable, that is, that $A$ has two (real) linearly independent eigenvectors.

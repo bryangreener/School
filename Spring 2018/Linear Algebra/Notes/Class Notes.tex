@@ -2553,5 +2553,55 @@ A good exercise for us to try is to show $\begin{bmatrix}[rr]1&3\\2&1\\\end{bmat
 \end{ex}
 
 \mychapter{35}{2018-04-03}
+\section{Homework Review}
+\subsection{11.58}
+This question is helpful for demonstrating diagonalization.
+$A=\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}$\\
+\begin{enumerate}
+\item[(a)]Find eigenvalues and linearly independent eigenvectors.\\
+Eigenvalues are the roots of char poly
+\[ \chi_A(\lambda)=\mathrm{det}(\lambda I_2A) = \mathrm{det}\begin{bmatrix}[rr]\lambda -2 & -(-1)\\-(-2)&\lambda - 3\\\end{bmatrix} = (\lambda - 2)(\lambda - 3)-2 = \lambda^2-5\lambda + 4=(\lambda - 1)(\lambda - 4) \]
+Eigenvalues are 1 and 4. For each eigenvalue, find eigenvectors.\\
+Let $\lambda=1$. 
+\[ \lambda I_2-A=\begin{bmatrix}[rr]-1&1\\2&-2\\\end{bmatrix} \]
+$v_1 = \begin{bmatrix}[r]1\\1\\\end{bmatrix}$\\
+Let $\lambda = 4$.
+\[ \lambda I_2-A=\begin{bmatrix}[rr]2&1\\2&1\\\end{bmatrix} \]
+$v_4 = \begin{bmatrix}[r]1\\-2\\\end{bmatrix}$\\
+To get these values we solve the systems by setting each row equal to zero.
+\item[(b)]Find a nonsingular matrix that diagonalizes $A$. In other words, find $P$ that diagonalizes $A$.\\
+Let $P=\begin{bmatrix}[rr]v_1&v_4\\\end{bmatrix} = \begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}$.\\
+Notice $P^{-1}AP = -\frac{1}{3}\begin{bmatrix}[rr]-2&-1\\-1&1\\\end{bmatrix}\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}\begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}=\begin{bmatrix}[rr]1&0\\0&4\\\end{bmatrix}=D$\\
+The $-\frac{1}{3}$ comes from the formula for the inverse of a $2\times 2$ matrix.
+\item[(c)]Compute $A^8$\\
+From $P^{-1}AP=D$, we can get $AP=PD \Rightarrow A=PDP^{-1} \Rightarrow A^8 = (PDP^{-1})^8$. If we expand this formula, we notice that we can cancel a lot of the $P$ and $P^{-1}$ to get $PDDDDDDDDP^{-1} = PD^8P^{-1}$.
+\[ D^3 = \begin{bmatrix}[rr]1&0\\0&4\\\end{bmatrix}^3 = \begin{bmatrix}[rr]1^3&0\\0&4^3\\\end{bmatrix} \]
+Using this pattern for $D^8$, we get $D^8=\begin{bmatrix}[rr]1^8&0\\0&4^8\\\end{bmatrix}$.
+\[ A^8 =\begin{bmatrix}[rr]1&1\\1&-2\\\end{bmatrix}\begin{bmatrix}[rr]1&0\\0&4^8\\\end{bmatrix}\begin{bmatrix}[rr]2&1\\1&-1\\\end{bmatrix}\frac{1}{3} \]
+Also $f(A)=Pf(D)P^{-1}$.
+\end{enumerate}
+
+\section{Diagonalizability}
+\subsection{Criterion}
+\begin{thrm}
+An $n\times n$ matrix is diagonalizable iff it has $n$ linearly independent eigenvectors.
+\end{thrm}
+\begin{ex}
+$A_1=\begin{bmatrix}[rr]2&-1\\-2&3\\\end{bmatrix}$. We know this matrix is diagonalizable as shown in homework review part 11.58 and this matrix is invertible.
+$A_2 = \begin{bmatrix}[rr]7&0\\0&0\\\end{bmatrix}$ is diagonalizable since it is already a diagonal matrix. Find $P$ such that $P^{-1}A_2P$ is diagonal.\\
+Notice $\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix}^{-1}A_2\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix}=\begin{bmatrix}[rr]7&0\\0&0\\\end{bmatrix}$ is diagonal. We should be able to fins two eigenvectors.\\
+Notice $\begin{bmatrix}[rr]7&0\\0&0\\\end{bmatrix}\begin{bmatrix}[r]1\\0\\\end{bmatrix}=\begin{bmatrix}[r]7\\0\\\end{bmatrix}=7\begin{bmatrix}[r]1\\0\\\end{bmatrix}$. So $\begin{bmatrix}[r]1\\0\\\end{bmatrix}$ is an eigenvector with eigenvalue of 7. We can repeat this process but with $\begin{bmatrix}[r]0\\1\\\end{bmatrix}$ to get a second eigenvector and eigenvalue.\\
+So this matrix is diagonalizable but not invertible.\\
+$A_3=\begin{bmatrix}[rr]3&2\\0&3\\\end{bmatrix}$. This matrix is invertible since the determinant is not zero. However this matrix is not diagonalizable.\\
+Eigenvalues of $A_3$ are 3 with multiplicity 2. We can find this since this matrix is upper triangular so we just take the values on the diagonal.
+\[ \chi_{A_3}(\lambda)=\mathrm{det}\begin{bmatrix}[rr]\lambda - 3&-2\\0 & \lambda - 3\\\end{bmatrix}=(\lambda - 3)^2 \]
+Eigenvectors: $\lambda I_2-A_3 = 3I_2-\begin{bmatrix}[rr]3&2\\0&3\\\end{bmatrix} = \begin{bmatrix}[rr]0&-2\\0&0\\\end{bmatrix}$ so the nullspace is spanned by $\begin{bmatrix}[r]1\\0\\\end{bmatrix}$.\\
+Note that every symmetric matrix is diagonalizable.\\
+$A_4=\begin{bmatrix}[rr]0&7\\0&0\\\end{bmatrix}$. This matrix is neither invertible or diagonalizable.\\
+If either eigenvalue is zero then the matrix is not invertible. 
+
+\end{ex}
+
+\mychapter{36}{2018-04-05}
 
 \end{document}

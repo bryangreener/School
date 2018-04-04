@@ -186,3 +186,8 @@
 \contentsline {subsection}{\numberline {34.1.3}\#4.b}{74}{subsection.34.1.3}
 \contentsline {section}{\numberline {34.2}Eigenvectors}{75}{section.34.2}
 \contentsline {chapter}{2018-04-03}{77}{chapter*.38}
+\contentsline {section}{\numberline {35.1}Homework Review}{77}{section.35.1}
+\contentsline {subsection}{\numberline {35.1.1}11.58}{77}{subsection.35.1.1}
+\contentsline {section}{\numberline {35.2}Diagonalizability}{78}{section.35.2}
+\contentsline {subsection}{\numberline {35.2.1}Criterion}{78}{subsection.35.2.1}
+\contentsline {chapter}{2018-04-05}{79}{chapter*.39}

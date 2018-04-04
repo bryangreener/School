@@ -1,15 +1,14 @@
 import random
 import numpy as np
 
-class NeuralNetwork(object):
-    def __del__(self):
-        print("deleted net obj")
-        
+class NeuralNetwork(object): 
     def __init__(self, sizes):
         self.numLayers = len(sizes)
         self.sizes = sizes
         self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
         self.weights = [np.random.randn(y, x) for x, y in zip(sizes[:-1], sizes[1:])]
+    def __del__(self):
+        print("Deleted NeuralNetwork object")
     
     def forward(self, a):
         for b, w in zip(self.biases, self.weights):
@@ -37,7 +36,7 @@ class NeuralNetwork(object):
             if test_data:
                 tempEval = self.evaluate(test_data)
                 epochResults.append(tempEval)
-                print("Epoch {0}: {1} / {2}".format(j, tempEval, n_test))
+                print("Epoch {0}: {1} / {2}".format(j+1, tempEval, n_test))
             else:
                 print("Epoch {0} complete".format(j))
                 
@@ -125,17 +124,6 @@ def vectorized_result(j):
     e[j] = 1.0
     return e
 
-#### Used in collecting data from epochs
-def trainingLoops(nt):
-    for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            nt.SGD(training_data, 3, j, i, test_data=test_data)
-
-def frange(start, stop, step):
-    i = start
-    while i < stop:
-        yield i
-        i += step
         
 #### MAIN
 training_data, test_data = load_data_wrapper()
@@ -154,187 +142,71 @@ of our data.
 Number of epochs will stay static at 30 since it gives a good
 amount of time for the training to actually take effect.
 '''
+
+
+#net = NeuralNetwork([784, 25, 15, 10])
+#net.SGD(training_data[:1000], 100, 15, 2, test_data=list(test_data)[:100])
+
+
+def testWrapper(func, args):
+    return func(args)
+import time
 import csv
 
-epochResults = []
-totalTrainingResults = []
+
+learnList = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+batchList = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+layerList = [[784,10,10],[784,10,10,10],[784,10,10,10,10],
+             [784,15,10],[784,15,15,10],[784,15,15,15,10],
+             [784,20,10],[784,20,20,10],[784,20,20,20,10],
+             [784,25,10],[784,25,25,10],[784,25,25,25,10],
+             [784,30,10],[784,30,30,10],[784,30,30,30,10],
+             [784,50,10],[784,50,50,10],[784,50,50,50,10]]
 #### Initialize network and iterate through input combos
-net = NeuralNetwork([784, 5, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 5, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
+#net = NeuralNetwork([784, 16, 10])
 
-net = NeuralNetwork([784, 5, 5, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 5, 5, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
+epochResults = []
+for i in layerList:
+    totalTrainingResults = []
+    totalLearnResults = []
+    for j in learnList:
+        totalBatchResults = []
+        for k in batchList:
+            toAverage = []
+            for l in range(0,5):
+                print("Layers: %i x %i, Learn Rate: %d, MiniBatch Size: %i, "
+                      "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
+                start = time.time()
+                net = testWrapper(NeuralNetwork, i)
+                net.SGD(training_data[:5000], 30, k, j, test_data=test_data[:1000])
+                stop = time.time()
+                epochResults.append((stop-start)*1000.0)
+                toAverage.append(list(epochResults))
+                del epochResults[:]
+                del net
+            #toAverage = toAverage
+            totalBatchResults.append(list(np.mean(toAverage, axis=0)))
+            print("Time for 10 Epochs (ms): %d" % (totalBatchResults[-1][-1]))
+        totalLearnResults.append(totalBatchResults)
+    totalTrainingResults.append(totalLearnResults)
+    # Output to file
+    with open("outfile5.txt", "a+") as output:
+        output.write(str(totalTrainingResults) + '\n')
 
-net = NeuralNetwork([784, 5, 5, 5, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 5, 5, 5, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 10, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 10, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 10, 10, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 10, 10, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 10, 10, 10, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 10, 10, 10, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 25, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 25, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 25, 25, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 25, 25, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 25, 25, 25, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 25, 25, 25, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 50, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 50, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 50, 50, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 50, 50, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 50, 50, 50, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 50, 50, 50, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 100, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 100, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 100, 100, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 100, 100, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
 
-net = NeuralNetwork([784, 100, 100, 100, 10])
-for i in frange(1.0, 10.0, 1.0):
-        for j in range(10, 101, 10):
-            net = NeuralNetwork([784, 100, 100, 100, 10])
-            net.SGD(training_data, 10, j, i, test_data=test_data)
-            del net
-totalTrainingResults.append(epochResults)
-with open('eout.txt', 'a') as myfile:
-    wr = csv.writer(myfile)
-    wr.writerow(totalTrainingResults)
-epochResults[:]
+
+
+
+
+

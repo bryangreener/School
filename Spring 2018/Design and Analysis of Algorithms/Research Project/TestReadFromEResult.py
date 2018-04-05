@@ -1,6 +1,6 @@
 import ast
 import matplotlib.pyplot as plt
-
+import numpy as np
 file = open('outfile5.txt', 'r')
 mainlist = []
 for line in file:

@@ -138,11 +138,28 @@
 	\item We repeat the steps above to find our eigenvalues $\chi_A(\lambda)=(\lambda-4)(\lambda-2)(\lambda+4)$. Thus our eigenvalues are 4, -4, and 2.
 	\item 
 	\end{enumerate}
-\item[11.62]Let $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ be a real matrix. Find necessary and sufficient conditions on $a,b,c,d$ so that $A$ is diagonalizable, that is, that $A$ has two (real) linearly independent eigenvectors.
-\item[11.63]Show that matrices $A$ and $A^T$ have the same eigenvalues. Give an example of a $2 \times 2$ matrix $A$ where $A$ and $A^T$ have different eigenvectors.
+\item[11.62]Let $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$ be a real matrix. Find necessary and sufficient conditions on $a,b,c,d$ so that $A$ is diagonalizable, that is, that $A$ has two (real) linearly independent eigenvectors.\\
+	\begin{solution}
+	We use the quadratic formula and $b^2-4ac$ along with $\Delta (t)=t^2-tr(A)t_det(A)$ to get $(-tr(A))^2-4(det(A)) > 0$.
+	\end{solution}
+\item[11.63]Show that matrices $A$ and $A^T$ have the same eigenvalues. Give an example of a $2 \times 2$ matrix $A$ where $A$ and $A^T$ have different eigenvectors.\\
+	Assuming that our matrix has eigenvalues, then our matrix is diagonal. Thus since it is diagonal then taking the transpose of the matrix will not change the order of the values in its diagonal. So we have the formula $\Delta(t)=t^2-tr(A)+det(A)$ and our matrices and theorem 10.1 in the book stating that $det(A)=det(A)^T$, then our equations $t^2-tr(A)+det(A)$ and $t^2-tr(A^T)+det(A^T)$ are equal.\\
+	Let $A=\begin{bmatrix}[rr]1&1\\0&1\\\end{bmatrix}$. The values in the diagonal can be any number so long as they are equal. The value in the top right can be any value as long as it is not zero and the value at the bottom left corner must be equal to zero.
+	Let $\lambda=-1$:\\
+	\[ \lambda I-A = \begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix}-\begin{bmatrix}[rr]1&1\\0&1\\\end{bmatrix} = \begin{bmatrix}[rr]0&1\\0&0\\\end{bmatrix} \]
+	So
+	\[ \begin{bmatrix}[rr]0&1\\0&0\\\end{bmatrix}\begin{bmatrix}[r]v_1\\v_2\\\end{bmatrix} = \begin{bmatrix}[r]0\\0\\\end{bmatrix} \]
+	
+	
 \item[11.68]For each symmetric matrix $B$, find its eigenvalues, a maximal orthogonal set $S$ of eigenvectors, and an orthogonal matrix $P$ such that $D=P^{-1}BP$ is diagonal:
 	\begin{enumerate}
-	\item $B=\begin{bmatrix}[rrr]0&1&1\\1&0&1\\1&1&0\\\end{bmatrix}$
+	\item $B=\begin{bmatrix}[rrr]0&1&1\\1&0&1\\1&1&0\\\end{bmatrix}$\\
+	\[ X_B=\mathrm{det}\begin{bmatrix}[rrr]\lambda&-1&-1\\-1&\lambda&-1\\-1&-1&\lambda\\\end{bmatrix} = (\lambda+1)^2(\lambda-2) \]
+	Thus our eigenvalues are -1 with a multiplicity of 2 and 2 with a multiplicity of 1.\\
+	Let $\lambda=1$, then
+	\[ \lambda I - A = \begin{bmatrix}[rrr]-1&-1&-1\\-1&-1&-1\\-1&-1&-1\\\end{bmatrix} \]
+	Thus we have two rows which can be simplified since they are duplicates. Then we have $\begin{bmatrix}[rrr]-1&-1&-1\\0&0&0\\0&0&0\\\end{bmatrix}$.\\
+	Thus we parametrize this vector so $a+b+c=0$. Since $b$ and $c$ are our free variables then we get the following two vector results for the solution space: $\begin{bmatrix}[r]1\\-1\\0\\\end{bmatrix},\begin{bmatrix}[r]1\\0\\-1\\\end{bmatrix}$.
 	\item $B=\begin{bmatrix}[rrr]2&2&4\\2&5&8\\4&8&17\\\end{bmatrix}$
 	\end{enumerate}
 \item[11.69]Find a real $2 \times 2$ symmetrix matrix $A$ with eigenvalues $\lambda = 1$ and $\lambda = 4$ such that $u=(1,1)$ is an eigenvector belonging to $\lambda=1$. Also find a matrix $B$ for which $B^2=A$.

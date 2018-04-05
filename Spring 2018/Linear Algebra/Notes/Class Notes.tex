@@ -2603,5 +2603,54 @@ If either eigenvalue is zero then the matrix is not invertible.
 \end{ex}
 
 \mychapter{36}{2018-04-05}
+\section{Homework Review}
+\subsection{11.55(b)}
+The cayley-hamilton theorem. Suppose $A$ is a matrix with characteristic polynomial $\chi_A$ then $\chi_A(A)=0$.\\
+\begin{ex}
+$B=\begin{bmatrix}[rr]2&-3\\7&-4\\\end{bmatrix}$
+\[ \chi_B(\lambda )=\mathrm{det}\begin{bmatrix}[rr]\lambda -2&3\\-7&\lambda + 4\\\end{bmatrix} \]
+\[ =(\lambda - 2)(\lambda + 4)+21=\lambda^2+2\lambda + 13 \]
+Notice $\chi_B(B)=B^2+2B+13I = \begin{bmatrix}[rr]2&-3\\7&-4\\\end{bmatrix}^2+2\begin{bmatrix}[rr]2&-3\\7&-4\\\end{bmatrix}+13\begin{bmatrix}[rr]1&0\\0&1\\\end{bmatrix}$
+\[ \begin{bmatrix}[rr]-17&6\\-14&-5\\\end{bmatrix}+\begin{bmatrix}[rr]4&-6\\14&-8\\\end{bmatrix}+\begin{bmatrix}[rr]13&0\\0&13\\\end{bmatrix}=\begin{bmatrix}[rr]0&0\\0&0\\\end{bmatrix} \]
+\subsection{11.56(b)}
+Let $f(x)=\sum_{k=0}^nC_kx^k$ be a polynomial.\\
+Notice $f(P^{-1}AP)=\sum_{k=0}^nC_k(P^{-1}AP)^k$. We just plug it into our sum. From part a, $(P^{-1}AP)^k=(P^{-1}A^kP$. So
+\[ \sum_{k=0}^nC_k(P^{-1}AP)^k = \sum_{k=0}^nP^{-1}A^kP=P^{-1}(\sum_{k=0}^nC_kA^k)P = P^{-1}f(A)P \]
+\subsection{11.68(b)}
+$B=\begin{bmatrix}[rrr]2&2&4\\2&5&8\\4&8&17\\\end{bmatrix}$\\
+$\chi_B=t^3-24t^2+45t-22$\\
+Observation: Suppose we have three eigenvalues $(t-\lambda_1 ),(t-\lambda_2 )(t-\lambda_3)$. The tracer is the sum of eigenvalues and the determinant is the product of eigenvalues. So we multiply this out and get
+\[ t^3-(\lambda_1+\lambda_2+\lambda_3)t^2+(\lambda_1\lambda_2+\lambda_1\lambda_3+\lambda_2\lambda_3)t-\lambda_1\lambda_2\lambda_3 \]
+So the diagonal matrix is $D=\begin{bmatrix}[rrr]\lambda_1&0&0\\0&\lambda_2&0\\0&0&\lambda_3\\\end{bmatrix}$
+So
+\[ t^3+24t^2+45t+22 = (t-1)(t^2-23t+22)=(t-1)(t-1)(t-22) \]
+Our eigenvalues are$\lambda=1$ with multiplicity of 2 and $\lambda=22$. Since our original matrix is symmetric then our eigenvectors will be perpendicular.
+Notice that $(1*1)+(1*22)+(1*22) = 45$\\
+Find a basis for the nullspace of $B-\lambda I$ for each eigenvalue.\\
+$\lambda=-22$: $B-22I=\begin{bmatrix}[rrr]-20&2&4\\2&-17&8\\4&8&-5\\\end{bmatrix}\xrightarrow[]{rref} \begin{bmatrix}[rrr]1&0&-\frac{1}{4}\\0&1&-\frac{1}{2}\\0&0&0\\\end{bmatrix}$\\
+If we don't get a zero row here then we have made a mistake.\\
+Thus our eigenvector is $\begin{bmatrix}[r]\frac{1}{4}\\\frac{1}{2}\\1\\\end{bmatrix}$ or $\begin{bmatrix}[r]1\\2\\4\\\end{bmatrix}$\\
+Remember that $v\in null(Q) \iff Qv=0$. So we can multiply both sides by negative 1 to get $-Qv=-1=0 = (-Q)v=0$ thus we can use either $B-\lambda I$ or $\lambda I - B$ and arrive at the same answer.\\
+Since we've gotten a space spanned by one eigenvector, that reflects the multiplicity of our eigenvalue. When we get a higher multiplicity, then the space is spanned by multiple eigenvectors.\\
+Every symmetric matrix with real entries is diagonalizable.
+
+\section{Diagonalizability}
+There is $P$ such that $P^{-1}BP=\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&22\\\end{bmatrix}$ the 1's and the 22 come from the previous section for 11.68(b) in the homework.
+\[ \mathrm{det}(P^{-1}BP)=\mathrm{det}(P)^{-1}\mathrm{det}(B)\mathrm{det}(P)=22 \]
+
+\begin{align*}
+\chi_D(\lambda)&=\mathrm{det}\begin{bmatrix}[rrr]\lambda-1&0&0\\0&\lambda-1&0\\0&0&\lambda-22\\\end{bmatrix}\\
+&=(\lambda-1)^2(\lambda-22)
+=\chi_{P^{-1}BP}(\lambda)\\
+&=\mathrm{det}(\lambda I-P^{-1}BP)\\
+&=\mathrm{det}P^{-1}\lambda IP-P^{-1}BP)\\
+&= \mathrm{det}P^{-1}(\lambda I-B)P)\\
+&= \mathrm{det}(P^{-1})\mathrm{det}(\lambda I-B)\mathrm{det}(P)\\
+&= \chi_B(\lambda)
+\end{align*}
+
+Good exam question: Prove that similar matrices have the same characteristic polynomial.
+\end{ex}
+\mychapter{37}{2018-04-06}
 
 \end{document}

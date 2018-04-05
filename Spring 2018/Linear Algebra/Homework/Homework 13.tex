@@ -156,10 +156,13 @@
 	\item $B=\begin{bmatrix}[rrr]0&1&1\\1&0&1\\1&1&0\\\end{bmatrix}$\\
 	\[ X_B=\mathrm{det}\begin{bmatrix}[rrr]\lambda&-1&-1\\-1&\lambda&-1\\-1&-1&\lambda\\\end{bmatrix} = (\lambda+1)^2(\lambda-2) \]
 	Thus our eigenvalues are -1 with a multiplicity of 2 and 2 with a multiplicity of 1.\\
-	Let $\lambda=1$, then
+	Let $\lambda=-1$, then
 	\[ \lambda I - A = \begin{bmatrix}[rrr]-1&-1&-1\\-1&-1&-1\\-1&-1&-1\\\end{bmatrix} \]
 	Thus we have two rows which can be simplified since they are duplicates. Then we have $\begin{bmatrix}[rrr]-1&-1&-1\\0&0&0\\0&0&0\\\end{bmatrix}$.\\
-	Thus we parametrize this vector so $a+b+c=0$. Since $b$ and $c$ are our free variables then we get the following two vector results for the solution space: $\begin{bmatrix}[r]1\\-1\\0\\\end{bmatrix},\begin{bmatrix}[r]1\\0\\-1\\\end{bmatrix}$.
+	Thus we parametrize this vector so $a+b+c=0$. Since $b$ and $c$ are our free variables then we get the following two vector results for the solution space: $\begin{bmatrix}[r]1\\-1\\0\\\end{bmatrix},\begin{bmatrix}[r]1\\1\\0\\\end{bmatrix}$.\\
+	Let $\lambda=2$, then
+	\[ \lambda I-A = \begin{bmatrix}[rrr]2&-1&-1\\-1&2&-1\\-1&-1&2\\\end{bmatrix} \]
+	
 	\item $B=\begin{bmatrix}[rrr]2&2&4\\2&5&8\\4&8&17\\\end{bmatrix}$
 	\end{enumerate}
 \item[11.69]Find a real $2 \times 2$ symmetrix matrix $A$ with eigenvalues $\lambda = 1$ and $\lambda = 4$ such that $u=(1,1)$ is an eigenvector belonging to $\lambda=1$. Also find a matrix $B$ for which $B^2=A$.

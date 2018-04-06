@@ -217,18 +217,19 @@
 	\begin{enumerate}
 	\item For $n>0$, $v$ is an eigenvector of $T^n$ belonging to $\lambda^n$.
 	\begin{proof}
-	Let $S=v_1,v_2,...,v_n$ be a minimal set of vectors where $s>1$ since $v_1\neq 0$. By the minimality condition, $v_2,...,v_s$ are linearly independent. Thus $v_1$ is a linear combination of $v_2,...,v_s$
-	\[ v_1=a_2v_2+a_3v_3+\cdots +a_sv_s \]
-	where some $a_k\neq 0$. Applying $T$ to this equation and using the linearity of $T$ gives us
-	\[ T(v_1)=T(a_2v_2+a_3v_3+\cdots +a_sv_s) = a_2T(v_2)+a_3T(v_3)+\cdots +a_sT(v_s) \]
-	Since $v_j$ is an eigenvector of $T$ belonging to $\lambda_j$ we have $T(v_j)=\lambda_jv_j$. So
-	\[ \lambda_1v_1=a_2\lambda_2v_2+a_3\lambda_3v_3+\cdots +a_s\lambda_sv_s \]
-	Thus at vector $v_n$ for $n > 0$, $v_n$ is an eigenvector of $T^n$ belonging to $\lambda^n$.
-	\end{proof}
+Assume $v\neq 0$ and $Tv=\lambda v$.
+Let $n=0$ then $T^0v=Iv=v$ and $\lambda^0v=1v=v$. Now assume $n$ is fixes and $T^nv=\lambda^nv$. Apply $T$, then 
+\[T^{n+1}v=T(T^nv)=T(\lambda^nv)=\lambda^nT(v) = \lambda^n(\lambda v)=\lambda^{n+1}v \]
+Thus by mathematical induction, $T^nv=\lambda^nv$ for all $n > 0$.
+\end{proof}
 	\item $f(\lambda)$ is an eigenvalue of $f(T)$ for any polynomial $f(t)$.
 	\begin{proof}
-	
-	\end{proof}
+Let $f$ be a polynomial. Then there exist scalars $c_0,c_1,...,c_n$ such that $f(x)=\sum_{k=0}^nc_kx^k$.\\
+So by using our proof from part (a),
+\[ f(x)=\sum_{k=0}^nc_k\lambda^kv \]
+Then by the definition of $f$, this sum is equal to $f(\lambda)v$.\\
+Thus $v$ is an eigenvector for the $f(t)$ with the eigenvalue $f(\lambda)$.
+\end{proof}
 	\end{enumerate}
 	
 \end{enumerate}	

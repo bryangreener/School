@@ -5,8 +5,8 @@ class NeuralNetwork(object):
     def __init__(self, sizes):
         self.numLayers = len(sizes)
         
-        self.sigmoid_momentum = [0.6,0.3,0.08,0.02]
-        self.sigmoid_past = [[np.array([np.zeros(y)]).T for x in range(4)] for y in sizes[1:]]
+        self.cost_rho = [0.02,0.08,0.3,0.6]
+        self.cost_past = [np.array([np.zeros(10)]).T for x in range(4)]
         
         self.sizes = sizes
         self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
@@ -92,7 +92,12 @@ class NeuralNetwork(object):
         return sum(int(x==y) for (x,y) in test_results)
     
     def cost_derivative(self, output_activations, y):
-        return(output_activations-y)
+        self.cost_past[:-1] = self.cost_past[1:];
+        self.cost_past[-1] = (output_activations-y)
+        temp = np.array([np.multiply(np.array(self.cost_past).T[0],
+                                     self.cost_rho).T.sum(axis=0)]).T
+        self.cost_past[-1] = temp
+        return(temp)
         
 def sigmoid(z):
     return 1.0/(1.0+np.exp(-z))
@@ -104,7 +109,7 @@ def sigmoid_prime(z):
 
 from mnist import MNIST
 def load_data():
-    mndata = MNIST('./mnist-data')
+    mndata = MNIST('../mnist-data')
     mndata.gz = True
     training_data = mndata.load_training()
     test_data = mndata.load_testing()
@@ -157,19 +162,14 @@ def testWrapper(func, args):
 import time
 import csv
 
-
-learnList = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-batchList = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
-layerList = [[784,10,10],[784,10,10,10],[784,10,10,10,10],
-             [784,15,10],[784,15,15,10],[784,15,15,15,10],
-             [784,20,10],[784,20,20,10],[784,20,20,20,10],
-             [784,25,10],[784,25,25,10],[784,25,25,25,10],
-             [784,30,10],[784,30,30,10],[784,30,30,30,10],
-             [784,50,10],[784,50,50,10],[784,50,50,50,10]]
 #### Initialize network and iterate through input combos
 #net = NeuralNetwork([784, 16, 10])
 
+
 epochResults = []
+net = NeuralNetwork([784, 35,15,20, 10])
+net.SGD(training_data[:10000], 1000, 15, 0.02, test_data=test_data[:1000])
+'''
 for i in layerList:
     totalTrainingResults = []
     totalLearnResults = []
@@ -196,7 +196,7 @@ for i in layerList:
     # Output to file
     with open("outfile5.txt", "a+") as output:
         output.write(str(totalTrainingResults) + '\n')
-
+'''
 
 
 

@@ -2652,5 +2652,55 @@ There is $P$ such that $P^{-1}BP=\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&22\\\end{
 Good exam question: Prove that similar matrices have the same characteristic polynomial.
 \end{ex}
 \mychapter{37}{2018-04-06}
+\section{Homework Review}
+\subsection{11.65}
+\begin{proof}
+Assume $v\neq 0$ and $Tv=\lambda v$.
+Let $n=0$ then $T^0v=Iv=v$ and $\lambda^0v=1v=v$. Now assume $n$ is fixes and $T^nv=\lambda^nv$. Apply $T$, then 
+\[T^{n+1}v=T(T^nv)=T(\lambda^nv)=\lambda^nT(v) = \lambda^n(\lambda v)=\lambda^{n+1}v \]
+Thus by mathematical induction, $T^nv=\lambda^nv$ for all $n > 0$.
+\end{proof}
+\begin{proof}
+Let $f$ be a polynomial. Then there exist scalars $c_0,c_1,...,c_n$ such that $f(x)=\sum_{k=0}^nc_kx^k$.\\
+So by using our proof from part (a),
+\[ f(x)=\sum_{k=0}^nc_k\lambda^kv \]
+Then by the definition of $f$, this sum is equal to $f(\lambda)v$.\\
+Thus $v$ is an eigenvector for the $f(t)$ with the eigenvalue $f(\lambda)$.
+\end{proof}
+\subsection{11.60(b)}
+$B=\begin{bmatrix}[rrr]3&-1&1\\7&-5&1\\6&-6&2\\\end{bmatrix}$\\
+Eigenvalues are roots of $\chi_B(\lambda)$.
+\begin{align*}
+&=\mathrm{det}\begin{bmatrix}[rrr]\lambda-3&1&-1\\-7&\lambda+5&-1\\-6&6&\lambda-2\\\end{bmatrix}\\
+&=(\lambda-3)(\lambda+5)(\lambda-2)+6+42+7(\lambda-2)+6(\lambda-3)-6(\lambda+5)\\
+&=\lambda^3+0\lambda^2-12\lambda+16\\
+\end{align*}
+After doing synthetic division, we get the following:
+$\lambda=-4 B+4I=\begin{bmatrix}[rrr]7&-1&1\\7&-1&1\\6&-6&6\\\end{bmatrix}$. Since we have a duplicate row then the determinant of this matrix is zero.\\
+Next we need to find the basis for the nullspace of this matrix. This trick only works in 3 dimensions.\\
+The rank of this matrix is 2 since we have two linearly independent rows. So we cant find more than one eigenvector for this matrix. We need to find a third vector perpendicular to these two linearly independent vectors.\\
+Elementary row operations gets us $\begin{bmatrix}[rrr]1&-1&1\\7&-1&1\\0&0&0\\\end{bmatrix}$.
+\[ \begin{vmatrix}i&j&k\\1&-1&1\\7&-1&1\\\end{vmatrix} = (-2,6,6) \Rightarrow \begin{bmatrix}[r]1\\-3\\-3\\\end{bmatrix} \]
+This result comes from the cross product formula. We can verify this is correct by taking this resulting matrix and multiplying by the elementary row operation matrix.
+\[ \begin{bmatrix}[rrr]7&-1&1\\7&-1&1\\6&-6&6\\\end{bmatrix}\begin{bmatrix}[r]1\\-3\\-3\\\end{bmatrix}\neq \begin{bmatrix}[r]0\\1\\1\\\end{bmatrix} \]
+We made a mistake in the calculation somewhere.\\
+Let $\lambda=2$
+\[ B-2I=\begin{bmatrix}[rrr]1&-1&1\\7&-7&1\\6&-6&0\\\end{bmatrix} \]
+$rank(B-2A)=2$ and $nullity(B-A)=3-2=1$. Thus this is a 1-dimensional subspace and so the geometric multiplicity is 1.
+
+\section{Algebraic vs Geometric Multiplicity}
+\begin{ex}
+Is $M$ diagonalizable?\\
+$M=\begin{bmatrix}[rrrr]3&1&0&0\\0&3&1&0\\0&0&3&0\\0&0&0&3\\\end{bmatrix}$\\
+Eigenvalues: 3 with multiplicity 4. We find this since the diagonal entries are the same. This applied any time our matrix is upper triangular.\\
+Eigenvectors:
+\[ M-3I = \begin{bmatrix}[rrrr]0&1&0&0\\0&0&1&0\\0&0&0&0\\0&0&0&0\\\end{bmatrix} \]
+The rank of this matrix is 2 and it is in rref. Thus the nullity of $M-3I=4-2=2$.\\
+Basis for $\mathrm{nullspace}(M-3I)=\left\{\begin{bmatrix}[r]1\\0\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\0\\1\\\end{bmatrix} \right\}$\\
+The basis vectors must have the two middle entries equal to 0. There aren't more than two possible nullspaces. Since the dimension of $V_3=2$ then the geometric multiplicity of $\lambda=3$ is 2.\\
+Therefore $M$ is not diagonalizable since we need 4 linearly independent eigenvectors for it to be diagonalizable.
+\end{ex}
+
+\mychapter{38}{2018-04-09}
 
 \end{document}

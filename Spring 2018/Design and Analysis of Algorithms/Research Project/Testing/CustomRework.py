@@ -34,7 +34,7 @@ def sigmoid(z):
 def sigmoidPrime(z):
     return np.exp(-z)/((1.0 + np.exp(-z))**2)
 
-eps = 1e-8
+eps = 1e-4
 
 class Network():
     def __init__(self, layers):
@@ -129,18 +129,24 @@ class Network():
     def RMSprop(self, trainData, epochs, miniBatchSize,
                 alpha, gamma, testData=None):
         cache = [np.zeros(w.shape) for w in self.weights]
-        miniBatches = self.PartitionBatches(trainData, miniBatchSize)
         for i in range(1,epochs + 1):
             random.shuffle(trainData)
-            idx = np.random.randint(0, len(miniBatches))
-            gradients = self.miniBatch(miniBatches[idx])
-            gradients = gradients[::-1]
-            for k in range(len(gradients)):
-                cache[k] = np.multiply(gamma, cache[k]) + \
-                    np.multiply((1-gamma), (gradients[k].T**2))
-                self.weights[k] += np.divide( \
-                            np.multiply(alpha, gradients[k].T), \
-                            (np.sqrt(cache[k]) + eps))
+            miniBatches = self.PartitionBatches(trainData, miniBatchSize)
+            for j in miniBatches:
+                gradients = self.miniBatch(j)
+                gradients = gradients[::-1]
+                
+                for k in range(len(gradients)):
+                    cache[k] = np.multiply((1-gamma),gradients[k].T**2)+np.multiply(gamma,cache[k])
+                    cache[k] = cache[k]/np.amax(cache[k], axis=0)
+                    self.weights[k] = self.weights[k] - np.multiply((alpha/np.sqrt(cache[k])),gradients[k].T)
+                    
+                    #cache[k] = np.multiply(gamma, cache[k]) + \
+                    #    np.multiply((1-gamma), (gradients[k].T**2))
+                    #self.weights[k] += np.divide( \
+                    #        np.multiply(alpha, gradients[k].T), \
+                    #        (np.sqrt(cache[k]) + eps))
+
             self.RunTests(i, testData)
                     
     def RunTests(self, epoch, testData=None):
@@ -207,16 +213,18 @@ class Trainer(object):
         
 
 trainData, testData = loadDataWrapper()
-net = Network([784,35,10])
-T=Trainer(net)
-T.Train(trainData, testData)
+net = Network([784,35,15,20,10])
+net.RMSprop(trainData[:10000], 1000, 25, 0.01, 0.9, testData[:1000])
 
+#T=Trainer(net)
+#T.Train(trainData, testData)
+'''
 plt.plot(T.J)
 plt.plot(T.TJ)
 plt.grid(1)
 plt.xlabel('Iterations')
 plt.ylabel('Cost')
 plt.show()
-
+'''
 #net.RMSprop(trainData[:60000], 1000, 15, 0.0001, 0.9, testData[:1000])
 #net.Momentum(trainData[:5000], 1000, 15, 0.001, 0.9, testData[:100])

@@ -57,7 +57,6 @@ class NeuralNetwork(object):
             delta_nabla_b, delta_nabla_w = self.backprop(x, y)
             nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
-
         self.weights = [w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
         self.biases = [b-(eta/len(mini_batch))*nb
@@ -187,7 +186,7 @@ import time
 
 learnList = [1.0]
 batchList = [15]
-layerList = [[784,100,10,35,15, 20, 10]]
+layerList = [[784,35,15,20,10]]
 #### Initialize network and iterate through input combos
 #net = NeuralNetwork([784, 16, 10])
 epochResults = []

@@ -135,11 +135,13 @@ class Network():
             for j in miniBatches:
                 gradients = self.miniBatch(j)
                 gradients = gradients[::-1]
-                
+                #http://climin.readthedocs.io/en/latest/rmsprop.html
                 for k in range(len(gradients)):
                     cache[k] = np.multiply((1-gamma),gradients[k].T**2)+np.multiply(gamma,cache[k])
+                    #This line fixes it all
                     cache[k] = cache[k]/np.amax(cache[k], axis=0)
-                    self.weights[k] = self.weights[k] - np.multiply((alpha/np.sqrt(cache[k])),gradients[k].T)
+                    self.weights[k] = self.weights[k] - \
+                        np.multiply((alpha/np.sqrt(cache[k])),gradients[k].T)
                     
                     #cache[k] = np.multiply(gamma, cache[k]) + \
                     #    np.multiply((1-gamma), (gradients[k].T**2))
@@ -214,7 +216,7 @@ class Trainer(object):
 
 trainData, testData = loadDataWrapper()
 net = Network([784,35,15,20,10])
-net.RMSprop(trainData[:10000], 1000, 25, 0.01, 0.9, testData[:1000])
+net.RMSprop(trainData[:10000], 1000, 5, 0.01, 0.9, testData[:1000])
 
 #T=Trainer(net)
 #T.Train(trainData, testData)

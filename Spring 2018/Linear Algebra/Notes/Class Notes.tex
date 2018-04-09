@@ -2702,5 +2702,121 @@ Therefore $M$ is not diagonalizable since we need 4 linearly independent eigenve
 \end{ex}
 
 \mychapter{38}{2018-04-09}
+\section{Jordan Canonical Form and Minimum Polynomials}
+\subsection{Jordan Blocks}
+\begin{defn}
+Let $\lambda$ be a scalar and $m$ a positive integer. The Jordan block with eigenvalue $\lambda$ and size $m$ is the $m\times m$ matrix of the form
+\[ \begin{bmatrix}[rrrr]\lambda&1&{}&{}\\{}&\lambda&1&{}\\{}&{}&\lambda&1\\{}&{}&{}&\lambda\\\end{bmatrix} \]
+Lambdas are in the diagonal and 1s are in the superdiagonal. Compare with p407 in the book.\\
+So $\begin{bmatrix}[rr]2&1\\0&2\\\end{bmatrix}$ is a Jordan block of size 2.
+\end{defn}
+\begin{thrm}
+Let $A$ be an $n\times n$ matrix ($A\in \mathbb{F}^{n\times n}$), then $A$ is similar to a block diagonal matrix where every diagonal block is a Jordan block. The sizes and eigenvalues of the blocks are uniquely determined by $A$.
+\end{thrm}
+\begin{ex}
+\[ M=\begin{bmatrix}[rrrrr]7&1&0&0&0\\0&7&0&0&0\\0&0&7&1&0\\0&0&0&7&0\\0&0&0&0&7\\\end{bmatrix} \]
+We can partition this matrix into three blocks.
+\begin{tabular}{cc|cc|c}
+8&1&0&0&0\\
+0&8&0&0&0\\
+\hline
+0&0&8&1&0\\
+0&0&0&8&0\\
+\hline
+0&0&0&0&8\\
+\end{tabular}
+All the eigenvalues in this matrix are 8.
+\end{ex}
+\begin{ex}
+Write all JFC's of $5\times 5$ matrices with eigenvalues 8.\\
+There are seven of them:\\
+1 block, min poly: $(\lambda-8)^5$
+\begin{tabular}{ccccc}
+8&1&0&0&0\\
+0&8&1&0&0\\
+0&0&8&1&0\\
+0&0&0&8&1\\
+0&0&0&0&8\\
+\end{tabular}\\
+2 blocks, min poly: $(\lambda-8)^3$
+\begin{tabular}{cccc|c}
+8&1&0&0&0\\
+0&8&1&0&0\\
+0&0&8&1&0\\
+\hline
+0&0&0&8&1\\
+0&0&0&0&8\\
+\end{tabular}\\
+5 blocks, min poly: $(\lambda-8)$
+\begin{tabular}{c|c|c|c|c}
+8&0&0&0&0\\
+\hline
+0&8&0&0&0\\
+\hline
+0&0&8&0&0\\
+\hline
+0&0&0&8&0\\
+\hline
+0&0&0&0&8\\
+\end{tabular}\\
+3 blocks, min poly: $(\lambda-8)^2$
+\begin{tabular}{ccc|c|c}
+8&1&0&0&0\\
+0&8&1&0&0\\
+0&0&8&0&0\\
+\hline
+0&0&0&8&0\\
+\hline
+0&0&0&0&8\\
+\end{tabular}\\
+There is also another 2 block, a 14 block, and the 3 block from the previous example but writing these in \LaTeX sucks.\\
+Find a permutation matrix $P$ such that $P^{-1}M_1P=M_2$ where $M_1$ and $M_2$ are two of the block matrices.\\
+The minimum polynomial is the polynomial that eliminates the matrix. The exponent of the minimum polynomial is the size of the largest block.\\
+\end{ex}
+\begin{defn}
+Matrices $A$ and $B$ are similar to each other if there is an invertible matrix $P$ such that $B=P^{-1}AP$.
+\end{defn}
+\begin{thrm}
+An $n\times n$ matrix is diagonalizable iff it has $n$ linearly independent eigenvectors.
+\end{thrm}
+
+\begin{ex}
+$A=$
+\begin{tabular}{ccc|c|c}
+8&1&0&0&0\\
+0&8&1&0&0\\
+0&0&8&0&0\\
+\hline
+0&0&0&8&0\\
+\hline
+0&0&0&0&8\\
+\end{tabular}\\
+$A-8I =$
+\begin{tabular}{ccc|c|c}
+0&1&0&0&0\\
+0&0&1&0&0\\
+0&0&0&0&0\\
+\hline
+0&0&0&0&0\\
+\hline
+0&0&0&0&0\\
+\end{tabular}\\
+The eigenvectors are spanned by $\left\{ \begin{bmatrix}[r]1\\0\\0\\0\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\0\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\0\\0\\1\\\end{bmatrix}\right\}$.
+\end{ex}
+\begin{thrm}
+A matrix is diagonalizable iff the algorithmic multiplicity is equal to the geometric multiplicity for every eigenvalue.\\
+So from our example above, A's algebraic multiplicity is 5 and its geometric multiplicity is 3.
+\end{thrm}
+
+
+Recall $e^z=1+z+\frac{z^2}{2}+\frac{z^3}{6}+\frac{z^4}{24}+\cdots = \sum_{k=0}^\infty \frac{z^k}{k\!}$ for all $z$, even for matrices.
+\begin{ex}
+Compute $e^M$ if $M=\begin{bmatrix}[rrr]0&t&0\\0&0&t\\0&0&0\\\end{bmatrix}=t\begin{bmatrix}[rrr]0&1&0\\0&0&1\\0&0&0\\\end{bmatrix}$.
+\[ e^M=I_3+M+\frac{1}{2}M^2+\frac{1}{6}M^3+\cdots \]
+\[ =\begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\\end{bmatrix}+\begin{bmatrix}[rrr]0&t&0\\0&0&t\\0&0&0\\\end{bmatrix}+\frac{1}{2}\begin{bmatrix}[rrr]0&0&t^2\\0&0&0\\0&0&0\\\end{bmatrix}+\frac{1}{6}\begin{bmatrix}[rrr]0&0&0\\0&0&0\\0&0&0\\\end{bmatrix}+\cdots =\begin{bmatrix}[rrr]1&t&\frac{1}{2}t^2\\0&1&t\\0&0&1\\\end{bmatrix} \]
+\end{ex}
+
+
+\mychapter{39}{2018-04-10}
 
 \end{document}

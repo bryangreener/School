@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import time
+import matplotlib.pyplot as plt
+from scipy import optimize
 from mnist import MNIST
 
 def loadData():
@@ -30,158 +32,191 @@ def testWrapper(func, args):
 def sigmoid(z):
     return 1.0/(1.0+np.exp(-z))
 def sigmoidPrime(z):
-    return(sigmoid(z)*(1-sigmoid(z)))
+    return np.exp(-z)/((1.0 + np.exp(-z))**2)
 
-eps = 1e-6
+eps = 1e-8
 
 class Network():
     def __init__(self, layers):
         #### Initialize weight and bias arrays with random values
         self.numLayers = len(layers)
         self.layers = layers
-        self.biases = [np.random.randn(y,1) for y in layers[1:]]
         self.weights = [np.random.randn(y,x) for x,y in zip(
                 layers[:-1],layers[1:])]
+        self.Lambda = 1e-4
+        self.a = [np.zeros(y.shape) for y in self.weights]
+        self.z = [np.zeros(y.shape) for y in self.weights]
 
-        self.errors = [np.zeros(y.shape) for y in self.weights]
-        self.zs = [np.zeros(y.shape) for y in self.weights]
-        
-        self.cWeights = [np.zeros(y) for y in layers[1:]]
-        self.cBiases = [np.zeros(y) for y in layers[1:]]
     def __del__(self):
         print("Deleted Network")
     
-    def FeedForward(self,a):
-        for b,w in zip(self.biases,self.weights):
-            a = sigmoid(np.dot(w,a)+b)
-        return a
+    def CostFunction(self, x, y):
+        self.yhat = self.FeedForward(x)
+        temp = []
+        for i in range(self.numLayers-1):
+            temp += sum(sum(self.weights[i]**2))
+        J = 0.5*sum((y-self.yhat)**2)/x.shape[0] + \
+            np.multiply((self.Lambda/2),temp)
+        return J
     
-    def BackpropOld(self, x, y):
-    #### Initialize delta vectors for bias/weight with zeros.
-        deltaB = [np.zeros(b.shape) for b in self.biases]
-        deltaW = [np.zeros(w.shape) for w in self.weights]
-    #### Rolling average vector for RMS Prop
-        
-    #### Feed Forward z^l=w^l a^(l-1) + b^l and a^l=sig(z^l)
-        activation = x
-        activations = [x]
-        zs = []
-        for b,w in zip(self.biases,self.weights):
-            z = np.dot(w,activation)+b
-            zs.append(z)
-            activation = sigmoid(z)
-            activations.append(activation)
-            
-    #### Update rolling mean for RMS Prop
-        #self.updateCache((activations[-1]-y), -1)
-        
-    #### Calculate Error E^l=delta_a C * sigprime(z^L)
-        delta = (activations[-1]-y)*sigmoidPrime(zs[-1])
-        deltaB[-1] = delta
-        deltaW[-1] = np.dot(delta,activations[-2].T)
-    #### Backpropagate Error
-        for i in reversed(range(0,self.numLayers-2)):
-    #### Calculate E^l=((w^(l+1)^T E^(l+1)) * sigprime(z^l))
-            delta = np.dot(self.weights[i+1].T,delta)*sigmoidPrime(zs[i])
-    #### Calculate dC/dw_jk^l = a_k^(l-1) E_j^l and dC/db_j^l = E_j^l
-            deltaB[i] = delta
-            deltaW[i] = np.dot(activations[i+1].T,delta)
-    #### Update cache for RMS Prop
-            #self.updateCache(deltaW[i], i)
-        return(deltaB,deltaW)
+    def CostFunctionPrime(self, x, y): # Effectively backprop
+        self.yhat = self.FeedForward(x)
+        dW = []
+        delta = np.multiply(-(y-self.yhat), sigmoidPrime(self.z[-1]))
+        for i in reversed(range(1, self.numLayers - 1)):
+            dW.append(np.divide(np.dot(self.a[i-1].T, delta) + \
+                                np.multiply(self.Lambda, \
+                                self.weights[i].T),x.shape[0]))
+            delta = np.multiply(np.dot(delta, self.weights[i]), \
+                                sigmoidPrime(self.z[i-1]))
+        dW.append(np.divide(np.dot(x.T, delta) + np.multiply(self.Lambda, \
+                  self.weights[0].T),x.shape[0]))
+        return dW # List of gradients
+    
+    def FeedForward(self,x):
+        # Z is offset by 1 to the left
+        self.z[0] = np.dot(x, self.weights[0].T)
+        self.a[0] = sigmoid(self.z[0])
+        for i in range(1, self.numLayers-1):
+            self.z[i] = np.dot(self.a[i-1], self.weights[i].T)
+            self.a[i] = sigmoid(self.z[i])
+        return self.a[-1]
+        # Last activation in a[] is the yhat value final est output
+    
+    def Backprop(self, xs, hs, errs):
+        deltas = [np.zeros(w.shape) for w in self.weights]
+        #### Gradient from output layer to prev layer
+        deltas[-1] = [np.dot(h[-1],errs) for h in hs]
+        dh = np.dot(errs,self.weights[-1].T)
+        dh[hs[:][-1] <= 0] = 0
+        deltas[-2] = np.dot(self.weights[-2].T,dh)
+        #### Gradients right to left of hidden layers
+        for i in reversed(range(1, self.numLayers-2)):
+            dh[hs[i] <= 0] = 0
+            deltas[i] = 1
+        dh = np.dot(errs,self.weights[0].T)
+        dh[hs <= 0] = 0
+        deltas[0] = np.dot(xs.T, dh)
+        self.weights = deltas
 
+    def miniBatch(self, mb):
+        x,y = [],[]
+        for a,b in mb:
+            x.append(a.ravel())
+            y.append(b.ravel())
+        gradients = self.CostFunctionPrime(np.array(x),np.array(y))
+        return gradients
+    
+    def PartitionBatches(self, trainData, miniBatchSize):
+        return [trainData[x:x+miniBatchSize] \
+                for x in range(0,len(trainData),miniBatchSize)]
+    
     def Momentum(self, trainData, epochs, miniBatchSize, 
                  alpha, gamma, testData=None):
         velocity = [np.zeros(w.shape) for w in self.weights]
-        miniBatches = [trainData[x:x+miniBatchSize] \
-                           for x in range(0,len(trainData),miniBatchSize)]
-        
         for i in range(1, epochs + 1):
             random.shuffle(trainData)
+            miniBatches = self.PartitionBatches(trainData, miniBatchSize)
+            for j in miniBatches:
+                gradients = self.miniBatch(j)
+                gradients = gradients[::-1]
+                for layer in range(len(gradients)):
+                    velocity[layer] = np.multiply(gamma, velocity[layer]) + \
+                        np.multiply(alpha, gradients[layer].T)
+                    self.weights[layer] += velocity[layer]
+            self.RunTests(i, testData)
+            
+    def RMSprop(self, trainData, epochs, miniBatchSize,
+                alpha, gamma, testData=None):
+        cache = [np.zeros(w.shape) for w in self.weights]
+        miniBatches = self.PartitionBatches(trainData, miniBatchSize)
+        for i in range(1,epochs + 1):
+            random.shuffle(trainData)
             idx = np.random.randint(0, len(miniBatches))
-            nablaW = self.miniBatch(miniBatches[idx], alpha)
-            
-            for layer in range(len(nablaW)):
-                velocity[layer] = np.multiply(gamma,velocity[layer]) + \
-                    np.multiply(alpha,nablaW[layer])
-                self.weights[layer] += np.multiply(-alpha/ \
-                            len(miniBatches[idx]),velocity[layer])
-            
-    #### If testData is passed in, forward pass and compare results then print
-            if testData:
-                nTest = len(testData)
-                tempEval = self.evaluate(testData)
-                print("Epoch {0}: {1} / {2}".format(i, tempEval, nTest))
-            else:
-                print("Epoch {0} complete".format(i))
-            
-
-    def RMSProp(self, trainData, epochs, miniBatchSize, alpha, testData=None):
-        n = len(trainData)
-        decay = 0.9
-        cacheW = [np.zeros(w.shape) for w in self.weights]
-        cacheB = [np.zeros(b.shape) for b in self.biases]
-        miniBatches = [trainData[x:x+miniBatchSize] \
-                           for x in range(0,n,miniBatchSize)]
-    #### Repeat train process for number of epochs specified
-        for h in range(1, epochs+1):
-            idx = np.random.randint(0,len(miniBatches))
-            nablaW, nablaB = self.miniBatch(miniBatches[idx], alpha)
-            k = 0
-            for i in nablaW:
-                l = 0
-                for j in i:
-                    cacheW[k][l] = decay * cacheW[k][l] + \
-                        (1.0 - decay) * (i[l]**2)
-                    self.weights[k][l] += alpha * i[l] / \
-                        (np.sqrt(cacheW[k][l]) + eps)
-                    l += 1
-                k += 1
-            k = 0
-            for i in nablaB:
-                l = 0
-                for j in i:
-                    cacheB[k][l] = decay * cacheB[k][l] + \
-                        (1.0 - decay) * (i[l]**2)
-                    self.biases[k][l] += alpha * i[l] / \
-                        (np.sqrt(cacheB[k][l]) + eps)
-                    l += 1
-                k += 1
+            gradients = self.miniBatch(miniBatches[idx])
+            gradients = gradients[::-1]
+            for k in range(len(gradients)):
+                cache[k] = np.multiply(gamma, cache[k]) + \
+                    np.multiply((1-gamma), (gradients[k].T**2))
+                self.weights[k] += np.divide( \
+                            np.multiply(alpha, gradients[k].T), \
+                            (np.sqrt(cache[k]) + eps))
+            self.RunTests(i, testData)
                     
-    #### If testData is passed in, forward pass and compare results then print
-            if testData:
-                nTest = len(testData)
-                tempEval = self.evaluate(testData)
-                print("Epoch {0}: {1} / {2}".format(h, tempEval, nTest))
-            else:
-                print("Epoch {0} complete".format(h))
+    def RunTests(self, epoch, testData=None):
+        if testData:
+            nTest = len(np.array(testData))
+            tempEval = self.evaluate(testData)
+            print("Epoch {0}: {1} / {2}".format(epoch, tempEval, nTest))
+        else:
+            print("Epoch {0} complete".format(epoch))
                 
-    def miniBatch(self, mb, alpha):
-        for x,y in mb:
-            activation = x
-            activations = [x]
-            
-            for w,b in zip(self.weights,self.biases):
-                z = np.dot(w,activation)+b
-                self.zs.append(z)
-                activation = sigmoid(z)
-                activations.append(activation)
-            self.errors[-1] = (activations[-1]-y)*sigmoidPrime(self.zs[-1])
-        return self.Backprop()
-    
-    def Backprop(self):
-        ret = []
-        for i in reversed(range(0,self.numLayers - 2)):
-            ret.append(np.dot(self.weights[i+1].T,self.errors[i+1]))
-            self.errors[i] += np.dot(self.weights[i+1].T, 
-                       self.errors[i+1]) * sigmoidPrime(self.zs[i])
-        return ret
-            
     def evaluate(self, testData):
-        res = [(np.argmax(self.FeedForward(x)),y) for x,y in testData]
+        res = [(np.argmax(self.FeedForward(x.T)),y) for x,y in testData]
         return sum(int(x==y) for x,y in res)
+    
+    def GetParams(self):
+        return self.weights
+            
+    def SetParams(self, params):
+        self.weights = params
         
+    def ComputeGradients(self, x, y):
+        return self.CostFunctionPrime(x,y)
+    
+class Trainer(object):
+    def __init__(self, N):
+        self.N = N
+        
+    def CostFunctionWrapper(self, params, x, y):
+        self.N.SetParams(params)
+        cost = self.N.CostFunction(x,y)
+        grad = self.N.ComputeGradients(x,y)
+        return cost,grad
+    
+    def Callback(self, params):
+        self.N.SetParams(params)
+        self.J.append(self.N.CostFunction(self.trainX, self.trainY))
+        self.TJ.append(self.N.CostFunction(self.testX, self.testY))
+    
+    def Train(self, trainData, testData):
+        trainX,trainY,testX,testY = [],[],[],[]
+        for a,b in trainData:
+            trainX.append(a.ravel())
+            trainY.append(b.ravel())
+        self.trainX = np.array(trainX)
+        self.trainY = np.array(trainY)
+        for a,b in testData:
+            testX.append(a.ravel())
+            testY.append(b)
+        self.testX = np.array(testX)
+        self.testY = np.array(testY)
+        
+        self.J = []
+        self.TJ = []
+        params0 = self.N.GetParams()
+        
+        options = {'maxiter':200, 'disp':True }
+        res = optimize.minimize(self.CostFunctionWrapper, params0, 
+                                jac=True, method='BFGS',
+                                args=(self.trainX.T,self.trainY.T), 
+                                options=options, callback=self.Callback)
+        self.N.setParams(res.x)
+        self.optimizationResults = res
+        
+        
+
 trainData, testData = loadDataWrapper()
 net = Network([784,35,10])
-#net.RMSProp(trainData[:1000], 1000, 15, 1.0, testData[:100])
-net.Momentum(trainData[:60000], 1000, 15, 1.0, 0.9, testData[:1000])
+T=Trainer(net)
+T.Train(trainData, testData)
+
+plt.plot(T.J)
+plt.plot(T.TJ)
+plt.grid(1)
+plt.xlabel('Iterations')
+plt.ylabel('Cost')
+plt.show()
+
+#net.RMSprop(trainData[:60000], 1000, 15, 0.0001, 0.9, testData[:1000])
+#net.Momentum(trainData[:5000], 1000, 15, 0.001, 0.9, testData[:100])

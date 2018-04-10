@@ -1,0 +1,175 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#14}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-04-10}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\begin{enumerate}
+\item[11.71]Find the characteristic and minimum polynomials of each matrix:
+	\begin{enumerate}
+	\item $A=\begin{bmatrix}[rrr]3&1&-1\\2&4&-2\\-1&-1&3\\\end{bmatrix}$
+	\item $B=\begin{bmatrix}[rrr]3&2&-1\\3&8&-3\\3&6&-1\\\end{bmatrix}$
+	\end{enumerate}
+\item[11.72]Find the characteristic and minimum polynomials of each matrix:
+	\begin{enumerate}
+	\item $A=\begin{bmatrix}[rrrrr]2&5&0&0&0\\0&2&0&0&0\\0&0&4&2&0\\0&0&3&5&0\\0&0&0&0&7\\\end{bmatrix}$
+	\item $B=\begin{bmatrix}[rrrrr]4&-1&0&0&0\\1&2&0&0&0\\0&0&3&1&0\\0&0&0&3&1\\0&0&0&0&3\\\end{bmatrix}$
+	\item $C=\begin{bmatrix}[rrrrr]3&2&0&0&0\\1&4&0&0&0\\0&0&3&1&0\\0&0&1&3&0\\0&0&0&0&4\\\end{bmatrix}$
+	\end{enumerate}
+\item[11.75]Show that a matrix $A$ and its transpose $A^T$ have the same minimum polynomial.
+
+\item[11.77]Show that $A$ is a scalar matrix $kI$ if and only if the minimum polynomial of $A$ is $m(t)=t-k$.
+\item[11.78]Find a matrix $A$ whose minimum polynomial is: (a) $t^3-5t^2+6t+8$; (b) $t^4-5t^3-2t+7t+4$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[11.79]Consider the following matrices in Jordan canonical form:
+\[ A=\begin{bmatrix}[ccccccccccc]
+	4&1&0&\tempb &{}&{}&{}&{}&{}&{}&{}\\
+	0&4&1&\tempb &{}&{}&{}&{}&{}&{}&{}\\
+	0&0&4&\tempb &{}&{}&{}&{}&{}&{}&{}\\
+	\cdashline{1-6}
+	{}&{}&{}&\tempb &4&1&\tempb &{}&{}&{}&{}\\
+	{}&{}&{}&\tempb &0&4&\tempb &{}&{}&{}&{}\\
+	\cdashline{4-9}
+	{}&{}&{}&{}&{}&{}&\tempb &2&1&\tempb &{}\\
+	{}&{}&{}&{}&{}&{}&\tempb &0&2&\tempb &{}\\
+	\cdashline{7-11}
+	{}&{}&{}&{}&{}&{}&{}&{}&{}&\tempb &2\\\end{bmatrix} 
+	\quad B=\begin{bmatrix}[ccccccccccc]
+	4&1&\tempb &{}&{}&{}&{}&{}&{}&{}&{}\\
+	0&4&\tempb &{}&{}&{}&{}&{}&{}&{}&{}\\
+	\cdashline{1-5}
+	{}&{}&\tempb &4&1&\tempb &{}&{}&{}&{}&{}\\
+	{}&{}&\tempb &0&4&\tempb &{}&{}&{}&{}&{}\\
+	\cdashline{3-7}
+	{}&{}&{}&{}&{}&\tempb &4 &\tempb &{}&{}&{}\\
+	\cdashline{6-11}	
+	{}&{}&{}&{}&{}&{}&{}&\tempb &2&1&0\\	
+	{}&{}&{}&{}&{}&{}&{}&\tempb &0&2&1\\	
+	{}&{}&{}&{}&{}&{}&{}&\tempb &0&0&2\\\end{bmatrix}	
+	\]
+	\begin{enumerate}
+	\item Find the characteristic polynomials of $A$ and $B$.
+	\item Find the minimum polynomials of $A$ and $B$.
+	\item Find a maximal set $S$ of linearly independent eigenvectors of $A$.
+	\item Find a maximal set $S$ of linearly independent eigenvectors of $B$.
+	\end{enumerate}
+	
+\item[11.80]Find all possible Jordan canonical forms whose characteristic polynomials $\Delta (t)$ and minimum polynomials $m(t)$ are as follows: (a) $\Delta (t)=(t-2)^4(t-3)^2,m(t)=(t-2)^2(t-3)^2$; (b) $\Delta (t)=(t-7)^5,m(t)=(t-7)^2$; (c) $\Delta (t) =(t-8)^4(t-1)^3,m(t)=(t-8)^3(t-1)^2$.
+	\begin{enumerate}
+	\item
+	\item
+	\item
+	\end{enumerate}		
+\item[11.81]The six possible Jordan canonical forms with characteristic polynomial $\Delta (t)=(t-2)^3(t-5)^2$ follow:\\
+I'm not writing these out. Block graphs are a nightmare in \LaTeX
+\item[12.28]For each matrix $A$, find a nonsingular matrix $P$ and a diagonal matrix $D$ such that $D=P^TAP$:
+	\begin{enumerate}
+	\item $A=\begin{bmatrix}[rrr]1&0&2\\0&3&6\\2&6&7\\\end{bmatrix}$
+	\item $A=\begin{bmatrix}[rrr]1&-2&1\\-2&5&3\\1&3&-2\\\end{bmatrix}$
+	\end{enumerate}		
+\item[12.29]For each matrix $B$, find a nonsingular matrix $P$ and a diagonal matrix $D$ such that $D=P^TAP$:
+	\begin{enumerate}
+	\item $B=\begin{bmatrix}[rrrr]1&1&-2&-3\\1&2&-5&-1\\-2&-5&10&9\\-3&-1&9&11\\\end{bmatrix}$
+	\end{enumerate}		
+\item[12.30]Find the symmetric matrix belonging to the following quadratic forms: (a) $q(x,y)=3x^2+8xy-7y^2$; (b) $q(x,y)=2x^2-xy+5y^2$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}		
+\item[12.31]Find the symmetric matrix, belonging to the following quadratic forms:\\
+(a) $q(x,y,z)=2x^2-8xy+y^2-16xz+14yz+5z^2$; (b) $q(x,y,z)=x^2-xz+y^2$; (c) $q(x,y,z)=xy+y^2+4xz+z^2$; (d) $q(x,y,z)=xy+yz$.
+	\begin{enumerate}
+	\item
+	\item
+	\item
+	\item
+	\end{enumerate}		
+\item[12.32]Let $q(x,y)=2x^2-6xy-3y^2$ and $x=s+2t$, $y=3s-t$.
+	\begin{enumerate}
+	\item Rewrite $q(x,y)$ in matrix notation, and find the matrix $A$ representing the quadratic form.
+	\item Rewrite the linear substitution using matrix notation, and find the matrix $P$ corresponding to the substitution.
+	\item Find $q(s,t)$ using: (i) direct substitution; (ii) matrix notation.
+	\end{enumerate}		
+	
+\end{enumerate}	
+\end{document}

@@ -34,8 +34,6 @@ def sigmoid(z):
 def sigmoidPrime(z):
     return np.exp(-z)/((1.0 + np.exp(-z))**2)
 
-eps = 1e-4
-
 class Network():
     def __init__(self, layers):
         #### Initialize weight and bias arrays with random values
@@ -49,7 +47,7 @@ class Network():
 
     def __del__(self):
         print("Deleted Network")
-    
+    '''
     def CostFunction(self, x, y):
         self.yhat = self.FeedForward(x)
         temp = []
@@ -58,7 +56,7 @@ class Network():
         J = 0.5*sum((y-self.yhat)**2)/x.shape[0] + \
             np.multiply((self.Lambda/2),temp)
         return J
-    
+    '''
     def CostFunctionPrime(self, x, y): # Effectively backprop
         self.yhat = self.FeedForward(x)
         dW = []
@@ -83,6 +81,7 @@ class Network():
         return self.a[-1]
         # Last activation in a[] is the yhat value final est output
     
+    '''
     def Backprop(self, xs, hs, errs):
         deltas = [np.zeros(w.shape) for w in self.weights]
         #### Gradient from output layer to prev layer
@@ -98,7 +97,8 @@ class Network():
         dh[hs <= 0] = 0
         deltas[0] = np.dot(xs.T, dh)
         self.weights = deltas
-
+    '''
+    
     def miniBatch(self, mb):
         x,y = [],[]
         for a,b in mb:
@@ -110,7 +110,7 @@ class Network():
     def PartitionBatches(self, trainData, miniBatchSize):
         return [trainData[x:x+miniBatchSize] \
                 for x in range(0,len(trainData),miniBatchSize)]
-    
+    '''
     def Momentum(self, trainData, epochs, miniBatchSize, 
                  alpha, gamma, testData=None):
         velocity = [np.zeros(w.shape) for w in self.weights]
@@ -125,10 +125,13 @@ class Network():
                         np.multiply(alpha, gradients[layer].T)
                     self.weights[layer] += velocity[layer]
             self.RunTests(i, testData)
-            
+    '''
     def RMSprop(self, trainData, epochs, miniBatchSize,
-                alpha, gamma, testData=None):
+                alpha=0.075, gamma=0.9, beta=5.0, testData=None):
+        #### Cache = r_t, Velocity = v_t
         cache = [np.zeros(w.shape) for w in self.weights]
+        velocity = [np.zeros(w.shape) for w in self.weights]
+        # Beta < 1
         for i in range(1,epochs + 1):
             random.shuffle(trainData)
             miniBatches = self.PartitionBatches(trainData, miniBatchSize)
@@ -137,11 +140,18 @@ class Network():
                 gradients = gradients[::-1]
                 #http://climin.readthedocs.io/en/latest/rmsprop.html
                 for k in range(len(gradients)):
-                    cache[k] = np.multiply((1-gamma),gradients[k].T**2)+np.multiply(gamma,cache[k])
-                    #This line fixes it all
+                    tempWeights = self.weights[k]
+                    velocity[k] = np.multiply(gamma,velocity[k])+np.multiply(alpha,gradients[k].T)
+                    self.weights[k] = self.weights[k] - np.multiply(beta,velocity[k])
+                    cache[k] = np.multiply((1-gamma),gradients[k].T**2)+np.multiply(gamma, cache[k])
                     cache[k] = cache[k]/np.amax(cache[k], axis=0)
-                    self.weights[k] = self.weights[k] - \
-                        np.multiply((alpha/np.sqrt(cache[k])),gradients[k].T)
+                    self.weights[k] = tempWeights - (np.multiply(beta,velocity[k]) + np.multiply(np.divide(alpha,(np.sqrt(cache[k]))), gradients[k].T))
+                                       
+                    #cache[k] = np.multiply((1-gamma),gradients[k].T**2)+np.multiply(gamma,cache[k])
+                    #This line fixes it all
+                    #cache[k] = cache[k]/np.amax(cache[k], axis=0)
+                    #self.weights[k] = self.weights[k] - \
+                    #    np.multiply((alpha/np.sqrt(cache[k])),gradients[k].T)
                     
                     #cache[k] = np.multiply(gamma, cache[k]) + \
                     #    np.multiply((1-gamma), (gradients[k].T**2))
@@ -162,7 +172,7 @@ class Network():
     def evaluate(self, testData):
         res = [(np.argmax(self.FeedForward(x.T)),y) for x,y in testData]
         return sum(int(x==y) for x,y in res)
-    
+'''
     def GetParams(self):
         return self.weights
             
@@ -171,7 +181,8 @@ class Network():
         
     def ComputeGradients(self, x, y):
         return self.CostFunctionPrime(x,y)
-    
+'''
+'''
 class Trainer(object):
     def __init__(self, N):
         self.N = N
@@ -211,22 +222,44 @@ class Trainer(object):
                                 options=options, callback=self.Callback)
         self.N.setParams(res.x)
         self.optimizationResults = res
-        
-        
+'''
+
+epochResults = []
+learnList = [0.075]
+batchList = [5,10,15,20,25,30,35,40,45,50]
+layerList = [[784,25,10],[784,25,25,10],[784,25,25,25,10]]
 
 trainData, testData = loadDataWrapper()
-net = Network([784,35,15,20,10])
-net.RMSprop(trainData[:10000], 1000, 5, 0.01, 0.9, testData[:1000])
+#net = Network([784,35,15,20,10])
+#net.RMSprop(trainData[:5000], 10000, 15, beta=6.0, testData=testData[:1000])
 
-#T=Trainer(net)
-#T.Train(trainData, testData)
-'''
-plt.plot(T.J)
-plt.plot(T.TJ)
-plt.grid(1)
-plt.xlabel('Iterations')
-plt.ylabel('Cost')
-plt.show()
-'''
-#net.RMSprop(trainData[:60000], 1000, 15, 0.0001, 0.9, testData[:1000])
-#net.Momentum(trainData[:5000], 1000, 15, 0.001, 0.9, testData[:100])
+# ~96% accurate at 60k train. ~95% accurate at 5k train 1k test
+#net = Network([784,35,15,20,10])
+#net.RMSprop(trainData[:60000], 1000, 15, 0.075, 0.9, testData[:10000])
+
+for i in layerList:
+    totalTrainingResults = []
+    totalLearnResults = []
+    for j in learnList:
+        totalBatchResults = []
+        for k in batchList:
+            toAverage = []
+            for l in range(0,5):
+                print("Layers: %i x %i, Learn Rate: %f, MiniBatch Size: %i, "
+                      "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
+                start = time.time()
+                net = testWrapper(Network, i)
+                net.RMSprop(trainData[:5000], 30, k, j, testData=testData[:1000])
+                stop = time.time()
+                epochResults.append((stop-start)*1000.0)
+                toAverage.append(list(epochResults))
+                del epochResults[:]
+                del net
+            #toAverage = toAverage
+            totalBatchResults.append(list(np.mean(toAverage, axis=0)))
+            print("Time for 30 Epochs (ms): %f" % (totalBatchResults[-1][-1]))
+        totalLearnResults.append(totalBatchResults)
+    totalTrainingResults.append(totalLearnResults)
+    # Output to file
+    with open("RMSpropTests.txt", "a+") as output:
+        output.write(str(totalTrainingResults) + '\n')

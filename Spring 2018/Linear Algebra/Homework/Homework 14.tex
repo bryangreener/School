@@ -84,22 +84,41 @@
 \begin{enumerate}
 \item[11.71]Find the characteristic and minimum polynomials of each matrix:
 	\begin{enumerate}
-	\item $A=\begin{bmatrix}[rrr]3&1&-1\\2&4&-2\\-1&-1&3\\\end{bmatrix}$
-	\item $B=\begin{bmatrix}[rrr]3&2&-1\\3&8&-3\\3&6&-1\\\end{bmatrix}$
+	\item $A=\begin{bmatrix}[rrr]3&1&-1\\2&4&-2\\-1&-1&3\\\end{bmatrix}$\\
+	\[ A-\lambda I = \begin{bmatrix}[rrr]3-\lambda & 1 & -1\\2&4-\lambda &-2\\-1&-1&3-\lambda\\\end{bmatrix} \]
+	Next we compute the determinant
+	\[ \mathrm{det}(A) = -\lambda^3+10\lambda^2-28\lambda+24 = (\lambda-6)(\lambda-2)^2 \]
+	Thus $m(t)$ is either $f(t)=(t-6)(t-2)$ or $g(t)=(t-6)(t-2)^2$.\\
+	By the Cayley-Hamilton theorem, $g(A)=\Delta(A)=0$. Hence we only need to test $f(t)$.
+	\[ f(A)=(A-6I)(A-2I) = \begin{bmatrix}[rrr]-3&1&-1\\2&-2&-2\\-1&-1&-3\\\end{bmatrix}\begin{bmatrix}[rrr]1&1&-1\\2&2&-2\\-1&-1&1\\\end{bmatrix} = \begin{bmatrix}[rrr]0&0&0\\0&0&0\\0&0&0\\\end{bmatrix} \]
+	Thus $m(t)=f(t)=(t-6)(t-2)=t^2-12t+12$ is the minimal polynomial of $A$.
+	
+	\item $B=\begin{bmatrix}[rrr]3&2&-1\\3&8&-3\\3&6&-1\\\end{bmatrix}$\\
+	Repeating the process from part (a), we get $\mathrm{det}(B)=-\lambda^3+10\lambda^2-28\lambda+24$. Since this is the same characteristic polynomial as part (a), then we get the same set of possibilities for $m(t)$. Thus we only need to test
+	\[ \begin{bmatrix}[rrr]3&2&-1\\3&8&-3\\3&6&-1\\\end{bmatrix}\begin{bmatrix}[rrr]1&2&-1\\3&6&-3\\3&6&-3\\\end{bmatrix}\neq\begin{bmatrix}[rrr]0&0&0\\0&0&0\\0&0&0\\\end{bmatrix} \]
 	\end{enumerate}
 \item[11.72]Find the characteristic and minimum polynomials of each matrix:
 	\begin{enumerate}
-	\item $A=\begin{bmatrix}[rrrrr]2&5&0&0&0\\0&2&0&0&0\\0&0&4&2&0\\0&0&3&5&0\\0&0&0&0&7\\\end{bmatrix}$
-	\item $B=\begin{bmatrix}[rrrrr]4&-1&0&0&0\\1&2&0&0&0\\0&0&3&1&0\\0&0&0&3&1\\0&0&0&0&3\\\end{bmatrix}$
-	\item $C=\begin{bmatrix}[rrrrr]3&2&0&0&0\\1&4&0&0&0\\0&0&3&1&0\\0&0&1&3&0\\0&0&0&0&4\\\end{bmatrix}$
+	\item $A=\begin{bmatrix}[rrrrr]2&5&0&0&0\\0&2&0&0&0\\0&0&4&2&0\\0&0&3&5&0\\0&0&0&0&7\\\end{bmatrix}$\\
+	This matrix is block diagonal with blocks
+	\[ A=\begin{bmatrix}[rr]2&5\\0&2\\\end{bmatrix}, \quad B=\begin{bmatrix}[rrr]4&2&0\\3&5&0\\0&0&7\\\end{bmatrix} \]
+	The matrix $A$ has minimum polynomial of $f(t)=(t-2)^2$ and $B$ has $g(t)=(t-2)(t-7)^2$. Thus $\Delta(t) = f(t)g(t) = (t-2)^3(t-7)^2$. So $m(t)=LCM[f(t)g(t)] = (t-2)^2(t-7)$.
+	\item $B=\begin{bmatrix}[rrrrr]4&-1&0&0&0\\1&2&0&0&0\\0&0&3&1&0\\0&0&0&3&1\\0&0&0&0&3\\\end{bmatrix}$\\
+	This matrix has the block matrices
+	\[ A=\begin{bmatrix}[rr]4&-1\\1&2\\\end{bmatrix}, \quad B=\begin{bmatrix}[rrr]3&1&0\\0&3&1\\0&0&3\\\end{bmatrix} \]
+	$A$ has minimum polynomial $f(t)=(t-3)^2$ and $B$ has $g(t)=(t-3)^3$. Thus $\Delta(t)=(t-3)^5$ but $m(t)=(t-3)^3$.
+	\item $C=\begin{bmatrix}[rrrrr]3&2&0&0&0\\1&4&0&0&0\\0&0&3&1&0\\0&0&1&3&0\\0&0&0&0&4\\\end{bmatrix}$\\
+	This matrix has the block matrices
+	\[ A=\begin{bmatrix}[rr]3&2\\1&4\\\end{bmatrix}, \quad B=\begin{bmatrix}[rrr]3&1&0\\1&3&0\\0&0&4\\\end{bmatrix} \]
+	Matrix $A$ has the minimum polynomial $f(t)=(t-2)(t-5)$ and $B$ has $g(t)=(t-4)^2(t-2)$. Thus $\Delta(t)=(t-2)^2(t-5)(t-4)^2$ but $m(t)=(t-2)(t-4)(t-5)$.
 	\end{enumerate}
 \item[11.75]Show that a matrix $A$ and its transpose $A^T$ have the same minimum polynomial.
 
 \item[11.77]Show that $A$ is a scalar matrix $kI$ if and only if the minimum polynomial of $A$ is $m(t)=t-k$.
 \item[11.78]Find a matrix $A$ whose minimum polynomial is: (a) $t^3-5t^2+6t+8$; (b) $t^4-5t^3-2t+7t+4$.
 	\begin{enumerate}
-	\item
-	\item
+	\item $A=\begin{bmatrix}[rrr]0&0&-8\\1&0&-6\\0&1&5\\\end{bmatrix}$
+	\item $A=\begin{bmatrix}[rrrr]0&0&0&-4\\1&0&0&-7\\0&1&0&2\\0&0&1&5\\\end{bmatrix}$
 	\end{enumerate}
 \item[11.79]Consider the following matrices in Jordan canonical form:
 \[ A=\begin{bmatrix}[ccccccccccc]
@@ -128,10 +147,14 @@
 	{}&{}&{}&{}&{}&{}&{}&\tempb &0&0&2\\\end{bmatrix}	
 	\]
 	\begin{enumerate}
-	\item Find the characteristic polynomials of $A$ and $B$.
-	\item Find the minimum polynomials of $A$ and $B$.
-	\item Find a maximal set $S$ of linearly independent eigenvectors of $A$.
-	\item Find a maximal set $S$ of linearly independent eigenvectors of $B$.
+	\item Find the characteristic polynomials of $A$ and $B$.\\
+	Since both matrices have five 4s and three 2s on the diagonal, then $\Delta(t)=(t-4)^5(t-2)^3$ is the characteristic polynomial of both $A$ and $B$ and their eigenvalues are 2 and 4.
+	\item Find the minimum polynomials of $A$ and $B$.\\
+	The minimum polynomial for $A$ is $(t-4)^3(t-2)^2$ since the largest block with 4s in the diagonal is of order 3 and the largest block with 2s is of order 2. The minimum polynomial for $B$ is $(t-4)^2(t-2)^3$ for the opposite reason of A's minimum polynomial.
+	\item Find a maximal set $S$ of linearly independent eigenvectors of $A$.\\
+	Since each block contributes one eigenvector to $S$, then a maximal set can be $v_1=(1,0,0,0,0,0,0,0),v_2=(0,0,0,1,0,0,0,0),v_3=(0,0,0,0,0,1,0,0),v_4=(0,0,0,0,0,0,0,1)$.
+	\item Find a maximal set $S$ of linearly independent eigenvectors of $B$.\\
+	Since each block contributes one eigenvector to $S$, then a maximal set can be $v_1=(1,0,0,0,0,0,0,0),v_2=(0,0,1,0,0,0,0,0),v_3=(0,0,0,0,1,0,0,0),v_4=(0,0,0,0,0,1,0,0)$.
 	\end{enumerate}
 	
 \item[11.80]Find all possible Jordan canonical forms whose characteristic polynomials $\Delta (t)$ and minimum polynomials $m(t)$ are as follows: (a) $\Delta (t)=(t-2)^4(t-3)^2,m(t)=(t-2)^2(t-3)^2$; (b) $\Delta (t)=(t-7)^5,m(t)=(t-7)^2$; (c) $\Delta (t) =(t-8)^4(t-1)^3,m(t)=(t-8)^3(t-1)^2$.

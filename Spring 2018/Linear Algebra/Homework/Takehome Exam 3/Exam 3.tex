@@ -89,8 +89,87 @@
 		a_{5,1}&a_{5,2}&a_{5,3}&a_{5,4}&a_{5,5}-x\\\end{bmatrix} \]
 	\end{solution}
 \item[3]The owner of a rapidly expanding business finds that for the first five months of the yea,r the sales are \$4.0, \$4.4, \$5.2, \$6.4, and \$8.0 (thousands). After plotting these figures, the owner speculates that they follow a quadratic function. Find the last-squares quadratic polynomial fit to these data and use it to project sales for the remaining seven months of the year.
-	\begin{solution}
-	
-	\end{solution}
+	\begin{center}
+	\begin{tabular}{c|l}
+	Month&Sales\\
+	\hline
+	1&\$4,000.00\\
+	2&\$4,400.00\\
+	3&\$5,200.00\\
+	4&\$6,400.00\\
+	5&\$8,000.00\\
+	6&\$8,600.00\\
+	7&\$9,600.00\\
+	8&\$10,600.00\\
+	9&\$11,600.00\\
+	10&\$12,600.00\\
+	11&\$13,600.00\\
+	12&\$14,600.00\\
+	\end{tabular}
+	\end{center}
+
+\item Demonstrate an example of the Cayley-Hamilton theorem with a $5 \times 5$ matrix.
+\begin{solution}
+Let $A=\begin{bmatrix}[rrrrr]1&1&1&1&1\\0&2&1&1&1\\0&0&3&1&1\\0&0&0&4&1\\0&0&0&0&5\\\end{bmatrix}$.
+Note that matrix $A$ is triangular with diagonal elements 1,2,3,4, and 5, and so its characteristic polynomial is
+\[ \Delta(t)=(t-1)(t-2)(t-3)(t-4)(t-5) \]
+So
+\begin{align*}
+\Delta(t)&=(t-1)(t-2)(t-3)(t-4)(t-5)\\
+&= t^5 - 15 t^4 + 85 t^3 - 225 t^2 + 274 t - 120\\
+&= \begin{bmatrix}[rrrrr]
+	1&31&211&781&2101\\
+	0&32&211&781&2101\\
+	0&0&243&781&2101\\
+	0&0&0&1024&2101\\
+	0&0&0&0&3125\\\end{bmatrix}\\
+	&+
+	50625 \begin{bmatrix}[rrrrr]
+	1&15&65&175&369\\
+	0&16&65&175&369\\
+	0&0&81&175&369\\
+	0&0&0&256&369\\
+	0&0&0&0&625\\\end{bmatrix}\\
+	&+
+	614125\begin{bmatrix}[rrrrr]
+	1&7&19&37&61\\
+	0&8&19&37&61\\
+	0&0&27&37&61\\
+	0&0&0&64&61\\
+	0&0&0&0&125\\\end{bmatrix}\\
+	&+
+	50625\begin{bmatrix}[rrrrr]
+	1&3&5&7&9\\
+	0&4&5&7&9\\
+	0&0&9&7&9\\
+	0&0&0&16&9\\
+	0&0&0&0&25\\\end{bmatrix}\\
+	&+
+	\begin{bmatrix}[rrrrr]
+	274&274&274&274&274\\
+	0&548&274&274&274\\
+	0&0&822&274&274\\
+	0&0&0&1096&274\\
+	0&0&0&0&1370\\\end{bmatrix}\\
+	&+
+	\begin{bmatrix}[rrrrr]
+	-120&0&0&0&0\\
+	0&-120&0&0&0\\
+	0&0&-120&0&0\\
+	0&0&0&-120&0\\
+	0&0&0&0&-120\\\end{bmatrix}
+\end{align*}
+
+\end{solution}
+
+
+\item[5.] Use iterative methods to find the largest eigenvalue of the matrix
+\[ M = \begin{bmatrix}[rrr]6&-4&1\\-4&6&-1\\1&-1&11\\\end{bmatrix} \]
+and give a basis for its eigenspace. (Search using the key words "iterative" and "largest eigenvalue".)
+\begin{solution}
+Eigenvalues: 12, 9, 2\\
+Basis for eigenspace:  
+\[ \left\{\begin{bmatrix}[r]0.408\\-0.408\\0.816\\\end{bmatrix},\begin{bmatrix}[r]-0.577\\0.577\\0.577\\\end{bmatrix},\begin{bmatrix}[r]-7.071e-01\\-7.071e-01\\3.053e-16\\\end{bmatrix}\right\} \]
+\end{solution}
 \end{enumerate}
 \end{document}

@@ -184,7 +184,7 @@ import time
 #import csv
 
 
-learnList = [1.0]
+learnList = [0.075]
 batchList = [15]
 layerList = [[784,35,15,20,10]]
 #### Initialize network and iterate through input combos
@@ -197,12 +197,12 @@ for i in layerList:
         totalBatchResults = []
         for k in batchList:
             toAverage = []
-            for l in range(0,5):
+            for l in range(0,1):
                 print("Layers: %i x %i, Learn Rate: %f, MiniBatch Size: %i, "
                       "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
                 start = time.time()
                 net = testWrapper(NeuralNetwork, i)
-                net.SGD(training_data[:5000], 1000, k, j, test_data=test_data[:1000])
+                net.SGD(training_data[:60000], 30, k, j, test_data=test_data[:10000])
                 stop = time.time()
                 epochResults.append((stop-start)*1000.0)
                 toAverage.append(list(epochResults))
@@ -210,11 +210,11 @@ for i in layerList:
                 del net
             #toAverage = toAverage
             totalBatchResults.append(list(np.mean(toAverage, axis=0)))
-            print("Time for 10 Epochs (ms): %f" % (totalBatchResults[-1][-1]))
+            print("Time for 1000 Epochs (ms): %f" % (totalBatchResults[-1][-1]))
         totalLearnResults.append(totalBatchResults)
     totalTrainingResults.append(totalLearnResults)
     # Output to file
-    with open("NewSigmoidTest.txt", "a+") as output:
+    with open("MNISTLong.txt", "a+") as output:
         output.write(str(totalTrainingResults) + '\n')
 
 

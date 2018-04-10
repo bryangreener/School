@@ -165,6 +165,7 @@ class Network():
         if testData:
             nTest = len(np.array(testData))
             tempEval = self.evaluate(testData)
+            epochResults.append(tempEval)
             print("Epoch {0}: {1} / {2}".format(epoch, tempEval, nTest))
         else:
             print("Epoch {0} complete".format(epoch))
@@ -226,8 +227,8 @@ class Trainer(object):
 
 epochResults = []
 learnList = [0.075]
-batchList = [5,10,15,20,25,30,35,40,45,50]
-layerList = [[784,25,10],[784,25,25,10],[784,25,25,25,10]]
+batchList = [15]
+layerList = [[784,35,15,20,10]]
 
 trainData, testData = loadDataWrapper()
 #net = Network([784,35,15,20,10])
@@ -244,12 +245,12 @@ for i in layerList:
         totalBatchResults = []
         for k in batchList:
             toAverage = []
-            for l in range(0,5):
+            for l in range(0,1):
                 print("Layers: %i x %i, Learn Rate: %f, MiniBatch Size: %i, "
                       "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
                 start = time.time()
                 net = testWrapper(Network, i)
-                net.RMSprop(trainData[:5000], 30, k, j, testData=testData[:1000])
+                net.RMSprop(trainData[:60000], 30, k, j, testData=testData[:10000])
                 stop = time.time()
                 epochResults.append((stop-start)*1000.0)
                 toAverage.append(list(epochResults))
@@ -257,9 +258,9 @@ for i in layerList:
                 del net
             #toAverage = toAverage
             totalBatchResults.append(list(np.mean(toAverage, axis=0)))
-            print("Time for 30 Epochs (ms): %f" % (totalBatchResults[-1][-1]))
+            print("Time for 1000 Epochs (ms): %f" % (totalBatchResults[-1][-1]))
         totalLearnResults.append(totalBatchResults)
     totalTrainingResults.append(totalLearnResults)
     # Output to file
-    with open("RMSpropTests.txt", "a+") as output:
+    with open("RMSLong.txt", "a+") as output:
         output.write(str(totalTrainingResults) + '\n')

@@ -86,22 +86,26 @@ and define a pair of sequences according to
 $A_1=1$, $B_1=1$, and $\begin{bmatrix}[r]A_{n+1}\\B_{n+1}\\\end{bmatrix}=M\begin{bmatrix}[r]A_n\\B_n\\\end{bmatrix}$, $(n\geq 1)$
 \end{center}
 (a) Determine the first 10 terms of each of these sequences. (b) Determine the limit $\lim_{n\rightarrow\infty}(A_n/B_n)$, and prove your result. (Hint: Diagonalize $M$).
-\begin{solution}
 \begin{enumerate}
 \item
 \[ \begin{bmatrix}[r]3\\2\\\end{bmatrix},\begin{bmatrix}[r]7\\5\\\end{bmatrix},\begin{bmatrix}[r]17\\12\\\end{bmatrix},\begin{bmatrix}[r]41\\29\\\end{bmatrix},\begin{bmatrix}[r]99\\70\\\end{bmatrix},\begin{bmatrix}[r]239\\169\\\end{bmatrix},\begin{bmatrix}[r]577\\408\\\end{bmatrix},\begin{bmatrix}[r]1393\\985\\\end{bmatrix},\begin{bmatrix}[r]3363\\2378\\\end{bmatrix},\begin{bmatrix}[r]8119\\5741\\\end{bmatrix} \]
+These results were found by writing a python program as follows:
+\begin{verbatim}
+import numpy as np
+M = np.array([[1,2],[1,1]])
+R = np.array([[1],[1]])
+for i in range(11):
+    print(R)
+    R = np.dot(M,R)
+\end{verbatim}
 
 \item Next we diagonalize $M$ and get $P=\begin{bmatrix}[rr]\sqrt{2}&-\sqrt{2}\\1&1\\\end{bmatrix}$, $D=\begin{bmatrix}[rr]1+\sqrt{2}&0\\0&1-\sqrt{2}\\\end{bmatrix}$, and $P^{-1}=\begin{bmatrix}[rr]\frac{1}{2\sqrt{2}}&\frac{1}{2}\\-\frac{1}{2\sqrt{2}}&\frac{1}{2}\\\end{bmatrix}$. So $M^n=PD^nP^{-1}$. Thus $\lim_{n\rightarrow\infty}M^n=\lim_{n\rightarrow\infty}PD^nP^{-1}=PBP^{-1}$ where
 \[ B=\begin{bmatrix}[rr]\infty &0\\0&0\\\end{bmatrix} \]
 Thus $\lim_{n\rightarrow\infty}M^n = PBP^{-1}=\begin{bmatrix}[rr]\infty&\infty\\\infty&\infty\\\end{bmatrix}$.\\
-Since every item in the limit of $M$ is infinity, then multiplying $M\begin{bmatrix}[r]A_n\\B_n\\\end{bmatrix}$ for $n\rightarrow\infty$ will result in $\begin{bmatrix}[r]\infty\\\infty\\\end{bmatrix}$.\\
-Let $M$ be a $2\times2$ matrix $\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$. Then
-\[ \begin{bmatrix}[r]A_{n+1}\\B_{n+1}\\\end{bmatrix} = \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[r]A_n\\B_n\\\end{bmatrix} = \begin{bmatrix}[r]aA_n+bB_n\\cA_n+dB_n\\\end{bmatrix} \]
-where $A_1=1$ and $B_1=1$. 
+Since every item in the limit of $M$ is infinity, then multiplying $M\begin{bmatrix}[r]A_n\\B_n\\\end{bmatrix}$ for $n\rightarrow\infty$ will result in $\begin{bmatrix}[r]\infty\\\infty\\\end{bmatrix}$.\\ 
 \end{enumerate}
-\end{solution}
 
-\item[3]The owner of a rapidly expanding business finds that for the first five months of the year the sales are \$4.0, \$4.4, \$5.2, \$6.4, and \$8.0 (thousands). After plotting these figures, the owner speculates that they follow a quadratic function. Find the last-squares quadratic polynomial fit to these data and use it to project sales for the remaining seven months of the year.
+\item[3.]The owner of a rapidly expanding business finds that for the first five months of the year the sales are \$4.0, \$4.4, \$5.2, \$6.4, and \$8.0 (thousands). After plotting these figures, the owner speculates that they follow a quadratic function. Find the last-squares quadratic polynomial fit to these data and use it to project sales for the remaining seven months of the year.
 	\begin{center}
 	\begin{tabular}{c|l}
 	Month&Sales\\
@@ -120,61 +124,13 @@ where $A_1=1$ and $B_1=1$.
 	12&\$27,932.62\\
 	\end{tabular}
 	\end{center}
-
-\item Demonstrate an example of the Cayley-Hamilton theorem with a $5 \times 5$ matrix.
-\begin{solution}
-Let $A=\begin{bmatrix}[rrrrr]1&1&1&1&1\\0&2&1&1&1\\0&0&3&1&1\\0&0&0&4&1\\0&0&0&0&5\\\end{bmatrix}$.
-Note that matrix $A$ is triangular with diagonal elements 1,2,3,4, and 5, and so its characteristic polynomial is
-\[ \Delta(t)=(t-1)(t-2)(t-3)(t-4)(t-5) \]
-So
-\begin{align*}
-\Delta(t)&=(t-1)(t-2)(t-3)(t-4)(t-5)\\
-&= t^5 - 15 t^4 + 85 t^3 - 225 t^2 + 274 t - 120\\
-&= \begin{bmatrix}[rrrrr]
-	1&31&211&781&2101\\
-	0&32&211&781&2101\\
-	0&0&243&781&2101\\
-	0&0&0&1024&2101\\
-	0&0&0&0&3125\\\end{bmatrix}\\
-	&+
-	50625 \begin{bmatrix}[rrrrr]
-	1&15&65&175&369\\
-	0&16&65&175&369\\
-	0&0&81&175&369\\
-	0&0&0&256&369\\
-	0&0&0&0&625\\\end{bmatrix}\\
-	&+
-	614125\begin{bmatrix}[rrrrr]
-	1&7&19&37&61\\
-	0&8&19&37&61\\
-	0&0&27&37&61\\
-	0&0&0&64&61\\
-	0&0&0&0&125\\\end{bmatrix}\\
-	&+
-	50625\begin{bmatrix}[rrrrr]
-	1&3&5&7&9\\
-	0&4&5&7&9\\
-	0&0&9&7&9\\
-	0&0&0&16&9\\
-	0&0&0&0&25\\\end{bmatrix}\\
-	&+
-	\begin{bmatrix}[rrrrr]
-	274&274&274&274&274\\
-	0&548&274&274&274\\
-	0&0&822&274&274\\
-	0&0&0&1096&274\\
-	0&0&0&0&1370\\\end{bmatrix}\\
-	&+
-	\begin{bmatrix}[rrrrr]
-	-120&0&0&0&0\\
-	0&-120&0&0&0\\
-	0&0&-120&0&0\\
-	0&0&0&-120&0\\
-	0&0&0&0&-120\\\end{bmatrix}
-\end{align*}
-
-\end{solution}
-
+	These results were found by using the R function lm() as seen below:
+	\begin{verbatim}
+	m = c(1,2,3,4,5)
+	s = c(4.0,4.4,5.2,6.4,8.0)
+	predict(lm(s~I(m^2)), data.frame(m=c(6,7,8,9,10,11,12)), interval="predict")
+	\end{verbatim}
+	I then used the results in the 'fit' column as the sales column for the remaining months.
 
 \item[5.] Use iterative methods to find the largest eigenvalue of the matrix
 \[ M = \begin{bmatrix}[rrr]6&-4&1\\-4&6&-1\\1&-1&11\\\end{bmatrix} \]
@@ -183,6 +139,150 @@ and give a basis for its eigenspace. (Search using the key words "iterative" and
 Eigenvalues: 12, 9, 2\\
 Basis for eigenspace:  
 \[ \left\{ \begin{bmatrix}[r]1\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]-2\\2\\2\\\end{bmatrix},\begin{bmatrix}[r]1\\-1\\2\\\end{bmatrix} \right\} \]
+I order to find these values, I used an R function. The pseudocode is below:
+\begin{verbatim}
+Save matrix to array A
+Use eigen() function to store eigenvalues in vector
+iter = 0
+b12 = b9 = b2 = NULL
+FOR i in eigenvalue vector
+    X = diag(ncol(A))
+    Y = round(A-(i*X))
+    Z = rref(Y)
+    IF Z[2,2] = 1
+	    z = 2
+	    y = (-z[2,3]*z)
+	    x = (-z[1,3]*c)
+    ELSE
+        z=0, y=1, x=y
+    IF iter = 0
+         b12 <- matrix(z(x,y,z), byrow = T, ncol=1, nrow=3)
+         # print(Z %*% basis.12)
+    ELIF iter = 1
+         b9 <- matrix(z(x,y,z), byrow = T, ncol=1, nrow=3)
+         # print(Z %*% basis.9)
+    ELSE
+         b2 <- matrix(z(x,y,z)), byrow = T, ncol=1, nrow=3)
+         # print(Z %*% basis.2)
+    iter++
+\end{verbatim}
+The 'b' values were set based on the results from using the built in eigen() function on the matrix.
 \end{solution}
+
+\item[7.] Demonstrate an example of the Cayley-Hamilton theorem with a $5 \times 5$ matrix.
+\begin{solution}
+Let $A=\begin{bmatrix}[rrrrr]1&1&1&1&1\\0&2&1&1&1\\0&0&3&1&1\\0&0&0&4&1\\0&0&0&0&5\\\end{bmatrix}$.
+Note that matrix $A$ is triangular with diagonal elements 1,2,3,4, and 5, and so its characteristic polynomial is
+\[ \Delta(t)=(1-t)(2-t)(3-t)(4-t)(5-t) \]
+So by expanding we get
+\begin{align*}
+\Delta(t)&=(1-t)(2-t)(3-t)(4-t)(5-t)\\
+&= -t^5 + 15 t^4 - 85 t^3 + 225 t^2 - 274 t + 120\\
+&= -A^5+15A^4-85A^3+225A^2-274A+120I\\
+&= \begin{bmatrix}[rrrrr]0&0&0&0&0\\0&0&0&0&0\\0&0&0&0&0\\0&0&0&0&0\\0&0&0&0&0\\\end{bmatrix}
+\end{align*}
+This result was verified using the following python code below:
+\begin{verbatim}
+import numpy as np
+A=np.matrix([[1,1,1,1,1],[0,2,1,1,1],[0,0,3,1,1],[0,0,0,4,1],[0,0,0,0,5]])
+I=np.matrix([[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]])
+print(-A**5 + 
+      np.multiply(15,A**4) -
+      np.multiply(85,A**3) + 
+      np.multiply(225, A**2) -
+      np.multiply(274,A) +
+      np.multiply(120,I))
+\end{verbatim}
+\end{solution}
+
+\item[8.]Demonstrate 3 non-trivial examples of the Singular Value Decomposition.
+	\begin{enumerate}
+	\item Let $M = \begin{bmatrix}[rrr]-149&-50&-154\\537&180&546\\-27&-9&-25\\\end{bmatrix}$.\\
+	The SVD of $M$ is $M=UDV^\prime$ where
+	\begin{align*}
+	U&=\begin{bmatrix}[rrr]
+	-0.26906707 & -0.67982121 & 0.68223605\\
+	0.96200923 & -0.15566953 & 0.22428829\\
+	-0.04627257 & 0.71666597 & 0.69587983\\\end{bmatrix}\\
+	D&=\begin{bmatrix}[rrr]
+	817.759668 & 0 & 0\\
+	0 & 2.47497449 & 0\\
+	0 & 0 & 0.00296452308\\\end{bmatrix}\\
+	V^\prime &= \begin{bmatrix}[rrr]
+	0.68227785 & 0.22871202 & 0.6943974\\
+ 	-0.66714135 & -0.19371852 & 0.71930213\\
+ 	0.29903068 & -0.95402513 & 0.02041339\\\end{bmatrix}
+ 	\end{align*}
+ 	I Got this result by using a python library function from numpy called linalg.svd. Below are the results:
+ 	\begin{verbatim}
+	arr = np.array([[-149,-50,-154],[537,180,546],[-27,-9,-25]])
+	U,D,V = np.linalg.svd(arr, full_matrices=True)
+ 	\end{verbatim}
+ 	I then verified this result by performing the following operations:
+ 	\begin{verbatim}
+	IN    print(np.allclose(arr, U * np.diag(D) * V))
+	OUT   True
+ 	
+	IN    print(np.round([np.dot(U[:,i-1].A1, U[:,i].A1) 
+	          for i in range(1,len(U))]))
+	OUT   [-0., -0.]
+	
+	IN    print(np.round([np.dot(V[:,i-1].A1, V[:,i].A1) 
+	          for i in range(1,len(V))]))
+	OUT   [-0., -0.]
+	
+	IN    print(np.round(np.sum((np.multiply(U,U)),0)))
+	OUT   [[1.,1.,1.]]
+	
+	IN    print(np.round(np.sum((np.multiply(V,V)),0)))
+	OUT   [[1.,1.,1.]]
+	
+	IN    print(np.allclose(U.T * U, np.identity(len(U))))
+	OUT   True
+	
+	IN    print(np.allclose(V.T * V, np.identity(len(V))))
+	OUT   True
+ 	\end{verbatim}
+ 	The first result here is testing the result of $M=UDV$. The remaining functions are verifying the orthogonal properties of U and V. Functions two and three are verifying that the dot products across columns is equal to zero. Four and five are verifying that the columns are unit vectors. Finally functions six and seven are verifying that multiplying each matrix by its transpose results in the identity matrix.
+	\item Let $M=\begin{bmatrix}[rrr]0&1&1\\\sqrt{2}&2&0\\0&1&1\\\end{bmatrix}$. Performing the same operations as above gives the results
+	\begin{align*}
+	U&=\begin{bmatrix}[rrr]-0.40824829 & 0.57735027 & -0.70710678\\
+	-0.81649658 & -0.57735027 & 0\\
+	-0.40824829 & 0.57735027 & 0.70710678\\\end{bmatrix}\\
+	D&=\begin{bmatrix}[rrr]
+	2.82842712 & 0 & 0\\
+	0 & 1.41421356 & 0\\
+	0 & 0 & 2.37213427e-17\\\end{bmatrix}\\
+	V&=\begin{bmatrix}[rrr]
+	-4.08248290e-01 & -8.66025404e-01 & -2.88675135e-01\\
+	-5.77350269e-01 & -4.89172797e-17 & 8.16496581e-01\\
+	-7.07106781e-01 & 5.00000000e-01 & -5.00000000e-01\\\end{bmatrix}
+	\end{align*}
+	Just as before, these results were verified to be accurate with the same functions from the previous example.
+	\item Let $M=\begin{bmatrix}[rrrr]2&3&4&5\\3&4&5&6\\4&5&6&7\\5&6&7&8\\\end{bmatrix}$. Once again, this matrix has been run through the same program and its results (listed below) verified.
+	\begin{align*}
+	U&=\begin{bmatrix}[rrrr]
+	-0.34897316 & -0.76040629 & 0.54422665 & 0.06178472\\
+	-0.44231612 & -0.32304249 & -0.77168715 & 0.32326297\\
+	-0.53565907 & 0.1143213 & -0.08930566 & -0.8318801\\
+	-0.62900202 & 0.5516851 &  0.31676616 & 0.44683241\\\end{bmatrix}\\
+	D&=\begin{bmatrix}
+	2.09544512e+01 & 0 & 0 & 0\\
+	0 & 9.54451150e-01 & 0 & 0\\
+	0 & 0 & 8.73806904e-16 & 0\\
+	0 & 0 & 0 & 4.73983730e-17\\\end{bmatrix}\\
+	V&=\begin{bmatrix}[rrrr]
+	-0.34897316 & -0.44231612 & -0.53565907 & -0.62900202\\
+	0.76040629 & 0.32304249 & -0.1143213  & -0.5516851\\
+	0.5477173 & -0.72850169 & -0.18614853 & 0.36693292\\
+	0.00239892 & -0.41144293 & 0.81568911 & -0.4066451\\\end{bmatrix}
+	\end{align*}
+	\end{enumerate}
+
+
+
+
+
+
 \end{enumerate}
 \end{document}

@@ -7,6 +7,10 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+
 % For clickable TOC
 \usepackage{hyperref}
 \hypersetup{
@@ -2817,6 +2821,50 @@ Compute $e^M$ if $M=\begin{bmatrix}[rrr]0&t&0\\0&0&t\\0&0&0\\\end{bmatrix}=t\beg
 \end{ex}
 
 
-\mychapter{39}{2018-04-10}
+\mychapter{39}{2018-04-12}
+\section{Exam 3 Review}
+\subsection{1}
+\[ \int_0^\infty t^ne^{-t}dt = n\! , <t^j,t^k>=(j+k)\! \]
+\section{Homework Review}
+\subsection{11.78}
+Finding a matrix whose minimum polynomial is given by a characteristic polynomial.
+\[ f(t)=t^3-5t^2+6t+8 \]
+We can solve this by finding the companion matrix otherwise just follow the pattern seen below.
+\[ A=\begin{bmatrix}[rrr]0&0&-8\\1&0&-6\\0&1&5\\\end{bmatrix} \]
+The given polynomial can also be seen as $t(t(t-5)+6)+8$.\\
+Otherwise we can solve this using Jordan canonical forms.\\
+Assume we have polynomials $h(t)=(t-3)^2(t+5)$ and $k(t)=(t-3)(t+5)$. Since these are factored, we can write down the Jordan canonical forms.
+\[ A_h=\begin{bmatrix}[rrrr]3&1&\tempb&{}\\0&3&\tempb&{}\\\cdashline{1-4} {}&{}&\tempb&5\\\end{bmatrix} \]
+
+\subsection{12.30}
+\begin{enumerate}
+\item[(a)] $M_q=\begin{bmatrix}[rr]3&4\\4&-7\\\end{bmatrix}$. This is found by inspection. The polynomial is $3x^2+8xy-7y^2$. Using the $x^2$ and $y^2$ gives us our diagonal then factoring the center gives us our remaining values.\\
+We verify this result:
+\[ \begin{bmatrix}[rr]x&y\\\end{bmatrix}\begin{bmatrix}[rr]3&4\\4&-7\\\end{bmatrix}\begin{bmatrix}[r]x\\y\\\end{bmatrix} = \begin{bmatrix}[rr]x&y\\\end{bmatrix}\begin{bmatrix}[r]3x+4y\\4x-7y\\\end{bmatrix} = \begin{bmatrix}[r]3x^2+4xy+4xy-7y^2\\\end{bmatrix} \]
+\end{enumerate}
+
+\subsection{12.32}
+\begin{enumerate}
+\item[(a)] See previous problem in this section for how to find the matrix for each polynomial.
+\[ A=\begin{bmatrix}[rr]2&-3\\-3&-3\\\end{bmatrix} \]
+\item[(b)] The change of variables can be written as $\begin{bmatrix}[r]x\\y\\\end{bmatrix}=\begin{bmatrix}[rr]1&2\\3&-1\\\end{bmatrix}\begin{bmatrix}[r]s\\t\\\end{bmatrix}$.
+\item[(c)]Since q is a function of two variables, we can plug in the expressions of s's and t's for x and y. Or from part (b) we can take the transpose of that matrix
+\[ \begin{bmatrix}[rr]x&y\\\end{bmatrix}=\begin{bmatrix}[rr]s&t\\\end{bmatrix}\begin{bmatrix}[rr]1&3\\2&-1\\\end{bmatrix} \]
+Note the answer from the book for this questions
+\[ q(s,t)=-43s^2-4st+17t^2\]
+Think about the matrix of this quadratic form. It is not diagonal. Use this as insight to solving similar problems.
+\end{enumerate}
+
+\section{Chain Rule}
+\begin{thrm}
+Suppose $U\xrightarrow[]{S} V$ and $V\xrightarrow[]{T} W$ are linearly transformations and $E,F,G$ are bases for $U,V,W$ respectively. Then $T\circ S$ is a linear transformation and 
+\[ \begin{bmatrix}[r]T\circ S\\\end{bmatrix}_G^E = \begin{bmatrix}[r]T\\\end{bmatrix}_F^E \begin{bmatrix}[r]S\\\end{bmatrix}_G^F \]
+\end{thrm}
+\section{Partial Fractions}
+\[ \frac{5x+7}{(x-3)^2(x+2)}=\frac{A}{x-3}+\frac{B}{(x-3)^2}+\frac{C}{x+2} \]
+This gives us three linear equations in $A,B,C$.
+
+
+\mychapter{40}{2018-04-13}
 
 \end{document}

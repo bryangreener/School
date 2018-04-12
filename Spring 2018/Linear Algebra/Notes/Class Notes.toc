@@ -204,4 +204,14 @@
 \contentsline {chapter}{2018-04-09}{83}{chapter*.41}
 \contentsline {section}{\numberline {38.1}Jordan Canonical Form and Minimum Polynomials}{83}{section.38.1}
 \contentsline {subsection}{\numberline {38.1.1}Jordan Blocks}{83}{subsection.38.1.1}
-\contentsline {chapter}{2018-04-10}{85}{chapter*.42}
+\contentsline {subsection}{\numberline {38.1.2}Matrix Exponential}{84}{subsection.38.1.2}
+\contentsline {chapter}{2018-04-12}{85}{chapter*.42}
+\contentsline {section}{\numberline {39.1}Exam 3 Review}{85}{section.39.1}
+\contentsline {subsection}{\numberline {39.1.1}1}{85}{subsection.39.1.1}
+\contentsline {section}{\numberline {39.2}Homework Review}{85}{section.39.2}
+\contentsline {subsection}{\numberline {39.2.1}11.78}{85}{subsection.39.2.1}
+\contentsline {subsection}{\numberline {39.2.2}12.30}{85}{subsection.39.2.2}
+\contentsline {subsection}{\numberline {39.2.3}12.32}{85}{subsection.39.2.3}
+\contentsline {section}{\numberline {39.3}Chain Rule}{86}{section.39.3}
+\contentsline {section}{\numberline {39.4}Partial Fractions}{86}{section.39.4}
+\contentsline {chapter}{2018-04-13}{87}{chapter*.43}

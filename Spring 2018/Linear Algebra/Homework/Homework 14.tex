@@ -115,9 +115,26 @@
 	Matrix $A$ has the minimum polynomial $f(t)=(t-2)(t-5)$ and $B$ has $g(t)=(t-4)(t-2)$ and $C$ has $h(t)=(t-4)$. Thus $\Delta(t)=(t-2)^2(t-5)(t-4)^2$ but $m(t)=(t-2)(t-4)(t-5)$.
 	\end{enumerate}
 \item[11.75]Show that a matrix $A$ and its transpose $A^T$ have the same minimum polynomial.\\
-	Look up definition for monic polynomial.
+	
 
 \item[11.77]Show that $A$ is a scalar matrix $kI$ if and only if the minimum polynomial of $A$ is $m(t)=t-k$.
+\begin{proof}
+Let $A$ be a scalar matrix $kI$. We show that this leads to $m(t)=(t-k)$.\\
+Then 
+\[ A=\begin{bmatrix}[rrrr]
+k&0&\cdots&0\\
+0&k&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&k\\\end{bmatrix} \]
+Thus the characteristic polynomial of this $n\times n$ matrix is $\Delta(t) = (t-k)^n$. However since every element in the diagonal is $k$ then the minimum polynomial is $m(t) = (t-k)$.\\
+Next let $m(t)=(t-k)$ for some matrix $A$. We show that this leads to $A = kI$. Then the characteristic polynomial of $A$ must be able to factor into some degree of $\Delta(t)=(t-k)^m$ where $m$ is an unknown degree. Since the only item in our minimum polynomial is $(t-k)$, then the only nonzero items in the diagonal of $A$ are $k$. Therefore the original matrix must be
+\[ A=\begin{bmatrix}[rrrr]
+k&0&\cdots&0\\
+0&k&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&k\\\end{bmatrix} \]
+which can be rewritten as $A=kI$.
+\end{proof}
 \item[11.78]Find a matrix $A$ whose minimum polynomial is: (a) $t^3-5t^2+6t+8$; (b) $t^4-5t^3-2t+7t+4$.
 	\begin{enumerate}
 	\item $A=\begin{bmatrix}[rrr]0&0&-8\\1&0&-6\\0&1&5\\\end{bmatrix}$

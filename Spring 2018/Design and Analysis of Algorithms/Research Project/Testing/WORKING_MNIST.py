@@ -202,7 +202,7 @@ for i in layerList:
                       "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
                 start = time.time()
                 net = testWrapper(NeuralNetwork, i)
-                net.SGD(training_data[:60000], 30, k, j, test_data=test_data[:10000])
+                net.SGD(training_data[:60000], 500, k, j, test_data=test_data[:10000])
                 stop = time.time()
                 epochResults.append((stop-start)*1000.0)
                 toAverage.append(list(epochResults))

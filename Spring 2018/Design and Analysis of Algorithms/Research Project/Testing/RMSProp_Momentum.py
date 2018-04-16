@@ -250,7 +250,7 @@ for i in layerList:
                       "Iteration: %i" % (len(i)-2, i[1], j, k, l+1))
                 start = time.time()
                 net = testWrapper(Network, i)
-                net.RMSprop(trainData[:60000], 30, k, j, testData=testData[:10000])
+                net.RMSprop(trainData[:60000], 500, k, j, testData=testData[:10000])
                 stop = time.time()
                 epochResults.append((stop-start)*1000.0)
                 toAverage.append(list(epochResults))

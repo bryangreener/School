@@ -2866,5 +2866,76 @@ This gives us three linear equations in $A,B,C$.
 
 
 \mychapter{40}{2018-04-13}
+\section{Homework Review}
+\subsection{12.28}
+\begin{enumerate}
+\item $A=\begin{bmatrix}[rrr]1&0&2\\0&3&6\\2&6&7\\\end{bmatrix}$. Using a theorem from chapter 12: Every matrix can be diagonally orthogonalized.\\
+Start by setting up the augmented matrix and reduce until we get a diagonal matrix on the left side. Note that column operations do not affect both sides while row operations do.
+\end{enumerate}
+
+\subsection{12.32}
+\begin{enumerate}
+\item[(c)] From part (b)
+\[ \begin{bmatrix}[r]x\\y\\\end{bmatrix} = \begin{bmatrix}[rr]1&2\\3&-1\\\end{bmatrix}\begin{bmatrix}[r]s\\t\\\end{bmatrix} \]
+This is called a linear operator since we're mapping $\mathbb{R}^2$ to $\mathbb{R}^2$.\\
+\begin{enumerate}
+\item[(i)]This is using algebraic notation.
+\[ q(x,y)=2x^2-6xy-3y^2 = 2(s+2t)^2-6(s+2t)(3s-t)-3(3s-t)^2 \]
+\item[(ii)]This is using matrix notation.
+\[ q(x,y)=\begin{bmatrix}[rr]s&t\\\end{bmatrix}\begin{bmatrix}[rr]1&3\\2&-1\\\end{bmatrix}\begin{bmatrix}[rr]2&-3\\-3&-3\\\end{bmatrix}\begin{bmatrix}[rr]1&2\\3&-1\\\end{bmatrix}\begin{bmatrix}[r]s\\t\\\end{bmatrix} \]
+This simplifies into the same result as in (i).
+\end{enumerate}
+\end{enumerate}
+
+
+\mychapter{41}{2018-04-16}
+\section{Quiz Review}
+\begin{enumerate}
+\item $M_Q = \begin{bmatrix}[rr]5&-1\\-1&5\\\end{bmatrix}$. Find orthogonal matrix that diagonalizes this matrix. So $P^TM_QP$ is diagonal.\\
+Eigenvalues: $\chi = \mathrm{det}\begin{bmatrix}[rr]\lambda-5 & -1\\-1&\lambda-5\\\end{bmatrix} = (\lambda-4)(\lambda-6)$ thus the eigenvalues are 4 and 6.\\
+Eigenvectors:\\
+$\lambda=4 \rightarrow M-4I = \begin{bmatrix}[rr]1&-1\\1&1\\\end{bmatrix}$ kills $\begin{bmatrix}[r]1\\1\\\end{bmatrix}$.\\
+$\lambda-6 \rightarrow M-6I = \begin{bmatrix}[rr]-1&-1\\-1&-1\\\end{bmatrix}$ kills $\begin{bmatrix}[r]1\\-1\\\end{bmatrix}$.\\
+Next stack these eigenvectors next to each other. So $P=\begin{bmatrix}[rr]1&1\\1&-1\\\end{bmatrix}$. However this is not orthogonal since $P^TP \neq I_2$. So we need to normalize this matrix by dividing by the magnitude. Magnitude: $||v||=\sqrt{v\cdot v}$. Thus $P=\begin{bmatrix}[rr]\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}\\\end{bmatrix}$.
+\end{enumerate}
+
+\section{Spectral Decomposition}
+\begin{defn}
+Let $V\xrightarrow[]{T} V$ be a linear operator. The spectrum of $T$ is the set of eigenvalues of $T$.
+\end{defn}
+Note: Eigenvalues are sometimes called singular values.\\
+Notation: $V_\lambda = \{v: T(v) = \lambda v\} =$ eigenspace of $T$ for $\lambda$.
+\begin{thrm}
+Suppose $m\in \mathbb{R}^{n\times n}$ is symmetric with spectrum $\{\lambda_1, \lambda_2, ..., \lambda_k\}$. Then there are matrices $E_1,E_2,...,E_k$ such that all of the following hold:
+\begin{enumerate}
+\item[(i)]$\mathrm{im}(E_i)=V_{\lambda_i}$
+\item[(ii)]$E_i^2 = E_i$
+\item[(iii)]$E_iE_j=E_jE_i \forall i,j$
+\item[(iv)]$M=\lambda_1E_1+\lambda_2E_2+\cdots +\lambda_kE_k$
+\end{enumerate}
+$E_i = i^{\mathrm{th}}$ principle idempotent = orthogonal projection onto $V_{\lambda_i}$.
+\begin{defn}
+$E$ is idempotent if $E^2=E$.
+\end{defn}
+\end{thrm}
+\begin{ex}
+Find the spectral decomposition of a given matrix $M=\begin{bmatrix}[rrr]5&-1&0\\-1&5&0\\0&0&4\\\end{bmatrix}$.\\
+First find the eigenvalues.
+\[ \chi_M(\lambda) = \begin{vmatrix}[rrr]\lambda-5&1&0\\1&\lambda-5&0\\0&0&\lambda-4\\\end{vmatrix} = (\lambda-4)\mathrm{det}\begin{bmatrix}[rr]\lambda-5&1\\1&\lambda-5\\\end{bmatrix} = (\lambda-4)(\lambda-4)(\lambda-6) \]
+Thus our eigenvalues are 4 and 6. Next we find the principle idempotent. We need to first find the eigenvectors.\\
+$\lambda=4\rightarrow M-4I=\begin{bmatrix}[rrr]1&-1&0\\-1&1&0\\0&0&0\\\end{bmatrix}$ kills $\mathrm{span}\left\{ \begin{bmatrix}[r]1\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\1\\\end{bmatrix}\right\} = v_4$. This is the same as finding the basis for the nullspace of the matrix since our rank is 1 and nullity is 2.\\
+$\lambda=6\rightarrow M-6I=\begin{bmatrix}[rrr]-1&-1&0\\-1&-1&0\\0&0&0\\\end{bmatrix}$ kills $\mathrm{span}\left\{\begin{bmatrix}[r]1\\-1\\0\\\end{bmatrix}\right\} = v_6$.\\
+Thus we've found three linearly independent eigenvectors all of which comprise an orthogonal set and are perpendicular to each other. We can find this by taking the dot product of any of the matrices in these spans and it gives 0s.\\
+$E_4$ is projection onto $v_4 = \mathrm{span}\left\{\begin{bmatrix}[r]1\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]0\\0\\1\\\end{bmatrix}\right\}$.\\
+\[ E_4(e_1) = E_4\begin{bmatrix}[r]0\\1\\0\\\end{bmatrix} = \dfrac{(1,0,0)\cdot (1,1,0)}{(1,1,0)\cdot (1,1,0)}\begin{bmatrix}[r]1\\1\\0\\\end{bmatrix} + \dfrac{(1,0,0)\cdot (0,0,1)}{(0,0,1)\cdot (0,0,1)}\begin{bmatrix}[r]0\\0\\1\\\end{bmatrix} =\begin{bmatrix}[r]\frac{1}{2}\\\frac{1}{2}\\0\\\end{bmatrix} \]
+We repeat this same process for $e_3$ and $e_1$ and combine the results to get $\begin{bmatrix}[rrr]\frac{1}{2}&\frac{1}{2}&0\\\frac{1}{2}&\frac{1}{2}&0\\0&0&1\\\end{bmatrix}$. This is the principle idempotent for $E_4$.\\
+We repeat this process for $E_6$ which results in $\begin{bmatrix}[rrr]\frac{1}{2}&\frac{1}{2}&0\\\frac{1}{2}&\frac{1}{2}&0\\0&0&0\\\end{bmatrix}$.\\
+Notice the rank of the matrix for $E_4$ is 2 and the column space is equal to $v_4$. Also note that the rank of the matrix for $E_6$ is 1 and the column space is the same as the image and $v_6$. Finally notice that $E_4^2=E_4$ and $E_6^2=E_6$, $E_4E_6=E_6E_4$. We also need to verify the last criteria of the theorem.
+\[ 4E_4+6E_6 = \begin{bmatrix}[rrr]2&2&0\\2&2&0\\0&0&4\\\end{bmatrix}+\begin{bmatrix}[rrr]3&-3&0\\-3&3&0\\0&0&0\\\end{bmatrix} = \begin{bmatrix}[rrr]5&-1&0\\-1&5&0\\0&0&4\\\end{bmatrix} \]
+\end{ex}
+Do the spectral decomposition for 12.28 a, b, and c. Try it for any symmetric matrix to practice.
+
+
+\mychapter{42}{2018-04-17}
 
 \end{document}

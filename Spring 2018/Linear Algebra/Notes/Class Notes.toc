@@ -1,217 +1,224 @@
-\contentsline {chapter}{2018-01-11}{6}{chapter*.2}
-\contentsline {section}{\numberline {1.1}Gauss-Jordan Elimination}{6}{section.1.1}
-\contentsline {section}{\numberline {1.2}Matrix/Vector Algebra}{6}{section.1.2}
-\contentsline {chapter}{2018-01-12}{8}{chapter*.3}
-\contentsline {section}{\numberline {2.1}Gauss-Jordan Elimination}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Matrix/Vector Algebra}{8}{section.2.2}
-\contentsline {chapter}{2018-01-16}{10}{chapter*.4}
-\contentsline {section}{\numberline {3.1}Homework Review}{10}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}2.82}{10}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}2.83}{12}{Item.4}
-\contentsline {subsection}{\numberline {3.1.3}2.86}{13}{Item.8}
-\contentsline {subsection}{\numberline {3.1.4}2.88}{13}{Item.11}
-\contentsline {subsection}{\numberline {3.1.5}2.89}{13}{Item.12}
-\contentsline {subsection}{\numberline {3.1.6}2.92}{13}{Item.13}
-\contentsline {chapter}{2018-01-18}{14}{chapter*.5}
-\contentsline {section}{\numberline {4.1}Homework Review}{14}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}1.76}{14}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}2.80}{14}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Invertibility}{14}{section.4.2}
-\contentsline {chapter}{2018-01-19}{16}{chapter*.6}
-\contentsline {section}{\numberline {5.1}Homework Review}{16}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}1.76}{16}{subsection.5.1.1}
-\contentsline {section}{\numberline {5.2}Elementary Matrices/Row Operations}{16}{section.5.2}
-\contentsline {section}{\numberline {5.3}LDU Decomposition}{16}{section.5.3}
-\contentsline {chapter}{2018-01-22}{18}{chapter*.7}
-\contentsline {section}{\numberline {6.1}nth Power of Matrices}{18}{section.6.1}
-\contentsline {section}{\numberline {6.2}Mathematical Induction}{18}{section.6.2}
-\contentsline {section}{\numberline {6.3}Vector Spaces and Scaling}{19}{section.6.3}
-\contentsline {chapter}{2018-01-23}{20}{chapter*.8}
-\contentsline {section}{\numberline {7.1}Homework Review}{20}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}3.90}{20}{subsection.7.1.1}
-\contentsline {section}{\numberline {7.2}Vector Spaces}{20}{section.7.2}
-\contentsline {chapter}{2018-01-25}{22}{chapter*.9}
-\contentsline {section}{\numberline {8.1}Homework Review}{22}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}3.99}{22}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}3.96}{22}{subsection.8.1.2}
-\contentsline {section}{\numberline {8.2}Subspaces}{22}{section.8.2}
-\contentsline {chapter}{2018-01-26}{24}{chapter*.10}
-\contentsline {section}{\numberline {9.1}Nullspaces}{24}{section.9.1}
-\contentsline {section}{\numberline {9.2}Linear Algebra Core Concepts}{24}{section.9.2}
-\contentsline {chapter}{2018-01-29}{25}{chapter*.11}
-\contentsline {section}{\numberline {10.1}Spans}{25}{section.10.1}
-\contentsline {section}{\numberline {10.2}Spanning Set}{25}{section.10.2}
-\contentsline {chapter}{2018-01-30}{26}{chapter*.12}
-\contentsline {section}{\numberline {11.1}Row and Column Spaces}{26}{section.11.1}
-\contentsline {section}{\numberline {11.2}Homework Review}{26}{section.11.2}
-\contentsline {subsection}{\numberline {11.2.1}4.36}{26}{subsection.11.2.1}
-\contentsline {chapter}{2018-02-01}{28}{chapter*.13}
-\contentsline {section}{\numberline {12.1}Homework Review}{28}{section.12.1}
-\contentsline {subsection}{\numberline {12.1.1}4.43}{28}{subsection.12.1.1}
-\contentsline {subsection}{\numberline {12.1.2}4.49}{28}{subsection.12.1.2}
-\contentsline {subsection}{\numberline {12.1.3}4.51}{28}{subsection.12.1.3}
-\contentsline {subsection}{\numberline {12.1.4}4.52}{29}{subsection.12.1.4}
-\contentsline {section}{\numberline {12.2}Zero Vector Lemma}{29}{section.12.2}
-\contentsline {chapter}{2018-02-05}{30}{chapter*.14}
-\contentsline {section}{\numberline {13.1}Exam Review}{30}{section.13.1}
-\contentsline {subsection}{\numberline {13.1.1}\#3}{30}{subsection.13.1.1}
-\contentsline {subsection}{\numberline {13.1.2}\#6b}{30}{subsection.13.1.2}
-\contentsline {section}{\numberline {13.2}Homework Review}{30}{section.13.2}
-\contentsline {subsection}{\numberline {13.2.1}5.50(a)}{30}{subsection.13.2.1}
-\contentsline {section}{\numberline {13.3}Linear Dependence/Independence}{31}{section.13.3}
-\contentsline {chapter}{2018-02-06}{32}{chapter*.15}
-\contentsline {section}{\numberline {14.1}Homework Review}{32}{section.14.1}
-\contentsline {subsection}{\numberline {14.1.1}4.63}{32}{subsection.14.1.1}
-\contentsline {section}{\numberline {14.2}Target and Range}{32}{section.14.2}
-\contentsline {chapter}{2018-02-08}{34}{chapter*.16}
-\contentsline {section}{\numberline {14.1}Homework Review}{34}{section.14.1}
-\contentsline {subsection}{\numberline {14.1.1}5.58}{34}{subsection.14.1.1}
-\contentsline {subsection}{\numberline {14.1.2}5.62.a}{34}{subsection.14.1.2}
-\contentsline {section}{\numberline {14.2}Basis}{34}{section.14.2}
-\contentsline {section}{\numberline {14.3}Rank}{35}{section.14.3}
-\contentsline {chapter}{2018-02-12}{36}{chapter*.17}
-\contentsline {section}{\numberline {15.1}Homework Review}{36}{section.15.1}
-\contentsline {subsection}{\numberline {15.1.1}5.52.b}{36}{subsection.15.1.1}
-\contentsline {subsection}{\numberline {15.1.2}5.82.a}{36}{subsection.15.1.2}
-\contentsline {section}{\numberline {15.2}Examples of Bases}{36}{section.15.2}
-\contentsline {section}{\numberline {15.3}Rank Continued}{37}{section.15.3}
-\contentsline {chapter}{2018-02-13}{38}{chapter*.18}
-\contentsline {section}{\numberline {15.1}Homework Review}{38}{section.15.1}
-\contentsline {subsection}{\numberline {15.1.1}5.55}{38}{subsection.15.1.1}
-\contentsline {section}{\numberline {15.2}Intersect of Subspaces}{38}{section.15.2}
-\contentsline {section}{\numberline {15.3}Sums of Subspaces}{39}{section.15.3}
-\contentsline {chapter}{2018-02-15}{40}{chapter*.19}
-\contentsline {section}{\numberline {16.1}Homework Review}{40}{section.16.1}
-\contentsline {subsection}{\numberline {16.1.1}5.70.a}{40}{subsection.16.1.1}
-\contentsline {subsection}{\numberline {16.1.2}5.72}{40}{subsection.16.1.2}
-\contentsline {subsection}{\numberline {16.1.3}5.77}{41}{subsection.16.1.3}
-\contentsline {section}{\numberline {16.2}Sums and Intersections Continued}{41}{section.16.2}
-\contentsline {chapter}{2018-02-16}{42}{chapter*.20}
-\contentsline {section}{\numberline {17.1}Homework Review}{42}{section.17.1}
-\contentsline {subsection}{\numberline {17.1.1}5.79}{42}{subsection.17.1.1}
-\contentsline {subsection}{\numberline {17.1.2}4.80.b}{42}{subsection.17.1.2}
-\contentsline {section}{\numberline {17.2}Direct Sums}{42}{section.17.2}
-\contentsline {chapter}{2018-02-20}{43}{chapter*.21}
-\contentsline {section}{\numberline {18.1}Coordinate Vectors}{43}{section.18.1}
-\contentsline {subsection}{\numberline {18.1.1}Change of Basis Matrix}{43}{subsection.18.1.1}
-\contentsline {section}{\numberline {18.2}Linear Mappings}{44}{section.18.2}
-\contentsline {chapter}{2018-02-22}{45}{chapter*.22}
-\contentsline {section}{\numberline {19.1}Homework Review}{45}{section.19.1}
-\contentsline {subsection}{\numberline {19.1.1}6.34}{45}{subsection.19.1.1}
-\contentsline {subsection}{\numberline {19.1.2}8.53}{45}{subsection.19.1.2}
-\contentsline {section}{\numberline {19.2}Rank Nullity Theorem}{45}{section.19.2}
-\contentsline {section}{\numberline {19.3}Image and Kernel}{46}{section.19.3}
-\contentsline {chapter}{2018-02-23}{47}{chapter*.23}
-\contentsline {section}{\numberline {20.1}Homework Review}{47}{section.20.1}
-\contentsline {subsection}{\numberline {20.1.1}6.31}{47}{subsection.20.1.1}
-\contentsline {section}{\numberline {20.2}Image and Kernel Continued}{47}{section.20.2}
-\contentsline {subsection}{\numberline {20.2.1}Linear Transformation Example}{47}{subsection.20.2.1}
-\contentsline {chapter}{2018-02-26}{48}{chapter*.24}
-\contentsline {section}{\numberline {21.1}Exam Problem}{48}{section.21.1}
-\contentsline {section}{\numberline {21.2}Rank Nullity}{48}{section.21.2}
-\contentsline {subsection}{\numberline {21.2.1}The Rank Nullity Theorem for Linear Mappings}{48}{subsection.21.2.1}
-\contentsline {subsection}{\numberline {21.2.2}8.75}{48}{subsection.21.2.2}
-\contentsline {subsection}{\numberline {21.2.3}Alternate Example of Rank Nullity Theorem}{48}{subsection.21.2.3}
-\contentsline {section}{\numberline {21.3}Matrix Representations of Linear Mappings}{49}{section.21.3}
-\contentsline {chapter}{2018-02-27}{50}{chapter*.25}
-\contentsline {section}{\numberline {22.1}Homework Review}{50}{section.22.1}
-\contentsline {subsection}{\numberline {22.1.1}8.73}{50}{subsection.22.1.1}
-\contentsline {subsection}{\numberline {22.1.2}8.85.a}{50}{subsection.22.1.2}
-\contentsline {subsection}{\numberline {22.1.3}8.80.c}{51}{subsection.22.1.3}
-\contentsline {subsection}{\numberline {22.1.4}8.70}{51}{subsection.22.1.4}
-\contentsline {section}{\numberline {22.2}Singularity}{52}{section.22.2}
-\contentsline {chapter}{2018-03-12}{53}{chapter*.26}
-\contentsline {section}{\numberline {23.1}Midterm Review}{53}{section.23.1}
-\contentsline {section}{\numberline {23.2}Chapter 7: Geometry}{53}{section.23.2}
-\contentsline {subsection}{\numberline {23.2.1}Magnitude and Angle}{53}{subsection.23.2.1}
-\contentsline {subsection}{\numberline {23.2.2}Orthogonality}{54}{subsection.23.2.2}
-\contentsline {subsection}{\numberline {23.2.3}Orthonormal}{54}{subsection.23.2.3}
-\contentsline {chapter}{2018-03-13}{55}{chapter*.27}
-\contentsline {section}{\numberline {24.1}Homework Review}{55}{section.24.1}
-\contentsline {subsection}{\numberline {24.1.1}9.29.b}{55}{subsection.24.1.1}
-\contentsline {section}{\numberline {24.2}Normalizing Orthogonal Sets}{55}{section.24.2}
-\contentsline {section}{\numberline {24.3}Inner Product Spaces}{55}{section.24.3}
-\contentsline {chapter}{2018-03-15}{57}{chapter*.28}
-\contentsline {section}{\numberline {25.1}Homework Review}{57}{section.25.1}
-\contentsline {subsection}{\numberline {25.1.1}7.65.b}{57}{subsection.25.1.1}
-\contentsline {subsection}{\numberline {25.1.2}9.43}{58}{subsection.25.1.2}
-\contentsline {subsection}{\numberline {25.1.3}7.60}{58}{subsection.25.1.3}
-\contentsline {section}{\numberline {25.2}Orthogonal Projection}{59}{section.25.2}
-\contentsline {chapter}{2018-03-16}{60}{chapter*.29}
-\contentsline {section}{\numberline {26.1}Homework Review}{60}{section.26.1}
-\contentsline {subsection}{\numberline {26.1.1}9.47}{60}{subsection.26.1.1}
-\contentsline {section}{\numberline {26.2}Gram-Schmidt Orthogonalization}{60}{section.26.2}
-\contentsline {chapter}{2018-03-19}{61}{chapter*.30}
-\contentsline {section}{\numberline {27.1}Quiz 6 Review}{61}{section.27.1}
-\contentsline {section}{\numberline {27.2}Homework Review}{61}{section.27.2}
-\contentsline {subsection}{\numberline {27.2.1}7.69}{61}{subsection.27.2.1}
-\contentsline {section}{\numberline {27.3}Over-determined System / Inconsistent System}{62}{section.27.3}
-\contentsline {subsection}{\numberline {27.3.1}Line of Best Fit}{62}{subsection.27.3.1}
-\contentsline {chapter}{2018-03-20}{63}{chapter*.31}
-\contentsline {section}{\numberline {28.1}Homework Review}{63}{section.28.1}
-\contentsline {subsection}{\numberline {28.1.1}7.69 Continued}{63}{subsection.28.1.1}
-\contentsline {section}{\numberline {28.2}Determinants}{63}{section.28.2}
-\contentsline {chapter}{2018-03-22}{64}{chapter*.32}
-\contentsline {section}{\numberline {29.1}Homework Review}{64}{section.29.1}
-\contentsline {subsection}{\numberline {29.1.1}7.73}{64}{subsection.29.1.1}
-\contentsline {subsection}{\numberline {29.1.2}7.85}{64}{subsection.29.1.2}
-\contentsline {subsection}{\numberline {29.1.3}7.70}{64}{subsection.29.1.3}
-\contentsline {section}{\numberline {29.2}Positive-Definite}{64}{section.29.2}
-\contentsline {section}{\numberline {29.3}Properties of Determinants Continued}{65}{section.29.3}
-\contentsline {chapter}{2018-03-23}{66}{chapter*.33}
-\contentsline {section}{\numberline {30.1}Homework Review}{66}{section.30.1}
-\contentsline {subsection}{\numberline {30.1.1}7.78}{66}{subsection.30.1.1}
-\contentsline {chapter}{2018-03-26}{67}{chapter*.34}
-\contentsline {section}{\numberline {31.1}Quiz Review}{67}{section.31.1}
-\contentsline {section}{\numberline {31.2}Possible Exam Question}{67}{section.31.2}
-\contentsline {section}{\numberline {31.3}Determinants Continued}{67}{section.31.3}
-\contentsline {subsection}{\numberline {31.3.1}Cofactor Expansion Formula}{67}{subsection.31.3.1}
-\contentsline {chapter}{2018-03-27}{70}{chapter*.35}
-\contentsline {section}{\numberline {32.1}Homework Review}{70}{section.32.1}
-\contentsline {subsection}{\numberline {32.1.1}10.59}{70}{subsection.32.1.1}
-\contentsline {section}{\numberline {32.2}Adjoints}{70}{section.32.2}
-\contentsline {section}{\numberline {32.3}Permutations and the Determinant}{70}{section.32.3}
-\contentsline {chapter}{2018-03-29}{72}{chapter*.36}
-\contentsline {section}{\numberline {33.1}Homework Review}{72}{section.33.1}
-\contentsline {subsection}{\numberline {33.1.1}10.76}{72}{subsection.33.1.1}
-\contentsline {subsection}{\numberline {33.1.2}10.79}{72}{subsection.33.1.2}
-\contentsline {subsection}{\numberline {33.1.3}10.74}{72}{subsection.33.1.3}
-\contentsline {subsection}{\numberline {33.1.4}10.83}{72}{subsection.33.1.4}
-\contentsline {subsection}{\numberline {33.1.5}10.69}{73}{subsection.33.1.5}
-\contentsline {section}{\numberline {33.2}Eigenvectors/Eigenvalues}{73}{section.33.2}
-\contentsline {chapter}{2018-04-02}{74}{chapter*.37}
-\contentsline {section}{\numberline {34.1}Exam Review}{74}{section.34.1}
-\contentsline {subsection}{\numberline {34.1.1}\#1}{74}{subsection.34.1.1}
-\contentsline {subsection}{\numberline {34.1.2}\#3}{74}{subsection.34.1.2}
-\contentsline {subsection}{\numberline {34.1.3}\#4.b}{74}{subsection.34.1.3}
-\contentsline {section}{\numberline {34.2}Eigenvectors}{75}{section.34.2}
-\contentsline {chapter}{2018-04-03}{77}{chapter*.38}
-\contentsline {section}{\numberline {35.1}Homework Review}{77}{section.35.1}
-\contentsline {subsection}{\numberline {35.1.1}11.58}{77}{subsection.35.1.1}
-\contentsline {section}{\numberline {35.2}Diagonalizability}{78}{section.35.2}
-\contentsline {subsection}{\numberline {35.2.1}Criterion}{78}{subsection.35.2.1}
-\contentsline {chapter}{2018-04-05}{79}{chapter*.39}
-\contentsline {section}{\numberline {36.1}Homework Review}{79}{section.36.1}
-\contentsline {subsection}{\numberline {36.1.1}11.55(b)}{79}{subsection.36.1.1}
-\contentsline {subsection}{\numberline {36.1.2}11.56(b)}{79}{subsection.36.1.2}
-\contentsline {subsection}{\numberline {36.1.3}11.68(b)}{79}{subsection.36.1.3}
-\contentsline {section}{\numberline {36.2}Diagonalizability}{80}{section.36.2}
-\contentsline {chapter}{2018-04-06}{81}{chapter*.40}
-\contentsline {section}{\numberline {37.1}Homework Review}{81}{section.37.1}
-\contentsline {subsection}{\numberline {37.1.1}11.65}{81}{subsection.37.1.1}
-\contentsline {subsection}{\numberline {37.1.2}11.60(b)}{81}{subsection.37.1.2}
-\contentsline {section}{\numberline {37.2}Algebraic vs Geometric Multiplicity}{82}{section.37.2}
-\contentsline {chapter}{2018-04-09}{83}{chapter*.41}
-\contentsline {section}{\numberline {38.1}Jordan Canonical Form and Minimum Polynomials}{83}{section.38.1}
-\contentsline {subsection}{\numberline {38.1.1}Jordan Blocks}{83}{subsection.38.1.1}
-\contentsline {subsection}{\numberline {38.1.2}Matrix Exponential}{84}{subsection.38.1.2}
-\contentsline {chapter}{2018-04-12}{85}{chapter*.42}
-\contentsline {section}{\numberline {39.1}Exam 3 Review}{85}{section.39.1}
-\contentsline {subsection}{\numberline {39.1.1}1}{85}{subsection.39.1.1}
-\contentsline {section}{\numberline {39.2}Homework Review}{85}{section.39.2}
-\contentsline {subsection}{\numberline {39.2.1}11.78}{85}{subsection.39.2.1}
-\contentsline {subsection}{\numberline {39.2.2}12.30}{85}{subsection.39.2.2}
-\contentsline {subsection}{\numberline {39.2.3}12.32}{85}{subsection.39.2.3}
-\contentsline {section}{\numberline {39.3}Chain Rule}{86}{section.39.3}
-\contentsline {section}{\numberline {39.4}Partial Fractions}{86}{section.39.4}
-\contentsline {chapter}{2018-04-13}{87}{chapter*.43}
+\contentsline {chapter}{2018-01-11}{7}{chapter*.2}
+\contentsline {section}{\numberline {1.1}Gauss-Jordan Elimination}{7}{section.1.1}
+\contentsline {section}{\numberline {1.2}Matrix/Vector Algebra}{7}{section.1.2}
+\contentsline {chapter}{2018-01-12}{9}{chapter*.3}
+\contentsline {section}{\numberline {2.1}Gauss-Jordan Elimination}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Matrix/Vector Algebra}{9}{section.2.2}
+\contentsline {chapter}{2018-01-16}{11}{chapter*.4}
+\contentsline {section}{\numberline {3.1}Homework Review}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}2.82}{11}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}2.83}{13}{Item.4}
+\contentsline {subsection}{\numberline {3.1.3}2.86}{14}{Item.8}
+\contentsline {subsection}{\numberline {3.1.4}2.88}{14}{Item.11}
+\contentsline {subsection}{\numberline {3.1.5}2.89}{14}{Item.12}
+\contentsline {subsection}{\numberline {3.1.6}2.92}{14}{Item.13}
+\contentsline {chapter}{2018-01-18}{15}{chapter*.5}
+\contentsline {section}{\numberline {4.1}Homework Review}{15}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}1.76}{15}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}2.80}{15}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Invertibility}{15}{section.4.2}
+\contentsline {chapter}{2018-01-19}{17}{chapter*.6}
+\contentsline {section}{\numberline {5.1}Homework Review}{17}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}1.76}{17}{subsection.5.1.1}
+\contentsline {section}{\numberline {5.2}Elementary Matrices/Row Operations}{17}{section.5.2}
+\contentsline {section}{\numberline {5.3}LDU Decomposition}{17}{section.5.3}
+\contentsline {chapter}{2018-01-22}{19}{chapter*.7}
+\contentsline {section}{\numberline {6.1}nth Power of Matrices}{19}{section.6.1}
+\contentsline {section}{\numberline {6.2}Mathematical Induction}{19}{section.6.2}
+\contentsline {section}{\numberline {6.3}Vector Spaces and Scaling}{20}{section.6.3}
+\contentsline {chapter}{2018-01-23}{21}{chapter*.8}
+\contentsline {section}{\numberline {7.1}Homework Review}{21}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}3.90}{21}{subsection.7.1.1}
+\contentsline {section}{\numberline {7.2}Vector Spaces}{21}{section.7.2}
+\contentsline {chapter}{2018-01-25}{23}{chapter*.9}
+\contentsline {section}{\numberline {8.1}Homework Review}{23}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}3.99}{23}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}3.96}{23}{subsection.8.1.2}
+\contentsline {section}{\numberline {8.2}Subspaces}{23}{section.8.2}
+\contentsline {chapter}{2018-01-26}{25}{chapter*.10}
+\contentsline {section}{\numberline {9.1}Nullspaces}{25}{section.9.1}
+\contentsline {section}{\numberline {9.2}Linear Algebra Core Concepts}{25}{section.9.2}
+\contentsline {chapter}{2018-01-29}{26}{chapter*.11}
+\contentsline {section}{\numberline {10.1}Spans}{26}{section.10.1}
+\contentsline {section}{\numberline {10.2}Spanning Set}{26}{section.10.2}
+\contentsline {chapter}{2018-01-30}{27}{chapter*.12}
+\contentsline {section}{\numberline {11.1}Row and Column Spaces}{27}{section.11.1}
+\contentsline {section}{\numberline {11.2}Homework Review}{27}{section.11.2}
+\contentsline {subsection}{\numberline {11.2.1}4.36}{27}{subsection.11.2.1}
+\contentsline {chapter}{2018-02-01}{29}{chapter*.13}
+\contentsline {section}{\numberline {12.1}Homework Review}{29}{section.12.1}
+\contentsline {subsection}{\numberline {12.1.1}4.43}{29}{subsection.12.1.1}
+\contentsline {subsection}{\numberline {12.1.2}4.49}{29}{subsection.12.1.2}
+\contentsline {subsection}{\numberline {12.1.3}4.51}{29}{subsection.12.1.3}
+\contentsline {subsection}{\numberline {12.1.4}4.52}{30}{subsection.12.1.4}
+\contentsline {section}{\numberline {12.2}Zero Vector Lemma}{30}{section.12.2}
+\contentsline {chapter}{2018-02-05}{31}{chapter*.14}
+\contentsline {section}{\numberline {13.1}Exam Review}{31}{section.13.1}
+\contentsline {subsection}{\numberline {13.1.1}\#3}{31}{subsection.13.1.1}
+\contentsline {subsection}{\numberline {13.1.2}\#6b}{31}{subsection.13.1.2}
+\contentsline {section}{\numberline {13.2}Homework Review}{31}{section.13.2}
+\contentsline {subsection}{\numberline {13.2.1}5.50(a)}{31}{subsection.13.2.1}
+\contentsline {section}{\numberline {13.3}Linear Dependence/Independence}{32}{section.13.3}
+\contentsline {chapter}{2018-02-06}{33}{chapter*.15}
+\contentsline {section}{\numberline {14.1}Homework Review}{33}{section.14.1}
+\contentsline {subsection}{\numberline {14.1.1}4.63}{33}{subsection.14.1.1}
+\contentsline {section}{\numberline {14.2}Target and Range}{33}{section.14.2}
+\contentsline {chapter}{2018-02-08}{35}{chapter*.16}
+\contentsline {section}{\numberline {14.1}Homework Review}{35}{section.14.1}
+\contentsline {subsection}{\numberline {14.1.1}5.58}{35}{subsection.14.1.1}
+\contentsline {subsection}{\numberline {14.1.2}5.62.a}{35}{subsection.14.1.2}
+\contentsline {section}{\numberline {14.2}Basis}{35}{section.14.2}
+\contentsline {section}{\numberline {14.3}Rank}{36}{section.14.3}
+\contentsline {chapter}{2018-02-12}{37}{chapter*.17}
+\contentsline {section}{\numberline {15.1}Homework Review}{37}{section.15.1}
+\contentsline {subsection}{\numberline {15.1.1}5.52.b}{37}{subsection.15.1.1}
+\contentsline {subsection}{\numberline {15.1.2}5.82.a}{37}{subsection.15.1.2}
+\contentsline {section}{\numberline {15.2}Examples of Bases}{37}{section.15.2}
+\contentsline {section}{\numberline {15.3}Rank Continued}{38}{section.15.3}
+\contentsline {chapter}{2018-02-13}{39}{chapter*.18}
+\contentsline {section}{\numberline {15.1}Homework Review}{39}{section.15.1}
+\contentsline {subsection}{\numberline {15.1.1}5.55}{39}{subsection.15.1.1}
+\contentsline {section}{\numberline {15.2}Intersect of Subspaces}{39}{section.15.2}
+\contentsline {section}{\numberline {15.3}Sums of Subspaces}{40}{section.15.3}
+\contentsline {chapter}{2018-02-15}{41}{chapter*.19}
+\contentsline {section}{\numberline {16.1}Homework Review}{41}{section.16.1}
+\contentsline {subsection}{\numberline {16.1.1}5.70.a}{41}{subsection.16.1.1}
+\contentsline {subsection}{\numberline {16.1.2}5.72}{41}{subsection.16.1.2}
+\contentsline {subsection}{\numberline {16.1.3}5.77}{42}{subsection.16.1.3}
+\contentsline {section}{\numberline {16.2}Sums and Intersections Continued}{42}{section.16.2}
+\contentsline {chapter}{2018-02-16}{43}{chapter*.20}
+\contentsline {section}{\numberline {17.1}Homework Review}{43}{section.17.1}
+\contentsline {subsection}{\numberline {17.1.1}5.79}{43}{subsection.17.1.1}
+\contentsline {subsection}{\numberline {17.1.2}4.80.b}{43}{subsection.17.1.2}
+\contentsline {section}{\numberline {17.2}Direct Sums}{43}{section.17.2}
+\contentsline {chapter}{2018-02-20}{44}{chapter*.21}
+\contentsline {section}{\numberline {18.1}Coordinate Vectors}{44}{section.18.1}
+\contentsline {subsection}{\numberline {18.1.1}Change of Basis Matrix}{44}{subsection.18.1.1}
+\contentsline {section}{\numberline {18.2}Linear Mappings}{45}{section.18.2}
+\contentsline {chapter}{2018-02-22}{46}{chapter*.22}
+\contentsline {section}{\numberline {19.1}Homework Review}{46}{section.19.1}
+\contentsline {subsection}{\numberline {19.1.1}6.34}{46}{subsection.19.1.1}
+\contentsline {subsection}{\numberline {19.1.2}8.53}{46}{subsection.19.1.2}
+\contentsline {section}{\numberline {19.2}Rank Nullity Theorem}{46}{section.19.2}
+\contentsline {section}{\numberline {19.3}Image and Kernel}{47}{section.19.3}
+\contentsline {chapter}{2018-02-23}{48}{chapter*.23}
+\contentsline {section}{\numberline {20.1}Homework Review}{48}{section.20.1}
+\contentsline {subsection}{\numberline {20.1.1}6.31}{48}{subsection.20.1.1}
+\contentsline {section}{\numberline {20.2}Image and Kernel Continued}{48}{section.20.2}
+\contentsline {subsection}{\numberline {20.2.1}Linear Transformation Example}{48}{subsection.20.2.1}
+\contentsline {chapter}{2018-02-26}{49}{chapter*.24}
+\contentsline {section}{\numberline {21.1}Exam Problem}{49}{section.21.1}
+\contentsline {section}{\numberline {21.2}Rank Nullity}{49}{section.21.2}
+\contentsline {subsection}{\numberline {21.2.1}The Rank Nullity Theorem for Linear Mappings}{49}{subsection.21.2.1}
+\contentsline {subsection}{\numberline {21.2.2}8.75}{49}{subsection.21.2.2}
+\contentsline {subsection}{\numberline {21.2.3}Alternate Example of Rank Nullity Theorem}{49}{subsection.21.2.3}
+\contentsline {section}{\numberline {21.3}Matrix Representations of Linear Mappings}{50}{section.21.3}
+\contentsline {chapter}{2018-02-27}{51}{chapter*.25}
+\contentsline {section}{\numberline {22.1}Homework Review}{51}{section.22.1}
+\contentsline {subsection}{\numberline {22.1.1}8.73}{51}{subsection.22.1.1}
+\contentsline {subsection}{\numberline {22.1.2}8.85.a}{51}{subsection.22.1.2}
+\contentsline {subsection}{\numberline {22.1.3}8.80.c}{52}{subsection.22.1.3}
+\contentsline {subsection}{\numberline {22.1.4}8.70}{52}{subsection.22.1.4}
+\contentsline {section}{\numberline {22.2}Singularity}{53}{section.22.2}
+\contentsline {chapter}{2018-03-12}{54}{chapter*.26}
+\contentsline {section}{\numberline {23.1}Midterm Review}{54}{section.23.1}
+\contentsline {section}{\numberline {23.2}Chapter 7: Geometry}{54}{section.23.2}
+\contentsline {subsection}{\numberline {23.2.1}Magnitude and Angle}{54}{subsection.23.2.1}
+\contentsline {subsection}{\numberline {23.2.2}Orthogonality}{55}{subsection.23.2.2}
+\contentsline {subsection}{\numberline {23.2.3}Orthonormal}{55}{subsection.23.2.3}
+\contentsline {chapter}{2018-03-13}{56}{chapter*.27}
+\contentsline {section}{\numberline {24.1}Homework Review}{56}{section.24.1}
+\contentsline {subsection}{\numberline {24.1.1}9.29.b}{56}{subsection.24.1.1}
+\contentsline {section}{\numberline {24.2}Normalizing Orthogonal Sets}{56}{section.24.2}
+\contentsline {section}{\numberline {24.3}Inner Product Spaces}{56}{section.24.3}
+\contentsline {chapter}{2018-03-15}{58}{chapter*.28}
+\contentsline {section}{\numberline {25.1}Homework Review}{58}{section.25.1}
+\contentsline {subsection}{\numberline {25.1.1}7.65.b}{58}{subsection.25.1.1}
+\contentsline {subsection}{\numberline {25.1.2}9.43}{59}{subsection.25.1.2}
+\contentsline {subsection}{\numberline {25.1.3}7.60}{59}{subsection.25.1.3}
+\contentsline {section}{\numberline {25.2}Orthogonal Projection}{60}{section.25.2}
+\contentsline {chapter}{2018-03-16}{61}{chapter*.29}
+\contentsline {section}{\numberline {26.1}Homework Review}{61}{section.26.1}
+\contentsline {subsection}{\numberline {26.1.1}9.47}{61}{subsection.26.1.1}
+\contentsline {section}{\numberline {26.2}Gram-Schmidt Orthogonalization}{61}{section.26.2}
+\contentsline {chapter}{2018-03-19}{62}{chapter*.30}
+\contentsline {section}{\numberline {27.1}Quiz 6 Review}{62}{section.27.1}
+\contentsline {section}{\numberline {27.2}Homework Review}{62}{section.27.2}
+\contentsline {subsection}{\numberline {27.2.1}7.69}{62}{subsection.27.2.1}
+\contentsline {section}{\numberline {27.3}Over-determined System / Inconsistent System}{63}{section.27.3}
+\contentsline {subsection}{\numberline {27.3.1}Line of Best Fit}{63}{subsection.27.3.1}
+\contentsline {chapter}{2018-03-20}{64}{chapter*.31}
+\contentsline {section}{\numberline {28.1}Homework Review}{64}{section.28.1}
+\contentsline {subsection}{\numberline {28.1.1}7.69 Continued}{64}{subsection.28.1.1}
+\contentsline {section}{\numberline {28.2}Determinants}{64}{section.28.2}
+\contentsline {chapter}{2018-03-22}{65}{chapter*.32}
+\contentsline {section}{\numberline {29.1}Homework Review}{65}{section.29.1}
+\contentsline {subsection}{\numberline {29.1.1}7.73}{65}{subsection.29.1.1}
+\contentsline {subsection}{\numberline {29.1.2}7.85}{65}{subsection.29.1.2}
+\contentsline {subsection}{\numberline {29.1.3}7.70}{65}{subsection.29.1.3}
+\contentsline {section}{\numberline {29.2}Positive-Definite}{65}{section.29.2}
+\contentsline {section}{\numberline {29.3}Properties of Determinants Continued}{66}{section.29.3}
+\contentsline {chapter}{2018-03-23}{67}{chapter*.33}
+\contentsline {section}{\numberline {30.1}Homework Review}{67}{section.30.1}
+\contentsline {subsection}{\numberline {30.1.1}7.78}{67}{subsection.30.1.1}
+\contentsline {chapter}{2018-03-26}{68}{chapter*.34}
+\contentsline {section}{\numberline {31.1}Quiz Review}{68}{section.31.1}
+\contentsline {section}{\numberline {31.2}Possible Exam Question}{68}{section.31.2}
+\contentsline {section}{\numberline {31.3}Determinants Continued}{68}{section.31.3}
+\contentsline {subsection}{\numberline {31.3.1}Cofactor Expansion Formula}{68}{subsection.31.3.1}
+\contentsline {chapter}{2018-03-27}{71}{chapter*.35}
+\contentsline {section}{\numberline {32.1}Homework Review}{71}{section.32.1}
+\contentsline {subsection}{\numberline {32.1.1}10.59}{71}{subsection.32.1.1}
+\contentsline {section}{\numberline {32.2}Adjoints}{71}{section.32.2}
+\contentsline {section}{\numberline {32.3}Permutations and the Determinant}{71}{section.32.3}
+\contentsline {chapter}{2018-03-29}{73}{chapter*.36}
+\contentsline {section}{\numberline {33.1}Homework Review}{73}{section.33.1}
+\contentsline {subsection}{\numberline {33.1.1}10.76}{73}{subsection.33.1.1}
+\contentsline {subsection}{\numberline {33.1.2}10.79}{73}{subsection.33.1.2}
+\contentsline {subsection}{\numberline {33.1.3}10.74}{73}{subsection.33.1.3}
+\contentsline {subsection}{\numberline {33.1.4}10.83}{73}{subsection.33.1.4}
+\contentsline {subsection}{\numberline {33.1.5}10.69}{74}{subsection.33.1.5}
+\contentsline {section}{\numberline {33.2}Eigenvectors/Eigenvalues}{74}{section.33.2}
+\contentsline {chapter}{2018-04-02}{75}{chapter*.37}
+\contentsline {section}{\numberline {34.1}Exam Review}{75}{section.34.1}
+\contentsline {subsection}{\numberline {34.1.1}\#1}{75}{subsection.34.1.1}
+\contentsline {subsection}{\numberline {34.1.2}\#3}{75}{subsection.34.1.2}
+\contentsline {subsection}{\numberline {34.1.3}\#4.b}{75}{subsection.34.1.3}
+\contentsline {section}{\numberline {34.2}Eigenvectors}{76}{section.34.2}
+\contentsline {chapter}{2018-04-03}{78}{chapter*.38}
+\contentsline {section}{\numberline {35.1}Homework Review}{78}{section.35.1}
+\contentsline {subsection}{\numberline {35.1.1}11.58}{78}{subsection.35.1.1}
+\contentsline {section}{\numberline {35.2}Diagonalizability}{79}{section.35.2}
+\contentsline {subsection}{\numberline {35.2.1}Criterion}{79}{subsection.35.2.1}
+\contentsline {chapter}{2018-04-05}{80}{chapter*.39}
+\contentsline {section}{\numberline {36.1}Homework Review}{80}{section.36.1}
+\contentsline {subsection}{\numberline {36.1.1}11.55(b)}{80}{subsection.36.1.1}
+\contentsline {subsection}{\numberline {36.1.2}11.56(b)}{80}{subsection.36.1.2}
+\contentsline {subsection}{\numberline {36.1.3}11.68(b)}{80}{subsection.36.1.3}
+\contentsline {section}{\numberline {36.2}Diagonalizability}{81}{section.36.2}
+\contentsline {chapter}{2018-04-06}{82}{chapter*.40}
+\contentsline {section}{\numberline {37.1}Homework Review}{82}{section.37.1}
+\contentsline {subsection}{\numberline {37.1.1}11.65}{82}{subsection.37.1.1}
+\contentsline {subsection}{\numberline {37.1.2}11.60(b)}{82}{subsection.37.1.2}
+\contentsline {section}{\numberline {37.2}Algebraic vs Geometric Multiplicity}{83}{section.37.2}
+\contentsline {chapter}{2018-04-09}{84}{chapter*.41}
+\contentsline {section}{\numberline {38.1}Jordan Canonical Form and Minimum Polynomials}{84}{section.38.1}
+\contentsline {subsection}{\numberline {38.1.1}Jordan Blocks}{84}{subsection.38.1.1}
+\contentsline {subsection}{\numberline {38.1.2}Matrix Exponential}{85}{subsection.38.1.2}
+\contentsline {chapter}{2018-04-12}{86}{chapter*.42}
+\contentsline {section}{\numberline {39.1}Exam 3 Review}{86}{section.39.1}
+\contentsline {subsection}{\numberline {39.1.1}1}{86}{subsection.39.1.1}
+\contentsline {section}{\numberline {39.2}Homework Review}{86}{section.39.2}
+\contentsline {subsection}{\numberline {39.2.1}11.78}{86}{subsection.39.2.1}
+\contentsline {subsection}{\numberline {39.2.2}12.30}{86}{subsection.39.2.2}
+\contentsline {subsection}{\numberline {39.2.3}12.32}{86}{subsection.39.2.3}
+\contentsline {section}{\numberline {39.3}Chain Rule}{87}{section.39.3}
+\contentsline {section}{\numberline {39.4}Partial Fractions}{87}{section.39.4}
+\contentsline {chapter}{2018-04-13}{88}{chapter*.43}
+\contentsline {section}{\numberline {40.1}Homework Review}{88}{section.40.1}
+\contentsline {subsection}{\numberline {40.1.1}12.28}{88}{subsection.40.1.1}
+\contentsline {subsection}{\numberline {40.1.2}12.32}{88}{subsection.40.1.2}
+\contentsline {chapter}{2018-04-16}{89}{chapter*.44}
+\contentsline {section}{\numberline {41.1}Quiz Review}{89}{section.41.1}
+\contentsline {section}{\numberline {41.2}Spectral Decomposition}{89}{section.41.2}
+\contentsline {chapter}{2018-04-17}{91}{chapter*.45}

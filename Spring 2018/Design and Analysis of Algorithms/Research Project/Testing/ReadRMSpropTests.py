@@ -14,13 +14,16 @@ learnrates=['0.075']
 batchlist=['15']
 
 fig = plt.figure()
-plt.plot(np.array(temp[0][0][0][0][:30]))
-plt.plot(np.array(temp[1][0][0][0][:30]))
+plt.plot(np.array(temp[0][0][0][0][100:500])/100)
+plt.plot(np.array(temp[1][0][0][0][100:500])/100)
 plt.title("Design: 784-35-15-20-10 -- Learn Rate: 0.075")
 plt.legend(['RMSprop', 'SGD'], loc='lower right')
 plt.grid(1)
+plt.xlabel("Iterations (Epochs)")
+plt.ylabel("Accuracy (%)")
+plt.xlim((100,400))
 plt.show()
-fig.savefig("./RMSvsSGD.png")
+fig.savefig("./RMSvsSGD2.png")
 plt.close(fig)
 
 '''

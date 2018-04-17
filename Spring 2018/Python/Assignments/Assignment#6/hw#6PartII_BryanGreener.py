@@ -14,10 +14,12 @@ def lev(a, len_a, b, len_b):
     
 class MemoizeReset(object):
     def __init__(self, f):
+        self.count = 0
         self.f = f
         self.cache = {}
     def __call__(self, *args):
         try:
+            self.count += 1
             return self.cache[args]
         except KeyError:
             value = self.f(*args)
@@ -33,5 +35,9 @@ class MemoizeReset(object):
         return fn
     def _reset(self):
         self.cache = {}
+        
+        
+
+    
     
 

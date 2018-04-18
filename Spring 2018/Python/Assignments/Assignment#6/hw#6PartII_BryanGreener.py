@@ -1,43 +1,38 @@
-def lev(a, len_a, b, len_b):
-    @MemoizeReset
-    cost = 0
-    if len_a == 0: return len_b
-    if len_b == 0: return len_a
-    if a[len_a - 1] == b[len_b - 1]:
+# Name: Bryan Greener
+# Date: 2018-04-17
+# Homework: 6 part 2
+
+def MemoizeReset(f):
+    mem = {}
+    def MR(*args, **kwargs):
+        MR.calls += 1
+        key = str(args) + str(kwargs)
+        if key not in mem:
+            mem[key] = f(*args, **kwargs)
+        return mem[key]
+    MR.calls = 0
+    MR.__name__ = f.__name__
+    return MR
+
+@MemoizeReset
+def lev(a, b):
+    if a == "":
+        return len(b)
+    if b == "":
+        return len(a)
+    if a[-1] == b[-1]:
         cost = 0
     else:
         cost = 1
-    
-    return min(lev(a, len_a - 1, b, len_b) + 1,
-               lev(a, len_a, b, len_b - 1) + 1,
-               lev(a, len_a - 1, b, len_b - 1) + cost)
-    
-class MemoizeReset(object):
-    def __init__(self, f):
-        self.count = 0
-        self.f = f
-        self.cache = {}
-    def __call__(self, *args):
-        try:
-            self.count += 1
-            return self.cache[args]
-        except KeyError:
-            value = self.f(*args)
-            self.cache[args] = value
-            return value
-        except TypeError:
-            return self.f(*args)
-    def __repr__(self):
-        return self.f.__doc__
-    def __get__(self, obj, objtype):
-        fn = functools.partial(self.__call__, obj)
-        fn.reset = self._reset
-        return fn
-    def _reset(self):
-        self.cache = {}
-        
-        
+    res = min([lev(a[:-1], b)+1,
+               lev(a, b[:-1])+1,
+               lev(a[:-1], b[:-1]) + cost])
+    return res
 
-    
-    
-
+import csv
+with open('wordfile.txt', 'r') as file:
+    reader = csv.reader(file, delimiter=',')
+    for row in reader:
+        print("%s,%s,%d,%s" % 
+              (row[0].strip(), row[1].strip(), 
+               lev(row[0].strip(),row[1].strip()),str(lev.calls)))

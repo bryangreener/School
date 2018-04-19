@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Homework \#14}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-04-10}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+\begin{enumerate}
+\item[11.16]Let $L$ be the linear transformation on $\mathbb{R}^2$ that reflects points across the line $y=kx$, where $k>0$. (See Fig. 11-1)
+	\begin{enumerate}
+	\item Show that $v_1=(1,k)$ and $v_2=(k,-1)$ are eigenvectors of $L$.
+	\item Show that $L$ is diagonalizable, and find such a diagonal representation of $D$.
+	\end{enumerate}
+\item[11.28]Let $A=\begin{bmatrix}[rrr]3&1&3\\1&3&1\\1&1&3\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item Find the characteristic polynomial $\Delta(t)$ and all eigenvalues of $A$.
+	\item Find a maximal set $S$ of nonzero orthogonal eigenvectors of $A$.
+	\item Find an orthogonal matrix $P$ such that $D=P^{-1}AP$ is diagonal.
+	\end{enumerate}
+\item[11.51]Let $A$ be an n-square matrix. Without using the Cayley-Hamilton theorem, prove that $A$ is a root of nonzero polynomial of degree $\leq n^2$.
+\item[12.35]Give an example of a quadratic form $q(x,y)$ such that $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.
+\item[12.37]Show that congruence of matrices is an equivalence relation.
+\item[12.38]Consider a real quadratic polynomial $q(x_1,...,x_n)=\sum_{i,j=1}^na_{i,j}x_ix_j$, where $a_{i,j}=a_{j,i}$.
+	\begin{enumerate}
+	\item If $a_{1,1}\neq 0$, show that the substitution
+	\[ x_1=y_1-\dfrac{1}{a_{1,1}}(a_{1,2}y_2+\cdots+a_{1,n}y_n), x_2=y_2,...,x_n=y_n \]
+	yields the equation $q(x_1,...,x_n)=a_{1,1}y_1^2+q^\prime(y_2,...,y_n)$, where $q^\prime$ is also a quadratic polynomial.
+	\item If $a_{1,1}=0$ but, say, $a_{1,2}\neq 0$, show that the substitution
+	\[ x_1=y_1+y_2,x_2=y_1-y_2,x_3=y_3,...,x_n=y_n \]
+	yields the equation $q(x_1,...,x_n)=\sum b_{i,j}y_iy_j$, where $b_{1,1}\neq 0$, i.e., reduces this case to case (a).
+	\end{enumerate}
+	This method of diagonalizing $q$ is known as \textit{completing the square}.
+\item[12.43]Determine whether or not each quadratic form is positive definite.
+	\begin{enumerate}
+	\item $q(x,y,z)=x^2+4xy+5y^2+6xz+2yz+4z^2$;
+	\item $q(x,y,z)=x^2+2xy+2y^2+4xz+6yz+7z^2$;
+	\end{enumerate}
+
+\item[12.27]Just read this solution
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+\end{document}

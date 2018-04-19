@@ -2936,6 +2936,54 @@ Notice the rank of the matrix for $E_4$ is 2 and the column space is equal to $v
 Do the spectral decomposition for 12.28 a, b, and c. Try it for any symmetric matrix to practice.
 
 
-\mychapter{42}{2018-04-17}
+\mychapter{42}{2018-04-19}
+\section{Homework Review}
+\subsection{12.37}
+Show three things:
+\begin{enumerate}
+\item[(i)] Show $A\equiv A$ ($\equiv$ is congruent) for all $A$.
+\item[(ii)] If $A\equiv B$ then $B\equiv A$.
+\item[(iii)] If $A\equiv B$ and $B\equiv C$ then $A\equiv C$.
+\end{enumerate}
+\begin{ex}
+Let $W\subset V$ be a subspace of $V$. Define a relation by $\vec{u}\equiv\vec{v}$ if $\vec{v}-\vec{u}\in W$. Prove this is an equivalence relation on $V$.
+\begin{enumerate}
+\item[(i)]Let $\vec{u}\in V$.\\
+Notice $\vec{u}-\vec{u}=\vec{0}\in W$ (subspace) $\Rightarrow \vec{u}\equiv \vec{u}$.
+\item[(ii)]Suppose $\vec{u}\equiv\vec{v}$. Notice $\vec{u}-\vec{u}=(\vec{v}-\vec{u})$. But $\vec{v}-\vec{u}\in W$ and $W$ is closed under negation. $\Rightarrow \vec{u}-\vec{v}\in W \Rightarrow \vec{v}\equiv \vec{u}$.
+\item[(iii)]Suppose $\vec{u}\equiv \vec{v}$ and $\vec{v}\equiv\vec{w}$ then $\vec{v}-\vec{u}\in W$ and $\vec{w}-\vec{v}\in W$. But $\vec{w}-\vec{u} = (\vec{w}-\vec{v})+(\vec{v}-\vec{u})$ and $W$ is closed under addition. Hence $\vec{w}-\vec{u}\in W$ and $\vec{u}\equiv\vec{w}$.
+\end{enumerate}
+\end{ex}
+
+\subsection{12.38}
+Assume $q(\vec{x})=\sum_{i=1}^n\sum_{j=1}^na_{i,j}x_ix_j$.\\
+Helpful to write this as $\sum_{i=1}^n \left[ \sum_{j=1}^na_{i,j}x_i \right] x_j$.
+\begin{enumerate}
+\item[(a)]
+\item[(b)]
+\begin{align*}
+\sum_{i=1}^n \left[ \sum_{j=1}^na_{i,j}x_i \right] x_j &= \sum_{i=1}^n\left[ a_{i,j}x_1 + \sum_{j=2}^na_{i,j}x_j\right] x_i\\
+&= \left[ a_{1,1}x_1+\sum_{j=2}^n a_{1,j}x_j \right] x_1 + \sum_{i=2}^n \left[ a_{i,1}x_1+\sum_{j=2}^n a_{i,j}x_j\right] x_i
+\end{align*}
+\end{enumerate}
+
+\subsection{12.43}
+\begin{thrm}
+A symmetric matrix is positive definite if every eigenvalue is positive.
+\end{thrm}
+\begin{enumerate}
+\item[(a)]$M=\begin{bmatrix}[rrr]1&2&3\\2&5&1\\3&1&4\\\end{bmatrix}$. We are given this symmetric matrix corresponding to a quadratic form. We find the eigenvalues of the matrix. If we get one that is zero or negative, then this matrix is not positive definite.
+\end{enumerate}
+
+\section{Final Exam Review}
+\subsection{Change of Basis Formula}
+The change of basis formula can be shown as
+\[ [T]_E^F = \begin{bmatrix}[cccc]C_E(T(f_1)) & C_E(T(f_2)) & \cdots & C_E(T(f_n))\\\end{bmatrix} \]
+where
+\[ C_E(v) = \begin{bmatrix}[c]C_1\\C_2\\\vdots\\C_m\\\end{bmatrix} \]
+for
+\[ v=\sum_{i=1}^mC_ie_i \]
+
+\mychapter{43}{2018-04-20}
 
 \end{document}

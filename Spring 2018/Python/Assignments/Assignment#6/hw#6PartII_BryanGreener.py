@@ -42,12 +42,11 @@ try:
     with open(filename, 'r') as file:
         reader = csv.reader(file, delimiter=',')
         for row in reader:
-            count = lev.count
-            lev.count = 0 #reset counter in decorator
             print("%s,%s,%d,%s" % (row[0].strip(), 
                                    row[1].strip(), 
                                    lev(row[0].strip(),row[1].strip()),
-                                   str(count)))
+                                   str(lev.count)))
+            lev.count = 0 #reset counter in decorator
 except OSError as err: # Invalid input file name
     print("OS Error: {0}".format(err))
     exit()

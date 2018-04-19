@@ -221,4 +221,11 @@
 \contentsline {chapter}{2018-04-16}{89}{chapter*.44}
 \contentsline {section}{\numberline {41.1}Quiz Review}{89}{section.41.1}
 \contentsline {section}{\numberline {41.2}Spectral Decomposition}{89}{section.41.2}
-\contentsline {chapter}{2018-04-17}{91}{chapter*.45}
+\contentsline {chapter}{2018-04-19}{91}{chapter*.45}
+\contentsline {section}{\numberline {42.1}Homework Review}{91}{section.42.1}
+\contentsline {subsection}{\numberline {42.1.1}12.37}{91}{subsection.42.1.1}
+\contentsline {subsection}{\numberline {42.1.2}12.38}{91}{subsection.42.1.2}
+\contentsline {subsection}{\numberline {42.1.3}12.43}{91}{subsection.42.1.3}
+\contentsline {section}{\numberline {42.2}Final Exam Review}{92}{section.42.2}
+\contentsline {subsection}{\numberline {42.2.1}Change of Basis Formula}{92}{subsection.42.2.1}
+\contentsline {chapter}{2018-04-20}{93}{chapter*.46}

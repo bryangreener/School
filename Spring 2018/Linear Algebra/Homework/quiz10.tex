@@ -98,6 +98,7 @@ $$M=\left[\begin{array}{rrr}
 \end{array}\right].$$
 
 (a) Find an orthogonal set of eigenvectors for $M$.
+\begin{solution}
 \[ M-\lambda I = \begin{bmatrix}[rrr]1-\lambda&-1&2\\-1&1-\lambda&2\\2&2&-2-\lambda\\\end{bmatrix} \]
 \begin{align*}
 M-\lambda I &= \mathrm{det}\begin{bmatrix}[rrr]1-\lambda&-1&2\\-1&1-\lambda&2\\2&2&-2-\lambda\\\end{bmatrix}\\
@@ -111,28 +112,50 @@ M - \lambda I_2 &= \begin{bmatrix}[rrr]-1&-1&2\\-1&-1&2\\2&2&-4\\\end{bmatrix}\\
 &\xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&1&-2\\0&0&0\\0&0&0\\\end{bmatrix}
 \end{align*}
 Since we have two free variables, we will get two different eigenvectors which also agrees with the fact that our eigenvalue of 2 has a multiplicity of 2.\\
-So $a+b-2c=0$ and we let $b=1,c=0$ then we get $a=-1$. Next we let $b=0,c=1$ then $a=2$. Thus our eigenvectors for $\lambda=2$ are
-\[ \left \{ \begin{bmatrix}[r]-1\\1\\0\\\end{bmatrix},\begin{bmatrix}[r]2\\0\\1\\\end{bmatrix} \right \} \]
+So $a+b-2c=0$ and we let $b=2,c=1$ then $a=0$ so our first vector $v_1=(0,2,1)$. Next we need to find a vector orthogonal to both $v_1$ and $a+b-2c$ such that both $a+b-2c=0$ and $2b+c=0$. So
+\[ \mathrm{rref}\begin{bmatrix}[rrr|r]1&1&-2&0\\0&2&1&0\\\end{bmatrix} = \begin{bmatrix}[rrr|r]1&0&-\frac{5}{2}&0\\0&1&\frac{1}{2}&0\\\end{bmatrix} \]
+Let $c=2$, then $b=-1$ and $a=5$. This gives us our second vector $v_2=(5,-1,2)$.
 Next let $\lambda=-4$, then
 \begin{align*}
 M - \lambda I_{-4} &= \begin{bmatrix}[rrr]5&-1&2\\-1&5&2\\2&2&2\\\end{bmatrix}\\
 &\xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&\frac{1}{2}\\0&1&\frac{1}{2}\\0&0&0\\\end{bmatrix}
 \end{align*}
-By parameterizing this solution, we get the eigenvector
-\[ \left\{\begin{bmatrix}[r]-\frac{1}{2}\\-\frac{1}{2}\\1\\\end{bmatrix}\right\} \]
-To make our lives easier we multiply this eigenvector by $2$ to get a simpler eigenvector
-\[ \left\{\begin{bmatrix}[r]-1\\-1\\2\\\end{bmatrix}\right\} \]
-Next we normalize these results to obtain our orthonormal basis. For each eigenvector we normalize it by performing the following operation
-\[ \dfrac{1}{\sqrt{a^2+b^2+c^2}}(a,b,c) \]
-Putting these normalized vectors as columns in a matrix gives us our $P$ value. Thus
-\[ D = P^TMP =\begin{bmatrix}[rrr]2&-2\sqrt{\frac{2}{5}}&0\\-2\sqrt{\frac{2}{5}}&2&0\\0&0&-4\\\end{bmatrix} \]
+Finally we need to find a vector orthogonal to this matrix and vectors $v_1$ and $v_2$.
+\[ \mathrm{rref}\begin{bmatrix}[rrr|r]1&0&\frac{1}{2}&0\\0&1&\frac{1}{2}&0\\0&2&1&0\\5&-1&2&0\\\end{bmatrix} = \begin{bmatrix}[rrr|r]1&0&\frac{1}{2}&0\\0&1&\frac{1}{2}&0\\0&0&0&0\\0&0&0&0\\\end{bmatrix} \]
+So let $c=2$ then $b=-1$ and $a=-1$. Thus we get our final vector $v_3=(-1,-1,2)$.\\
+So our orthogonal set of eigenvectors is
+\[ \left\{\begin{bmatrix}[r]0\\2\\1\\\end{bmatrix},\begin{bmatrix}[r]5\\-1\\2\\\end{bmatrix},\begin{bmatrix}[r]-1\\-1\\2\\\end{bmatrix}\right\} \]
+\end{solution}
 
-
-
-\newpage
 (b) For each eigenvalue $\lambda$, determine the matrix of the orthogonal projection
 $\mathbb{R}^3\xrightarrow{\ E_\lambda\ }V_\lambda$, where $V_\lambda$ denotes the eigenspace
-corresponding to $\lambda$.  (A formula for orthogonal projection appears on the last page of Exam 3.)
+corresponding to $\lambda$.  (A formula for orthogonal projection appears on the last page of Exam 3.)\\
+\begin{solution}
+We perform spectral decomposition for $E_2$.
+\begin{align*}
+E_2(e_1) &= \dfrac{(1,0,0)\cdot (0,2,1)}{(0,2,1)\cdot (0,2,1)}\begin{bmatrix}[r]0\\2\\1\\\end{bmatrix} + \dfrac{(1,0,0)\cdot (5,-1,2)}{(5,-1,2)\cdot (5,-1,2)}\begin{bmatrix}[r]5\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]\frac{5}{6}\\-\frac{1}{6}\\\frac{1}{3}\\\end{bmatrix}\\
+E_2(e_2) &= \dfrac{(0,1,0)\cdot (0,2,1)}{(0,2,1)\cdot (0,2,1)}\begin{bmatrix}[r]0\\2\\1\\\end{bmatrix} + \dfrac{(0,1,0)\cdot (5,-1,2)}{(5,-1,2)\cdot (5,-1,2)}\begin{bmatrix}[r]5\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]0\\\frac{4}{5}\\\frac{2}{5}\\\end{bmatrix} + \begin{bmatrix}[r]-\frac{5}{30}\\\frac{1}{30}\\-\frac{2}{30}\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]-\frac{5}{30}\\\frac{5}{6}\\\frac{1}{3}\\\end{bmatrix}\\
+E_2(e_3) &= \dfrac{(0,0,1)\cdot (0,2,1)}{(0,2,1)\cdot (0,2,1)}\begin{bmatrix}[r]0\\2\\1\\\end{bmatrix} + \dfrac{(0,0,1)\cdot (5,-1,2)}{(5,-1,2)\cdot (5,-1,2)}\begin{bmatrix}[r]5\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]0\\\frac{2}{5}\\\frac{1}{5}\\\end{bmatrix} + \begin{bmatrix}[r]\frac{1}{3}\\-\frac{1}{15}\\\frac{2}{15}\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]\frac{1}{3}\\\frac{1}{3}\\\frac{1}{3}\\\end{bmatrix}\\
+&\Rightarrow \begin{bmatrix}[rrr]\frac{5}{6}&-\frac{5}{30}&\frac{1}{3}\\-\frac{1}{6}&\frac{5}{6}&\frac{1}{3}\\\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&\frac{1}{2}\\0&1&\frac{1}{2}\\0&0&0\\\end{bmatrix}
+\end{align*}
+
+Next we perform the same process on $E_{-4}$.
+\begin{align*}
+E_{-4}(e_1) &= \dfrac{(1,0,0)\cdot (-1,-1,2)}{(-1,-1,2)\cdot (-1,-1,2)}\begin{bmatrix}[r]-1\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]\frac{1}{6}\\\frac{1}{6}\\-\frac{1}{3}\\\end{bmatrix}\\
+E_{-4}(e_2) &= \dfrac{(0,1,0)\cdot (-1,-1,2)}{(-1,-1,2)\cdot (-1,-1,2)}\begin{bmatrix}[r]-1\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]\frac{1}{6}\\\frac{1}{6}\\-\frac{1}{3}\\\end{bmatrix}\\
+E_{-4}(e_3) &= \dfrac{(0,0,1)\cdot (-1,-1,2)}{(-1,-1,2)\cdot (-1,-1,2)}\begin{bmatrix}[r]-1\\-1\\2\\\end{bmatrix}\\
+&= \begin{bmatrix}[r]-\frac{1}{3}\\-\frac{1}{3}\\\frac{2}{3}\\\end{bmatrix}\\
+&\Rightarrow \begin{bmatrix}[rrr]\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&1&-2\\0&0&0\\0&0&0\\\end{bmatrix}
+\end{align*}
+\end{solution}
+
 
 (c) Check your answers.  You should confirm that: \\
 The column space of $E_\lambda$ coincides with $V_\lambda$ for each eigenvalue, \\
@@ -141,6 +164,21 @@ $E_\lambda^2=E_\lambda$ for each eigenvalue, \\
 if $\lambda\neq\mu$, then $E_\lambda\circ E_\mu=0$, \\
 $\sum_\lambda E_\lambda$ is an identity matrix, and \\
 $\sum_\lambda \lambda E_\lambda=M$. \\
+
+\begin{solution}
+Note that the rank of matrix $E_2$ is 2 also note that the rank of matrix $E_{-4}$ is 1. We also see that the column space of $E_2$ is equal to $u_2=\{v_1,v_2\}$ and the column space of $E_{-4}$ is equal to $u_{-4}=(v_3)$.\\
+Next we check that $E_2^2=E_2$
+\[ E_2^2 = \begin{bmatrix}[rrr]\frac{5}{6}&-\frac{5}{30}&\frac{1}{3}\\-\frac{1}{6}&\frac{5}{6}&\frac{1}{3}\\\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\\\end{bmatrix}^2 = \begin{bmatrix}[rrr]\frac{5}{6}&-\frac{5}{30}&\frac{1}{3}\\-\frac{1}{6}&\frac{5}{6}&\frac{1}{3}\\\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\\\end{bmatrix} = E_2 \]
+\[ E_{-4}^2 = \begin{bmatrix}[rrr]\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\\end{bmatrix}^2 = \begin{bmatrix}[rrr]\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\\end{bmatrix} = E_{-4} \]
+Next we check that $\sum_\lambda E_\lambda = I$.
+\[ \begin{bmatrix}[rrr]\frac{5}{6}&-\frac{5}{30}&\frac{1}{3}\\-\frac{1}{6}&\frac{5}{6}&\frac{1}{3}\\\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\\\end{bmatrix} + \begin{bmatrix}[rrr]\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\\end{bmatrix} = \begin{bmatrix}[rrr]1&0&0\\0&1&0\\0&0&1\\\end{bmatrix} \]
+Finally we verify that $\sum_\lambda \lambda E_\lambda = M$.
+\begin{align*}
+\sum_\lambda \lambda E_\lambda &= -4\begin{bmatrix}[rrr]\frac{5}{6}&-\frac{5}{30}&\frac{1}{3}\\-\frac{1}{6}&\frac{5}{6}&\frac{1}{3}\\\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\\\end{bmatrix} + 2\begin{bmatrix}[rrr]\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\\frac{1}{6}&\frac{1}{6}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\\end{bmatrix}\\
+&= \begin{bmatrix}[rrr]-\frac{2}{3}&-\frac{2}{3}&\frac{4}{3}\\-\frac{2}{3}&-\frac{2}{3}&\frac{4}{3}\\\frac{4}{3}&\frac{4}{3}&-\frac{8}{3}\\\end{bmatrix} + \begin{bmatrix}[rrr]\frac{5}{3}&-\frac{1}{3}&\frac{2}{3}\\-\frac{1}{3}&\frac{5}{3}&\frac{2}{3}\\\frac{2}{3}&\frac{2}{3}&\frac{2}{3}\\\end{bmatrix}\\
+&= \begin{bmatrix}[rrr]1&-1&2\\-1&1&2\\2&2&-2\\\end{bmatrix}
+\end{align*}
+\end{solution}
 
 \end{document}
 

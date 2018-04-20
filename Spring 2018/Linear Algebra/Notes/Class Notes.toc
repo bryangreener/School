@@ -229,3 +229,9 @@
 \contentsline {section}{\numberline {42.2}Final Exam Review}{92}{section.42.2}
 \contentsline {subsection}{\numberline {42.2.1}Change of Basis Formula}{92}{subsection.42.2.1}
 \contentsline {chapter}{2018-04-20}{93}{chapter*.46}
+\contentsline {section}{\numberline {43.1}Quiz 10 Review}{93}{section.43.1}
+\contentsline {section}{\numberline {43.2}Final Exam Review}{94}{section.43.2}
+\contentsline {subsection}{\numberline {43.2.1}7.82}{94}{subsection.43.2.1}
+\contentsline {subsection}{\numberline {43.2.2}Eigen Decomposition}{94}{subsection.43.2.2}
+\contentsline {subsection}{\numberline {43.2.3}QR Algorithm}{94}{subsection.43.2.3}
+\contentsline {subsection}{\numberline {43.2.4}12.37}{95}{subsection.43.2.4}

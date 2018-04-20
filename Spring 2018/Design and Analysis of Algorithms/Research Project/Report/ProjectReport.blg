@@ -1,29 +1,29 @@
 [0] Config.pm:302> INFO - This is Biber 2.11
-[0] Config.pm:305> INFO - Logfile is 'ProjectReport.blg'
-[22] biber-MSWIN64:313> INFO - === 
-[48] Biber.pm:371> INFO - Reading 'ProjectReport.bcf'
-[113] Biber.pm:854> INFO - Using all citekeys in bib section 0
-[123] Biber.pm:3976> INFO - Processing section 0
-[135] Biber.pm:4136> INFO - Looking for bibtex format file 'citations.bib' for section 0
-[136] bibtex.pm:1454> INFO - Reading ascii input as UTF-8
-[138] bibtex.pm:1500> INFO - LaTeX decoding ...
-[156] bibtex.pm:1316> INFO - Found BibTeX data source 'citations.bib'
-[169] Utils.pm:193> WARN - month field 'Oct' in entry 'article2' is not an integer - this will probably not sort properly.
-[173] Utils.pm:193> WARN - month field 'Mar' in entry 'article4' is not an integer - this will probably not sort properly.
-[175] Utils.pm:193> WARN - month field 'Dec' in entry 'toward_data_science' is not an integer - this will probably not sort properly.
-[178] Utils.pm:193> WARN - month field 'Jun' in entry 'kristiadi_2016' is not an integer - this will probably not sort properly.
-[180] Utils.pm:193> WARN - month field 'Dec' in entry 'nielsen_2017' is not an integer - this will probably not sort properly.
-[180] Utils.pm:193> WARN - month field 'Oct' in entry 'steemit' is not an integer - this will probably not sort properly.
-[187] Utils.pm:193> WARN - month field 'Nov' in entry 'article3' is not an integer - this will probably not sort properly.
-[202] Utils.pm:193> WARN - month field 'Jan' in entry 'article7' is not an integer - this will probably not sort properly.
-[206] Utils.pm:193> WARN - month field 'Mar' in entry 'article5' is not an integer - this will probably not sort properly.
-[209] Utils.pm:193> WARN - month field 'Jan' in entry 'ruder_2016' is not an integer - this will probably not sort properly.
-[233] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[233] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[233] Biber.pm:3804> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[233] Biber.pm:3810> INFO - No sort tailoring available for locale 'en-US'
-[252] bbl.pm:617> INFO - Writing 'ProjectReport.bbl' with encoding 'ascii'
-[253] Utils.pm:193> WARN - The entry 'toward_data_science' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[257] Utils.pm:193> WARN - The entry 'article8' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[260] bbl.pm:720> INFO - Output to ProjectReport.bbl
-[264] Biber.pm:110> INFO - WARNINGS: 12
+[1] Config.pm:305> INFO - Logfile is 'ProjectReport.blg'
+[58] biber-MSWIN64:313> INFO - === 
+[139] Biber.pm:371> INFO - Reading 'ProjectReport.bcf'
+[310] Biber.pm:854> INFO - Using all citekeys in bib section 0
+[329] Biber.pm:3976> INFO - Processing section 0
+[349] Biber.pm:4136> INFO - Looking for bibtex format file 'citations.bib' for section 0
+[351] bibtex.pm:1454> INFO - Reading ascii input as UTF-8
+[354] bibtex.pm:1500> INFO - LaTeX decoding ...
+[416] bibtex.pm:1316> INFO - Found BibTeX data source 'citations.bib'
+[450] Utils.pm:193> WARN - month field 'Oct' in entry 'article2' is not an integer - this will probably not sort properly.
+[461] Utils.pm:193> WARN - month field 'Jan' in entry 'ruder_2016' is not an integer - this will probably not sort properly.
+[483] Utils.pm:193> WARN - month field 'Oct' in entry 'steemit' is not an integer - this will probably not sort properly.
+[501] Utils.pm:193> WARN - month field 'Mar' in entry 'article5' is not an integer - this will probably not sort properly.
+[515] Utils.pm:193> WARN - month field 'Dec' in entry 'nielsen_2017' is not an integer - this will probably not sort properly.
+[523] Utils.pm:193> WARN - month field 'Jun' in entry 'kristiadi_2016' is not an integer - this will probably not sort properly.
+[550] Utils.pm:193> WARN - month field 'Jan' in entry 'article7' is not an integer - this will probably not sort properly.
+[558] Utils.pm:193> WARN - month field 'Dec' in entry 'toward_data_science' is not an integer - this will probably not sort properly.
+[566] Utils.pm:193> WARN - month field 'Mar' in entry 'article4' is not an integer - this will probably not sort properly.
+[585] Utils.pm:193> WARN - month field 'Nov' in entry 'article3' is not an integer - this will probably not sort properly.
+[635] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[635] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[635] Biber.pm:3804> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[635] Biber.pm:3810> INFO - No sort tailoring available for locale 'en-US'
+[667] bbl.pm:617> INFO - Writing 'ProjectReport.bbl' with encoding 'ascii'
+[672] Utils.pm:193> WARN - The entry 'toward_data_science' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[682] Utils.pm:193> WARN - The entry 'article8' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[689] bbl.pm:720> INFO - Output to ProjectReport.bbl
+[703] Biber.pm:110> INFO - WARNINGS: 12

@@ -66,7 +66,7 @@
  
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Homework \#14}
+\lhead{Homework \#15}
 \rhead{Bryan Greener}
 \cfoot{\thepage}
 % END BLOCK============================================
@@ -75,7 +75,7 @@
 % BEGIN BLOCK------------------------------------------
 \title{Bryan Greener}
 \author{MATH 2300 CRN:15163}
-\date{2018-04-10}
+\date{2018-04-20}
 \begin{document}
 \maketitle
 % END BLOCK============================================
@@ -84,18 +84,48 @@
 \begin{enumerate}
 \item[11.16]Let $L$ be the linear transformation on $\mathbb{R}^2$ that reflects points across the line $y=kx$, where $k>0$. (See Fig. 11-1)
 	\begin{enumerate}
-	\item Show that $v_1=(1,k)$ and $v_2=(k,-1)$ are eigenvectors of $L$.
-	\item Show that $L$ is diagonalizable, and find such a diagonal representation of $D$.
+	\item Show that $v_1=(1,k)$ and $v_2=(k,-1)$ are eigenvectors of $L$.\\
+		The vector $v_1=(1,k)$ lies on the line $y=kx$. So $L(v_1)=v_1$. Thus $v_1$ is an eigenvector of $L$ belonging to the eigenvalue $\lambda_1=1$. $v_2=(k,-1)$ is perpendicular to the line $y=kx$ so $L(v_2)=-v_2$. Therefore $v_2$ is an eigenvector of $L$ beloging to the eigenvalue $\lambda_2=-1$.
+	\item Show that $L$ is diagonalizable, and find such a diagonal representation of $D$.\\
+		Our set $S=\{v_1,v_2\}$ is a basis of $\mathbb{R}^2$ of eigenvectors of $L$. So $L$ is diagonalizable with $D=\begin{bmatrix}[rr]1&0\\0&-1\\\end{bmatrix}$.
 	\end{enumerate}
 \item[11.28]Let $A=\begin{bmatrix}[rrr]3&1&3\\1&3&1\\1&1&3\\\end{bmatrix}$.
 	\begin{enumerate}
-	\item Find the characteristic polynomial $\Delta(t)$ and all eigenvalues of $A$.
-	\item Find a maximal set $S$ of nonzero orthogonal eigenvectors of $A$.
-	\item Find an orthogonal matrix $P$ such that $D=P^{-1}AP$ is diagonal.
+	\item Find the characteristic polynomial $\Delta(t)$ and all eigenvalues of $A$.\\
+		By using the trace, determinant, and the determinants $A_{1,1},A_{2,2},A_{3,3}$, we get the characteristic polynomial $\Delta(t) = t^3-9t^2+24t-20 = (t-2)^2(t-5)$. Thus our eigenvalues are $\lambda=2$ with a multiplicity of 2 and $\lambda=5$. 
+	\item Find a maximal set $S$ of nonzero orthogonal eigenvectors of $A$.\\
+		Let $\lambda=2$:
+		\[ M-\lambda I = \begin{bmatrix}[rrr]1&1&1\\1&1&1\\1&1&1\\\end{bmatrix} \]
+		Thus since we have two repeated rows we will have two free variables. Thus by parameterizing this solution we get the vector $v_1=(0,1,-1)$. Next we find a second vector which is orthogonal to both $v_1$ and our resulting matrix. By setting $0,1,1$ and $1,1,1$ into a matrix and reducing then solving the system, we get our second vector $v_1=(2,-1,-1)$.\\
+		Next we repeat this process and find $M-\lambda I$ for $\lambda=5$ to get $v_3=(1,1,1)$. we now have three eigenvectors which are perpendicular to each other. These three vectors form our maximal set of nonzero orthogonal eigenvectors of $A$.
+	\item Find an orthogonal matrix $P$ such that $D=P^{-1}AP$ is diagonal.\\
+		We normalize $v_1,v_2,v_3$ to get an orthonormal basis. Setting these orthonormal vectors as columns in a matrix gives us
+		\[ P = \begin{bmatrix}[rrr]0&\frac{2}{\sqrt{6}}&\frac{1}{\sqrt{3}}\\\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{3}}\\-\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{3}}\\\end{bmatrix} \]
+		Thus $D=P^TAp = \begin{bmatrix}[rrr]2&0&0\\0&2&0\\0&0&5\\\end{bmatrix}$.
 	\end{enumerate}
+	
 \item[11.51]Let $A$ be an n-square matrix. Without using the Cayley-Hamilton theorem, prove that $A$ is a root of nonzero polynomial of degree $\leq n^2$.
-\item[12.35]Give an example of a quadratic form $q(x,y)$ such that $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.
+	\begin{proof}
+	Let $N=n^2$. Consider the $N+1$ matrices $1,A,A^2,...,A^n$. Recall that the vector space $V$ of $n\times n$ matrices has dimensions $N=n^2$. Thus the above $N+1$ matrices are linearly dependent. Thus there exist scalars $a_0,a_1,...,a_N$ not all zero for which
+	\[ a_NA^N+\cdots + a_1A+a_0 I = 0 \]
+	Thus $A$ is the root of the polynomial $f(t)=a_Nt^N+\cdots +a_1t+a_0$.
+	\end{proof}
+\item[12.35]Give an example of a quadratic form $q(x,y)$ such that $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.\\
+	Let $q(x,y)=x^2-y^2$ and $u=(1,1),v=(1,-1)$. Then $q(u)=1^2-1^2 = 0$ and $q(v)=1^2-(-1)^2=0$ but $q(u+v)=(1+1)^2-(1-1)^2=4-0$. Thus both $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.
 \item[12.37]Show that congruence of matrices is an equivalence relation.
+	\begin{proof}
+	Let $W\subset V$ be a subspace of $V$. Define a relation by $\vec{u}\equiv\vec{v}$ if $\vec{v}-\vec{u}\in W$. We prove that this is an equivalence relation on $V$.
+	\begin{enumerate}
+	\item[(i)]Show $A \equiv A$ $\forall A$.\\
+		Let $\vec{u}\in V$. Notice that $\vec{u}-\vec{u}=\vec{0}\in W$. Thus $\vec{u}\equiv\vec{u}$.
+	\item[(ii)]If $A \equiv B$ then $B \equiv A$.\\
+		Assume that $\vec{v}\equiv\vec{u}$. Notice that $\vec{u}-\vec{u}=(\vec{v}-\vec{u})$. However $\vec{v}-\vec{u}\in W$ and $W$ is closed under negation. Thus $\vec{u}-\vec{u}\in W$ and so $\vec{v}\equiv\vec{u}$.
+	\item[(iii)]If $A \equiv B$ and $B \equiv C$ then $A \equiv C$.\\
+		Assume that $\vec{u}\equiv\vec{v}$ and $\vec{v}\equiv\vec{w}$ then $\vec{v}-\vec{u}\in W$ and $\vec{w}-\vec{v}\in W$. However $\vec{w}-\vec{u}=(\vec{w}-\vec{v})+(\vec{v}-\vec{u})$ and $W$ is closed under addition. Therefore $\vec{w}-\vec{u}\in W$ and so $\vec{u}\equiv\vec{w}$.
+	\end{enumerate}
+	\end{proof}
+
+
 \item[12.38]Consider a real quadratic polynomial $q(x_1,...,x_n)=\sum_{i,j=1}^na_{i,j}x_ix_j$, where $a_{i,j}=a_{j,i}$.
 	\begin{enumerate}
 	\item If $a_{1,1}\neq 0$, show that the substitution
@@ -108,20 +138,14 @@
 	This method of diagonalizing $q$ is known as \textit{completing the square}.
 \item[12.43]Determine whether or not each quadratic form is positive definite.
 	\begin{enumerate}
-	\item $q(x,y,z)=x^2+4xy+5y^2+6xz+2yz+4z^2$;
-	\item $q(x,y,z)=x^2+2xy+2y^2+4xz+6yz+7z^2$;
+	\item $q(x,y,z)=x^2+4xy+5y^2+6xz+2yz+4z^2$;\\
+		This equation gives us the symmetric matrix
+		\[ M= \begin{bmatrix}[rrr]1&2&3\\2&5&1\\3&1&4\\\end{bmatrix} \]
+		This matrix results in a negative eigenvalue and so this matrix is not positive definite.
+	\item $q(x,y,z)=x^2+2xy+2y^2+4xz+6yz+7z^2$;\\
+		This equation gives us the symmetric matrix
+		\[ M = \begin{bmatrix}[rrr]1&1&2\\1&2&3\\2&3&7\\\end{bmatrix} \]\\
+		Since all eigenvalues of this matrix are $> 0$, this matrix is positive definite.
 	\end{enumerate}
-
-\item[12.27]Just read this solution
-
-
-
-
-
-
-
-
-
-
 \end{enumerate}
 \end{document}

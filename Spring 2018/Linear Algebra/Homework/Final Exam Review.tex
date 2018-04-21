@@ -1,0 +1,267 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{result}{Result} %added
+\newtheorem*{theorem}{Theorem} %added
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Final Review}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{MATH 2300 CRN:15163}
+\date{2018-04-20}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+\begin{enumerate}
+\item[1.88]Given the surface $z=f(x,y)=x^2+2xy$, find a normal vector $N$ and tangent plane $H$ when $x=3$ and $y=1$.
+\item[1.90]Given: $u=3i-4j+2k$, $v=2i+5j-3k$, $w=4i+7j+2k$. Find: (a) $u \times v$; (b) $u \times w$;
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[1.93]Find a unit vector $w$ orthogonal to: (a) $u=[1,2,3]$ and $v=[1,-1,2]$; (b) $u=3i-j+2k$ and $v=4i-2j-k$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}		
+\item[2.85]Find the dimension and a basis of the general solution $W$ of each homogeneous system.
+\[ \mathrm{(a)} \sysdelim{.}{.}\systeme[xyzst]{x+3y+2z-s-t=0,2x+6y+5z+s-t=0,5x+15y+12z+s-3t=0} \quad \mathrm{(b)} \sysdelim{.}{.}\systeme[xyzst]{2x-4y+3z-s+2t=0,3x-6y+5z-2s+4t=0,5x-10y+7z-3s+t=0} \]
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}		
+\item[2.91]Let $Ax=b$ be an $n \times n$ system of linear equations.
+	\begin{enumerate}
+	\item Suppose $Ax=0$ has only the zero solution. Show that $Ax=b$ has a unique solution for any choice of vector $b$.
+	\item Suppose $Ax=0$ has a nonzero solution. Show that the system $Ax=b$ cannot have a unique solution, and that there are vectors $b$ for which $Ax=b$ has no solution.
+	\end{enumerate}		
+\item[3.50]Suppose $A$ is an $n \times n$ matrix and $AB=BA=I$. SHow that such a matrix $B$ is unique, that is, show that inverses are unique.
+\item[3.61]Prove Theorem 3.4: Every $2 \times 2$ orthogonal matrix has the form
+\[ \begin{bmatrix}[rr]\cos\theta & \sin\theta\\-\sin\theta & \cos\theta\\\end{bmatrix} \quad \mathrm{or} \quad \begin{bmatrix}[rr]\cos\theta & \sin\theta\\\sin\theta & -\cos\theta \\\end{bmatrix} \]
+for some real number $\Theta$.
+\item[3.83](a) Give an example of a nonzero matrix $A$ such that $AB=AC$ but $B\neq C$. (b) Suppose $A$ is invertible. Show that if $AB=AB$, then $B=C$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[3.89]Find all real triangular matrices $A$ such that $A^2=B$, where:
+\[ \mathrm{(a)} B=\begin{bmatrix}[rr]4&21\\0&25\\\end{bmatrix} \quad \mathrm{(b)} B = \begin{bmatrix}[rr]1&4\\0&-9\\\end{bmatrix} \]
+	\begin{enumerate}
+	\item[(b)]
+	\end{enumerate}		
+\item[4.37]Show that axiom $[A_4]$ of a vector space $V$, that is, $u+v=v+u$, can be derived from the other axioms of $V$.
+\item[4.44]Write $M$ as a linear combination of $A=\begin{bmatrix}[rr]1&1\\0&-1\\\end{bmatrix}$, $B=\begin{bmatrix}[rr]1&1\\-1&1\\\end{bmatrix}$, $C=\begin{bmatrix}[rr]1&-1\\0&0\\\end{bmatrix}$, where:
+(a) $M=\begin{bmatrix}[rr]3&-1\\1&-3\\\end{bmatrix}$; (b) $M=\begin{bmatrix}[rr]2&1\\-1&-2\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[4.66]Consider the following subspaces of $\mathbb{R}^3$:
+\[ U_1=\{(a,b,c): a=c\},U_2=\{(a,b,c): a+b+c=0\}, U_3=(0,0,c)\} \]
+Show that: (a) $\mathbb{R}^3=U_1\oplus U_3$; (b) $\mathbb{R}^3=U_2\oplus U_3$; (c) $\mathbb{R}^3=U_1+U_1$ but $\mathbb{R}^3\neq U_1\oplus U_2$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[4.50]Let $V$ be the vector space of all functions from the real field $\mathbb{R}$ into $\mathbb{R}$. Determine whether or not $W$ is a subspace of $V$ in each case:\\
+(a) $W$ consists of all bounded functions. [Here $f: \mathbb{R}\rightarrow\mathbb{R}$ is bounded if $\exists M \in \mathbb{R}$ such that, for every $x\in \mathbb{R}$, we have $|f(x)| \leq M$.]\\
+(b) $W$ consists of all functions $f(x)=x^k$, where $K$ is any real scalar.\\
+(c) $W$ consists of all continuous functions.\\
+(d) $W$ consists of the exponential function $f(x)=e^{kx}$, where $K$ is any real scalar.\\
+(e) $W$ consists of all differentiable functions.\\
+(f) $W$ consists of all integrable functions in, say, the interval $0\leq x \leq 1$.\\
+(g) $W$ consists of constant functions $f(x)=k$, where $k$ is any real scalar.
+	\begin{enumerate}
+	\item[(c)]
+	\end{enumerate}
+\item[5.44]Prove Theorem 5.10 (for two factors): Suppose $V=U\oplus W$. Moreover, suppose $S_1=\{u_1,...,u_m\}$ and $S_2=\{w_1,...,w_n\}$ are linearly independent subsets of $U$ and $W$, respectively. Then:
+	\begin{enumerate}
+	\item[(i)] The union $S=S_1 \cup S_2$ is linearly independent in $V$.
+	\item[(ii)] If $S_1$ and $S_2$ are bass of $U$ and $W$, respectively, then $S=S_1 \cup S_2$ is a basis of $V$.
+	\item[(iii)] $\mathrm{dim}V = \mathrm{dim}U + \mathrm{dim}W$.
+	\end{enumerate}
+\item[5.53]Show that $u=(a,b)$ and $v=(c,d)$ in $\mathbb{R}^2$ are linearly dependent if and only if $ad-bc=0$.
+\item[5.67]Find a basis and the dimension of the subspace $W$ of $P(t)$ spanned by the polynomials:\\
+(a) $u=t^3+2t^2-2t+1$, $v=t^3+3t^2-t+4$, and $w=2t^3+t^2-7t-7$\\
+(b) $u=t^3+t^2-3t+2$, $v=2t^3+t^2+t-4$, and $w=4t^3+3t^2-5t+2$
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[5.85]Consider a finite sequence of vectors $S=\{u_1,u_2,...,u_n\}$. Let $T$ be a sequence of vectors obtained from $S$ by one of the following "elementary" operations:\\
+(1) Interchange two vectors.\\
+(2) Multiply a vector by a nonzero scalar.\\
+(3) Add a multiply of one vector to another vector.\\
+Show that $S$ and $T$ span the same subspace $W$. Also show that $T$ is linearly independent if and only if $S$ is linearly independent.
+\item[6.26]In the vector space $M=M_{2,2}$ of $2\times 2$ matrices find the coordinate vector $[A]$ of the matrix $A$ relative to the basis
+\[ S=\left\{ \begin{bmatrix}[rr]1&1\\1&1\\\end{bmatrix},\begin{bmatrix}[rr]1&-1\\1&0\\\end{bmatrix},\begin{bmatrix}[rr]1&1\\0&0\\\end{bmatrix},\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix}\right\} \]
+where: (a) $A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}		
+\item[7.8]Verify each of the following:\\
+(a) Parallelogram law (Fig. 7-9): $||u+v||^2 + ||u-v||^2 = 2||u||^2 + 2||v||^2$.\\
+(b) Polar form for $\langle u,v \rangle$ (which shows that the inner product can be obtained from the norm function): $\langle u,v\rangle=\dfrac{1}{4}(||u+v||^2-||u-v||^2)$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[7.9]Find $K$ so that the following pairs are orthogonal:\\
+(a) $u=(1,2,k,3)$ and $v=(3,k,7,-5)$ in $\mathbb{R}^4$.\\
+(b) $f(t) = t+k$ and $g(t)=t^2$, where $\langle f,g\rangle = \int_0^1f(t)g(t)dt$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[7.35]Prove Theorem 7.1 (Cauchy-Schwarz): For any vectors $u$ and $v$ in a real inner product space $V$,
+\[ \langle u,v \rangle^2 \leq \langle u,u\rangle \langle v,v\rangle \qquad \mathrm{or equivalently} \qquad |\langle u,v \rangle | \leq ||u|| ||v|| \]
+
+\item[7.83]Determine which of the following matrices are positive definite:\\
+(a) $\begin{bmatrix}[rr]1&3\\3&5\\\end{bmatrix}$; (b) $\begin{bmatrix}[rr]3&4\\4&7\\\end{bmatrix}$; (c) $\begin{bmatrix}[rr]4&2\\2&1\\\end{bmatrix}$; (d) $\begin{bmatrix}[rr]6&-7\\-7&9\\\end{bmatrix}$.
+\item[8.21]Let $F: \mathbb{R}^4\rightarrow\mathbb{R}^3$ be a linear mapping defined by
+\[ F(x,y,z,t)=(x-y+z+t,x+2z-t,x+y+3z-3t) \]
+Find a basis and the dimension of: (a) the image of $F$; (b) the kernel of $F$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[8.50]Let $E$ be a linear operator on $V$ for which $E^2=E$. (Such an operator is called a \textit{projection}.) Let $U$ be the image of $E$, and let $W$ be the kernel. Prove:\\
+(a) If $u\in U$, then $E(u)=u$, i.e., $E$ is the identity mapping on $U$.\\
+(b) If $E\neq I$, then $E$ is singular, i.e., $E(v)=0$ for some $v\neq 0$.\\
+(c) $V=U\oplus W$.
+	\begin{enumerate}
+	\item
+	\item
+	\item
+	\end{enumerate}
+\item[8.58]Show that the following mappings are not linear:\\
+(a) $F:\mathbb{R}^2\rightarrow\mathbb{R}^2$ defined by $F(x,y)=(x^2,y^2)$.\\
+(b) $F:\mathbb{R}^3\rightarrow\mathbb{R}^2$ defined by $F(x,y,z)=(x+1,y+z)$.\\
+(c) $F:\mathbb{R}^2\rightarrow\mathbb{R}^2$ defined by $F(x,y)=(xy,y)$.\\
+(d) $F:\mathbb{R}^3\rightarrow\mathbb{R}^2$ defined by $F(x,y,z)=(|x|,y+z)$.
+	\begin{enumerate}
+	\item[(c)]
+	\end{enumerate}
+\item[8.74]Find a linear mapping $G:\mathbb{R}^4\rightarrow\mathbb{R}^3$ whose kernel is spanned by $(1,2,3,4)$ and $(0,1,1,1)$.
+\item[8.91]Show that each linear operator $T$ on $\mathbb{R}^3$ is nonsingular and find a formula for $T^{-1}$, where: (a) $T(x,y,z)=(x-3y-2z,y-4z,z)$; (b) $T(x,y,z)=(x+z,x-y,y)$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[9.7]For each of the following transformations (operators) $L$ on $\mathbb{R}^2$, find the matrix $A$ which represents $L$ (relative to the usual basis of $\mathbb{R}^2$:\\
+(a) $L$ is defined by $L(1,0)=(2,4)$ and $L(0,1)=(5,8)$.\\
+(b) $L$ is the rotation in $\mathbb{R}^2$ counterclockwise by $90^\circ$.\\
+(c) $L$ is the reflection in $\mathbb{R}^2$ about the line $y=-x$.
+	\begin{enumerate}
+	\item
+	\item
+	\item
+	\end{enumerate}
+\item[9.9]The set $S=\{e^{3t},te^{3t},t^2e^{3t}\}$ is a basis of a vector space $V$ of functions $f: \mathbb{R}\rightarrow\mathbb{R}$. Let $D$ be the differential operator on $V$, that is, $D(f)=df/dt$. Find the matrix representation of $D$ relative to the basis $S$.
+\item[9.14]Write $A\simeq B$ if $A$ is similar to $B$, that is, if there exists an invertible matrix $P$ such that $A=P^{-1}BP$. Prove that $\simeq$ is an equivalence relation (on square matrices), that is, prove: (a) $A\simeq A$ , for every $A$; (b) if $A \simeq B$, then $B\simeq A$; (c) if $A\simeq B$ and $B\simeq C$, then $A\simeq C$.\\
+
+\item[9.15]Suppose $B$ is similar to $A$, say $B=P^{-1}AP$.\\
+(a) Show that $B^n=P^{-1}A^nP$, and so $B^n$ is similar to $A^n$.\\
+(b) Show that $f(B)=P^{-1}f(A)P$ for any polynomial $f(x)$, and so $f(B)$ is similar to $f(A)$.\\
+(c) Show that $B$ is a root of a polynomial $g(x)$ if and only if $A$ is a root of $g(x)$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[9.45]Let $F:\mathbb{R}^3\rightarrow\mathbb{R}^2$ be defined by $F(x,y,z)=(2x+y-z,3x-2y+4z)$.\\
+(a) Find the matrix $A$ representing $G$ relative to the bases
+\[ S=\{(1,1,1),(1,1,0),(1,0,0)\} \quad \mathrm{and} \quad S^\prime = \{(1,3),(1,4)\} \]
+(b) Verify that, for any $v=(a,b,c)$ in $\mathbb{R}^3$, $A[v]_S=[F(v)]_{S^\prime}$.
+	\begin{enumerate}
+	\item
+	\item
+	\end{enumerate}
+\item[10.47]Prove Theorem 10.9: $A\cdot (\mathrm{adj}A)=(\mathrm{adj}A)\cdot A = |A|I$.
+\item[10.80]Let $A$ be an n-square matrix. Prove $|kA|=k^n|A|$.
+\item[11.16]Let $L$ be the linear transformation on $\mathbb{R}^2$ that reflects points across the line $y=kx$, where $k > 0$. (See Fig. 11-1.)\\
+(a) Show that $v_1=(1,k)$ and $v_2=(k,-1)$ are eigenvectors of $L$.\\
+(b) Show that $L$ is diagonalizable, and find such a diagonal representation of $D$.
+\item[11.21]Determine whether or not $A$ is diagonalizable, where $A=\begin{bmatrix}[rrr]1&2&3\\0&2&3\\0&0&3\\\end{bmatrix}$.
+\item[11.28]Let $A=\begin{bmatrix}[rrr]3&1&1\\1&3&1\\1&1&3\\\end{bmatrix}$.\\
+(a) Find the characteristic polynomial $\Delta(t)$ and all eigenvalues of $A$.\\
+(b) Find a maximal set $S$ of nonzero orthogonal eigenvectors of $A$.\\
+(c) Find an orthogonal matrix $P$ such that $D=P^{-1}AP$ is diagonal.
+\item[11.51]Let $A$ be an n-square matrix. Without using the Caylet-Hamilton theorem, prove that $A$ is a root of nonzero polynomial of degree $\leq n^2$.
+\item[12.4]Find the quadratic form $q(X)$ which corresponds to each symmetric matrix:\\
+(a) $A=\begin{bmatrix}[rr]5&-3\\-3&8\\\end{bmatrix}$; (b) $B=\begin{bmatrix}[rrr]4&-5&7\\-5&-6&8\\7&8&-9\\\end{bmatrix}$; (c) $C=\begin{bmatrix}[rrrr]2&4&-1&5\\4&-7&-6&8\\-1&-6&3&9\\5&8&9&1\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item
+	\end{enumerate}
+\item[12.20]Let $B$ be any nonsingular matrix, and let $M=B^TB$. (a) Show that $M$ is symmetric; (b) show that $M$ is positive definite.
+\item[12.35]Give an example of a quadratic form $q(x,y)$ such that $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.
+\item[12.39]For each matrix $A$ find an orthogonal matrix $P$ and a diagonal matrix $D$ such that $D=P^TAP$:\\
+(a) $A=\begin{bmatrix}[rr]6&-1\\-1&6\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rr]9&4\\4&-6\\\end{bmatrix}$; (c) $A=\begin{bmatrix}[rr]7&3\\3&-1\\\end{bmatrix}$.
+\item[12.42]Determine whether or not each quadratic form is positive definite.\\
+(a) $q(x,y) = 4x^2+5xy+7y^2$;\\
+(b) $q(x,y)=2x^2-3xy-y^2$; (c) $q(x,y)=x^2-6xy+4y^2$.
+\end{enumerate}
+\end{document}

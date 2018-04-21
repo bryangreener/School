@@ -52,11 +52,12 @@
 \makeatother 
 
 % END BLOCK============================================
-
+\theoremstyle{plain}
 \newtheorem*{lemma}{Lemma} %added
-\newtheorem*{result}{Result} %added
 \newtheorem*{theorem}{Theorem} %added
+
 \theoremstyle{definition}
+\newtheorem*{result}{Result} %added
 \newtheorem*{solution}{Solution} %added
 \theoremstyle{plain}
 
@@ -81,104 +82,207 @@
 % END BLOCK============================================
 
 \TabPositions{4cm}
+Skipped 1.88, 2.91, 3.50, 3.61, 4.37, 4.50, 5.44, 5.53, 5.85, 
+
+
+
 \begin{enumerate}
 \item[1.88]Given the surface $z=f(x,y)=x^2+2xy$, find a normal vector $N$ and tangent plane $H$ when $x=3$ and $y=1$.
+	\begin{solution}
+	Let $f(x,y,z) = x^2+2xy-z = 0$. Thus we get the derivatives 
+	\begin{center}
+	$f_x(x,y,z)=x+2y$, $f_y(x,y,z)=2x$, and $f_z(x,y,z)=-1$.
+	\end{center}
+	\end{solution}
+	
 \item[1.90]Given: $u=3i-4j+2k$, $v=2i+5j-3k$, $w=4i+7j+2k$. Find: (a) $u \times v$; (b) $u \times w$;
 	\begin{enumerate}
-	\item
-	\item
+	\item We first set up the array of coefficients as
+		\[ \begin{bmatrix}[rrr]3&-4&2\\2&5&-3\\\end{bmatrix} \]
+		The formula for the cross product is as follows
+		\begin{align*}
+		u \times v &= \left[ \mathrm{det}\begin{bmatrix}[rr]-4&2\\5&-3\\\end{bmatrix},-\mathrm{det}\begin{bmatrix}[rr]3&2\\2&-3\\\end{bmatrix},\mathrm{det}\begin{bmatrix}[rr]3&-4\\2&5\\\end{bmatrix}\right]\\
+		&= [ 2, 13, 23 ]\\
+		&= 2i+13j+23k 
+		\end{align*}
+	\item Repeating the same process as above, we get the matrix
+		\[ \begin{bmatrix}[rrr]3&-4&2\\4&7&2\\\end{bmatrix} \]
+		Thus $u\times w =-22i+2j+37k$. 
 	\end{enumerate}
+	
 \item[1.93]Find a unit vector $w$ orthogonal to: (a) $u=[1,2,3]$ and $v=[1,-1,2]$; (b) $u=3i-j+2k$ and $v=4i-2j-k$.
 	\begin{enumerate}
-	\item
-	\item
-	\end{enumerate}		
+	\item Repeating the initial steps in problem 1.90 gives us the matrix
+		\[ \begin{bmatrix}[rrr]1&2&3\\1&-1&2\\\end{bmatrix} \]
+		Then $u \times v = [7,1,-3]$. We then normalize this vector to get
+		\[ u = \left[ \dfrac{7}{\sqrt{59}},\dfrac{1}{\sqrt{59}},\dfrac{-3}{\sqrt{59}} \right] \]
+	\item 
+		\[ \begin{bmatrix}[rrr]3&-1&2\\4&-2&-1\\\end{bmatrix} \]
+		Then $u\times v = 5i+11j-2k$. We then normalize this result to get
+		\[ u = \left[ \dfrac{5i}{\sqrt{150}}+\dfrac{11j}{\sqrt{150}}-\dfrac{2k}{\sqrt{150}} \right] \]
+	\end{enumerate}
+		
 \item[2.85]Find the dimension and a basis of the general solution $W$ of each homogeneous system.
 \[ \mathrm{(a)} \sysdelim{.}{.}\systeme[xyzst]{x+3y+2z-s-t=0,2x+6y+5z+s-t=0,5x+15y+12z+s-3t=0} \quad \mathrm{(b)} \sysdelim{.}{.}\systeme[xyzst]{2x-4y+3z-s+2t=0,3x-6y+5z-2s+4t=0,5x-10y+7z-3s+t=0} \]
 	\begin{enumerate}
-	\item
-	\item
-	\end{enumerate}		
+	\item First we reduce this system to get
+		\[ \begin{bmatrix}[rrrrr]1&3&2&-1&-1\\2&6&5&1&-1\\5&15&12&1&-3\\\end{bmatrix}\xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrrrr]1&3&0&-7&-3\\0&0&1&3&1\\0&0&0&0&0\\\end{bmatrix} \]
+		Thus we have two free variables so the dimension of $W$ is 3.\\
+		First we let $y=1,s=0,t=0$, then $u_1=(-3,1,0,0,0)$.\\
+		Next let $y=0,s=1,t=0$, then $u_2=(0,0,-3,1,0)$.\\
+		Finally let $y=0,s=0,t=1$, then $u_3=(0,0,-1,0,1)$.\\
+		$u_1,u_2,u_3$ form a basis for $W$. Any solution of the system can be written in the form
+		\[ au_1+bu_2+cu_3 = a(-3,1,0,0,0)+b(0,0,-3,1,0)+c(0,0,-1,0,1) = (-3a,a,-3b-c,b,c) \]
+		where $a$, $b$, and $c$ are arbitrary constants. 
+	\item First we reduce this system to get
+		\[ \begin{bmatrix}[rrrrr]2&-4&3&-1&2\\3&-6&5&-2&4\\5&-10&7&-3&1\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrrrr]1&-2&0&0&-5\\0&0&1&0&5\\0&0&0&1&3\\\end{bmatrix} \]
+		Thus we have two free variables so the dimension of $W$ is 2.\\
+		First we let $y=1,t=0$, then $u_1=(2,1,0,0,0)$.\\
+		Next let $y=0,t=1$, then $u_2=(5,0,-5,-3,1)$.\\
+		$u_1,u_2$ form a basis for $W$. Any solution of the system can be written in the form
+		\[ au_1+bu_2 = a(2,1,0,0,0)+b(5,0,-5,-3,1) = (2a+5b,a,-5b,-3b,b) \]
+		where $a$ and $b$ are arbitrary constants.
+	\end{enumerate}
+	
 \item[2.91]Let $Ax=b$ be an $n \times n$ system of linear equations.
 	\begin{enumerate}
 	\item Suppose $Ax=0$ has only the zero solution. Show that $Ax=b$ has a unique solution for any choice of vector $b$.
 	\item Suppose $Ax=0$ has a nonzero solution. Show that the system $Ax=b$ cannot have a unique solution, and that there are vectors $b$ for which $Ax=b$ has no solution.
 	\end{enumerate}		
-\item[3.50]Suppose $A$ is an $n \times n$ matrix and $AB=BA=I$. SHow that such a matrix $B$ is unique, that is, show that inverses are unique.
+	
+\item[3.50]Suppose $A$ is an $n \times n$ matrix and $AB=BA=I$. Show that such a matrix $B$ is unique, that is, show that inverses are unique.
+
 \item[3.61]Prove Theorem 3.4: Every $2 \times 2$ orthogonal matrix has the form
 \[ \begin{bmatrix}[rr]\cos\theta & \sin\theta\\-\sin\theta & \cos\theta\\\end{bmatrix} \quad \mathrm{or} \quad \begin{bmatrix}[rr]\cos\theta & \sin\theta\\\sin\theta & -\cos\theta \\\end{bmatrix} \]
-for some real number $\Theta$.
+for some real number $\theta$.
+
 \item[3.83](a) Give an example of a nonzero matrix $A$ such that $AB=AC$ but $B\neq C$. (b) Suppose $A$ is invertible. Show that if $AB=AB$, then $B=C$.
 	\begin{enumerate}
-	\item
+	\item Let $A=\begin{bmatrix}[rr]0&1\\0&0\\\end{bmatrix},B=\begin{bmatrix}[rr]b_1&b_2\\b_3&b_4\\\end{bmatrix},C=\begin{bmatrix}[rr]c_1&c_2\\c_3&c_4\\\end{bmatrix}$. So
+	\[ AB = \begin{bmatrix}[rr]b_3&b_4\\0&0\\\end{bmatrix} \]
+	\[ AC = \begin{bmatrix}[rr]c_3&c_4\\0&0\\\end{bmatrix} \]
+	Thus $b_1,b_2,c_1,c_2$ can all be chosen randomly.
 	\end{enumerate}
+	
 \item[3.89]Find all real triangular matrices $A$ such that $A^2=B$, where:
 \[ \mathrm{(a)} B=\begin{bmatrix}[rr]4&21\\0&25\\\end{bmatrix} \quad \mathrm{(b)} B = \begin{bmatrix}[rr]1&4\\0&-9\\\end{bmatrix} \]
 	\begin{enumerate}
-	\item[(b)]
-	\end{enumerate}		
+	\item[(b)] Let $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$, then
+		\[ A^2 = \begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix} = \begin{bmatrix}[rr]a^2+bc&ab+bd\\ac+cd&bc+d^2\\\end{bmatrix} = B \]
+		So $a^2+bc = 1$, $ab+bd = 4$, $ac+cd = 0$, and $bc+d^2 = -9$. Let $c=0$, then $d=\pm 3$ and $a=\pm 1$.\\
+		We solve for each case:
+		\begin{center}
+		Let $a=1,d=3$, then $b=1$ and $A=\begin{bmatrix}[rr]1&1\\0&3\\\end{bmatrix}$\\
+		Let $a=1,d=-3$, then $b=-2$ and $A=\begin{bmatrix}[rr]1&-2\\0&-3\\\end{bmatrix}$\\
+		Let $a=-1,d=3$, then $b=2$ and $A=\begin{bmatrix}[rr]-1&2\\0&3\\\end{bmatrix}$\\
+		Let $a=-1,d=-3$, then $b=-2$ and $A=\begin{bmatrix}[rr]-1&-2\\0&-3\\\end{bmatrix}$
+		\end{center}
+	\end{enumerate}	
+		
 \item[4.37]Show that axiom $[A_4]$ of a vector space $V$, that is, $u+v=v+u$, can be derived from the other axioms of $V$.
+
 \item[4.44]Write $M$ as a linear combination of $A=\begin{bmatrix}[rr]1&1\\0&-1\\\end{bmatrix}$, $B=\begin{bmatrix}[rr]1&1\\-1&1\\\end{bmatrix}$, $C=\begin{bmatrix}[rr]1&-1\\0&0\\\end{bmatrix}$, where:
 (a) $M=\begin{bmatrix}[rr]3&-1\\1&-3\\\end{bmatrix}$; (b) $M=\begin{bmatrix}[rr]2&1\\-1&-2\\\end{bmatrix}$.
 	\begin{enumerate}
-	\item
+	\item Let $M=xA + yB + zC$, then
+		\[ \begin{bmatrix}[rr]3&-1\\1&-3\\\end{bmatrix} = x\begin{bmatrix}[rr]1&1\\0&-1\\\end{bmatrix}+y\begin{bmatrix}[rr]1&1\\-1&1\\\end{bmatrix}+z\begin{bmatrix}[rr]1&-1\\0&0\\\end{bmatrix} = \begin{bmatrix}[rr]x+y+z&x+y-z\\-y&-x\\\end{bmatrix} \]
+		We can then form the system
+		\[ \begin{bmatrix}[rrr|r]1&1&1&3\\1&1&-1&-1\\0&-1&0&1\\-1&1&0&-3\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrrr]1&0&0&2\\0&1&0&-1\\0&0&1&2\\0&0&0&0\\\end{bmatrix} \]
+		We then solve this system by backsubstitution to get $z=2,y=-1,x=2$. Thus $M=2A-1B+2C$.
 	\end{enumerate}
+	
 \item[4.66]Consider the following subspaces of $\mathbb{R}^3$:
 \[ U_1=\{(a,b,c): a=c\},U_2=\{(a,b,c): a+b+c=0\}, U_3=(0,0,c)\} \]
 Show that: (a) $\mathbb{R}^3=U_1\oplus U_3$; (b) $\mathbb{R}^3=U_2\oplus U_3$; (c) $\mathbb{R}^3=U_1+U_1$ but $\mathbb{R}^3\neq U_1\oplus U_2$.
 	\begin{enumerate}
 	\item
+		\begin{proof}
+		First we show that $U_1 \cap U_3 = \{0\}$. Suppose $v=(a,b,c)\in U_1 \cap U_3$. Then $a=c$ and $a=0,b=0$. Hence $a=0,b=0,c=0$. Thus $v=0=(0,0,0)$.\\
+		Next we show that $\mathbb{R}^3 = U_1+U_3$. If $v=(a,b,c)\in \mathbb{R}^3$, then $v=(a,b,a)+(0,0,c-a)$, where $(a,b,a)\in U_1$ and $(0,0,c-a)\in U_3$. Both conditions, $U_1\cap U_3 = \{0\}$ and $U_1+U_3 =\mathbb{R}^3$, imply $\mathbb{R}^3 = U_1 \oplus U_3$.
+		\end{proof}
 	\end{enumerate}
-\item[4.50]Let $V$ be the vector space of all functions from the real field $\mathbb{R}$ into $\mathbb{R}$. Determine whether or not $W$ is a subspace of $V$ in each case:\\
-(a) $W$ consists of all bounded functions. [Here $f: \mathbb{R}\rightarrow\mathbb{R}$ is bounded if $\exists M \in \mathbb{R}$ such that, for every $x\in \mathbb{R}$, we have $|f(x)| \leq M$.]\\
-(b) $W$ consists of all functions $f(x)=x^k$, where $K$ is any real scalar.\\
-(c) $W$ consists of all continuous functions.\\
-(d) $W$ consists of the exponential function $f(x)=e^{kx}$, where $K$ is any real scalar.\\
-(e) $W$ consists of all differentiable functions.\\
-(f) $W$ consists of all integrable functions in, say, the interval $0\leq x \leq 1$.\\
-(g) $W$ consists of constant functions $f(x)=k$, where $k$ is any real scalar.
+	
+\item[4.50]Let $V$ be the vector space of all functions from the real field $\mathbb{R}$ into $\mathbb{R}$. Determine whether or not $W$ is a subspace of $V$ in each case:
 	\begin{enumerate}
-	\item[(c)]
+	\item $W$ consists of all bounded functions. [Here $f: \mathbb{R}\rightarrow\mathbb{R}$ is bounded if $\exists M \in \mathbb{R}$ such that, for every $x\in \mathbb{R}$, we have $|f(x)| \leq M$.]
+	\item $W$ consists of all functions $f(x)=x^k$, where $K$ is any real scalar.
+	\item $W$ consists of all continuous functions.\\
+		\begin{solution}
+		
+		\end{solution}
+	\item $W$ consists of the exponential function $f(x)=e^{kx}$, where $K$ is any real scalar.
+	\item $W$ consists of all differentiable functions.
+	\item $W$ consists of all integrable functions in, say, the interval $0\leq x \leq 1$.
+	\item $W$ consists of constant functions $f(x)=k$, where $k$ is any real scalar.
 	\end{enumerate}
+	
 \item[5.44]Prove Theorem 5.10 (for two factors): Suppose $V=U\oplus W$. Moreover, suppose $S_1=\{u_1,...,u_m\}$ and $S_2=\{w_1,...,w_n\}$ are linearly independent subsets of $U$ and $W$, respectively. Then:
 	\begin{enumerate}
 	\item[(i)] The union $S=S_1 \cup S_2$ is linearly independent in $V$.
 	\item[(ii)] If $S_1$ and $S_2$ are bass of $U$ and $W$, respectively, then $S=S_1 \cup S_2$ is a basis of $V$.
 	\item[(iii)] $\mathrm{dim}V = \mathrm{dim}U + \mathrm{dim}W$.
 	\end{enumerate}
+	
 \item[5.53]Show that $u=(a,b)$ and $v=(c,d)$ in $\mathbb{R}^2$ are linearly dependent if and only if $ad-bc=0$.
+
 \item[5.67]Find a basis and the dimension of the subspace $W$ of $P(t)$ spanned by the polynomials:\\
 (a) $u=t^3+2t^2-2t+1$, $v=t^3+3t^2-t+4$, and $w=2t^3+t^2-7t-7$\\
 (b) $u=t^3+t^2-3t+2$, $v=2t^3+t^2+t-4$, and $w=4t^3+3t^2-5t+2$
 	\begin{enumerate}
-	\item
-	\item
+	\item We first set up a coordinate matrix for these polynomials then reduce
+		\[ \begin{bmatrix}[rrrr]1&2&-2&1\\1&3&-1&4\\2&1&-7&-7\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrrr]1&0&-4&-4\\0&1&1&3\\0&0&0&0\\\end{bmatrix} \]
+		Since we only have two pivot entries, then the dimension of this system is 2. Using the rows with pivot entries, we find our basis $\{t^3-4t-4,t^2+t+3\}$.
+	\item We first set up a coordinate matrix for these polynomials then reduce
+		\[ \begin{bmatrix}[rrrr]1&1&-3&2\\2&1&1&-4\\4&3&-5&2\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrrr]1&0&4&0\\0&1&-7&0\\0&0&0&1\\\end{bmatrix} \]
+		Since we have three pivot entries, then the dimension of this system is 3. Using the rows with pivot entires, we find our basis $\{t^3+4t,t^2-7t,1\}$.
 	\end{enumerate}
+	
 \item[5.85]Consider a finite sequence of vectors $S=\{u_1,u_2,...,u_n\}$. Let $T$ be a sequence of vectors obtained from $S$ by one of the following "elementary" operations:\\
 (1) Interchange two vectors.\\
 (2) Multiply a vector by a nonzero scalar.\\
-(3) Add a multiply of one vector to another vector.\\
+(3) Add a multiple of one vector to another vector.\\
 Show that $S$ and $T$ span the same subspace $W$. Also show that $T$ is linearly independent if and only if $S$ is linearly independent.
+
 \item[6.26]In the vector space $M=M_{2,2}$ of $2\times 2$ matrices find the coordinate vector $[A]$ of the matrix $A$ relative to the basis
 \[ S=\left\{ \begin{bmatrix}[rr]1&1\\1&1\\\end{bmatrix},\begin{bmatrix}[rr]1&-1\\1&0\\\end{bmatrix},\begin{bmatrix}[rr]1&1\\0&0\\\end{bmatrix},\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix}\right\} \]
 where: (a) $A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rr]a&b\\c&d\\\end{bmatrix}$.
 	\begin{enumerate}
-	\item
-	\end{enumerate}		
+	\item We first set $A$ as a linear combination of the basis vectors
+		\[ A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix} = x\begin{bmatrix}[rr]1&1\\1&1\\\end{bmatrix}+y\begin{bmatrix}[rr]1&-1\\1&0\\\end{bmatrix}+z\begin{bmatrix}[rr]1&1\\0&0\\\end{bmatrix}+s\begin{bmatrix}[rr]1&0\\0&0\\\end{bmatrix} \]
+		This gives us
+		\[ \begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix} = \begin{bmatrix}[rr]x+y+z+s&x-y+z\\x+y&x\\\end{bmatrix} \]
+		This results in the system
+		\[ \sysdelim{.}{.}\systeme[xyzs]{x+y+z+s=3,x-y+z=-5,x+y=6,x=7} \]
+		Thus by backsubstitution we get $x=7,y=-1,z=-13,s=10$.\\
+		Hence $[A]=[7,-1,-13,10]$ whose components are the elements of $A$ written row by row.
+	\end{enumerate}
+	
 \item[7.8]Verify each of the following:\\
 (a) Parallelogram law (Fig. 7-9): $||u+v||^2 + ||u-v||^2 = 2||u||^2 + 2||v||^2$.\\
 (b) Polar form for $\langle u,v \rangle$ (which shows that the inner product can be obtained from the norm function): $\langle u,v\rangle=\dfrac{1}{4}(||u+v||^2-||u-v||^2)$.
 	\begin{enumerate}
-	\item
-	\item
+	\item We start by expanding $||u+v||^2$ and $||u-v||^2$.
+		\begin{align*}
+		||u+v||^2 &= \langle u+v,u+v \rangle = ||u||^2 + 2\langle u,v \rangle + ||v||^2\\
+		||u-v||^2 &= \langle u-v, u-v \rangle = ||u||^2 - 2\langle u,v \rangle + ||v||^2
+		\end{align*}
+		Adding these two equations together cancels out the middle terms to give us
+		\[ ||u+v||^2+||u-v||^2 = 2||u||^2 + 2||v||^2 \]
+	\item Using the two equations expanded in part (a), we subtract the second equation from the first to get
+		\[ ||u+v||^2 - ||u-v||^2 = 4\langle u,v \rangle \]
+		Dividing this result by 4 gives us the polar form.
 	\end{enumerate}
+	
 \item[7.9]Find $K$ so that the following pairs are orthogonal:\\
 (a) $u=(1,2,k,3)$ and $v=(3,k,7,-5)$ in $\mathbb{R}^4$.\\
 (b) $f(t) = t+k$ and $g(t)=t^2$, where $\langle f,g\rangle = \int_0^1f(t)g(t)dt$.
 	\begin{enumerate}
-	\item
-	\item
+	\item We first find $\langle u,v \rangle = (1,2,k,3)\cdot (3,k,7,-5) = 3+2k+7k-15 = 9k-12$. Next we set this equation equal to zero and solve for $k$ to find $k=\dfrac{4}{3}$.
+	\item First we find
+		\[ \langle f,g \rangle = \int_0^1(t+k)t^2dt = \int_0^1(t^3+kt^2)dt = \left[ \dfrac{t^4}{4}+\dfrac{kt^3}{3}\right]_0^1 = \dfrac{1}{4}+\dfrac{k}{3} \]
+		Set this result equal to zero to get $k=-\dfrac{3}{4}$.
 	\end{enumerate}
+	
 \item[7.35]Prove Theorem 7.1 (Cauchy-Schwarz): For any vectors $u$ and $v$ in a real inner product space $V$,
 \[ \langle u,v \rangle^2 \leq \langle u,u\rangle \langle v,v\rangle \qquad \mathrm{or equivalently} \qquad |\langle u,v \rangle | \leq ||u|| ||v|| \]
 

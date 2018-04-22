@@ -82,7 +82,7 @@
 % END BLOCK============================================
 
 \TabPositions{4cm}
-Skipped 1.88, 2.91, 3.50, 3.61, 4.37, 4.50, 5.44, 5.53, 5.85, 
+Skipped 1.88, 2.91, 3.50, 3.61, 4.37, 4.50, 5.44, 5.53, 5.85, 7.35, 8.50, 8.58, 
 
 
 
@@ -284,17 +284,31 @@ where: (a) $A=\begin{bmatrix}[rr]3&-5\\6&7\\\end{bmatrix}$; (b) $A=\begin{bmatri
 	\end{enumerate}
 	
 \item[7.35]Prove Theorem 7.1 (Cauchy-Schwarz): For any vectors $u$ and $v$ in a real inner product space $V$,
-\[ \langle u,v \rangle^2 \leq \langle u,u\rangle \langle v,v\rangle \qquad \mathrm{or equivalently} \qquad |\langle u,v \rangle | \leq ||u|| ||v|| \]
+\[ \langle u,v \rangle^2 \leq \langle u,u\rangle \langle v,v\rangle \qquad \mathrm{equivalently} \qquad |\langle u,v \rangle | \leq ||u|| ||v|| \]
 
 \item[7.83]Determine which of the following matrices are positive definite:\\
 (a) $\begin{bmatrix}[rr]1&3\\3&5\\\end{bmatrix}$; (b) $\begin{bmatrix}[rr]3&4\\4&7\\\end{bmatrix}$; (c) $\begin{bmatrix}[rr]4&2\\2&1\\\end{bmatrix}$; (d) $\begin{bmatrix}[rr]6&-7\\-7&9\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item Both diagonal entries are positive however the determinant is negative, thus this matrix is not positive definite.
+	\item Both diagonal entries are positive and the determinant is positive, thus this matrix is positive definite.
+	\item Both diagonal entries are positive but the determinant is zero, thus the matrix is not positive definite.
+	\item Both diagonal entries are positive and the determinant is positive, thus this matrix is positive definite.
+	\end{enumerate}
+	
 \item[8.21]Let $F: \mathbb{R}^4\rightarrow\mathbb{R}^3$ be a linear mapping defined by
 \[ F(x,y,z,t)=(x-y+z+t,x+2z-t,x+y+3z-3t) \]
 Find a basis and the dimension of: (a) the image of $F$; (b) the kernel of $F$.
 	\begin{enumerate}
-	\item
-	\item
+	\item First we find the images of the usual basis of $\mathbb{R}^4$:\\
+		$F(1,0,0,0)=(1,1,1),F(0,1,0,0)=(-1,0,1),F(0,0,1,0)=(1,2,3), F(0,0,0,1)=(1,-1,-3)$\\
+		Next we create a matrix using these images.
+		\[ \begin{bmatrix}[rrr]1&1&1\\-1&0&1\\1&2&3\\1&-1&-3\\\end{bmatrix} \xrightarrow[]{\mathrm{rref}} \begin{bmatrix}[rrr]1&0&-1\\0&1&2\\0&0&0\\0&0&0\\\end{bmatrix} \]
+		Thus $(1,0,-1)$ and $(0,1,2)$ form a basis for the image of $F$. Hence the dimension of the image of $F$ is 2.
+	\item Set $F(v)=0$
+		\[ F(x,y,z,t)=(x-y+z+t,x+2z-t,x+y+3z-3t)=(0,0,0) \]
+		Solving this homogeneous system gives us free variables $z$ and $t$. Thus the dimension of the kernel of $F$ is 2. Parameterizing this solution gives us the basis of the kernel of $F$ as $(2,1,-1,0),(1,2,0,1)$.
 	\end{enumerate}
+	
 \item[8.50]Let $E$ be a linear operator on $V$ for which $E^2=E$. (Such an operator is called a \textit{projection}.) Let $U$ be the image of $E$, and let $W$ be the kernel. Prove:\\
 (a) If $u\in U$, then $E(u)=u$, i.e., $E$ is the identity mapping on $U$.\\
 (b) If $E\neq I$, then $E$ is singular, i.e., $E(v)=0$ for some $v\neq 0$.\\
@@ -312,11 +326,16 @@ Find a basis and the dimension of: (a) the image of $F$; (b) the kernel of $F$.
 	\begin{enumerate}
 	\item[(c)]
 	\end{enumerate}
+	
 \item[8.74]Find a linear mapping $G:\mathbb{R}^4\rightarrow\mathbb{R}^3$ whose kernel is spanned by $(1,2,3,4)$ and $(0,1,1,1)$.
+	\begin{solution}
+		
+	\end{solution}
 \item[8.91]Show that each linear operator $T$ on $\mathbb{R}^3$ is nonsingular and find a formula for $T^{-1}$, where: (a) $T(x,y,z)=(x-3y-2z,y-4z,z)$; (b) $T(x,y,z)=(x+z,x-y,y)$.
 	\begin{enumerate}
-	\item
+	\item 
 	\end{enumerate}
+	
 \item[9.7]For each of the following transformations (operators) $L$ on $\mathbb{R}^2$, find the matrix $A$ which represents $L$ (relative to the usual basis of $\mathbb{R}^2$:\\
 (a) $L$ is defined by $L(1,0)=(2,4)$ and $L(0,1)=(5,8)$.\\
 (b) $L$ is the rotation in $\mathbb{R}^2$ counterclockwise by $90^\circ$.\\

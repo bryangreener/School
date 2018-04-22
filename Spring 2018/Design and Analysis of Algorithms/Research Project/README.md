@@ -1,9 +1,11 @@
-# Design and Analysis of Algorithms Final Project
-## Feed Forward Neural Network
-### Author: Bryan Greener
+# Design and Analysis of Algorithms Final Project:
+# Feed Forward Neural Network
+Final Project for Spring 2018 WMU course Design and Analysis of Algorithms. This project contains a neural network which can categorize handwritten digits passed in from the MNIST database.
+
+## Author
+Bryan Greener
 
 ## Directory Contents:
-
 ### Articles
 Folder containing articles, journals, and book materials used to research for this project.
 

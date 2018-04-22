@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto} %add \notab command
+\usepackage{hyperref}
+\usepackage[nottoc]{tocbibind} %embedded bibliography
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{R Package for Dr. McKean}
+\rhead{Feasibility Report}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{\huge R Package for Dr. McKean\\
+	\LARGE Feasibility Report}
+\author{Austin Ragotzy \and Bryan Greener \and Paul Phillips}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+
+\section{Introduction}
+As the field of big data grows, more people are studying data science and computational statistics. This area of study requires very fast and easy methods of solving very complex problems. Due to this need, many programming languages are putting more emphasis on making statistical computing more efficient. The three most often used languages are MATLAB, Python, and R. This report's focus is on the R programming language. R is a programming language with a focus on statistical computation and analysis. It is a free software environment supported by the R Foundation for Statistical Computing and is used by statisticians across the world due to the ease of use for statistic related mathematical problems. R is considered an ``interpreted language'' and it is usually run through a command line interpreter. This makes R very similar to languages such as MATLAB and APL. One of the biggest advantages to R over other languages is the wide variety of packages provided by the community. These packages add functionality to R that otherwise would require years of experience for a typical user to be able to program for themselves. There are many sources for these packages however the most widely accepted and trusted source is The Comprehensive R Archive Network also known as CRAN\cite{cran}. CRAN allows anybody to submit packages to them which then undergo a review process before being accepted into their network. From there, end users can retrieve packages and use them with ease.
+
+\section{Background}
+Joseph W. McKean is a Ph.D. of Statistics from Penn State University who is currently a statistics professor at Western Michigan University and has a wide variety of publications in many different statistics journals and books\cite{mckean}. His most recently updated publication is \textit{Introduction to Mathematical Statistics $8^\mathrm{th}$ Edition}\cite{book} and is the focus of this project. Dr. McKean frequently teaches a Probability course in which they use the R programming language. In this course, the students use content in McKean's book which contains many different R functions that the students can write and use in R. However, as this book has a focus on statistics and not programming in R itself, students may not understand the reasoning behind the way that each function is written. From here, Dr. McKean could write a document describing each function in detail however that would only add to the reading material required for the course. Thus he has requested the creation of an interactive package in R that students can use as a hands-on learning tool. This could help cut down on reading material required for the course as well as teach students the statistics and the programming side of the material at the same time, giving students the ability to develop functions to solve dynamic problems that no existing packages can solve for them.
+
+\section{Design}
+The main point of this package will be to be used as a teaching tool for people looking to learn statistics as well as the functional R programming needed to solve complex statistical problems. Thus this package will require an easily read and consistent code structure geared toward non-programming users. Each function should be written in a way that allows for the average user to make slight changes to suit their needs. This means that each function needs to be documented in a clean and thorough way that describes how different parameters and outputs interact with each other. Along with this, there should be manuals outside of the code that the user can read through to get an even deeper understanding of the inner workings of each function. This documentation should be separated from the functions themselves in order to improve readability. Often times in code comments are helpful however too much documentation can also make basic code more confusing. This package should be written to meet the requirements for submitting a package CRAN in hopes to submit this package to them when it is completed. After completing the package, Dr. McKean would like to look into writing an article regarding the package to be submitted for review for publishing however this is a long term goal that is superseded by the previously mentioned goals. Another possible long term goal of this project is to make an interactive web solution using R Shiny as an additional teaching tool for anyone that uses the package.
+
+\section{Stories and Spikes}
+
+\section{Resources}
+This project relies on few resources as the required functions are already published in a book. Direct contact between each member of the team and Dr. McKean is helping to prevent a disconnect between Dr. McKean's expectations of the package and the team's projected implementation of the package. Dr. McKean is contacting the publishers of his book which contains these functions in order to verify the legality of submitting a package of these functions to a public resource such as CRAN for distribution. The team and Dr. Mckean are working with each other to develop a contract containing project guidelines, distribution rights, disclosure rights, and intellectual rights. This contract is expected to be completed before June 2018 however work on this project may continue before the contract's completion in order to meet the deadline of late November 2018 for the whole project. More research is to be done on the time it takes for CRAN to review and accept or decline a package.
+
+\medskip
+
+\begin{thebibliography}{9}
+\bibitem{cran}
+The Comprehensive R Archive Network\\
+\url{https://cran.r-project.org}
+
+\bibitem{book}
+Hogg, McKean, Craig (2018). \textit{Introduction to Mathematical Statistics: $8^\mathrm{th}$ Edition}. Boston: Pearson.
+
+\bibitem{mckean}
+Joe McKean\\
+\url{http://www.stat.wmich.edu/mckean/index.html}
+\end{thebibliography}
+
+\end{document}

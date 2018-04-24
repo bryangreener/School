@@ -377,14 +377,55 @@ Find a basis and the dimension of: (a) the image of $F$; (b) the kernel of $F$.
 \item[12.4]Find the quadratic form $q(X)$ which corresponds to each symmetric matrix:\\
 (a) $A=\begin{bmatrix}[rr]5&-3\\-3&8\\\end{bmatrix}$; (b) $B=\begin{bmatrix}[rrr]4&-5&7\\-5&-6&8\\7&8&-9\\\end{bmatrix}$; (c) $C=\begin{bmatrix}[rrrr]2&4&-1&5\\4&-7&-6&8\\-1&-6&3&9\\5&8&9&1\\\end{bmatrix}$.
 	\begin{enumerate}
-	\item
+	\item $A(x,y) = 5x^2-6xy+8y^2$.
 	\end{enumerate}
 \item[12.20]Let $B$ be any nonsingular matrix, and let $M=B^TB$. (a) Show that $M$ is symmetric; (b) show that $M$ is positive definite.
 \item[12.35]Give an example of a quadratic form $q(x,y)$ such that $q(u)=0$ and $q(v)=0$ but $q(u+v)\neq 0$.
+
+
 \item[12.39]For each matrix $A$ find an orthogonal matrix $P$ and a diagonal matrix $D$ such that $D=P^TAP$:\\
 (a) $A=\begin{bmatrix}[rr]6&-1\\-1&6\\\end{bmatrix}$; (b) $A=\begin{bmatrix}[rr]9&4\\4&-6\\\end{bmatrix}$; (c) $A=\begin{bmatrix}[rr]7&3\\3&-1\\\end{bmatrix}$.
+	\begin{enumerate}
+	\item
+		\[ \mathrm{det}(A-\lambda I) = (6-\lambda)(6-\lambda) - 1 = \lambda^2 - 12\lambda + 35  = (\lambda-5)(\lambda-7) \]
+		Let $\lambda=5$ then
+		\[ A-5I = \begin{bmatrix}[rr]1&-1\\-1&1\\\end{bmatrix} \]
+		Thus we get an eigenvector of $\begin{bmatrix}[r]1\\1\\\end{bmatrix}$.\\
+		Let $\lambda=7$ then
+		\[ A-7I=\begin{bmatrix}[rr]-1&-1\\-1&-1\\\end{bmatrix} \]
+		Thus we get an eigenvector of $\begin{bmatrix}[r]-1\\1\\\end{bmatrix}$.\\
+		Next put these two eigenvectors into a single matrix
+		\[ P=\begin{bmatrix}[rr]1&-1\\1&1\\\end{bmatrix}, \quad P^T = \begin{bmatrix}[rr]1&1\\-1&1\\\end{bmatrix} \]
+		\[ P^TP = \begin{bmatrix}[rr]2&0\\0&2\\\end{bmatrix} \]
+		Thus this matrix is orthogonal since it is equal to $2I$.
+		\[ D=P^TAP = \begin{bmatrix}[rr]10&0\\0&14\\\end{bmatrix} \]
+		where $D$ is our resulting diagonal matrix.
+		
+	\item
+		\[ \mathrm{det}(A-\lambda I) = (\lambda+7)(\lambda-10) \]
+		Let $\lambda=-7$ then
+		\[ A+7I = \begin{bmatrix}[rr]16&4\\4&1\\\end{bmatrix} \]
+		Thus we get an eigenvector of $\begin{bmatrix}[r]-1\\4\\\end{bmatrix}$.
+		Let $\lambda=10$ then we get an eigenvector of $\begin{bmatrix}[r]4\\1\\\end{bmatrix}$.
+		So our resulting matrix is
+		\[ P=\begin{bmatrix}[rr]-1&4\\4&1\\\end{bmatrix}, \quad P^T = \begin{bmatrix}[rr]-1&4\\4&1\\\end{bmatrix} \]
+		\[ D = P^TAP = \begin{bmatrix}[rr]-119&0\\0&170\\\end{bmatrix} \]
+		
+	\item
+		Repeating the same steps as before, we get
+		\[ D = P^TAP = \begin{bmatrix}[rr]-20&0\\0&80\\\end{bmatrix} \]
+	\end{enumerate}
+
 \item[12.42]Determine whether or not each quadratic form is positive definite.\\
 (a) $q(x,y) = 4x^2+5xy+7y^2$;\\
 (b) $q(x,y)=2x^2-3xy-y^2$; (c) $q(x,y)=x^2-6xy+4y^2$.
+	\begin{enumerate}
+	\item $q(x,y)=4x^2+5xy+7y^2$\\
+		Both eigenvalues of this quadratic are positive, thus this is positive definite.
+	\item $q(x,y)=2x^2-3xy-y^2$\\
+		This is not positive definite since both eigenvalues are not positive.
+	\item $q(x,y)=x^2-6xy+4y^2$\\
+		Both eigenvalues are positive thus this is positive definite.
+	\end{enumerate}
 \end{enumerate}
 \end{document}

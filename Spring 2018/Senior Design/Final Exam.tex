@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage{hyperref}
+
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+% Spacers:
+% BEGIN BLOCK------------------------------------------
+% END BLOCK============================================
+
+
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% CUSTOM SETTINGS
+% BEGIN BLOCK------------------------------------------
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+
+% For definitions
+\newtheorem{defn}{Definition}[section]
+\newtheorem{thrm}{Theorem}[section]
+
+% For circled text
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+
+% END BLOCK============================================
+\theoremstyle{plain}
+\newtheorem*{lemma}{Lemma} %added
+\newtheorem*{theorem}{Theorem} %added
+
+\theoremstyle{definition}
+\newtheorem*{result}{Result} %added
+\newtheorem*{solution}{Solution} %added
+\theoremstyle{plain}
+
+% HEADER
+% BEGIN BLOCK------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Final Exam}
+\rhead{Bryan Greener}
+\cfoot{\thepage}
+% END BLOCK============================================
+
+% TITLE
+% BEGIN BLOCK------------------------------------------
+\title{Bryan Greener}
+\author{Senior Design 1}
+\date{2018-04-25}
+\begin{document}
+\maketitle
+% END BLOCK============================================
+
+\TabPositions{4cm}
+Given a system based on the layers below:
+\begin{enumerate}
+\item[(a)] Front end framework (Bootstrap)
+\item[(b)] Code written using the web server framework (written in Ruby, etc)
+\item[(c)] Web System Framework (Ruby on Rails)
+	\begin{itemize}
+	\item Webserver (Apache)
+	\item Database Server (MySQL)
+	\end{itemize}
+\item[(d)] Operating System (Linux)
+\end{enumerate}
+
+\begin{enumerate}
+\item Why are single purpose servers easier to secure than multi-purpose servers?\\
+With a single purpose server, the applications that will be run on it are well defined and will have a good list of system specifications and applications that are needed in order to secure the system. Adding additional roles to a server can often cause problems where one service requires a specific set of firewall settings, network configuration, etc. and the second application will often have settings that conflict with the settings of the first application.
+
+\item Indicate a testing tool that may be applied to each layer above to test functionality and if it can be run automatically. Briefly explain.
+\begin{enumerate}
+	\item Bootstraps can be tested using any program that offers syntax highlighting. However due to the nature of a bootstrap, they cannot be automatically tested.
+	\item For web server frameworks, UNIT tests can be run to test functionality and these tests can be set up in a way to be run automatically. For example, you can write code in the .NET framework within Visual Studio which will allow for compile time testing which is done by Visual Studio itself but you can also use UNIT testing packages to do basic unit tests.
+	\item Web system frameworks can be tested the same way as web server frameworks. For example, using ASP.NET with MVC in Visual Studio, you can easily write up UNIT tests and use Visual Studio's compile time validation in order to test your code. Just like before, these tests can be set up to run automatically.
+	\item When writing any program regardless of its intended OS that it will be run on, you can set up automatic testing using UNIT tests (based on the language). For example, in C you can use the CUNIT testing framework which can be configured to run automatically.
+\end{enumerate}
+
+\item Indicate a tool that can be used at each layer during execution to prevent security problems.
+	\begin{enumerate}
+	\item Not so much a tool, but to prevent security issues in bootstraps, good input sanitizing can prevent injection attacks.
+	\item The .NET framework has many security tools that are available from microsoft themselves. For example, certmgr is a tool that manages certificates, certificate trust lists, and certificate revocation lists.
+	\item ASP.NET with MVC has many tools that can be used to security itself. One example is ASP.NET identity which is a package of other tools that handle authentication, authorization, and profile support.
+	\item Every operating system has its own set of security tools including built in antiviruses, certificate managers, authentication and authorization tools, and many more.
+	\end{enumerate}
+	
+\item Indicate a tool that can be used at each layer to detect security problems. Give a one sentence description and a link.
+	\begin{enumerate}
+	\item This tool provides intellisense for bootstrap in the VSCode text editor. \url{https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css}
+	\item This tool is used to check if .NET code meets security requirements. \url{https://msdn.microsoft.com/en-us/library/62bwd2yd(v=vs.100).aspx}
+	\item This tool helps to secure use data in ASP.NET with MVC. \url{https://docs.microsoft.com/en-us/aspnet/core/security/authorization/secure-data?view=aspnetcore-2.1}
+	\item This tool is used to validate X.509 certificates to replace built in validation methods that may not apply to the specific code application. \url{https://docs.microsoft.com/en-us/dotnet/framework/wcf/samples/x-509-certificate-validator}
+	\end{enumerate}
+
+\item In addition to tools above, each layer usually provides security recommendations and best practices. Provide a link to the Ruby on Rails security practices recommendations.
+	\begin{enumerate}
+	\item Bootstrap: \url{https://www.w3schools.com/bootstrap/default.asp}
+	\item .NET: \url{https://www.owasp.org/index.php/.NET_Security_Cheat_Sheet}
+	\item Ruby on Rails: \url{http://guides.rubyonrails.org/security.html}
+	\item Windows: \url{https://technet.microsoft.com/en-us/library/bb735870.aspx}
+	\end{enumerate}
+	
+\item Define usability and briefly how you might test for it.\\
+	ISO Definition: 
+	\begin{quote}
+	The extent to which a product can be used by specified users to achieve specified goals with effectiveness, efficiency, and satisfaction in a specified context of use.	
+	\end{quote}
+	The best way to test for usability is to sit down with a user and have them use the application that needs tested. Take notes on their reactions as they work with the program. Note down times where the user seems to take longer than expected to work through a problem. Force an error to pop up and see how the user reacts. After running through the program with them, ask them some simple questions about how easy the program was to understand, if there were any places where they got confused, etc. 
+
+\item Define accessibility and briefly how you might test for it.\\
+	Computer accessibility refers to the accessibility of a computer system to all people, regardless of disability type or severity of impairment. There are many checklists which show what a program must do in order to be within the legal accessibility boundaries. In order to test for accessibility, one may work directly with people with various types of handicaps and see if they have any trouble using the program. Just like with usability testing, ask the user afterward if they had any issue using any part of the program or if there was anything that confused them.
+
+\item How might you test for browser compatibility?\\
+	There are many ways to improve browser compatibility without testing. W3Schools has a large guide on standards in order to make a site as compatible as possible with different browsers. However there are also many 3rd party tools which can be used to test browser compatibility. A couple examples of these 3rd party tools are BrowserStack, Litmus, TestingBot, Multibrowser, and many more. These tools will test your webpage based on different aspects of it such as the language it was written in, the CSS features used, any authentication techniques used, and so on.
+	
+\item How can you address the problem of updates in one layer breaking the application?\\
+	The first thing to do before updating anything is to read through changelogs and verify that there are no conflicts between the system requirements of other layers. A good system to follow is to avoid updating layers for a while after a new update is released. Then just wait for a while and see if any large issues arise for other people between layers of your implementation. This will also give you time to do more research on the update in order to see if there will be any compatibility issues. If all else fails, use a testing server to try updating the system on and see if there are any problems that arise in the test environment. After a while of testing, then the update can either be deployed or scrapped.
+\end{enumerate}
+
+\end{document}

@@ -2,10 +2,16 @@
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 \usepackage{tabto} %add \notab command
-\usepackage{hyperref}
 \usepackage[nottoc]{tocbibind} %embedded bibliography
+\usepackage{tabularx}
 \usepackage{arydshln} % gives hdashline and cdashline
 \newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+\usepackage{hyperref}
+
+
+\newcolumntype{R}{>{\raggedright\arraybackslash\hspace{0pt}} X}
+\newcolumntype{S}{>{\centering  \arraybackslash\hspace{0pt}} X}
+\newcolumntype{T}{>{\raggedleft \arraybackslash\hspace{0pt}} X}
 
 % HEADER
 % BEGIN BLOCK------------------------------------------
@@ -40,6 +46,49 @@ Joseph W. McKean is a Ph.D. of Statistics from Penn State University who is curr
 The main point of this package will be to be used as a teaching tool for people looking to learn statistics as well as the functional R programming needed to solve complex statistical problems. Thus this package will require an easily read and consistent code structure geared toward non-programming users. Each function should be written in a way that allows for the average user to make slight changes to suit their needs. This means that each function needs to be documented in a clean and thorough way that describes how different parameters and outputs interact with each other. Along with this, there should be manuals outside of the code that the user can read through to get an even deeper understanding of the inner workings of each function. This documentation should be separated from the functions themselves in order to improve readability. Often times in code comments are helpful however too much documentation can also make basic code more confusing. This package should be written to meet the requirements for submitting a package CRAN in hopes to submit this package to them when it is completed. After completing the package, Dr. McKean would like to look into writing an article regarding the package to be submitted for review for publishing however this is a long term goal that is superseded by the previously mentioned goals. Another possible long term goal of this project is to make an interactive web solution using R Shiny as an additional teaching tool for anyone that uses the package.
 
 \section{Stories and Spikes}
+\subsection*{Stories}
+\begin{tabularx}{\linewidth}{| @{} R| *{3}{S|} @{}|}
+\hline
+\textbf{Stories} & \textbf{Time Est (Minutes)} & \textbf{Risk (1-5)}\\
+\hline
+User opens function, understands its purpose, logic, and output through comments within code. & 2100 & 2\\
+\hline
+Functions return helpful information on errors and each includes manpage accessible to user via commands. & 1800 & 4\\
+\hline
+Package consists of datasets which are available to user after installation of package. Data sets may also need help file in order to provide user with background information for each data set. & 1000 & 3\\
+\hline
+Package installs and loads any required 3rd party packages upon installation. Example: RFit is a package required for one or more functions in this project. & 480 & 4\\
+\hline
+Reduce duplicate functions by concatenating similar functions into single function with switches to change its behavior. & 600 & 3\\
+\hline
+Collection of functions are implemented into an R package containing all required documentation. & 480 & 2\\
+\hline
+Package will pass all CRAN evaluations and will be accessible to users via CRAN and GitHub. & TBT & 3\\
+\hline
+A journal is available to users which discusses the package in greater detail. & TBT & TBT\\
+\hline
+\end{tabularx}
+
+\subsection*{Spikes}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Team Member} & \textbf{Spike Description}\\
+\hline
+Austin & Research and test makefile for R\\
+\hline
+Paul & Create second test function and package\\
+\hline
+Paul & Create test function and package\\
+\hline
+Austin & Research and test ROxygen\\
+\hline
+Bryan & Research and test branching in Git\\
+\hline
+Paul & Add rdSpike package and research/document\\
+\hline
+Bryan & Practice R programming\\
+\hline
+\end{tabular}
 
 \section{Resources}
 This project relies on few resources as the required functions are already published in a book. Direct contact between each member of the team and Dr. McKean is helping to prevent a disconnect between Dr. McKean's expectations of the package and the team's projected implementation of the package. Dr. McKean is contacting the publishers of his book which contains these functions in order to verify the legality of submitting a package of these functions to a public resource such as CRAN for distribution. The team and Dr. Mckean are working with each other to develop a contract containing project guidelines, distribution rights, disclosure rights, and intellectual rights. This contract is expected to be completed before June 2018 however work on this project may continue before the contract's completion in order to meet the deadline of late November 2018 for the whole project. More research is to be done on the time it takes for CRAN to review and accept or decline a package.

@@ -71,12 +71,39 @@
 }
 
 
-
-
+\usepackage{graphicx}
+\graphicspath{ {Images/} }
 \begin{document}
 
 \mychapter{1}{2018-05-09}
+\section{Possible Essay Question}
+You have unlimited funding and the ultimate peripheral device and you're going to build an intelligent. Will you have any neural component in the device? If so, justify.
 
+\section{TLU}
+TLU - Threshold Logic Unit\\
+\begin{center}
+\centering
+\includegraphics[width=0.25\textwidth]{McColloch-Pitts-Neuron}\\
+Above is a McColloch-Pitts neuron where the following hold:
+\end{center}
+\begin{align}
+x &\in \{0,1\}\\
+y&=\left\{\begin{array}{cc}0 & \sum_i x_i-w_i \geq 0\\1 & \pi\\\end{array} \right.\\
+w &\in \mathbb{R}
+\end{align}
 
+\section{Gradient Descent}
+Our goal in gradient descent is to find the partial derivative $\dfrac{\partial E}{\partial W}$. Gradient descent is assuming that there is a relation between the errors and the weights. We are looking for the minima in this function.
+\[ \Delta w = \dfrac{\partial E}{\partial w} \]
 
+\section{Perceptron Learning Algorithm}
+Using the same neuron design as before, we follow the steps below:
+\begin{enumerate}
+\item Input $\bar{x}$ which is a vector of inputs.
+\item Output $y$
+\item Compute to target $\hat{y}$
+\end{enumerate}
+
+Suppose $y=0,\hat{y}=1$, add $\Delta$ to reach the expected value.\\
+This algorithm draws a hyperplane through the function and classifies based on what side of the line each value is. 
 \end{document}

@@ -1,0 +1,82 @@
+\documentclass{report}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\usepackage{arydshln} % gives hdashline and cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+
+
+% For clickable TOC
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\theoremstyle{plain}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{result}{Result}
+
+\theoremstyle{plain}
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
+
+
+
+
+\begin{document}
+
+\mychapter{1}{2018-05-09}
+
+
+
+\end{document}

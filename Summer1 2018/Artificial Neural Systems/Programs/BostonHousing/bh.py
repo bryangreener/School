@@ -3,8 +3,9 @@ import random
 
 
 class Network():
-    def __init__(self):
+    def __init__(self, eta):
         self.weights = np.random.randn(13,1)
+        self.eta = eta
         
     def sigmoid(self, z):
         return 1.0/(1.0+np.exp(-z))
@@ -22,7 +23,7 @@ class Network():
             for d in trainData[0]:
                 yhat = self.sigmoid(np.dot(d[:-1], self.weights))
                 cost = d[-1] - yhat
-                self.weights += np.multiply(cost, np.array([d[:-1]]).T)
+                self.weights += self.eta * np.multiply(cost, np.array([d[:-1]]).T)
                 
             correct = 0
             for d in testData[0]:
@@ -41,5 +42,6 @@ data = inputData.astype(float)
 dNorm = data / data.max(axis=0)
 mean = dNorm.mean(axis=0)[-1]
 
-net = Network()
+# net takes lerning rate hyperparameter. Use ~ 0.01
+net = Network(0.01)
 net.train(dNorm, 10000)

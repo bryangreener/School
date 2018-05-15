@@ -1,51 +1,45 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May  9 14:55:57 2018
-
-@author: Bryan
-"""
-
 import numpy as np
-import pandas as pd
 import random
-from sklearn import preprocessing
 
-#df = pd.read_csv("./BostonHousing.csv", header=None)
-#data = np.array([df[1:]], dtype=float)
-data = np.genfromtxt('./BostonHousing.csv', delimiter=',')[1:]
-data = np.multiply((1.0/data.max(axis=0)), data)
 
 class Network():
     def __init__(self):
-        self.weights = [np.random.randn(13,1)]
-        self.a = [np.random.randn(1,1)]
+        self.weights = np.random.randn(13,1)
         
     def sigmoid(self, z):
         return 1.0/(1.0+np.exp(-z))
-
-    def forward(self, x):
-        z = np.dot(x, self.weights[0])
-        self.a[0] = self.sigmoid(z)
-        return self.a[0]
+    
+    def relu(self, z):
+        return z * (z > 0.0)
+    
+    def train(self, data, epochs):
+        random.shuffle(data)
+        trainData = np.array([data[:400]])
+        testData = np.array([data[401:]])
         
-    def train(self, trainData, testData, epochs):
         for e in range(epochs):
             random.shuffle(trainData)
-            for d in trainData:
-                yhat = self.forward(np.array([d[:-1]]))
-                self.weights[0] = self.weights[0] - \
-                    np. multiply((d[-1] - yhat), self.a[0])
-                self.weights[0] = self.weights[0]/np.amax(self.weights[0],axis=0)
-            
-            result = 0
-            for d in testData:
-                if self.forward(d[:-1]) == 1: 
-                    result += 1
-            print("Epoch {0}: {1}/106".format(e, result))
+            for d in trainData[0]:
+                yhat = self.sigmoid(np.dot(d[:-1], self.weights))
+                cost = d[-1] - yhat
+                self.weights += np.multiply(cost, np.array([d[:-1]]).T)
+                
+            correct = 0
+            for d in testData[0]:
+                yhat = np.dot(d[:-1], self.weights)
+                if (yhat > mean and d[-1] > mean) or \
+                    (yhat < mean and d[-1] < mean):
+                    correct += 1
+            print("Epoch: {0}  {1}/{2}".format(e, correct, testData[0].shape[0]))
+
+
+inputData = np.genfromtxt('./bh.csv', delimiter=',', dtype="|U5")[1:]
+for row in range(inputData.shape[0]):
+    for item in range(inputData.shape[1]):
+        inputData[row][item] = inputData[row][item].replace('"','')
+data = inputData.astype(float)
+dNorm = data / data.max(axis=0)
+mean = dNorm.mean(axis=0)[-1]
 
 net = Network()
-net.train(data[:400], data[401:], 100)
-
-               
-            
-        
+net.train(dNorm, 10000)

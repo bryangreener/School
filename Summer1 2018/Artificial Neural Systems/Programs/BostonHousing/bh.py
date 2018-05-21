@@ -57,5 +57,5 @@ mean = dNorm.mean(axis=0)[-1]
 
 # net takes input/output layer sizes and learning rate hyperparameter.
 # use 0.01 for learn rate.
-net = Network(13, 1, 0.05)
-net.train(dNorm, 1000)
+net = Network(13, 1, 0.01)
+net.train(dNorm, 100000)

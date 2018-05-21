@@ -7,6 +7,8 @@ Created on Sun May 20 10:03:36 2018
 import numpy as np
 import pandas as pd
 import random
+from sklearn.metrics import mean_squared_error as mse
+from math import sqrt
 
 class Network():
     def __init__(self, layers):
@@ -39,8 +41,8 @@ class Network():
             else: 
                 delta = np.dot(delta,self.w[i+1].T)*self.sigmoidPrime(self.z[i+1])
             dw = np.divide((np.dot(delta.T,self.a[i]).T + lam * self.w[i]), 
-                           (x.shape[0]))
-            self.w[i] = self.w[i] - eta * dw
+                           (x.shape[1]))
+            self.w[i] = self.w[i] - (eta * dw)
             self.w[i] = self.w[i] / self.w[i].max(axis=0)
         
     def train(self, trainData, testData, epochs, eta):
@@ -52,25 +54,31 @@ class Network():
                 self.backward(t[:-1].T, t[-1].T, eta)
             
             accuracy = 0.0
+            expected = []
+            predicted = []
             for t in testData:
-                accuracy += (t[-1] - self.forward(t[:-1]))
-            print("Epoch {0}/{1}  {2}% accuracy".format(epoch, epochs,
-                  (accuracy/testData.shape[0])*100))
+                expected.append((maxVal[-1] - minVal[-1]) * t[-1] + minVal[-1])
+                predicted.append((maxVal[-1] - minVal[-1]) * self.forward(t[:-1]) + minVal[-1])
+            rms = sqrt(mse(expected,predicted))
+            print("Epoch {0:04}/{1}  rmse: ${2:.2f}".format(epoch+1, epochs, rms))
             
 def category(df):
     for col in list(df.select_dtypes(exclude=[np.number])):
-        df[col] = df[col].astype('category')
-    catCols = df.select_dtypes(['category']).columns
-    df[catCols] = df[catCols].apply(lambda x: x.cat.codes)
+        #df[col] = df[col].astype('category')
+        df[col] = pd.get_dummies(df[col])
+    #catCols = df.select_dtypes(['category']).columns
+    #df[catCols] = df[catCols].apply(lambda x: x.cat.codes)
     return df
             
             
 df = category(pd.read_csv('./other_housing.csv').fillna(value=0))
 inputData = df.values
-inputData = inputData / inputData.max(axis=0)
+maxVal = inputData.max(axis=0)
+minVal = inputData.min(axis=0)
+inputData = (inputData - minVal) / (maxVal - minVal)
 # 75/25 split of data
 trainData = inputData[:round(inputData.shape[0] * 0.75)]
 testData = inputData[round(inputData.shape[0] * 0.75 + 1):]
 
-net = Network([inputData.shape[1]-1, 10, 20, 1])
+net = Network([inputData.shape[1]-1, 15, 20, 1])
 net.train(trainData, testData, 1000, 0.01)

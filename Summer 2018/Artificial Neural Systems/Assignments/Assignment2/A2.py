@@ -14,8 +14,8 @@ class Network():
     def __init__(self, layers):
         self.layers = layers
         self.w = [np.random.randn(x,y) for x,y in zip(layers[:-1],layers[1:])]
-        self.a = [np.random.randn(1,x) for x in self.layers]
-        self.z = [np.random.randn(1,x) for x in self.layers]
+        self.a = [np.zeros((1,x.shape[1])) for x in self.w]
+        self.z = [np.zeros((1,x.shape[1])) for x in self.w]
 
     def sigmoid(self, z):
         return 1.0/(1.0+np.exp(-z))
@@ -24,26 +24,22 @@ class Network():
         return np.exp(-z)/((1.0 + np.exp(-z))**2)
 
     def forward(self, x):
-        # Preload input layer activation with inputs
-        self.a[0] = self.sigmoid(x)
-        for i in range(1, len(self.layers)):
-            self.z[i] = np.dot(self.a[i-1], self.w[i-1])
+        self.z[0] = x.dot(self.w[0])
+        self.a[0] = self.sigmoid(self.z[0])
+        for i in range(1, len(self.layers) - 1):
+            self.z[i] = self.a[i-1].dot(self.w[i])
             self.a[i] = self.sigmoid(self.z[i])
         return self.a[-1]
 
     def backward(self, x, y, eta):
         lam = 1e-4
-        self.a[0] = x #update activation at first layer with inputs
-        #### Calculate partial derivatives of cost (cost prime)
+        delta = -(y-self.a[-1]) * self.sigmoidPrime(self.z[-1])
         for i in range(len(self.layers)-2, 0, -1):
-            if i == len(self.layers)-2: #y-yhat for last layer
-                delta = np.dot((self.a[-1]-y), self.sigmoidPrime(self.z[-1]))
-            else: 
-                delta = np.dot(delta,self.w[i+1].T)*self.sigmoidPrime(self.z[i+1])
-            dw = np.divide((np.dot(delta.T,self.a[i]).T + lam * self.w[i]), 
-                           (x.shape[1]))
+            dw = (self.a[i-1].T.dot(delta) + lam * self.w[i]) / x.shape[0]
+            delta = delta.dot(self.w[i].T) * self.sigmoidPrime(self.z[i-1])
             self.w[i] = self.w[i] - (eta * dw)
-            self.w[i] = self.w[i] / self.w[i].max(axis=0)
+        dw = (x.T.dot(delta) + lam * self.w[0]) / x.shape[0]
+        self.w[0] = self.w[0] - (eta * dw)
         
     def train(self, trainData, testData, epochs, eta):
         for epoch in range(epochs):
@@ -53,32 +49,35 @@ class Network():
                 self.forward(t[:-1].T)
                 self.backward(t[:-1].T, t[-1].T, eta)
             
-            accuracy = 0.0
-            expected = []
-            predicted = []
-            for t in testData:
-                expected.append((maxVal[-1] - minVal[-1]) * t[-1] + minVal[-1])
-                predicted.append((maxVal[-1] - minVal[-1]) * self.forward(t[:-1]) + minVal[-1])
-            rms = sqrt(mse(expected,predicted))
-            print("Epoch {0:04}/{1}  rmse: ${2:.2f}".format(epoch+1, epochs, rms))
-            
+            self.test(testData, epoch, epochs)
+
+    def test(self, testData, e, es):
+        rms = sqrt(mse([[t[-1]*norm] for t in testData],
+                       [[self.forward(t[:-1])[0] * norm] for t in testData]))
+        print("Epoch {0: >4}/{1} rmse: ${2: >10.2f}".format(e + 1, es, rms))
+
+#### Convert categorical variables to one-hots
 def category(df):
     for col in list(df.select_dtypes(exclude=[np.number])):
-        #df[col] = df[col].astype('category')
-        df[col] = pd.get_dummies(df[col])
-    #catCols = df.select_dtypes(['category']).columns
-    #df[catCols] = df[catCols].apply(lambda x: x.cat.codes)
+        temp = pd.get_dummies(df[col])
+        for t in temp:
+            df.insert(df.columns.get_loc(col), str(col)+" "+str(t), temp[t])
+        df = df.drop([col], axis=1)
     return df
             
             
 df = category(pd.read_csv('./other_housing.csv').fillna(value=0))
 inputData = df.values
-maxVal = inputData.max(axis=0)
-minVal = inputData.min(axis=0)
-inputData = (inputData - minVal) / (maxVal - minVal)
+# Normalize Data
+norm = np.linalg.norm(inputData)
+inputData = inputData / np.linalg.norm(inputData)
+
+# Shuffle before splitting data
+random.shuffle(inputData)
+
 # 75/25 split of data
 trainData = inputData[:round(inputData.shape[0] * 0.75)]
-testData = inputData[round(inputData.shape[0] * 0.75 + 1):]
+testData = inputData[round(inputData.shape[0] * 0.25 + 1):]
 
-net = Network([inputData.shape[1]-1, 15, 20, 1])
+net = Network([inputData.shape[1]-1, 30, 10, 1])
 net.train(trainData, testData, 1000, 0.01)

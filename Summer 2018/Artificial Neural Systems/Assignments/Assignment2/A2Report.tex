@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}		% Date Formatting
+\renewcommand{\dateseparator}{--}	% Date Formatting
+\usepackage{arydshln} 				% \hdashline and \cdashline
+\newcommand*{\tempb}{\multicolumn{1}{:c}{}} % Used for block matrices
+\usepackage[linesnumbered,ruled]{algorithm2e}
+
+
+% For clickable TOC
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+% Custom Section Types
+\theoremstyle{plain} % italics
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{definition} % normal type
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{result}{Result}
+\theoremstyle{plain} % italics
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
+
+\title{Backpropagation Algorithm Report}
+\author{Bryan Greener}
+\date{2018-05-24}
+
+
+\SetKwFor{For}{for (}{) $\lbrace$}{$\rbrace$}
+\begin{document}
+% BUILD TOC
+%\tableofcontents{}
+\maketitle
+
+\section*{Implementation}
+This implementation of a neural network uses the backpropagation algorithm with gradient descent. The input data consists of numerous columns with both numerical and categorical data. To handle the categorical parameters, they were converted to one-hot arrays and re-inserted into the dataset. The input data was then normalized by dividing the dataset by the norm of the dataset which was obtained using Numpy's linalg.norm function. The denormalization process used later on simply reverses this operation. The requirements for this network included the use of two hidden layers. These hidden layers were set to 30 nodes and 10 nodes respectively. These node counts were determined using the following equation:
+\[ (i+j)^{0.5}+10 \]
+The variables $i$ and $j$ represent the number of input layer nodes and the number of output layer nodes. Due to the low resulting number from the left side of this equation, 10 is added to the result. The input layer consists of a number of nodes equal to the amount of training parameters and the output layer consists of a single node resulting in a float value representing a normalized prediction of the price of a house. The dataset was split into training and testing subsets where the training set is 75\% of the complete dataset and the testing set is 25\%. 
+
+Algorithms used in this implementation include the sigmoid function, a sigmoid prime function, a feed forward algorithm, and the backpropagation algorithm. The sigmoid and sigmoid prime functions are as follows.
+\begin{align}
+\sigma(z) &= \dfrac{1}{1+e^{-z}}\\
+\sigma^\prime(z) &= \dfrac{e^{-z}}{\left( 1+e^{-z} \right)^2}
+\end{align}
+In the case of this program, $z$ is a matrix corresponding to the input activations at any given layer in the network.
+Next, the feed forward algorithm takes in an $n\times 1$ matrix where $n$ is the number of input parameters for the network. In this implementation the activation matrices $a$ and $z$ and the weight matrix $w$ are stored in a class object but for the purpose of showing the algorithm they are included in the algorithm below. The other main algorithm involved is the backpropagation algorithm which is also listed below.
+\begin{algorithm}[H]
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+
+    \underline{function FeedForward} $(a, z, w, x)$\;
+    \Input{Activation matrices $a$ and $z$, weight matrix $w$, input matrix $x$.}
+    \Output{$\hat{y}$}
+    $z[0] = x \cdot w[0]$\\
+    $a[0] = \sigma(z[0])$\\
+    \For{$i=1;\ i < l;\ i += 1$}{
+    	$z[i] = a[i-1] \cdot w[i]$\\
+    	$a[i] = \sigma(z[i])$\\
+    }
+    return $a[-1]$\\
+    \caption{Feed Forward algorithm for sending matrix of inputs into network and getting single value result.}
+\end{algorithm}
+\begin{algorithm}[H]
+	\SetKwInOut{Input}{Input}
+    \underline{function Backprop} $(a, z, w, x, y, \eta)$\;
+    \Input{Activation matrices $a$ and $z$, weight matrix $w$, input matrix $x$, output matrix $y$, hyperparameter $\eta$.}
+    $\lambda = 1e-4$\\
+    $\delta = -(y-\hat{y}) \sigma^\prime(z[-1])$\\
+    \For{$i=l-1;\ i > 0;\ i -= 1$}{
+    	$\Delta = \dfrac{a[i-1]^T \cdot \delta + \lambda w[i]}{len(x)}$\\
+    	$\delta = \delta \cdot w[i]^T \sigma^\prime(z[i-1])$\\
+    	$w[i] = w[i] - \eta\Delta$\\
+    }
+    $\Delta = \dfrac{x^T\cdot\delta + \lambda w[0]}{len(x)}$\\
+    $w[0] = w[0] - \eta\Delta$\\
+    \caption{Backward propagation algorithm for sending the errors calculated at the last layer back to the start of the network, updating weights along the way.}
+\end{algorithm}
+
+\vspace{1em}
+\noindent Algorithm 2 adds two new hyperparameters $\lambda$ and $\eta$. $\eta$ is the learning rate of the network and it scales the size of each step during the training process in order to allow more fine tuning of the behavior of training. $\lambda$ is a very small value that is used to scale the weights to prevent overflow errors in the sigmoid functions.
+
+\section*{Analysis}
+This implementation of a neural network using backprop did not include things such as momentum, smoothing, or mini-batches. Thus the accuracy of this network is not as high as it could be. After testing with different learning rates and network designs, this network was able to get an average error of $\pm \$40,000$ over hundreds of training epochs while using a 75/25 split of training and testing data. This accuracy improved when increasing the percentage of training data however this shows that the network was not able to generalize very well. Many times while testing this network on different randomizations of training data, the accuracy would be far worse than $\pm \$40,000$. This is due to the network getting stuck in local minima since no momentum was used. Along with this, the network's accuracy is lowered by the input data itself since many parameters of the dataset were ordinal and were handled simply as categorical. It's also likely that there are parameters that are hurting the network's overall accuracy or may just not be needed at all. By using statistical methods of reducing the noisy data, the network could improve both in time and accuracy however this was not performed in this implementation.
+
+This dataset was also run through a different implementation designed for a class in spring 2018 to be used with the MNIST handwritten digit dataset. This version of the program uses RMSProp with Nesterov momentum. These two additions combined halved the prediction error and improved the running time of the network by a significant amount as well. Still though the overall error was $\pm \$20,000$ which has a lot of room for improvement. Overall, the limiting factor to both networks is the input dataset and noisy data.
+
+
+
+
+
+\end{document}
+
+
+\begin{algorithm}
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+
+    \underline{function Euclid} $(a,b)$\;
+    \Input{Two nonnegative integers $a$ and $b$}
+    \Output{$\gcd(a,b)$}
+    \eIf{$b=0$}
+      {
+        return $a$\;
+      }
+      {
+        return Euclid$(b,a\mod b)$\;
+      }
+    \caption{Euclid's algorithm for finding the greatest common divisor of two nonnegative integers}
+\end{algorithm}

@@ -54,7 +54,10 @@ class Network():
     def test(self, testData, e, es):
         rms = sqrt(mse([[t[-1]*norm] for t in testData],
                        [[self.forward(t[:-1])[0] * norm] for t in testData]))
-        print("Epoch {0: >4}/{1} rmse: ${2: >10.2f}".format(e + 1, es, rms))
+        #print("Epoch {0: >4}/{1} rmse: ${2: >10.2f}".format(e + 1, es, rms))
+    
+    def newTestFunc(self, testData):
+        return [self.forward(t)[0] * norm for t in testData]
 
 #### Convert categorical variables to one-hots
 def category(df):
@@ -64,10 +67,27 @@ def category(df):
             df.insert(df.columns.get_loc(col), str(col)+" "+str(t), temp[t])
         df = df.drop([col], axis=1)
     return df
+
+def compare(a, b):
+    for header in a:
+        if header not in b.columns:
+            a = a.drop([header], axis=1)
+    for header in b:
+        if header not in a.columns:
+            b = b.drop([header], axis=1)
+    return a,b
             
-            
-df = category(pd.read_csv('./other_housing.csv').fillna(value=0))
+dfa = category(pd.read_csv('./other_housing.csv').fillna(value=0))
+dfb = category(pd.read_csv('./other_housing_test.csv').fillna(value=0))
+
+df, newdf = compare(dfa.iloc[:,:-1], dfb.iloc[:,1:])
+df.insert(0, dfa.iloc[:,-1].name, dfa.iloc[:,-1])
+newdf.insert(0, dfb.iloc[:,0].name, dfb.iloc[:,0])
+
 inputData = df.values
+newTest = newdf.iloc[:,1:].values
+
+
 # Normalize Data
 norm = np.linalg.norm(inputData)
 inputData = inputData / np.linalg.norm(inputData)
@@ -76,8 +96,15 @@ inputData = inputData / np.linalg.norm(inputData)
 random.shuffle(inputData)
 
 # 75/25 split of data
-trainData = inputData[:round(inputData.shape[0] * 0.75)]
+trainData = inputData[round(inputData.shape[0] * 0.75):]
 testData = inputData[round(inputData.shape[0] * 0.25 + 1):]
 
 net = Network([inputData.shape[1]-1, 30, 10, 1])
-net.train(trainData, testData, 1000, 0.01)
+net.train(trainData, testData, 500, 0.01)
+
+newTest = newTest / np.linalg.norm(inputData)
+newTestRes = net.newTestFunc(newTest)
+final = np.array([newdf.iloc[:,0].values, newTestRes])
+blah = pd.DataFrame(np.column_stack([newdf.iloc[:,0].values, newTestRes]), columns=['Order', 'PredictedSalesPrice_FirstLast'])
+print("Complete")
+blah.to_csv('results.csv')

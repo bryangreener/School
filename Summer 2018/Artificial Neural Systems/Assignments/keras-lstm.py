@@ -17,7 +17,7 @@ import pdb
 ### DATA PREPROCESSING ###
 def ReadWords(file):
     with tf.gfile.GFile(file, "r") as f:
-        return f.read().decode('utf-8').replace('\n', '<eos>').split()
+        return f.read().replace('\n', '<eos>').split()
 def BuildVocab(file):
     data = ReadWords(file)
     counter = collections.Counter(data)
@@ -29,9 +29,9 @@ def FileToWordIds(file, wordToId):
     data = ReadWords(file)
     return [wordToId[word] for word in data if word in wordToId]
 def LoadData():
-    trainPath = os.path.join(dataPath, 'rev.txt')
-    validPath = os.path.join(dataPath, 'rev.txt')
-    testPath  = os.path.join(dataPath, 'rev.txt')
+    trainPath = os.path.join(dataPath, 'ptb.train.txt')
+    validPath = os.path.join(dataPath, 'ptb.valid.txt')
+    testPath  = os.path.join(dataPath, 'ptb.test.txt')
     wordToId = BuildVocab(trainPath)
     trainData = FileToWordIds(trainPath, wordToId)
     validData = FileToWordIds(validPath, wordToId)
@@ -64,12 +64,20 @@ class KerasBatchGenerator(object):
                 if self.currentIdx + self.numSteps >= len(self.data):
                     self.currentIdx = 0
                 x[i, :] = self.data[self.currentIdx:self.currentIdx + self.numSteps]
-                tempY = self.data[self.currentIdx + 1: self.currentIdx + self.numSteps]
+                tempY = self.data[self.currentIdx + 1: self.currentIdx + self.numSteps + 1]
                 y[i, :, :] = to_categorical(tempY, num_classes=self.vocab)
                 self.currentIdx += self.skipStep
             yield x, y
 
-dataPath = '.\\'
+dataPath = 'C:\\Users\\aabgreener\\Desktop\\lstmdata\\data'
+
+#parser = argparse.ArgumentParser()
+#parser.add_argument('run_opt', type=int, default=1, help='An integer: 1 to train, 2 to test')
+#parser.add_argument('--dataPath', type=str, default=dataPath, help='Full path of train data.')
+#args = parser.parse_args()
+#if args.dataPath:
+#    dataPath = args.dataPath
+
 numSteps = 30
 numEpochs = 50
 batchSize = 20
@@ -92,11 +100,11 @@ model.add(TimeDistributed(Dense(vocab)))
 model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', 
               metrics=['categorical_accuracy'])
-checkpointer = ModelCheckpoint(file=dataPath + '/model-{epoch:02d}.hdf5',
+checkpointer = ModelCheckpoint(filepath=dataPath + '/model-{epoch:02d}.hdf5',
                                verbose=1)
-model.fit_generator(trainDataGenerator.generate(),
+model.fit_generator(trainDataGenerator.Generate(),
                     len(trainData)//(batchSize*numSteps), numEpochs,
-                    validation_data=validDataGenerator.generate(),
+                    validation_data=validDataGenerator.Generate(),
                     validation_steps=len(validData)//(batchSize*numSteps), 
                     callbacks=[checkpointer])
 
@@ -106,12 +114,12 @@ exampleTrainingGenerator = KerasBatchGenerator(trainData, numSteps, 1,
                                                vocab, skipStep=1)
 print("Training data")
 for i in range(dummyIters):
-    dummy = next(exampleTrainingGenerator.generate())
+    dummy = next(exampleTrainingGenerator.Generate())
 numPredict = 10
 truePrintOut = "Actual words: "
 predPrintOut = "Predicted words: "
 for i in range(numPredict):
-    data = next(exampleTrainingGenerator.generate())
+    data = next(exampleTrainingGenerator.Generate())
     prediction = model.predict(data[0])
     predictWord = np.argmax(prediction[:, numSteps-1, :])
     truePrintOut += reversedDictionary[trainData[numSteps + dummyIters + i]]

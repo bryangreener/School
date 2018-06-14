@@ -50,12 +50,12 @@ print('Loaded training data...')
 dictionary, reverseDictionary = BuildDataset(trainingData)
 #initialize variables
 vocabSize = len(dictionary)
-eta = 0.001
-iters = 50000
+eta = 0.01
+iters = 5000
 displayStep = 1000
 n_input = 3
 # number of hidden units in RNN cell
-n_hidden = 512
+n_hidden = 5000
 # tf graph input
 x = tf.placeholder('float', [None, n_input, 1])
 y = tf.placeholder('float', [None, vocabSize])
@@ -120,7 +120,7 @@ with tf.Session() as sess:
 			symbolsInKeys = [dictionary[str(words[i])] for i in range(len(words))]
 			for i in range(32):
 				keys = np.reshape(np.array(symbolsInKeys), [-1, n_input, 1])
-				onehotPred = sess.run(pred, feed_dict={x: keys()})
+				onehotPred = sess.run(pred, feed_dict={x: keys})
 				onehotPredIndex = int(tf.argmax(onehotPred, 1).eval())
 				sentence = "%s %s" % (sentence, reverseDictionary[onehotPredIndex])
 				symbolsInKeys = symbolsInKeys[1:]

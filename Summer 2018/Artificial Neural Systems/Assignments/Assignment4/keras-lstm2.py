@@ -7,7 +7,7 @@ from keras.callbacks import ModelCheckpoint
 import numpy as np
 from keras.utils import np_utils
 
-filename = "txts\\Rev.txt"
+filename = "Rev.txt"
 raw_text = (open(filename).read()).lower()
 chars = sorted(list(set(raw_text)))
 chars_to_int = dict((c, i) for i, c in enumerate(chars))
@@ -27,8 +27,10 @@ n_patterns = len(dataX)
 print("Total patterns:", n_patterns)
 
 # reshape x to be [samples, timesteps, features]
-x = np.reshape(dataX, (n_patterns, seq_length, 1))
-x = x / float(n_vocab)
+x = np_utils.to_categorical(dataX)
+# removed following two lines as we dont want to normalize this data
+#x = np.reshape(dataX, (n_patterns, seq_length, 1))
+#x = x / float(n_vocab)
 #onehot encode output variable
 y = np_utils.to_categorical(dataY)
 #define lstm model
@@ -39,7 +41,7 @@ model.add(Dropout(0.2))
 #uncomment the following two lines to improve accuracy
 model.add(LSTM(256))
 model.add(Dropout(0.2))
-model.add(TimeDistributed(Dense(y.shape[1], activation='softmax'))) #added
+model.add(Dense(y.shape[1], activation='softmax')) #added
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 
 # define checkpoint

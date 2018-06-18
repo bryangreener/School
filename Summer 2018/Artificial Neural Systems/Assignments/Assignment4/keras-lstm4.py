@@ -26,15 +26,18 @@ class RNN:
         y = np_utils.to_categorical(y)
         return x, y
 
-    def CreateModel(self, x, y, numHidden, dropAmount):
-        model = Sequential()
-        model.add(LSTM(numHidden, input_shape=(x.shape[1], x.shape[2]),
-                       return_sequences=True))
-        model.add(Dropout(dropAmount))
-        model.add(LSTM(numHidden))
-        model.add(Dropout(dropAmount))
-        model.add(Dense(y.shape[1], activation='softmax'))
-        model.compile(loss='categorical_crossentropy', optimizer='adam')
+    def CreateModel(self, x, y, numHidden, dropAmount, resumeFile=''):
+        if resumeFile:
+            model = load_model(resumeFile)   
+        else:
+            model = Sequential()
+            model.add(LSTM(numHidden, input_shape=(x.shape[1], x.shape[2]),
+                           return_sequences=True))
+            model.add(Dropout(dropAmount))
+            model.add(LSTM(numHidden))
+            model.add(Dropout(dropAmount))
+            model.add(Dense(y.shape[1], activation='softmax'))
+            model.compile(loss='categorical_crossentropy', optimizer='adam')
         self.model = model
 
     def Checkpointer(self):
@@ -44,22 +47,14 @@ class RNN:
                                 verbose=1,
                                 save_best_only=True)]
 
-    def Train(self, x, y, numEpochs, batchSize, resumeFile=None):
-        if resumeFile:
-            self.model.load_weights(resumeFile)
-            self.model.compile(loss='categorical_crossentropy',
-                               optimizer='adam')
+    def Train(self, x, y, numEpochs, batchSize):
         self.model.fit(x,
                        y,
                        epochs=numEpochs,
                        batch_size=batchSize,
                        callbacks=self.Checkpointer())
 
-    def Generate(self, x, y, numToPrint, resumeFile=None):
-        if resumeFile:
-            self.model.load_weights(resumeFile)
-            self.model.compile(loss='categorical_crossentropy',
-                               optimizer='adam')
+    def Generate(self, x, y, numToPrint):
         start = np.random.randint(0, len(x)-2)
         pattern = x[start]
         print("Seed: {}", ("\"",
@@ -79,11 +74,19 @@ if __name__ == '__main__':
     epochs = 25
     batchSize = 32
     seqLength = 100
-    numToPrint = 50
-    numHidden = 128
-    dropAmount = 0.2
+    #numToPrint = 50
+    #numHidden = 128
+    #dropAmount = 0.2
+    #resumeFile = "lstm4-24-1.0499.hdf5"
+    #lstm = RNN(batchSize, epochs)
+    #x, y = lstm.Read(file, seqLength)
+    #lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
+    #lstm.Train(x, y, epochs, batchSize)
+    #lstm.Generate(x, y, numToPrint)
+    import keras
+    model = keras.models.load_model("./lstm4-24-1.0499.hdf5")
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
-    lstm.CreateModel(x, y, numHidden, dropAmount)
-    lstm.Train(x, y, epochs, batchSize)
-    lstm.Generate(x, y, numToPrint)
+    model.summary()
+    model.fit(x, y, epochs=1, batch_size=batchSize)
+    

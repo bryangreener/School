@@ -48,45 +48,41 @@ class RNN:
                                 save_best_only=True)]
 
     def Train(self, x, y, numEpochs, batchSize):
+        checkpoint = self.Checkpointer()
         self.model.fit(x,
                        y,
                        epochs=numEpochs,
                        batch_size=batchSize,
-                       callbacks=self.Checkpointer())
+                       callbacks=checkpoint)
 
     def Generate(self, x, y, numToPrint):
         start = np.random.randint(0, len(x)-2)
         pattern = x[start]
         print("Seed: {}", ("\"",
-                          ''.join([self.ixToChar[v] for v in pattern]),
+                          ''.join([self.ixToChar[np.argmax(v)] for v in pattern]),
                           "\""))
         for i in range(numToPrint):
-            prediction = self.model.predict(x, verbose=0)
+            prediction = self.model.predict(np.array([pattern]), verbose=0)
             idx = np.argmax(prediction)
             result = self.ixToChar[idx]
             #seqIn = [self.ixToChar[v] for v in pattern]
             print(result)
-            pattern.append(idx)
-            pattern = pattern[1:len(pattern)]
+            np.append(pattern, idx)
+            pattern[0] = pattern[0][1:len(pattern)]
 
 if __name__ == '__main__':
     file = 'txts\\Rev.txt'
     epochs = 25
-    batchSize = 32
+    batchSize = 64
     seqLength = 100
-    #numToPrint = 50
-    #numHidden = 128
-    #dropAmount = 0.2
-    #resumeFile = "lstm4-24-1.0499.hdf5"
-    #lstm = RNN(batchSize, epochs)
-    #x, y = lstm.Read(file, seqLength)
-    #lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
-    #lstm.Train(x, y, epochs, batchSize)
-    #lstm.Generate(x, y, numToPrint)
-    import keras
-    model = keras.models.load_model("./lstm4-24-1.0499.hdf5")
+    numToPrint = 50
+    numHidden = 128
+    dropAmount = 0.2
+    resumeFile = "lstm4-13-0.8142.hdf5"
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
-    model.summary()
-    model.fit(x, y, epochs=1, batch_size=batchSize)
+    lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
+    #lstm.Train(x, y, epochs, batchSize)
+    lstm.Generate(x, y, numToPrint)
+
     

@@ -1,9 +1,11 @@
 from __future__ import print_function
+import keras
 from keras.layers import Dense, Dropout, LSTM
 from keras.models import Sequential, load_model
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
 import numpy as np
+import matplotlib.pyplot as plt
 
 class RNN:
     def __init__(self, batchSize, epochs):
@@ -41,7 +43,7 @@ class RNN:
         self.model = model
 
     def Checkpointer(self):
-        file = "lstm4-{epoch:02d}-{loss:.4f}.hdf5"
+        file = "lstm4-small-{epoch:02d}-{loss:.4f}.hdf5"
         return [ModelCheckpoint(file,
                                 monitor='loss',
                                 verbose=1,
@@ -49,40 +51,45 @@ class RNN:
 
     def Train(self, x, y, numEpochs, batchSize):
         checkpoint = self.Checkpointer()
-        self.model.fit(x,
-                       y,
-                       epochs=numEpochs,
-                       batch_size=batchSize,
-                       callbacks=checkpoint)
+        history = self.model.fit(x,
+                                 y,
+                                 epochs=numEpochs,
+                                 batch_size=batchSize,
+                                 callbacks=checkpoint)
+        
+        plt.plot(history.history['loss'])
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss')
+        plt.show()
 
     def Generate(self, x, y, numToPrint):
         start = np.random.randint(0, len(x)-2)
         pattern = x[start]
-        print("Seed: {}", ("\"",
-                          ''.join([self.ixToChar[np.argmax(v)] for v in pattern]),
-                          "\""))
+        output = ''.join([self.ixToChar[np.argmax(v)] for v in pattern])
+        print("Seed: ", output)
+        
         for i in range(numToPrint):
             prediction = self.model.predict(np.array([pattern]), verbose=0)
             idx = np.argmax(prediction)
-            result = self.ixToChar[idx]
+            output += self.ixToChar[idx]
             #seqIn = [self.ixToChar[v] for v in pattern]
-            print(result)
-            np.append(pattern, idx)
-            pattern[0] = pattern[0][1:len(pattern)]
+            pattern = np.concatenate((pattern, prediction))
+            pattern = pattern[1:len(pattern)]
+        print("New String:", output)
 
 if __name__ == '__main__':
     file = 'txts\\Rev.txt'
-    epochs = 25
-    batchSize = 64
+    epochs = 50
+    batchSize = 128
     seqLength = 100
     numToPrint = 50
-    numHidden = 128
+    numHidden = 256
     dropAmount = 0.2
-    resumeFile = "lstm4-13-0.8142.hdf5"
+    #resumeFile = "lstm4-13-0.8142.hdf5"
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
-    lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
-    #lstm.Train(x, y, epochs, batchSize)
+    lstm.CreateModel(x, y, numHidden, dropAmount)
+    lstm.Train(x, y, epochs, batchSize)
     lstm.Generate(x, y, numToPrint)
 
     

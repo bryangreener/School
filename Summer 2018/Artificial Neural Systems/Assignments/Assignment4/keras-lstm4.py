@@ -36,7 +36,9 @@ class RNN:
             model.add(LSTM(numHidden, input_shape=(x.shape[1], x.shape[2]),
                            return_sequences=True))
             model.add(Dropout(dropAmount))
-            model.add(LSTM(numHidden))
+            model.add(LSTM(numHidden, return_sequences=True))
+            model.add(Dropout(dropAmount))
+            model.add(LSTM(numHidden, return_sequences=True))
             model.add(Dropout(dropAmount))
             model.add(Dense(y.shape[1], activation='softmax'))
             model.compile(loss='categorical_crossentropy', optimizer='adam')
@@ -55,6 +57,7 @@ class RNN:
                                  y,
                                  epochs=numEpochs,
                                  batch_size=batchSize,
+                                 shuffle=False,
                                  callbacks=checkpoint)
         
         plt.plot(history.history['loss'])

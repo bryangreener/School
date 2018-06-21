@@ -34,25 +34,22 @@ class RNN:
         else:
             model = Sequential()
             model.add(LSTM(numHidden, input_shape=(x.shape[1], x.shape[2]),
-                           return_sequences=True))
+                           return_sequences=False))
             model.add(Dropout(dropAmount))
-            model.add(LSTM(numHidden, return_sequences=True))
-            model.add(Dropout(dropAmount))
-            model.add(LSTM(numHidden, return_sequences=True))
-            model.add(Dropout(dropAmount))
+            #model.add(LSTM(numHidden, return_sequences=True))
+            #model.add(Dropout(dropAmount))
+            #model.add(LSTM(numHidden, return_sequences=False))
+            #model.add(Dropout(dropAmount))
             model.add(Dense(y.shape[1], activation='softmax'))
             model.compile(loss='categorical_crossentropy', optimizer='adam')
         self.model = model
 
-    def Checkpointer(self):
-        file = "lstm4-small-{epoch:02d}-{loss:.4f}.hdf5"
-        return [ModelCheckpoint(file,
+    def Train(self, x, y, numEpochs, batchSize):
+        file = "lstm4-test-{epoch:02d}-{loss:.4f}.hdf5"
+        checkpoint = [ModelCheckpoint(file,
                                 monitor='loss',
                                 verbose=1,
                                 save_best_only=True)]
-
-    def Train(self, x, y, numEpochs, batchSize):
-        checkpoint = self.Checkpointer()
         history = self.model.fit(x,
                                  y,
                                  epochs=numEpochs,
@@ -76,22 +73,22 @@ class RNN:
             idx = np.argmax(prediction)
             output += self.ixToChar[idx]
             #seqIn = [self.ixToChar[v] for v in pattern]
-            pattern = np.concatenate((pattern, prediction))
-            pattern = pattern[1:len(pattern)]
+            pattern = np.concatenate((pattern, prediction))[1:]
+            #pattern = pattern[1:len(pattern)]
         print("New String:", output)
 
 if __name__ == '__main__':
     file = 'txts\\Rev.txt'
-    epochs = 50
-    batchSize = 128
+    epochs = 10
+    batchSize = 32
     seqLength = 100
     numToPrint = 50
-    numHidden = 256
+    numHidden = 128
     dropAmount = 0.2
-    #resumeFile = "lstm4-13-0.8142.hdf5"
+    resumeFile = 'lstm4-test-01-2.4459.hdf5'
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
-    lstm.CreateModel(x, y, numHidden, dropAmount)
+    lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
     lstm.Train(x, y, epochs, batchSize)
     lstm.Generate(x, y, numToPrint)
 

@@ -1,0 +1,8 @@
+tensorflow 1.8.0
+keras 2.2.0
+keras-applicatyions 1.0.2
+keras-base 2.2.0
+keras-preprocwessing 1.0.1
+anaconda-client 1.6.14
+anaconda-navigator 1.8.7
+anaconda-PROJECT 0.8.2

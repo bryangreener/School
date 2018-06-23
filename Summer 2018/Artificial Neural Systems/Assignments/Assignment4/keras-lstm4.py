@@ -45,7 +45,7 @@ class RNN:
         self.model = model
 
     def Train(self, x, y, numEpochs, batchSize):
-        file = "lstm4-NEW-{epoch:02d}-{loss:.4f}.hdf5"
+        file = "lstm4-NEW2-{epoch:02d}-{loss:.4f}.hdf5"
         checkpoint = [ModelCheckpoint(file,
                                 monitor='loss',
                                 verbose=1,
@@ -85,10 +85,10 @@ if __name__ == '__main__':
     numToPrint = 50
     numHidden = 256
     dropAmount = 0.2
-    resumeFile = 'models/lstm4-test-08-0.9993.hdf5'
+    resumeFile = 'lstm4-NEW-257-0.1713.hdf5'
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
-    lstm.CreateModel(x, y, numHidden, dropAmount)
+    lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
     lstm.Train(x, y, epochs, batchSize)
     #lstm.Generate(x, y, numToPrint)
 

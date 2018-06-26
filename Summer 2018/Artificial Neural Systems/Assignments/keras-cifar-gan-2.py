@@ -1,3 +1,5 @@
+#READ THIS
+#https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9
 from keras.models import Sequential
 from keras.layers import Dense, Reshape, Flatten, Activation, MaxPooling2D, Dropout
 from keras.layers import BatchNormalization, UpSampling2D, Conv2D, Conv2DTranspose, LeakyReLU

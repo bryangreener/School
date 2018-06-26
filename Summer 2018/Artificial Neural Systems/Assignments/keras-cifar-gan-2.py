@@ -10,18 +10,19 @@ import math
 def Generator():
     '''
     model = Sequential()
-    model.add(Dense, input_dim=100, output_dim=1024)
+    model.add(Dense(input_dim=100, output_dim=1024))
     model.add(Activation('tanh'))
     model.add(Dense(128*8*8))
     model.add(BatchNormalization())
     model.add(Activation('tanh'))
-    model.add(Reshape((128, 8, 8)), input_shape=(128*8*8,))
+    model.add(Reshape((128, 8, 8), input_shape=(128*8*8,))
     model.add(UpSampling2D(size=(2,2)))
     model.add(Conv2D(64, 5, 5, padding='same'))
     model.add(Activation('tanh'))
     model.add(UpSampling2D(size=(2,2)))
     model.add(Conv2D(3, 5, 5, padding='same'))
     model.add(Activation('tanh'))
+    return model
     '''
     generator = Sequential()
     dropout = 0.4
@@ -33,32 +34,70 @@ def Generator():
     generator.add(Reshape((dim, dim, depth)))
     generator.add(Dropout(dropout))
     generator.add(UpSampling2D())
-    generator.add(Conv2DTranspose(int(depth/2), 5, padding='same'))
+    generator.add(Conv2DTranspose(int(depth/2), 5, padding='same', 
+                                  activation='relu',
+                                  kernel_initializer='glorot_normal',
+                                  bias_initializer='Zeros'))
     generator.add(BatchNormalization(momentum=0.9))
-    generator.add(Activation('relu'))
+    #generator.add(Activation('relu'))
     generator.add(UpSampling2D())
-    generator.add(Conv2DTranspose(int(depth/4), 5, padding='same'))
+    generator.add(Conv2DTranspose(int(depth/4), 5, padding='same', 
+                                  activation='relu',
+                                  kernel_initializer='glorot_normal',
+                                  bias_initializer='Zeros'))
     generator.add(BatchNormalization(momentum=0.9))
-    generator.add(Activation('relu'))
-    generator.add(Conv2DTranspose(int(depth/8), 5, padding='same'))
+    #generator.add(Activation('relu'))
+    generator.add(Conv2DTranspose(int(depth/8), 5, padding='same', 
+                                  activation='relu',
+                                  kernel_initializer='glorot_normal',
+                                  bias_initializer='Zeros'))
     generator.add(BatchNormalization(momentum=0.9))
-    generator.add(Activation('relu'))
-    generator.add(Conv2DTranspose(3, 5, padding='same', activation='sigmoid'))
+    #generator.add(Activation('relu'))
+    generator.add(Conv2DTranspose(3, 5, padding='same', activation='tanh',
+                                  kernel_initializer='glorot_normal',
+                                  bias_initializer='Zeros'))
     return generator
-
+    '''
+    model = Sequential()
+    model.add(Dense(256*8*8, 
+                    input_dim=100,
+                    kernel_initializer='glorot_normal', 
+                    bias_initializer='Zeros'))
+    model.add(Reshape((8, 8, 256)))
+    model.add(Conv2DTranspose(256/2, kernel_size=5, padding='same',
+                              activation='relu', 
+                              kernel_initializer='glorot_normal', 
+                              bias_initializer='Zeros'))
+    model.add(BatchNormalization())
+    model.add(Conv2DTranspose(256/4, kernel_size=5, padding='same',
+                              activation='relu',
+                              kernel_initializer='glorot_normal',
+                              bias_initializer='Zeros'))
+    model.add(BatchNormalization())
+    model.add(Conv2DTranspose(256/8, kernel_size=5, padding='same',
+                              activation='relu',
+                              kernel_initializer='glorot_normal',
+                              bias_initializer='Zeros'))
+    model.add(BatchNormalization())
+    model.add(Conv2DTranspose(3, kernel_size=5, padding='same',
+                              activation='tanh',
+                              kernel_initializer='glorot_normal',
+                              bias_initializer='Zeros'))
+    return model
+    '''
 def Discriminator():
     '''
     model = Sequential()
     model.add(Conv2D(32, kernel_size=(3,3), strides=(1,1), padding='same',
                  activation='tanh', input_shape=(3, 32, 32)))
     model.add(Conv2D(32, (3,3), padding='same', activation='tanh'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(MaxPooling2D(pool_size=(2,2), dim_ordering='th'))
     model.add(Conv2D(64, (3,3), padding='same', activation='tanh'))
     model.add(Conv2D(64, (3,3), padding='same', activation='tanh'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(MaxPooling2D(pool_size=(2,2), dim_ordering='th'))
     model.add(Conv2D(128, (3,3), padding='same', activation='tanh'))
     model.add(Conv2D(128, (3,3), padding='same', activation='tanh'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(MaxPooling2D(pool_size=(2,2), dim_ordering='th'))
     model.add(Flatten())
     model.add(Dense(1024, activation='tanh'))
     model.add(Dense(1, activation='sigmoid'))
@@ -66,25 +105,30 @@ def Discriminator():
     '''
     discriminator = Sequential()
     depth = 64
-    dropout = 0.4
+    #dropout = 0.4
     input_shape = (32, 32, 3)
-    discriminator.add(Conv2D(depth*1, 5, strides=2, input_shape=input_shape,
-                             padding='same'))
-    discriminator.add(LeakyReLU(alpha=0.2))
-    discriminator.add(Dropout(dropout))
-    discriminator.add(Conv2D(depth*2, 5, strides=2, padding='same'))
-    discriminator.add(LeakyReLU(alpha=0.2))
-    discriminator.add(Dropout(dropout))
-    discriminator.add(Conv2D(depth*4, 5, strides=2, padding='same'))
-    discriminator.add(LeakyReLU(alpha=0.2))
-    discriminator.add(Dropout(dropout))
-    discriminator.add(Conv2D(depth*4, 5, strides=2, padding='same'))
-    discriminator.add(LeakyReLU(alpha=0.2))
-    discriminator.add(Dropout(dropout))
+    discriminator.add(Conv2D(depth*1, 5, strides=1, input_shape=input_shape,
+                             padding='same', activation='tanh'))
+    discriminator.add(MaxPooling2D())
+    #discriminator.add(LeakyReLU(alpha=0.2))
+    #discriminator.add(Dropout(dropout))
+    discriminator.add(Conv2D(depth*2, 5, strides=1, padding='same', activation='tanh'))
+    discriminator.add(MaxPooling2D())
+    #discriminator.add(LeakyReLU(alpha=0.2))
+    #discriminator.add(Dropout(dropout))
+    discriminator.add(Conv2D(depth*4, 5, strides=1, padding='same', activation='tanh'))
+    discriminator.add(MaxPooling2D())
+    #discriminator.add(LeakyReLU(alpha=0.2))
+    #discriminator.add(Dropout(dropout))
+    discriminator.add(Conv2D(depth*4, 5, strides=1, padding='same', activation='tanh'))
+    discriminator.add(MaxPooling2D())
+    #discriminator.add(LeakyReLU(alpha=0.2))
+    #discriminator.add(Dropout(dropout))
     discriminator.add(Flatten())
+    discriminator.add(Dense(1024, activation='tanh'))
     discriminator.add(Dense(1, activation='sigmoid'))
     return discriminator
-
+    
 def Adversary(g, d):
     model = Sequential()
     model.add(g)
@@ -113,7 +157,7 @@ def CombineImages(generated_images):
 def Train(batch_size):
     (x_train, _),(_,_) = cifar10.load_data()
     x_train = (x_train.astype(np.float32) - 127.5)/127.5
-    x_train = x_train.reshape((x_train.shape[0], 3) + x_train.shape[1:3])
+    #x_train = x_train.reshape((x_train.shape[0], 3) + x_train.shape[1:3])
     d = Discriminator()
     g = Generator()
     a = Adversary(g, d)
@@ -133,7 +177,7 @@ def Train(batch_size):
                 noise[i, :] = np.random.uniform(-1, 1, 100)
             image_batch = x_train[index * batch_size: (index+1) * batch_size]
             generated_images = g.predict(noise, verbose=0)
-            if index % 20 == 0:
+            if index % 5 == 0:
                 image = CombineImages(generated_images)
                 image = image*127.5 + 127.5
                 Image.fromarray(image.astype(np.uint8)).save(str(epoch)+"_"+str(index)+".png")

@@ -102,9 +102,27 @@
 \item In the attached paper, consider equation 2.
 	\begin{enumerate}
 	\item Graph the equation for a very large $T$ and for $T=1$.
+	\medskip\\
+		To my understanding, equation 2 in the paper (shown below) will behave like a sigmoid function.
+		\[ P(S_i = 1) = \dfrac{1}{1+e^{-\frac{\Delta V}{T}}} \]
+		Thus our graph is as follows.\\
+		\begin{center}
+		\includegraphics[scale=0.5]{sigmoid.png}
+		\end{center}
+		Since this function is bounded by $[0,1]$ then $0 \leq f(x) \leq 1$ for all $x\in\mathbb{R}$.
+	
 	\item Explain why Boltzmann learning causes the system to converge on system states that represent better solutions.
+	\medskip\\
+		Using simulated annealing allows the network to converge around the global minimum instead of the local minimum in a function. This is because of the nature of the machine resetting its state at each time unit, preventing the machine from reaching a thermal equilibrium.
+		
 	\item How can stochastic activations avoid the flaw in gradient descent?
+	\medskip\\
+		By implementing stochastic methods in our networks, we prevent overfitting in the model. This is due to the fact that we are not training on the same set of data in the same order over and over, which would cause the network to ''memorize'' that pattern.
 	\end{enumerate}
+	
+\item One could teach the LSTM algorithm without saying the word 'neural net' \--- simply as a clever algorithm and data structure. But are there essential characteristics that a 'neural network' or 'deep learning' approach bring to AI solutions, if at all?
+\medskip\\
+	While the LSTM algorithm can be taught purely from a mathematical point of view, I believe that relating it to neural networks allows us to understand the intuition behind what this algorithm is doing. This same statement applies to artificial neural networks in general \-- they can all be taught just with math and statistics. However by explaining how they relate to our brains we can take inspiration from ourselves and develop artificial networks by mimicking nature's design. This allows us to see where we may improve if we hope to make a network that actually 'thinks' more like we do. 
 \end{enumerate}
 
 \end{document}

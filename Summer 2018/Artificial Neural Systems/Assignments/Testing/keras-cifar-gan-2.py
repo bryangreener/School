@@ -1,5 +1,6 @@
 #READ THIS
 #https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9
+import keras
 from keras.models import Sequential
 from keras.layers import Dense, Reshape, Flatten, Activation, MaxPooling2D, Dropout
 from keras.layers import BatchNormalization, UpSampling2D, Conv2D, Conv2DTranspose, LeakyReLU
@@ -7,6 +8,7 @@ from keras.optimizers import Adam, SGD
 from keras.datasets import cifar10
 import numpy as np
 from PIL import Image
+import matplotlib.pyplot as plt
 import math
 
 def Generator():
@@ -138,7 +140,21 @@ def Adversary(g, d):
     model.add(d)
     return model
 
-def CombineImages(generated_images):
+def CombineImages(generated_images, epoch, batch, batch_size):
+    plt.ioff()
+    dim = int(math.sqrt(batch_size))
+    fig, axs = plt.subplots(dim,dim, squeeze=False)
+    count = 0
+    for i in range(dim):
+        for j in range(dim):
+            img = keras.preprocessing.image.array_to_img(generated_images[count], scale=True)
+            axs[i,j].imshow(img)
+            axs[i,j].axis('off')
+            count += 1
+    #plt.show()
+    plt.savefig('GAN_Images\{0}_{1}'.format(epoch, batch))
+    plt.close()
+    '''
     num = generated_images.shape[0]
     width = int(math.sqrt(num))
     height = int(math.ceil(float(num)/width))
@@ -155,44 +171,44 @@ def CombineImages(generated_images):
         image[i * shape[0]: (i+1) * shape[0], j * shape[1]: (j+1) * shape[1], 
               2] = img[:, :, 2]
     return image
+    '''
 
 def Train(batch_size):
     (x_train, _),(_,_) = cifar10.load_data()
-    x_train = (x_train.astype(np.float32) - 127.5)/127.5
+    x_train = (x_train - 127.5)/127.5
     #x_train = x_train.reshape((x_train.shape[0], 3) + x_train.shape[1:3])
     d = Discriminator()
     g = Generator()
     a = Adversary(g, d)
-    d_optimizer = Adam(lr=0.0002, beta_1=0.5)
-    g_optimizer = Adam(lr=0.0002, beta_1=0.5)
-    g.compile(loss='binary_crossentropy', optimizer=g_optimizer)
-    a.compile(loss='binary_crossentropy', optimizer=g_optimizer)
+    optimizer = Adam(0.0002, 0.5)
+    g.compile(loss='binary_crossentropy', optimizer=optimizer)
+    a.compile(loss='binary_crossentropy', optimizer=optimizer)
     d.trainable = True
-    d.compile(loss='binary_crossentropy', optimizer=d_optimizer)
+    d.compile(loss='binary_crossentropy', optimizer=optimizer)
     
     noise = np.zeros((batch_size, 100))
-    
+    continuous_noise = np.zeros((batch_size, 100))
+    for i in range(batch_size):
+        continuous_noise[i, :] = np.random.uniform(-1, 1, 100)
+        
     for epoch in range(1000):
         print("Epoch", epoch)
         for index in range(int(x_train.shape[0]/batch_size)):
             for i in range(batch_size):
                 noise[i, :] = np.random.uniform(-1, 1, 100)
             image_batch = x_train[index * batch_size: (index+1) * batch_size]
-            generated_images = g.predict(noise, verbose=0)
-            if index % 5 == 0:
-                image = CombineImages(generated_images)
-                image = image*127.5 + 127.5
-                Image.fromarray(image.astype(np.uint8)).save(str(epoch)+"_"+str(index)+".png")
+            generated_images = g.predict(noise)
+            if index % 10 == 0:
+                CombineImages(g.predict(continuous_noise), epoch, index, batch_size)
             x = np.concatenate((image_batch, generated_images))
             y = [1] * batch_size + [0] * batch_size
             d_loss = d.train_on_batch(x, y)
-            print("Batch %d d_loss: %f" % (index, d_loss))
             for i in range(batch_size):
                 noise[i, :] = np.random.uniform(-1, 1, 100)
             d.trainable = False
             g_loss = a.train_on_batch(noise, [1] * batch_size)
             d.trainable = True
-            print("Batch %d g_loss : %f" % (index, g_loss))
+            print("Batch %d d_loss : %f g_loss : %f" % (index, d_loss, g_loss))
 
 if __name__ == "__main__":
     Train(batch_size=16)

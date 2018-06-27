@@ -102,8 +102,22 @@
 \item In the attached paper, consider equation 2.
 	\begin{enumerate}
 	\item Graph the equation for a very large $T$ and for $T=1$.
+	\medskip\\
+		To my understanding, equation 2 in the paper (shown below) will behave like a sigmoid function.
+		\[ P(S_i = 1) = \dfrac{1}{1+e^{-\frac{\Delta V}{T}}} \]
+		Thus our graph is as follows.\\
+		\begin{center}
+		\includegraphics[scale=0.5]{sigmoid.png}
+		\end{center}
+		Since this function is bounded by $[0,1]$ then $x\in [0,1]$.
+	
 	\item Explain why Boltzmann learning causes the system to converge on system states that represent better solutions.
+	\medskip\\
+		Using simulated annealing allows the network to converge around the global minimum instead of the local minimum in a function. This is because of the nature of the machine resetting its state at each time unit, preventing the machine from reaching a thermal equilibrium.
+		
 	\item How can stochastic activations avoid the flaw in gradient descent?
+	\medskip\\
+		By implementing stochastic methods in our networks, we prevent overfitting in the model. This is due to the fact that we are not training on the same set of data in the same order over and over, which would cause the network to ''memorize'' that pattern.
 	\end{enumerate}
 \end{enumerate}
 

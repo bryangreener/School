@@ -89,7 +89,7 @@ if __name__ == '__main__':
     lstm = RNN(batchSize, epochs)
     x, y = lstm.Read(file, seqLength)
     lstm.CreateModel(x, y, numHidden, dropAmount, resumeFile)
-    lstm.Train(x, y, epochs, batchSize)
+    #lstm.Train(x, y, epochs, batchSize)
     #lstm.Generate(x, y, numToPrint)
 
     

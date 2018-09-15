@@ -124,4 +124,4 @@ def Train(batch_size):
             print("Batch %d d_loss : %f g_loss : %f" % (index, d_loss, g_loss))
 
 if __name__ == "__main__":
-    Train(batch_size=4)
+    Train(batch_size=9)

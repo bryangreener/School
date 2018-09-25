@@ -71,6 +71,81 @@ Every process gets a set amount of time allowed in the CPU before it is removed 
 \noindent
 The timer used by the CPU to determine the allowed time is called the \textit{Time Quantum}. Items kicked out by the time quantum get sent back to the end of the ready queue. 
 
+\mychapter{2}{2018-09-25}
+\section{Exam 1 Review}
+
+\begin{enumerate}
+\item[1.]Discuss the differences between user space and kernel space including security/rights as well as memory access.\\
+	The kernel is a different mode in the CPU and can access anywhere in the computer. Thus the kernel has no security at all.
+
+\item[2.]Where in the OS system levels does a device driver usually sit? User or Kernel and why?\\
+	Device drivers sit in the kernel since they have to be fast and the kernel calls them.
+
+\item[3.]Why are device drivers a threat to the security of a computer?\\
+	Since drivers run in the kernel, and the kernel is not secure, then it has unrestricted access to the whole computer.
+
+\item[4.]What is the role of a device driver in terms of the device's hardware/software and the OS code? Does the kernel call different functions for each device of the same type?\\
+	
 
 
+\item[5.]Describe the way each OS deals with device drivers as far as not having viruses and doing their job correctly.\\
+	\begin{enumerate}
+	\item[a] Linux\\
+			The Linux user base tests and certifies drivers. The driver is the put into a trusted repository where users can download drivers checked out by other users. When you download a driver, you're asked to go to a different source and run a CRC (Cyclical Redundancy Check) check which is similar to comparing checksums.
+	\item[b] Apple\\
+			Only allows device drivers approved by Apple software developers (which is a title that you can get for little money).
+	\item[c] MS-Windows\\
+			Drivers must be certified by MS people and they must have an SSH Certificate in order to be loaded.
+	\end{enumerate}
+
+\item[6.]Explain why a program cannot be optimized when using a debugger to single step through the source code.\\
+	Programs cannot be optimized when debugging since the debugger will change the machine code that is translated from the program.
+
+\item[7]
+	\begin{enumerate}
+	\item What does the static key word do to x?\\
+		Static stores the variable in the data section of memory.
+	\item Where is x stored?\\
+		x is stored in the data section as mentioned in the previous part of this problem.
+	\item What value is returned the second time func is called?\\
+		25 is returned. Even though static int x is declared inside the function every time func is called, the value is stored elsewhere and is not re-initialized every function call.
+	\end{enumerate}
+
+\item[9]Explain the difference between the memory types shared by processes and memory shared by threads.\\
+	When a thread is spawned, the only thing not shared by other things is the stack, thus that section of stack used by the process is unique to that process. All processes share the heap, data, and text.
+	
+\item[10]The CPU's MMU translates virtual memory addresses to real memory addresses.
+	\begin{enumerate}
+	\item The MMU uses a table to manage the translation, how does this table get its information?\\
+		The MMU gets its information from the Kernel and tells the MMU where each segment is.
+	\item[c.] What happens if a process asks for memory addresses that are not loaded into real memory and the real memory is full?\\
+		The Kernel will take segments out of real memory and saves them to the hard disk then loads what is requested. This also throws a page fault.
+	\end{enumerate}
+
+\item[13.]Why do you need to use a remote debugger to single step debug a kernel?\\
+If you stop code while single stepping then the debugger won't be running since the kernel won't be running.
+
+\item[14.]Write the body for myStrcpy using array notation like dest[i] and pointer arithmetic like src++, one form on each size of =\\
+	\begin{verbatim}
+	void myStrcpy(char *dest, char *src[]){
+	  while(*dest++ = *src++);
+	}
+	\end{verbatim}
+
+\item[15.]The parameters for myStrcpy are dest and src. What is the difference in their data types?\\
+	There is no difference between src and dest in terms of data types in myStrcpy.
+
+\item[16.]If the file q1.c is in the current working directory and no makefile show the make command to compile and create q1.\\
+	Tricky question wording. It just wanted the command to make the program given a makefile is provided so the answer would be
+	\begin{verbatim}
+	user@comp:~/$ make program_name
+	\end{verbatim}
+
+\item[20.]
+	\begin{verbatim}
+	for(int i = 0; i < c; i++){ printf("%s\n", f[i]); }
+	\end{verbatim}
+
+
+\end{enumerate}
 \end{document}

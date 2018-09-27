@@ -148,4 +148,56 @@ If you stop code while single stepping then the debugger won't be running since 
 
 
 \end{enumerate}
+
+\mychapter{3}{2018-09-27}
+\section*{Schedulers}
+\subsection*{Scheduler Systems and Queues}
+Types of Scheduler Systems:
+\begin{itemize}
+	\item Servers
+	\item Users
+	\item Small Devices and Embedded Systems
+	\item Real Time
+\end{itemize}
+
+\noindent
+Normally processes leave the CPU and go into the ready queue because they are preempted or they time out. The scheduler determines which items from the ready queue go into the CPU next.\\
+
+\noindent
+Types of structures for the ready queue:
+\begin{itemize}
+	\item FIFO Queue.
+	\item Take shortest time task first. Problem is that you need to be able to predict ahead of time how long a process will take.
+	\item Priority Queue. Every process has priority and highest priority runs first. Low priority processes rarely get run with these types of structures since they never get to the front of the queue.
+\end{itemize}
+
+\subsection*{Priority Queues}
+Some priority queues use \textit{aging} to allow low priority processes to make their way out of the queue. Most operating systems use this system along with the time quantum in the CPU to process the ready queue.\\
+
+\begin{defn}[Thrashing] Thrashing is when switching processes is done too often due to too small of a time quantum. This ends up hindering overall performance.
+\end{defn}
+
+\subsection*{Multilevel Queues}
+Many modern CPUs use multilevel queues where process priority queues are based on the process type in order from highest to lowest priority:
+\begin{enumerate}
+	\item Real-time processes
+	\item System processes
+	\item Interactive processes
+	\item Batch processes
+\end{enumerate}
+
+\subsection*{Real-Time Scheduling}
+Latency has to be accounted for with real time systems. There are two types of latencies that affect performance:
+
+\begin{defn}[Interrupt Latency]
+	Time from arrival of interrupt to start of routine that services interrupt.
+\end{defn}
+
+\begin{defn}[Dispatch Latency]
+	Time for schedule to take current process off CPU and switch to another.
+\end{defn}
+
+\noindent
+Real-time scheduling must support preemptive priority based scheduling.
+
 \end{document}

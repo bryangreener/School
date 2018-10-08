@@ -1,0 +1,97 @@
+\documentclass{report}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{tabto}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% For definitions
+%\newtheorem{defn}{Definition}[section]
+%\newtheorem{thrm}{Theorem}[section]
+%\newtheorem{ex}[Example}[section]
+\newtheorem*{ex}{Example}
+\newtheorem*{defn}{Definition}
+\newtheorem*{thrm}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{result}{Result}
+
+% For circled text
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.8pt] (char) {#1};}}
+
+\usepackage{pgf}
+\usetikzlibrary{arrows, automata}
+
+% For equation system alignment
+\usepackage{systeme,mathtools}
+% Usage:
+%	\[
+%	\sysdelim.\}\systeme{
+%	3z +y = 10,
+%	x + y +  z = 6,
+%	3y - z = 13}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+%used for matrix vertical line
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother 
+ 
+% Change chapter numbering
+\newcommand{\mychapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\chapter*{#2}
+	\addcontentsline{toc}{chapter}{#2}
+}
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\begin{document}
+
+\begin{center}
+	\LARGE\textbf{Engineering Expo Review}\\
+	\Large\textit{Bryan Greener}
+\end{center}
+
+\section*{Overview}
+This is a collection of my experiences with the different companies at the Fall 2018 Engineering Expo at WMU. Each company is listed in its own section with a description of how I felt I'd be a good fit at their company, any possible leads into a job, and anything else that I may have found interesting.
+
+\section*{Auto-Owners Insurance}
+I am interested in Auto-Owners mainly due to how established they are in the business environment. They are a Fortune 500 company and they offer many software development roles. After talking with their representative, they seemed interested in my skill-set and gave me a quick interview on the spot. Auto-Owners also has an IT Actuarial Day later this month that I'd be interested in attending.
+
+\section*{Dynatrace}
+I've spoken with the same representative from Dynatrace at a previous expo. I am very interested in a job at their business since they offer paid time training to get up to speed with their business and they hire graduated students. I talked with their representative and they seemed to be in a similar position to me when they were graduating and they really liked their migration into Dynatrace. This company also specializes in a lot of the languages that I am familiar with.
+
+\section*{KLA Tencor}
+I honestly don't remember talking to these people however I still plan on applying on their site as they show listings for software development positions.
+
+\section*{Nexient}
+Nexient's backend development seems like a good fit for me as they work with Java, C\#, and .NET. I applied for backend development and spoke with the representative who seemed to be interested in my resume but they may have just been putting on a show. 
+
+\section*{NOAA}
+Nobody from NOAA was at their booth so I just took a pamphlet. However I know that NOAA uses a lot of different kinds of software to create maps and weather prediction tools. I think working on this type of software would be interesting so I plan on applying on their site if they have any openings.
+
+\section*{Rocket Mortgage / Quicken Loans}
+Rocket Mortgage works on APIs for Quicken Loans so they aren't actually a part of quicken loans however they develop a lot of the backend tools that they use. The representative seemed interested in my resume and suggested I also apply online which I plan on doing. This would be a good company to work for and experience with API development is very helpful at getting jobs in this field.
+
+\section*{Sandalwood}
+Sandalwood seemed most interested in me out of all the booths that I visited. After talking with their representative, I plan on following up on their site to apply. While talking with them, their needs seemed to fit my skill set very closely. Their positions are mostly IoT which of course is a booming field now days and I have experience working with integrated controllers so this would be a good fit for me.
+
+\section*{Tyler Technologies}
+Tyler Technologies is offering both a Software Engineering Internship and a full time Software Developer position. I applied for both positions and spoke with the representative at the engineering expo regarding their company and work environment. I would be interested in working here since they work with .NET and develop software for emergency response systems which is an interesting field.
+
+\section*{Summary}
+Overall, I was upset that some of the bigger names in software development such as Amazon or Google weren't at this expo however I did get a few good leads for jobs and I got a good feel for what most places seemed to be looking for in software engineers. I haven't heard anything back from any of the people that I spoke with however I still plan on following up on their site and applying to different companies that weren't at the expo anyway.
+
+\end{document}

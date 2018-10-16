@@ -6,6 +6,8 @@
 \renewcommand{\dateseparator}{--}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\usepackage[super]{nth}
+\setlength{\parindent}{0pt}
 
 % For definitions
 %\newtheorem{defn}{Definition}[section]
@@ -200,7 +202,110 @@ Latency has to be accounted for with real time systems. There are two types of l
 \noindent
 Real-time scheduling must support preemptive priority based scheduling.
 
-\mychapter{4}{2018-10-02}
-\section*{}
+\mychapter{4}{2018-10-16}
+\section*{Exam Review}
+\begin{enumerate}
+	\item[1.]If you double the number of processors working on a problem, does the speed double?\\
+	No because there is a delay in processing information.
+	
+	\item[2.] What is the biggest challenge for Computer Scientists with concurrent processing?\\
+Designing the algorithms that handle concurrent processing.
+
+	\item[7.]What does it mean to preempt a process in the CPU?\\
+	Preempt means to take a process out because there is a more important process that came up.
+	
+	\item[8.b.1]What type of OS uses shortest future run time/shortest job first?\\
+	In real-time systems you know ahead of time how long each process will take.
+
+	\item[11.]How does hyper-threading work and how should the scheduler use them?\\
+	Hyper-threading is where one core can have multiple threads. Hyper-threading only works when both threads are from the same process and are sharing everything except the stack. When one thread is waiting for memory access the other thread will run. The scheduler should make sure that threads from the same process are in the same processor. The term ''Hyper-threading'' is a term created by Intel.
+	
+	\item[13.]Describe L1, L2, and L3 caches and why they are important.\\
+	Caches pre-fetch instructions and data from processes to allow the CPU to operate faster. This is as opposed to the CPU going to main memory to fetch information. Caches are more important than raw CPU speed for performance of a CPU.
+	
+	\item[14.]What is processor affinity and why is it important with levels of caches?\\
+	Processor affinity is when the scheduler tries to keep processes together on the same CPU so it can take advantage of what has already been pre-fetched into the cache. So if running a process with 5 threads, you'd want to keep it all in one CPU core. But without processor affinity, the CPU will try to split this process up between other cores if they are available.
+	
+	\item[15.]When designing scheduling for an OS, should they be fixed or dynamic and why?\\
+	They should be dynamic in order to be flexible in different situations.
+\end{enumerate}
+
+\section*{Concurrent Processing}
+See chapter 4 in \nth{10} edition and chapter 5 in \nth{9} edition of textbook.\\
+
+\subsection*{Process Synchronization}
+\begin{defn}[Concurrent Processing] Concurrent Processing is when there are multiple processes that need to communicate with each other or multiple threads that need to share data.
+\end{defn}
+\noindent
+One of the primary goals of process synchronization is protecting shared resources from all the other processes that are trying to use that resource at the same time.\\
+
+Java for example has both thread-safe and normal threading classes where thread-safe classes have larger overhear to lock objects and their methods when threads are using those resources. Thread-safe classes run much slower due to this overhead.\\
+
+
+\subsection*{Shared Memory}
+Most OSs have ''shared memory'' which allows multiple processes to share the same memory.\\
+
+\subsection*{Sockets}
+Sockets are a way of opening a two directional communication path with another process. Can be secure but isn't guaranteed. Sockets can be used with internet protocols such as Novell or TCP/IP.\\
+
+When opening connection to devices on a network, a socket is opened for data to transmit through. The socket is then written to and read from.\\
+
+\subsection*{Signals}
+\begin{defn}[Signals]Signals are like software interrupts. For example, Ctrl+C sends a signal to the current process that tells the process to process that signal. If the signal is not set in the system then the system uses the default which in this case is the 'Kill' command.
+\end{defn}
+
+\noindent
+Signals can be programmed into software to be whatever the developer wants. The following command (Linux) is the only command that cannot be blocked by software.
+\begin{verbatim}
+kill -9 [process#]
+\end{verbatim}
+
+\noindent
+Signaling is a way of talking between processes on the same computer as a software interrupt. It is also a way of telling your process what to do.
+
+\subsection*{Concurrent Processing Summary}
+Those are the ways of allowing processes to communicate with each other.
+
+\section*{Semaphores}
+A semaphore is used to control access to shared resources between processes.\\
+
+Semaphores were originally used to control trains on railroad tracks to prevent collisions.\\
+
+When a process is given the semaphore, it is able to use a requested shared resource, otherwise it is not able to use it.\\
+
+Semaphores are handled by a special bit in the CPU. If the bit is a 0 it means the object is available otherwise it isn't. Usually in low level programming, test if the bit is 0 then set the bit. This operation must be atomic (done in 1 operation) otherwise there could be collisions.\\
+
+The kernel has a table for process IDs and semaphores and all the threads in the kernel can only get access to this table. The semaphore bit controls who gets access to this table. This table is protected by the semaphore bit in the CPU. This is what allows multiple processes to access this single semaphore bit at the same time. You can create system functions to ask for semaphores. When done with the semaphore, you give it back.\\
+
+Processes mount a semaphore, then either set/get/unset, then when done the semaphore is unmounted (disconnected from process).\\
+
+\begin{ex}
+Below are the steps taken by a process when using semaphores:
+\begin{enumerate}
+\item Mount semaphore 'sm'
+\item Set 'sm'
+\item Process
+\item Unset 'sm'
+\item Unmount semaphore 'sm'
+\end{enumerate}
+The setting and unsetting steps are usually in a loop where the process sets the semaphore then unsets the semaphore.
+\end{ex}
+
+\subsection*{Deadlocks}
+\begin{defn}[Deadlock]
+A deadlock is when two or more processes are waiting for another process to unlock a semaphore in order to continue while the process that is being waited on is waiting for the other process to unlock a semaphore. This results in both processes being in a stalemate where each cannot continue and unlock its semaphore until the other process unlocks its semaphore.
+\end{defn}
+\begin{ex}
+Let's say two processes each need 2 semaphores to process something. So process 1 gets semaphore B and A and process 2 gets semaphore A, C, then B.\\
+First off, P1 locks B, P2 locks A. Then P1 is waiting for P2 to unlock A in order to continue while P2 is waiting for P1 to unlock B to continue. This is a deadlock.
+\end{ex}
+
+A way to avoid deadlocks is to give back the locked semaphore then wait for a random time and try to get the next semaphore again.\\
+
+A way to tell if a process is in a deadlock is to set a timer on the semaphore requests (after initial request) then if request fails then try again.\\
+
+In POSIX/UNIX you can only ask for one semaphore at a time. In System5 and Non-POSIX you can ask the kernel for multiple semaphores all in one function call. The kernel then handles the deadlock detection and returns either all the requested semaphores or none of them.
+
+\mychapter{5}{2018-10-XX}
 
 \end{document}

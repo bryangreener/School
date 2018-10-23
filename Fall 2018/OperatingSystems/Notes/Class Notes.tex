@@ -306,6 +306,109 @@ A way to tell if a process is in a deadlock is to set a timer on the semaphore r
 
 In POSIX/UNIX you can only ask for one semaphore at a time. In System5 and Non-POSIX you can ask the kernel for multiple semaphores all in one function call. The kernel then handles the deadlock detection and returns either all the requested semaphores or none of them.
 
-\mychapter{5}{2018-10-XX}
+\mychapter{5}{2018-10-23}
+\section*{Semaphores Continued}
+\textit{printf} uses a FILE* and a buffer of about 2k and printf writes to the buffer. The buffer doesn't get flushed to the OS. At a lower level the system uses the write() system call and sends the buffer to this system call. In the OS there is at least one buffer, one of which is associated with the HDD called the ''Disk Controller''. What is written to the file is written to one of these buffers and if the system crashes then that written info will be lost. Only after the info if successfully written is the transaction actually ended. If the system crashes then the database will be restores to the last backup and it will use the log file to bring it back to where the system was before the crash. Without the log file everything done since the last backup is gone.\\
+
+Due to these problems, many commercial databases bypass the OS and take over the HDD to avoid all these buffers that leave room for error.\\ 
+
+\begin{defn}[Dirty Read]
+The option to allow reading locked records in a database. This can result in reading information that is in the middle of a transaction and what is read will actually be old data that was changed. However dirty reads are much faster, though this is the trade-off that must be considered. This is an option that can be configured for a database in most database systems.
+\end{defn}
+
+Thus, buffers are a problem if you need guaranteed data transfer. This is why semaphores are needed.
+
+\section*{Fork/Execute/Redirection/Pipes}
+stdio contains the following:
+\begin{itemize}
+\item FILE *stdin
+	Normal programs read from this. File number 0.
+\item FILE *stdout
+	Normal programs write to this. File number 1.
+\item FILE *stderr
+	stderr has no buffer. File number 2.
+\end{itemize}
+
+\subsection*{Redirection}
+Redirection is when stdin or stdout is changed.\\
+
+The following line redirects stdout to point to the value at the right. So instead of writing to the normal stdout, the output of the program is a.out. The program still sees stdout as normal but the pointer for stdout is changed.
+\begin{verbatim}
+a > a.out
+\end{verbatim}
+
+The following redirects stdin to point to the value at the right. So instead of reading from normal stdin, the input for the program is coming from a2.out. As before, the program still sees stdin as normal but the pointer for stdin is changed.
+\begin{verbatim}
+a < a.out
+\end{verbatim}
+
+You can also redirect stderr.\\
+Redirect stdout to one file and stderr to another:
+\begin{verbatim}
+a > a.out 2>error
+\end{verbatim}
+Redirect stderr to stdout (\&1) then redirect stdout to file:
+\begin{verbatim}
+a > a.out 2>&1
+\end{verbatim}
+Redirect both to a file:
+\begin{verbatim}
+a &> a.out
+\end{verbatim}
+
+\subsection*{Pipes}
+Pipes are another form of redirection. Pipes take the stdout from one program and sends it as stdin to another. Below, the output from program a is being sent as input to program b. This is not limited to a single pipe, so you can pipe over and over again. Unknown at time of class if you can use the same program in a series of pipes multiple times.
+\begin{verbatim}
+a | b
+\end{verbatim}
+
+\subsection*{Forks}
+When a process forks itself, an exact duplicate of that process is created. So if a program 'a' forks itself, there will now be two processes: 'a' and its child.\\
+
+fork() returns either 0 or the process id (pid). fork() returns a 0 to the child process created and a pid of the child process to the parent. Otherwise if fork returns a negative value then the creation of the child process failed.\\
+
+The process flow of fork() is as follows
+\begin{verbatim}
+fork()
+redirect -> open -> dupe
+execute()
+\end{verbatim}
+
+During the second step, argc, argv, and an array of environment variables are created.\\
+
+The return of execute is what comes back from main.\\
+
+Summary:\\
+Fork creates an exact copy of the parent, the variables are all in the same places. Fork returns the code for the parent or child. Anything done in child will not affect the child. Anything done in the parent before the fork will affect the child.\\
+
+\pagebreak
+Simple command line interpreter. Most code omitted to prevent confusion:
+\begin{verbatim}
+int main(int argc, char **argv){
+  int line_count, pid;
+  char buf[1000];
+  int fileOne, fileTwo, fileThree;
+  if(argv<4){
+  	// not enough args
+  }else{
+    if((pid = fork()) < 0){
+  		
+    }else if(pid == 0{
+      //child
+      // Open files in here and save to file vars
+      execlp(); // executes new program
+    }else{
+      //parent
+      wait_pid(pid);
+    }
+  }
+}
+\end{verbatim}
+There are different versions of the exec system call. The execlp() version uses 'l' to pass a list of command-line arguments and 'p' (stands for PATH) which allows passing in of environment variables. This tells the program to search through all the PATH directories for the file specified; otherwise you need to use a specific path. This is a Unix/POSIX function. Any lists passed in in any version must be null terminated. The other versions of the exec function can be found by looking up the Exec system call.\\
+
+When execute is called in a process, the process that called that execute command disappears.
+
+\mychapter{6}{2018-10-25}
+
 
 \end{document}

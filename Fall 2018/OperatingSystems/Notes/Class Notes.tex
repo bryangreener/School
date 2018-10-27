@@ -6,6 +6,8 @@
 \renewcommand{\dateseparator}{--}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\usepackage[super]{nth}
+\setlength{\parindent}{0pt}
 
 % For definitions
 %\newtheorem{defn}{Definition}[section]
@@ -150,8 +152,8 @@ If you stop code while single stepping then the debugger won't be running since 
 \end{enumerate}
 
 \mychapter{3}{2018-09-27}
-\section*{Schedulers}
-\subsection*{Scheduler Systems and Queues}
+\section{Schedulers}
+\subsection{Scheduler Systems and Queues}
 Types of Scheduler Systems:
 \begin{itemize}
 	\item Servers
@@ -171,13 +173,13 @@ Types of structures for the ready queue:
 	\item Priority Queue. Every process has priority and highest priority runs first. Low priority processes rarely get run with these types of structures since they never get to the front of the queue.
 \end{itemize}
 
-\subsection*{Priority Queues}
+\subsection{Priority Queues}
 Some priority queues use \textit{aging} to allow low priority processes to make their way out of the queue. Most operating systems use this system along with the time quantum in the CPU to process the ready queue.\\
 
 \begin{defn}[Thrashing] Thrashing is when switching processes is done too often due to too small of a time quantum. This ends up hindering overall performance.
 \end{defn}
 
-\subsection*{Multilevel Queues}
+\subsection{Multilevel Queues}
 Many modern CPUs use multilevel queues where process priority queues are based on the process type in order from highest to lowest priority:
 \begin{enumerate}
 	\item Real-time processes
@@ -186,7 +188,7 @@ Many modern CPUs use multilevel queues where process priority queues are based o
 	\item Batch processes
 \end{enumerate}
 
-\subsection*{Real-Time Scheduling}
+\subsection{Real-Time Scheduling}
 Latency has to be accounted for with real time systems. There are two types of latencies that affect performance:
 
 \begin{defn}[Interrupt Latency]
@@ -200,7 +202,263 @@ Latency has to be accounted for with real time systems. There are two types of l
 \noindent
 Real-time scheduling must support preemptive priority based scheduling.
 
-\mychapter{4}{2018-10-02}
-\section*{}
+\mychapter{4}{2018-10-16}
+\section{Exam Review}
+\begin{enumerate}
+	\item[1.]If you double the number of processors working on a problem, does the speed double?\\
+	No because there is a delay in processing information.
+	
+	\item[2.] What is the biggest challenge for Computer Scientists with concurrent processing?\\
+Designing the algorithms that handle concurrent processing.
+
+	\item[7.]What does it mean to preempt a process in the CPU?\\
+	Preempt means to take a process out because there is a more important process that came up.
+	
+	\item[8.b.1]What type of OS uses shortest future run time/shortest job first?\\
+	In real-time systems you know ahead of time how long each process will take.
+
+	\item[11.]How does hyper-threading work and how should the scheduler use them?\\
+	Hyper-threading is where one core can have multiple threads. Hyper-threading only works when both threads are from the same process and are sharing everything except the stack. When one thread is waiting for memory access the other thread will run. The scheduler should make sure that threads from the same process are in the same processor. The term ''Hyper-threading'' is a term created by Intel.
+	
+	\item[13.]Describe L1, L2, and L3 caches and why they are important.\\
+	Caches pre-fetch instructions and data from processes to allow the CPU to operate faster. This is as opposed to the CPU going to main memory to fetch information. Caches are more important than raw CPU speed for performance of a CPU.
+	
+	\item[14.]What is processor affinity and why is it important with levels of caches?\\
+	Processor affinity is when the scheduler tries to keep processes together on the same CPU so it can take advantage of what has already been pre-fetched into the cache. So if running a process with 5 threads, you'd want to keep it all in one CPU core. But without processor affinity, the CPU will try to split this process up between other cores if they are available.
+	
+	\item[15.]When designing scheduling for an OS, should they be fixed or dynamic and why?\\
+	They should be dynamic in order to be flexible in different situations.
+\end{enumerate}
+
+\section{Concurrent Processing}
+See chapter 4 in \nth{10} edition and chapter 5 in \nth{9} edition of textbook.\\
+
+\subsection{Process Synchronization}
+\begin{defn}[Concurrent Processing] Concurrent Processing is when there are multiple processes that need to communicate with each other or multiple threads that need to share data.
+\end{defn}
+\noindent
+One of the primary goals of process synchronization is protecting shared resources from all the other processes that are trying to use that resource at the same time.\\
+
+Java for example has both thread-safe and normal threading classes where thread-safe classes have larger overhear to lock objects and their methods when threads are using those resources. Thread-safe classes run much slower due to this overhead.\\
+
+
+\subsection{Shared Memory}
+Most OSs have ''shared memory'' which allows multiple processes to share the same memory.\\
+
+\subsection{Sockets}
+Sockets are a way of opening a two directional communication path with another process. Can be secure but isn't guaranteed. Sockets can be used with internet protocols such as Novell or TCP/IP.\\
+
+When opening connection to devices on a network, a socket is opened for data to transmit through. The socket is then written to and read from.\\
+
+\subsection{Signals}
+\begin{defn}[Signals]Signals are like software interrupts. For example, Ctrl+C sends a signal to the current process that tells the process to process that signal. If the signal is not set in the system then the system uses the default which in this case is the 'Kill' command.
+\end{defn}
+
+\noindent
+Signals can be programmed into software to be whatever the developer wants. The following command (Linux) is the only command that cannot be blocked by software.
+\begin{verbatim}
+kill -9 [process#]
+\end{verbatim}
+
+\noindent
+Signaling is a way of talking between processes on the same computer as a software interrupt. It is also a way of telling your process what to do.
+
+\subsection{Concurrent Processing Summary}
+Those are the ways of allowing processes to communicate with each other.
+
+\section{Semaphores}
+A semaphore is used to control access to shared resources between processes.\\
+
+Semaphores were originally used to control trains on railroad tracks to prevent collisions.\\
+
+When a process is given the semaphore, it is able to use a requested shared resource, otherwise it is not able to use it.\\
+
+Semaphores are handled by a special bit in the CPU. If the bit is a 0 it means the object is available otherwise it isn't. Usually in low level programming, test if the bit is 0 then set the bit. This operation must be atomic (done in 1 operation) otherwise there could be collisions.\\
+
+The kernel has a table for process IDs and semaphores and all the threads in the kernel can only get access to this table. The semaphore bit controls who gets access to this table. This table is protected by the semaphore bit in the CPU. This is what allows multiple processes to access this single semaphore bit at the same time. You can create system functions to ask for semaphores. When done with the semaphore, you give it back.\\
+
+Processes mount a semaphore, then either set/get/unset, then when done the semaphore is unmounted (disconnected from process).\\
+
+\begin{ex}
+Below are the steps taken by a process when using semaphores:
+\begin{enumerate}
+\item Mount semaphore 'sm'
+\item Set 'sm'
+\item Process
+\item Unset 'sm'
+\item Unmount semaphore 'sm'
+\end{enumerate}
+The setting and unsetting steps are usually in a loop where the process sets the semaphore then unsets the semaphore.
+\end{ex}
+
+\subsection{Deadlocks}
+\begin{defn}[Deadlock]
+A deadlock is when two or more processes are waiting for another process to unlock a semaphore in order to continue while the process that is being waited on is waiting for the other process to unlock a semaphore. This results in both processes being in a stalemate where each cannot continue and unlock its semaphore until the other process unlocks its semaphore.
+\end{defn}
+\begin{ex}
+Let's say two processes each need 2 semaphores to process something. So process 1 gets semaphore B and A and process 2 gets semaphore A, C, then B.\\
+First off, P1 locks B, P2 locks A. Then P1 is waiting for P2 to unlock A in order to continue while P2 is waiting for P1 to unlock B to continue. This is a deadlock.
+\end{ex}
+
+A way to avoid deadlocks is to give back the locked semaphore then wait for a random time and try to get the next semaphore again.\\
+
+A way to tell if a process is in a deadlock is to set a timer on the semaphore requests (after initial request) then if request fails then try again.\\
+
+In POSIX/UNIX you can only ask for one semaphore at a time. In System5 and Non-POSIX you can ask the kernel for multiple semaphores all in one function call. The kernel then handles the deadlock detection and returns either all the requested semaphores or none of them.
+
+\mychapter{5}{2018-10-23}
+\section{Semaphores Continued}
+\textit{printf} uses a FILE* and a buffer of about 2k and printf writes to the buffer. The buffer doesn't get flushed to the OS. At a lower level the system uses the write() system call and sends the buffer to this system call. In the OS there is at least one buffer, one of which is associated with the HDD called the ''Disk Controller''. What is written to the file is written to one of these buffers and if the system crashes then that written info will be lost. Only after the info if successfully written is the transaction actually ended. If the system crashes then the database will be restores to the last backup and it will use the log file to bring it back to where the system was before the crash. Without the log file everything done since the last backup is gone.\\
+
+Due to these problems, many commercial databases bypass the OS and take over the HDD to avoid all these buffers that leave room for error.\\ 
+
+\begin{defn}[Dirty Read]
+The option to allow reading locked records in a database. This can result in reading information that is in the middle of a transaction and what is read will actually be old data that was changed. However dirty reads are much faster, though this is the trade-off that must be considered. This is an option that can be configured for a database in most database systems.
+\end{defn}
+
+Thus, buffers are a problem if you need guaranteed data transfer. This is why semaphores are needed.
+
+\section{Fork/Execute/Redirection/Pipes}
+stdio contains the following:
+\begin{itemize}
+\item FILE *stdin
+	Normal programs read from this. File number 0.
+\item FILE *stdout
+	Normal programs write to this. File number 1.
+\item FILE *stderr
+	stderr has no buffer. File number 2.
+\end{itemize}
+
+\subsection{Redirection}
+Redirection is when stdin or stdout is changed.\\
+
+The following line redirects stdout to point to the value at the right. So instead of writing to the normal stdout, the output of the program is a.out. The program still sees stdout as normal but the pointer for stdout is changed.
+\begin{verbatim}
+a > a.out
+\end{verbatim}
+
+The following redirects stdin to point to the value at the right. So instead of reading from normal stdin, the input for the program is coming from a2.out. As before, the program still sees stdin as normal but the pointer for stdin is changed.
+\begin{verbatim}
+a < a.out
+\end{verbatim}
+
+You can also redirect stderr.\\
+Redirect stdout to one file and stderr to another:
+\begin{verbatim}
+a > a.out 2>error
+\end{verbatim}
+Redirect stderr to stdout (\&1) then redirect stdout to file:
+\begin{verbatim}
+a > a.out 2>&1
+\end{verbatim}
+Redirect both to a file:
+\begin{verbatim}
+a &> a.out
+\end{verbatim}
+
+\subsection{Pipes}
+Pipes are another form of redirection. Pipes take the stdout from one program and sends it as stdin to another. Below, the output from program a is being sent as input to program b. This is not limited to a single pipe, so you can pipe over and over again. Unknown at time of class if you can use the same program in a series of pipes multiple times.
+\begin{verbatim}
+a | b
+\end{verbatim}
+
+\subsection{Forks}
+When a process forks itself, an exact duplicate of that process is created. So if a program 'a' forks itself, there will now be two processes: 'a' and its child.\\
+
+fork() returns either 0 or the process id (pid). fork() returns a 0 to the child process created and a pid of the child process to the parent. Otherwise if fork returns a negative value then the creation of the child process failed.\\
+
+The process flow of fork() is as follows
+\begin{verbatim}
+fork()
+redirect -> open -> dupe
+execute()
+\end{verbatim}
+
+During the second step, argc, argv, and an array of environment variables are created.\\
+
+The return of execute is what comes back from main.\\
+
+Summary:\\
+Fork creates an exact copy of the parent, the variables are all in the same places. Fork returns the code for the parent or child. Anything done in child will not affect the child. Anything done in the parent before the fork will affect the child.\\
+
+\pagebreak
+Simple command line interpreter. Most code omitted to prevent confusion:
+\begin{verbatim}
+int main(int argc, char **argv){
+  int line_count, pid;
+  char buf[1000];
+  int fileOne, fileTwo, fileThree;
+  if(argv<4){
+  	// not enough args
+  }else{
+    if((pid = fork()) < 0){
+  		
+    }else if(pid == 0{
+      //child
+      // Open files in here and save to file vars
+      execlp(); // executes new program
+    }else{
+      //parent
+      wait_pid(pid);
+    }
+  }
+}
+\end{verbatim}
+There are different versions of the exec system call. The execlp() version uses 'l' to pass a list of command-line arguments and 'p' (stands for PATH) which allows passing in of environment variables. This tells the program to search through all the PATH directories for the file specified; otherwise you need to use a specific path. This is a Unix/POSIX function. Any lists passed in in any version must be null terminated. The other versions of the exec function can be found by looking up the Exec system call.\\
+
+When execute is called in a process, the process that called that execute command disappears.
+
+\mychapter{6}{2018-10-25}
+\section{Assignment 3 Notes}
+For Assignment 3, fork() returns 2 values: either process id or 0. If 0 then you're in child.\\
+
+This assignment can be completed with a computer with a single core/thread.\\
+
+Don't forget to unlock the semaphores.\\
+
+This assignment returns the number of deadlocks during the program. If you don't get any, then right after running the first semaphore sleep the thread for a second. This will force a deadlock.\\
+
+sem\textunderscore wait stalls until receiving a semaphore, sem\textunderscore timedwait waits until it either gets the semaphore or the timer runs out in which case it will return an error. sem\textunderscore post gives the semphore back. sem\textunderscore open opens the sempahore, sem\textunderscore unlink destroys the named semaphore. We'll be using a version of sem\textunderscore wait called sem\textunderscore timedwait in this assignment. We'll also be using both named and unnamed semaphores. Read the manpage for sem() to see more functions.\\
+
+Each process in this assignment will count the number of deadlocks that it gets.\\
+
+wait() and waitpid() can be used to wait for the child process to die before continuing with parent process.\\
+
+Look up pthread library and look up what is needed for named ones.\\
+
+\section{Semaphores Continued}
+
+Semaphores are all system calls provided by the kernel. In user processes in higher level languages, there are concepts like mutexes and shared code segments and thread safe classes (like in java). All of these are in user space (higher level function) used underneath system calls used by semaphores. These higher level languages only use 1 semaphore. You can also tell a semaphore to allow multiple people to use it at once but no more than that specified number. However Hardin hasn't ever seen anyone use this feature.\\
+
+System 5 semaphores allow the user to ask for multiple semaphores at once from the same system call. The kernel detects the deadlocks. It will either give you all or none of the semaphores. System 5 was depreciated for ease of use over functionality. POSIX doesn't use System 5 semaphores.\\
+
+\section{Links and inodes}
+You can view inode information for files by running the command below
+
+\begin{verbatim}
+root@comp:~/$ ls -i
+\end{verbatim}
+
+In any given system there is a series of unique inode numbers. The inode number is how the OS refers to any given file. So copying a file in multiple locations will have the same inode number for each of these files. By running the following command, you can create a link to a file and link the two.
+
+\begin{verbatim}
+root@comp:~/$ ln err.out errln
+\end{verbatim}
+
+Note that both the newly created 'errln' and the old 'err.out' have the same inode number. These two files can be in any directories in the OS and they will still share the same inode number. This is an example of a hard link. However going across different file systems you will need a soft link in order to link files together. Then by running the following command, the third column shows the number of links to the file.
+
+\begin{verbatim}
+root@comp:~/$ ls -il
+\end{verbatim}
+
+So in our example, 'err.out' and 'errln' both have a 2 in the third column of the command results.\\
+
+Directories will have 2 links by default because they have the link to the directory in its containing directory and the '.' link which links to the name in the containing directory inside of the directory itself. Thus the inode number in the containing folder and the inode number of the '.' inside that folder will be the same number.\\
+
+So unlinking will remove the inode link between the two. The 'rm' command unlinks during the deletion process. There is also an unlink command which is possibly a depreciated version of 'rm' which deletes the link between two items.\\
+
+
+
+\mychapter{7}{2018-10-30}
 
 \end{document}

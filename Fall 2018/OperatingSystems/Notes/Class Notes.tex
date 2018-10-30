@@ -460,5 +460,20 @@ So unlinking will remove the inode link between the two. The 'rm' command unlink
 
 
 \mychapter{7}{2018-10-30}
+\section{Message Queues}
+Message queues are controlled by the kernel. Message queues provide inter-process communication on any given computer (as are Pipes). These are not needed if using threads. If using threads, you need some way of controlling the messages sent to the queue controller. Threads can however use message queues and could benefit from using them.\\
+
+Look up how to open/read/write using message queues.\\
+
+The advantage of message queues is you don't need separate queues for both processes on both ends.\\
+
+\section{Sockets}
+All operating systems support sockets.\\
+
+Secure Socket Handler (SSH)\\
+
+Secure Sockets require double key encryption systems on both ends whereas Unsecure Sockets don't require this.\\
+
+\mychapter{8}{2018-11-01}
 
 \end{document}

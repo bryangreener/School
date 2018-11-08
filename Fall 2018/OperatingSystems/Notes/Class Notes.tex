@@ -483,9 +483,57 @@ When the CPU received an interrupt, it stops whatever it is doing and jumps to t
 \section{printf/scanf}
 
 
-\mychapter{9}{2018-11-06}
+\mychapter{9}{2018-11-08}
+\section{Virtual-address Space}
+Between the stack and heap in virtual memory is a hole. A hole means that the location on the physical storage at the end of the stack is somewhere other than just before the start of the heap's address space on physical storage.\\
+
+These holes in memory are left there to allow for growth of the stack/heap. Holes also occur in files.\\
+
+When you put a hole in a file, the filesize includes the size of the hole. However when you get the size of the file on the disk, the size of the hole isn't included.
+
+\section{Paging}
+Most OS's bring page in when needed and have a minimum size of the page.\\
+
+\subsection{Basic Page Replacement}
+\begin{enumerate}
+\item Find location of desired page on disk.
+\item Find a free frame:
+	\begin{itemize}
+	\item if there is free frame, use it 
+	\item otherwise use page replacement algorithm to select a victim frame then write victim frame to disk if dirty
+	\end{itemize}
+\item Bring desired page into newly free frame; update page and frame tables.
+\item Continue the process by restarting the instruction that caused the trap.
+\end{enumerate}
+
+One way of determining next page to load, you can use a stack to record the most recent page references. Otherwise there are ways to keep track of what should come next but those come at high overhead cost.\\
+
+\subsection{Thrashing}
+If a process doesn't have enough pages, the page-fault rate is very high. This can lead to thrashing.
+\begin{defn}[Thrashing]
+A process is busy swapping pages in and out.
+\end{defn}
+
+One thing to watch out for with 2D arrays is traversing column-by-column vs row-by-row. In C, rows of 2D arrays are all contiguous memory so it is faster to traverse row-by-row since it will have a lot less traversal time hopping between memory addresses. In an example where we have a 2D array of size $128\times 128$ where each row is stored in one page, traversing by columns causes over 16,000 page faults whereas traversing by rows causes only 128 page faults.
+
+\section{Array Indexing}
+Assuming we have
+\begin{verbatim}
+char a[20];
+\end{verbatim}
+and this array starts at 1024 in memory. If we index to a[i] then to index to that place in memory the computer does $1024+(i*sizeof(char))$. So the computer calculates the address offset from the start of the array.\\
+
+Next if we have a 2D array such as
+\begin{verbatim}
+char a[3,4];
+\end{verbatim}
+then we get 3 chunks of memory that are 4 bytes. So our array in memory is 3 pointers that point to their chunk of 4 bytes in memory. The address of a is the start of these 3 pointers in memory; in this example the address is 1024. To index to a[x,y], the computer does $1024+(1024+sizeof(address)) + (y*sizeof(char))$.\\
+
+This is how C works however some languages such as fortran do not function this way but since fortran is dead we won't explain that.\\
 
 
-\mychapter{10}{2018-11-08}
+
+
+\mychapter{10}{2018-11-13}
 
 \end{document}

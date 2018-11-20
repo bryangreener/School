@@ -535,5 +535,62 @@ This is how C works however some languages such as fortran do not function this 
 
 
 \mychapter{10}{2018-11-13}
+\section{Exam 3 Review}
+\begin{enumerate}
+\item[2.] What is the main difference between multiple threads and multiple processes as far as memory from malloc?\\
+Threads all share the heap whereas processes don't.
+
+\item[3.]Why does the following correct code work as far as the value stored in n? What part of the run time system allows recursion?
+\begin{verbatim}
+int f(int n){ if(n < 2) return 1; return n * f(n-1); }
+\end{verbatim}
+
+The stack allows for recursion.
+
+\item[8.]Rewrite the loop as a while loop with no if, break, or continue.\\
+Do not add the \textit{n++} line.
+
+\item[9.]What is the difference between named and unnamed semaphores as far as where the semaphore is stored?\\
+Named semaphores are stored in the file system by the kernel. Unnamed semaphores are stored in memory. Both however are a variable with a pointer to them.
+
+\item[10.]The exec() function has a version that allows passing environmental variables. What are these and how are they used?\\
+Environmental variables are global variables. These can be set in the cshrc files.
+
+\item[11.]The exec() function has a version that uses an environmental variable to search for the program you want to execute. What is the name of this variable and how is it used?\\
+The path variable is the list of directories that a program searches within when executed.
+
+\item[13.]What does the following command line to do stdin and stdout of P1 and P2?
+\begin{verbatim}
+$ P1 | P2
+\end{verbatim}
+
+P1 stdin stays the same. P1 stdout goes to input of the pipe. P2 stdin goes to the output of the pipe. P2 stdout is the screen.
+
+\item[15.]If your process is waiting for a system call like sleep() or read() and it receives a signal you catch, what does the system call do after your code returns?\\
+
+The system call returns with the program with some sort of error code explaining why it was interrupted.
+
+\item[17.]Who/what enforces the use of Semaphores; for example, to share the console screen?\\
+
+You as a programmer have to decide to use semaphores.
+
+\item[18.]There is only one bit in the CPU that can be used as a semaphore. The kernel maintains many semaphores for the processes that are running. How does this work?\\
+
+Only one kernel thread at any time can check or change a semaphore in the semaphore table.
+
+\item[21.]C, Java, and .NET all use different methods to manage dynamically allocated memory.
+	\begin{enumerate}
+	\item How does the garbage collection differ for Java and .NET?\\
+	Java does a copy into new memory during defragmentation whereas .NET defragments memory in place.
+	
+	\item When a program asks for new memory, how does each language find it?\\
+	C follows a linked list of free spaces in the malloc buffer. Java just gives memory at the end of the allocated memory and uses garbage collection to squish memory together.
+
+	\item What performance penalty does Java's allocation cause?\\
+	Variables in java have a handle that must be looked up in a table to find a memory address. This lookup and overhear causes a slowdown.
+	\end{enumerate}
+\end{enumerate}
+
+
 
 \end{document}

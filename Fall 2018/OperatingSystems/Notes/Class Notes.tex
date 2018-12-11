@@ -460,5 +460,137 @@ So unlinking will remove the inode link between the two. The 'rm' command unlink
 
 
 \mychapter{7}{2018-10-30}
+\section{Message Queues}
+Message queues are controlled by the kernel. Message queues provide inter-process communication on any given computer (as are Pipes). These are not needed if using threads. If using threads, you need some way of controlling the messages sent to the queue controller. Threads can however use message queues and could benefit from using them.\\
+
+Look up how to open/read/write using message queues.\\
+
+The advantage of message queues is you don't need separate queues for both processes on both ends.\\
+
+\section{Sockets}
+All operating systems support sockets.\\
+
+Secure Socket Handler (SSH)\\
+
+Secure Sockets require double key encryption systems on both ends whereas Unsecure Sockets don't require this.\\
+
+\mychapter{8}{2018-11-01}
+\section{Events/Signals}
+Event handlers are just a more sophisticated form of signals. Signals are like interrupts but interrupts are mediated and handled by the kernel whereas signals are mediated by the kernel and handled by the process.\\
+
+When the CPU received an interrupt, it stops whatever it is doing and jumps to the proper location in the interrupt table where it finds a jump to the code it needs to run to handle that interrupt.\\
+
+\section{printf/scanf}
+
+
+\mychapter{9}{2018-11-08}
+\section{Virtual-address Space}
+Between the stack and heap in virtual memory is a hole. A hole means that the location on the physical storage at the end of the stack is somewhere other than just before the start of the heap's address space on physical storage.\\
+
+These holes in memory are left there to allow for growth of the stack/heap. Holes also occur in files.\\
+
+When you put a hole in a file, the filesize includes the size of the hole. However when you get the size of the file on the disk, the size of the hole isn't included.
+
+\section{Paging}
+Most OS's bring page in when needed and have a minimum size of the page.\\
+
+\subsection{Basic Page Replacement}
+\begin{enumerate}
+\item Find location of desired page on disk.
+\item Find a free frame:
+	\begin{itemize}
+	\item if there is free frame, use it 
+	\item otherwise use page replacement algorithm to select a victim frame then write victim frame to disk if dirty
+	\end{itemize}
+\item Bring desired page into newly free frame; update page and frame tables.
+\item Continue the process by restarting the instruction that caused the trap.
+\end{enumerate}
+
+One way of determining next page to load, you can use a stack to record the most recent page references. Otherwise there are ways to keep track of what should come next but those come at high overhead cost.\\
+
+\subsection{Thrashing}
+If a process doesn't have enough pages, the page-fault rate is very high. This can lead to thrashing.
+\begin{defn}[Thrashing]
+A process is busy swapping pages in and out.
+\end{defn}
+
+One thing to watch out for with 2D arrays is traversing column-by-column vs row-by-row. In C, rows of 2D arrays are all contiguous memory so it is faster to traverse row-by-row since it will have a lot less traversal time hopping between memory addresses. In an example where we have a 2D array of size $128\times 128$ where each row is stored in one page, traversing by columns causes over 16,000 page faults whereas traversing by rows causes only 128 page faults.
+
+\section{Array Indexing}
+Assuming we have
+\begin{verbatim}
+char a[20];
+\end{verbatim}
+and this array starts at 1024 in memory. If we index to a[i] then to index to that place in memory the computer does $1024+(i*sizeof(char))$. So the computer calculates the address offset from the start of the array.\\
+
+Next if we have a 2D array such as
+\begin{verbatim}
+char a[3,4];
+\end{verbatim}
+then we get 3 chunks of memory that are 4 bytes. So our array in memory is 3 pointers that point to their chunk of 4 bytes in memory. The address of a is the start of these 3 pointers in memory; in this example the address is 1024. To index to a[x,y], the computer does $1024+(1024+sizeof(address)) + (y*sizeof(char))$.\\
+
+This is how C works however some languages such as fortran do not function this way but since fortran is dead we won't explain that.\\
+
+
+
+
+\mychapter{10}{2018-11-13}
+\section{Exam 3 Review}
+\begin{enumerate}
+\item[2.] What is the main difference between multiple threads and multiple processes as far as memory from malloc?\\
+Threads all share the heap whereas processes don't.
+
+\item[3.]Why does the following correct code work as far as the value stored in n? What part of the run time system allows recursion?
+\begin{verbatim}
+int f(int n){ if(n < 2) return 1; return n * f(n-1); }
+\end{verbatim}
+
+The stack allows for recursion.
+
+\item[8.]Rewrite the loop as a while loop with no if, break, or continue.\\
+Do not add the \textit{n++} line.
+
+\item[9.]What is the difference between named and unnamed semaphores as far as where the semaphore is stored?\\
+Named semaphores are stored in the file system by the kernel. Unnamed semaphores are stored in memory. Both however are a variable with a pointer to them.
+
+\item[10.]The exec() function has a version that allows passing environmental variables. What are these and how are they used?\\
+Environmental variables are global variables. These can be set in the cshrc files.
+
+\item[11.]The exec() function has a version that uses an environmental variable to search for the program you want to execute. What is the name of this variable and how is it used?\\
+The path variable is the list of directories that a program searches within when executed.
+
+\item[13.]What does the following command line to do stdin and stdout of P1 and P2?
+\begin{verbatim}
+$ P1 | P2
+\end{verbatim}
+
+P1 stdin stays the same. P1 stdout goes to input of the pipe. P2 stdin goes to the output of the pipe. P2 stdout is the screen.
+
+\item[15.]If your process is waiting for a system call like sleep() or read() and it receives a signal you catch, what does the system call do after your code returns?\\
+
+The system call returns with the program with some sort of error code explaining why it was interrupted.
+
+\item[17.]Who/what enforces the use of Semaphores; for example, to share the console screen?\\
+
+You as a programmer have to decide to use semaphores.
+
+\item[18.]There is only one bit in the CPU that can be used as a semaphore. The kernel maintains many semaphores for the processes that are running. How does this work?\\
+
+Only one kernel thread at any time can check or change a semaphore in the semaphore table.
+
+\item[21.]C, Java, and .NET all use different methods to manage dynamically allocated memory.
+	\begin{enumerate}
+	\item How does the garbage collection differ for Java and .NET?\\
+	Java does a copy into new memory during defragmentation whereas .NET defragments memory in place.
+	
+	\item When a program asks for new memory, how does each language find it?\\
+	C follows a linked list of free spaces in the malloc buffer. Java just gives memory at the end of the allocated memory and uses garbage collection to squish memory together.
+
+	\item What performance penalty does Java's allocation cause?\\
+	Variables in java have a handle that must be looked up in a table to find a memory address. This lookup and overhear causes a slowdown.
+	\end{enumerate}
+\end{enumerate}
+
+
 
 \end{document}
